@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://cjfw4hasfo8ik"]
+
+[ext_resource type="Texture2D" uid="uid://cvxy8ydgwomqh" path="res://images/rooms/underdocks/underdocks_01_a.png" id="1_82mdo"]
+[ext_resource type="Texture2D" uid="uid://bnlf5ynahsy8u" path="res://images/rooms/underdocks/underdocks_02_a.png" id="2_35stj"]
+[ext_resource type="Texture2D" uid="uid://del54pxobtgf8" path="res://images/rooms/underdocks/underdocks_04_a.png" id="3_6p8gw"]
+[ext_resource type="Texture2D" uid="uid://c6r8xp7wi3hkh" path="res://images/rooms/underdocks/underdocks_05_a.png" id="4_m4csd"]
+
+[node name="CombatRoom" type="Control" unique_id=18767815]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="BackGroundContainer" type="Control" parent="." unique_id=1215282505]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background1" type="TextureRect" parent="BackGroundContainer" unique_id=1629789452]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_82mdo")
+expand_mode = 1
+
+[node name="2" type="TextureRect" parent="BackGroundContainer" unique_id=1502299885]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_35stj")
+expand_mode = 1
+
+[node name="3" type="TextureRect" parent="BackGroundContainer" unique_id=1385248162]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_6p8gw")
+expand_mode = 1
+
+[node name="4" type="TextureRect" parent="BackGroundContainer" unique_id=83263002]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_m4csd")
+expand_mode = 1

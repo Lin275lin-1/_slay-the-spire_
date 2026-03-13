@@ -1,0 +1,207 @@
+[gd_scene format=3 uid="uid://cunj3kh5og6dc"]
+
+[ext_resource type="Script" uid="uid://p5t5ynm0gru3" path="res://scripts/ui/card_ui.gd" id="1_s55cg"]
+[ext_resource type="Script" uid="uid://n32cyhvf6qam" path="res://scripts/hand_manager/card_state_machine/card_state_machine.gd" id="2_1kpl7"]
+[ext_resource type="Texture2D" uid="uid://cv2t58jc3h2gy" path="res://images/atlas/card_template_atlas/card_frame_attack.tres" id="2_5rjcn"]
+[ext_resource type="Texture2D" uid="uid://b8sa7qho8t24c" path="res://images/atlas/card_portrait_atlas/ironclad/打击.tres" id="2_im7p3"]
+[ext_resource type="Texture2D" uid="uid://b8fx3ghsehpyo" path="res://images/atlas/card_template_atlas/card_portrait_attack.tres" id="3_fke5x"]
+[ext_resource type="Texture2D" uid="uid://c0kofvxadxtwk" path="res://images/atlas/card_template_atlas/card_banner.tres" id="4_im7p3"]
+[ext_resource type="Texture2D" uid="uid://bya30mv1ksmgy" path="res://images/atlas/card_template_atlas/card_type_plaque.tres" id="4_vk10k"]
+[ext_resource type="Texture2D" uid="uid://dvxq0bcqtlfn8" path="res://images/atlas/card_template_atlas/energy_icon_ironclad.tres" id="5_7cyci"]
+[ext_resource type="Script" uid="uid://r1hpyjdc572v" path="res://scripts/hand_manager/card_state_machine/card_base_state.gd" id="9_7cyci"]
+[ext_resource type="Script" uid="uid://h66064xnout6" path="res://scripts/hand_manager/card_state_machine/card_clicked_state.gd" id="10_0og8s"]
+[ext_resource type="Script" uid="uid://b3itqlw4pv3ga" path="res://scripts/hand_manager/card_state_machine/card_dragging_state.gd" id="11_2u763"]
+[ext_resource type="Script" uid="uid://c5ciu1i21f7tn" path="res://scripts/hand_manager/card_state_machine/card_aiming_state.gd" id="12_i2e1o"]
+[ext_resource type="Script" uid="uid://deyslpu2jebj4" path="res://scripts/hand_manager/card_state_machine/card_released_state.gd" id="13_pvsb8"]
+
+[node name="CardUI" type="Control" unique_id=883918395]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_s55cg")
+
+[node name="Visuals" type="Control" parent="." unique_id=1490993169]
+layout_mode = 1
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="CardPortrait" type="TextureRect" parent="Visuals" unique_id=749964796]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -176.0
+offset_right = 125.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_im7p3")
+
+[node name="CardFrame" type="TextureRect" parent="Visuals" unique_id=724728824]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -211.0
+offset_right = 150.0
+offset_bottom = 211.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5rjcn")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="PortraitBorder" type="TextureRect" parent="Visuals" unique_id=72130813]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -137.5
+offset_top = -169.0
+offset_right = 137.5
+offset_bottom = 41.0
+grow_horizontal = 2
+texture = ExtResource("3_fke5x")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TitleBanner" type="TextureRect" parent="Visuals" unique_id=855410499]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.0
+offset_top = -201.0
+offset_right = 164.0
+offset_bottom = -118.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_im7p3")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TitleLabel" type="Label" parent="Visuals/TitleBanner" unique_id=924373933]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 4.0
+offset_right = 20.0
+offset_bottom = 27.0
+grow_horizontal = 2
+text = "打击"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnergyIcon" type="TextureRect" parent="Visuals" unique_id=765360507]
+layout_mode = 0
+offset_left = -165.0
+offset_top = -221.0
+offset_right = -101.0
+offset_bottom = -157.0
+texture = ExtResource("5_7cyci")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="EnergyLabel" type="Label" parent="Visuals/EnergyIcon" unique_id=484522562]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TypePlaque" type="NinePatchRect" parent="Visuals" unique_id=1435758143]
+layout_mode = 0
+offset_left = -30.0
+offset_top = -2.0
+offset_right = 31.0
+offset_bottom = 35.0
+texture = ExtResource("4_vk10k")
+patch_margin_left = 13
+patch_margin_top = 5
+patch_margin_right = 13
+
+[node name="TypeLabel" type="Label" parent="Visuals/TypePlaque" unique_id=247319145]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "攻击"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="Visuals" unique_id=1953267051]
+layout_mode = 0
+offset_left = -122.0
+offset_top = 37.0
+offset_right = 121.0
+offset_bottom = 173.0
+bbcode_enabled = true
+text = "[center]造成6点伤害[/center]"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="Debug" type="Control" parent="." unique_id=679281035]
+anchors_preset = 0
+offset_left = -21.0
+offset_top = 43.0
+offset_right = 19.0
+offset_bottom = 83.0
+
+[node name="StateLabel" type="Label" parent="Debug" unique_id=1534182082]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "BASE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardStateMachine" type="Node" parent="." unique_id=152135754 node_paths=PackedStringArray("initial_state", "card_ui")]
+script = ExtResource("2_1kpl7")
+initial_state = NodePath("CardBaseState")
+card_ui = NodePath("..")
+
+[node name="CardBaseState" type="Node" parent="CardStateMachine" unique_id=1411814012]
+script = ExtResource("9_7cyci")
+
+[node name="CardClickedState" type="Node" parent="CardStateMachine" unique_id=440843913]
+script = ExtResource("10_0og8s")
+state = 1
+
+[node name="CardDraggingState" type="Node" parent="CardStateMachine" unique_id=34916596]
+script = ExtResource("11_2u763")
+state = 2
+
+[node name="CardAimingState" type="Node" parent="CardStateMachine" unique_id=1080599145]
+script = ExtResource("12_i2e1o")
+state = 3
+
+[node name="CardReleasedState" type="Node" parent="CardStateMachine" unique_id=1367157191]
+script = ExtResource("13_pvsb8")
+state = 4
