@@ -34,6 +34,7 @@ version_control/autoload_on_startup=true
 
 ui_player=""
 ui_layer=""
+ui_enemies=""
 
 [input]
 

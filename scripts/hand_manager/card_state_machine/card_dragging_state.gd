@@ -18,6 +18,9 @@ func enter_state() -> void:
 	)
 
 func exit_state() -> void:
+	# 已知bug:在选择卡牌到瞄准的瞬间可能触发其他卡牌的preview
+	# 可能原因: dragging->aiming中间释放了card_drag_ended
+	# 导致卡牌一瞬间disabled被设置为false,与其他卡牌进行互动
 	Events.card_drag_ended.emit(card_ui)
 	card_ui.drop_point_area.monitoring = false
 

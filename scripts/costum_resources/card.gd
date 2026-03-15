@@ -11,6 +11,7 @@ enum Target {SELF, SINGLE_ENEMY, ALL_ENEMIES, EVERYONE}
 @export var id: String
 @export var type: Type
 @export var target: Target
+@export var cost: int
 
 func is_single_targetd() -> bool:
 	return target == Target.SINGLE_ENEMY

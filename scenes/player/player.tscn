@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bsxwudt1fhfq"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://8wiohbeiuu21" path="res://animations/characters/ironclad/ironclad.atlas" id="1_gmlin"]
+[ext_resource type="Script" uid="uid://bw2yoey1sa2w8" path="res://scripts/player/player.gd" id="1_p47bc"]
+[ext_resource type="Resource" uid="uid://bqq44kff15k4w" path="res://entities/characters/ironclad/ironclad_stats.tres" id="2_75vfm"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dyk0k8i37hi8g" path="res://animations/characters/ironclad/ironclad.skel" id="2_lvxji"]
+[ext_resource type="Script" uid="uid://bayy3j6ssj0g" path="res://scripts/utils/spine_manager.gd" id="3_p47bc"]
+[ext_resource type="PackedScene" uid="uid://copfb0hm4hkcy" path="res://scenes/combat_ui/health_bar.tscn" id="4_lvxji"]
+
+[sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_75vfm"]
+atlas_res = ExtResource("1_gmlin")
+skeleton_file_res = ExtResource("2_lvxji")
+
+[node name="Player" type="Node2D" unique_id=1177636233 groups=["ui_player"]]
+script = ExtResource("1_p47bc")
+stats = ExtResource("2_75vfm")
+
+[node name="SpineManager" type="SpineSprite" parent="." unique_id=1361405987]
+skeleton_data_res = SubResource("SpineSkeletonDataResource_75vfm")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(0.3, 0.3)
+script = ExtResource("3_p47bc")
+metadata/_custom_type_script = "uid://bayy3j6ssj0g"
+
+[node name="HealthBar" parent="." unique_id=1512934549 instance=ExtResource("4_lvxji")]
+offset_left = -118.0
+offset_top = 32.0
+offset_right = -118.0
+offset_bottom = 32.0

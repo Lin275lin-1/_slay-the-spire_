@@ -70,15 +70,13 @@ func _on_card_drag_or_aiming_started(card_ui: CardUI) -> void:
 		if card_ui == self:
 			return
 		disabled = true
-func _on_card_drag_or_aiming_ended(card_ui: CardUI) -> void:
+func _on_card_drag_or_aiming_ended(_card_ui: CardUI) -> void:
 	disabled = false
 	# set_playable
-
 
 func _on_drop_point_area_area_entered(area: Area2D) -> void:
 	if not targets.has(area):
 		targets.append(area)
-
 
 func _on_drop_point_area_area_exited(area: Area2D) -> void:
 	targets.erase(area)

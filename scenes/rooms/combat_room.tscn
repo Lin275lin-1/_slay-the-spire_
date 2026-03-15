@@ -9,13 +9,10 @@
 [ext_resource type="Resource" uid="uid://b5jbjk3a0xd0q" path="res://entities/characters/ironclad/cards/格挡.tres" id="5_jnfh8"]
 [ext_resource type="Texture2D" uid="uid://del54pxobtgf8" path="res://images/rooms/underdocks/underdocks_04_a.png" id="5_prplb"]
 [ext_resource type="Texture2D" uid="uid://c6r8xp7wi3hkh" path="res://images/rooms/underdocks/underdocks_05_a.png" id="6_jnfh8"]
-[ext_resource type="Texture2D" uid="uid://tlpdt4b2r7sk" path="res://images/packed/character_select/char_select_ironclad.png" id="7_1y2y0"]
-[ext_resource type="Texture2D" uid="uid://bmvk3rd0mwitm" path="res://images/packed/character_select/char_select_silent.png" id="8_58ypt"]
 [ext_resource type="PackedScene" uid="uid://bdu3mvwj8syfb" path="res://scenes/card_target_selector/card_target_selector.tscn" id="11_58ypt"]
-[ext_resource type="PackedScene" uid="uid://copfb0hm4hkcy" path="res://scenes/battle_ui/health_bar.tscn" id="12_prplb"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hq47e"]
-size = Vector2(221, 287)
+[ext_resource type="PackedScene" uid="uid://bsxwudt1fhfq" path="res://scenes/player/player.tscn" id="11_jnfh8"]
+[ext_resource type="PackedScene" uid="uid://dtcyajca05718" path="res://scenes/enemy/enemy.tscn" id="12_jnfh8"]
+[ext_resource type="Resource" uid="uid://dehq0xyltkswt" path="res://entities/enemies/leaf_slime_m/test.tres" id="13_1y2y0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vujjl"]
 size = Vector2(1920, 630)
@@ -27,6 +24,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 1
 script = ExtResource("1_vujjl")
+metadata/_edit_lock_ = true
 
 [node name="CombatUI" type="CanvasLayer" parent="." unique_id=661618034 groups=["ui_layer"]]
 
@@ -126,31 +124,8 @@ mouse_filter = 2
 texture = ExtResource("6_jnfh8")
 expand_mode = 1
 
-[node name="Player" type="Node2D" parent="." unique_id=910250332 groups=["ui_player"]]
-position = Vector2(-3, -31)
-
-[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1407869630]
-position = Vector2(370, 486)
-texture = ExtResource("7_1y2y0")
-
-[node name="Enemy" type="Area2D" parent="." unique_id=345843328]
-position = Vector2(146, -92)
-collision_layer = 4
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy" unique_id=327785571]
-position = Vector2(1392, 489)
-texture = ExtResource("8_58ypt")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=695817035]
-position = Vector2(1400.5, 528.5)
-shape = SubResource("RectangleShape2D_hq47e")
-debug_color = Color(0.93273, 0.22185946, 0.35486558, 0.41960785)
-
-[node name="HealthBar" parent="Enemy" unique_id=1512934549 instance=ExtResource("12_prplb")]
-offset_left = 1277.0
-offset_top = 622.0
-offset_right = 1277.0
-offset_bottom = 622.0
+[node name="Player" parent="." unique_id=1177636233 instance=ExtResource("11_jnfh8")]
+position = Vector2(386, 496)
 
 [node name="CardDropArea" type="Area2D" parent="." unique_id=237894908]
 collision_layer = 2
@@ -176,6 +151,10 @@ offset_top = 521.0
 offset_right = 1052.0
 offset_bottom = 621.0
 text = "删除卡牌"
+
+[node name="Enemy" parent="." unique_id=934959197 instance=ExtResource("12_jnfh8")]
+position = Vector2(1434, 459)
+stats = ExtResource("13_1y2y0")
 
 [connection signal="pressed" from="AddCard" to="." method="_on_add_card_pressed"]
 [connection signal="pressed" from="RemoveCard" to="." method="_on_remove_card_pressed"]
