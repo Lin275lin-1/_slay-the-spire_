@@ -1,9 +1,0 @@
-使用grid snap切割卡面时的参数
-
-card_atlas_0:
-	offset: 23px, 29px
-	step: 250px, 190px
-
-card_atlas_1: 
-	offset: 23px, 3px
-	step: 250px, 190px
