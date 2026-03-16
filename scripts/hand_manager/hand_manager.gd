@@ -3,6 +3,8 @@ extends Control
 
 const CARD_UI = preload("uid://cunj3kh5og6dc")
 
+@export var char_stats: CharacterStats
+
 @export var height_curve: Curve
 @export var rotation_curve: Curve
 
@@ -18,17 +20,14 @@ func _ready() -> void:
 	Events.card_drag_started.connect(
 	func(_card_ui): set_cards() 
 		)
-	for child: CardUI in get_children():
-		child.reparent_requested.connect(_on_card_ui_reparent_requested)
-		child.parent = self
-	set_cards()
 
 func add_card(card: Card) -> void:
 	var new_card_ui :CardUI = CARD_UI.instantiate()
+	add_child(new_card_ui)
 	new_card_ui.card = card
 	new_card_ui.parent = self
 	new_card_ui.reparent_requested.connect(_on_card_ui_reparent_requested)
-	#new_card
+	new_card_ui.char_stats = char_stats
 
 ## 使手牌扇形排列
 func set_cards() -> void: 
@@ -96,7 +95,13 @@ func _on_card_previewed(pre_card: CardUI, to_preview: bool) -> void:
 			card_ui.movement_tween.tween_property(card_ui, "position:x", card_ui.original_position.x + movement, tween_time)
 			
 func discard_card(card: CardUI) -> void:
+	# TODO: 卡牌消耗/移向弃牌堆动画
 	card.queue_free()
+	set_cards()
+
+func discard_hand() -> void:
+	for child in get_children():
+		child.disabled = true
 
 func disable_hand() -> void:
 	for card_ui: CardUI in get_children():

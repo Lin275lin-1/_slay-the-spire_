@@ -1,7 +1,7 @@
 class_name Player
 extends Node2D
 
-@export var stats: CharacterStats : set = _set_character_stats
+@export var stats: CharacterStats : set = _set_char_stats
 
 @onready var spine_manager: SpineManager = $SpineManager
 @onready var health_bar: HealthBar = $HealthBar
@@ -15,8 +15,8 @@ func take_damage(damage: int) -> void:
 	if stats.health <= 0:
 		print("玩家死亡")
 
-func _set_character_stats(value: CharacterStats) -> void:
-	stats = value.create_instance()
+func _set_char_stats(value: CharacterStats) -> void:
+	stats = value
 	# 导入变量的setter会在运行游戏时调用一次
 	if not stats.stats_changed.is_connected(_update_stats):
 		stats.stats_changed.connect(_update_stats)

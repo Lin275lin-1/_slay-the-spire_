@@ -2,16 +2,11 @@
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://b8e4wst5vt8xh" path="res://animations/characters/ironclad/ironclad_skel_data.tres" id="1_e3vkd"]
 [ext_resource type="Script" uid="uid://dpde6spa48hlj" path="res://scripts/costum_resources/character_stats.gd" id="1_orbop"]
-[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="4_wbn8u"]
-[ext_resource type="Script" uid="uid://jvpf65gf7yuq" path="res://scripts/costum_resources/card_pile.gd" id="5_3x26l"]
-
-[sub_resource type="Resource" id="Resource_7fl4h"]
-script = ExtResource("5_3x26l")
-metadata/_custom_type_script = "uid://jvpf65gf7yuq"
+[ext_resource type="Resource" uid="uid://hp2dus3ms3gm" path="res://entities/characters/ironclad/ironclad_starting_deck.tres" id="3_spq8r"]
 
 [resource]
 script = ExtResource("1_orbop")
-starting_deck = SubResource("Resource_7fl4h")
+starting_deck = ExtResource("3_spq8r")
 cards_per_turn = 5
 max_energy = 3
 max_health = 33
