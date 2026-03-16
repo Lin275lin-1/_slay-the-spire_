@@ -11,11 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://bdu3mvwj8syfb" path="res://scenes/card_target_selector/card_target_selector.tscn" id="11_58ypt"]
 [ext_resource type="PackedScene" uid="uid://bsxwudt1fhfq" path="res://scenes/player/player.tscn" id="11_jnfh8"]
 [ext_resource type="PackedScene" uid="uid://dtcyajca05718" path="res://scenes/enemy/enemy.tscn" id="12_jnfh8"]
-[ext_resource type="Resource" uid="uid://dehq0xyltkswt" path="res://entities/enemies/leaf_slime_m/test.tres" id="13_1y2y0"]
 [ext_resource type="PackedScene" uid="uid://dlp0rxa1b482m" path="res://scenes/combat_ui/energy_ui.tscn" id="14_1y2y0"]
 [ext_resource type="Script" uid="uid://dpde6spa48hlj" path="res://scripts/costum_resources/character_stats.gd" id="15_82is4"]
 [ext_resource type="Texture2D" uid="uid://jwynhqw8ayou" path="res://images/packed/combat_ui/end_turn_button.png" id="16_82is4"]
 [ext_resource type="Script" uid="uid://cqlaav8vqwmad" path="res://scripts/player/player_handler.gd" id="16_bf0xi"]
+[ext_resource type="Resource" uid="uid://bdt85ngfibtet" path="res://entities/enemies/leaf_slime_m/leaf_slime_m.tres" id="17_82is4"]
 [ext_resource type="Texture2D" uid="uid://bnnrjotxgq0sx" path="res://images/packed/combat_ui/end_turn_button_glow.png" id="17_og13y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_82is4"]
@@ -170,6 +170,6 @@ metadata/_edit_lock_ = true
 
 [node name="Enemy" parent="." unique_id=934959197 instance=ExtResource("12_jnfh8")]
 position = Vector2(1434, 459)
-stats = ExtResource("13_1y2y0")
+stats = ExtResource("17_82is4")
 
 [connection signal="pressed" from="AddCard" to="." method="_on_add_card_pressed"]

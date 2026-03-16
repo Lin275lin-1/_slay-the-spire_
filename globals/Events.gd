@@ -14,4 +14,6 @@ signal card_played(card: Card)
 signal player_hand_drawn
 signal player_hand_discarded
 signal turn_ended
+## 敌人相关
+signal  enemy_action_completed(enemy: Enemy)
 @warning_ignore_restore("unused_signal")
