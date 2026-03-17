@@ -4,3 +4,4 @@ func apply_effects(targets) -> void:
 	var damage_effect := DamageEffect.new()
 	damage_effect.amount = 6
 	damage_effect.execute(targets)
+	SFXPlayer.play(sound)

@@ -7,6 +7,7 @@ func perform_action() -> void:
 	if not enemy or not target:
 		return
 		
+	SFXPlayer.play(intent.sound)
 	var block_effect := BlockEffect.new()
 	var damage_effect := DamageEffect.new()
 	block_effect.amount = block
