@@ -9,6 +9,7 @@ signal before_lose_health(context: Context)
 
 @export var stats: EnemyStats : set = _set_enemy_stats
 
+@onready var buff_container: Node = $BuffContainer
 @onready var reticles: Node2D = $Reticles
 @onready var health_bar: HealthBar = $HealthBar
 @onready var spine_manager: SpineManager = $SpineManager
@@ -20,6 +21,7 @@ var current_action: EnemyAction : set = _set_current_action
 var spine_anim_state: SpineAnimationState
 
 func do_turn() -> void:
+	start_turn()
 	stats.block = 0
 	
 	if not current_action:
@@ -52,6 +54,12 @@ func _setup_ai() -> void:
 	add_child(new_ai)
 	enemy_ai = new_ai
 	enemy_ai.enemy = self
+
+func start_turn() -> void:
+	turn_started.emit(self)
+
+func end_turn() -> void:
+	turn_ended.emit(self)
 
 func update_action() -> void:
 	if not enemy_ai:

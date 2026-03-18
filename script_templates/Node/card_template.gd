@@ -1,6 +1,7 @@
 # meta-name: 卡牌逻辑
 # meta-description: 卡牌逻辑脚本的模板
 # 记得删掉class_name
+# !!一定记得把脚本附加到cardname.tres上
 class_name MyCard
 extends Card
 

@@ -9,6 +9,7 @@ signal before_lose_health(context: Context)
 
 @export var stats: CharacterStats : set = _set_char_stats
 
+@onready var buff_container: Node = $BuffContainer
 @onready var hint_sprite: TextureRect = $Hint
 @onready var hint_lable: Label = $Hint/HintLable
 @onready var spine_manager: SpineManager = $SpineManager

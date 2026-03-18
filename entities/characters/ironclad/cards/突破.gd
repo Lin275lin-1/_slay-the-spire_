@@ -3,8 +3,6 @@ extends Card
 func apply_effects(context: Context) -> void:
 	var damage_effect := DamageEffect.new()
 	var lose_health_effect := LossHealthEffect.new()
-	# 从这里我感觉context没有必要分类型，amount,targets,source三个参数可以描述任何effect
-	# 也许会有需要判断context类型的时候？
 	damage_effect.sound = sound
 	# 找到玩家并从targets中去除
 	var player_index: int
