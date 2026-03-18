@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Slay the Spire"
+run/main_scene="uid://bsxwudt1fhfq"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
 
 [audio]
 
