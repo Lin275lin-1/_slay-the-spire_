@@ -7,6 +7,7 @@ extends Control
 @onready var hand_manager: HandManager = $CombatUI/HandManager
 # 子节点的所有char_stats由该节点分发
 @export var char_stats: CharacterStats: set = _set_char_stats
+@export var music: AudioStream
 const CARD_UI = preload("uid://cunj3kh5og6dc")
 
 func _ready() -> void:
@@ -23,6 +24,7 @@ func _ready() -> void:
 	start_combat(new_stats)
 
 func start_combat(char_stats_: CharacterStats) -> void:
+	MusicPlayer.play(music, true)
 	enemy_handler.reset_enemy_actions()
 	player_handler.start_battle(char_stats_)
 
