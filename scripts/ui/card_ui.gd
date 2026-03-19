@@ -161,3 +161,5 @@ func _on_drop_point_area_area_exited(area: Area2D) -> void:
 
 func _on_char_stats_changed() -> void:
 	self.playable = char_stats.can_play_card(card)
+
+	

@@ -9,9 +9,11 @@ extends Buff
 func _init() -> void:
 	# 一定要在init中设置buff名
 	# 在buff进树之前会判断buff_name
-	buff_name = "易伤"
-	description = "受到的攻击伤害增加50%"
-
+	var buff_info: Dictionary = BuffLibrary.buff_data["易伤"]
+	buff_name = buff_info["name"]
+	description = buff_info["description"]
+	icon = buff_info["icon"]
+	
 func _ready() -> void:
 	type = Type.DEBUFF
 	if agent and agent.has_signal("before_take_damage"):

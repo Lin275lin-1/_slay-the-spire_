@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://bayy3j6ssj0g" path="res://scripts/utils/spine_manager.gd" id="3_p47bc"]
 [ext_resource type="PackedScene" uid="uid://copfb0hm4hkcy" path="res://scenes/combat_ui/health_bar.tscn" id="4_lvxji"]
 [ext_resource type="Texture2D" uid="uid://ul1oevmcxsoj" path="res://images/vfx/miasma_cloud.png" id="7_0owmy"]
+[ext_resource type="Script" uid="uid://beoly8uxrkebe" path="res://scripts/player/buff_manager.gd" id="8_5gtgg"]
+[ext_resource type="PackedScene" uid="uid://cbir7pfgl5y7d" path="res://scenes/combat_ui/buff_container.tscn" id="8_qek5x"]
 
 [sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_75vfm"]
 atlas_res = ExtResource("1_gmlin")
@@ -61,4 +63,11 @@ vertical_alignment = 1
 wait_time = 2.0
 one_shot = true
 
-[node name="BuffContainer" type="Node" parent="." unique_id=667935252]
+[node name="BuffManager" type="Node" parent="." unique_id=667935252]
+script = ExtResource("8_5gtgg")
+
+[node name="BuffContainer" parent="." unique_id=1496015378 instance=ExtResource("8_qek5x")]
+offset_left = -107.0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 205.0

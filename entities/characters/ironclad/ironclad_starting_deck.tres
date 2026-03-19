@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://b5jbjk3a0xd0q" path="res://entities/characters/ironclad/cards/防御.tres" id="2_uecsy"]
 [ext_resource type="Resource" uid="uid://rfrswfbanfy" path="res://entities/characters/ironclad/cards/打击.tres" id="3_55lnr"]
 [ext_resource type="Resource" uid="uid://objfyia1a4gs" path="res://entities/characters/ironclad/cards/突破.tres" id="4_55lnr"]
-[ext_resource type="Resource" uid="uid://dosdxrq1vcxfj" path="res://entities/characters/ironclad/cards/重击.tres" id="5_44pr0"]
+[ext_resource type="Resource" uid="uid://dosdxrq1vcxfj" path="res://entities/characters/ironclad/cards/痛击.tres" id="5_44pr0"]
 
 [resource]
 script = ExtResource("2_pcwuu")

@@ -7,9 +7,12 @@ signal turn_ended(player: Player)
 signal before_take_damage(context: Context)
 signal before_lose_health(context: Context)
 
+const BUFF_UI = preload("res://scenes/combat_ui/buff_ui.tscn")
+
 @export var stats: CharacterStats : set = _set_char_stats
 
-@onready var buff_container: Node = $BuffContainer
+@onready var buff_manager: BuffManager = $BuffManager
+@onready var buff_container: GridContainer = $BuffContainer
 @onready var hint_sprite: TextureRect = $Hint
 @onready var hint_lable: Label = $Hint/HintLable
 @onready var spine_manager: SpineManager = $SpineManager
@@ -29,6 +32,13 @@ func _hint(hint_text: String) -> void:
 	hint_sprite.visible = true
 	hint_lable.text = hint_text
 	hint_timer.start(2.5)
+
+func add_buff(buff_context: ApplyBuffContext) -> void:
+	buff_context.buff_node.stacks = buff_context.amount	
+	buff_manager.add_buff(buff_context)
+	var buff_ui := BUFF_UI.instantiate()
+	buff_ui.buff = buff_context.buff_node
+	buff_container.add_child(buff_ui)
 	
 func lose_health(context: Context) -> void:
 	if stats.health <= 0:

@@ -23,7 +23,8 @@ buses/default_bus_layout="uid://d21g525cffshd"
 Events="*uid://b020t6pk8kp4y"
 MusicPlayer="*uid://d3vsqdefsperv"
 SFXPlayer="*uid://cloao6gglg3wl"
-BuffHandler="*uid://bqc783e5h07td"
+TooltipManager="*uid://b84mguuwvj18j"
+BuffLibrary="*uid://biey585ofwmog"
 
 [display]
 

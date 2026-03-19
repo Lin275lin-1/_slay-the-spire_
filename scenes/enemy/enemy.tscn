@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://doi41puqdenrn" path="res://scenes/combat_ui/intents.tscn" id="3_cwlon"]
 [ext_resource type="PackedScene" uid="uid://copfb0hm4hkcy" path="res://scenes/combat_ui/health_bar.tscn" id="3_gl05p"]
 [ext_resource type="Texture2D" uid="uid://hm3yndjsncmt" path="res://images/ui/combat/combat_reticle.png" id="5_cwlon"]
+[ext_resource type="Script" uid="uid://beoly8uxrkebe" path="res://scripts/player/buff_manager.gd" id="7_13gj6"]
+[ext_resource type="PackedScene" uid="uid://cbir7pfgl5y7d" path="res://scenes/combat_ui/buff_container.tscn" id="7_nbhyu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwlon"]
 size = Vector2(319, 269)
@@ -66,7 +68,14 @@ rotation = 3.1415927
 scale = Vector2(2, 2)
 texture = ExtResource("5_cwlon")
 
-[node name="BuffContainer" type="Node" parent="." unique_id=792632197]
+[node name="BuffManager" type="Node" parent="." unique_id=792632197]
+script = ExtResource("7_13gj6")
+
+[node name="BuffContainer" parent="." unique_id=1496015378 instance=ExtResource("7_nbhyu")]
+offset_left = -103.0
+offset_top = 120.0
+offset_right = 132.0
+offset_bottom = 261.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
