@@ -49,6 +49,8 @@ func _ready() -> void:
 	Events.card_click_ended.connect(_on_card_click_or_drag_or_aiming_ended)
 	Events.card_drag_started.connect(_on_card_click_or_drag_or_aiming_started)
 	Events.card_drag_ended.connect(_on_card_click_or_drag_or_aiming_ended)
+	Events.target_selected.connect(_on_target_selected)
+	Events.target_unselected.connect(_on_target_unselected)
 	card_state_machine.init()
 
 func play() -> void:
@@ -124,6 +126,7 @@ func _set_card(value: Card) -> void:
 			type_text = "出错"
 			
 	type_label.text = type_text
+	description_label.text = card.get_default_description()
 
 func _set_playable(value: bool) -> void:
 	playable = value
@@ -160,17 +163,24 @@ func _on_mouse_exited() -> void:
 	Events.tooltip_hide_request.emit()
 	
 func _on_card_click_or_drag_or_aiming_started(card_ui: CardUI) -> void:
-		if card_ui == self:
-			return
-		disabled = true
+	if card_ui == self:
+		return
+	disabled = true
 		
 func _on_card_click_or_drag_or_aiming_ended(_card_ui: CardUI) -> void:
 	disabled = false
 	self.playable = char_stats.can_play_card(card)
 
+func set_description(source_: Creature, target_: Creature) -> void:
+	description_label.text = card.get_description(source_, target_)
+
 func _on_drop_point_area_area_entered(area: Area2D) -> void:
+	
 	if not targets.has(area):
 		targets.append(area)
+	# 这么调用会不会有问题?
+	if card.target == card.Target.ALL_ENEMIES or card.target == card.Target.EVERYONE:
+		set_description(get_tree().get_first_node_in_group("ui_player"), get_tree().get_first_node_in_group("ui_enemies"))
 
 func _on_drop_point_area_area_exited(area: Area2D) -> void:
 	targets.erase(area)
@@ -178,4 +188,8 @@ func _on_drop_point_area_area_exited(area: Area2D) -> void:
 func _on_char_stats_changed() -> void:
 	self.playable = char_stats.can_play_card(card)
 
+func _on_target_selected(target: Creature) -> void:
+	set_description(get_tree().get_first_node_in_group("ui_player"), target)
 	
+func _on_target_unselected() -> void:
+	set_description(get_tree().get_first_node_in_group("ui_player"), null)
