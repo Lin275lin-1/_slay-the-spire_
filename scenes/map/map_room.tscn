@@ -6,7 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://4ep5bl" path="res://images/atlases/compressed.sprites/map/map_circle_2.tres" id="3_uo7qb"]
 [ext_resource type="Texture2D" uid="uid://480ugk" path="res://images/atlases/compressed.sprites/map/map_circle_3.tres" id="4_7bw2w"]
 [ext_resource type="Texture2D" uid="uid://54bklj" path="res://images/atlases/compressed.sprites/map/map_circle_4.tres" id="5_dh5ag"]
-[ext_resource type="Texture2D" uid="uid://b8m5mtsv6ue2g" path="res://images/ui/run_history/rest_site.png" id="7_g1tsg"]
+[ext_resource type="Texture2D" uid="uid://dgqw0oq7m4op4" path="res://images/ui/run_history/rest_site.png" id="7_g1tsg"]
+[ext_resource type="Texture2D" uid="uid://c3onlgi2iqb2o" path="res://images/packed/map/icons/map_ping.png" id="8_5hkq2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_11bm1"]
 resource_local_to_scene = true
@@ -212,6 +213,7 @@ _data = {
 }
 
 [node name="MapRoom" type="Area2D" unique_id=2050772987]
+scale = Vector2(0.7, 0.7)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_g1tsg")
@@ -220,42 +222,52 @@ script = ExtResource("1_g1tsg")
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
 z_index = 1
-scale = Vector2(1.259, 1.259)
+scale = Vector2(2, 2)
 
 [node name="Sprite2D2" type="Sprite2D" parent="Select_Circle" unique_id=309982339]
 modulate = Color(0, 0, 0, 0)
 self_modulate = Color(0, 0, 0, 1)
-scale = Vector2(1.0767161, 1.0767161)
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("1_71bvp")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Select_Circle" unique_id=1220532938]
 modulate = Color(0, 0, 0, 0)
 self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_xjypl")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Select_Circle" unique_id=134177534]
 modulate = Color(0, 0, 0, 0)
 self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("3_uo7qb")
 
 [node name="Sprite2D5" type="Sprite2D" parent="Select_Circle" unique_id=524139253]
 modulate = Color(0, 0, 0, 0)
 self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.7, 0.7)
 
 [node name="Sprite2D6" type="Sprite2D" parent="Select_Circle" unique_id=374469991]
 modulate = Color(0, 0, 0, 0)
 self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("4_7bw2w")
 
 [node name="Sprite2D7" type="Sprite2D" parent="Select_Circle" unique_id=77971014]
 modulate = Color(0, 0, 0, 0)
 self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_dh5ag")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=137324443]
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals" unique_id=764668594]
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("7_g1tsg")
+
+[node name="highlight" type="Sprite2D" parent="Visuals" unique_id=353703933]
+modulate = Color(0.78039217, 0.8117647, 0.64705884, 0)
+texture = ExtResource("8_5hkq2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=286046258]
 visible = false

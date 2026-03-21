@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Slay the Spire"
-run/main_scene="uid://cjfw4hasfo8ik"
+run/main_scene="uid://g1qfq6cyq3sc"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [autoload]

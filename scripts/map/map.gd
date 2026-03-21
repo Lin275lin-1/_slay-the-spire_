@@ -1,14 +1,17 @@
 class_name Map
 extends Node2D
 
-const SCROLL_SPEED := 15
+#//滚动速度加快
+const SCROLL_SPEED := 250
 const MAP_ROOM = preload("res://scenes/map/map_room.tscn")
 const MAP_LINE = preload("res://scenes/map/map_line.tscn")
+
 @onready var map_generator: MapGenerator = $MapGenerator
 @onready var lines: Node2D = %Lines
 @onready var rooms: Node2D = %Rooms
 @onready var visuals:Node2D = $Visuals
 @onready var camera_2d:Camera2D = $Camera2D
+@onready var legend: Legend = $Legend_background/Legend
 var map_data: Array[Array]
 var floors_climbed: int
 var last_room: Room
@@ -18,6 +21,8 @@ var camera_edge_y: float
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS -1)
 	generate_new_map()
+	legend.highlight_requested.connect(_on_legend_highlight_requested)
+	legend.highlight_cleared.connect(_on_legend_highlight_cleared)
 	unlock_floor(0)
 	
 	#await get_tree().process_frame  # 等待一帧确保视口尺寸已确定
@@ -30,11 +35,17 @@ func _ready() -> void:
 	
 func _input(event:InputEvent) -> void:
 	if event.is_action_pressed("scroll_up"):
-		camera_2d.position.y -= SCROLL_SPEED
+		var new_y = camera_2d.position.y - SCROLL_SPEED
+	# 当向上滚动超出底部（更负）时，跳到顶部（0）
+		if new_y < -camera_edge_y-500:
+			new_y = 0
+		camera_2d.position.y = new_y
 	elif event.is_action_pressed("scroll_down"):
-		camera_2d.position.y += SCROLL_SPEED
-		camera_2d.position.y = clamp(camera_2d.position.y, -camera_edge_y,0)
-
+		var new_y = camera_2d.position.y + SCROLL_SPEED
+		# 当向下滚动超出顶部（正数）时，跳到底部（-camera_edge_y）
+		if new_y > 500:
+			new_y = -camera_edge_y
+		camera_2d.position.y = new_y
 
 func generate_new_map() -> void:
 	floors_climbed =0
@@ -107,3 +118,13 @@ func _on_map_room_selected(room:Room) -> void:
 	
 	#test
 	#Events.map_exited.emit(room)
+	
+func _on_legend_highlight_requested(type: int):
+	#print("收到高亮请求，类型: ", type)
+	for map_room in rooms.get_children():
+		if map_room.room.type == type:
+			map_room.set_highlight(true)
+
+func _on_legend_highlight_cleared():
+	for map_room in rooms.get_children():
+		map_room.set_highlight(false)

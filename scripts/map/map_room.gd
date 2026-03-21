@@ -11,12 +11,22 @@ const ICONS := {
 	Room.Type.CAMPFIRE:[preload("res://images/ui/run_history/rest_site.png"), Vector2(0.6,0.6)],
 	Room.Type.SHOP:[preload("res://images/ui/run_history/shop.png"), Vector2(0.6,0.6)],
 	Room.Type.BOSS:[preload("res://images/map/placeholder/doormaker_boss_icon.png"),Vector2(1.25,1.25)],
+	Room.Type.ELITE:   [preload("res://images/atlases/ui_atlas.sprites/map/icons/map_elite.tres"), Vector2.ONE],  
+	Room.Type.UNKNOWN: [preload("res://images/atlases/ui_atlas.sprites/map/icons/map_unknown.tres"), Vector2.ONE],   
 }
 
+@onready var highlight_sprite: Sprite2D = $Visuals/highlight
 @onready var sprite_2d:Sprite2D = $Visuals/Sprite2D
 @onready var Select_Circle:Node2D = $Select_Circle
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+
+var original_modulate: Color
+var original_scale: Vector2
+
+func _ready():
+	original_modulate = modulate
+	original_scale = scale
 #debug
 #func _ready() -> void:
 	#var test_room := Room.new()
@@ -67,7 +77,20 @@ func _on_map_room_selected() -> void:
 	selected.emit(room)
 
 
-
+func set_highlight(highlight: bool):
+	if highlight:
+		modulate = Color(1, 1, 0.5, 1.0)  
+		if room.type != Room.Type.BOSS and room.type != Room.Type.TREASURE and room.type != Room.Type.MONSTER and room.type != Room.Type.ELITE:
+			highlight_sprite.modulate.a = 1.0        # 淡黄色，完全不透明
+			
+		if room.type == Room.Type.ELITE:
+			scale = original_scale * 1.6
+		else :
+			scale = original_scale * 1.2
+	else:
+		modulate = Color.WHITE
+		scale = original_scale
+		highlight_sprite.modulate.a = 0.0
 
 
 
