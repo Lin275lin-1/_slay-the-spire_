@@ -1,4 +1,7 @@
+
 extends Node
+
+# 预加载自定义类型，确保在信号声明时能够识别
 
 
 @warning_ignore_start("unused_signal")
