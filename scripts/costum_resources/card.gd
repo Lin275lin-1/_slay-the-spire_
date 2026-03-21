@@ -70,7 +70,7 @@ func _get_targets(context: Context) -> Context:
 		Target.SELF:
 			context.targets = tree.get_nodes_in_group("ui_player")
 		Target.ALL_ENEMIES:
-			context.targets = tree.get_nodes_in_group("ui_emeies")
+			context.targets = tree.get_nodes_in_group("ui_enemies")
 		Target.EVERYONE:
 			context.targets = tree.get_nodes_in_group("ui_player") + tree.get_nodes_in_group("ui_enemies")
 		_:

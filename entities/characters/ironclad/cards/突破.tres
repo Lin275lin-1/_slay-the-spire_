@@ -23,7 +23,7 @@ metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 [resource]
 script = ExtResource("2_82msx")
 id = "突破"
-target = 3
+target = 2
 cost = 1
 portrait = ExtResource("1_mytnf")
 description = "[center]失去{lose_health}点生命，然后对所有敌人造成{damage}点伤害[/center]"
