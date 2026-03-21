@@ -26,12 +26,17 @@ func _hint(hint_text: String) -> void:
 	hint_lable.text = hint_text
 	hint_timer.start(2.5)
 
-func add_buff(buff_context: ApplyBuffContext) -> void:
-	buff_context.buff_node.stacks = buff_context.amount	
-	buff_manager.add_buff(buff_context)
-	var buff_ui := BUFF_UI.instantiate()
-	buff_ui.buff = buff_context.buff_node
-	buff_container.add_child(buff_ui)
+#func add_buff(buff_context: ApplyBuffContext) -> void:
+	#buff_context.buff_node.stacks = buff_context.amount	
+	#buff_manager.add_buff(buff_context)
+	#var buff_ui := BUFF_UI.instantiate()
+	#buff_ui.buff = buff_context.buff_node
+	#buff_container.add_child(buff_ui)
+	
+func gain_block(context: Context) -> void:
+	before_gain_block.emit(context)
+	stats.block += context.amount
+
 	
 func die() -> void:
 	health_bar.hide()
@@ -57,8 +62,6 @@ func lose_health(context: Context) -> void:
 func take_damage(context: Context) -> void:
 	if stats.health <= 0:
 		return
-		
-	before_take_damage.emit(context)
 
 	var hurt := stats.take_damage(context.amount)
 	
@@ -68,9 +71,6 @@ func take_damage(context: Context) -> void:
 		Events.player_hit.emit()
 		spine_anim_state.set_animation("hurt", false, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
-
-func gain_block(context: Context) -> void:
-	stats.block += context.amount
 
 func start_turn() -> void:
 	turn_started.emit(self)
@@ -121,7 +121,7 @@ func _on_mouse_exited() -> void:
 func show_keyword_tooltip() -> void:
 	if buff_manager.get_child_count() == 0:
 		return
-	for child: Buff in buff_manager:
+	for child: Buff in buff_manager.get_children():
 		KeywordTooltip.add_keyword(child.buff_name, child.get_description())
 	KeywordTooltip.global_position = global_position + Vector2(hitbox.shape.size.x / 2, -hitbox.shape.size.y / 2)
 	KeywordTooltip.show()

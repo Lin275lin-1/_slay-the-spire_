@@ -9,10 +9,11 @@ func is_performable() -> bool:
 func perform_action() -> void:
 	if not enemy or not target:
 		return
-	var damage_effect := DamageEffect.new()
-	damage_effect.sound = intent.sound
+	var attack_effect := AttackEffect.new()
+	attack_effect.sound = intent.sound
 	var tween := create_tween()
-	tween.tween_callback(damage_effect.execute.bind(DamageContext.new(enemy, [target], damage)))
+	var damage_context := DamageContext.new(enemy, [target], damage)
+	tween.tween_callback(attack_effect.execute.bind(damage_context))
 	tween.tween_interval(0.3)
-	tween.tween_callback(damage_effect.execute.bind(DamageContext.new(enemy, [target], damage)))
+	tween.tween_callback(attack_effect.execute.bind(damage_context))
 	await tween.finished

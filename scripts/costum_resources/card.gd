@@ -40,7 +40,7 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 				modifiers = []
 			_:
 				printerr("未知的NumericEntry")
-		var final_value = NumericHelper.apply_modifers(base_value, modifiers)
+		var final_value = NumericHelper.apply_modifiers(base_value, modifiers)
 		ret[entry.placeholder] = final_value
 	return ret
 
@@ -80,8 +80,27 @@ func _get_targets(context: Context) -> Context:
 	return context
 
 func get_description(source_: Creature, target_: Creature) -> String:
-	return description.format(get_final_values(source_, target_))
-
+	var numeric_dict := get_final_values(source_, target_)
+	var final_value: int
+	var color: String
+	var replacement: String
+	var ret: String = description
+	for placeholder: String in numeric_dict.keys():
+		final_value = numeric_dict[placeholder]
+		replacement = str(final_value)
+		for numeric_entry in numeric_entries:
+			if numeric_entry.placeholder == placeholder:
+				if numeric_entry.base_value == final_value:
+					continue
+				elif numeric_entry.base_value > final_value:
+					color = "red"
+					replacement = "[color={0}]{1}[/color]".format([color, final_value])
+				elif numeric_entry.base_value < final_value:
+					color = "green"
+					replacement = "[color={0}]{1}[/color]".format([color, final_value])
+				ret = ret.replace("{" + placeholder + "}", replacement)
+	return ret.format(numeric_dict)
+	
 func get_default_description() -> String:
 	var dict := {}
 	for entry: NumericEntry in numeric_entries:

@@ -8,8 +8,8 @@ func perform_action() -> void:
 		return
 		
 	var block_effect := BlockEffect.new()
-	var damage_effect := DamageEffect.new()
+	var attack_effect := AttackEffect.new()
 	block_effect.execute(GainBlockContext.new(enemy, [enemy], block))
-	damage_effect.sound = intent.sound
-	damage_effect.execute(DamageContext.new(enemy, [target], damage))
+	attack_effect.sound = intent.sound
+	attack_effect.execute(DamageContext.new(enemy, [target], damage))
 		

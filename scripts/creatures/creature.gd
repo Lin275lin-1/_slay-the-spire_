@@ -6,6 +6,8 @@ signal turn_started(creature: Creature)
 signal turn_ended(creature: Creature)
 signal before_take_damage(context: Context)
 signal before_lose_health(context: Context)
+signal before_attack(context: Context)
+signal before_gain_block(context: Context)
 @warning_ignore_restore("unused_signal")
 # offset: 根据贴图大小调整各个组件
 
@@ -19,12 +21,22 @@ const BUFF_UI = preload("res://scenes/combat_ui/buff_ui.tscn")
 
 var spine_anim_state: SpineAnimationState
 
+func attack(context: Context) -> void:
+	before_attack.emit(context)
+	for child: Creature in context.targets:
+		var damage_context = DamageContext.new(self, [child], context.amount)
+		child.before_take_damage.emit(damage_context)
+		child.take_damage(damage_context)
+
+func gain_block(context: Context) -> void:
+	pass
+
 func add_buff(buff_context: ApplyBuffContext) -> void:
 	buff_context.buff_node.stacks = buff_context.amount	
-	buff_manager.add_buff(buff_context)
-	var buff_ui := BUFF_UI.instantiate()
-	buff_ui.buff = buff_context.buff_node
-	buff_container.add_child(buff_ui)
+	if buff_manager.add_buff(buff_context):
+		var buff_ui := BUFF_UI.instantiate()
+		buff_ui.buff = buff_context.buff_node
+		buff_container.add_child(buff_ui)
 
 func get_modifiers_by_type(type: Enums.NumericType) -> Array:
 	var ret := []
@@ -41,9 +53,6 @@ func end_turn() -> void:
 func lose_health(_context: Context) -> void:
 	pass
 	
-func gain_block(_context: Context):
-	pass
-
 func take_damage(_context: Context) -> void:
 	pass
 

@@ -1,7 +1,7 @@
 extends Card
 
 func apply_effects(context: Context) -> void:
-	var damage_effect := DamageEffect.new()
+	var damage_effect := AttackEffect.new()
 	var lose_health_effect := LossHealthEffect.new()
 	damage_effect.sound = sound
 	# 找到玩家并从targets中去除

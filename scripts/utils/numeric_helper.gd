@@ -1,6 +1,6 @@
 class_name NumericHelper
 
-static func apply_modifers(base: int, modifiers: Array) -> int:
+static func apply_modifiers(base: int, modifiers: Array) -> int:
 	var total_additive := 0
 	var total_multiplier := 1.0
 	var total_callables := []
@@ -9,9 +9,10 @@ static func apply_modifers(base: int, modifiers: Array) -> int:
 		total_multiplier *= modifier.multipiler
 		if modifier.function:
 			total_callables.append(modifier.function)
-	var ret = (base + total_additive) * total_multiplier
+	var ret = base + total_additive
 	for function in total_callables:
 		ret = function.call(ret)
+	ret *= total_multiplier
 	return ret
 
 static func combine_modifiers(source_m: Array, target_m: Array) -> Array:

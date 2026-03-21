@@ -15,7 +15,7 @@ func perform_action() -> void:
 	if not enemy or not target:
 		return
 	already_used = true
-	var damage_effect := DamageEffect.new()
-	damage_effect.sound = intent.sound
-	damage_effect.execute(DamageContext.new(enemy, [target], damage))	
+	var attack_effect := AttackEffect.new()
+	attack_effect.sound = intent.sound
+	attack_effect.execute(DamageContext.new(enemy, [target], damage))	
 	

@@ -17,10 +17,14 @@ func _ready() -> void:
 
 func add_buff(buff_context: ApplyBuffContext) -> void:
 	buff_context.buff_node.stacks = buff_context.amount	
-	buff_manager.add_buff(buff_context)
-	var buff_ui := BUFF_UI.instantiate()
-	buff_ui.buff = buff_context.buff_node
-	buff_container.add_child(buff_ui)
+	if buff_manager.add_buff(buff_context):
+		var buff_ui := BUFF_UI.instantiate()
+		buff_ui.buff = buff_context.buff_node
+		buff_container.add_child(buff_ui)
+
+func gain_block(context: Context) -> void:
+	before_gain_block.emit(context)
+	stats.block += context.amount
 
 func do_turn() -> void:
 	start_turn()
@@ -121,14 +125,9 @@ func lose_health(context: Context) -> void:
 		spine_anim_state.set_animation("hurt", true, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
 
-func gain_block(context: Context):
-	stats.block += context.amount
-
 func take_damage(context: Context) -> void:
 	if stats.health <= 0:
 		return
-	
-	before_take_damage.emit(context)
 	
 	var hurt := stats.take_damage(context.amount)
 	
