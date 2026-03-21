@@ -61,6 +61,10 @@ var keyword_info = {
 	"敏捷":{
 		"name": "敏捷",
 		"description": "从卡牌获得的格挡提高"
+	},
+	"格挡":{
+		"name": "格挡",
+		"description": "在回合开始前抵挡伤害"
 	}
 }
 

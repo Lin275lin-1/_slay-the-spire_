@@ -119,9 +119,13 @@ func _on_mouse_exited() -> void:
 	Events.tooltip_hide_request.emit()
 
 func show_keyword_tooltip() -> void:
-	if buff_manager.get_child_count() == 0:
-		return
+	#if buff_manager.get_child_count() == 0:
+		#return
 	for child: Buff in buff_manager.get_children():
 		KeywordTooltip.add_keyword(child.buff_name, child.get_description())
+	if stats.has_block():
+		KeywordTooltip.add_keyword(BuffLibrary.keyword_info["格挡"]["name"], BuffLibrary.keyword_info["格挡"]["description"])
+	elif buff_manager.get_child_count() == 0:
+		return
 	KeywordTooltip.global_position = global_position + Vector2(hitbox.shape.size.x / 2, -hitbox.shape.size.y / 2)
 	KeywordTooltip.show()
