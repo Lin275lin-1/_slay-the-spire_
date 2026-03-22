@@ -20,6 +20,16 @@ var buff_data = {
 		"name": "脆弱",
 		"description": "从卡牌中获得的格挡降低25%",
 		"icon": preload("res://images/powers/frail_power.png")
+	},
+	"力量":{
+		"name": "力量",
+		"description": "造成的攻击伤害提高{stacks}点",
+		"icon": preload("res://images/powers/strength_power.png")
+	},
+	"敏捷":{
+		"name": "敏捷",
+		"description": "从卡牌获得的格挡提高{stacks}点",
+		"icon": preload("res://images/powers/dexterity_power.png")
 	}
 }
 
@@ -43,6 +53,18 @@ var keyword_info = {
 	"脆弱":{
 		"name": "脆弱",
 		"description": "从卡牌中获得的格挡降低25%",
+	},
+	"力量":{
+		"name": "力量",
+		"description": "造成的攻击伤害提高"
+	},
+	"敏捷":{
+		"name": "敏捷",
+		"description": "从卡牌获得的格挡提高"
+	},
+	"格挡":{
+		"name": "格挡",
+		"description": "在回合开始前抵挡伤害"
 	}
 }
 

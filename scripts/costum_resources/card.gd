@@ -5,6 +5,8 @@ extends Resource
 enum Type {ATTACK, SKILL, POWER}
 # 卡牌目标类型
 enum Target {SELF, SINGLE_ENEMY, ALL_ENEMIES, EVERYONE}
+# 卡牌稀有度
+enum Rarity {COMMON, UNCOMMON, RARE}
 
 ## TODO: 使用表格而不是使用资源文件存储数据
 @export_group("卡牌属性")
@@ -13,6 +15,7 @@ enum Target {SELF, SINGLE_ENEMY, ALL_ENEMIES, EVERYONE}
 @export var target: Target
 # TODO: X费
 @export var cost: int
+@export var rarity: Rarity
 @export_group("卡牌描述")
 @export var portrait: Texture
 @export_multiline var description: String
@@ -40,7 +43,7 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 				modifiers = []
 			_:
 				printerr("未知的NumericEntry")
-		var final_value = NumericHelper.apply_modifers(base_value, modifiers)
+		var final_value = NumericHelper.apply_modifiers(base_value, modifiers)
 		ret[entry.placeholder] = final_value
 	return ret
 
@@ -70,7 +73,7 @@ func _get_targets(context: Context) -> Context:
 		Target.SELF:
 			context.targets = tree.get_nodes_in_group("ui_player")
 		Target.ALL_ENEMIES:
-			context.targets = tree.get_nodes_in_group("ui_emeies")
+			context.targets = tree.get_nodes_in_group("ui_enemies")
 		Target.EVERYONE:
 			context.targets = tree.get_nodes_in_group("ui_player") + tree.get_nodes_in_group("ui_enemies")
 		_:
@@ -80,8 +83,27 @@ func _get_targets(context: Context) -> Context:
 	return context
 
 func get_description(source_: Creature, target_: Creature) -> String:
-	return description.format(get_final_values(source_, target_))
-
+	var numeric_dict := get_final_values(source_, target_)
+	var final_value: int
+	var color: String
+	var replacement: String
+	var ret: String = description
+	for placeholder: String in numeric_dict.keys():
+		final_value = numeric_dict[placeholder]
+		replacement = str(final_value)
+		for numeric_entry in numeric_entries:
+			if numeric_entry.placeholder == placeholder:
+				if numeric_entry.base_value == final_value:
+					continue
+				elif numeric_entry.base_value > final_value:
+					color = "red"
+					replacement = "[color={0}]{1}[/color]".format([color, final_value])
+				elif numeric_entry.base_value < final_value:
+					color = "green"
+					replacement = "[color={0}]{1}[/color]".format([color, final_value])
+				ret = ret.replace("{" + placeholder + "}", replacement)
+	return ret.format(numeric_dict)
+	
 func get_default_description() -> String:
 	var dict := {}
 	for entry: NumericEntry in numeric_entries:

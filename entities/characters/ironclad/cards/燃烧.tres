@@ -1,0 +1,26 @@
+[gd_resource type="Resource" format=3 uid="uid://cbdwqvevklhm0"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_qbqqq"]
+[ext_resource type="Texture2D" uid="uid://cikuvbk" path="res://images/atlases/card_atlas.sprites/ironclad/inflame.tres" id="2_61fru"]
+[ext_resource type="Script" uid="uid://d1sfqu2pct7s3" path="res://entities/characters/ironclad/cards/燃烧.gd" id="3_61fru"]
+[ext_resource type="AudioStream" uid="uid://dbe46o0jyq2x8" path="res://audio/SFX/dark_orb_channel.mp3" id="4_61fru"]
+
+[sub_resource type="Resource" id="Resource_4ko5v"]
+script = ExtResource("1_qbqqq")
+type = 4
+base_value = 2
+placeholder = "strength"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_61fru")
+id = "燃烧"
+type = 2
+cost = 1
+rarity = 1
+portrait = ExtResource("2_61fru")
+description = "[center]获得{strength}点力量[/center]"
+sound = ExtResource("4_61fru")
+numeric_entries = Array[ExtResource("1_qbqqq")]([SubResource("Resource_4ko5v")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

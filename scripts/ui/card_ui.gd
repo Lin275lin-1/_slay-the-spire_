@@ -145,6 +145,10 @@ func _on_gui_input(event: InputEvent) -> void:
 func _on_mouse_entered() -> void:
 	card_state_machine.on_mouse_entered()
 	Events.tooltip_show_request.emit(self)
+	if card.target == card.Target.SELF or card.target == card.Target.SINGLE_ENEMY:
+		set_description(get_tree().get_first_node_in_group("ui_player"), null)
+	elif card.target == card.Target.EVERYONE or card.target == card.Target.ALL_ENEMIES:
+		set_description(get_tree().get_first_node_in_group("ui_player"), get_tree().get_first_node_in_group("ui_enemies"))
 	
 func show_keyword_tooltip() -> void:
 	var keywords = KeywordTooltip.extract_keyword(card.description)
@@ -175,12 +179,8 @@ func set_description(source_: Creature, target_: Creature) -> void:
 	description_label.text = card.get_description(source_, target_)
 
 func _on_drop_point_area_area_entered(area: Area2D) -> void:
-	
 	if not targets.has(area):
 		targets.append(area)
-	# 这么调用会不会有问题?
-	if card.target == card.Target.ALL_ENEMIES or card.target == card.Target.EVERYONE:
-		set_description(get_tree().get_first_node_in_group("ui_player"), get_tree().get_first_node_in_group("ui_enemies"))
 
 func _on_drop_point_area_area_exited(area: Area2D) -> void:
 	targets.erase(area)

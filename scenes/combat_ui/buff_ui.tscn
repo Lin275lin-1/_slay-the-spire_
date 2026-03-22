@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bh55r3bo6qp1f" path="res://scripts/combat_ui/buff_ui.gd" id="2_x8xea"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_x8xea"]
-font_size = 10
+font_size = 18
 
 [node name="BuffUI" type="TextureRect" unique_id=1772520858]
 custom_minimum_size = Vector2(40, 40)

@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://bv0rrfhkiiomf"]
+
+[ext_resource type="Script" uid="uid://t8ll61cgf0dr" path="res://scripts/character_selector/character_selector.gd" id="1_70e1j"]
+[ext_resource type="Script" uid="uid://bayy3j6ssj0g" path="res://scripts/utils/spine_manager.gd" id="2_70e1j"]
+[ext_resource type="Texture2D" uid="uid://daxc83v2oatx0" path="res://images/packed/character_select/char_select_ironclad.png" id="4_ysgu0"]
+[ext_resource type="Texture2D" uid="uid://b7aglyga6u0vm" path="res://images/packed/character_select/char_select_silent.png" id="5_h00ml"]
+[ext_resource type="Texture2D" uid="uid://otu4plfv86an" path="res://images/packed/character_select/char_select_regent.png" id="6_csu32"]
+[ext_resource type="Texture2D" uid="uid://fd73sxa61bj2" path="res://images/packed/character_select/char_select_necrobinder.png" id="7_v33eu"]
+[ext_resource type="Texture2D" uid="uid://bb803i8" path="res://images/atlases/ui_atlas.sprites/back_button.tres" id="8_h00ml"]
+[ext_resource type="Texture2D" uid="uid://degmf1g3d7lbd" path="res://images/packed/character_select/char_select_defect.png" id="8_iu8gr"]
+[ext_resource type="Texture2D" uid="uid://cahogy5" path="res://images/atlases/compressed.sprites/back_button_arrow.tres" id="9_v33eu"]
+[ext_resource type="Texture2D" uid="uid://yefjak" path="res://images/atlases/ui_atlas.sprites/confirm_button.tres" id="10_iu8gr"]
+[ext_resource type="Texture2D" uid="uid://cp3mg3t" path="res://images/atlases/compressed.sprites/confirm_button_tick.tres" id="11_oyb0m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ysgu0"]
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x26dg"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_x26dg"]
+
+[node name="character_selector" type="Control" unique_id=765309063]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_70e1j")
+
+[node name="backforsomechar" type="TextureRect" parent="." unique_id=93820554]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="background" type="SpineSprite" parent="." unique_id=1056861416]
+position = Vector2(-80, -1)
+scale = Vector2(0.45, 0.45)
+script = ExtResource("2_70e1j")
+metadata/_custom_type_script = "uid://bayy3j6ssj0g"
+
+[node name="character_buttons" type="HBoxContainer" parent="." unique_id=511320880]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 383.0
+offset_top = 725.0
+offset_right = 1252.0
+offset_bottom = 928.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="ironclad" type="Button" parent="character_buttons" unique_id=1129044955]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ysgu0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x26dg")
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_x26dg")
+text = "
+"
+icon = ExtResource("4_ysgu0")
+icon_alignment = 1
+
+[node name="silent" type="Button" parent="character_buttons" unique_id=1062431580]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ysgu0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x26dg")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_x26dg")
+text = "
+"
+icon = ExtResource("5_h00ml")
+icon_alignment = 1
+
+[node name="regent" type="Button" parent="character_buttons" unique_id=844444745]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ysgu0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x26dg")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_x26dg")
+text = "
+"
+icon = ExtResource("6_csu32")
+icon_alignment = 1
+
+[node name="necrobinder" type="Button" parent="character_buttons" unique_id=292477427]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ysgu0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x26dg")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_x26dg")
+text = "
+"
+icon = ExtResource("7_v33eu")
+icon_alignment = 1
+
+[node name="defect" type="Button" parent="character_buttons" unique_id=986798064]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ysgu0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x26dg")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_x26dg")
+text = "
+"
+icon = ExtResource("8_iu8gr")
+icon_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=1167858637]
+layout_mode = 1
+offset_left = 6.0
+offset_top = 771.0
+offset_right = 218.0
+offset_bottom = 905.0
+metadata/_edit_group_ = true
+
+[node name="BackButton" type="Sprite2D" parent="Button" unique_id=2020223669]
+position = Vector2(111, 74)
+scale = Vector2(0.75333333, 0.85148513)
+texture = ExtResource("8_h00ml")
+
+[node name="BackButtonArrow" type="Sprite2D" parent="Button/BackButton" unique_id=364061837]
+position = Vector2(-43.805305, -11.744202)
+scale = Vector2(0.98082596, 0.7698967)
+texture = ExtResource("9_v33eu")
+
+[node name="start" type="Button" parent="." unique_id=2036066575]
+layout_mode = 0
+offset_left = 1680.0
+offset_top = 776.0
+offset_right = 1912.0
+offset_bottom = 915.0
+theme_override_font_sizes/font_size = 50
+metadata/_edit_group_ = true
+
+[node name="ConfirmButton" type="Sprite2D" parent="start" unique_id=1325895012]
+position = Vector2(95, 75)
+scale = Vector2(0.81, 0.8118812)
+texture = ExtResource("10_iu8gr")
+
+[node name="ConfirmButtonTick" type="Sprite2D" parent="start/ConfirmButton" unique_id=1611630571]
+position = Vector2(35.802467, -8.621923)
+scale = Vector2(0.76666665, 0.6944445)
+texture = ExtResource("11_oyb0m")
+
+[connection signal="pressed" from="character_buttons/ironclad" to="." method="_on_ironclad_pressed"]
+[connection signal="pressed" from="character_buttons/silent" to="." method="_on_silent_pressed"]
+[connection signal="pressed" from="character_buttons/regent" to="." method="_on_regent_pressed"]
+[connection signal="pressed" from="character_buttons/necrobinder" to="." method="_on_necrobinder_pressed"]
+[connection signal="pressed" from="character_buttons/defect" to="." method="_on_defect_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]

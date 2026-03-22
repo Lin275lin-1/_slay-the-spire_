@@ -2,7 +2,7 @@
 extends Card
 
 func apply_effects(context: Context) -> void:
-	var damage_effect := DamageEffect.new()
+	var damage_effect := AttackEffect.new()
 	context.amount = 8
 	damage_effect.sound = sound
 	damage_effect.execute(context)

@@ -4,8 +4,6 @@
 class_name MyEffect
 extends Effect
 
-var amount := 0
-
 func execute(context: Context) -> void:
 	for target: Creature in context.targets:
 		if not target:

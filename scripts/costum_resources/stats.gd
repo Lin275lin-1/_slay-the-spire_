@@ -37,3 +37,6 @@ func create_instance() -> Stats:
 	instance.health = max_health
 	instance.block = 0
 	return instance
+
+func has_block() -> bool:
+	return block > 0
