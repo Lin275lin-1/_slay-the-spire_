@@ -33,6 +33,15 @@ var buff_data = {
 	}
 }
 
+var buff_scene = {
+	"易伤": VulnerableDebuff,
+	"虚弱": WeaknessDebuff,
+	"中毒": PoisonDebuff,
+	"脆弱": FragileDebuff,
+	"力量": StrengthBuff,
+	"敏捷": DexterityBuff
+}
+
 var keyword_info = {
 	"易伤": {
 		"name": "易伤",
