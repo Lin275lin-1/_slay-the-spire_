@@ -14,6 +14,7 @@ func _init() -> void:
 	
 func _ready() -> void:
 	type = Type.DEBUFF
+	affect = AFFECT.SELF
 	if agent and agent.has_signal("before_attack"):
 		agent.connect("before_attack", _on_before_take_damage)
 	else:

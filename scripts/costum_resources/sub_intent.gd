@@ -1,0 +1,68 @@
+class_name SubIntent
+extends Resource
+
+enum Type{
+	ATTACK,
+	BUFF,
+	CARD_DEBUFF,
+	DEFFEND,
+	DEBUFF,
+	ESCAPE,
+	HEAL,
+	SUMMON,
+	STUN,
+	SLEEP,
+	UNKOWN,
+}
+
+@export var type: Type
+@export var icon: Texture2D
+@export var base_value: int
+@export var self_targeted: bool
+@export var repeat: int = 1
+@export var sound: AudioStream
+
+var final_value : int
+
+func get_final_value() -> int:
+	return final_value
+
+func calc_final_value(source: Creature, target: Creature) -> void:
+	var modifiers := []
+	match type:
+		Type.ATTACK:
+			if target:
+				modifiers = NumericHelper.combine_modifiers(source.get_modifiers_by_type(Enums.NumericType.DAMAGE, Buff.AFFECT.SELF), target.get_modifiers_by_type(Enums.NumericType.DAMAGE, Buff.AFFECT.TARGET))
+			else:
+				modifiers = source.get_modifiers_by_type(Enums.NumericType.DAMAGE, Buff.AFFECT.SELF)
+		Type.DEFFEND:
+			modifiers = source.get_modifiers_by_type(Enums.NumericType.BLOCK, Buff.AFFECT.SELF)
+		_:
+			pass
+	final_value = NumericHelper.apply_modifiers(base_value, modifiers)
+	
+# 其他的需要通过继承实现
+func execute(source: Creature, targets: Array[Node]) -> void:
+	match type:
+		Type.ATTACK:
+			for i in range(repeat):
+				source.attack(DamageContext.new(source, targets, base_value))
+				SFXPlayer.play(sound)
+				if i < repeat - 1:
+					await source.get_tree().create_timer(0.3).timeout
+		Type.DEFFEND:
+			source.gain_block(GainBlockContext.new(source, [source], base_value))
+			SFXPlayer.play(sound)
+		_:
+			SFXPlayer.play(sound)
+
+func get_text() -> String:
+	match type:
+		Type.ATTACK:
+			#TODO: 动态显示
+			if repeat == 1:
+				return "{0}".format([final_value])
+			else:
+				return "{0}x{1}".format([final_value, repeat])
+		_:
+			return ""

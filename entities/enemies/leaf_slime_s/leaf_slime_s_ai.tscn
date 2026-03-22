@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b06w3uca3vj26" path="res://entities/enemies/enemy_intent_picker.tscn" id="1_8ng87"]
 [ext_resource type="Script" uid="uid://v6ojdkrcyaus" path="res://entities/enemies/leaf_slime_s/weak_attack.gd" id="2_rls3m"]
-[ext_resource type="Script" uid="uid://ce34juwu5b0yr" path="res://scripts/costum_resources/intent_ui.gd" id="3_ge6bf"]
+[ext_resource type="Script" uid="uid://ce34juwu5b0yr" path="res://scripts/costum_resources/intent.gd" id="3_ge6bf"]
 [ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_fk83n"]
 [ext_resource type="Script" uid="uid://db8jyp0whl5g6" path="res://entities/enemies/leaf_slime_s/double_attack.gd" id="5_gg02k"]
 

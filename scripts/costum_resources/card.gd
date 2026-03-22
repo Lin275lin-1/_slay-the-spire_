@@ -30,15 +30,15 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 		var modifiers := []
 		match entry.affected_by:
 			NumericEntry.AFFECTED_BY.SELF:
-				modifiers = source_.get_modifiers_by_type(entry.type)
+				modifiers = source_.get_modifiers_by_type(entry.type, Buff.AFFECT.SELF)
 			NumericEntry.AFFECTED_BY.TARGET:
 				if target_:
-					modifiers = target_.get_modifiers_by_type(entry.type)
+					modifiers = target_.get_modifiers_by_type(entry.type, Buff.AFFECT.TARGET)
 			NumericEntry.AFFECTED_BY.BOTH:
 				if target_:
-					modifiers = NumericHelper.combine_modifiers(source_.get_modifiers_by_type(entry.type), target_.get_modifiers_by_type(entry.type))
+					modifiers = NumericHelper.combine_modifiers(source_.get_modifiers_by_type(entry.type, Buff.AFFECT.SELF), target_.get_modifiers_by_type(entry.type, Buff.AFFECT.TARGET))
 				else:
-					modifiers = source_.get_modifiers_by_type(entry.type)
+					modifiers = source_.get_modifiers_by_type(entry.type, Buff.AFFECT.SELF)
 			NumericEntry.AFFECTED_BY.NONE:
 				modifiers = []
 			_:

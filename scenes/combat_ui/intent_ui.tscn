@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://do0dq71gofpkr"]
 
-[ext_resource type="Script" uid="uid://bithkexk646aq" path="res://scripts/combat_ui/intent.gd" id="1_gncus"]
+[ext_resource type="Script" uid="uid://bithkexk646aq" path="res://scripts/combat_ui/intent_ui.gd" id="1_gncus"]
 [ext_resource type="Texture2D" uid="uid://dy13liym84y04" path="res://images/packed/intents/intent_unknown.png" id="2_ly20q"]
 
 [node name="intentUI" type="Control" unique_id=1443955602]
