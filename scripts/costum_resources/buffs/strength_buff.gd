@@ -14,6 +14,7 @@ func _init() -> void:
 	
 func _ready() -> void:
 	type = Type.DEBUFF
+	affect = AFFECT.SELF
 	if agent and agent.has_signal("before_attack"):
 		agent.connect("before_attack", _on_before_take_damage)
 	else:
@@ -26,6 +27,12 @@ func get_modifier() -> Array[Modifier]:
 
 func get_description() -> String:
 	return description.format({"stacks": stacks})
+
+func remove_stack(amount: int):
+	stacks -= amount
+	if stacks == 0:
+		queue_free()
+	stack_changed.emit()
 
 func _on_before_take_damage(context: Context) -> void:
 	context.amount += stacks

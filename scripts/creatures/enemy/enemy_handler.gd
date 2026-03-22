@@ -6,8 +6,8 @@ func _ready() -> void:
 
 func reset_enemy_actions() -> void:
 	for child: Enemy in get_children():
-		child.current_action = null
-		child.update_action()
+		child.current_intent = null
+		child.update_intent()
 
 func start_turn() -> void:
 	if get_child_count() == 0:
