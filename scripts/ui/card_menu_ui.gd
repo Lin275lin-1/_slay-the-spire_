@@ -1,5 +1,5 @@
 class_name CardMenuUI
-extends CenterContainer
+extends Control
 
 signal inspect_card_requested(card: Card)
 
@@ -19,25 +19,27 @@ const CARD_FRAME_SKILL_S = preload("res://images/atlases/ui_atlas.sprites/card/c
 @onready var energy_label: Label = %EnergyLabel
 @onready var type_label: Label = %TypeLabel
 @onready var description_label: RichTextLabel = %DescriptionLabel
-@onready var visuals: Control = $Visuals
+@onready var visuals: Control = $CardMenuUI/Visuals
+
 
 var tween: Tween
 
 @export var card: Card: set = _set_card
 
+
 func _on_visuals_mouse_entered() -> void:
 	if tween: 
 		tween.kill()
 	tween = create_tween().set_trans(Tween.TRANS_SPRING)
-	tween.tween_property(visuals, "scale", Vector2(1.3, 1.3), 0.1)
+	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.1)
 
 
 func _on_visuals_mouse_exited() -> void:
 	if tween:
 		tween.kill()
 	tween = create_tween().set_trans(Tween.TRANS_SPRING)
-	tween.tween_property(visuals, "scale", Vector2.ONE, 0.2)
-
+	tween.tween_property(self, "scale", Vector2.ONE, 0.2)
+	
 func _on_visuals_gui_input(event: InputEvent) -> void:
 	pass # Replace with function body.
 

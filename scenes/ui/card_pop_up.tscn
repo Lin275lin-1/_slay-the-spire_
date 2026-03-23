@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://ciqc4fkeeetw0"]
+
+[ext_resource type="Texture2D" uid="uid://b4ffylh" path="res://images/atlases/ui_atlas.sprites/settings_tiny_left_arrow.tres" id="1_y7n4m"]
+[ext_resource type="PackedScene" uid="uid://uxv6ncqktd1c" path="res://scenes/ui/card_menu_ui.tscn" id="2_1v3rr"]
+[ext_resource type="Texture2D" uid="uid://kjsi4o" path="res://images/atlases/ui_atlas.sprites/settings_tiny_right_arrow.tres" id="3_b2j5q"]
+
+[node name="CardPopUp" type="Control" unique_id=302635351]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1894838826]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=506501521]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="Button" type="Button" parent="HBoxContainer" unique_id=1592742284]
+layout_mode = 2
+icon = ExtResource("1_y7n4m")
+flat = true
+
+[node name="Control" type="Control" parent="HBoxContainer" unique_id=908666704]
+custom_minimum_size = Vector2(358, 503)
+layout_mode = 2
+
+[node name="CenterContainer" parent="HBoxContainer/Control" unique_id=946762981 instance=ExtResource("2_1v3rr")]
+layout_mode = 0
+offset_left = 60.5
+offset_top = 84.0
+offset_right = 297.5
+offset_bottom = 419.0
+scale = Vector2(1.5, 1.5)
+script = null
+
+[node name="Button2" type="Button" parent="HBoxContainer" unique_id=1493460903]
+layout_mode = 2
+icon = ExtResource("3_b2j5q")
+flat = true
