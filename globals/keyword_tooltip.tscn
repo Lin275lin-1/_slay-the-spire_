@@ -4,7 +4,6 @@
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=777275650]
 layer = 3
-visible = false
 script = ExtResource("1_brlsu")
 
 [node name="KeywordTooltip" type="HBoxContainer" parent="." unique_id=2011722589]

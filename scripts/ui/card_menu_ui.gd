@@ -2,6 +2,9 @@ class_name CardMenuUI
 extends CenterContainer
 
 signal inspect_card_requested(card: Card)
+signal tooltip_requested(card: Card)        # 鼠标进入时发出
+signal tooltip_hide_requested()  
+
 
 @onready var visuals: CardVisuals = $CardMenuUI/Visuals
 
@@ -31,6 +34,8 @@ func _on_mouse_entered() -> void:
 		tween.kill()
 	tween = create_tween().set_trans(Tween.TRANS_SPRING)
 	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.1)
+	
+	tooltip_requested.emit(card)
 	Events.tooltip_show_request.emit(self)
 	
 func show_keyword_tooltip() -> void:
@@ -42,7 +47,8 @@ func show_keyword_tooltip() -> void:
 		var desc: String = BuffLibrary.get_keyword_description(keyword)
 		KeywordTooltip.add_keyword(keyword_name, desc)
 	# preview时会scale到1.3，同时向上移动175px(显示tooltip需要0.2s,此时tween已经完成)
-	KeywordTooltip.keyword_tooltip.global_position = global_position + Vector2(size.x * 1.4, 0)
+	#+ Vector2(size.x * 1.4, 0)
+	KeywordTooltip.keyword_tooltip.global_position = global_position 
 	KeywordTooltip.show()
 
 func _on_mouse_exited() -> void:
@@ -50,4 +56,5 @@ func _on_mouse_exited() -> void:
 		tween.kill()
 	tween = create_tween().set_trans(Tween.TRANS_SPRING)
 	tween.tween_property(self, "scale", Vector2.ONE, 0.2)
+	tooltip_hide_requested.emit()
 	Events.tooltip_hide_request.emit()

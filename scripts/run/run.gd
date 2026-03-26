@@ -9,20 +9,30 @@ const SHOP_SCENE := preload("res://scenes/rooms/shop_room/shop_room.tscn")
 const TREASURE_SCENE := preload("res://scenes/rooms/treasure_room/treasure_room.tscn")
 const INCIDENT_SCENE := preload("res://scenes/rooms/incident_room/incident_room.tscn")
 
+const BATTLE_REWARD_SCENE = preload("res://scenes/rooms/reward/reward_room.tscn")
+
 @onready var current_room: Node = $CurrentRoom
+
 @onready var combat: Button = %combat
 @onready var treasure: Button = %treasure
 @onready var shop: Button = %shop
 @onready var campfire: Button = %campfire
 @onready var rewards: Button = %rewards
-@onready var map: Button = %map
 @onready var incident: Button = %incident
-@onready var deck_view: DeckView = %DeckView
+
+@onready var map: Button = %map
+
 @onready var top_bar: TopBar = %TopBar
+#@onready var gold_ui: GoldUI = %TopBar/Left/TopBarGold
+
+@onready var deck_view: DeckView = %DeckView
+
 
 @export var run_startup: RunStartup
 
 var character: CharacterStats
+
+var stats: RunStats
 
 func _ready() -> void:
 	if not run_startup:
@@ -36,23 +46,49 @@ func _ready() -> void:
 			print("加载游戏")
 	
 func _start_run() -> void:
+	stats = RunStats.new()
+	
 	_setup_event_connections()
 	_setup_top_bar()
 	# TODO: 生成地图
+	
+	#debug
+	#await get_tree().create_timer(3).timeout
+	#stats.gold += 55
 
 func _setup_top_bar() -> void:
 	deck_view.card_pile = character.deck
+	
+	#金币状态赋值
+	top_bar.run_stats = stats   
+	
 	top_bar.initialize(character)
 	top_bar.deck_view_requested.connect(deck_view.show_card_pile.bind("你在战斗中将会使用这里的所有卡牌。", false))
 
 
-func _change_view(scene: PackedScene) -> void:
+func _change_view(scene: PackedScene) -> Node:
 	if current_room.get_child_count() > 0:
 		current_room.get_child(0).queue_free()
-	current_room.add_child(scene.instantiate())
+		
+	get_tree().paused = false
+	var new_view := scene.instantiate()
+	current_room.add_child(new_view)
+	
+	return new_view
+	
+func _on_combat_won() -> void:
 
+	var reward_scene :=_change_view(BATTLE_REWARD_SCENE) as BattleReward
+	reward_scene.run_stats = stats
+	reward_scene.character_stats =character
+	#this is temporary code,it will come from real battle encounter data
+	# as a dependency
+	
+	#reward_scene.add_gold_reward(77)
+	#reward_scene.add_card_reward()
+	
 func _setup_event_connections() -> void:
-	Events.combat_won.connect(_change_view.bind(COMBAT_REWARD_SCENE))
+	Events.combat_won.connect(_on_combat_won)
 	Events.combat_reward_exited.connect(_change_view.bind(MAP_SCENE))
 	Events.campfire_exited.connect(_change_view.bind(MAP_SCENE))
 	Events.map_exited.connect(_on_map_exited)

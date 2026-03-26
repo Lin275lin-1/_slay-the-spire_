@@ -1,0 +1,354 @@
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://dj2uogmuhqx44"]
+
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://jvpf65gf7yuq" path="res://scripts/costum_resources/card_pile.gd" id="2_pile"]
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="3_numeric"]
+[ext_resource type="Texture2D" uid="uid://6ony3r" path="res://images/atlases/card_atlas.sprites/ironclad/anger.tres" id="3_vins6"]
+[ext_resource type="Texture2D" uid="uid://v5fhk" path="res://images/atlases/card_atlas.sprites/ironclad/armaments.tres" id="4_j86dx"]
+[ext_resource type="Texture2D" uid="uid://cojmrrl" path="res://images/atlases/card_atlas.sprites/ironclad/barricade.tres" id="5_ovpga"]
+[ext_resource type="Texture2D" uid="uid://b03h6ce" path="res://images/atlases/card_atlas.sprites/ironclad/battle_trance.tres" id="6_ll06q"]
+[ext_resource type="Texture2D" uid="uid://bbpfskx" path="res://images/atlases/card_atlas.sprites/ironclad/bloodletting.tres" id="7_fl7cp"]
+[ext_resource type="Texture2D" uid="uid://b6s4nay" path="res://images/atlases/card_atlas.sprites/ironclad/bludgeon.tres" id="8_xjwdw"]
+[ext_resource type="Texture2D" uid="uid://b0e08xe" path="res://images/atlases/card_atlas.sprites/ironclad/body_slam.tres" id="9_6408v"]
+[ext_resource type="Texture2D" uid="uid://t28flj" path="res://images/atlases/card_atlas.sprites/ironclad/brand.tres" id="10_iuuv3"]
+[ext_resource type="Texture2D" uid="uid://fj7hwr" path="res://images/atlases/card_atlas.sprites/ironclad/break.tres" id="11_7j7q5"]
+[ext_resource type="Texture2D" uid="uid://cyokfre" path="res://images/atlases/card_atlas.sprites/ironclad/breakthrough.tres" id="12_pdfs1"]
+[ext_resource type="Texture2D" uid="uid://4566p1" path="res://images/atlases/card_atlas.sprites/ironclad/bully.tres" id="13_vins6"]
+[ext_resource type="Texture2D" uid="uid://cbwhwps" path="res://images/atlases/card_atlas.sprites/ironclad/burning_pact.tres" id="14_j86dx"]
+[ext_resource type="Texture2D" uid="uid://2s2f2g" path="res://images/atlases/card_atlas.sprites/ironclad/cascade.tres" id="15_ovpga"]
+[ext_resource type="Texture2D" uid="uid://2wra8v" path="res://images/atlases/card_atlas.sprites/ironclad/colossus.tres" id="16_ll06q"]
+[ext_resource type="Texture2D" uid="uid://b8p12np" path="res://images/atlases/card_atlas.sprites/ironclad/dominate.tres" id="17_fl7cp"]
+[ext_resource type="Texture2D" uid="uid://b60dq5s" path="res://images/atlases/card_atlas.sprites/ironclad/evil_eye.tres" id="18_xjwdw"]
+[ext_resource type="Texture2D" uid="uid://ysurbs" path="res://images/atlases/card_atlas.sprites/ironclad/feed.tres" id="19_6408v"]
+[ext_resource type="Texture2D" uid="uid://6ivvsd" path="res://images/atlases/card_atlas.sprites/ironclad/feel_no_pain.tres" id="20_vins6"]
+[ext_resource type="Texture2D" uid="uid://cvci3od" path="res://images/atlases/card_atlas.sprites/ironclad/fiend_fire.tres" id="21_iuuv3"]
+[ext_resource type="Texture2D" uid="uid://6bwvdv" path="res://images/atlases/card_atlas.sprites/ironclad/flame_barrier.tres" id="22_7j7q5"]
+[ext_resource type="Texture2D" uid="uid://cg5pw0n" path="res://images/atlases/card_atlas.sprites/ironclad/grapple.tres" id="23_pdfs1"]
+[ext_resource type="Texture2D" uid="uid://6rwx4n" path="res://images/atlases/card_atlas.sprites/ironclad/shrug_it_off.tres" id="24_i07d6"]
+[ext_resource type="Texture2D" uid="uid://b78fve5" path="res://images/atlases/card_atlas.sprites/ironclad/tank.tres" id="25_a2wao"]
+[ext_resource type="Texture2D" uid="uid://x6dqru" path="res://images/atlases/card_atlas.sprites/ironclad/thunderclap.tres" id="26_fuk52"]
+
+[sub_resource type="Resource" id="numeric_damage_6"]
+script = ExtResource("3_numeric")
+base_value = 6
+placeholder = "damage"
+affected_by = 2
+
+[sub_resource type="Resource" id="card_anger"]
+script = ExtResource("1_card")
+id = "愤怒"
+target = 1
+portrait = ExtResource("3_vins6")
+description = "[center]造成{damage}点伤害。将一张愤怒复制品加入弃牌堆。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_damage_6")])
+
+[sub_resource type="Resource" id="numeric_block_5"]
+script = ExtResource("3_numeric")
+type = 2
+base_value = 5
+placeholder = "block"
+
+[sub_resource type="Resource" id="card_armaments"]
+script = ExtResource("1_card")
+id = "武装"
+target = 2
+cost = 1
+portrait = ExtResource("4_j86dx")
+description = "[center]获得{block}点格挡。升级手牌中一张牌。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_block_5")])
+
+[sub_resource type="Resource" id="card_barricade"]
+script = ExtResource("1_card")
+id = "壁垒"
+target = 2
+cost = 3
+rarity = 2
+portrait = ExtResource("5_ovpga")
+description = "[center]格挡不会在回合结束时消失。[/center]"
+
+[sub_resource type="Resource" id="card_battle_trance"]
+script = ExtResource("1_card")
+id = "战斗专注"
+target = 2
+rarity = 1
+portrait = ExtResource("6_ll06q")
+description = "[center]抽3张牌。本回合不能再抽牌。[/center]"
+
+[sub_resource type="Resource" id="card_bloodletting"]
+script = ExtResource("1_card")
+id = "放血"
+target = 2
+rarity = 1
+portrait = ExtResource("7_fl7cp")
+description = "[center]失去3点生命，获得2点[color = gold]能量[/color]。[/center]"
+
+[sub_resource type="Resource" id="numeric_damage_32"]
+script = ExtResource("3_numeric")
+base_value = 32
+placeholder = "damage"
+affected_by = 2
+
+[sub_resource type="Resource" id="card_bludgeon"]
+script = ExtResource("1_card")
+id = "重锤"
+target = 1
+cost = 3
+rarity = 2
+portrait = ExtResource("8_xjwdw")
+description = "[center]造成{damage}点伤害。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_damage_32")])
+
+[sub_resource type="Resource" id="card_body_slam"]
+script = ExtResource("1_card")
+id = "全身撞击"
+target = 1
+cost = 1
+portrait = ExtResource("9_6408v")
+description = "[center]造成等同于当前格挡值的伤害。[/center]"
+
+[sub_resource type="Resource" id="numeric_damage_7"]
+script = ExtResource("3_numeric")
+base_value = 7
+placeholder = "damage"
+affected_by = 2
+
+[sub_resource type="Resource" id="numeric_weak_2"]
+script = ExtResource("3_numeric")
+type = 4
+base_value = 2
+placeholder = "weak"
+affected_by = 3
+
+[sub_resource type="Resource" id="card_brand"]
+script = ExtResource("1_card")
+id = "烙印"
+target = 1
+cost = 1
+rarity = 1
+portrait = ExtResource("10_iuuv3")
+description = "[center]造成{damage}点伤害。施加{weak}层[color = gold]虚弱[/color]。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_damage_7"), SubResource("numeric_weak_2")])
+
+[sub_resource type="Resource" id="numeric_damage_5"]
+script = ExtResource("3_numeric")
+base_value = 5
+placeholder = "damage"
+affected_by = 2
+
+[sub_resource type="Resource" id="card_break"]
+script = ExtResource("1_card")
+id = "破防"
+target = 1
+cost = 1
+portrait = ExtResource("11_7j7q5")
+description = "[center]造成{damage}点伤害。如果目标有格挡，额外造成{extra}点伤害。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_damage_5")])
+
+[sub_resource type="Resource" id="card_breakthrough"]
+script = ExtResource("1_card")
+id = "突破极限"
+target = 2
+cost = 1
+rarity = 2
+portrait = ExtResource("12_pdfs1")
+description = "[center][color = gold]力量[/color]翻倍。[color = gold]消耗[/color]。[/center]"
+
+[sub_resource type="Resource" id="card_bully"]
+script = ExtResource("1_card")
+id = "欺凌"
+target = 1
+cost = 1
+portrait = ExtResource("13_vins6")
+description = "[center]造成{damage}点伤害。如果敌人有[color = gold]虚弱[/color]，获得{block}点格挡。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_damage_6"), SubResource("numeric_block_5")])
+
+[sub_resource type="Resource" id="card_burning_pact"]
+script = ExtResource("1_card")
+id = "燃烧契约"
+target = 2
+cost = 1
+rarity = 1
+portrait = ExtResource("14_j86dx")
+description = "[center]消耗1张牌，抽2张牌。[/center]"
+
+[sub_resource type="Resource" id="card_cascade"]
+script = ExtResource("1_card")
+id = "连锁"
+target = 1
+cost = 1
+rarity = 1
+portrait = ExtResource("15_ovpga")
+description = "[center]造成{damage}点伤害，随机再造成一次同等伤害。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_damage_6")])
+
+[sub_resource type="Resource" id="numeric_strength_3"]
+script = ExtResource("3_numeric")
+type = 4
+base_value = 3
+placeholder = "strength"
+affected_by = 3
+
+[sub_resource type="Resource" id="card_colossus"]
+script = ExtResource("1_card")
+id = "巨人"
+target = 2
+cost = 2
+rarity = 2
+portrait = ExtResource("16_ll06q")
+description = "[center]获得{strength}点[color = gold]力量[/color]。每回合失去{loss}点[color = gold]力量[/color]。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_strength_3")])
+
+[sub_resource type="Resource" id="numeric_vulnerable_1"]
+script = ExtResource("3_numeric")
+type = 4
+base_value = 1
+placeholder = "vulnerable"
+affected_by = 3
+
+[sub_resource type="Resource" id="card_dominate"]
+script = ExtResource("1_card")
+id = "主宰"
+target = 1
+cost = 1
+rarity = 1
+portrait = ExtResource("17_fl7cp")
+description = "[center]施加{stacks}层[color = gold]易伤[/color]。目标每有一层[color = gold]易伤[/color]，获得一点力量。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_vulnerable_1")])
+
+[sub_resource type="Resource" id="numeric_weak_1"]
+script = ExtResource("3_numeric")
+type = 4
+base_value = 1
+placeholder = "weak"
+affected_by = 3
+
+[sub_resource type="Resource" id="card_evil_eye"]
+script = ExtResource("1_card")
+id = "邪眼"
+target = 1
+cost = 1
+rarity = 1
+portrait = ExtResource("18_xjwdw")
+description = "[center]造成{damage}点伤害。施加{weak}层虚弱。抽1张牌。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_damage_5"), SubResource("numeric_weak_1")])
+
+[sub_resource type="Resource" id="numeric_damage_10"]
+script = ExtResource("3_numeric")
+base_value = 10
+placeholder = "damage"
+affected_by = 2
+
+[sub_resource type="Resource" id="card_feed"]
+script = ExtResource("1_card")
+id = "狂宴"
+target = 1
+cost = 1
+rarity = 2
+portrait = ExtResource("19_6408v")
+description = "[center]造成{damage}点伤害。若此击杀敌人，永久增加3点最大生命值。[color = gold]消耗[/color]。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_damage_10")])
+
+[sub_resource type="Resource" id="numeric_block_3"]
+script = ExtResource("3_numeric")
+type = 2
+base_value = 3
+placeholder = "block"
+
+[sub_resource type="Resource" id="card_feel_no_pain"]
+script = ExtResource("1_card")
+id = "无惧疼痛"
+target = 2
+cost = 1
+rarity = 1
+portrait = ExtResource("20_vins6")
+description = "[center]每消耗一张牌获得{block}点格挡。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_block_3")])
+
+[sub_resource type="Resource" id="card_fiend_fire"]
+script = ExtResource("1_card")
+id = "恶魔之焰"
+target = 1
+cost = 2
+rarity = 2
+portrait = ExtResource("21_iuuv3")
+description = "[center]消耗手牌，每张造成{damage}点伤害。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_damage_7")])
+
+[sub_resource type="Resource" id="numeric_block_12"]
+script = ExtResource("3_numeric")
+type = 2
+base_value = 12
+placeholder = "block"
+
+[sub_resource type="Resource" id="card_flame_barrier"]
+script = ExtResource("1_card")
+id = "火焰屏障"
+target = 2
+cost = 2
+rarity = 1
+portrait = ExtResource("22_7j7q5")
+description = "[center]获得{block}点格挡，每次被攻击反弹4点伤害。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_block_12")])
+
+[sub_resource type="Resource" id="numeric_damage_8"]
+script = ExtResource("3_numeric")
+base_value = 8
+placeholder = "damage"
+affected_by = 2
+
+[sub_resource type="Resource" id="numeric_block_8"]
+script = ExtResource("3_numeric")
+type = 2
+base_value = 8
+placeholder = "block"
+
+[sub_resource type="Resource" id="card_grapple"]
+script = ExtResource("1_card")
+id = "擒拿"
+target = 1
+cost = 1
+portrait = ExtResource("23_pdfs1")
+description = "[center]造成{damage}点伤害。如果目标有[color = gold]易伤[/color]，获得{block}点格挡。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_damage_8"), SubResource("numeric_block_8")])
+
+[sub_resource type="Resource" id="card_shrug_it_off"]
+script = ExtResource("1_card")
+id = "耸肩无视"
+target = 2
+cost = 1
+portrait = ExtResource("24_i07d6")
+description = "[center]获得{block}点格挡，抽1张牌。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_block_8")])
+
+[sub_resource type="Resource" id="numeric_block_15"]
+script = ExtResource("3_numeric")
+type = 2
+base_value = 15
+placeholder = "block"
+
+[sub_resource type="Resource" id="card_tank"]
+script = ExtResource("1_card")
+id = "坦克"
+target = 2
+cost = 2
+portrait = ExtResource("25_a2wao")
+description = "[center]获得{block}点格挡。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_block_15")])
+
+[sub_resource type="Resource" id="numeric_damage_4"]
+script = ExtResource("3_numeric")
+base_value = 4
+placeholder = "damage"
+affected_by = 2
+
+[sub_resource type="Resource" id="card_thunderclap"]
+script = ExtResource("1_card")
+id = "闪电霹雳"
+cost = 1
+portrait = ExtResource("26_fuk52")
+description = "[center]对所有敌人造成{damage}点伤害，并施加1层易伤。[/center]"
+numeric_entries = Array[ExtResource("3_numeric")]([SubResource("numeric_damage_4"), SubResource("numeric_vulnerable_1")])
+
+[resource]
+script = ExtResource("2_pile")
+cards = Array[ExtResource("1_card")]([SubResource("card_anger"), SubResource("card_armaments"), SubResource("card_barricade"), SubResource("card_battle_trance"), SubResource("card_bloodletting"), SubResource("card_bludgeon"), SubResource("card_body_slam"), SubResource("card_brand"), SubResource("card_break"), SubResource("card_breakthrough"), SubResource("card_bully"), SubResource("card_burning_pact"), SubResource("card_cascade"), SubResource("card_colossus"), SubResource("card_dominate"), SubResource("card_evil_eye"), SubResource("card_feed"), SubResource("card_feel_no_pain"), SubResource("card_fiend_fire"), SubResource("card_flame_barrier"), SubResource("card_grapple"), SubResource("card_shrug_it_off"), SubResource("card_tank"), SubResource("card_thunderclap")])
