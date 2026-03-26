@@ -23,7 +23,7 @@ const CARD_FRAME_COLORLESS_MAT = preload("res://materials/cards/frames/card_fram
 const CARD_FRAME_CURSE_MAT = preload("res://materials/cards/frames/card_frame_curse_mat.tres")
 const CARD_FRAME_GREEN_MAT = preload("res://materials/cards/frames/card_frame_green_mat.tres")
 #const CARD_FRAME_ORANGE_MAT = preload("res://materials/cards/frames/card_frame_orange_mat.tres")
-#const CARD_FRAME_PINK_MAT = preload("res://materials/cards/frames/card_frame_pink_mat.tres")
+const CARD_FRAME_PINK_MAT = preload("res://materials/cards/frames/card_frame_pink_mat.tres")
 #const CARD_FRAME_QUEST_MAT = preload("res://materials/cards/frames/card_frame_quest_mat.tres")
 const CARD_FRAME_RED_MAT = preload("res://materials/cards/frames/card_frame_red_mat.tres")
 
@@ -70,6 +70,8 @@ func _set_card(value: Card) -> void:
 			card_frame.material = CARD_FRAME_RED_MAT
 		card.COLOR.GREEN:
 			card_frame.material = CARD_FRAME_GREEN_MAT
+		card.COLOR.PINK:
+			card_frame.material = CARD_FRAME_PINK_MAT
 		card.COLOR.COLORLESS:
 			card_frame.material = CARD_FRAME_COLORLESS_MAT
 		card.COLOR.CURSE:

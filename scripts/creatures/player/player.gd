@@ -3,6 +3,8 @@ extends Creature
 
 
 @export var stats: CharacterStats : set = _set_char_stats
+@export var hand_selector: HandSelector
+@export var agent: PlayerHandler
 
 @onready var hitbox: CollisionShape2D = $CollisionShape2D
 @onready var hint_sprite: TextureRect = $Hint
@@ -32,7 +34,18 @@ func _hint(hint_text: String) -> void:
 	#var buff_ui := BUFF_UI.instantiate()
 	#buff_ui.buff = buff_context.buff_node
 	#buff_container.add_child(buff_ui)
-	
+
+func select(context: ChooseCardContext) -> void:
+	var selected: Array[Card]
+	agent.hide_hand()
+	if context.max_select > 1:
+		selected = await hand_selector.multi_select(context.cards as Array[Card], context.title, context.min_select, context.max_select)
+	else:
+		selected = await hand_selector.single_select(context.cards as Array[Card], context.title)
+	for card: Card in selected:
+		context.callback.call(card)
+	agent.show_hand()
+		
 func gain_block(context: Context) -> void:
 	before_gain_block.emit(context)
 	stats.block += context.amount
@@ -71,6 +84,15 @@ func take_damage(context: Context) -> void:
 		Events.player_hit.emit()
 		spine_anim_state.set_animation("hurt", false, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
+
+func get_hand_cards() -> Array[Card]:
+	return agent.get_hand()
+
+func discard_card(card: Card) -> void:
+	agent.discard_card(card)
+	
+func exhaust_card(card: Card) -> void:
+	agent.exhaust_card(card)
 
 func start_turn() -> void:
 	turn_started.emit(self)

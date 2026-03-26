@@ -55,19 +55,52 @@ func disable_hand() -> void:
 	for child:CardUI in hand_manager.get_children():
 		child.disabled = true
 
-func discard_card(card_ui:CardUI) -> void:
-	pass
+func discard_card(card: Card) -> void:
+	for child: CardUI in hand_manager.get_children():
+		if card == child.card:
+			hand_manager.discard_card(child)
+			char_stats.discard_pile.add_card(card)
+			return
+	printerr("player_handler")
+
+
+func exhaust_card(card: Card) -> void:
+	for child: CardUI in hand_manager.get_children():
+		if card == child.card:
+			hand_manager.exhaust_card(child)
+			char_stats.exhaust_pile.add_card(card)
+			return
+	printerr("player_handler")
+
 
 func discard_cards() -> void:
 	var tween := create_tween()
 	for child: CardUI in hand_manager.get_children():
-		tween.tween_callback(char_stats.discard_pile.add_card.bind(child.card))
+		if child.card.ethereal:
+			tween.tween_callback(char_stats.exhaust_pile.add_card.bind(child.card))
+			#TODO:卡片消耗特效
+		else:
+			tween.tween_callback(char_stats.discard_pile.add_card.bind(child.card))
 		tween.tween_callback(hand_manager.discard_card.bind(child))
 		tween.tween_interval(HAND_DISCARD_INTERVAL)
 	tween.finished.connect(
 		func(): Events.player_hand_discarded.emit()
 	)
 
+func hide_hand() -> void:
+	print("hide")
+	hand_manager.hide()
+	
+func show_hand() -> void:
+	print("show")
+	hand_manager.show()
+	
+func get_hand() -> Array[Card]:
+	var ret: Array[Card] = []
+	for child: CardUI in hand_manager.get_children():
+		ret.append(child.card)
+	return ret
+	
 func reshuffle_deck_from_discard_pile() -> void:
 	if not char_stats.draw_pile.is_empty():
 		return
@@ -78,6 +111,9 @@ func reshuffle_deck_from_discard_pile() -> void:
 	char_stats.draw_pile.shuffle()
 
 func _on_card_played(card: Card) -> void:
+	if card.type == card.Type.POWER:
+		# 能力牌打出后不进入任何牌堆
+		return
 	if card.exhaust:
 		char_stats.exhaust_pile.add_card(card)
 	else:

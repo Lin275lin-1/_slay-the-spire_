@@ -1,6 +1,7 @@
 class_name CardUI
 extends Control
 
+signal toggled(card: CardUI)
 
 @export var card: Card: set = _set_card
 @export var char_stats: CharacterStats: set = _set_char_stats
@@ -22,6 +23,9 @@ var parent : Control
 var tween: Tween
 # 专门负责移动的tween
 var movement_tween: Tween
+# 选择状态
+
+var selection_mode: Enums.SelectionMode = Enums.SelectionMode.NONE
 
 # 在dragging/aiming下，卡牌会脱离handmanger
 @warning_ignore("unused_signal")
@@ -44,12 +48,30 @@ func play() -> void:
 	card.play(Context.new(get_tree().get_first_node_in_group("ui_player"), targets, 0), char_stats)
 	# TODO: 在删除前做出消耗/去弃牌堆的动画
 	queue_free()
+
+func animate_reset() -> void:
+	if tween:
+		tween.kill()
+	if movement_tween:
+		movement_tween.kill()
+	self.rotation_degrees = 0
+	self.scale = Vector2.ONE
+	self.position = original_position
 	
+func animate_set_card(target_position: Vector2, target_rotation_degrees: float, duration: float) -> void:
+	if movement_tween:
+		movement_tween.kill()
+	disabled = true
+	movement_tween = create_tween().set_parallel(true)
+	movement_tween.tween_property(self, "position", target_position, duration)
+	movement_tween.tween_property(self, "rotation_degrees", target_rotation_degrees, duration)
+	movement_tween.finished.connect(func(): disabled = false)
+		
 func animate_to_position(new_position: Vector2, duration: float) -> void:
 	if movement_tween:
 		movement_tween.kill()
 	movement_tween = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
-	movement_tween.tween_property(self, "global_position", new_position, duration)
+	movement_tween.tween_property(self, "position", new_position, duration)
 
 func animate_start_preview() -> void:
 	if movement_tween:
@@ -96,24 +118,36 @@ func _set_playable(value: bool) -> void:
 
 func _set_disabled(value: bool) -> void:
 	disabled = value
-	
 
 func _input(event: InputEvent) -> void:
-	card_state_machine.on_input(event)
+	if disabled:
+		return
+	if selection_mode == Enums.SelectionMode.NONE:
+		card_state_machine.on_input(event)
 
 func _on_gui_input(event: InputEvent) -> void:
-	card_state_machine.on_gui_input(event)
+	if selection_mode == Enums.SelectionMode.NONE and not disabled:
+		card_state_machine.on_gui_input(event)
+	elif selection_mode != Enums.SelectionMode.NONE and (event.is_action_pressed("left_mouse") or event.is_action_pressed("right_mouse")):
+		toggled.emit(self)
+	
 
 func _on_mouse_entered() -> void:
-	card_state_machine.on_mouse_entered()
+	if disabled: 
+		return
+	if selection_mode == Enums.SelectionMode.NONE:
+		card_state_machine.on_mouse_entered()
+		if card.target == card.Target.SELF or card.target == card.Target.SINGLE_ENEMY:
+			set_description(get_tree().get_first_node_in_group("ui_player"), null)
+		elif card.target == card.Target.EVERYONE or card.target == card.Target.ALL_ENEMIES:
+			set_description(get_tree().get_first_node_in_group("ui_player"), get_tree().get_first_node_in_group("ui_enemies"))
+	else:
+		Events.card_previewed.emit(self, true)
+		animate_start_preview()
 	Events.tooltip_show_request.emit(self)
-	if card.target == card.Target.SELF or card.target == card.Target.SINGLE_ENEMY:
-		set_description(get_tree().get_first_node_in_group("ui_player"), null)
-	elif card.target == card.Target.EVERYONE or card.target == card.Target.ALL_ENEMIES:
-		set_description(get_tree().get_first_node_in_group("ui_player"), get_tree().get_first_node_in_group("ui_enemies"))
 	
 func show_keyword_tooltip() -> void:
-	var keywords = KeywordTooltip.extract_keyword(card.description)
+	var keywords = KeywordTooltip.extract_keyword(card.get_default_description())
 	if keywords.is_empty():
 		return
 	for keyword:String in keywords:
@@ -125,7 +159,13 @@ func show_keyword_tooltip() -> void:
 	KeywordTooltip.show()
 
 func _on_mouse_exited() -> void:
-	card_state_machine.on_mouse_exited()
+	if disabled:
+		return
+	if selection_mode == Enums.SelectionMode.NONE:
+		card_state_machine.on_mouse_exited()
+	else:
+		Events.card_previewed.emit(self, false)
+		animate_end_preview()
 	Events.tooltip_hide_request.emit()
 	
 func _on_card_click_or_drag_or_aiming_started(card_ui: CardUI) -> void:
@@ -138,7 +178,10 @@ func _on_card_click_or_drag_or_aiming_ended(_card_ui: CardUI) -> void:
 	self.playable = char_stats.can_play_card(card)
 
 func set_description(source_: Creature, target_: Creature) -> void:
-	visuals.set_description(card.get_description(source_, target_))
+	if selection_mode == Enums.SelectionMode.NONE:
+		visuals.set_description(card.get_description(source_, target_))
+	else:
+		visuals.set_description(card.get_default_description())
 
 func _on_drop_point_area_area_entered(area: Area2D) -> void:
 	if not targets.has(area):

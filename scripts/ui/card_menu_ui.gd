@@ -34,7 +34,7 @@ func _on_mouse_entered() -> void:
 	Events.tooltip_show_request.emit(self)
 	
 func show_keyword_tooltip() -> void:
-	var keywords = KeywordTooltip.extract_keyword(card.description)
+	var keywords = KeywordTooltip.extract_keyword(card.get_default_description())
 	if keywords.is_empty():
 		return
 	for keyword:String in keywords:

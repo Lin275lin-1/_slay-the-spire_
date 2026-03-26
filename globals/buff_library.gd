@@ -30,6 +30,11 @@ var buff_data = {
 		"name": "敏捷",
 		"description": "从卡牌获得的格挡提高{stacks}点",
 		"icon": preload("res://images/powers/dexterity_power.png")
+	},
+	"恶魔形态":{
+		"name": "恶魔形态",
+		"description": "在每回合开始时，获得{stacks}层力量",
+		"icon": preload("res://images/powers/demon_form_power.png")
 	}
 }
 
@@ -39,7 +44,8 @@ var buff_scene = {
 	"中毒": PoisonDebuff,
 	"脆弱": FragileDebuff,
 	"力量": StrengthBuff,
-	"敏捷": DexterityBuff
+	"敏捷": DexterityBuff,
+	"恶魔形态": DemonFormBuff
 }
 
 var keyword_info = {
@@ -55,10 +61,6 @@ var keyword_info = {
 		"name": "中毒",
 		"description": "回合开始时失去等同于层数的生命，然后减少一层",
 	},
-	"消耗":{
-		"name": "消耗",
-		"description": "被消耗的牌不会进入弃牌堆而是进入消耗堆"
-	},
 	"脆弱":{
 		"name": "脆弱",
 		"description": "从卡牌中获得的格挡降低25%",
@@ -71,16 +73,28 @@ var keyword_info = {
 		"name": "敏捷",
 		"description": "从卡牌获得的格挡提高"
 	},
+	"恶魔形态":{
+		"name": "恶魔形态",
+		"description": "在回合开始时获得等同于层数的力量"
+	},
 	"格挡":{
-		"name": "格挡]",
+		"name": "格挡",
 		"description": "在回合开始前抵挡伤害"
+	},
+	"消耗":{
+		"name": "消耗",
+		"description": "被消耗的牌不会进入弃牌堆而是进入消耗堆"
+	},
+	"虚无":{
+		"name": "虚无",
+		"description": "虚无牌在回合结束时如果仍在手牌中，自动被消耗"
 	}
 }
 
 func get_keyword_description(key: String) -> String:
 	return keyword_info.get(key, {}).get("description", "")
+	
 # 一般来说key和name是相同的，这里不考虑多语言
-
 func get_keyword_name(key: String) -> String:
 	return keyword_info.get(key, {}).get("name", "")
 

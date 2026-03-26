@@ -24,6 +24,10 @@
 [ext_resource type="AudioStream" uid="uid://3lu4thc1wvg0" path="res://audio/SFX/dark_orb_evoke.mp3" id="21_l52n2"]
 [ext_resource type="Texture2D" uid="uid://b8p12np" path="res://images/atlases/card_atlas.sprites/ironclad/dominate.tres" id="22_cyjvc"]
 [ext_resource type="Script" uid="uid://crcvx0yompece" path="res://entities/characters/ironclad/cards/主宰.gd" id="23_lmdw5"]
+[ext_resource type="Texture2D" uid="uid://pafakq" path="res://images/atlases/card_atlas.sprites/necrobinder/defile.tres" id="26_cilra"]
+[ext_resource type="Texture2D" uid="uid://bcgn03j" path="res://images/atlases/card_atlas.sprites/necrobinder/sculpting_strike.tres" id="26_lm2nt"]
+[ext_resource type="Script" uid="uid://cj4qfukbhf6x8" path="res://entities/characters/necrobinder/雕琢打击.gd" id="27_jqanm"]
+[ext_resource type="Script" uid="uid://btp5g8uxwew6f" path="res://entities/characters/necrobinder/玷污.gd" id="27_lm2nt"]
 
 [sub_resource type="Resource" id="Resource_sjnru"]
 script = ExtResource("2_t8brg")
@@ -31,17 +35,6 @@ base_value = 6
 placeholder = "damage"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
-
-[sub_resource type="Resource" id="Resource_t8brg"]
-script = ExtResource("7_whuos")
-id = "打击"
-target = 1
-cost = 1
-portrait = ExtResource("6_bsqa6")
-description = "[center]造成{damage}点伤害。[/center]"
-sound = ExtResource("8_cilra")
-numeric_entries = Array[ExtResource("2_t8brg")]([SubResource("Resource_sjnru")])
-metadata/_custom_type_script = "uid://br1hibx18tv13"
 
 [sub_resource type="Resource" id="Resource_au0bv"]
 script = ExtResource("7_whuos")
@@ -224,7 +217,46 @@ numeric_entries = Array[ExtResource("2_t8brg")]([SubResource("Resource_s7go0")])
 exhaust = true
 metadata/_custom_type_script = "uid://br1hibx18tv13"
 
+[sub_resource type="Resource" id="Resource_u3761"]
+script = ExtResource("2_t8brg")
+base_value = 13
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_vp0wk"]
+script = ExtResource("27_lm2nt")
+id = "玷污"
+target = 1
+card_color = 3
+cost = 1
+portrait = ExtResource("26_cilra")
+description = "[center]造成{damage}点伤害[/center]"
+sound = ExtResource("11_q88nh")
+numeric_entries = Array[ExtResource("2_t8brg")]([SubResource("Resource_u3761")])
+ethereal = true
+metadata/_custom_type_script = "uid://br1hibx18tv13"
+
+[sub_resource type="Resource" id="Resource_8jli3"]
+script = ExtResource("2_t8brg")
+base_value = 7
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_2qpn7"]
+script = ExtResource("27_jqanm")
+id = "雕琢打击"
+target = 1
+card_color = 3
+cost = 1
+portrait = ExtResource("26_lm2nt")
+description = "[center]造成{damage}点伤害。[/center][p][center]选择手中的一张牌施加[color=gold]虚无[/color]。[/center]"
+sound = ExtResource("11_q88nh")
+numeric_entries = Array[ExtResource("2_t8brg")]([SubResource("Resource_8jli3")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"
+
 [resource]
 script = ExtResource("2_pcwuu")
-cards = Array[ExtResource("1_6dnus")]([SubResource("Resource_t8brg"), SubResource("Resource_au0bv"), SubResource("Resource_cyjvc"), SubResource("Resource_lmdw5"), SubResource("Resource_bsqa6"), SubResource("Resource_whuos"), SubResource("Resource_cilra"), SubResource("Resource_lm2nt"), SubResource("Resource_jqanm"), SubResource("Resource_q88nh")])
+cards = Array[ExtResource("1_6dnus")]([SubResource("Resource_au0bv"), SubResource("Resource_cyjvc"), SubResource("Resource_lmdw5"), SubResource("Resource_bsqa6"), SubResource("Resource_whuos"), SubResource("Resource_cilra"), SubResource("Resource_lm2nt"), SubResource("Resource_jqanm"), SubResource("Resource_q88nh"), SubResource("Resource_vp0wk"), SubResource("Resource_2qpn7")])
 metadata/_custom_type_script = "uid://jvpf65gf7yuq"

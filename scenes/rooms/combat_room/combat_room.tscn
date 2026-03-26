@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://lb7f7afwbapn" path="res://images/packed/combat_ui/discard_pile.png" id="12_4hrnf"]
 [ext_resource type="PackedScene" uid="uid://bdu3mvwj8syfb" path="res://scenes/card_target_selector/card_target_selector.tscn" id="12_83j5g"]
 [ext_resource type="Texture2D" uid="uid://dyk2ylwv2fgxp" path="res://images/packed/combat_ui/exhaust_pile.png" id="12_hylje"]
+[ext_resource type="PackedScene" uid="uid://dwj3mdroe0dgp" path="res://scenes/rooms/combat_room/combat_ui/hand_selelctor.tscn" id="13_4hrnf"]
 [ext_resource type="Script" uid="uid://b7jbna8u8wfw1" path="res://scripts/rooms/combat_room/combat_ui/red_flash.gd" id="13_d1stk"]
 [ext_resource type="Texture2D" uid="uid://cvxy8ydgwomqh" path="res://images/rooms/underdocks/underdocks_01_a.png" id="14_fjeak"]
 [ext_resource type="PackedScene" uid="uid://bijk3yg4btssm" path="res://scenes/ui/deck_view.tscn" id="15_hylje"]
@@ -173,6 +174,9 @@ text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="HandSelelctor" parent="CombatUI" unique_id=505773446 instance=ExtResource("13_4hrnf")]
+visible = false
+
 [node name="RedFlash" type="CanvasLayer" parent="." unique_id=919668335]
 layer = 2
 
@@ -280,9 +284,11 @@ position = Vector2(959, 310)
 shape = SubResource("RectangleShape2D_vujjl")
 metadata/_edit_lock_ = true
 
-[node name="Player" parent="." unique_id=1710440414 instance=ExtResource("19_ry3up")]
+[node name="Player" parent="." unique_id=1710440414 node_paths=PackedStringArray("hand_selector", "agent") instance=ExtResource("19_ry3up")]
 position = Vector2(402, 489)
 stats = ExtResource("2_7btib")
+hand_selector = NodePath("../CombatUI/HandSelelctor")
+agent = NodePath("../PlayerHandler")
 
 [node name="EnemyHandler" type="Node2D" parent="." unique_id=385461736]
 script = ExtResource("20_646qw")
