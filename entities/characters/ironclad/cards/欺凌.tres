@@ -33,7 +33,7 @@ affected_by = 2
 source = 4
 extra_param = {
 "buff_name": "易伤",
-"factor": "3"
+"factor": 3
 }
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 

@@ -12,10 +12,10 @@ signal after_draw_card(card: Card)
 
 @onready var hitbox: CollisionShape2D = $CollisionShape2D
 
+var visuals: CreatureVisuals
+var spine_manager: SpineManager
+
 func _ready() -> void:
-	spine_manager.scale = Vector2(0.3, 0.3)
-	hitbox.shape.size *= Vector2(0.3, 0.3)
-	hitbox.position = Vector2(0, - hitbox.shape.size.y / 2)
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 	Events.card_played.connect(_on_card_played)
@@ -154,6 +154,12 @@ func _set_char_stats(value: CharacterStats) -> void:
 	if not stats.stats_changed.is_connected(_update_stats):
 		stats.stats_changed.connect(_update_stats)
 	
+	if visuals == null:
+		visuals = stats.visuals_scene.instantiate()
+		add_child(visuals)
+		await visuals.ready
+		spine_manager = visuals.get_spine_manager()
+
 	_update_player()
 
 func _update_stats() -> void:
@@ -163,14 +169,13 @@ func _update_player() -> void:
 	if stats is not CharacterStats:
 		printerr("player出现出错")
 		return
-	if not is_inside_tree():
-		await ready
+	if not is_node_ready():
+		await ready	
 	
-	spine_manager.skeleton_data_res = stats.animation
-	await get_tree().process_frame
 	spine_anim_state = spine_manager.get_animation_state()
 	spine_anim_state.set_animation("idle_loop", true, 0)
 	_update_stats()
+	name_label.text = stats.character_name
 
 func _on_card_played(card: Card) -> void:
 	if card.type == Card.Type.ATTACK:

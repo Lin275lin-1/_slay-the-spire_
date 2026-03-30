@@ -54,3 +54,12 @@ func get_hurt_animation_name() -> String:
 	if buffed:
 		return "hurt_buffed"
 	return "hurt" 
+
+func get_skin(spine_sprite: SpineManager) -> SpineSkin:
+	var eye = randi() % 2
+	var pattern = randi() % 2
+	var skin: SpineSkin = spine_sprite.new_skin("new skin")
+	var data := spine_sprite.get_skeleton().get_data()
+	skin.add_skin(data.find_skin("eye1") if eye == 0 else data.find_skin("eye2"))
+	skin.add_skin(data.find_skin("pattern1") if pattern == 0 else data.find_skin("pattern2"))
+	return skin

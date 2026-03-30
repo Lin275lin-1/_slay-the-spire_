@@ -22,3 +22,6 @@ func get_idle_animation_name() -> String:
 
 func get_hurt_animation_name() -> String:
 	return "hurt" 
+
+func get_skin(_spine_sprite: SpineManager) -> SpineSkin:
+	return null;

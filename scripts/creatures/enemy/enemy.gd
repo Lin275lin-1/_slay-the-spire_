@@ -10,6 +10,9 @@ var enemy_ai: EnemyAI
 #var current_action: EnemyAction : set = _set_current_action
 var current_intent: Intent: set = _set_current_intent
 
+var visuals: CreatureVisuals
+var spine_manager: SpineManager
+
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	area_exited.connect(_on_area_exited)
@@ -68,6 +71,11 @@ func _set_enemy_stats(value: EnemyStats) -> void:
 	if not stats.stats_changed.is_connected(_update_stats):
 		stats.stats_changed.connect(_update_stats)
 	
+	if visuals == null:
+		visuals = stats.visuals_scene.instantiate()
+		add_child(visuals)
+		await visuals.ready
+		spine_manager = visuals.get_spine_manager()
 	_update_enemy()
 
 func _setup_ai() -> void:
@@ -99,15 +107,17 @@ func _update_enemy() -> void:
 	if not stats is Stats:
 		printerr("enemy出错")
 		return
-	if not is_inside_tree():
+	if not is_node_ready():
 		await ready
 	
-	spine_manager.skeleton_data_res = stats.animation
 	_setup_ai()
-	# 不等一帧的话get_animation_state返回的是null
-	await get_tree().process_frame
+	var skeleton := spine_manager.get_skeleton()
+	var skin := enemy_ai.get_skin(spine_manager)
+	if skin:
+		skeleton.set_skin(skin)
 	spine_anim_state = spine_manager.get_animation_state()
 	spine_anim_state.set_animation(enemy_ai.get_idle_animation_name(), true, 0)
+	name_label.text = stats.enemy_name
 	_update_stats()
 	
 func die() -> void:

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://bqq44kff15k4w"]
 
-[ext_resource type="SpineSkeletonDataResource" uid="uid://b8e4wst5vt8xh" path="res://animations/characters/ironclad/ironclad_skel_data.tres" id="1_e3vkd"]
 [ext_resource type="Script" uid="uid://dpde6spa48hlj" path="res://scripts/costum_resources/character_stats.gd" id="1_orbop"]
 [ext_resource type="Texture2D" uid="uid://x2neryjvbtwy" path="res://images/ui/top_panel/character_icon_ironclad.png" id="2_e3vkd"]
 [ext_resource type="Resource" uid="uid://dj2uogmuhqx44" path="res://scenes/rooms/reward/Draftable_cards.tres" id="3_e3340"]
 [ext_resource type="Resource" uid="uid://hp2dus3ms3gm" path="res://entities/characters/ironclad/ironclad_starting_deck.tres" id="3_spq8r"]
+[ext_resource type="PackedScene" uid="uid://dgktfp0e1myrn" path="res://scenes/creature_visuals/ironclad.tscn" id="5_e3340"]
 
 [resource]
 script = ExtResource("1_orbop")
@@ -16,5 +16,5 @@ character_name = "铁甲战士"
 character_icon = ExtResource("2_e3vkd")
 character_description = "这是战士的描述"
 max_health = 33
-animation = ExtResource("1_e3vkd")
+visuals_scene = ExtResource("5_e3340")
 metadata/_custom_type_script = "uid://dpde6spa48hlj"

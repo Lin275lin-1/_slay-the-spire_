@@ -23,8 +23,9 @@ const BUFF_UI = preload("res://scenes/rooms/combat_room/combat_ui/buff_ui.tscn")
 @onready var buff_manager: BuffManager = $BuffManager
 @onready var reticles: Node2D = $Reticles
 @onready var health_bar: HealthBar = $HealthBar
-@onready var spine_manager: SpineManager = $SpineManager
 @onready var speech_bubble: SpeechBubble = $SpeechBubble
+@onready var name_label: Label = %NameLabel
+
 
 var spine_anim_state: SpineAnimationState
 

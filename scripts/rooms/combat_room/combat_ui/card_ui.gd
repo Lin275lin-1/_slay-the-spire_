@@ -46,7 +46,7 @@ func _ready() -> void:
 func play() -> void:
 	if not card:
 		return
-	card.play(Context.new(get_tree().get_first_node_in_group("ui_player"), targets, 0), char_stats)
+	card.play(get_tree().get_first_node_in_group("ui_player"), targets, char_stats)
 	# TODO: 在删除前做出消耗/去弃牌堆的动画
 	queue_free()
 

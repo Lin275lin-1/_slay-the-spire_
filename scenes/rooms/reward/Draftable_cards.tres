@@ -1,7 +1,11 @@
 [gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://dj2uogmuhqx44"]
 
 [ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="1_card"]
+[ext_resource type="Resource" uid="uid://bwfi2t422lab6" path="res://entities/characters/ironclad/cards/闪电霹雳.tres" id="2_04ax7"]
 [ext_resource type="Script" uid="uid://jvpf65gf7yuq" path="res://scripts/costum_resources/card_pile.gd" id="2_pile"]
+[ext_resource type="Resource" uid="uid://bfpgqg7mlesr4" path="res://entities/characters/ironclad/cards/重锤.tres" id="3_053a4"]
+[ext_resource type="Resource" uid="uid://djt7dhsu34m5b" path="res://entities/characters/ironclad/cards/耸肩无视.tres" id="4_sr0ox"]
 
 [resource]
 script = ExtResource("2_pile")
+cards = Array[ExtResource("1_card")]([ExtResource("2_04ax7"), ExtResource("3_053a4"), ExtResource("4_sr0ox")])

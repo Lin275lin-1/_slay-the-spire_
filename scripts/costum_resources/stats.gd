@@ -4,7 +4,8 @@ extends Resource
 signal stats_changed
 
 @export var max_health := 1
-@export var animation: SpineSkeletonDataResource
+@export var visuals_scene: PackedScene
+
 
 var health: int : set = _set_health
 var block: int : set = _set_block

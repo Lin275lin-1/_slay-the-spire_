@@ -74,40 +74,39 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 		ret[entry.placeholder] = final_value
 	return ret
 
-func play(context: Context, char_stats: CharacterStats) -> void:
+func play(source: Player, targets: Array[Node], char_stats: CharacterStats) -> void:
 	Events.card_played.emit(self)
 	char_stats.energy -= get_cost()
 	if is_single_targeted():
-		apply_effects(context)
+		apply_effects(source, targets)
 	else:
-		apply_effects(_get_targets(context))
+		apply_effects(source, _get_targets(source, targets))
 
-func apply_effects(_context: Context) -> void:
+func apply_effects(_source: Player, _targets: Array[Node]) -> void:
 	pass
 
 func is_single_targeted() -> bool:
 	return get_target() == Target.SINGLE_ENEMY
 
-func _get_targets(context: Context) -> Context:
-	var targets := context.targets
+func _get_targets(source: Player, targets: Array[Node]) -> Array[Node]:
+	var ret: Array[Node] = targets
 	if not targets or targets.is_empty():
 		printerr("card出错")
-		context.targets = []
-		return context
+		return []
 	# 资源没有获取场景树的方法
 	var tree := targets[0].get_tree()
 	match get_target():
 		Target.SELF:
-			context.targets = tree.get_nodes_in_group("ui_player")
+			ret = [source]
 		Target.ALL_ENEMIES:
-			context.targets = tree.get_nodes_in_group("ui_enemies")
+			ret = tree.get_nodes_in_group("ui_enemies")
 		Target.EVERYONE:
-			context.targets = tree.get_nodes_in_group("ui_player") + tree.get_nodes_in_group("ui_enemies")
+			ret = [source] + tree.get_nodes_in_group("ui_enemies")
 		_:
 			# 对于SingleTargeted,使用TargetSelector获取目标
 			printerr("card出错")
-			context.targets = []
-	return context
+			ret = []
+	return ret
 
 func get_description(source_: Creature, target_: Creature) -> String:
 	var numeric_dict := get_final_values(source_, target_)
