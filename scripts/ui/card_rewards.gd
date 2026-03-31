@@ -76,7 +76,7 @@ func _clear_rewards()->void:
 func _show_tooltip(card: Card, card_node: Node) -> void:
 	#+ Vector2(card_node.size.x, 0)
 	var tooltip_position = card_node.global_position + Vector2(card_node.size.x+50, 0)
-	card_tooltip_popup.show_tooltip(card.description, tooltip_position)
+	card_tooltip_popup.show_tooltip(card.get_default_description(), tooltip_position)
 
 # 隐藏 Tooltip
 func _hide_tooltip() -> void:

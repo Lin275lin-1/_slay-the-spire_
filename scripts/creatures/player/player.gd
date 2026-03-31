@@ -172,6 +172,7 @@ func _update_player() -> void:
 	if not is_node_ready():
 		await ready	
 	
+	set_hitbox()
 	spine_anim_state = spine_manager.get_animation_state()
 	spine_anim_state.set_animation("idle_loop", true, 0)
 	_update_stats()
@@ -186,9 +187,11 @@ func _on_card_played(card: Card) -> void:
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
 	
 func _on_mouse_entered() -> void:
+	show_name()
 	Events.tooltip_show_request.emit(self)
 
 func _on_mouse_exited() -> void:
+	hide_name()
 	Events.tooltip_hide_request.emit()
 
 func show_keyword_tooltip() -> void:
@@ -202,3 +205,15 @@ func show_keyword_tooltip() -> void:
 		return
 	KeywordTooltip.keyword_tooltip.global_position = global_position + Vector2(hitbox.shape.size.x / 2, -hitbox.shape.size.y / 2)
 	KeywordTooltip.show()
+
+func set_hitbox() -> void:
+	var bound_size = visuals.get_size()
+	var center_point = visuals.get_center_point()
+	hitbox.shape.size = bound_size
+	hitbox.position = center_point
+	set_recticles([
+		center_point - bound_size / 2,
+		center_point + Vector2(bound_size.x / 2, -bound_size.y / 2),
+		center_point + Vector2(-bound_size.x / 2, bound_size.y / 2),
+		center_point + bound_size / 2
+	], visuals.get_visual_scale() * 2)

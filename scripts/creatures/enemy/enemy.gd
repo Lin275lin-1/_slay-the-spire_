@@ -109,7 +109,7 @@ func _update_enemy() -> void:
 		return
 	if not is_node_ready():
 		await ready
-	
+	set_hitbox()
 	_setup_ai()
 	var skeleton := spine_manager.get_skeleton()
 	var skin := enemy_ai.get_skin(spine_manager)
@@ -156,7 +156,6 @@ func take_damage(context: Context) -> void:
 		spine_anim_state.set_animation(enemy_ai.get_hurt_animation_name(), true, 0)
 		spine_anim_state.add_animation(enemy_ai.get_idle_animation_name(), 0, true, 0)
 
-
 func _on_area_entered(_area: Area2D) -> void:
 	reticles.visible = true
 
@@ -164,9 +163,11 @@ func _on_area_exited(_area: Area2D) -> void:
 	reticles.visible = false
 
 func _on_mouse_entered() -> void:
+	show_name()
 	Events.tooltip_show_request.emit(self)
 
 func _on_mouse_exited() -> void:
+	hide_name()
 	Events.tooltip_hide_request.emit()
 
 func show_keyword_tooltip() -> void:
@@ -186,3 +187,16 @@ func show_keyword_tooltip() -> void:
 func _on_after_applied_buff(context: Context) -> void:
 	current_intent.calc_final_values(self, context.source)
 	intents.update_intent(current_intent)
+
+func set_hitbox() -> void:
+	var bound_size = visuals.get_size()
+	var center_point = visuals.get_center_point()
+	hitbox.shape.size = bound_size
+	hitbox.position = center_point
+	set_recticles([
+		center_point - bound_size / 2,
+		center_point + Vector2(bound_size.x / 2, -bound_size.y / 2),
+		center_point + Vector2(-bound_size.x / 2, bound_size.y / 2),
+		center_point + bound_size / 2
+	], visuals.get_visual_scale() * 2)
+	intents.position = visuals.get_intent_point() - intents.size / 2

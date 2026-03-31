@@ -22,11 +22,9 @@ layout_mode = 3
 anchors_preset = 0
 offset_left = -145.0
 offset_top = -159.0
-offset_right = 144.0
+offset_right = 171.0
 offset_bottom = 1.0
-
-[node name="CenterPoint" type="Marker2D" parent="." unique_id=356996719]
-position = Vector2(0, -72)
+mouse_filter = 2
 
 [node name="IntentPoint" type="Marker2D" parent="." unique_id=2095673481]
 position = Vector2(0, -213)

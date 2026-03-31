@@ -25,9 +25,8 @@ offset_left = -109.0
 offset_top = -143.0
 offset_right = 109.0
 offset_bottom = 1.0
-
-[node name="CenterPoint" type="Marker2D" parent="." unique_id=2099314544]
-position = Vector2(1, -52)
+size_flags_horizontal = 4
+mouse_filter = 2
 
 [node name="IntentPoint" type="Marker2D" parent="." unique_id=1488931005]
 position = Vector2(0, -187)

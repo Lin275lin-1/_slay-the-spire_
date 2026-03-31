@@ -25,6 +25,8 @@ const BUFF_UI = preload("res://scenes/rooms/combat_room/combat_ui/buff_ui.tscn")
 @onready var health_bar: HealthBar = $HealthBar
 @onready var speech_bubble: SpeechBubble = $SpeechBubble
 @onready var name_label: Label = %NameLabel
+@onready var name_plate: Control = $NamePlate
+@onready var name_tween: Tween
 
 
 var spine_anim_state: SpineAnimationState
@@ -91,3 +93,21 @@ func take_damage(_context: Context) -> void:
 
 func die() -> void:
 	pass
+
+func set_recticles(positions: Array[Vector2], reticle_scale: Vector2) -> void:
+	for i in range(4):
+		var reticle: Node2D = reticles.get_child(i)
+		reticle.position = positions[i]
+		reticle.scale = reticle_scale
+	
+func show_name() -> void:
+	if name_tween:
+		name_tween.kill()
+	name_tween = create_tween()
+	name_tween.tween_property(name_plate, "modulate:a", 1.0, 0.3)
+
+func hide_name() -> void:
+	if name_tween:
+		name_tween.kill()
+	name_tween = create_tween()
+	name_tween.tween_property(name_plate, "modulate:a", 0.0, 0.3)
