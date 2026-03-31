@@ -73,12 +73,15 @@ func _change_view(scene: PackedScene) -> Node:
 	var new_view := scene.instantiate()
 	current_room.add_child(new_view)
 	
-	# 测试怪物池使用的代码 张颢骞
+	# 张颢骞
 	if scene == COMBAT_SCENE:
 		# 这段应该在_on_battle_room_entered(room: Room)中实现，new_view.enemy_encounter = room.enemy_encounter
 		new_view = new_view as CombatRoom
 		new_view.char_stats = character
-		new_view.enemy_encounter = preload("res://entities/encounters/act1/two_toadpoles.tres")
+		# 测试怪物池使用的代码
+		var encounter_pool = preload("res://entities/encounters/encounter_pools/act1_encounter_pool.tres")
+		new_view.enemy_encounter = encounter_pool.get_random_encounter_by_type(EnemyEncounter.Type.WEAK)
+		#
 		new_view.start_combat()
 	#
 	

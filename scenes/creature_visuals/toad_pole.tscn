@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bayy3j6ssj0g" path="res://scripts/utils/spine_manager.gd" id="3_lv7kt"]
 
 [node name="ToadPole" type="Node2D" unique_id=111790525]
+modulate = Color(0.72464263, 0.7246426, 0.7246426, 1)
 script = ExtResource("1_m2sbr")
 
 [node name="Visuals" type="SpineSprite" parent="." unique_id=800868301]
@@ -22,7 +23,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_left = -145.0
 offset_top = -159.0
-offset_right = 171.0
+offset_right = 136.0
 offset_bottom = 1.0
 mouse_filter = 2
 

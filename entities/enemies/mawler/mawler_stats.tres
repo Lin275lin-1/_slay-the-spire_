@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://b8gnh6fck14ic"]
+
+[ext_resource type="Script" uid="uid://bjrlwk5w4gqtk" path="res://scripts/costum_resources/enemy_stats.gd" id="1_83l0c"]
+[ext_resource type="Resource" uid="uid://bkvvawvvp6drb" path="res://entities/enemies/mawler/mawler_ai.tres" id="1_kp833"]
+[ext_resource type="PackedScene" uid="uid://3xry5haywevq" path="res://scenes/creature_visuals/mawler.tscn" id="2_lh65u"]
+
+[resource]
+script = ExtResource("1_83l0c")
+ai = ExtResource("1_kp833")
+enemy_name = "蛮兽"
+hightest_max_health = 72
+lowest_max_health = 72
+visuals_scene = ExtResource("2_lh65u")
+metadata/_custom_type_script = "uid://bjrlwk5w4gqtk"

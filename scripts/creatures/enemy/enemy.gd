@@ -110,6 +110,7 @@ func _update_enemy() -> void:
 	if not is_node_ready():
 		await ready
 	set_hitbox()
+	health_bar.set_length(visuals.get_size().x)
 	_setup_ai()
 	var skeleton := spine_manager.get_skeleton()
 	var skin := enemy_ai.get_skin(spine_manager)
@@ -200,3 +201,10 @@ func set_hitbox() -> void:
 		center_point + bound_size / 2
 	], visuals.get_visual_scale() * 2)
 	intents.position = visuals.get_intent_point() - intents.size / 2
+	health_bar.position = center_point + Vector2(-bound_size.x / 2, bound_size.y / 2)
+	health_bar.set_length(visuals.get_size().x)
+	health_bar.position = center_point + Vector2(-bound_size.x / 2, bound_size.y / 2)
+	buff_container.size.x = bound_size.x
+	buff_container.position = center_point + Vector2(-bound_size.x / 2, bound_size.y / 2 + 40)
+	name_plate.size.x = bound_size.x
+	name_plate.position = center_point + Vector2(-bound_size.x / 2, bound_size.y / 2)

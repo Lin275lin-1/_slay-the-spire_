@@ -8,6 +8,7 @@
 script = ExtResource("1_tn2cd")
 ai = ExtResource("1_m135s")
 enemy_name = "蟾蜍蝌蚪"
-max_health = 30
+hightest_max_health = 25
+lowest_max_health = 21
 visuals_scene = ExtResource("3_m135s")
 metadata/_custom_type_script = "uid://bjrlwk5w4gqtk"

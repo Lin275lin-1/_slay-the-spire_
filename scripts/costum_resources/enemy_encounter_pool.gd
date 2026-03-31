@@ -28,7 +28,6 @@ func get_random_encounter_by_type(type: EnemyEncounter.Type) -> EnemyEncounter:
 	var encounters := _get_all_encounters_by_type(type)
 	for encounter: EnemyEncounter in encounters:
 		if encounter.accumulated_weight > roll:
-			print("encounter")
 			return encounter
 	printerr("enemy_encounter_pool: get_random_encounter_by_type")
 	return null

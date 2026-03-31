@@ -19,7 +19,7 @@ func setup_enemies(encounter: EnemyEncounter) -> void:
 	for enemy_entry : EnemyEntry in encounter.enemy_entries:
 		var new_enemy: Enemy = EnemyScene.instantiate()
 		new_enemy.position = enemy_entry.position
-		new_enemy.stats = enemy_entry.enemy_stats.duplicate()
+		new_enemy.stats = enemy_entry.enemy_stats.create_instance()
 		add_child(new_enemy)
 
 func start_turn() -> void:
