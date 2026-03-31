@@ -22,23 +22,19 @@ func execute_intent(source: Creature, target: Creature, current_intent: Intent) 
 
 func choose_intent(_source: Creature, _target: Creature) -> Intent:
 	if last_action.is_empty():
-		var intent = random_intent([intents[0], intents[2]])
+		var intent = random_intent([get_intent_by_name(intents, "Spiken"), get_intent_by_name(intents, "Whirl")])
 		last_action = intent.intent_name
 		return intent
 	else:
-		# 考虑到一个怪物的意图也没几个我就不重构了
 		match last_action:
 			"Whirl":
-				return intents[2]
+				return get_intent_by_name(intents, "Spiken")
 			"Spiken":
-				return intents[1]
+				return get_intent_by_name(intents, "SpikeSpit")
 			"SpikeSpit":
-				return intents[0]
+				return get_intent_by_name(intents, "Whirl")
 			_:
 				return random_intent(intents)
-
-func random_intent(intents_: Array[Intent]) -> Intent:
-	return intents_[randi() % intents_.size()]
 
 func get_die_animation_name() -> String:
 	if buffed:

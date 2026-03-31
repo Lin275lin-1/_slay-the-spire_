@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EnemyEncounter" format=3 uid="uid://dk34vc6o3tigt"]
+
+[ext_resource type="Script" uid="uid://dw53gdpom3gn6" path="res://scripts/costum_resources/enemy_entry.gd" id="1_e7vhl"]
+[ext_resource type="Script" uid="uid://dgu4qpyr0pnnb" path="res://scripts/costum_resources/enemy_encounter.gd" id="2_6cmp0"]
+[ext_resource type="Resource" uid="uid://qd6x4mb1j81y" path="res://entities/enemies/toadpole/toadpole_stats.tres" id="2_lgdov"]
+
+[sub_resource type="Resource" id="Resource_p4516"]
+script = ExtResource("1_e7vhl")
+enemy_stats = ExtResource("2_lgdov")
+position = Vector2(1200, 468)
+metadata/_custom_type_script = "uid://dw53gdpom3gn6"
+
+[sub_resource type="Resource" id="Resource_aahnc"]
+script = ExtResource("1_e7vhl")
+enemy_stats = ExtResource("2_lgdov")
+position = Vector2(1700, 468)
+metadata/_custom_type_script = "uid://dw53gdpom3gn6"
+
+[resource]
+script = ExtResource("2_6cmp0")
+weight = 1.0
+enemy_entries = Array[ExtResource("1_e7vhl")]([SubResource("Resource_p4516"), SubResource("Resource_aahnc")])
+encounter_name = "two_toadpoles"
+metadata/_custom_type_script = "uid://dgu4qpyr0pnnb"
