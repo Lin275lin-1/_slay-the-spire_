@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bv8bx2mmcw00l"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://l88yarj7pucn" path="res://animations/monsters/leaf_slime_s/leaf_slime_s_skel_data.tres" id="1_2gsyx"]
+[ext_resource type="Script" uid="uid://b2nmxu6nwwuhu" path="res://scripts/creature_visuals.gd" id="1_2sifu"]
+[ext_resource type="Script" uid="uid://bayy3j6ssj0g" path="res://scripts/utils/spine_manager.gd" id="2_2sifu"]
+
+[node name="LeafSlimeS" type="Node2D" unique_id=1844324425]
+script = ExtResource("1_2sifu")
+
+[node name="Visuals" type="SpineSprite" parent="." unique_id=240716431]
+skeleton_data_res = ExtResource("1_2gsyx")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(0, -25)
+scale = Vector2(0.273, 0.273)
+script = ExtResource("2_2sifu")
+metadata/_custom_type_script = "uid://bayy3j6ssj0g"
+
+[node name="IntentPoint" type="Marker2D" parent="." unique_id=1857685115]
+position = Vector2(0, -144)
+
+[node name="Bounds" type="Control" parent="." unique_id=507929647]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -60.0
+offset_top = -101.0
+offset_right = 56.0
+mouse_filter = 2

@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cjcdgqqwgtewx"]
+
+[ext_resource type="Script" uid="uid://b2nmxu6nwwuhu" path="res://scripts/creature_visuals.gd" id="1_j5kd2"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://033sy7ja6os" path="res://animations/monsters/twig_slime_s/twig_slime_s_skel_data.tres" id="2_p6706"]
+[ext_resource type="Script" uid="uid://bayy3j6ssj0g" path="res://scripts/utils/spine_manager.gd" id="3_28urm"]
+
+[node name="TwigSlimeS" type="Node2D" unique_id=1830328673]
+script = ExtResource("1_j5kd2")
+
+[node name="Visuals" type="SpineSprite" parent="." unique_id=332746707]
+skeleton_data_res = ExtResource("2_p6706")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(0, -26)
+scale = Vector2(0.275, 0.275)
+script = ExtResource("3_28urm")
+metadata/_custom_type_script = "uid://bayy3j6ssj0g"
+
+[node name="Bounds" type="Control" parent="." unique_id=881333315]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -61.0
+offset_top = -89.0
+offset_right = 59.0
+offset_bottom = -5.0
+mouse_filter = 2
+
+[node name="IntentPoint" type="Marker2D" parent="." unique_id=727782131]
+position = Vector2(0, -150)

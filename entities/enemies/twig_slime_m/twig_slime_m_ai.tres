@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="EnemyAI" format=3 uid="uid://bb0avbipisgvp"]
+
+[ext_resource type="Script" uid="uid://ce34juwu5b0yr" path="res://scripts/costum_resources/intents/intent.gd" id="1_eb8np"]
+[ext_resource type="Script" uid="uid://dpkht0suo8prh" path="res://scripts/costum_resources/enemy_ai.gd" id="2_2ac3r"]
+[ext_resource type="Script" uid="uid://iqqyr44teapg" path="res://scripts/costum_resources/intents/sub_intent.gd" id="2_iq7g1"]
+[ext_resource type="Texture2D" uid="uid://r6jnvrqc1utn" path="res://images/packed/intents/attack/intent_attack_3.png" id="3_l0uf7"]
+[ext_resource type="Resource" uid="uid://by2gga1uh715e" path="res://entities/characters/status_cards/粘液.tres" id="4_ta0p2"]
+[ext_resource type="Texture2D" uid="uid://b4tk6b14m4yl3" path="res://images/packed/intents/intent_status_card.png" id="5_no4kl"]
+[ext_resource type="Script" uid="uid://b3b84q5sqt5kj" path="res://scripts/costum_resources/intents/put_card_sub_intent.gd" id="6_bja22"]
+
+[sub_resource type="Resource" id="Resource_72cov"]
+script = ExtResource("2_iq7g1")
+icon = ExtResource("3_l0uf7")
+base_value = 11
+metadata/_custom_type_script = "uid://iqqyr44teapg"
+
+[sub_resource type="Resource" id="Resource_n3jbk"]
+script = ExtResource("1_eb8np")
+sub_intents = Array[ExtResource("2_iq7g1")]([SubResource("Resource_72cov")])
+intent_name = "ClumpShot"
+anim_name = "attack"
+metadata/_custom_type_script = "uid://ce34juwu5b0yr"
+
+[sub_resource type="Resource" id="Resource_omsx0"]
+script = ExtResource("6_bja22")
+where = 1
+card = ExtResource("4_ta0p2")
+type = 10
+icon = ExtResource("5_no4kl")
+base_value = 1
+metadata/_custom_type_script = "uid://b3b84q5sqt5kj"
+
+[sub_resource type="Resource" id="Resource_lgsya"]
+script = ExtResource("1_eb8np")
+sub_intents = Array[ExtResource("2_iq7g1")]([SubResource("Resource_omsx0")])
+intent_name = "StickyShot"
+metadata/_custom_type_script = "uid://ce34juwu5b0yr"
+
+[resource]
+script = ExtResource("2_2ac3r")
+intents = Array[ExtResource("1_eb8np")]([SubResource("Resource_n3jbk"), SubResource("Resource_lgsya")])
+metadata/_custom_type_script = "uid://dpkht0suo8prh"

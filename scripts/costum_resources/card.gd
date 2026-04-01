@@ -1,7 +1,7 @@
 class_name Card
 extends Resource
 # 卡牌类型(攻击，技能，能力)
-enum Type {ATTACK, SKILL, POWER}
+enum Type {ATTACK, SKILL, POWER, STATUS, CURSE}
 # 卡牌目标类型
 enum Target {SELF, SINGLE_ENEMY, ALL_ENEMIES, EVERYONE}
 # 卡牌稀有度
@@ -47,6 +47,7 @@ enum COLOR {
 @export_multiline var upgraded_description: String
 @export var upgraded_numeric_entries: Array[NumericEntry]
 @export var upgraded: bool = false
+@export var upgradable: bool = true
 
 
 func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
@@ -147,7 +148,8 @@ func append_features(desc: String) -> String:
 	return desc
 
 func upgrade() -> void:
-	upgraded = true
+	if upgradable:
+		upgraded = true
 
 func get_numeric_entries() -> Array[NumericEntry]:
 	return upgraded_numeric_entries if upgraded else base_numeric_entries

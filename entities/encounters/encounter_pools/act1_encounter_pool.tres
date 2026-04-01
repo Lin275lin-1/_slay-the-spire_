@@ -5,8 +5,9 @@
 [ext_resource type="Script" uid="uid://ctyh7cm7a03s2" path="res://scripts/costum_resources/enemy_encounter_pool.gd" id="2_r6wps"]
 [ext_resource type="Resource" uid="uid://baf6ktkxmdu8i" path="res://entities/encounters/act1/one_slime_one_toadpole.tres" id="3_84eic"]
 [ext_resource type="Resource" uid="uid://beqm8vohjiyut" path="res://entities/encounters/act1/one_mawler.tres" id="4_ffknf"]
+[ext_resource type="Resource" uid="uid://jgh12yjtqvvh" path="res://entities/encounters/act1/two_leaf_slimes.tres" id="5_vul34"]
 
 [resource]
 script = ExtResource("2_r6wps")
-pool = Array[ExtResource("1_8b4wf")]([ExtResource("2_84eic"), ExtResource("3_84eic"), ExtResource("4_ffknf")])
+pool = Array[ExtResource("1_8b4wf")]([ExtResource("2_84eic"), ExtResource("3_84eic"), ExtResource("4_ffknf"), ExtResource("5_vul34")])
 metadata/_custom_type_script = "uid://ctyh7cm7a03s2"

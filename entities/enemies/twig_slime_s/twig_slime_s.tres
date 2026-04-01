@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://cm4lesyla0lcc"]
+
+[ext_resource type="Resource" uid="uid://dbxr72o0lckmx" path="res://entities/enemies/twig_slime_s/twig_slime_s_ai.tres" id="1_d7tj4"]
+[ext_resource type="Script" uid="uid://bjrlwk5w4gqtk" path="res://scripts/costum_resources/enemy_stats.gd" id="1_juiqo"]
+[ext_resource type="PackedScene" uid="uid://cjcdgqqwgtewx" path="res://scenes/creature_visuals/twig_slime_s.tscn" id="3_yewui"]
+
+[resource]
+script = ExtResource("1_juiqo")
+ai = ExtResource("1_d7tj4")
+enemy_name = "树枝史莱姆（小）"
+hightest_max_health = 11
+lowest_max_health = 7
+visuals_scene = ExtResource("3_yewui")
+metadata/_custom_type_script = "uid://bjrlwk5w4gqtk"

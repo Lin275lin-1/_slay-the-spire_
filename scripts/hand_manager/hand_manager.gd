@@ -30,6 +30,9 @@ func add_cards_for_selection(card:Card) -> CardUI:
 	return new_card_ui
 
 func add_card(card: Card) -> void:
+	if get_child_count() >= 10:
+		char_stats.draw_pile.add_card(card)
+		return
 	var new_card_ui :CardUI = CARD_UI.instantiate()
 	add_child(new_card_ui)
 	new_card_ui.card = card

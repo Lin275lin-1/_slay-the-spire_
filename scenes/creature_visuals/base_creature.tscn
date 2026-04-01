@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://hq2fgf5f5yue"]
+
+[ext_resource type="Script" uid="uid://b2nmxu6nwwuhu" path="res://scripts/creature_visuals.gd" id="1_6qqcv"]
+[ext_resource type="Script" uid="uid://bayy3j6ssj0g" path="res://scripts/utils/spine_manager.gd" id="2_gy8uq"]
+
+[node name="BaseCreature" type="Node2D" unique_id=1830328673]
+script = ExtResource("1_6qqcv")
+
+[node name="Visuals" type="SpineSprite" parent="." unique_id=332746707]
+script = ExtResource("2_gy8uq")
+metadata/_custom_type_script = "uid://bayy3j6ssj0g"
+
+[node name="Bounds" type="Control" parent="." unique_id=881333315]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="IntentPoint" type="Marker2D" parent="." unique_id=727782131]

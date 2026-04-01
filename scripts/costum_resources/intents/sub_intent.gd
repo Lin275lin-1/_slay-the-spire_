@@ -12,6 +12,7 @@ enum Type{
 	SUMMON,
 	STUN,
 	SLEEP,
+	STATUS,
 	UNKOWN,
 }
 

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format=3 uid="uid://by2gga1uh715e"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_hp4e4"]
+[ext_resource type="Texture2D" uid="uid://p3dctu" path="res://images/atlases/card_atlas.sprites/status/slimed.tres" id="2_b7hly"]
+[ext_resource type="Script" uid="uid://b3vbmv0v5bmx2" path="res://entities/characters/status_cards/粘液.gd" id="3_p5k0q"]
+
+[resource]
+script = ExtResource("3_p5k0q")
+id = "粘液"
+type = 3
+card_color = 6
+base_cost = 1
+rarity = 4
+portrait = ExtResource("2_b7hly")
+base_description = "[center]抽1张牌。[/center]"
+exhaust = true
+upgraded_description = "无法升级"
+upgradable = false
+metadata/_custom_type_script = "uid://br1hibx18tv13"

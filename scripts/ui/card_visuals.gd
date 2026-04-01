@@ -63,6 +63,10 @@ func _set_card(value: Card) -> void:
 			type_text = "能力"
 			card_frame.texture = CARD_FRAME_POWER_S
 			portrait_border.texture = CARD_PORTRAIT_BORDER_POWER_S
+		card.Type.STATUS:
+			type_text = "状态"
+			card_frame.texture = CARD_FRAME_SKILL_S
+			portrait_border.texture = CARD_PORTRAIT_BORDER_SKILL_S
 		_:
 			type_text = "出错"
 	match card.card_color:

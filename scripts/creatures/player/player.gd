@@ -111,7 +111,9 @@ func put_card_in_discard_pile(card: Card) -> void:
 func put_card_in_draw_pile(card: Card, top:bool = false) -> void:
 	agent.put_card_in_draw_pile(card, top)
 	
-
+func put_card_in_hand(card: Card) -> void:
+	agent.put_card_in_hand(card)
+	
 func get_hand_cards() -> Array[Card]:
 	return agent.get_hand()
 
@@ -217,9 +219,11 @@ func set_hitbox() -> void:
 		center_point + Vector2(-bound_size.x / 2, bound_size.y / 2),
 		center_point + bound_size / 2
 	], visuals.get_visual_scale() * 2)
+	var hp_bar_position = center_point + Vector2(-bound_size.x / 2, bound_size.y / 2)
+	health_bar.position = hp_bar_position
 	health_bar.set_length(visuals.get_size().x)
-	health_bar.position = center_point + Vector2(-bound_size.x / 2, bound_size.y / 2)
+	health_bar.position = hp_bar_position
 	buff_container.size.x = bound_size.x
-	buff_container.position = center_point + Vector2(-bound_size.x / 2, bound_size.y / 2 + 40)
+	buff_container.position = hp_bar_position + Vector2(0, 40)
 	name_plate.size.x = bound_size.x
-	name_plate.position = center_point + Vector2(-bound_size.x / 2, bound_size.y / 2)
+	name_plate.position = hp_bar_position + Vector2(0, 10)

@@ -1,58 +1,45 @@
-[gd_resource type="Resource" script_class="EnemyAI" format=3 uid="uid://tcbdqpsi4r8e"]
+[gd_resource type="Resource" format=3 uid="uid://tcbdqpsi4r8e"]
 
 [ext_resource type="Script" uid="uid://ce34juwu5b0yr" path="res://scripts/costum_resources/intents/intent.gd" id="1_et3dl"]
 [ext_resource type="Script" uid="uid://iqqyr44teapg" path="res://scripts/costum_resources/intents/sub_intent.gd" id="2_ldd8u"]
-[ext_resource type="Script" uid="uid://dpkht0suo8prh" path="res://scripts/costum_resources/enemy_ai.gd" id="2_rsv0b"]
 [ext_resource type="Texture2D" uid="uid://cdjfipfy2o2u8" path="res://images/packed/intents/attack/intent_attack_2.png" id="3_vqc1p"]
-[ext_resource type="Texture2D" uid="uid://bvpum0wc2c6or" path="res://images/packed/intents/attack/intent_attack_1.png" id="4_et3dl"]
 [ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_ldd8u"]
-[ext_resource type="Texture2D" uid="uid://cfdd2dmjyy32j" path="res://images/packed/intents/buff/intent_buff_00.png" id="6_ldd8u"]
-[ext_resource type="Script" uid="uid://c2p6buhbk6em8" path="res://scripts/costum_resources/intents/apply_debuff_sub_intent.gd" id="7_kvjr0"]
-[ext_resource type="AudioStream" uid="uid://dbe46o0jyq2x8" path="res://audio/SFX/dark_orb_channel.mp3" id="10_sj1l8"]
+[ext_resource type="Resource" uid="uid://by2gga1uh715e" path="res://entities/characters/status_cards/粘液.tres" id="5_et3dl"]
+[ext_resource type="Texture2D" uid="uid://b4tk6b14m4yl3" path="res://images/packed/intents/intent_status_card.png" id="6_ldd8u"]
+[ext_resource type="Script" uid="uid://b3b84q5sqt5kj" path="res://scripts/costum_resources/intents/put_card_sub_intent.gd" id="7_kvjr0"]
+[ext_resource type="Script" uid="uid://bmnqyhqm6pv8y" path="res://entities/enemies/leaf_slime_m/leaf_slime_m_ai.gd" id="8_et3dl"]
 
 [sub_resource type="Resource" id="Resource_6ocyn"]
 script = ExtResource("2_ldd8u")
-icon = ExtResource("4_et3dl")
-base_value = 4
+icon = ExtResource("3_vqc1p")
+base_value = 8
 sound = ExtResource("4_ldd8u")
 metadata/_custom_type_script = "uid://iqqyr44teapg"
 
 [sub_resource type="Resource" id="Resource_e5uog"]
 script = ExtResource("1_et3dl")
 sub_intents = Array[ExtResource("2_ldd8u")]([SubResource("Resource_6ocyn")])
+intent_name = "ClumpShot"
 anim_name = "attack"
 metadata/_custom_type_script = "uid://ce34juwu5b0yr"
 
-[sub_resource type="Resource" id="Resource_h507v"]
-script = ExtResource("2_ldd8u")
-icon = ExtResource("3_vqc1p")
-base_value = 3
-repeat = 3
-sound = ExtResource("4_ldd8u")
-metadata/_custom_type_script = "uid://iqqyr44teapg"
+[sub_resource type="Resource" id="Resource_nfbet"]
+script = ExtResource("7_kvjr0")
+where = 1
+card = ExtResource("5_et3dl")
+type = 10
+icon = ExtResource("6_ldd8u")
+base_value = 2
+metadata/_custom_type_script = "uid://b3b84q5sqt5kj"
 
 [sub_resource type="Resource" id="Resource_bh4vf"]
 script = ExtResource("1_et3dl")
-sub_intents = Array[ExtResource("2_ldd8u")]([SubResource("Resource_h507v")])
-anim_name = "cast"
-metadata/_custom_type_script = "uid://ce34juwu5b0yr"
-
-[sub_resource type="Resource" id="Resource_f7a7q"]
-script = ExtResource("7_kvjr0")
-buff_id = "力量"
-type = 1
-icon = ExtResource("6_ldd8u")
-base_value = 2
-sound = ExtResource("10_sj1l8")
-metadata/_custom_type_script = "uid://c2p6buhbk6em8"
-
-[sub_resource type="Resource" id="Resource_qgql5"]
-script = ExtResource("1_et3dl")
-sub_intents = Array[ExtResource("2_ldd8u")]([SubResource("Resource_f7a7q")])
+sub_intents = Array[ExtResource("2_ldd8u")]([SubResource("Resource_nfbet")])
+intent_name = "StickyShot"
 anim_name = "cast"
 metadata/_custom_type_script = "uid://ce34juwu5b0yr"
 
 [resource]
-script = ExtResource("2_rsv0b")
-intents = Array[ExtResource("1_et3dl")]([SubResource("Resource_e5uog"), SubResource("Resource_bh4vf"), SubResource("Resource_qgql5")])
+script = ExtResource("8_et3dl")
+intents = Array[ExtResource("1_et3dl")]([SubResource("Resource_e5uog"), SubResource("Resource_bh4vf")])
 metadata/_custom_type_script = "uid://dpkht0suo8prh"

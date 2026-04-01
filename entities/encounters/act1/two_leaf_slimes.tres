@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EnemyEncounter" format=3 uid="uid://jgh12yjtqvvh"]
+
+[ext_resource type="Script" uid="uid://dw53gdpom3gn6" path="res://scripts/costum_resources/enemy_entry.gd" id="1_7vhy1"]
+[ext_resource type="Resource" uid="uid://bdt85ngfibtet" path="res://entities/enemies/leaf_slime_m/leaf_slime_m.tres" id="2_k2o2n"]
+[ext_resource type="Script" uid="uid://dgu4qpyr0pnnb" path="res://scripts/costum_resources/enemy_encounter.gd" id="2_s16bu"]
+[ext_resource type="Resource" uid="uid://6t0lxm3urof3" path="res://entities/enemies/leaf_slime_s/leaf_slime_s.tres" id="3_r0w2y"]
+
+[sub_resource type="Resource" id="Resource_gnetj"]
+script = ExtResource("1_7vhy1")
+enemy_stats = ExtResource("2_k2o2n")
+position = Vector2(1200, 520)
+metadata/_custom_type_script = "uid://dw53gdpom3gn6"
+
+[sub_resource type="Resource" id="Resource_0prii"]
+script = ExtResource("1_7vhy1")
+enemy_stats = ExtResource("3_r0w2y")
+position = Vector2(1700, 520)
+metadata/_custom_type_script = "uid://dw53gdpom3gn6"
+
+[resource]
+script = ExtResource("2_s16bu")
+weight = 1.0
+enemy_entries = Array[ExtResource("1_7vhy1")]([SubResource("Resource_gnetj"), SubResource("Resource_0prii")])
+metadata/_custom_type_script = "uid://dgu4qpyr0pnnb"

@@ -122,6 +122,9 @@ func put_card_in_draw_pile(card: Card, top: bool = false) -> void:
 		char_stats.draw_pile.add_card(card)
 		char_stats.draw_pile.shuffle()
 
+func put_card_in_hand(card: Card) -> void:
+	hand_manager.add_card(card)
+
 func put_card_in_discard_pile(card: Card) -> void:
 	char_stats.discard_pile.add_card(card)
 
