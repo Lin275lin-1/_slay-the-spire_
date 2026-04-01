@@ -15,7 +15,7 @@ func _init() -> void:
 func _ready() -> void:
 	type = Type.DEBUFF
 	if agent and agent.has_signal("before_gain_block"):
-		agent.connect("before_gain_block", _on_before_take_damage)
+		agent.connect("before_gain_block", _on_before_gain_block)
 	else:
 		printerr("该对象没有before_gain_block信号")
 	
@@ -32,5 +32,5 @@ func remove_stack(amount: int):
 		queue_free()
 	stack_changed.emit()
 	
-func _on_before_take_damage(context: Context) -> void:
-	context.amount += stacks
+func _on_before_gain_block(context: Context) -> void:
+	context.modifiers.append(Modifier.new(Enums.NumericType.BLOCK, stacks, 1.0, null))

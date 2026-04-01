@@ -5,9 +5,16 @@
 [ext_resource type="Script" uid="uid://cj4qfukbhf6x8" path="res://entities/characters/necrobinder/雕琢打击.gd" id="3_ppitb"]
 [ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_87gmd"]
 
-[sub_resource type="Resource" id="Resource_8jli3"]
+[sub_resource type="Resource" id="Resource_ppitb"]
 script = ExtResource("1_ppitb")
 base_value = 7
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_qdl3f"]
+script = ExtResource("1_ppitb")
+base_value = 10
 placeholder = "damage"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
@@ -15,11 +22,15 @@ metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 [resource]
 script = ExtResource("3_ppitb")
 id = "雕琢打击"
-target = 1
+base_target = 1
 card_color = 3
-cost = 1
+base_cost = 1
 portrait = ExtResource("2_qdl3f")
-description = "[center]造成{damage}点伤害。[/center][p][center]选择手中的一张牌施加[color=gold]虚无[/color]。[/center]"
+base_description = "[center]造成{damage}点伤害。[/center][p][center]选择一张手牌施加[color=gold]虚无[/color]。[/center]"
 sound = ExtResource("4_87gmd")
-numeric_entries = Array[ExtResource("1_ppitb")]([SubResource("Resource_8jli3")])
+base_numeric_entries = Array[ExtResource("1_ppitb")]([SubResource("Resource_ppitb")])
+upgraded_target = 1
+upgraded_cost = 1
+upgraded_description = "[center]造成{damage}点伤害。[/center][p][center]选择一张手牌施加[color=gold]虚无[/color]。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_ppitb")]([SubResource("Resource_qdl3f")])
 metadata/_custom_type_script = "uid://br1hibx18tv13"

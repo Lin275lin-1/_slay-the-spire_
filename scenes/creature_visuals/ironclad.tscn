@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dgktfp0e1myrn"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://b8e4wst5vt8xh" path="res://animations/characters/ironclad/ironclad_skel_data.tres" id="1_j80du"]
+[ext_resource type="Script" uid="uid://b2nmxu6nwwuhu" path="res://scripts/creature_visuals.gd" id="1_ljj71"]
+[ext_resource type="Script" uid="uid://bayy3j6ssj0g" path="res://scripts/utils/spine_manager.gd" id="2_ljj71"]
+
+[node name="Ironclad" type="Node2D" unique_id=1339075407]
+script = ExtResource("1_ljj71")
+
+[node name="Visuals" type="SpineSprite" parent="." unique_id=1530565997]
+skeleton_data_res = ExtResource("1_j80du")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(-2, -29)
+scale = Vector2(0.28, 0.28)
+script = ExtResource("2_ljj71")
+metadata/_custom_type_script = "uid://bayy3j6ssj0g"
+
+[node name="Bounds" type="Control" parent="." unique_id=1669416247]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -143.0
+offset_top = -312.0
+offset_right = 90.0
+offset_bottom = -12.0
+mouse_filter = 2
+
+[node name="IntentPoint" type="Marker2D" parent="." unique_id=1387660589]
+position = Vector2(0, -360)

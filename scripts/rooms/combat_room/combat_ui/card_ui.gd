@@ -1,9 +1,10 @@
 class_name CardUI
 extends Control
 
+# 处理选择卡牌逻辑
 signal toggled(card: CardUI)
 
-@export var card: Card: set = _set_card
+@export var card: Card: set = set_card
 @export var char_stats: CharacterStats: set = _set_char_stats
 
 @onready var drop_point_area: Area2D = $DropPointArea
@@ -45,7 +46,7 @@ func _ready() -> void:
 func play() -> void:
 	if not card:
 		return
-	card.play(Context.new(get_tree().get_first_node_in_group("ui_player"), targets, 0), char_stats)
+	card.play(get_tree().get_first_node_in_group("ui_player"), targets, char_stats)
 	# TODO: 在删除前做出消耗/去弃牌堆的动画
 	queue_free()
 
@@ -73,6 +74,23 @@ func animate_to_position(new_position: Vector2, duration: float) -> void:
 	movement_tween = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
 	movement_tween.tween_property(self, "position", new_position, duration)
 
+func animate_preview(new_position_x, new_scale, new_rotation, to_preview, tween_time) -> void:
+	if movement_tween:
+		movement_tween.kill()
+	if tween:
+		tween.kill()
+	tween = create_tween().set_trans(Tween.TRANS_SINE).set_parallel(true)
+	movement_tween = create_tween().set_trans(Tween.TRANS_SINE)
+	if to_preview:
+		movement_tween.tween_property(self, "position", Vector2(new_position_x, original_position.y - 175), tween_time)
+		tween.tween_property(self, "scale", Vector2(new_scale, new_scale), tween_time)
+		tween.tween_property(self, "rotation_degrees", new_rotation, tween_time)
+	else:
+		movement_tween.tween_property(self, "position", Vector2(new_position_x, original_position.y), tween_time)
+		tween.tween_property(self, "scale", Vector2.ONE, tween_time)
+		tween.tween_property(self, "rotation_degrees", original_rotation, tween_time)
+
+# 弃用
 func animate_start_preview() -> void:
 	if movement_tween:
 		movement_tween.kill()
@@ -83,7 +101,7 @@ func animate_start_preview() -> void:
 	movement_tween.tween_property(self, "position:y", original_position.y - 175, 0.1).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(self, "scale", Vector2(1.3, 1.3), 0.1)
 	tween.tween_property(self, "rotation_degrees", 0, 0.1).set_trans(Tween.TRANS_SINE)
-
+# 弃用
 func animate_end_preview() -> void:
 	if movement_tween:
 		movement_tween.kill()
@@ -105,7 +123,7 @@ func _set_char_stats(value: CharacterStats) -> void:
 	char_stats = value
 	char_stats.stats_changed.connect(_on_char_stats_changed)
 
-func _set_card(value: Card) -> void:
+func set_card(value: Card) -> void:
 	if not is_node_ready():
 		await ready
 	
@@ -137,9 +155,9 @@ func _on_mouse_entered() -> void:
 		return
 	if selection_mode == Enums.SelectionMode.NONE:
 		card_state_machine.on_mouse_entered()
-		if card.target == card.Target.SELF or card.target == card.Target.SINGLE_ENEMY:
+		if card.get_target() == card.Target.SELF or card.get_target() == card.Target.SINGLE_ENEMY:
 			set_description(get_tree().get_first_node_in_group("ui_player"), null)
-		elif card.target == card.Target.EVERYONE or card.target == card.Target.ALL_ENEMIES:
+		elif card.get_target() == card.Target.EVERYONE or card.get_target() == card.Target.ALL_ENEMIES:
 			set_description(get_tree().get_first_node_in_group("ui_player"), get_tree().get_first_node_in_group("ui_enemies"))
 	else:
 		Events.card_previewed.emit(self, true)
@@ -193,8 +211,11 @@ func _on_drop_point_area_area_exited(area: Area2D) -> void:
 func _on_char_stats_changed() -> void:
 	self.playable = char_stats.can_play_card(card)
 
-func _on_target_selected(target: Creature) -> void:
-	set_description(get_tree().get_first_node_in_group("ui_player"), target)
+func _on_target_selected(target: Creature, card_: Card) -> void:
+	# 如果更改目标的卡牌不是自身，不修改描述
+	if card_ == card:
+		set_description(get_tree().get_first_node_in_group("ui_player"), target)
 	
-func _on_target_unselected() -> void:
-	set_description(get_tree().get_first_node_in_group("ui_player"), null)
+func _on_target_unselected(card_) -> void:
+	if card_ == card:
+		set_description(get_tree().get_first_node_in_group("ui_player"), null)

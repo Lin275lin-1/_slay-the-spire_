@@ -14,8 +14,7 @@ var current_mode: Enums.SelectionMode = Enums.SelectionMode.NONE
 var max_select := 10
 var min_select := 0
 var selected_cards: Array[Card] = []
-var cards_list: Array[CardUI] = []
-@export var cards: Array[Card]
+
 func _ready() -> void:
 	comfirm_button.pressed.connect(_on_comfirm)
 	cancel_button.pressed.connect(_on_cancel)
@@ -35,10 +34,9 @@ func multi_select(cards_to_choose: Array[Card], title: String, min_: int = 0, ma
 	return ret
 	
 func _start_selection(cards_to_choose: Array[Card], title: String, mode: Enums.SelectionMode) -> Array[Card]:
-	show()
+	if min_select > len(cards_to_choose):
+		return cards_to_choose
 	current_mode = mode
-	# 需要复制吗？
-	#cards_list = cards.duplicate()
 	selected_cards.clear()
 	for child in selected_cards_container.get_children():
 		child.queue_free()
@@ -55,8 +53,9 @@ func _start_selection(cards_to_choose: Array[Card], title: String, mode: Enums.S
 		card_ui.toggled.connect(_on_card_toggled)
 	# 等待节点删除
 	await get_tree().process_frame
-	hand_manager.set_cards()
+	hand_manager.set_cards(true)
 	hint_label.text = title
+	show()
 	var ret: Array[Card]
 	ret = await card_selected
 	hide()
@@ -67,17 +66,25 @@ func _on_card_toggled(card_ui: CardUI) -> void:
 	if card_ui.card in selected_cards:
 		selected_cards.erase(card_ui.card)
 		cancel_button.visible = (length - 1 != 0)
+		comfirm_button.visible = (length - 1 > min_select)
 		for child: CardUI in selected_cards_container.get_children():
 			if card_ui == child:
 				child.reparent_requested.emit(child)
 				child.disabled = false
 				break
 	else:
-		if length >= max_select:
+		if length >= max_select and length > 1:
 			return
+		elif length >= max_select and length == 1:
+			# 最多选择一张卡牌时点击交换卡牌
+			selected_cards.clear()
+			var child: CardUI = selected_cards_container.get_child(0)
+			child.reparent_requested.emit(child)
+		else:
+			comfirm_button.visible = length + 1 >= min_select
+			cancel_button.visible = true
+			
 		selected_cards.append(card_ui.card)
-		comfirm_button.visible = length + 1 >= min_select
-		cancel_button.visible = true
 		if card_ui.movement_tween:
 			card_ui.movement_tween.kill()
 		if card_ui.tween:

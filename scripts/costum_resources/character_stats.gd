@@ -29,7 +29,16 @@ func reset_energy() -> void:
 	energy = max_energy
 	
 func can_play_card(card: Card) -> bool:
-	return energy >= card.cost
+	return energy >= card.get_cost()
+
+func get_draw_pile() -> Array[Card]:
+	return draw_pile.cards
+
+func get_discard_pile() -> Array[Card]:
+	return discard_pile.cards
+
+func get_exhaust_pile() -> Array[Card]:
+	return exhaust_pile.cards
 
 func create_instance() -> CharacterStats:
 	var instance := self.duplicate()

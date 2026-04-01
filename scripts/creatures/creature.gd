@@ -2,9 +2,11 @@ class_name Creature
 extends Area2D
 
 @warning_ignore_start("unused_signal")
-signal turn_started(creature: Creature)
+signal before_turn_started(creature: Creature)
+signal after_turn_started(creature: Creature)
 signal turn_ended(creature: Creature)
 signal before_take_damage(context: Context)
+signal after_take_damage(context: Context)
 signal before_lose_health(context: Context)
 signal before_attack(context: Context)
 signal before_gain_block(context: Context)
@@ -21,15 +23,21 @@ const BUFF_UI = preload("res://scenes/rooms/combat_room/combat_ui/buff_ui.tscn")
 @onready var buff_manager: BuffManager = $BuffManager
 @onready var reticles: Node2D = $Reticles
 @onready var health_bar: HealthBar = $HealthBar
-@onready var spine_manager: SpineManager = $SpineManager
+@onready var speech_bubble: SpeechBubble = $SpeechBubble
+@onready var name_label: Label = %NameLabel
+@onready var name_plate: Control = $NamePlate
+@onready var name_tween: Tween
+
 
 var spine_anim_state: SpineAnimationState
 
+func speech(_text: String, _time: float = 2.5) -> void:
+	pass
+
 func attack(context: Context) -> void:
-	before_attack.emit(context)
 	for child: Creature in context.targets:
 		var damage_context = DamageContext.new(self, [child], context.amount)
-		child.before_take_damage.emit(damage_context)
+		before_attack.emit(damage_context)
 		child.take_damage(damage_context)
 
 func gain_block(_context: Context) -> void:
@@ -39,6 +47,12 @@ func apply_buff(buff_context: ApplyBuffContext) -> void:
 	before_apply_buff.emit(buff_context)
 	buff_context.targets[0].add_buff(buff_context)
 	after_apply_buff.emit(buff_context)
+
+func has_buff(name_: String) -> bool:
+	for child: Buff in buff_manager.get_children():
+		if child.buff_name == name_:
+			return true
+	return false
 	
 func add_buff(buff_context: ApplyBuffContext) -> void:
 	before_applied_buff.emit(buff_context)
@@ -65,7 +79,8 @@ func get_modifiers_by_type(type: Enums.NumericType, affect: Buff.AFFECT) -> Arra
 	return ret
 
 func start_turn() -> void:
-	turn_started.emit(self)
+	before_turn_started.emit(self)
+	after_turn_started.emit(self)
 
 func end_turn() -> void:
 	turn_ended.emit(self)
@@ -78,3 +93,21 @@ func take_damage(_context: Context) -> void:
 
 func die() -> void:
 	pass
+
+func set_recticles(positions: Array[Vector2], reticle_scale: Vector2) -> void:
+	for i in range(4):
+		var reticle: Node2D = reticles.get_child(i)
+		reticle.position = positions[i]
+		reticle.scale = reticle_scale
+	
+func show_name() -> void:
+	if name_tween:
+		name_tween.kill()
+	name_tween = create_tween()
+	name_tween.tween_property(name_plate, "modulate:a", 1.0, 0.3)
+
+func hide_name() -> void:
+	if name_tween:
+		name_tween.kill()
+	name_tween = create_tween()
+	name_tween.tween_property(name_plate, "modulate:a", 0.0, 0.3)

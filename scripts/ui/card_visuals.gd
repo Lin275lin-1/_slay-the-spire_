@@ -32,7 +32,7 @@ const CARD_FRAME_RED_MAT = preload("res://materials/cards/frames/card_frame_red_
 @onready var card_portrait: TextureRect = %CardPortrait
 @onready var card_frame: TextureRect = %CardFrame
 @onready var portrait_border: TextureRect = %PortraitBorder
-@onready var title_label: Label = %TitleLabel
+@onready var title_label: RichTextLabel = %TitleLabel
 @onready var energy_label: Label = %EnergyLabel
 @onready var type_label: Label = %TypeLabel
 @onready var description_label: RichTextLabel = %DescriptionLabel
@@ -45,9 +45,9 @@ func _set_card(value: Card) -> void:
 	
 	card = value
 	card_portrait.texture = card.portrait
-	title_label.text = card.id
-	energy_label.text = str(card.cost)
-	description_label.text = card.description
+	title_label.text = card.get_title()
+	energy_label.text = str(card.get_cost())
+	description_label.text = card.get_default_description()
 	var type_text: String
 	# TODO: 诅咒，状态
 	match card.type:

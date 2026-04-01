@@ -47,8 +47,8 @@ func show_keyword_tooltip() -> void:
 		var desc: String = BuffLibrary.get_keyword_description(keyword)
 		KeywordTooltip.add_keyword(keyword_name, desc)
 	# preview时会scale到1.3，同时向上移动175px(显示tooltip需要0.2s,此时tween已经完成)
-	#+ Vector2(size.x * 1.4, 0)
-	KeywordTooltip.keyword_tooltip.global_position = global_position 
+	#
+	KeywordTooltip.keyword_tooltip.global_position = global_position + Vector2(size.x * 1.4, 0)
 	KeywordTooltip.show()
 
 func _on_mouse_exited() -> void:

@@ -70,9 +70,20 @@ func _change_view(scene: PackedScene) -> Node:
 	if current_room.get_child_count() > 0:
 		current_room.get_child(0).queue_free()
 		
-	get_tree().paused = false
 	var new_view := scene.instantiate()
 	current_room.add_child(new_view)
+	
+	# 张颢骞
+	if scene == COMBAT_SCENE:
+		# 这段应该在_on_battle_room_entered(room: Room)中实现，new_view.enemy_encounter = room.enemy_encounter
+		new_view = new_view as CombatRoom
+		new_view.char_stats = character
+		# 测试怪物池使用的代码
+		var encounter_pool = preload("res://entities/encounters/encounter_pools/act1_encounter_pool.tres")
+		new_view.enemy_encounter = encounter_pool.get_random_encounter_by_type(EnemyEncounter.Type.WEAK)
+		#
+		new_view.start_combat()
+	#
 	
 	return new_view
 	
@@ -84,6 +95,7 @@ func _on_combat_won() -> void:
 	#this is temporary code,it will come from real battle encounter data
 	# as a dependency
 	
+	# reward_scene.add_gold_reward(map.last_room.enemy_encounter.roll_gold_reward())
 	#reward_scene.add_gold_reward(77)
 	#reward_scene.add_card_reward()
 	

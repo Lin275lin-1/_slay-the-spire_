@@ -28,7 +28,7 @@ func get_modifier() -> Array[Modifier]:
 	return [modifier]
 
 func _on_before_gain_block(context: Context) -> void:
-	context.amount = int(context.amount * 0.75)
+	context.modifiers.append(Modifier.new(Enums.NumericType.BLOCK, 0, 0.75, null))
 
 func _on_turn_ended(_creature: Node2D) -> void:
 	remove_stack(1) 
