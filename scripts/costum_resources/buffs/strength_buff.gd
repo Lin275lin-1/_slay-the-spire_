@@ -35,4 +35,4 @@ func remove_stack(amount: int):
 	stack_changed.emit()
 
 func _on_before_attack(context: Context) -> void:
-	context.amount += stacks
+	context.modifiers.append(Modifier.new(Enums.NumericType.DAMAGE, stacks, 1.0, null))

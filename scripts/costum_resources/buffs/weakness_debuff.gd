@@ -2,8 +2,6 @@
 class_name WeaknessDebuff
 extends Buff
 
-
-
 func _init() -> void:
 	var buff_info: Dictionary = BuffLibrary.buff_data["虚弱"]
 	buff_name = buff_info["name"]
@@ -26,7 +24,7 @@ func get_modifier() -> Array[Modifier]:
 	return [modifier]
 
 func _on_before_attack(context: Context) -> void:
-	context.amount = int(context.amount * 0.75)
+	context.modifiers.append(Modifier.new(Enums.NumericType.DAMAGE, 0, 0.75, null))
 
 func _on_turn_ended(_creature: Node2D) -> void:
 	# remove_stack是继承自buff,层数小于0是调用queue_free()

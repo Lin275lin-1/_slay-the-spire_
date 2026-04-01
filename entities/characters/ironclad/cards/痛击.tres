@@ -5,28 +5,47 @@
 [ext_resource type="Script" uid="uid://c88oxyuj67or7" path="res://entities/characters/ironclad/cards/痛击.gd" id="2_kqsla"]
 [ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="3_4yurv"]
 
-[sub_resource type="Resource" id="Resource_4yurv"]
+[sub_resource type="Resource" id="Resource_kqsla"]
 script = ExtResource("1_kqsla")
 base_value = 8
 placeholder = "damage"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
-[sub_resource type="Resource" id="Resource_epc34"]
+[sub_resource type="Resource" id="Resource_4yurv"]
 script = ExtResource("1_kqsla")
 type = 4
 base_value = 2
-placeholder = "vunlerable"
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_epc34"]
+script = ExtResource("1_kqsla")
+base_value = 10
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_oc4jl"]
+script = ExtResource("1_kqsla")
+type = 4
+base_value = 3
+placeholder = "stacks"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
 script = ExtResource("2_kqsla")
 id = "痛击"
-target = 1
-cost = 2
+base_target = 1
+base_cost = 2
 portrait = ExtResource("1_1yq0f")
-description = "[center]造成{damage}点伤害[/center][p][center]施加{vunlerable}层[color=gold]易伤[/color]。[/center]"
+base_description = "[center]造成{damage}点伤害。[/center][p][center]施加{stacks}层[color=gold]易伤[/color]。[/center]"
 sound = ExtResource("3_4yurv")
-numeric_entries = Array[ExtResource("1_kqsla")]([SubResource("Resource_4yurv"), SubResource("Resource_epc34")])
+base_numeric_entries = Array[ExtResource("1_kqsla")]([SubResource("Resource_kqsla"), SubResource("Resource_4yurv")])
+upgraded_target = 1
+upgraded_cost = 2
+upgraded_description = "[center]造成{damage}点伤害。[/center][p][center]施加{stacks}层[color=gold]易伤[/color]。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_kqsla")]([SubResource("Resource_epc34"), SubResource("Resource_oc4jl")])
 metadata/_custom_type_script = "uid://br1hibx18tv13"

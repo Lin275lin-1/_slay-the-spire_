@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://qmqejd" path="res://images/atlases/ui_atlas.sprites/card/card_banner.tres" id="4_njcf5"]
 [ext_resource type="Texture2D" uid="uid://g1g8kd" path="res://images/atlases/ui_atlas.sprites/card/energy_ironclad.tres" id="5_b8ve4"]
 [ext_resource type="Texture2D" uid="uid://bduvy6u" path="res://images/atlases/ui_atlas.sprites/card/card_portrait_border_plaque_s.tres" id="6_0ge8e"]
+[ext_resource type="FontFile" uid="uid://wcoiw83db02h" path="res://fonts/zhs/SourceHanSerifSC-Bold.otf" id="7_njcf5"]
 
 [node name="Visuals" type="Control" unique_id=829210823]
 layout_mode = 3
@@ -89,7 +90,7 @@ texture = ExtResource("4_njcf5")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="TitleLabel" type="Label" parent="TitleBanner" unique_id=1328100646]
+[node name="TitleLabel" type="RichTextLabel" parent="TitleBanner" unique_id=1806528608]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -97,13 +98,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -24.5
-offset_top = -23.5
-offset_right = 7.5
-offset_bottom = -0.5
+offset_left = -95.5
+offset_top = -30.5
+offset_right = 93.5
+offset_bottom = 2.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/default_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+theme_override_colors/font_shadow_color = Color(0.30980393, 0.3137255, 0.33333334, 1)
+theme_override_fonts/normal_font = ExtResource("7_njcf5")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
 text = "打击"
+scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 

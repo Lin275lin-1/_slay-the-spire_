@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bjrlwk5w4gqtk" path="res://scripts/costum_resources/enemy_stats.gd" id="1_4swqq"]
 [ext_resource type="Resource" uid="uid://bmuwcy553u8mu" path="res://entities/enemies/leaf_slime_s/leaf_slime_s_ai.tres" id="1_uo07u"]
-[ext_resource type="SpineSkeletonDataResource" uid="uid://l88yarj7pucn" path="res://animations/monsters/leaf_slime_s/leaf_slime_s_skel_data.tres" id="2_oum24"]
+[ext_resource type="PackedScene" uid="uid://bt6dgr1onadst" path="res://scenes/creature_visuals/leaf_slime_m.tscn" id="3_uo07u"]
 
 [resource]
 script = ExtResource("1_4swqq")
 ai = ExtResource("1_uo07u")
+enemy_name = "树枝史莱姆"
 max_health = 11
-animation = ExtResource("2_oum24")
+visuals_scene = ExtResource("3_uo07u")
 metadata/_custom_type_script = "uid://bjrlwk5w4gqtk"

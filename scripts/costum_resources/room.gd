@@ -14,6 +14,8 @@ enum Type {NOT_ASSIGNED,MONSTER,TREASURE,CAMPFIRE,BOSS,SHOP,ELITE,UNKNOWN}
 @export var next_rooms: Array[Room]
 #房间是否被选中
 @export var selected := false
+# 只在战斗房间使用
+@export var enemy_encounter: EnemyEncounter
 
 
 func _to_string() -> String:

@@ -12,15 +12,26 @@ placeholder = "damage"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_fs1rm"]
+script = ExtResource("1_75tvl")
+base_value = 17
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
 [resource]
 script = ExtResource("3_u3761")
 id = "玷污"
-target = 1
+base_target = 1
 card_color = 3
-cost = 1
+base_cost = 1
 portrait = ExtResource("2_u3761")
-description = "[center]造成{damage}点伤害[/center]"
+base_description = "[center]造成{damage}点伤害。[/center]"
 sound = ExtResource("4_fs1rm")
-numeric_entries = Array[ExtResource("1_75tvl")]([SubResource("Resource_u3761")])
+base_numeric_entries = Array[ExtResource("1_75tvl")]([SubResource("Resource_u3761")])
 ethereal = true
+upgraded_target = 1
+upgraded_cost = 1
+upgraded_description = "[center]造成{damage}点伤害。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_75tvl")]([SubResource("Resource_fs1rm")])
 metadata/_custom_type_script = "uid://br1hibx18tv13"

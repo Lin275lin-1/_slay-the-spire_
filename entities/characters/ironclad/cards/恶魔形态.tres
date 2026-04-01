@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bt5vtxq45orx" path="res://entities/characters/ironclad/cards/恶魔形态.gd" id="3_7w2ll"]
 [ext_resource type="AudioStream" uid="uid://dbe46o0jyq2x8" path="res://audio/SFX/dark_orb_channel.mp3" id="4_ym4su"]
 
-[sub_resource type="Resource" id="Resource_nbr5u"]
+[sub_resource type="Resource" id="Resource_7w2ll"]
 script = ExtResource("1_ppwhd")
 type = 4
 base_value = 2
@@ -13,10 +13,26 @@ placeholder = "stacks_1"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
-[sub_resource type="Resource" id="Resource_f8drp"]
+[sub_resource type="Resource" id="Resource_ym4su"]
 script = ExtResource("1_ppwhd")
 type = 4
 base_value = 2
+placeholder = "stacks_2"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_nbr5u"]
+script = ExtResource("1_ppwhd")
+type = 4
+base_value = 3
+placeholder = "stacks_1"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_f8drp"]
+script = ExtResource("1_ppwhd")
+type = 4
+base_value = 3
 placeholder = "stacks_2"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
@@ -25,10 +41,13 @@ metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 script = ExtResource("3_7w2ll")
 id = "恶魔形态"
 type = 2
-cost = 3
+base_cost = 3
 rarity = 2
 portrait = ExtResource("2_7w2ll")
-description = "[center]获得{stacks_1}点[color=gold]力量[/color]。[/center][p][center]获得{stacks_2}层[color=gold]恶魔形态[/color]。[/center]"
+base_description = "[center]获得{stacks_1}层[color=gold]力量[/color]。[/center][p][center]获得{stacks_2}层[color=gold]恶魔形态[/color]。[/center]"
 sound = ExtResource("4_ym4su")
-numeric_entries = Array[ExtResource("1_ppwhd")]([SubResource("Resource_nbr5u"), SubResource("Resource_f8drp")])
+base_numeric_entries = Array[ExtResource("1_ppwhd")]([SubResource("Resource_7w2ll"), SubResource("Resource_ym4su")])
+upgraded_cost = 3
+upgraded_description = "[center]获得{stacks_1}层[color=gold]力量[/color]。[/center][p][center]获得{stacks_2}层[color=gold]恶魔形态[/color]。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_ppwhd")]([SubResource("Resource_nbr5u"), SubResource("Resource_f8drp")])
 metadata/_custom_type_script = "uid://br1hibx18tv13"
