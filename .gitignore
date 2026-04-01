@@ -3,4 +3,4 @@
 /android/
 addons/
 *.import
-bin/windows/*~
+bin/
