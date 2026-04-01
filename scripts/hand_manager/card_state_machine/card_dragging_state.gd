@@ -8,7 +8,8 @@ func enter_state() -> void:
 	var ui_layer := get_tree().get_first_node_in_group("ui_layer")
 	if ui_layer:
 		card_ui.reparent(ui_layer)
-	offset = card_ui.get_global_mouse_position() - card_ui.global_position
+	#offset = card_ui.get_global_mouse_position() - card_ui.position
+	offset = card_ui.size / 2
 	Events.card_drag_started.emit(card_ui)
 	minimum_drag_time_elapsed = false
 	var threshhold_timer := get_tree().create_timer(DRAG_MININUM_THRESHHOLD, false)
@@ -31,7 +32,7 @@ func on_input(event: InputEvent) -> void:
 	
 	if not card_ui.playable:
 		card_state_machine_change_state_requested.emit(self, STATE.BASE)
-		Events.player_hited.emit("没有足够的能量")
+		Events.player_talked.emit("没有足够的能量", 2.5)
 		return
 	
 	if single_targetd and mouse_motion and card_ui.targets.size() > 0:
@@ -39,7 +40,7 @@ func on_input(event: InputEvent) -> void:
 		return
 	
 	if mouse_motion:
-		card_ui.global_position = card_ui.get_global_mouse_position() - offset
+		card_ui.position = card_ui.get_global_mouse_position() - offset
 	elif cancel:
 		card_state_machine_change_state_requested.emit(self, STATE.BASE)
 	elif minimum_drag_time_elapsed and comfirm and not single_targetd:

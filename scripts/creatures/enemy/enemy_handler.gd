@@ -1,6 +1,8 @@
 class_name EnemyHandler
 extends Node2D
 
+const EnemyScene := preload("res://scenes/creatures/enemy/enemy.tscn")
+
 func _ready() -> void:
 	Events.enemy_action_completed.connect(_on_enemy_action_completed)
 
@@ -8,6 +10,17 @@ func reset_enemy_intents() -> void:
 	for child: Enemy in get_children():
 		child.current_intent = null
 		child.update_intent()
+
+func setup_enemies(encounter: EnemyEncounter) -> void:
+	if not encounter:
+		return
+	for enemy: Enemy in get_children():
+		enemy.queue_free()
+	for enemy_entry : EnemyEntry in encounter.enemy_entries:
+		var new_enemy: Enemy = EnemyScene.instantiate()
+		new_enemy.position = enemy_entry.position
+		new_enemy.stats = enemy_entry.enemy_stats.create_instance()
+		add_child(new_enemy)
 
 func start_turn() -> void:
 	if get_child_count() == 0:

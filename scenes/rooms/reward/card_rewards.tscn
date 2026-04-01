@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://cgjob5cnnv3xf"]
+
+[ext_resource type="Texture2D" uid="uid://d2j6mr7oiuuyh" path="res://images/rooms/architect_victory/architect_victory_bg.png" id="1_1jgo7"]
+[ext_resource type="Script" uid="uid://dkeir2n32plbu" path="res://scripts/ui/card_rewards.gd" id="2_eovk8"]
+[ext_resource type="Texture2D" uid="uid://bkbggtnccf6pi" path="res://images/ui/reward_screen/reward_banner.png" id="2_ivq4g"]
+[ext_resource type="PackedScene" uid="uid://uxv6ncqktd1c" path="res://scenes/ui/card_menu_ui.tscn" id="2_p3che"]
+[ext_resource type="Texture2D" uid="uid://cyruikkcbbm0f" path="res://images/ui/reward_screen/reward_skip_button.png" id="3_ivq4g"]
+[ext_resource type="PackedScene" uid="uid://h3da6tbyw5e0" path="res://scenes/ui/tool_tip.tscn" id="4_eovk8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eovk8"]
+texture = ExtResource("2_ivq4g")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_otfep"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_otfep"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ft6w1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mgbyu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dgmg0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kdy8u"]
+
+[node name="CardRewards" type="TextureRect" unique_id=1037842414]
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_1jgo7")
+script = ExtResource("2_eovk8")
+
+[node name="Label" type="Label" parent="." unique_id=938212330]
+layout_mode = 0
+offset_left = 1231.0
+offset_top = 330.0
+offset_right = 1839.0
+offset_bottom = 449.0
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_eovk8")
+theme_override_styles/focus = SubResource("StyleBoxTexture_otfep")
+text = "Choose a Card"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=406609329]
+custom_minimum_size = Vector2(400, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -605.0
+offset_top = -197.0
+offset_right = 606.0
+offset_bottom = 403.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+
+[node name="Cards" type="HBoxContainer" parent="VBoxContainer" unique_id=2111439064]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 250
+metadata/_edit_lock_ = true
+
+[node name="CenterContainer" parent="VBoxContainer/Cards" unique_id=946762981 instance=ExtResource("2_p3che")]
+layout_mode = 2
+
+[node name="CenterContainer2" parent="VBoxContainer/Cards" unique_id=84519233 instance=ExtResource("2_p3che")]
+layout_mode = 2
+
+[node name="CenterContainer3" parent="VBoxContainer/Cards" unique_id=1422826292 instance=ExtResource("2_p3che")]
+layout_mode = 2
+
+[node name="SkipCardsReward" type="Button" parent="VBoxContainer" unique_id=274297628]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 110)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_otfep")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ft6w1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_mgbyu")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_dgmg0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kdy8u")
+text = "skip"
+icon = ExtResource("3_ivq4g")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ToolTip" parent="." unique_id=849497176 instance=ExtResource("4_eovk8")]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 0

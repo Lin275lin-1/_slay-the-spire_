@@ -3,29 +3,26 @@
 [ext_resource type="Script" uid="uid://doeqctp26hq6y" path="res://scripts/creatures/creature.gd" id="1_32syg"]
 [ext_resource type="PackedScene" uid="uid://copfb0hm4hkcy" path="res://scenes/rooms/combat_room/combat_ui/health_bar.tscn" id="2_j4eis"]
 [ext_resource type="PackedScene" uid="uid://cbir7pfgl5y7d" path="res://scenes/rooms/combat_room/combat_ui/buff_container.tscn" id="3_bod4x"]
-[ext_resource type="Script" uid="uid://bayy3j6ssj0g" path="res://scripts/utils/spine_manager.gd" id="5_qn62h"]
 [ext_resource type="Texture2D" uid="uid://hm3yndjsncmt" path="res://images/ui/combat/combat_reticle.png" id="6_dlany"]
+[ext_resource type="PackedScene" uid="uid://bv5lhx0gj4ka3" path="res://scenes/ui/speech_bubble.tscn" id="7_32syg"]
 [ext_resource type="Script" uid="uid://beoly8uxrkebe" path="res://scripts/creatures/buff_manager.gd" id="7_ne82r"]
+[ext_resource type="Texture2D" uid="uid://drmgoyr4vi1nf" path="res://images/ui/combat/combat_nameplate_background.png" id="8_bod4x"]
+[ext_resource type="FontFile" uid="uid://wcoiw83db02h" path="res://fonts/zhs/SourceHanSerifSC-Bold.otf" id="9_vpxc5"]
 
 [node name="Creature" type="Area2D" unique_id=465140807]
 script = ExtResource("1_32syg")
 
 [node name="HealthBar" parent="." unique_id=1512934549 instance=ExtResource("2_j4eis")]
 offset_left = -115.0
-offset_top = 77.0
+offset_top = 4.0
 offset_right = -115.0
-offset_bottom = 77.0
+offset_bottom = 4.0
 
 [node name="BuffContainer" parent="." unique_id=1496015378 instance=ExtResource("3_bod4x")]
-offset_left = -101.0
-offset_top = 107.0
-offset_right = 134.0
-offset_bottom = 248.0
-
-[node name="SpineManager" type="SpineSprite" parent="." unique_id=2074089765]
-scale = Vector2(0.7, 0.7)
-script = ExtResource("5_qn62h")
-metadata/_custom_type_script = "uid://bayy3j6ssj0g"
+offset_left = -102.0
+offset_top = 44.0
+offset_right = 133.0
+offset_bottom = 185.0
 
 [node name="Reticles" type="Node2D" parent="." unique_id=1493303524]
 visible = false
@@ -55,3 +52,46 @@ texture = ExtResource("6_dlany")
 
 [node name="BuffManager" type="Node" parent="." unique_id=1071170894]
 script = ExtResource("7_ne82r")
+
+[node name="SpeechBubble" parent="." unique_id=1782935771 instance=ExtResource("7_32syg")]
+visible = false
+offset_left = 209.0
+offset_top = -172.0
+offset_right = 209.0
+offset_bottom = -172.0
+
+[node name="NamePlate" type="Control" parent="." unique_id=706061852]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_left = -131.0
+offset_top = 13.0
+offset_right = 136.0
+offset_bottom = 63.0
+mouse_filter = 2
+
+[node name="NamePlateBG" type="TextureRect" parent="NamePlate" unique_id=490212489]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_bod4x")
+expand_mode = 1
+
+[node name="NameLabel" type="Label" parent="NamePlate" unique_id=1306056180]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_vpxc5")
+theme_override_font_sizes/font_size = 12
+text = "这是名字"
+horizontal_alignment = 1
+vertical_alignment = 1

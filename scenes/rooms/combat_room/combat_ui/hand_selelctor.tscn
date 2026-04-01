@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://dwj3mdroe0dgp"]
+
+[ext_resource type="Texture2D" uid="uid://f54lcv" path="res://images/atlases/ui_atlas.sprites/peek_button.tres" id="1_de14f"]
+[ext_resource type="Script" uid="uid://bs1e0vjeu2hjh" path="res://scripts/rooms/combat_room/combat_ui/hand_selelctor.gd" id="1_irwpo"]
+[ext_resource type="PackedScene" uid="uid://deidb0dmylls" path="res://scenes/hand_manager/hand_manager.tscn" id="2_ussap"]
+[ext_resource type="PackedScene" uid="uid://tnl8udgtv6w5" path="res://scenes/ui/comfirm_button.tscn" id="8_uoyrg"]
+[ext_resource type="Texture2D" uid="uid://b1ommqi" path="res://images/atlases/compressed.sprites/confirm_button_outline.tres" id="9_0blf0"]
+[ext_resource type="Texture2D" uid="uid://cp3mg3t" path="res://images/atlases/compressed.sprites/confirm_button_tick.tres" id="10_bi20a"]
+[ext_resource type="Texture2D" uid="uid://bb803i8" path="res://images/atlases/ui_atlas.sprites/back_button.tres" id="11_u0m56"]
+[ext_resource type="Texture2D" uid="uid://cxm0iyd" path="res://images/atlases/compressed.sprites/back_button_outline.tres" id="12_sb8bf"]
+[ext_resource type="Texture2D" uid="uid://cahogy5" path="res://images/atlases/compressed.sprites/back_button_arrow.tres" id="13_i8li7"]
+
+[node name="HandSelelctor" type="ColorRect" unique_id=505773446]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+script = ExtResource("1_irwpo")
+
+[node name="PeakButton" type="TextureButton" parent="." unique_id=806970811]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 452.0
+offset_right = 236.0
+offset_bottom = 622.0
+texture_normal = ExtResource("1_de14f")
+
+[node name="HintLabel" type="Label" parent="." unique_id=656029799]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -388.0
+offset_right = 140.0
+offset_bottom = -333.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "选择一张卡消耗"
+
+[node name="HandManager" parent="." unique_id=828060318 instance=ExtResource("2_ussap")]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 855.0
+offset_right = 1493.0
+offset_bottom = 1155.0
+
+[node name="SelectedCardsContainer" type="HBoxContainer" parent="." unique_id=1116090130]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -200
+
+[node name="ComfirmButton" parent="." unique_id=959760777 instance=ExtResource("8_uoyrg")]
+layout_mode = 0
+offset_left = 1668.0
+offset_top = 671.0
+offset_right = 1968.0
+offset_bottom = 873.0
+out_line_texture = ExtResource("9_0blf0")
+icon_texture = ExtResource("10_bi20a")
+
+[node name="CancelButton" parent="." unique_id=1693092838 instance=ExtResource("8_uoyrg")]
+layout_mode = 0
+offset_left = -72.0
+offset_top = 677.0
+offset_right = 228.0
+offset_bottom = 879.0
+texture_normal = ExtResource("11_u0m56")
+out_line_texture = ExtResource("12_sb8bf")
+icon_texture = ExtResource("13_i8li7")

@@ -21,6 +21,14 @@ func _ready() -> void:
 	func(_card_ui): set_cards() 
 		)
 
+func add_cards_for_selection(card:Card) -> CardUI:
+	var new_card_ui: CardUI = CARD_UI.instantiate()
+	add_child(new_card_ui)
+	new_card_ui.card = card
+	new_card_ui.parent = self
+	new_card_ui.reparent_requested.connect(_on_card_ui_reparent_requested)
+	return new_card_ui
+
 func add_card(card: Card) -> void:
 	var new_card_ui :CardUI = CARD_UI.instantiate()
 	add_child(new_card_ui)
@@ -30,7 +38,7 @@ func add_card(card: Card) -> void:
 	new_card_ui.char_stats = char_stats
 
 ## 使手牌扇形排列
-func set_cards() -> void: 
+func set_cards(instant: bool = false) -> void: 
 	var card_count := get_child_count()
 	var card_uis := get_children()
 	
@@ -46,7 +54,6 @@ func set_cards() -> void:
 		tween.tween_property(card_ui, "position", card_ui.original_position, tween_time)
 		tween.tween_property(card_ui, "rotation_degrees", card_ui.original_rotation, tween_time)
 	else:
-		var tween := create_tween()
 		var target_position: Vector2
 		var target_rotation: float
 		var x_position := 0.0
@@ -70,34 +77,65 @@ func set_cards() -> void:
 			card_ui.original_position = target_position
 			card_ui.original_rotation = target_rotation
 			card_ui.original_index = card_index	
-			tween.set_parallel(true)
-			tween.tween_property(card_ui, "position", target_position, tween_time)
-			tween.tween_property(card_ui, "rotation_degrees", target_rotation, tween_time)
+			if instant:
+				card_ui.position = target_position
+				card_ui.rotation_degrees = target_rotation
+			else:
+				card_ui.animate_set_card(target_position, target_rotation, tween_time)
 			
 func _on_card_previewed(pre_card: CardUI, to_preview: bool) -> void:
 	if to_preview:
 		pre_card.z_index = 1
 	else:
 		pre_card.z_index = 0
-	## to_preview = true时周围卡牌散开，=false复原
+	# to_preview = true时周围卡牌散开，=false复原
 	var card_count := get_child_count()
-	if card_count == 1 or card_count == 0:
-		return
+	if card_count == 1:
+		pre_card.animate_preview(pre_card.original_position.x, 1.3, 0, to_preview, tween_time)
 	if pre_card:
 		var element :int = to_preview as int
 		for card_ui: CardUI in get_children():
-			var movement = sign(card_ui.original_index - pre_card.original_index) * element * offset
+			var movement: float
+			var delta = card_ui.original_index - pre_card.original_index
+			if abs(delta) > 3:
+				movement = 0
+			else:
+				movement = sign(delta) * (4 - abs(delta)) * element * offset
 			#card_ui.animate_to_position(card_ui.original_position + Vector2(movement, 0), tween_time)
 			#var tween := get_tree().create_tween()
 			#tween.set_parallel(true)
 			#tween.tween_property(card_ui, "position:x", card_ui.original_position.x + movement, tween_time)
-			card_ui.movement_tween = create_tween()
-			card_ui.movement_tween.tween_property(card_ui, "position:x", card_ui.original_position.x + movement, tween_time)
+			if card_ui == pre_card:
+				card_ui.animate_preview(card_ui.original_position.x, 1.3, 0, to_preview, tween_time)
+			else:
+				card_ui.animate_preview(card_ui.original_position.x + movement, 1.3, 0, false, tween_time)
+			#card_ui.animate_to_position(card_ui.original_position + Vector2(movement, 0), tween_time)
 			
+			#card_ui.movement_tween = create_tween()
+			#card_ui.movement_tween.tween_property(card_ui, "position:x", card_ui.original_position.x + movement, tween_time)
+
+# TODO: 卡牌消耗/移向弃牌堆动画
 func discard_card(card: CardUI) -> void:
-	# TODO: 卡牌消耗/移向弃牌堆动画
+	card.queue_free()
+	# 等待card.queue_free()
+	await get_tree().process_frame
+	set_cards()
+
+func exhaust_card(card: CardUI) -> void:
+	card.queue_free()
+	# 等待card.queue_free()
+	await get_tree().process_frame
+	set_cards()
+
+func remove_card(card: CardUI) -> void:
 	card.queue_free()
 	set_cards()
+
+func find_card_ui(card: Card) -> CardUI:
+	for child: CardUI in get_children():
+		if child.card == card:
+			return child
+	return null
 
 func discard_hand() -> void:
 	for child in get_children():
@@ -114,3 +152,8 @@ func _on_card_ui_reparent_requested(card_ui:CardUI) -> void:
 		move_child.call_deferred(card_ui, card_ui.original_index)
 		card_ui.set_deferred("disabled", false)
 		set_cards.call_deferred()
+
+func update_hand() -> void:
+	for child: CardUI in get_children():
+		child.set_card(child.card)
+		

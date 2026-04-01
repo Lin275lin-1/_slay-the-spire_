@@ -6,7 +6,7 @@ const MOUSE_Y_SNAPBACK_THRESHHOLD := 1000
 func enter_state() -> void:
 	card_ui.drop_point_area.monitoring = false
 	card_ui.targets.clear()
-	card_ui.animate_to_position(card_ui.parent.global_position + card_ui.parent.size * Vector2(0.5, -0.5), 0.2)
+	card_ui.animate_to_position(card_ui.parent.position + card_ui.parent.size * Vector2(0.5, -0.5), 0.2)
 	Events.card_aim_started.emit(card_ui)
 
 func exit_state() -> void:

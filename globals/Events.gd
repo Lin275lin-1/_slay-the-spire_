@@ -1,4 +1,3 @@
-
 extends Node
 
 # 预加载自定义类型，确保在信号声明时能够识别
@@ -14,14 +13,14 @@ signal card_drag_started(card_ui: CardUI)
 signal card_drag_ended(card_ui: CardUI)
 signal card_previewed(card_ui: CardUI, to_preview: bool)
 signal card_played(card: Card)
-signal target_selected(target: Creature)
-signal target_unselected()
+signal target_selected(target: Creature, card: Card)
+signal target_unselected(card: Card)
 ## 玩家相关
 # 玩家回合开始抽牌后
 signal player_hand_drawn
 signal player_hand_discarded
 signal player_turn_ended
-signal player_hited(text: String)
+signal player_talked(text: String, time: float)
 signal player_died
 signal player_hit
 ## 敌人相关

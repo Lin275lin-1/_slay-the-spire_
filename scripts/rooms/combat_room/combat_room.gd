@@ -1,5 +1,7 @@
+class_name CombatRoom
 extends Control
 
+@export var enemy_encounter: EnemyEncounter
 @onready var enemy_handler: EnemyHandler = $EnemyHandler
 @onready var player: Player = $Player
 @onready var player_handler: PlayerHandler = $PlayerHandler
@@ -11,23 +13,27 @@ extends Control
 
 func _ready() -> void:
 	# 这步应该在开始一局时进行
-	var new_stats: CharacterStats = char_stats.create_instance()
-	combat_ui.char_stats = new_stats
-	hand_manager.char_stats = new_stats
-	player.stats = new_stats
+	#var new_stats: CharacterStats = char_stats.create_instance()
+	
+	
 	enemy_handler.child_order_changed.connect(_on_child_order_changed)
 	Events.enemy_turn_ended.connect(_on_enemy_turn_ended)
 	Events.player_turn_ended.connect(player_handler.end_turn)
 	Events.player_hand_discarded.connect(enemy_handler.start_turn)
 	
-	start_combat(new_stats)
+	#start_combat()
 	# 初始化牌堆
-	combat_ui.initialize_card_pile_view()
+	
 
-func start_combat(char_stats_: CharacterStats) -> void:
+func start_combat() -> void:
 	MusicPlayer.play(music, true)
+	enemy_handler.setup_enemies(enemy_encounter)
 	enemy_handler.reset_enemy_intents()
-	player_handler.start_battle(char_stats_)
+	combat_ui.char_stats = char_stats
+	hand_manager.char_stats = char_stats
+	player.stats = char_stats
+	player_handler.start_battle(char_stats)
+	combat_ui.initialize_card_pile_view()
 
 func _on_add_card_pressed() -> void:
 	player_handler.draw_card()

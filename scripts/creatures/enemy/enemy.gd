@@ -10,6 +10,9 @@ var enemy_ai: EnemyAI
 #var current_action: EnemyAction : set = _set_current_action
 var current_intent: Intent: set = _set_current_intent
 
+var visuals: CreatureVisuals
+var spine_manager: SpineManager
+
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	area_exited.connect(_on_area_exited)
@@ -28,7 +31,7 @@ func _ready() -> void:
 
 func gain_block(context: Context) -> void:
 	before_gain_block.emit(context)
-	stats.block += context.amount
+	stats.block += context.get_final_value()
 
 func do_turn() -> void:
 	start_turn()
@@ -39,8 +42,8 @@ func do_turn() -> void:
 		
 	execute_intent()
 	spine_anim_state.set_animation(current_intent.anim_name, true, 0)
-	spine_anim_state.add_animation("idle_loop", 0, true, 0)
 	await spine_manager.animation_completed
+	spine_anim_state.set_animation(enemy_ai.get_idle_animation_name(), true, 0)
 	Events.enemy_action_completed.emit(self)	
 	turn_ended.emit(self)
 	update_intent()
@@ -49,8 +52,7 @@ func execute_intent() -> void:
 	if not current_intent:
 		return
 	var player: Player = get_tree().get_first_node_in_group("ui_player")
-	for sub_intent: SubIntent in current_intent.sub_intents:
-		sub_intent.execute(self, [player])
+	enemy_ai.execute_intent(self, player, current_intent)
 	intents.hide_intent()
 		
 func _set_current_intent(value: Intent) -> void:
@@ -69,6 +71,11 @@ func _set_enemy_stats(value: EnemyStats) -> void:
 	if not stats.stats_changed.is_connected(_update_stats):
 		stats.stats_changed.connect(_update_stats)
 	
+	if visuals == null:
+		visuals = stats.visuals_scene.instantiate()
+		add_child(visuals)
+		await visuals.ready
+		spine_manager = visuals.get_spine_manager()
 	_update_enemy()
 
 func _setup_ai() -> void:
@@ -77,7 +84,9 @@ func _setup_ai() -> void:
 	enemy_ai = stats.ai
 	
 func start_turn() -> void:
-	turn_started.emit(self)
+	before_turn_started.emit(self)
+	stats.block = 0
+	after_turn_started.emit(self)
 
 func end_turn() -> void:
 	turn_ended.emit(self)
@@ -98,15 +107,18 @@ func _update_enemy() -> void:
 	if not stats is Stats:
 		printerr("enemy出错")
 		return
-	if not is_inside_tree():
+	if not is_node_ready():
 		await ready
-	
-	spine_manager.skeleton_data_res = stats.animation
+	set_hitbox()
+	health_bar.set_length(visuals.get_size().x)
 	_setup_ai()
-	# 不等一帧的话get_animation_state返回的是null
-	await get_tree().process_frame
+	var skeleton := spine_manager.get_skeleton()
+	var skin := enemy_ai.get_skin(spine_manager)
+	if skin:
+		skeleton.set_skin(skin)
 	spine_anim_state = spine_manager.get_animation_state()
-	spine_anim_state.set_animation("idle_loop", true, 0)
+	spine_anim_state.set_animation(enemy_ai.get_idle_animation_name(), true, 0)
+	name_label.text = stats.enemy_name
 	_update_stats()
 	
 func die() -> void:
@@ -114,7 +126,7 @@ func die() -> void:
 	health_bar.hide()
 	reticles.hide()
 	buff_container.hide()
-	spine_anim_state.set_animation("die", true, 0)
+	spine_anim_state.set_animation(enemy_ai.get_die_animation_name(), true, 0)
 	spine_manager.animation_completed.connect(
 		func (_x, _y, _z): queue_free()
 	)
@@ -129,21 +141,21 @@ func lose_health(context: Context) -> void:
 	if stats.health <= 0:
 		die()
 	else:
-		spine_anim_state.set_animation("hurt", true, 0)
-		spine_anim_state.add_animation("idle_loop", 0, true, 0)
+		spine_anim_state.set_animation(enemy_ai.get_hurt_animation_name(), true, 0)
+		spine_anim_state.add_animation(enemy_ai.get_idle_animation_name(), 0, true, 0)
 
 func take_damage(context: Context) -> void:
 	if stats.health <= 0:
 		return
-	
-	var hurt := stats.take_damage(context.amount)
+	before_take_damage.emit(context)
+	var hurt := stats.take_damage(context.get_final_value())
+	after_take_damage.emit(context)
 	
 	if stats.health <= 0:
 		die()
 	elif hurt:
-		spine_anim_state.set_animation("hurt", true, 0)
-		spine_anim_state.add_animation("idle_loop", 0, true, 0)
-
+		spine_anim_state.set_animation(enemy_ai.get_hurt_animation_name(), true, 0)
+		spine_anim_state.add_animation(enemy_ai.get_idle_animation_name(), 0, true, 0)
 
 func _on_area_entered(_area: Area2D) -> void:
 	reticles.visible = true
@@ -152,9 +164,11 @@ func _on_area_exited(_area: Area2D) -> void:
 	reticles.visible = false
 
 func _on_mouse_entered() -> void:
+	show_name()
 	Events.tooltip_show_request.emit(self)
 
 func _on_mouse_exited() -> void:
+	hide_name()
 	Events.tooltip_hide_request.emit()
 
 func show_keyword_tooltip() -> void:
@@ -174,3 +188,23 @@ func show_keyword_tooltip() -> void:
 func _on_after_applied_buff(context: Context) -> void:
 	current_intent.calc_final_values(self, context.source)
 	intents.update_intent(current_intent)
+
+func set_hitbox() -> void:
+	var bound_size = visuals.get_size()
+	var center_point = visuals.get_center_point()
+	hitbox.shape.size = bound_size
+	hitbox.position = center_point
+	set_recticles([
+		center_point - bound_size / 2,
+		center_point + Vector2(bound_size.x / 2, -bound_size.y / 2),
+		center_point + Vector2(-bound_size.x / 2, bound_size.y / 2),
+		center_point + bound_size / 2
+	], visuals.get_visual_scale() * 2)
+	intents.position = visuals.get_intent_point() - intents.size / 2
+	health_bar.position = center_point + Vector2(-bound_size.x / 2, bound_size.y / 2)
+	health_bar.set_length(visuals.get_size().x)
+	health_bar.position = center_point + Vector2(-bound_size.x / 2, bound_size.y / 2)
+	buff_container.size.x = bound_size.x
+	buff_container.position = center_point + Vector2(-bound_size.x / 2, bound_size.y / 2 + 40)
+	name_plate.size.x = bound_size.x
+	name_plate.position = center_point + Vector2(-bound_size.x / 2, bound_size.y / 2)

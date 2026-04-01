@@ -4,6 +4,7 @@ extends Stats
 
 @export_group("游戏数据")
 @export var starting_deck: CardPile
+@export var draftable_cards: CardPile
 @export var cards_per_turn: int
 @export var max_energy: int
 @export_group("视觉效果")
@@ -28,7 +29,16 @@ func reset_energy() -> void:
 	energy = max_energy
 	
 func can_play_card(card: Card) -> bool:
-	return energy >= card.cost
+	return energy >= card.get_cost()
+
+func get_draw_pile() -> Array[Card]:
+	return draw_pile.cards
+
+func get_discard_pile() -> Array[Card]:
+	return discard_pile.cards
+
+func get_exhaust_pile() -> Array[Card]:
+	return exhaust_pile.cards
 
 func create_instance() -> CharacterStats:
 	var instance := self.duplicate()
