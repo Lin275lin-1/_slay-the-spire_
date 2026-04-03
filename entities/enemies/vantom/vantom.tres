@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://co5o388rhc6fe"]
+
+[ext_resource type="Resource" uid="uid://cp6ojavykicut" path="res://entities/enemies/vantom/vantom_ai.tres" id="1_8mdcm"]
+[ext_resource type="Script" uid="uid://bjrlwk5w4gqtk" path="res://scripts/costum_resources/enemy_stats.gd" id="1_t8kj7"]
+[ext_resource type="PackedScene" uid="uid://daeaonre1x5yc" path="res://scenes/creature_visuals/vantom.tscn" id="2_jmaiw"]
+
+[resource]
+script = ExtResource("1_t8kj7")
+ai = ExtResource("1_8mdcm")
+enemy_name = "墨影幻灵"
+hightest_max_health = 173
+lowest_max_health = 173
+visuals_scene = ExtResource("2_jmaiw")
+metadata/_custom_type_script = "uid://bjrlwk5w4gqtk"

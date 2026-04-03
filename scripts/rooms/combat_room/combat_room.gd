@@ -21,7 +21,7 @@ func _ready() -> void:
 	Events.player_turn_ended.connect(player_handler.end_turn)
 	Events.player_hand_discarded.connect(enemy_handler.start_turn)
 	
-	#start_combat()
+	start_combat()
 	# 初始化牌堆
 	
 
@@ -29,6 +29,9 @@ func start_combat() -> void:
 	MusicPlayer.play(music, true)
 	enemy_handler.setup_enemies(enemy_encounter)
 	enemy_handler.reset_enemy_intents()
+	#
+	char_stats = char_stats.create_instance()
+	#
 	combat_ui.char_stats = char_stats
 	hand_manager.char_stats = char_stats
 	player.stats = char_stats

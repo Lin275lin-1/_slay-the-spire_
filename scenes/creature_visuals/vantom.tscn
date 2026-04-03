@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://daeaonre1x5yc"]
+
+[ext_resource type="Script" uid="uid://c4selil26hvep" path="res://scenes/creature_visuals/vantom_visual.gd" id="1_4c37g"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dny2x2y3vlkp6" path="res://animations/monsters/vantom/vantom_skel_data.tres" id="2_qfm3n"]
+[ext_resource type="Script" uid="uid://bayy3j6ssj0g" path="res://scripts/utils/spine_manager.gd" id="3_rin4u"]
+
+[node name="Vantom" type="Node2D" unique_id=1830328673]
+show_behind_parent = true
+script = ExtResource("1_4c37g")
+
+[node name="Visuals" type="SpineSprite" parent="." unique_id=332746707]
+skeleton_data_res = ExtResource("2_qfm3n")
+preview_skin = "default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(0, -30)
+scale = Vector2(0.2, 0.2)
+script = ExtResource("3_rin4u")
+metadata/_custom_type_script = "uid://bayy3j6ssj0g"
+
+[node name="MegaTail" type="SpineBoneNode" parent="Visuals" unique_id=213806979]
+bone_mode = 1
+bone_name = "tail_target_bone"
+show_behind_parent = true
+position = Vector2(0, -1300)
+
+[node name="Bounds" type="Control" parent="." unique_id=881333315]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -229.0
+offset_top = -423.0
+offset_right = 204.0
+offset_bottom = -1.0
+mouse_filter = 2
+
+[node name="IntentPoint" type="Marker2D" parent="." unique_id=727782131]
+position = Vector2(1, -348)
+
+[node name="MegaTailPoint" type="Marker2D" parent="." unique_id=461687081]
+position = Vector2(-517, -387)

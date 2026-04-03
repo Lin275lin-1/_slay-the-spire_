@@ -38,6 +38,7 @@ const CARD_FRAME_RED_MAT = preload("res://materials/cards/frames/card_frame_red_
 @onready var description_label: RichTextLabel = %DescriptionLabel
 @onready var title_banner: TextureRect = $TitleBanner
 @onready var type_plaque: NinePatchRect = %TypePlaque
+@onready var energy_icon: TextureRect = %EnergyIcon
 
 func _set_card(value: Card) -> void:
 	if not is_node_ready():
@@ -46,7 +47,10 @@ func _set_card(value: Card) -> void:
 	card = value
 	card_portrait.texture = card.portrait
 	title_label.text = card.get_title()
-	energy_label.text = str(card.get_cost())
+	if card.playable:
+		energy_label.text = str(card.get_cost())
+	else:
+		energy_icon.visible = false
 	description_label.text = card.get_default_description()
 	var type_text: String
 	# TODO: 诅咒，状态

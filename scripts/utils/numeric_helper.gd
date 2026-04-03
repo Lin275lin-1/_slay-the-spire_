@@ -10,9 +10,9 @@ static func apply_modifiers(base: int, modifiers: Array) -> int:
 		if modifier.function:
 			total_callables.append(modifier.function)
 	var ret = base + total_additive
+	ret *= total_multiplier
 	for function in total_callables:
 		ret = function.call(ret)
-	ret *= total_multiplier
 	return ret
 
 static func combine_modifiers(source_m: Array, target_m: Array) -> Array:

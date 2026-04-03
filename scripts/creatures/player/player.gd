@@ -90,7 +90,8 @@ func lose_health(context: Context) -> void:
 		Events.player_hit.emit()
 		spine_anim_state.set_animation("hurt", false, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
-		
+
+
 func take_damage(context: Context) -> void:
 	
 	if stats.health <= 0:
@@ -190,7 +191,7 @@ func _on_card_played(card: Card) -> void:
 	
 func _on_mouse_entered() -> void:
 	show_name()
-	Events.tooltip_show_request.emit(self)
+	Events.tooltip_show_request.emit(self, show_keyword_tooltip)
 
 func _on_mouse_exited() -> void:
 	hide_name()

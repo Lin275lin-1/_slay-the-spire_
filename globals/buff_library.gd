@@ -50,6 +50,11 @@ var buff_data = {
 		"name": "荆棘",
 		"description": "受到攻击伤害时，反弹{stacks}点伤害",
 		"icon": preload("res://images/powers/thorns_power.png")
+	},
+	"滑溜":{
+		"name": "滑溜",
+		"description": "下次失去生命值时，只会失去1点生命",
+		"icon": preload("res://images/powers/slippery_power.png")
 	}
 }
 
@@ -64,6 +69,7 @@ var buff_scene = {
 	"壁垒": BarricadeBuff,
 	"无法抽牌": NoDrawDebuff,
 	"荆棘": ThornsBuff,
+	"滑溜": SlipperyBuff
 }
 
 var keyword_info = {
@@ -118,7 +124,7 @@ var keyword_info = {
 	"荆棘":{
 		"name": "荆棘",
 		"description": "受到攻击伤害时，反弹等同于荆棘层数点伤害",
-	}
+	},
 }
 
 func get_keyword_description(key: String) -> String:

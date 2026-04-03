@@ -162,7 +162,7 @@ func _on_mouse_entered() -> void:
 	else:
 		Events.card_previewed.emit(self, true)
 		animate_start_preview()
-	Events.tooltip_show_request.emit(self)
+	Events.tooltip_show_request.emit(self, show_keyword_tooltip)
 	
 func show_keyword_tooltip() -> void:
 	var keywords = KeywordTooltip.extract_keyword(card.get_default_description())

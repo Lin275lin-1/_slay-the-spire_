@@ -18,7 +18,7 @@ func update_display(sub_intent_: SubIntent) -> void:
 	
 func _on_mouse_entered():
 	if sub_intent:
-		Events.tooltip_show_request.emit(self)
+		Events.tooltip_show_request.emit(self, show_keyword_tooltip)
 
 func _on_mouse_exited():
 	if sub_intent:

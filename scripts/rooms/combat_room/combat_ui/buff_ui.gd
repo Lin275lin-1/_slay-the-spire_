@@ -21,7 +21,7 @@ func _on_buff_removed() -> void:
 
 func _on_mouse_entered():
 	if buff:
-		Events.tooltip_show_request.emit(self)
+		Events.tooltip_show_request.emit(self, show_keyword_tooltip)
 
 func _on_mouse_exited():
 	if buff:

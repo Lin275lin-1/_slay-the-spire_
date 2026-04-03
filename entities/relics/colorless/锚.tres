@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://b5niu17o73g0m"]
+
+[ext_resource type="Texture2D" uid="uid://bymv8uf" path="res://images/atlases/relic_atlas.sprites/anchor.tres" id="1_8ija3"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="1_a8td2"]
+
+[resource]
+script = ExtResource("1_a8td2")
+relic_name = "锚"
+id = "anchor"
+icon = ExtResource("1_8ija3")
+description = "第一回合开始后，获得10点[color=gold]格挡[/color]"
+relic_type = 6
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

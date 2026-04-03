@@ -42,8 +42,8 @@ func do_turn() -> void:
 		
 	execute_intent()
 	spine_anim_state.set_animation(current_intent.anim_name, true, 0)
+	spine_anim_state.add_animation(enemy_ai.get_idle_animation_name(), 0, true, 0)
 	await spine_manager.animation_completed
-	spine_anim_state.set_animation(enemy_ai.get_idle_animation_name(), true, 0)
 	Events.enemy_action_completed.emit(self)	
 	turn_ended.emit(self)
 	update_intent()
@@ -110,7 +110,6 @@ func _update_enemy() -> void:
 	if not is_node_ready():
 		await ready
 	set_hitbox()
-	health_bar.set_length(visuals.get_size().x)
 	_setup_ai()
 	var skeleton := spine_manager.get_skeleton()
 	var skin := enemy_ai.get_skin(spine_manager)
@@ -165,7 +164,7 @@ func _on_area_exited(_area: Area2D) -> void:
 
 func _on_mouse_entered() -> void:
 	show_name()
-	Events.tooltip_show_request.emit(self)
+	Events.tooltip_show_request.emit(self, show_keyword_tooltip)
 
 func _on_mouse_exited() -> void:
 	hide_name()
@@ -186,21 +185,22 @@ func show_keyword_tooltip() -> void:
 	KeywordTooltip.show()
 
 func _on_after_applied_buff(context: Context) -> void:
-	current_intent.calc_final_values(self, context.source)
-	intents.update_intent(current_intent)
+	if current_intent:
+		current_intent.calc_final_values(self, context.source)
+		intents.update_intent(current_intent)
 
 func set_hitbox() -> void:
 	var bound_size = visuals.get_size()
 	var center_point = visuals.get_center_point()
 	hitbox.shape.size = bound_size
 	hitbox.position = center_point
-	print(bound_size)
 	set_recticles([
 		center_point - bound_size / 2,
 		center_point + Vector2(bound_size.x / 2, -bound_size.y / 2),
 		center_point + Vector2(-bound_size.x / 2, bound_size.y / 2),
 		center_point + bound_size / 2
 	], visuals.get_visual_scale() * 2)
+	health_bar.set_length(visuals.get_size().x)
 	intents.position = visuals.get_intent_point() - intents.size / 2
 	var hp_bar_position = center_point + Vector2(-bound_size.x / 2, bound_size.y / 2)
 	health_bar.position = hp_bar_position

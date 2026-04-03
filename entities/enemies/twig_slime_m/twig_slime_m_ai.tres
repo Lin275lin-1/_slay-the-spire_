@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="EnemyAI" format=3 uid="uid://bb0avbipisgvp"]
+[gd_resource type="Resource" format=3 uid="uid://bb0avbipisgvp"]
 
 [ext_resource type="Script" uid="uid://ce34juwu5b0yr" path="res://scripts/costum_resources/intents/intent.gd" id="1_eb8np"]
-[ext_resource type="Script" uid="uid://dpkht0suo8prh" path="res://scripts/costum_resources/enemy_ai.gd" id="2_2ac3r"]
 [ext_resource type="Script" uid="uid://iqqyr44teapg" path="res://scripts/costum_resources/intents/sub_intent.gd" id="2_iq7g1"]
 [ext_resource type="Texture2D" uid="uid://r6jnvrqc1utn" path="res://images/packed/intents/attack/intent_attack_3.png" id="3_l0uf7"]
 [ext_resource type="Resource" uid="uid://by2gga1uh715e" path="res://entities/characters/status_cards/粘液.tres" id="4_ta0p2"]
 [ext_resource type="Texture2D" uid="uid://b4tk6b14m4yl3" path="res://images/packed/intents/intent_status_card.png" id="5_no4kl"]
 [ext_resource type="Script" uid="uid://b3b84q5sqt5kj" path="res://scripts/costum_resources/intents/put_card_sub_intent.gd" id="6_bja22"]
+[ext_resource type="Script" uid="uid://dvy1chg4qtsxv" path="res://entities/enemies/twig_slime_m/twig_slime_m_ai.gd" id="7_iq7g1"]
 
 [sub_resource type="Resource" id="Resource_72cov"]
 script = ExtResource("2_iq7g1")
@@ -34,9 +34,10 @@ metadata/_custom_type_script = "uid://b3b84q5sqt5kj"
 script = ExtResource("1_eb8np")
 sub_intents = Array[ExtResource("2_iq7g1")]([SubResource("Resource_omsx0")])
 intent_name = "StickyShot"
+anim_name = "cast"
 metadata/_custom_type_script = "uid://ce34juwu5b0yr"
 
 [resource]
-script = ExtResource("2_2ac3r")
+script = ExtResource("7_iq7g1")
 intents = Array[ExtResource("1_eb8np")]([SubResource("Resource_n3jbk"), SubResource("Resource_lgsya")])
 metadata/_custom_type_script = "uid://dpkht0suo8prh"
