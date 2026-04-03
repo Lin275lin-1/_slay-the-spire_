@@ -40,6 +40,7 @@ enum COLOR {
 @export var exhaust: bool
 # 是否带”虚无“词条
 @export var ethereal: bool
+@export var playable : bool = true
 # 升级后
 @export_group("升级后")
 @export var upgraded_target: Target

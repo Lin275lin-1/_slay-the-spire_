@@ -36,7 +36,7 @@ func _on_mouse_entered() -> void:
 	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.1)
 	
 	tooltip_requested.emit(card)
-	Events.tooltip_show_request.emit(self)
+	Events.tooltip_show_request.emit(self, show_keyword_tooltip)
 	
 func show_keyword_tooltip() -> void:
 	var keywords = KeywordTooltip.extract_keyword(card.get_default_description())

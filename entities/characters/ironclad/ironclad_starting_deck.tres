@@ -4,16 +4,16 @@
 [ext_resource type="Resource" uid="uid://b4u1h22sin2el" path="res://entities/characters/ironclad/cards/主宰.tres" id="2_gvngp"]
 [ext_resource type="Script" uid="uid://jvpf65gf7yuq" path="res://scripts/costum_resources/card_pile.gd" id="2_pcwuu"]
 [ext_resource type="Resource" uid="uid://by1y0dacb0le4" path="res://entities/characters/ironclad/cards/全身撞击.tres" id="3_xe1fr"]
-[ext_resource type="Resource" uid="uid://crx7od0tunyjb" path="res://entities/characters/ironclad/cards/壁垒.tres" id="4_1lg0p"]
 [ext_resource type="Resource" uid="uid://dqdqfe0bcpgp6" path="res://entities/characters/ironclad/cards/愤怒.tres" id="5_sdqn1"]
 [ext_resource type="Resource" uid="uid://b2c13bouulo8c" path="res://entities/characters/ironclad/cards/战斗专注.tres" id="6_4bseq"]
 [ext_resource type="Resource" uid="uid://rfrswfbanfy" path="res://entities/characters/ironclad/cards/打击.tres" id="7_8xmro"]
 [ext_resource type="Resource" uid="uid://durx4ieeeb30h" path="res://entities/characters/ironclad/cards/放血.tres" id="8_7hj0v"]
 [ext_resource type="Resource" uid="uid://upuj7jv770uk" path="res://entities/characters/ironclad/cards/欺凌.tres" id="9_jj41u"]
 [ext_resource type="Resource" uid="uid://qhmifpkdvj6h" path="res://entities/characters/ironclad/cards/武装.tres" id="10_ewnxv"]
+[ext_resource type="Resource" uid="uid://b5jbjk3a0xd0q" path="res://entities/characters/ironclad/cards/防御.tres" id="11_gvngp"]
 [ext_resource type="Resource" uid="uid://dk4qphec16bps" path="res://entities/characters/ironclad/cards/烙印.tres" id="11_y7rga"]
 
 [resource]
 script = ExtResource("2_pcwuu")
-cards = Array[ExtResource("1_6dnus")]([ExtResource("2_gvngp"), ExtResource("3_xe1fr"), ExtResource("4_1lg0p"), ExtResource("5_sdqn1"), ExtResource("6_4bseq"), ExtResource("7_8xmro"), ExtResource("8_7hj0v"), ExtResource("9_jj41u"), ExtResource("10_ewnxv"), ExtResource("11_y7rga")])
+cards = Array[ExtResource("1_6dnus")]([ExtResource("2_gvngp"), ExtResource("3_xe1fr"), ExtResource("5_sdqn1"), ExtResource("6_4bseq"), ExtResource("7_8xmro"), ExtResource("8_7hj0v"), ExtResource("9_jj41u"), ExtResource("10_ewnxv"), ExtResource("11_y7rga"), ExtResource("11_gvngp"), ExtResource("11_gvngp")])
 metadata/_custom_type_script = "uid://jvpf65gf7yuq"

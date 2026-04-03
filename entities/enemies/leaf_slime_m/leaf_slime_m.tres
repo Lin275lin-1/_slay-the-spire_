@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_dbr30")
 ai = ExtResource("1_avlbb")
-enemy_name = "树叶史莱姆(中)"
+enemy_name = "树叶史莱姆（中）"
 hightest_max_health = 35
 lowest_max_health = 32
 max_health = 18

@@ -8,6 +8,7 @@ extends CanvasLayer
 const TOOLTIP_ENTRY = preload("res://globals/tooltip_entry.tscn")
 
 var current_node: Node
+var callback: Callable
 
 func _ready() -> void:
 	Events.tooltip_show_request.connect(_on_tooltip_show_requested)
@@ -43,10 +44,11 @@ func extract_keyword(text: String) -> Array:
 		unique_dict[keyword] = found
 	return unique_dict.keys()
 	
-func _on_tooltip_show_requested(node: Node) -> void:
+func _on_tooltip_show_requested(node: Node, callback_: Callable) -> void:
 	clear()
 	tooltip_timer.start(0.2)
 	current_node = node
+	callback = callback_
 
 func _on_tooltip_hide_requested() -> void:
 	tooltip_timer.stop()
@@ -54,6 +56,6 @@ func _on_tooltip_hide_requested() -> void:
 
 func _on_timer_timeout() -> void:
 	# TODO:找时间重构
-	if current_node:
-		current_node.show_keyword_tooltip()
+	if current_node and callback:
+		callback.call()
 		show()

@@ -7,6 +7,7 @@
 custom_minimum_size = Vector2(200, 100)
 offset_right = 200.0
 offset_bottom = 100.0
+mouse_filter = 2
 theme = ExtResource("1_22kr1")
 script = ExtResource("1_fit0h")
 
@@ -21,6 +22,7 @@ offset_right = -1.0
 offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="title" type="RichTextLabel" parent="VBoxContainer" unique_id=1571979811]
 unique_name_in_owner = true

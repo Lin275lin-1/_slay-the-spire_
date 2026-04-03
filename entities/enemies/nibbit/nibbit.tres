@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://bv0m86mshv3gj"]
+
+[ext_resource type="Resource" uid="uid://b7d2m4ftsvv71" path="res://entities/enemies/nibbit/nibbit_ai.tres" id="1_8o4l6"]
+[ext_resource type="Script" uid="uid://bjrlwk5w4gqtk" path="res://scripts/costum_resources/enemy_stats.gd" id="1_ffvbm"]
+[ext_resource type="PackedScene" uid="uid://ehev41bc2om8" path="res://scenes/creature_visuals/nibbit.tscn" id="3_g2q2o"]
+
+[resource]
+script = ExtResource("1_ffvbm")
+ai = ExtResource("1_8o4l6")
+enemy_name = "小啃兽"
+hightest_max_health = 46
+lowest_max_health = 42
+visuals_scene = ExtResource("3_g2q2o")
+metadata/_custom_type_script = "uid://bjrlwk5w4gqtk"

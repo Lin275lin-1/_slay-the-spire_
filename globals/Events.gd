@@ -28,7 +28,7 @@ signal enemy_action_completed(enemy: Enemy)
 signal enemy_turn_ended
 signal enemy_died
 ## 提示栏相关
-signal tooltip_show_request(node: Node)
+signal tooltip_show_request(node: Node, callback: Callable)
 signal tooltip_hide_request 
 ## 战斗相关
 signal combat_won

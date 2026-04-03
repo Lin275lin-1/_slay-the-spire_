@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://h2lk8mcg6tu5"]
+
+[ext_resource type="Texture2D" uid="uid://b5b6yjy" path="res://images/atlases/relic_atlas.sprites/lantern.tres" id="1_84n5j"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="1_blsmw"]
+
+[resource]
+script = ExtResource("1_blsmw")
+relic_name = "灯笼"
+id = "lantern"
+icon = ExtResource("1_84n5j")
+description = "第一回合开始后，获得1点能量"
+relic_type = 6
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

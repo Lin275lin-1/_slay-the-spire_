@@ -7,6 +7,7 @@ extends Stats
 @export var draftable_cards: CardPile
 @export var cards_per_turn: int
 @export var max_energy: int
+@export var starting_relic: Relic
 @export_group("视觉效果")
 ## 角色的名称
 @export var character_name: String
