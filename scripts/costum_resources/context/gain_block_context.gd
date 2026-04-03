@@ -5,4 +5,6 @@ extends Context
 var modifiers: Array[Modifier]
 
 func get_final_value() -> int:
+	if no_modifiers:
+		return amount
 	return NumericHelper.apply_modifiers(amount, modifiers)

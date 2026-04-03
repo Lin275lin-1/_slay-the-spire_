@@ -88,7 +88,6 @@ func _start_run() -> void:
 	
 	_setup_event_connections()
 	_setup_top_bar()
-	# TODO: 生成地图
 	map_node.init(stats)
 	_show_map()
 	#debug
@@ -122,6 +121,7 @@ func _change_view(scene: PackedScene) -> Node:
 		# 测试怪物池使用的代码
 		var encounter_pool = preload("res://entities/encounters/encounter_pools/act1_encounter_pool.tres")
 		new_view.enemy_encounter = encounter_pool.get_random_encounter_by_type(EnemyEncounter.Type.WEAK)
+		new_view.relics = top_bar.relic_handler
 		#
 		new_view.start_combat()
 	#

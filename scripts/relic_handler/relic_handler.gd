@@ -1,8 +1,9 @@
+class_name RelicHandler
 extends GridContainer
 
 signal relics_activated(type: Relic.TriggerType)
 
-const RELIC_APPLY_INTERVAL := 0.4
+const RELIC_APPLY_INTERVAL := 0.1
 const RELIC_UI = preload("res://scenes/relichandler/relic_ui.tscn")
 
 func _ready() -> void:
@@ -10,19 +11,13 @@ func _ready() -> void:
 	for relic_ui: RelicUI in get_children():
 		relic_ui.queue_free()
 	child_exiting_tree.connect(_on_relics_child_exiting_tree)
-	add_relic(preload("uid://d3a7gl0qcwuho"))
-	await get_tree().create_timer(1.0).timeout
-	add_relic(preload("uid://h2lk8mcg6tu5"))
-	await get_tree().create_timer(1.0).timeout
-	add_relic(preload("uid://b5niu17o73g0m"))
-	await get_tree().create_timer(1.0).timeout
 
 func activate_relics_by_trigger_type(type: Relic.TriggerType) -> void:
 	# 由信号解决：一般不会触发
 	if type == Relic.TriggerType.EVENT_BASED:
 		return
 	
-	var relic_queue: Array[RelicUI] = get_children().filter(
+	var relic_queue: Array[Node] = get_children().filter(
 		func(relic_ui: RelicUI):
 			return relic_ui.relic.trigger_type == type
 	)
@@ -33,7 +28,7 @@ func activate_relics_by_trigger_type(type: Relic.TriggerType) -> void:
 	
 	var tween := create_tween()
 	for relic_ui: RelicUI in relic_queue:
-		tween.tween_callback(relic_ui.relic.activate_relic)
+		tween.tween_callback(relic_ui.relic.activate_relic.bind(relic_ui))
 		tween.tween_interval(RELIC_APPLY_INTERVAL)
 	tween.finished.connect(func(): relics_activated.emit(type))
 

@@ -31,7 +31,7 @@ font_size = 30
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vujjl"]
 size = Vector2(1920, 630)
 
-[node name="CombatRoom" type="Control" unique_id=18767815]
+[node name="CombatRoom" type="Control" unique_id=18767815 node_paths=PackedStringArray("relics")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
@@ -41,6 +41,7 @@ script = ExtResource("1_fx62r")
 enemy_encounter = ExtResource("2_hylje")
 char_stats = ExtResource("2_7btib")
 music = ExtResource("3_hylje")
+relics = NodePath("")
 metadata/_edit_lock_ = true
 
 [node name="CombatUI" type="CanvasLayer" parent="." unique_id=661618034 groups=["ui_layer"]]
