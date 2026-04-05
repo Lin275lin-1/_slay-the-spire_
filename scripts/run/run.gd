@@ -68,7 +68,8 @@ func _on_map_room_selected(room: Room) -> void:
 		Room.Type.SHOP:
 			scene = SHOP_SCENE
 		Room.Type.CAMPFIRE:
-			scene = CAMPFIRE_SCENE
+			_on_campfire_room_entered(room)
+			return
 		Room.Type.UNKNOWN:
 			scene = INCIDENT_SCENE   # 事件房间
 		_:
@@ -123,6 +124,8 @@ func _on_combat_won() -> void:
 	# reward_scene.add_gold_reward(map.last_room.enemy_encounter.roll_gold_reward())
 	reward_scene.add_gold_reward(map_node.last_room.enemy_encounter.roll_gold_reward())
 	reward_scene.add_card_reward()
+
+
 	
 func _setup_event_connections() -> void:
 	Events.combat_won.connect(_on_combat_won)
@@ -180,3 +183,8 @@ func _on_combat_room_entered(room: Room):
 	battle_scene.enemy_encounter = room.enemy_encounter
 	battle_scene.relics = top_bar.relic_handler
 	battle_scene.start_combat()
+
+func _on_campfire_room_entered(room: Room)-> void:
+	var capfire_scene :CampfireRoom = _change_view(CAMPFIRE_SCENE) as CampfireRoom
+	capfire_scene.char_stats=character
+	
