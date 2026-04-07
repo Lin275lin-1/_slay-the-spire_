@@ -127,13 +127,14 @@ func _change_view(scene: PackedScene) -> Node:
 	return new_view
 	
 func _on_combat_won() -> void:
-
+	
 	var reward_scene :=_change_view(BATTLE_REWARD_SCENE) as BattleReward
 	reward_scene.run_stats = stats
 	reward_scene.character_stats =character
 	
 	#地图
-	map_node.complete_current_room()
+	#map_node.complete_current_room()
+	
 	#this is temporary code,it will come from real battle encounter data
 	# as a dependency
 	

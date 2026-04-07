@@ -25,7 +25,7 @@ var room_to_lines: Dictionary = {}
 
 var run_stats: RunStats   # 外部状态
 
-
+var old_camera_2d_position_y: float
 
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS -1)
@@ -56,6 +56,7 @@ func init(stats:RunStats) -> void:
 
 
 func _input(event:InputEvent) -> void:
+	#print("Map._input received: ", event, " scroll_enabled: ", scroll_enabled)
 	if not scroll_enabled:
 		return                     # 禁用滚动时直接返回
 	if event.is_action_pressed("scroll_up"):
@@ -144,6 +145,7 @@ func _on_map_room_selected(room:Room) -> void:
 	Events.map_room_selected.emit(room)
 	
 	#camera不可滚动,回到地图底部且所有背景消失
+	old_camera_2d_position_y = camera_2d.position.y
 	camera_2d.position.y = 0
 	scroll_enabled = false
 	hide()
@@ -158,6 +160,7 @@ func complete_current_room() -> void:
 	
 	#地图和legend显现,可以滚动
 	show()
+	camera_2d.position.y = old_camera_2d_position_y
 	legendAll.show()
 	scroll_enabled = true
 	# 更新 floors_climbed：当前房间的下一层索引 = last_room.row + 1
