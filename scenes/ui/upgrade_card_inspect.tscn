@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://cvlmxlw62p50e"]
+
+[ext_resource type="Script" uid="uid://bakx46et3is83" path="res://scripts/ui/upgrade_card_inspect.gd" id="1_6lbwm"]
+[ext_resource type="PackedScene" uid="uid://cbba4s2smp5b2" path="res://scenes/ui/card_inspect_ui.tscn" id="2_otcwd"]
+[ext_resource type="Texture2D" uid="uid://nxhrbcu264p5" path="res://images/ui/cards/upgrade_preview/upgrade_arrow.png" id="3_v78wn"]
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="3_vuis1"]
+[ext_resource type="Texture2D" uid="uid://w1mk8x" path="res://images/atlases/card_atlas.sprites/ironclad/strike_ironclad.tres" id="4_6lbwm"]
+[ext_resource type="Script" uid="uid://c43aulk6qym1v" path="res://entities/characters/ironclad/cards/打击.gd" id="5_0sicv"]
+[ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="6_mgxkx"]
+[ext_resource type="PackedScene" uid="uid://tnl8udgtv6w5" path="res://scenes/ui/comfirm_button.tscn" id="8_cs7d6"]
+[ext_resource type="Texture2D" uid="uid://cp3mg3t" path="res://images/atlases/compressed.sprites/confirm_button_tick.tres" id="9_wvl4l"]
+[ext_resource type="Texture2D" uid="uid://b1ommqi" path="res://images/atlases/compressed.sprites/confirm_button_outline.tres" id="10_iw6sg"]
+[ext_resource type="Texture2D" uid="uid://bb803i8" path="res://images/atlases/ui_atlas.sprites/back_button.tres" id="11_gwc8w"]
+[ext_resource type="Texture2D" uid="uid://cxm0iyd" path="res://images/atlases/compressed.sprites/back_button_outline.tres" id="12_daypl"]
+[ext_resource type="Texture2D" uid="uid://q1y4ux" path="res://images/atlases/compressed.sprites/back_button_x.tres" id="13_6vij6"]
+
+[sub_resource type="Resource" id="Resource_sjnru"]
+script = ExtResource("3_vuis1")
+base_value = 6
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_5j0xq"]
+script = ExtResource("3_vuis1")
+base_value = 9
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_ons3p"]
+script = ExtResource("5_0sicv")
+id = "打击"
+base_target = 1
+base_cost = 1
+portrait = ExtResource("4_6lbwm")
+base_description = "[center]造成{damage}点伤害。[/center]"
+sound = ExtResource("6_mgxkx")
+base_numeric_entries = Array[ExtResource("3_vuis1")]([SubResource("Resource_sjnru")])
+upgraded_target = 1
+upgraded_cost = 1
+upgraded_description = "[center]造成{damage}点伤害。[/center]"
+upgraded_numeric_entries = Array[ExtResource("3_vuis1")]([SubResource("Resource_5j0xq")])
+upgraded = true
+metadata/_custom_type_script = "uid://br1hibx18tv13"
+
+[node name="UpgradeCardInspect" type="Control" unique_id=302635351]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_6lbwm")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1894838826]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6431373)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=506501521]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 50
+
+[node name="BaseCardContainer" type="Control" parent="HBoxContainer" unique_id=908666704]
+custom_minimum_size = Vector2(358, 503)
+layout_mode = 2
+
+[node name="BaseCard" parent="HBoxContainer/BaseCardContainer" unique_id=946762981 instance=ExtResource("2_otcwd")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=1336172571]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/HBoxContainer" unique_id=1864768799]
+layout_mode = 2
+texture = ExtResource("3_v78wn")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/HBoxContainer" unique_id=7204226]
+layout_mode = 2
+texture = ExtResource("3_v78wn")
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/HBoxContainer" unique_id=1143514832]
+layout_mode = 2
+texture = ExtResource("3_v78wn")
+stretch_mode = 5
+
+[node name="UpgradedCardContainer" type="Control" parent="HBoxContainer" unique_id=1115808094]
+custom_minimum_size = Vector2(358, 503)
+layout_mode = 2
+
+[node name="UpgradedCard" parent="HBoxContainer/UpgradedCardContainer" unique_id=1352009250 instance=ExtResource("2_otcwd")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+card = SubResource("Resource_ons3p")
+
+[node name="ComfirmButton" parent="." unique_id=959760777 instance=ExtResource("8_cs7d6")]
+layout_mode = 0
+offset_left = 1676.0
+offset_top = 813.0
+offset_right = 1976.0
+offset_bottom = 1015.0
+out_line_texture = ExtResource("10_iw6sg")
+icon_texture = ExtResource("9_wvl4l")
+
+[node name="CancelButton" parent="." unique_id=2114489191 instance=ExtResource("8_cs7d6")]
+layout_mode = 0
+offset_left = -67.0
+offset_top = 813.0
+offset_right = 233.0
+offset_bottom = 1015.0
+texture_normal = ExtResource("11_gwc8w")
+out_line_texture = ExtResource("12_daypl")
+icon_texture = ExtResource("13_6vij6")

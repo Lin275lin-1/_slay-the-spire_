@@ -198,15 +198,8 @@ one_shot = true
 [node name="CardPileView" type="CanvasLayer" parent="." unique_id=653295741]
 layer = 3
 
-[node name="DrawPileView" parent="CardPileView" unique_id=1662556681 instance=ExtResource("15_hylje")]
+[node name="InspectPileView" parent="CardPileView" unique_id=1662556681 instance=ExtResource("15_hylje")]
 unique_name_in_owner = true
-visible = false
-
-[node name="DiscardPileView" parent="CardPileView" unique_id=1838611263 instance=ExtResource("15_hylje")]
-unique_name_in_owner = true
-visible = false
-
-[node name="ExhaustPileView" parent="CardPileView" unique_id=594777507 instance=ExtResource("15_hylje")]
 visible = false
 
 [node name="BackGroundContainer" type="Control" parent="." unique_id=1215282505]
