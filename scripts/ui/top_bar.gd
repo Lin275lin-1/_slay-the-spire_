@@ -8,7 +8,7 @@ signal deck_view_requested(deck: Array[Card])
 
 @export var run_stats:RunStats :set = set_run_stats
 @onready var gold_label: Label = $Left/TopBarGold/Label
-@onready var relic_handler: GridContainer = $RelicHandler
+@onready var relic_handler: RelicHandler = $RelicHandler
 @onready var top_bar_potion: PotionHandler = $Left/TopBarPotion
 
 func _ready()-> void:
@@ -21,7 +21,7 @@ func initialize(stats: CharacterStats) -> void:
 	avatar.texture = stats.character_icon
 	card_pile_button.pressed.connect(deck_view_requested.emit.bind(stats.deck.cards))
 	top_bar_potion.initialize(run_stats)
-	
+	relic_handler.initialize(run_stats)
 	# 测试用
 	#var tween = create_tween()
 	#tween.tween_callback(func(): run_stats.add_potion(preload("uid://cmilch2jb6xgn")))
@@ -29,6 +29,19 @@ func initialize(stats: CharacterStats) -> void:
 	#tween.tween_callback(func(): run_stats.add_potion(preload("uid://6tqk3prnw8wl")))
 	#tween.tween_interval(1.0)
 	#tween.tween_callback(func(): run_stats.add_potion(preload("uid://btvj32p8ixefr")))
+	#tween.tween_interval(1.0)
+	#var tween = create_tween()
+	#tween.tween_callback(func(): run_stats.add_relic(preload("uid://d3a7gl0qcwuho")))
+	#tween.tween_interval(1.0)
+	#tween.tween_callback(func(): run_stats.add_relic(preload("uid://h2lk8mcg6tu5")))
+	#tween.tween_interval(1.0)
+	#tween.tween_callback(func(): run_stats.add_relic(preload("uid://b5niu17o73g0m")))
+	#tween.tween_interval(1.0)
+	#tween.tween_callback(func(): run_stats.remove_relic(preload("uid://d3a7gl0qcwuho")))
+	#tween.tween_interval(1.0)
+	#tween.tween_callback(func(): run_stats.remove_relic(preload("uid://h2lk8mcg6tu5")))
+	#tween.tween_interval(1.0)
+	#tween.tween_callback(func(): run_stats.remove_relic(preload("uid://b5niu17o73g0m")))
 	#tween.tween_interval(1.0)
 	#
 	
