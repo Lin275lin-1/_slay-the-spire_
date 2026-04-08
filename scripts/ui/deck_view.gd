@@ -78,6 +78,11 @@ func _on_card_selected(card: Card) -> void:
 			selected_cards.append(card)
 			_set_card_ui_highlight(card, true)
 			confirm_button.visible = len(selected_cards) >= min_selection
+		elif selected_cards.size() == max_selection and max_selection == 1:
+			_set_card_ui_highlight(selected_cards[0], false)
+			selected_cards.clear()
+			selected_cards.append(card)
+			_set_card_ui_highlight(card, true)
 
 func _set_card_ui_highlight(card: Card, highlight: bool):
 	for child in card_grid_container.get_children():
@@ -122,6 +127,8 @@ func show_card_pile(pile: Array[Card], hint_text: String, randomized: bool = fal
 	show()
 
 func select_card_pile(pile: Array[Card], min_select: int = 0, max_select: int = 1, hint_text: String = "选择卡牌") -> Array[Card]:
+	if min_select >= pile.size():
+		return pile
 	selection_mode = true
 	max_selection = max_select
 	min_selection = min_select

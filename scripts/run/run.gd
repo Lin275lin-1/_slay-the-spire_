@@ -93,7 +93,6 @@ func _setup_top_bar() -> void:
 	
 	#金币状态赋值
 	top_bar.run_stats = stats   
-	
 	top_bar.initialize(character)
 	top_bar.deck_view_requested.connect(deck_view.show_card_pile.bind("你在战斗中将会使用这里的所有卡牌。", false))
 	# 遗物

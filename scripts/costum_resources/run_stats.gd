@@ -5,6 +5,10 @@ signal gold_changed
 
 signal floor_changed(new_floor: int)          # 楼层变化信号
 
+## 药水相关
+signal potion_added(potion: Potion)
+signal potion_removed(index: int)
+
 const STARTING_GOLD:= 70
 
 const BASE_CARD_REWARDS := 3;
@@ -13,6 +17,10 @@ const BASE_UNCOMMON_WEIGHT := 3.7
 const BASE_RARE_WEIGHT := 0.3
 
 @export var gold := STARTING_GOLD : set = set_gold
+
+## 药水
+@export var potions: Array[Potion] = []
+@export var max_potion_slots: int = 3
 
 
 @export var card_rewards := BASE_CARD_REWARDS
@@ -23,6 +31,37 @@ const BASE_RARE_WEIGHT := 0.3
 #地图数据
 @export var map_data: Array[Array] = []   # 保存整个地图数据（Room 资源数组）
 @export var floors_climbed: int = 0       # 已攀爬的层数（已解锁的最高楼层索引，0-based）
+
+func _init() -> void:
+	init_potion_slots()
+
+func init_potion_slots() -> void:
+	var potion_copy = potions.duplicate()
+	var length = len(potions)
+	potions.clear()
+	# 不会出现栏位减少的情况所以不考虑药水溢出问题
+	for i in range(max_potion_slots):
+		if i < length:
+			potions.append(potion_copy[i])
+		else:
+			potions.append(null)
+
+func add_potion(potion: Potion) -> bool:
+	for i in range(potions.size()):
+		if potions[i] == null:
+			potions[i] = potion
+			potion_added.emit(potion)
+			return true
+	return false
+			
+func remove_potion(index: int) -> void:
+	if index >= max_potion_slots:
+		return
+	potions[index] = null
+	potion_removed.emit(index)
+
+func get_potions() -> Array[Potion]:
+	return potions
 
 func set_gold(new_amount:int)->void:
 	gold = new_amount

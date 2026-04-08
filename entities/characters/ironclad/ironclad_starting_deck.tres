@@ -13,8 +13,10 @@
 [ext_resource type="Resource" uid="uid://b5jbjk3a0xd0q" path="res://entities/characters/ironclad/cards/防御.tres" id="11_gvngp"]
 [ext_resource type="Resource" uid="uid://dk4qphec16bps" path="res://entities/characters/ironclad/cards/烙印.tres" id="11_y7rga"]
 [ext_resource type="Resource" uid="uid://dosdxrq1vcxfj" path="res://entities/characters/ironclad/cards/痛击.tres" id="12_xe1fr"]
+[ext_resource type="Resource" uid="uid://ciiko3jlk30aq" path="res://entities/characters/necrobinder/雕琢打击.tres" id="13_1lg0p"]
+[ext_resource type="Resource" uid="uid://4b4rigm35wmi" path="res://entities/characters/ironclad/cards/头槌.tres" id="14_sdqn1"]
 
 [resource]
 script = ExtResource("2_pcwuu")
-cards = Array[ExtResource("1_6dnus")]([ExtResource("2_gvngp"), ExtResource("3_xe1fr"), ExtResource("5_sdqn1"), ExtResource("6_4bseq"), ExtResource("7_8xmro"), ExtResource("8_7hj0v"), ExtResource("9_jj41u"), ExtResource("10_ewnxv"), ExtResource("11_y7rga"), ExtResource("11_gvngp"), ExtResource("11_gvngp"), ExtResource("12_xe1fr")])
+cards = Array[ExtResource("1_6dnus")]([ExtResource("2_gvngp"), ExtResource("3_xe1fr"), ExtResource("5_sdqn1"), ExtResource("6_4bseq"), ExtResource("7_8xmro"), ExtResource("8_7hj0v"), ExtResource("9_jj41u"), ExtResource("10_ewnxv"), ExtResource("11_y7rga"), ExtResource("11_gvngp"), ExtResource("11_gvngp"), ExtResource("12_xe1fr"), ExtResource("13_1lg0p"), ExtResource("14_sdqn1")])
 metadata/_custom_type_script = "uid://jvpf65gf7yuq"

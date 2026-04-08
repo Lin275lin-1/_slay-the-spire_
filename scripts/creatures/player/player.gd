@@ -8,6 +8,7 @@ signal after_draw_card(card: Card)
 
 @export var stats: CharacterStats : set = _set_char_stats
 @export var hand_selector: HandSelector
+@export var deck_view: DeckView
 @export var agent: PlayerHandler
 
 @onready var hitbox: CollisionShape2D = $CollisionShape2D
@@ -20,7 +21,7 @@ func _ready() -> void:
 	mouse_exited.connect(_on_mouse_exited)
 	Events.card_played.connect(_on_card_played)
 	Events.player_talked.connect(speech)
-
+	
 func speech(text: String, time: float = 2.5) -> void:
 	speech_bubble.set_text(text, time)
 	speech_bubble.global_position = hitbox.global_position + Vector2(hitbox.shape.size.x, -hitbox.shape.size.y / 2)
@@ -32,7 +33,7 @@ func speech(text: String, time: float = 2.5) -> void:
 	#buff_ui.buff = buff_context.buff_node
 	#buff_container.add_child(buff_ui)
 
-func select(context: ChooseCardContext) -> void:
+func select_hand(context: ChooseCardContext) -> void:
 	var selected: Array[Card]
 	agent.hide_hand()
 	agent.disable_hand()
@@ -45,7 +46,13 @@ func select(context: ChooseCardContext) -> void:
 	agent.update_hand()
 	agent.disable_hand(false)
 	agent.show_hand()
-		
+
+func select_deck(context: ChooseCardContext) -> void:
+	var selected: Array[Card]
+	selected = await deck_view.select_card_pile(context.cards, context.min_select, context.max_select, context.title)
+	for card: Card in selected:
+		context.callback.call(card)
+
 func gain_block(context: Context) -> void:
 	before_gain_block.emit(context)
 	stats.block += context.get_final_value()
@@ -127,12 +134,12 @@ func get_discard_pile() -> Array[Card]:
 func get_exhaust_pile() -> Array[Card]:
 	return stats.get_exhaust_pile()
 
-func get_card_count_by_name(name: String) -> int:
+func get_card_count_by_name(card_name: String) -> int:
 	var all_cards: Array[Card] = get_hand_cards()
 	all_cards.append_array(get_draw_pile())
 	all_cards.append_array(get_discard_pile())
 	# 将所有卡牌加起来，用filter函数筛选出id有name字符串卡牌然后获取数组长度
-	return len(all_cards.filter(func(card: Card): card.id.contains(name)))
+	return len(all_cards.filter(func(card: Card): card.id.contains(card_name)))
 
 func discard_card(card: Card) -> void:
 	agent.discard_card(card)

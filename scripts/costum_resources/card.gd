@@ -79,7 +79,7 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 	return ret
 
 func play(source: Player, targets: Array[Node], char_stats: CharacterStats) -> void:
-	Events.card_played.emit(self)
+	
 	if first_play_free:
 		first_play_free = false
 	else:
@@ -88,6 +88,7 @@ func play(source: Player, targets: Array[Node], char_stats: CharacterStats) -> v
 		apply_effects(source, targets)
 	else:
 		apply_effects(source, _get_targets(source, targets))
+	Events.card_played.emit(self)
 
 func apply_effects(_source: Player, _targets: Array[Node]) -> void:
 	pass

@@ -14,12 +14,24 @@ signal deck_view_requested(deck: Array[Card])
 func _ready()-> void:
 	gold_label.text ="0"
 	
+	
 
 func initialize(stats: CharacterStats) -> void:
 	card_pile_button.card_pile = stats.deck
 	avatar.texture = stats.character_icon
 	card_pile_button.pressed.connect(deck_view_requested.emit.bind(stats.deck.cards))
-
+	top_bar_potion.initialize(run_stats)
+	
+	# 测试用
+	#var tween = create_tween()
+	#tween.tween_callback(func(): run_stats.add_potion(preload("uid://cmilch2jb6xgn")))
+	#tween.tween_interval(1.0)
+	#tween.tween_callback(func(): run_stats.add_potion(preload("uid://6tqk3prnw8wl")))
+	#tween.tween_interval(1.0)
+	#tween.tween_callback(func(): run_stats.add_potion(preload("uid://btvj32p8ixefr")))
+	#tween.tween_interval(1.0)
+	#
+	
 #金币更改
 func set_run_stats(new_value:RunStats)->void:
 	run_stats =new_value
@@ -29,6 +41,3 @@ func set_run_stats(new_value:RunStats)->void:
 		
 func _update_gold()->void:
 	gold_label.text=str(run_stats.gold)
-
-func add_potion(potion: Potion) -> bool:
-	return top_bar_potion.add_potion(potion)
