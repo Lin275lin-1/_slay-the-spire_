@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://bcd358hkhxqp" path="res://scripts/map/map.gd" id="1_sxf4j"]
 [ext_resource type="PackedScene" uid="uid://c30ke3xdmcd3m" path="res://scenes/map/Legend.tscn" id="2_sqgf4"]
 [ext_resource type="Script" uid="uid://brcwbale2dt2h" path="res://scripts/map/map_generator.gd" id="2_tqkkf"]
-[ext_resource type="Texture2D" uid="uid://dili70jsn5a45" path="res://images/packed/map/map_bgs/overgrowth/map_top_overgrowth.png" id="3_jcaow"]
+[ext_resource type="Texture2D" uid="uid://hfa83ki5cy3u" path="res://images/packed/map/map_bgs/overgrowth/map_top_overgrowth.png" id="3_jcaow"]
 [ext_resource type="Resource" uid="uid://bb0c1ht5oirct" path="res://entities/encounters/encounter_pools/act1_encounter_pool.tres" id="3_vvrx0"]
-[ext_resource type="Texture2D" uid="uid://b3bfcl5u84wyf" path="res://images/packed/map/map_bgs/overgrowth/map_middle_overgrowth.png" id="4_04w0f"]
-[ext_resource type="Texture2D" uid="uid://kl3rs6nmylaq" path="res://images/packed/map/map_bgs/overgrowth/map_bottom_overgrowth.png" id="5_sqgf4"]
-[ext_resource type="Texture2D" uid="uid://bmopjsvoktfrn" path="res://images/rooms/false_queen/false_queen_bg.png" id="6_vvrx0"]
+[ext_resource type="Texture2D" uid="uid://drvxdbsfmfnuo" path="res://images/packed/map/map_bgs/overgrowth/map_middle_overgrowth.png" id="4_04w0f"]
+[ext_resource type="Texture2D" uid="uid://63f74w51tm5d" path="res://images/packed/map/map_bgs/overgrowth/map_bottom_overgrowth.png" id="5_sqgf4"]
+[ext_resource type="Texture2D" uid="uid://dtmhjw5lrxj3t" path="res://images/rooms/false_queen/false_queen_bg.png" id="6_vvrx0"]
 [ext_resource type="Texture2D" uid="uid://b8ra3w" path="res://images/atlases/ui_atlas.sprites/map/map_legend.tres" id="7_04w0f"]
 
 [node name="Map" type="Node2D" unique_id=2080320068]
@@ -18,6 +18,7 @@ metadata/_edit_lock_ = true
 
 [node name="Lines" type="Node2D" parent="Visuals" unique_id=573115876]
 unique_name_in_owner = true
+z_index = -1
 metadata/_edit_lock_ = true
 
 [node name="Rooms" type="Node2D" parent="Visuals" unique_id=827458797]
@@ -37,23 +38,23 @@ act2_pool = ExtResource("3_vvrx0")
 act3_pool = ExtResource("3_vvrx0")
 
 [node name="Background" type="Node2D" parent="." unique_id=1208578723]
-z_index = -1
+z_index = -2
 metadata/_edit_lock_ = true
 
 [node name="Top" type="Sprite2D" parent="Background" unique_id=343043579]
-z_index = -1
+z_index = -2
 position = Vector2(980, -1973)
 scale = Vector2(0.6300037, 0.76119787)
 texture = ExtResource("3_jcaow")
 
 [node name="Middle" type="Sprite2D" parent="Background" unique_id=499505033]
-z_index = -1
+z_index = -2
 position = Vector2(979, -846)
 scale = Vector2(0.6316306, 0.81180555)
 texture = ExtResource("4_04w0f")
 
 [node name="Down" type="Sprite2D" parent="Background" unique_id=528615178]
-z_index = -1
+z_index = -2
 position = Vector2(981, 251)
 scale = Vector2(0.6283153, 0.7118923)
 texture = ExtResource("5_sqgf4")
@@ -66,7 +67,7 @@ z_index = 4
 mouse_filter = 2
 
 [node name="background" type="TextureRect" parent="Legend_background" unique_id=2095724340]
-z_index = -2
+z_index = -3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

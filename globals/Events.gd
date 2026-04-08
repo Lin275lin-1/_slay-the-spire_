@@ -40,3 +40,6 @@ signal treasure_room_exited
 signal incident_exited
 signal map_exited
 @warning_ignore_restore("unused_signal")
+
+##地图房间
+signal map_room_selected(room: Room)

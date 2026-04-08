@@ -221,7 +221,6 @@ script = ExtResource("1_g1tsg")
 [node name="Select_Circle" type="Node2D" parent="." unique_id=1744452023]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-z_index = 1
 scale = Vector2(2, 2)
 
 [node name="Sprite2D2" type="Sprite2D" parent="Select_Circle" unique_id=309982339]
@@ -260,6 +259,7 @@ scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_dh5ag")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=137324443]
+z_index = -1
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals" unique_id=764668594]
 scale = Vector2(0.6, 0.6)

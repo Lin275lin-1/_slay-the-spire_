@@ -13,6 +13,7 @@ const BATTLE_REWARD_SCENE = preload("res://scenes/rooms/reward/reward_room.tscn"
 
 @onready var current_room: Node = $CurrentRoom
 
+#待删?
 @onready var combat: Button = %combat
 @onready var treasure: Button = %treasure
 @onready var shop: Button = %shop
@@ -20,8 +21,11 @@ const BATTLE_REWARD_SCENE = preload("res://scenes/rooms/reward/reward_room.tscn"
 @onready var rewards: Button = %rewards
 @onready var incident: Button = %incident
 
+
 @onready var map: Button = %map
 
+#得到map节点
+@onready var map_node: Map = $Map
 @onready var top_bar: TopBar = %TopBar
 #@onready var gold_ui: GoldUI = %TopBar/Left/TopBarGold
 
@@ -37,21 +41,56 @@ var stats: RunStats
 func _ready() -> void:
 	if not run_startup:
 		return
-	
+	Events.map_room_selected.connect(_on_map_room_selected)
 	match run_startup.type:
 		RunStartup.Type.NEW_RUN:
 			character = run_startup.picked_character.create_instance()
 			_start_run()
 		RunStartup.Type.CONTINUE_RUN:
+			map_node.init(stats)
 			print("加载游戏")
 	
+func _on_map_room_selected(room: Room) -> void:
+	# 根据房间类型选择对应的场景
+	var scene: PackedScene
+	match room.type:
+		Room.Type.MONSTER:
+			scene = COMBAT_SCENE
+		Room.Type.ELITE:
+			scene = COMBAT_SCENE   # 精英怪也是战斗
+		Room.Type.BOSS:
+			scene = COMBAT_SCENE
+		Room.Type.TREASURE:
+			scene = TREASURE_SCENE
+		Room.Type.SHOP:
+			scene = SHOP_SCENE
+		Room.Type.CAMPFIRE:
+			scene = CAMPFIRE_SCENE
+		Room.Type.UNKNOWN:
+			scene = INCIDENT_SCENE   # 事件房间
+		_:
+			return
+
+	# 切换视图
+	var new_room_node = _change_view(scene)
+	
+	# 如果是战斗房间，还需要传递敌人数据
+	#if scene == COMBAT_SCENE:
+		#var combat_room = new_room_node as CombatRoom
+		#combat_room.char_stats = character
+		## 从 room 中获取敌人生成数据（例如 room.enemy_encounter）
+		## 需要确保 Room 资源中包含了 encounter 信息
+		#combat_room.enemy_encounter = room.enemy_encounter
+		#combat_room.start_combat()
+		
 func _start_run() -> void:
 	stats = RunStats.new()
 	
 	_setup_event_connections()
 	_setup_top_bar()
 	# TODO: 生成地图
-	
+	map_node.init(stats)
+	_show_map()
 	#debug
 	#await get_tree().create_timer(3).timeout
 	#stats.gold += 55
@@ -73,7 +112,7 @@ func _change_view(scene: PackedScene) -> Node:
 	var new_view := scene.instantiate()
 	current_room.add_child(new_view)
 	
-	# 张颢骞
+	# zhanghaoqian
 	if scene == COMBAT_SCENE:
 		# 这段应该在_on_battle_room_entered(room: Room)中实现，new_view.enemy_encounter = room.enemy_encounter
 		new_view = new_view as CombatRoom
@@ -88,10 +127,14 @@ func _change_view(scene: PackedScene) -> Node:
 	return new_view
 	
 func _on_combat_won() -> void:
-
+	
 	var reward_scene :=_change_view(BATTLE_REWARD_SCENE) as BattleReward
 	reward_scene.run_stats = stats
 	reward_scene.character_stats =character
+	
+	#地图
+	#map_node.complete_current_room()
+	
 	#this is temporary code,it will come from real battle encounter data
 	# as a dependency
 	
@@ -101,20 +144,50 @@ func _on_combat_won() -> void:
 	
 func _setup_event_connections() -> void:
 	Events.combat_won.connect(_on_combat_won)
-	Events.combat_reward_exited.connect(_change_view.bind(MAP_SCENE))
-	Events.campfire_exited.connect(_change_view.bind(MAP_SCENE))
-	Events.map_exited.connect(_on_map_exited)
-	Events.shop_exited.connect(_change_view.bind(MAP_SCENE))
-	Events.treasure_room_exited.connect(_change_view.bind(MAP_SCENE))
-	Events.incident_exited.connect(_change_view.bind(MAP_SCENE))
 	
+	#这里会造成地图重新初始化,导致legend对应图标无法高亮
+	#Events.combat_reward_exited.connect(_change_view.bind(MAP_SCENE))
+	#Events.campfire_exited.connect(_change_view.bind(MAP_SCENE))
+	#Events.shop_exited.connect(_change_view.bind(MAP_SCENE))
+	#Events.treasure_room_exited.connect(_change_view.bind(MAP_SCENE))
+	#Events.incident_exited.connect(_change_view.bind(MAP_SCENE))
+	
+	#房间事件完成后返回到地图并且向前走一步
+	Events.combat_reward_exited.connect(_on_room_exited)
+	Events.shop_exited.connect(_on_room_exited)
+	Events.treasure_room_exited.connect(_on_room_exited)
+	Events.incident_exited.connect(_on_room_exited)
+	Events.campfire_exited.connect(_on_room_exited)
+	
+	Events.map_exited.connect(_on_map_exited)
+	map.pressed.connect(_show_map)
+	#test
 	combat.pressed.connect(_change_view.bind(COMBAT_SCENE))
 	rewards.pressed.connect(_change_view.bind(COMBAT_REWARD_SCENE))
 	treasure.pressed.connect(_change_view.bind(TREASURE_SCENE))
 	shop.pressed.connect(_change_view.bind(SHOP_SCENE))
 	campfire.pressed.connect(_change_view.bind(CAMPFIRE_SCENE))
-	map.pressed.connect(_change_view.bind(MAP_SCENE))
 	incident.pressed.connect(_change_view.bind(INCIDENT_SCENE))
+
+func _show_map() -> void:
+	# 隐藏当前房间视图
+	if current_room.get_child_count() > 0:
+		current_room.get_child(0).hide()
+	# 显示地图节点
+	map_node.show_map()	
+	
+	
 	
 func _on_map_exited() -> void:
+	map_node.hide()
+	# 重新显示当前房间视图
+	if current_room.get_child_count() > 0:
+		current_room.get_child(0).show()
+		
 	print("map_exited")
+
+func _on_room_exited() -> void:
+	# 完成当前房间（解锁下一层）
+	map_node.complete_current_room()
+	# 显示地图
+	_show_map()

@@ -23,10 +23,13 @@ const ICONS := {
 
 var original_modulate: Color
 var original_scale: Vector2
+var target_alpha := 0.6   # 存储房间非(被legend)时的目标透明度
 
 func _ready():
 	original_modulate = modulate
 	original_scale = scale
+	
+	sprite_2d.modulate.a = 0.6
 #debug
 #func _ready() -> void:
 	#var test_room := Room.new()
@@ -45,9 +48,15 @@ func set_available(new_value:bool) -> void:
 	available = new_value
 	if available:
 		animation_player.play("highlight")
+		if not room.selected:
+			target_alpha = 0.6
+			sprite_2d.modulate.a = target_alpha
 	elif not room.selected:
 		animation_player.play("RESET")
-
+		target_alpha = 0.6
+		sprite_2d.modulate.a = target_alpha
+		
+			 
 func set_room(new_data: Room) -> void:
 	room = new_data
 	position = room.position
@@ -57,9 +66,9 @@ func set_room(new_data: Room) -> void:
 	sprite_2d.texture = ICONS[room.type][0]
 	sprite_2d.scale = ICONS[room.type][1]
 
-func show_selected() -> void:
-	Select_Circle.modulate = Color.BLACK
-	
+#func show_selected() -> void:
+	#Select_Circle.modulate = Color.BLACK
+	#sprite_2d.modulate.a = 1.0           # 选中后完全不透明	
 
 func _on_input_event(_viewport:Node, event:InputEvent, _shape_idx:int) -> void:
 	#print("事件触发, available=", available, ", 动作=", event.as_text())
@@ -67,7 +76,9 @@ func _on_input_event(_viewport:Node, event:InputEvent, _shape_idx:int) -> void:
 		return
 	room.selected = true
 	animation_player.play("select")
-	print("clicked")
+	target_alpha = 1.0
+	sprite_2d.modulate.a = target_alpha        # 选中后完全不透明	
+	#print("clicked")
 	
 	
 # Called by the AnimationPLayer when the
@@ -79,15 +90,20 @@ func _on_map_room_selected() -> void:
 
 func set_highlight(highlight: bool):
 	if highlight:
+		# 高亮时：图标变为完全不透明
+		sprite_2d.modulate.a = 1.0
+		# 以下为原有高亮效果（颜色、缩放等），可根据需要保留或注释
 		modulate = Color(1, 1, 0.5, 1.0)  
 		if room.type != Room.Type.BOSS and room.type != Room.Type.TREASURE and room.type != Room.Type.MONSTER and room.type != Room.Type.ELITE:
-			highlight_sprite.modulate.a = 1.0        # 淡黄色，完全不透明
-			
+			highlight_sprite.modulate.a = 1.0
 		if room.type == Room.Type.ELITE:
 			scale = original_scale * 1.6
-		else :
+		else:
 			scale = original_scale * 1.2
 	else:
+		# 退出高亮：恢复房间应有的透明度
+		sprite_2d.modulate.a = target_alpha
+		# 恢复颜色和缩放
 		modulate = Color.WHITE
 		scale = original_scale
 		highlight_sprite.modulate.a = 0.0
