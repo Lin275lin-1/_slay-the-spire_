@@ -113,8 +113,7 @@ func reshuffle_deck_from_discard_pile() -> void:
 		return
 	
 	while not char_stats.discard_pile.is_empty():
-		char_stats.draw_pile.add_card(char_stats.discard_pile.draw_card())
-	print("shuffle")
+		char_stats.draw_pile.add_card(char_stats.discard_pile.draw_card())	
 	char_stats.draw_pile.shuffle()
 
 func put_card_in_draw_pile(card: Card, top: bool = false) -> void:

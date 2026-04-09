@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://ucmprufjyvcb"]
+
+[ext_resource type="FontFile" uid="uid://wcoiw83db02h" path="res://fonts/zhs/SourceHanSerifSC-Bold.otf" id="1_b4sxj"]
+
+[resource]
+font = ExtResource("1_b4sxj")
+font_size = 50
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
