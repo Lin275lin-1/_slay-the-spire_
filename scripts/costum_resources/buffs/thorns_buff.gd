@@ -11,9 +11,10 @@ func _init() -> void:
 	buff_name = buff_info["name"]
 	description = buff_info["description"]
 	icon = buff_info["icon"]
+	type = Type.BUFF
 	
 func _ready() -> void:
-	type = Type.DEBUFF
+	
 	if agent and agent.has_signal("after_take_damage"):
 		agent.connect("after_take_damage", _on_after_take_damage)
 	else:

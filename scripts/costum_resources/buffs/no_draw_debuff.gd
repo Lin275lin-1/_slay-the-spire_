@@ -12,9 +12,9 @@ func _init() -> void:
 	description = buff_info["description"]
 	icon = buff_info["icon"]
 	stackable = false
+	type = Type.DEBUFF
 	
 func _ready() -> void:
-	type = Type.DEBUFF
 	if agent and agent.has_signal("before_draw_cards"):
 		agent.connect("before_draw_cards", _on_before_draw_cards)
 	else:

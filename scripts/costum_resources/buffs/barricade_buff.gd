@@ -12,9 +12,9 @@ func _init() -> void:
 	description = buff_info["description"]
 	icon = buff_info["icon"]
 	stackable = false
+	type = Type.BUFF
 	
 func _ready() -> void:
-	type = Type.DEBUFF
 	if agent and agent.has_signal("before_turn_started"):
 		agent.connect("before_turn_started", _on_before_turn_started)
 	if agent and agent.has_signal("after_turn_started"):

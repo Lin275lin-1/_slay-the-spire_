@@ -23,6 +23,7 @@ metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 [resource]
 script = ExtResource("3_ur2gw")
 id = "放血"
+type = 1
 portrait = ExtResource("2_mxsrm")
 base_description = "[center]失去3点生命。[/center][p][center]获得{energy}点[color=gold]能量[/color]。[/center]"
 base_numeric_entries = Array[ExtResource("1_5h6ck")]([SubResource("Resource_7yvx5")])

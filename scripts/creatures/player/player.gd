@@ -104,7 +104,9 @@ func take_damage(context: Context) -> void:
 	if stats.health <= 0:
 		return
 	before_take_damage.emit(context)
-	var hurt := stats.take_damage(context.get_final_value())
+	var final_value :int = context.get_final_value()
+	var hurt := stats.take_damage(final_value)
+	damage_number_spawner.spawn_damage_label(final_value, !hurt)
 	after_take_damage.emit(context)
 	if stats.health <= 0:
 		die()
@@ -220,6 +222,7 @@ func set_hitbox() -> void:
 	var center_point = visuals.get_center_point()
 	hitbox.shape.size = bound_size
 	hitbox.position = center_point
+	damage_number_spawner.position = center_point
 	set_recticles([
 		center_point - bound_size / 2,
 		center_point + Vector2(bound_size.x / 2, -bound_size.y / 2),

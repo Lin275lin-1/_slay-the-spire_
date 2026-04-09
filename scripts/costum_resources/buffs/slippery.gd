@@ -9,9 +9,10 @@ func _init() -> void:
 	buff_name = buff_info["name"]
 	description = buff_info["description"]
 	icon = buff_info["icon"]
+	type = Type.BUFF
 	
 func _ready() -> void:
-	type = Type.BUFF
+	
 	affect = AFFECT.TARGET
 	if agent and agent.has_signal("before_lose_health"):
 		agent.connect("before_lose_health", _on_before_take_damage)
