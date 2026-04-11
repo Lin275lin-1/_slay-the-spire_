@@ -5,3 +5,11 @@ func get_modifiers() -> Array[Modifier]:
 
 func get_description() -> String:
 	return description.format({"stacks": stacks})
+
+func can_enchant(card: Card) -> bool:
+	if card.has_enchantment():
+		return false
+	for entry: NumericEntry in card.get_numeric_entries():
+		if entry.type == Enums.NumericType.DAMAGE:
+			return true
+	return false

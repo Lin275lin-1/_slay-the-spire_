@@ -13,6 +13,9 @@ func get_modifiers() -> Array[Modifier]:
 func on_play(_player: Player, _targets: Array[Node]) -> void:
 	pass
 
+func can_enchant(card: Card) -> bool:
+	return !card.has_enchantment()
+
 func get_description() -> String:
 	return description
 
@@ -28,3 +31,4 @@ func get_additional_card_description() -> String:
 
 func on_enchant_set(_card: Card) -> void:
 	pass
+	

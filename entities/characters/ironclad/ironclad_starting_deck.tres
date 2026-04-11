@@ -5,10 +5,7 @@
 [ext_resource type="Script" uid="uid://jvpf65gf7yuq" path="res://scripts/costum_resources/card_pile.gd" id="2_pcwuu"]
 [ext_resource type="Resource" uid="uid://by1y0dacb0le4" path="res://entities/cards/ironclad/全身撞击.tres" id="3_8xmro"]
 [ext_resource type="Resource" uid="uid://dqdqfe0bcpgp6" path="res://entities/cards/ironclad/愤怒.tres" id="4_7hj0v"]
-[ext_resource type="Resource" uid="uid://b2c13bouulo8c" path="res://entities/cards/ironclad/战斗专注.tres" id="5_jj41u"]
-[ext_resource type="Resource" uid="uid://rfrswfbanfy" path="res://entities/cards/ironclad/打击.tres" id="6_ewnxv"]
 [ext_resource type="Resource" uid="uid://durx4ieeeb30h" path="res://entities/cards/ironclad/放血.tres" id="7_y7rga"]
-[ext_resource type="Resource" uid="uid://upuj7jv770uk" path="res://entities/cards/ironclad/欺凌.tres" id="8_t8brg"]
 [ext_resource type="Resource" uid="uid://qhmifpkdvj6h" path="res://entities/cards/ironclad/武装.tres" id="9_au0bv"]
 [ext_resource type="Resource" uid="uid://dk4qphec16bps" path="res://entities/cards/ironclad/烙印.tres" id="10_cyjvc"]
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="11_t8brg"]
@@ -24,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://c08n4uo" path="res://images/atlases/card_atlas.sprites/ironclad/bash.tres" id="17_cyjvc"]
 [ext_resource type="Script" uid="uid://c88oxyuj67or7" path="res://entities/cards/ironclad/痛击.gd" id="18_lmdw5"]
 [ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="19_bsqa6"]
+[ext_resource type="Resource" uid="uid://2t6dsuhi1es4" path="res://entities/cards/colorless/拳斗.tres" id="21_t8brg"]
 
 [sub_resource type="Resource" id="Resource_rknk0"]
 script = ExtResource("11_t8brg")
@@ -120,5 +118,5 @@ metadata/_custom_type_script = "uid://br1hibx18tv13"
 
 [resource]
 script = ExtResource("2_pcwuu")
-cards = Array[ExtResource("1_6dnus")]([ExtResource("2_4bseq"), ExtResource("3_8xmro"), ExtResource("4_7hj0v"), ExtResource("5_jj41u"), ExtResource("6_ewnxv"), ExtResource("7_y7rga"), ExtResource("8_t8brg"), ExtResource("9_au0bv"), ExtResource("10_cyjvc"), SubResource("Resource_cilra"), SubResource("Resource_lm2nt"), SubResource("Resource_whuos"), ExtResource("13_whuos"), ExtResource("14_cilra"), ExtResource("15_lm2nt"), ExtResource("16_8xmro")])
+cards = Array[ExtResource("1_6dnus")]([ExtResource("2_4bseq"), ExtResource("3_8xmro"), ExtResource("4_7hj0v"), ExtResource("7_y7rga"), ExtResource("9_au0bv"), ExtResource("10_cyjvc"), SubResource("Resource_cilra"), SubResource("Resource_lm2nt"), SubResource("Resource_whuos"), ExtResource("13_whuos"), ExtResource("14_cilra"), ExtResource("15_lm2nt"), ExtResource("16_8xmro"), ExtResource("21_t8brg")])
 metadata/_custom_type_script = "uid://jvpf65gf7yuq"
