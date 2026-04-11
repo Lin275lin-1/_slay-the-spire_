@@ -18,7 +18,9 @@ enum Source{
 	## 基于卡牌特定名称数量
 	CARD_COUNT_BY_NAME,
 	## 基于目标buff层数
-	TARGET_BUFF
+	TARGET_BUFF,
+	## 基于本回合打出的攻击牌数量
+	ATTACK_PLAYED_THIS_TURN
 }
 
 @export var type: Enums.NumericType

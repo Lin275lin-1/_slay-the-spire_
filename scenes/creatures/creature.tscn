@@ -7,7 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://bv5lhx0gj4ka3" path="res://scenes/ui/speech_bubble.tscn" id="7_32syg"]
 [ext_resource type="Script" uid="uid://beoly8uxrkebe" path="res://scripts/creatures/buff_manager.gd" id="7_ne82r"]
 [ext_resource type="Texture2D" uid="uid://drmgoyr4vi1nf" path="res://images/ui/combat/combat_nameplate_background.png" id="8_bod4x"]
+[ext_resource type="Script" uid="uid://b4x7nyaqm0lc3" path="res://scripts/ui/damage_number_spawner.gd" id="9_bod4x"]
 [ext_resource type="FontFile" uid="uid://wcoiw83db02h" path="res://fonts/zhs/SourceHanSerifSC-Bold.otf" id="9_vpxc5"]
+[ext_resource type="LabelSettings" uid="uid://ucmprufjyvcb" path="res://themes/damge_number_label_settings.tres" id="10_qn62h"]
+[ext_resource type="LabelSettings" uid="uid://7urdfnst40ow" path="res://themes/buff_text_label_settings.tres" id="11_dlany"]
 
 [node name="Creature" type="Area2D" unique_id=465140807]
 script = ExtResource("1_32syg")
@@ -95,3 +98,9 @@ theme_override_font_sizes/font_size = 12
 text = "这是名字"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DamageNumberSpawner" type="Node2D" parent="." unique_id=1887516962]
+script = ExtResource("9_bod4x")
+damage_number_label_settings = ExtResource("10_qn62h")
+text_label_settings = ExtResource("11_dlany")
+metadata/_custom_type_script = "uid://b4x7nyaqm0lc3"

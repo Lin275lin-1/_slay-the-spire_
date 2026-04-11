@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://uxv6ncqktd1c"]
 
 [ext_resource type="Script" uid="uid://yldb61754eoh" path="res://scripts/ui/card_menu_ui.gd" id="1_wcoov"]
-[ext_resource type="Resource" uid="uid://dosdxrq1vcxfj" path="res://entities/characters/ironclad/cards/痛击.tres" id="2_5nlic"]
+[ext_resource type="Resource" uid="uid://dosdxrq1vcxfj" path="res://entities/cards/ironclad/痛击.tres" id="2_5nlic"]
 [ext_resource type="PackedScene" uid="uid://b22g8dum6re3" path="res://scenes/ui/card_visuals.tscn" id="2_mcev2"]
 
 [node name="CenterContainer" type="CenterContainer" unique_id=946762981]

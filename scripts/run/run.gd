@@ -90,16 +90,13 @@ func _start_run() -> void:
 	#stats.gold += 55
 
 func _setup_top_bar() -> void:
-	deck_view.card_pile = character.deck
 	
 	#金币状态赋值
 	top_bar.run_stats = stats   
-	
 	top_bar.initialize(character)
 	top_bar.deck_view_requested.connect(deck_view.show_card_pile.bind("你在战斗中将会使用这里的所有卡牌。", false))
 	# 遗物
 	top_bar.relic_handler.add_relic(character.starting_relic)
-	
 
 func _change_view(scene: PackedScene) -> Node:
 	if current_room.get_child_count() > 0:
@@ -188,4 +185,5 @@ func _on_combat_room_entered(room: Room):
 func _on_campfire_room_entered(room: Room)-> void:
 	var capfire_scene :CampfireRoom = _change_view(CAMPFIRE_SCENE) as CampfireRoom
 	capfire_scene.char_stats=character
+	capfire_scene.deck_view = deck_view
 	

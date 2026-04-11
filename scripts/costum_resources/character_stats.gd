@@ -1,8 +1,16 @@
 class_name CharacterStats
 extends Stats
 
+enum COLOR {
+	RED = 0b0000001,	# 铁甲战士
+	GREEN = 0b0000010,	# 静默猎手
+	ORANGE = 0b0000100, # 储君
+	PINK = 0b0001000,	# 亡灵契约师
+	BLUE = 0b0010000,	# 故障机器人
+}
 
 @export_group("游戏数据")
+@export var color: COLOR = COLOR.RED
 @export var starting_deck: CardPile
 @export var draftable_cards: CardPile
 @export var cards_per_turn: int
@@ -30,6 +38,8 @@ func reset_energy() -> void:
 	energy = max_energy
 	
 func can_play_card(card: Card) -> bool:
+	if card.first_play_free:
+		return true
 	return energy >= card.get_cost()
 
 func get_draw_pile() -> Array[Card]:

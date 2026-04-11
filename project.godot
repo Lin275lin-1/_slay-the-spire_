@@ -23,6 +23,7 @@ TooltipManager="*res://globals/tooltip_manager.gd"
 KeywordTooltip="*res://globals/keyword_tooltip.tscn"
 BuffLibrary="*res://globals/buff_library.gd"
 Game="*uid://ckhqrqwi4d4ji"
+CardPool="*uid://d2kmliv2m0fqo"
 
 [display]
 

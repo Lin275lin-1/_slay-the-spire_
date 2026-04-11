@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://p5t5ynm0gru3" path="res://scripts/rooms/combat_room/combat_ui/card_ui.gd" id="1_s55cg"]
 [ext_resource type="Script" uid="uid://n32cyhvf6qam" path="res://scripts/hand_manager/card_state_machine/card_state_machine.gd" id="2_1kpl7"]
 [ext_resource type="PackedScene" uid="uid://b22g8dum6re3" path="res://scenes/ui/card_visuals.tscn" id="2_17lfd"]
-[ext_resource type="Resource" uid="uid://cbdwqvevklhm0" path="res://entities/characters/ironclad/cards/燃烧.tres" id="2_qqmtg"]
+[ext_resource type="Resource" uid="uid://cbdwqvevklhm0" path="res://entities/cards/ironclad/燃烧.tres" id="2_qqmtg"]
 [ext_resource type="Resource" uid="uid://bqq44kff15k4w" path="res://entities/characters/ironclad/ironclad_stats.tres" id="3_fi06d"]
 [ext_resource type="Script" uid="uid://r1hpyjdc572v" path="res://scripts/hand_manager/card_state_machine/card_base_state.gd" id="9_7cyci"]
 [ext_resource type="Script" uid="uid://h66064xnout6" path="res://scripts/hand_manager/card_state_machine/card_clicked_state.gd" id="10_0og8s"]

@@ -1,20 +1,32 @@
 class_name Card
 extends Resource
 # 卡牌类型(攻击，技能，能力)
-enum Type {ATTACK, SKILL, POWER, STATUS, CURSE}
+enum Type {
+	ATTACK = 0b00001, 
+	SKILL = 0b00010, 
+	POWER = 0b00100, 
+	STATUS = 0b01000, 
+	CURSE = 0b10000
+	}
 # 卡牌目标类型
 enum Target {SELF, SINGLE_ENEMY, ALL_ENEMIES, EVERYONE}
 # 卡牌稀有度
-enum Rarity {COMMON, UNCOMMON, RARE, CURSED, STATUS}
+enum Rarity {
+	COMMON = 0b00001, 
+	UNCOMMON = 0b00010, 
+	RARE = 0b00100, 
+	CURSED = 0b01000, 
+	STATUS = 0b10000
+	}
 # 卡牌所属卡牌池
 enum COLOR {
-	RED,	# 铁甲战士
-	GREEN,	# 静默猎手
-	ORANGE, # 储君
-	PINK,	# 亡灵契约师
-	BLUE,	# 故障机器人
-	CURSE,  # 诅咒
-	COLORLESS, # 无色
+	RED = 0b0000001,	# 铁甲战士
+	GREEN = 0b0000010,	# 静默猎手
+	ORANGE = 0b0000100, # 储君
+	PINK = 0b0001000,	# 亡灵契约师
+	BLUE = 0b0010000,	# 故障机器人
+	CURSE = 0b0100000,  # 诅咒
+	COLORLESS = 0b1000000, # 无色
 }
 
 ## TODO: 使用表格而不是使用资源文件存储数据
@@ -22,14 +34,18 @@ enum COLOR {
 ## 卡牌名称
 @export var id: String
 ## 卡牌类型
-@export var type: Type
+@export var type: Type = Type.ATTACK
 ## 目标类型
 @export var base_target: Target
 ## 卡牌属于那个角色池，详情见COLOR枚举
-@export var card_color: COLOR
+@export var card_color: COLOR = COLOR.RED
 # TODO: X费
 @export var base_cost: int
-@export var rarity: Rarity
+@export var rarity: Rarity = Rarity.COMMON
+# 是否可以被发现
+@export var discoverable: bool = true
+# 是否可作为卡牌奖励
+@export var draftable: bool = true
 @export_group("卡牌描述")
 @export var portrait: Texture
 @export_multiline var base_description: String
@@ -51,7 +67,6 @@ enum COLOR {
 @export var upgradable: bool = true
 
 var first_play_free := false
-
 
 func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 	var ret = {}
@@ -79,7 +94,6 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 	return ret
 
 func play(source: Player, targets: Array[Node], char_stats: CharacterStats) -> void:
-	Events.card_played.emit(self)
 	if first_play_free:
 		first_play_free = false
 	else:
@@ -88,6 +102,7 @@ func play(source: Player, targets: Array[Node], char_stats: CharacterStats) -> v
 		apply_effects(source, targets)
 	else:
 		apply_effects(source, _get_targets(source, targets))
+	Events.card_played.emit(self)
 
 func apply_effects(_source: Player, _targets: Array[Node]) -> void:
 	pass
@@ -179,6 +194,8 @@ func _get_numeric_value(entry: NumericEntry, player: Player = null, target: Crea
 					return entry.base_value + buff.stacks * entry.extra_param["factor"]
 				else:
 					return entry.base_value
+		NumericEntry.Source.ATTACK_PLAYED_THIS_TURN:
+			return player.attack_played_this_turn
 		_:
 			print("未实现")
 			return 0

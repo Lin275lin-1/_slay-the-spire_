@@ -1,0 +1,37 @@
+[gd_resource type="Resource" format=3 uid="uid://bdpwi66a4qek4"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_75tvl"]
+[ext_resource type="Texture2D" uid="uid://pafakq" path="res://images/atlases/card_atlas.sprites/necrobinder/defile.tres" id="2_u3761"]
+[ext_resource type="Script" uid="uid://btp5g8uxwew6f" path="res://entities/cards/necrobinder/玷污.gd" id="3_u3761"]
+[ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_fs1rm"]
+
+[sub_resource type="Resource" id="Resource_u3761"]
+script = ExtResource("1_75tvl")
+base_value = 13
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_fs1rm"]
+script = ExtResource("1_75tvl")
+base_value = 17
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_u3761")
+id = "玷污"
+base_target = 1
+card_color = 8
+base_cost = 1
+portrait = ExtResource("2_u3761")
+base_description = "[center]造成{damage}点伤害。[/center]"
+sound = ExtResource("4_fs1rm")
+base_numeric_entries = Array[ExtResource("1_75tvl")]([SubResource("Resource_u3761")])
+ethereal = true
+upgraded_target = 1
+upgraded_cost = 1
+upgraded_description = "[center]造成{damage}点伤害。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_75tvl")]([SubResource("Resource_fs1rm")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

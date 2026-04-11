@@ -27,6 +27,7 @@ const BUFF_UI = preload("res://scenes/rooms/combat_room/combat_ui/buff_ui.tscn")
 @onready var name_label: Label = %NameLabel
 @onready var name_plate: Control = $NamePlate
 @onready var name_tween: Tween
+@onready var damage_number_spawner: DamageNumberSpawner = $DamageNumberSpawner
 
 
 var spine_anim_state: SpineAnimationState
@@ -63,6 +64,7 @@ func add_buff(buff_context: ApplyBuffContext) -> void:
 		var buff_ui := BUFF_UI.instantiate()
 		buff_ui.buff = buff_context.buff_node
 		buff_container.add_child(buff_ui)
+	damage_number_spawner.spawn_buff_label(buff_context.buff_node.buff_name, buff_context.buff_node.type == Buff.Type.BUFF)
 	after_applied_buff.emit(buff_context)
 
 func get_buff(buff_name: String) -> Buff:

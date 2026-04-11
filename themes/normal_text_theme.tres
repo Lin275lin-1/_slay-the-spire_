@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://wltsmjys44mr"]
+
+[ext_resource type="FontFile" uid="uid://odbxx5stx1as" path="res://fonts/zhs/SourceHanSerifSC-Medium.otf" id="1_eiysk"]
+
+[resource]
+font = ExtResource("1_eiysk")
+font_size = 60
+outline_size = 10
+outline_color = Color(0.2459839, 0.24598393, 0.24598393, 1)
+shadow_size = 15
+shadow_color = Color(0, 0, 0, 1)

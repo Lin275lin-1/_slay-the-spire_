@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://7urdfnst40ow"]
+
+[ext_resource type="FontFile" uid="uid://bgo5h1rnqi6op" path="res://fonts/zhs/NotoSansMonoCJKsc-Regular.otf" id="1_5ikhc"]
+
+[resource]
+font = ExtResource("1_5ikhc")
+font_size = 40
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)

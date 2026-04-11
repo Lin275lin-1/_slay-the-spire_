@@ -1,0 +1,51 @@
+[gd_resource type="Resource" format=3 uid="uid://b35n0oawq2sun"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_20u08"]
+[ext_resource type="Texture2D" uid="uid://op1w6j" path="res://images/atlases/card_atlas.sprites/silent/finisher.tres" id="2_bqjk8"]
+[ext_resource type="Script" uid="uid://diearpqpfot8s" path="res://entities/cards/silent/终结技.gd" id="3_hc47b"]
+
+[sub_resource type="Resource" id="Resource_6fhcc"]
+script = ExtResource("1_20u08")
+base_value = 6
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_hc47b"]
+script = ExtResource("1_20u08")
+type = 7
+placeholder = "times"
+affected_by = 3
+source = 5
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_r762g"]
+script = ExtResource("1_20u08")
+base_value = 8
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_bqjk8"]
+script = ExtResource("1_20u08")
+type = 7
+placeholder = "times"
+affected_by = 3
+source = 5
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_hc47b")
+id = "终结技"
+base_target = 1
+card_color = 2
+base_cost = 1
+rarity = 2
+portrait = ExtResource("2_bqjk8")
+base_description = "[center]在这个回合内每打出过一张攻击牌，就造成{damage}点伤害一次。[/center]"
+base_numeric_entries = Array[ExtResource("1_20u08")]([SubResource("Resource_6fhcc"), SubResource("Resource_hc47b")])
+upgraded_target = 1
+upgraded_cost = 1
+upgraded_description = "[center]在这个回合内每打出过一张攻击牌，就造成{damage}点伤害一次。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_20u08")]([SubResource("Resource_r762g"), SubResource("Resource_bqjk8")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

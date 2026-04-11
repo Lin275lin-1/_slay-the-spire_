@@ -21,6 +21,10 @@ func add_card_to_top(card: Card) -> void:
 	cards.insert(0, card)
 	card_pile_size_changed.emit(cards.size())
 
+func remove_card(card: Card) -> void:
+	cards.remove_at(cards.find(card))
+	card_pile_size_changed.emit(cards.size())
+
 func shuffle() -> void:
 	cards.shuffle()
 	

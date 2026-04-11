@@ -13,6 +13,8 @@ extends Control
 @export var relics: RelicHandler
 
 
+
+
 func _ready() -> void:
 	# 这步应该在开始一局时进行
 	#var new_stats: CharacterStats = char_stats.create_instance()
@@ -36,7 +38,6 @@ func start_combat() -> void:
 	combat_ui.char_stats = char_stats
 	hand_manager.char_stats = char_stats
 	player.stats = char_stats
-	
 	
 	relics.relics_activated.connect(_on_relics_activated)
 	relics.activate_relics_by_trigger_type(Relic.TriggerType.START_OF_COMBAT)
@@ -69,4 +70,3 @@ func _on_relics_activated(type: Relic.TriggerType) -> void:
 			Events.combat_start.emit()
 		Relic.TriggerType.END_OF_COMBAT:
 			Events.combat_won.emit()
-			

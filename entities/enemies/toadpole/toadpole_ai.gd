@@ -21,20 +21,17 @@ func execute_intent(source: Creature, target: Creature, current_intent: Intent) 
 		sub_intent.execute(source, [target])
 
 func choose_intent(_source: Creature, _target: Creature) -> Intent:
-	if last_action.is_empty():
-		var intent = random_intent([get_intent_by_name(intents, "Spiken"), get_intent_by_name(intents, "Whirl")])
-		last_action = intent.intent_name
-		return intent
-	else:
-		match last_action:
-			"Whirl":
-				return get_intent_by_name(intents, "Spiken")
-			"Spiken":
-				return get_intent_by_name(intents, "SpikeSpit")
-			"SpikeSpit":
-				return get_intent_by_name(intents, "Whirl")
-			_:
-				return random_intent(intents)
+	match last_action:
+		"":
+			return random_intent([get_intent_by_name(intents, "Spiken"), get_intent_by_name(intents, "Whirl")])
+		"Whirl":
+			return get_intent_by_name(intents, "Spiken")
+		"Spiken":
+			return get_intent_by_name(intents, "SpikeSpit")
+		"SpikeSpit":
+			return get_intent_by_name(intents, "Whirl")
+		_:
+			return random_intent(intents)
 
 func get_die_animation_name() -> String:
 	if buffed:

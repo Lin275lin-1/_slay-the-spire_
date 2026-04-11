@@ -11,7 +11,6 @@ enum Where{
 @export var card: Card
 
 func execute(source: Creature, targets: Array[Node]) -> void:
-	print("test")
 	var put_card_effect = PutCardEffect.new()
 	put_card_effect.execute(PutCardContext.new(source, targets, base_value, (where as int), card))
 	

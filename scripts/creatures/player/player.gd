@@ -5,9 +5,10 @@ extends Creature
 signal before_draw_cards(context: DrawCardContext)
 signal after_draw_card(card: Card)
 
-
 @export var stats: CharacterStats : set = _set_char_stats
 @export var hand_selector: HandSelector
+@export var deck_view: DeckView
+@export var discover_view: DiscoverCardView
 @export var agent: PlayerHandler
 
 @onready var hitbox: CollisionShape2D = $CollisionShape2D
@@ -15,12 +16,15 @@ signal after_draw_card(card: Card)
 var visuals: CreatureVisuals
 var spine_manager: SpineManager
 
+# 本回合打出攻击牌的数量
+var attack_played_this_turn := 0
+
 func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 	Events.card_played.connect(_on_card_played)
 	Events.player_talked.connect(speech)
-
+	
 func speech(text: String, time: float = 2.5) -> void:
 	speech_bubble.set_text(text, time)
 	speech_bubble.global_position = hitbox.global_position + Vector2(hitbox.shape.size.x, -hitbox.shape.size.y / 2)
@@ -32,7 +36,16 @@ func speech(text: String, time: float = 2.5) -> void:
 	#buff_ui.buff = buff_context.buff_node
 	#buff_container.add_child(buff_ui)
 
-func select(context: ChooseCardContext) -> void:
+func discover_card(context: DiscoverContext) -> void:
+	var availabel_cards := CardPool.get_discoverable_cards(context.color, context.type, context.rarity)
+	availabel_cards.shuffle()
+	# 随机三张
+	var discovered_cards := availabel_cards.slice(0, 3)
+	var card: Card = await discover_view.select(discovered_cards, context.can_skip, context.upgraded, context.first_play_free)
+	put_card_in_hand(card)
+	
+	
+func select_hand(context: ChooseCardContext) -> void:
 	var selected: Array[Card]
 	agent.hide_hand()
 	agent.disable_hand()
@@ -45,7 +58,13 @@ func select(context: ChooseCardContext) -> void:
 	agent.update_hand()
 	agent.disable_hand(false)
 	agent.show_hand()
-		
+
+func select_deck(context: ChooseCardContext) -> void:
+	var selected: Array[Card]
+	selected = await deck_view.select_card_pile(context.cards, context.min_select, context.max_select, context.title)
+	for card: Card in selected:
+		context.callback.call(card)
+
 func gain_block(context: Context) -> void:
 	before_gain_block.emit(context)
 	stats.block += context.get_final_value()
@@ -97,7 +116,9 @@ func take_damage(context: Context) -> void:
 	if stats.health <= 0:
 		return
 	before_take_damage.emit(context)
-	var hurt := stats.take_damage(context.get_final_value())
+	var final_value :int = context.get_final_value()
+	var hurt := stats.take_damage(final_value)
+	damage_number_spawner.spawn_damage_label(final_value, !hurt)
 	after_take_damage.emit(context)
 	if stats.health <= 0:
 		die()
@@ -127,12 +148,12 @@ func get_discard_pile() -> Array[Card]:
 func get_exhaust_pile() -> Array[Card]:
 	return stats.get_exhaust_pile()
 
-func get_card_count_by_name(name: String) -> int:
+func get_card_count_by_name(card_name: String) -> int:
 	var all_cards: Array[Card] = get_hand_cards()
 	all_cards.append_array(get_draw_pile())
 	all_cards.append_array(get_discard_pile())
 	# 将所有卡牌加起来，用filter函数筛选出id有name字符串卡牌然后获取数组长度
-	return len(all_cards.filter(func(card: Card): card.id.contains(name)))
+	return len(all_cards.filter(func(card: Card): card.id.contains(card_name)))
 
 func discard_card(card: Card) -> void:
 	agent.discard_card(card)
@@ -147,6 +168,7 @@ func start_turn() -> void:
 	after_turn_started.emit(self)
 
 func end_turn() -> void:
+	attack_played_this_turn = 0
 	turn_ended.emit(self)
 		
 func _set_char_stats(value: CharacterStats) -> void:
@@ -182,6 +204,7 @@ func _update_player() -> void:
 
 func _on_card_played(card: Card) -> void:
 	if card.type == Card.Type.ATTACK:
+		attack_played_this_turn += 1
 		spine_anim_state.set_animation("attack", false, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
 	else:
@@ -213,6 +236,7 @@ func set_hitbox() -> void:
 	var center_point = visuals.get_center_point()
 	hitbox.shape.size = bound_size
 	hitbox.position = center_point
+	damage_number_spawner.position = center_point
 	set_recticles([
 		center_point - bound_size / 2,
 		center_point + Vector2(bound_size.x / 2, -bound_size.y / 2),

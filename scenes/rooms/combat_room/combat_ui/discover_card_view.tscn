@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://bpxa77yfyyws0"]
+
+[ext_resource type="Script" uid="uid://bisnvr6bvfqx4" path="res://scripts/rooms/combat_room/combat_ui/discover_card_view.gd" id="1_s6e4l"]
+[ext_resource type="Texture2D" uid="uid://bkbggtnccf6pi" path="res://images/ui/reward_screen/reward_banner.png" id="1_wbmn7"]
+[ext_resource type="FontFile" uid="uid://odbxx5stx1as" path="res://fonts/zhs/SourceHanSerifSC-Medium.otf" id="3_5064s"]
+[ext_resource type="Texture2D" uid="uid://f54lcv" path="res://images/atlases/ui_atlas.sprites/peek_button.tres" id="3_42365"]
+[ext_resource type="PackedScene" uid="uid://uxv6ncqktd1c" path="res://scenes/ui/card_menu_ui.tscn" id="4_5064s"]
+[ext_resource type="Texture2D" uid="uid://cyruikkcbbm0f" path="res://images/ui/reward_screen/reward_skip_button.png" id="5_mkngd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mkngd"]
+font = ExtResource("3_5064s")
+font_size = 60
+outline_size = 10
+outline_color = Color(0.2459839, 0.24598393, 0.24598393, 1)
+shadow_size = 15
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ydwev"]
+font = ExtResource("3_5064s")
+font_size = 45
+outline_size = 10
+outline_color = Color(0.2459839, 0.24598393, 0.24598393, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="DiscoverCardView" type="ColorRect" unique_id=505773446]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+script = ExtResource("1_s6e4l")
+
+[node name="DiscoverBanner" type="TextureRect" parent="." unique_id=753375065]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -575.0
+offset_right = 500.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_wbmn7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HintLabel" type="Label" parent="DiscoverBanner" unique_id=656029799]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -392.0
+offset_top = -95.0
+offset_right = 394.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "选择一张牌"
+label_settings = SubResource("LabelSettings_mkngd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PeakButton" type="TextureButton" parent="." unique_id=806970811]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 452.0
+offset_right = 236.0
+offset_bottom = 622.0
+texture_normal = ExtResource("3_42365")
+
+[node name="DiscoveredCardsContainer" type="HBoxContainer" parent="." unique_id=1116090130]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 150
+
+[node name="CenterContainer" parent="DiscoveredCardsContainer" unique_id=946762981 instance=ExtResource("4_5064s")]
+layout_mode = 2
+
+[node name="CenterContainer2" parent="DiscoveredCardsContainer" unique_id=32081501 instance=ExtResource("4_5064s")]
+layout_mode = 2
+
+[node name="CenterContainer3" parent="DiscoveredCardsContainer" unique_id=1270045728 instance=ExtResource("4_5064s")]
+layout_mode = 2
+
+[node name="SkipButton" type="TextureButton" parent="." unique_id=643067929]
+layout_mode = 0
+offset_left = 770.0
+offset_top = 804.0
+offset_right = 1179.0
+offset_bottom = 912.0
+texture_normal = ExtResource("5_mkngd")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="SkipButton" unique_id=578520151]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 13.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = "Skip
+"
+label_settings = SubResource("LabelSettings_ydwev")
+horizontal_alignment = 1
+vertical_alignment = 1

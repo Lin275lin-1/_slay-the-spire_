@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cnpcjof4fvvng" path="res://images/packed/intents/attack/intent_attack_4.png" id="4_gaadk"]
 [ext_resource type="Texture2D" uid="uid://r6jnvrqc1utn" path="res://images/packed/intents/attack/intent_attack_3.png" id="4_oe3fb"]
 [ext_resource type="Texture2D" uid="uid://bueaoomrl3ifh" path="res://images/packed/intents/intent_buff.png" id="5_27bsf"]
-[ext_resource type="Resource" uid="uid://djvmk3f4ikvji" path="res://entities/characters/status_cards/伤口.tres" id="5_oe3fb"]
+[ext_resource type="Resource" uid="uid://djvmk3f4ikvji" path="res://entities/cards/status_cards/伤口.tres" id="5_oe3fb"]
 [ext_resource type="Texture2D" uid="uid://b4tk6b14m4yl3" path="res://images/packed/intents/intent_status_card.png" id="6_31xl2"]
 [ext_resource type="Script" uid="uid://dpbv4m5rd0bbq" path="res://scripts/costum_resources/intents/apply_buff_sub_intent.gd" id="6_oe3fb"]
 [ext_resource type="Script" uid="uid://b3b84q5sqt5kj" path="res://scripts/costum_resources/intents/put_card_sub_intent.gd" id="7_ioc5n"]

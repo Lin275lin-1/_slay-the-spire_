@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://w1mk8x" path="res://images/atlases/card_atlas.sprites/ironclad/strike_ironclad.tres" id="1_imfec"]
 [ext_resource type="Script" uid="uid://d826qaf767hb" path="res://scripts/ui/card_visuals.gd" id="1_m3e03"]
-[ext_resource type="Resource" uid="uid://cbdwqvevklhm0" path="res://entities/characters/ironclad/cards/燃烧.tres" id="2_bp74k"]
+[ext_resource type="Resource" uid="uid://cbdwqvevklhm0" path="res://entities/cards/ironclad/燃烧.tres" id="2_bp74k"]
 [ext_resource type="Texture2D" uid="uid://cslfj7h" path="res://images/atlases/ui_atlas.sprites/card/card_frame_attack_s.tres" id="2_m3e03"]
 [ext_resource type="Texture2D" uid="uid://0o70qg" path="res://images/atlases/ui_atlas.sprites/card/card_portrait_border_attack_s.tres" id="3_bp74k"]
 [ext_resource type="Texture2D" uid="uid://qmqejd" path="res://images/atlases/ui_atlas.sprites/card/card_banner.tres" id="4_njcf5"]
@@ -142,6 +142,7 @@ grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
 text = "1"
+scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
