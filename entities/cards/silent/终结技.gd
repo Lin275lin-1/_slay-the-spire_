@@ -5,8 +5,8 @@ extends Card
 func apply_effects(source: Player, targets: Array[Node]) -> void:
 	var numeric_entries := get_numeric_entries()
 	var damage_effect := AttackEffect.new()
-	for i in range(get_numeric_value(numeric_entries, 1, source)):
-		damage_effect.execute(DamageContext.new(source, targets, get_numeric_value(numeric_entries, 0)))
+	for i in range(get_numeric_value(numeric_entries[1], source)):
+		damage_effect.execute(DamageContext.new(source, targets, get_numeric_value(numeric_entries[0]), get_enchantment_modifiers(numeric_entries[0])))
 		await source.get_tree().create_timer(0.2).timeout
 		
 func get_description(source_: Creature, target_: Creature) -> String:

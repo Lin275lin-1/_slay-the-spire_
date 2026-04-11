@@ -37,7 +37,7 @@ func speech(_text: String, _time: float = 2.5) -> void:
 
 func attack(context: Context) -> void:
 	for child: Creature in context.targets:
-		var damage_context = DamageContext.new(self, [child], context.amount)
+		var damage_context = DamageContext.new(self, [child], context.amount, context.modifiers)
 		before_attack.emit(damage_context)
 		child.take_damage(damage_context)
 

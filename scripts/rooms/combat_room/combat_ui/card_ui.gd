@@ -166,8 +166,10 @@ func _on_mouse_entered() -> void:
 	
 func show_keyword_tooltip() -> void:
 	var keywords = KeywordTooltip.extract_keyword(card.get_default_description())
-	if keywords.is_empty():
-		return
+	
+	if card.has_enchantment():
+		KeywordTooltip.add_keyword(card.enchantment.enchantment_name, card.enchantment.get_description())
+	
 	for keyword:String in keywords:
 		var keyword_name: String = BuffLibrary.get_keyword_name(keyword)
 		var desc: String = BuffLibrary.get_keyword_description(keyword)

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://bxfmhxgwl7qn1"]
+
+[ext_resource type="Texture2D" uid="uid://cwh6jyhd77m27" path="res://images/enchantments/sharp.png" id="1_wriuy"]
+[ext_resource type="Script" uid="uid://chmc4p2wc8hbr" path="res://entities/enchantments/锋利.gd" id="2_wriuy"]
+
+[resource]
+script = ExtResource("2_wriuy")
+id = "sharp"
+enchantment_name = "锋利"
+description = "这张卡的伤害值增加{stacks}。"
+icon = ExtResource("1_wriuy")
+stacks = 3
+metadata/_custom_type_script = "uid://bohadu72l6n53"

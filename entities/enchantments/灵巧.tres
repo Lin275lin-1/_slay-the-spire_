@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://dw7kbq2tcyxgb"]
+
+[ext_resource type="Texture2D" uid="uid://c7xvf1lj7d57y" path="res://images/enchantments/nimble.png" id="1_8r7m1"]
+[ext_resource type="Script" uid="uid://f4282hlxltp5" path="res://entities/enchantments/灵巧.gd" id="2_rk8qe"]
+
+[resource]
+script = ExtResource("2_rk8qe")
+id = "nimble"
+enchantment_name = "灵巧"
+description = "这张卡获得的格挡提高{stacks}点。"
+icon = ExtResource("1_8r7m1")
+stacks = 3
+metadata/_custom_type_script = "uid://bohadu72l6n53"
