@@ -50,6 +50,7 @@ func show_keyword_tooltip() -> void:
 	#
 	KeywordTooltip.keyword_tooltip.global_position = global_position + Vector2(size.x * 1.4, 0)
 	KeywordTooltip.show()
+	print("显示tooltip")
 
 func _on_mouse_exited() -> void:
 	if tween:

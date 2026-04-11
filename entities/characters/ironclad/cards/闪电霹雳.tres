@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_bvjlo"]
 [ext_resource type="Texture2D" uid="uid://x6dqru" path="res://images/atlases/card_atlas.sprites/ironclad/thunderclap.tres" id="2_s5fly"]
 [ext_resource type="Script" uid="uid://coguyr7klivol" path="res://entities/characters/ironclad/cards/闪电霹雳.gd" id="3_0t5dk"]
-[ext_resource type="AudioStream" uid="uid://ba4ets7sje2xy" path="res://audio/SFX/lightning_orb_evoke.mp3" id="4_ovux8"]
+[ext_resource type="AudioStream" uid="uid://5hkfxlyqq0tx" path="res://audio/SFX/lightning_orb_evoke.mp3" id="4_ovux8"]
 
 [sub_resource type="Resource" id="Resource_kfv0u"]
 script = ExtResource("1_bvjlo")

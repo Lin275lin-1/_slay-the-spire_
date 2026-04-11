@@ -1,7 +1,7 @@
-[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://bs70xw06n8w5b"]
+[gd_resource type="SpineSkeletonDataResource" format=3 uid="uid://bs70xw06n8w5b"]
 
-[ext_resource type="SpineAtlasResource" uid="uid://ckmvm451vebwy" path="res://animations/merchant/regent/regent_shop.atlas" id="1_s1drc"]
-[ext_resource type="SpineSkeletonFileResource" uid="uid://dyyhq03h15cp3" path="res://animations/characters/regent/regent.skel" id="2_2c4rb"]
+[ext_resource type="SpineAtlasResource" uid="uid://cyfs7jatpix8t" path="res://animations/merchant/regent/regent_shop.atlas" id="1_s1drc"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cwodfg0pcy6n8" path="res://animations/characters/regent/regent.skel" id="2_2c4rb"]
 
 [sub_resource type="SpineAnimationMix" id="SpineAnimationMix_y55pg"]
 from = "cast"
