@@ -61,3 +61,17 @@ func create_instance() -> CharacterStats:
 	instance.discard_pile = CardPile.new()
 	instance.exhaust_pile = CardPile.new()
 	return instance
+
+func take_damage(damage: int) -> int:
+	if damage <= 0:
+		return false
+	var actual_damage: int
+	#实际伤害
+	actual_damage = clampi(damage - block, 0, damage)
+	#计算护甲
+	block = clampi(block - damage, 0, block)
+	health -= actual_damage
+	if health<=0:
+		print("角色生命值小于0，角色死亡")
+		Events.player_died.emit()
+	return actual_damage

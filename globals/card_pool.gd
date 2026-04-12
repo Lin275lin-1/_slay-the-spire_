@@ -86,6 +86,7 @@ func get_cards(color: int, type: int, rarity: int) -> Array[Card]:
 func get_discoverable_cards(color: int, type: int, rarity: int) -> Array[Card]:
 	return filter_card_by_rarity(filter_card_by_type(get_discoverable_cards_by_color(color), type), rarity)
 
+#可以被奖励的卡牌
 func get_draftable_cards(color: int, type: int, rarity: int) -> Array[Card]:
 	return filter_card_by_rarity(filter_card_by_type(get_draftable_cards_by_color(color), type), rarity)
 

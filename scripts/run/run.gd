@@ -71,7 +71,8 @@ func _on_map_room_selected(room: Room) -> void:
 			_on_campfire_room_entered(room)
 			return
 		Room.Type.UNKNOWN:
-			scene = INCIDENT_SCENE   # 事件房间
+			_on_incident_room_entered(room)
+			return
 		_:
 			return
 
@@ -185,4 +186,12 @@ func _on_campfire_room_entered(room: Room)-> void:
 	var capfire_scene :CampfireRoom = _change_view(CAMPFIRE_SCENE) as CampfireRoom
 	capfire_scene.char_stats=character
 	capfire_scene.deck_view = deck_view
+
+	
+func _on_incident_room_entered(room: Room)->void:
+	var incident_scene :IncidentRoom = _change_view(INCIDENT_SCENE) as IncidentRoom
+	incident_scene.char_stats = character
+	incident_scene.run_stats=stats
+	incident_scene.deck_view=deck_view
+	incident_scene.init()
 	

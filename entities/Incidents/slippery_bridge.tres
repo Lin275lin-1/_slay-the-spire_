@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="IncidentData" format=3 uid="uid://c2ll8c6tt83nf"]
+
+[ext_resource type="Script" uid="uid://cff53ccvxdc3t" path="res://scripts/costum_resources/incident_data.gd" id="1_b4n8s"]
+
+[resource]
+script = ExtResource("1_b4n8s")
+backgroundPath = "res://images/events/slippery_bridge.png"
+incidentName = "slippery_bridge"
+eventTitile = "滑脚木桥"
+eventDescription = "当你穿过一座摇摇欲坠的木桥时，
+忽然间暴雨倾盆。
+阵阵狂风不断向你袭来，
+似乎要将你的旅程终结与此。"
+option1Description = "将从你的牌组中被移除"
+option2Description = "再撑一会儿
+失去3点生命值。重新随机上面的卡牌"
+press_op2_title = Array[String](["再撑一会", "再撑一会", "再撑一会", "再撑一会", "再撑一会", "再撑一会", "再撑一会", "再撑一会", "跨越"])
+press_op2_description = Array[String](["你正在坚持！", "还在…坚…扌~~寺！！！", "口~阝~可~！？！！！", "我能行！！！", "不～～～～", "我在干什么！？", "!!!!!!!!!!!!!... !!!
+!!!!!!!! !!!!!!!!!!!?? !!!!!!!!!", "开发者在此告知：
+对于坚持了这么久的玩家，
+这里已经没有额外的文本内容了。
+若有不便，我们对此深表歉意。", "我恨桥。"])
+press_op2_op1description = Array[String](["跨越
+一张随机卡牌将从你的牌组中被移除", "跨越
+一张随机卡牌将从你的牌组中被移除", "跨越
+一张随机卡牌将从你的牌组中被移除", "跨越
+一张随机卡牌将从你的牌组中被移除", "跨越
+一张随机卡牌将从你的牌组中被移除", "跨越
+一张随机卡牌将从你的牌组中被移除", "跨越
+一张随机卡牌将从你的牌组中被移除", "跨越
+一张随机卡牌将从你的牌组中被移除", "离开"])
+press_op2_op2description = Array[String](["再撑一会儿失去4点生命值。重新随机上面的卡牌", "再撑一会儿失去5点生命值。重新随机上面的卡牌", "再撑一会儿失去6点生命值。重新随机上面的卡牌", "再撑一会儿失去7点生命值。重新随机上面的卡牌", "再撑一会儿失去8点生命值。重新随机上面的卡牌", "再撑一会儿失去9点生命值。重新随机上面的卡牌", "再撑一会儿失去10点生命值。重新随机上面的卡牌", "再撑一会儿失去11点生命值。重新随机上面的卡牌", "离开"])
