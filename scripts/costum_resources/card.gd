@@ -1,6 +1,7 @@
 class_name Card
 extends Resource
 # 卡牌类型(攻击，技能，能力)
+
 enum Type {
 	ATTACK = 0b00001, 
 	SKILL = 0b00010, 
