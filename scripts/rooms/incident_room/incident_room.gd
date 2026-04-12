@@ -69,7 +69,7 @@ func init()->void:
 	random_number = randi_range(0, incidentsDataArray.size()-1)  # 生成0到房间数组大小-1的随机整数
 	room_number=random_number
 	#用作测试
-	room_number=0
+	#room_number=0
 	set_incident_data(incidentsDataArray[room_number])
 
 func set_incident_data(data:IncidentData)->void:

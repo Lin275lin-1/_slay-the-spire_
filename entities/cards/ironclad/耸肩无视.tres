@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_khewp"]
 [ext_resource type="Texture2D" uid="uid://6rwx4n" path="res://images/atlases/card_atlas.sprites/ironclad/shrug_it_off.tres" id="2_11jwt"]
 [ext_resource type="Script" uid="uid://ccn4rd333asft" path="res://entities/cards/ironclad/耸肩无视.gd" id="3_a6tga"]
-[ext_resource type="AudioStream" uid="uid://debelv08fuh1w" path="res://audio/SFX/frost_orb_passive.mp3" id="4_x4nvq"]
+[ext_resource type="AudioStream" uid="uid://cnxfhtrl0n8nm" path="res://audio/SFX/frost_orb_passive.mp3" id="4_x4nvq"]
 
 [sub_resource type="Resource" id="Resource_4m843"]
 script = ExtResource("1_khewp")

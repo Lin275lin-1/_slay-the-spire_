@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://ce34juwu5b0yr" path="res://scripts/costum_resources/intents/intent.gd" id="1_eb8np"]
 [ext_resource type="Script" uid="uid://iqqyr44teapg" path="res://scripts/costum_resources/intents/sub_intent.gd" id="2_iq7g1"]
-[ext_resource type="Texture2D" uid="uid://c4qea6ui2gksn" path="res://images/packed/intents/attack/intent_attack_3.png" id="3_l0uf7"]
+[ext_resource type="Texture2D" uid="uid://r6jnvrqc1utn" path="res://images/packed/intents/attack/intent_attack_3.png" id="3_l0uf7"]
 [ext_resource type="Resource" uid="uid://by2gga1uh715e" path="res://entities/cards/status_cards/粘液.tres" id="4_ta0p2"]
-[ext_resource type="Texture2D" uid="uid://s3dma6tta5n3" path="res://images/packed/intents/intent_status_card.png" id="5_no4kl"]
+[ext_resource type="Texture2D" uid="uid://b4tk6b14m4yl3" path="res://images/packed/intents/intent_status_card.png" id="5_no4kl"]
 [ext_resource type="Script" uid="uid://b3b84q5sqt5kj" path="res://scripts/costum_resources/intents/put_card_sub_intent.gd" id="6_bja22"]
 [ext_resource type="Script" uid="uid://dvy1chg4qtsxv" path="res://entities/enemies/twig_slime_m/twig_slime_m_ai.gd" id="7_iq7g1"]
 
