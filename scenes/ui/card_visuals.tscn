@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://g1g8kd" path="res://images/atlases/ui_atlas.sprites/card/energy_ironclad.tres" id="5_b8ve4"]
 [ext_resource type="Texture2D" uid="uid://bduvy6u" path="res://images/atlases/ui_atlas.sprites/card/card_portrait_border_plaque_s.tres" id="6_0ge8e"]
 [ext_resource type="FontFile" uid="uid://wcoiw83db02h" path="res://fonts/zhs/SourceHanSerifSC-Bold.otf" id="7_njcf5"]
+[ext_resource type="Texture2D" uid="uid://hfvemc" path="res://images/atlases/ui_atlas.sprites/card/card_enchant_s.tres" id="10_0ge8e"]
+[ext_resource type="Texture2D" uid="uid://diod4yd30g3s7" path="res://images/enchantments/adroit.png" id="11_k4udy"]
 
 [node name="Visuals" type="Control" unique_id=829210823]
 layout_mode = 3
@@ -187,4 +189,43 @@ mouse_filter = 2
 bbcode_enabled = true
 text = "[center]造成6点伤害[/center]"
 scroll_active = false
+vertical_alignment = 1
+
+[node name="Enchantment" type="TextureRect" parent="." unique_id=2000040134]
+unique_name_in_owner = true
+self_modulate = Color(0.41725737, 0.41725743, 0.41725728, 1)
+layout_mode = 0
+offset_left = -17.0
+offset_top = 88.0
+offset_right = 55.0
+offset_bottom = 142.0
+texture = ExtResource("10_0ge8e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EnchantmentIcon" type="TextureRect" parent="Enchantment" unique_id=717871919]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 9.0
+offset_right = -23.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_k4udy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EnchantmentStackLabel" type="Label" parent="Enchantment" unique_id=1208129259]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 28.0
+offset_top = 26.0
+offset_right = 68.0
+offset_bottom = 49.0
+text = "2"
+horizontal_alignment = 1
 vertical_alignment = 1

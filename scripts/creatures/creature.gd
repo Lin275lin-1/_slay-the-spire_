@@ -35,12 +35,11 @@ var spine_anim_state: SpineAnimationState
 func speech(_text: String, _time: float = 2.5) -> void:
 	pass
 
-func attack(context: Context) -> void:
-	for child: Creature in context.targets:
-		var damage_context = DamageContext.new(self, [child], context.amount)
-		before_attack.emit(damage_context)
-		child.take_damage(damage_context)
-
+func attack(context: Context) -> int:
+	var damage_context = DamageContext.new(self, context.targets, context.amount, context.modifiers)
+	before_attack.emit(damage_context)
+	return context.targets[0].take_damage(damage_context)
+	
 func gain_block(_context: Context) -> void:
 	pass
 
@@ -90,8 +89,8 @@ func end_turn() -> void:
 func lose_health(_context: Context) -> void:
 	pass
 	
-func take_damage(_context: Context) -> void:
-	pass
+func take_damage(_context: Context) -> int:
+	return 0
 
 func die() -> void:
 	pass

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://b56gw7xhi8pe1"]
+
+[ext_resource type="Script" uid="uid://cfvlwgbpxwpvp" path="res://entities/enchantments/伶俐.gd" id="1_1kcbp"]
+[ext_resource type="Texture2D" uid="uid://diod4yd30g3s7" path="res://images/enchantments/adroit.png" id="1_3n4m1"]
+
+[resource]
+script = ExtResource("1_1kcbp")
+id = "adroit"
+enchantment_name = "伶俐"
+description = "打出该牌时获得{stacks}点格挡。"
+icon = ExtResource("1_3n4m1")
+stacks = 2
+metadata/_custom_type_script = "uid://bohadu72l6n53"

@@ -10,7 +10,7 @@ func activate_relic(owner: RelicUI) -> void:
 	if used:
 		return
 	var gain_block_effect = BlockEffect.new()
-	gain_block_effect.execute(GainBlockContext.new(owner, [owner.get_tree().get_first_node_in_group('ui_player')], blocks, true))
+	gain_block_effect.execute(GainBlockContext.new(owner, [owner.get_tree().get_first_node_in_group('ui_player')], blocks, [], true))
 	used = true
 	
 func deactivate_relic(_owner: RelicUI) -> void:
