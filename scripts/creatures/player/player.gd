@@ -2,7 +2,7 @@ class_name Player
 extends Creature
 
 # 玩家专属信号
-signal before_draw_cards(context: DrawCardContext)
+signal before_draw_card(context: DrawCardContext)
 signal after_draw_card(card: Card)
 
 @export var stats: CharacterStats : set = _set_char_stats
@@ -81,18 +81,21 @@ func die() -> void:
 	await spine_manager.animation_completed
 	Events.player_died.emit()
 
-func draw_card() -> void:
-	var card: Card = agent.draw_card()
-	after_draw_card.emit(card)
+func draw_card(context: DrawCardContext) -> void:
+	before_draw_card.emit(context)
+	print(context.amount)
+	if context.amount != 0:
+		var card: Card = agent.draw_card()
+		after_draw_card.emit(card)
 
-func draw_cards(context: DrawCardContext) -> void:
-	before_draw_cards.emit(context)
-	if context.amount > 0:
-		var tween = create_tween()
-		for i in range(context.amount):
-			tween.tween_callback(draw_card)
-			tween.tween_interval(0.2)
-		await tween.finished
+#func draw_cards(context: DrawCardContext) -> void:
+	#before_draw_cards.emit(context)
+	#if context.amount > 0:
+		#var tween = create_tween()
+		#for i in range(context.amount):
+			#tween.tween_callback(draw_card)
+			#tween.tween_interval(0.2)
+		#await tween.finished
 
 func gain_energy(context: GainEnergyContext) -> void:
 	stats.energy += context.amount
@@ -104,6 +107,7 @@ func lose_health(context: Context) -> int:
 	
 	before_lose_health.emit(context)
 	stats.health -= context.amount
+	damage_number_spawner.spawn_damage_label(context.amount, false)
 
 	if stats.health <= 0:
 		die()
@@ -120,7 +124,7 @@ func take_damage(context: Context) -> int:
 	before_take_damage.emit(context)
 	var final_value :int = context.get_final_value()
 	var actual_damage := stats.take_damage(final_value)
-	damage_number_spawner.spawn_damage_label(final_value, actual_damage == 0)
+	damage_number_spawner.spawn_damage_label(actual_damage, actual_damage == 0 and final_value != 0)
 	after_take_damage.emit(context)
 	if stats.health <= 0:
 		die()

@@ -7,6 +7,6 @@ func apply(source: Node, _targets: Array[Node], card_context: Dictionary, previo
 	var value = draw_card_provider.get_value(previous_result, card_context)
 	if source is Player:
 		for i in range(value):
-			await source.draw_card()
+			await source.draw_card(DrawCardContext.new(source, source, 1))
 			await source.get_tree().create_timer(0.2).timeout
 	return null

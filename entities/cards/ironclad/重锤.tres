@@ -29,6 +29,7 @@ metadata/_custom_type_script = "uid://dtok21t0ujjui"
 [sub_resource type="Resource" id="Resource_ncoce"]
 script = ExtResource("4_o1fyu")
 damage_provider = SubResource("Resource_fqdpw")
+target_type = 2
 metadata/_custom_type_script = "uid://bhhtjppe5dfcx"
 
 [sub_resource type="Resource" id="Resource_n7fi6"]
@@ -39,6 +40,7 @@ metadata/_custom_type_script = "uid://dtok21t0ujjui"
 [sub_resource type="Resource" id="Resource_ytxv4"]
 script = ExtResource("8_5mk5h")
 damage_provider = SubResource("Resource_n7fi6")
+target_type = 2
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
 
 [sub_resource type="Resource" id="Resource_51p85"]

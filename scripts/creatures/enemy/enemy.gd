@@ -12,6 +12,7 @@ var current_intent: Intent: set = _set_current_intent
 
 var visuals: CreatureVisuals
 var spine_manager: SpineManager
+var dead: bool = false
 
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
@@ -39,7 +40,10 @@ func do_turn() -> void:
 	
 	if not current_intent:
 		return
-		
+	
+	if dead:
+		Events.enemy_action_completed.emit(self)	
+		return		
 	execute_intent()
 	spine_anim_state.set_animation(current_intent.anim_name, true, 0)
 	spine_anim_state.add_animation(enemy_ai.get_idle_animation_name(), 0, true, 0)
@@ -121,6 +125,7 @@ func _update_enemy() -> void:
 	_update_stats()
 	
 func die() -> void:
+	dead = true
 	intents.hide()
 	health_bar.hide()
 	reticles.hide()
@@ -136,6 +141,7 @@ func lose_health(context: Context) -> int:
 	
 	before_lose_health.emit(context)
 	stats.health -= context.amount
+	damage_number_spawner.spawn_damage_label(context.amount, false)
 
 	if stats.health <= 0:
 		die()
@@ -151,7 +157,7 @@ func take_damage(context: Context) -> int:
 	before_take_damage.emit(context)
 	var final_value: int = context.get_final_value()
 	var actual_damage := stats.take_damage(final_value)
-	damage_number_spawner.spawn_damage_label(final_value, actual_damage == 0)
+	damage_number_spawner.spawn_damage_label(actual_damage, actual_damage == 0 and final_value != 0)
 	after_take_damage.emit(context)
 	
 	if stats.health <= 0:

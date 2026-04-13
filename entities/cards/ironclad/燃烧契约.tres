@@ -15,7 +15,7 @@ metadata/_custom_type_script = "uid://dtok21t0ujjui"
 script = ExtResource("1_yvywq")
 numeric_type = 7
 numeric_provider = SubResource("Resource_iy4gf")
-placeholder = "exhuast"
+placeholder = "exhaust"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 

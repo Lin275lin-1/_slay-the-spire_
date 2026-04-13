@@ -24,10 +24,9 @@ func spawn_buff_label(buff_name: String, is_buff: bool) -> void:
 	else:
 		new_label.label_settings.font_color = debuff_color
 	
-	get_tree().root.call_deferred("add_child", new_label)
-	# 在label的text被赋值是就会触发resize信号
-	await new_label.resized
-	new_label.position = global_position + Vector2(-new_label.size.x / 2, new_label.size.y)
+	add_child(new_label)
+	
+	new_label.position = Vector2(-new_label.size.x / 2, new_label.size.y)
 	var target_rise_pos: Vector2 = new_label.position + Vector2(0, -400)
 	
 	new_label.set_float(target_rise_pos, FLOAT_TIME)
@@ -38,13 +37,10 @@ func spawn_damage_label(number: int, blocked: bool = false) -> void:
 	# 确保伤害数字在最上层
 	new_label.z_index = 1000
 	new_label.pivot_offset_ratio = Vector2(0.5, 1.0)
-		
-	get_tree().root.call_deferred("add_child", new_label)
+
+	add_child(new_label)
 	
-	# 在label的text被赋值是就会触发resize信号
-	await new_label.tree_entered
-	
-	new_label.position = global_position + Vector2(-new_label.size.x / 2, new_label.size.y)
+	new_label.position = Vector2(-new_label.size.x / 2, new_label.size.y)
 	new_label.position += Vector2(randf_range(-50.0, 50.0), 0)
 	
 	var target_rise_pos: Vector2 = new_label.position + Vector2(randf_range(-100.0, 100.0), randf_range(-400, -300))

@@ -8,8 +8,10 @@ func _ready() -> void:
 
 func reset_enemy_intents() -> void:
 	for child: Enemy in get_children():
-		child.current_intent = null
-		child.update_intent()
+		# 如果child被queue_free就不会再更新意图
+		if is_instance_valid(child):
+			child.current_intent = null
+			child.update_intent()
 
 func setup_enemies(encounter: EnemyEncounter) -> void:
 	if not encounter:

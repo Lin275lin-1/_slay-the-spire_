@@ -23,6 +23,6 @@ func apply(source: Node, targets: Array[Node], card_context: Dictionary, previou
 			if damage_formula:
 				damage += damage_formula.calculate(target)
 			total_damage += source.attack(DamageContext.new(source, target, damage, modifiers, no_modifiers))
-			await source.get_tree().create_timer(0.2).timeout
+			await source.get_tree().create_timer(0.1).timeout
 	return total_damage
 	

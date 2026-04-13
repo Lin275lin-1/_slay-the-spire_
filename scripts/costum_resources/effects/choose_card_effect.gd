@@ -39,9 +39,9 @@ func apply(source: Node, _targets: Array[Node], _card_context: Dictionary, _prev
 		for card: Card in cards:
 			card.upgrade()
 	elif where == Where.HAND:
-		source.select_hand(ChooseCardContext.new(source, cards, get_hint_text(), min_select, max_select, get_callback(source)))
+		await source.select_hand(ChooseCardContext.new(source, cards, get_hint_text(), min_select, max_select, get_callback(source)))
 	else:
-		source.select_deck(ChooseCardContext.new(source, cards, get_hint_text(), min_select, max_select, get_callback(source)))
+		await source.select_deck(ChooseCardContext.new(source, cards, get_hint_text(), min_select, max_select, get_callback(source)))
 	return null
 
 func get_callback(source: Player) -> Callable:
