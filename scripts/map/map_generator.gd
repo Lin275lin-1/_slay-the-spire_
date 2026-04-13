@@ -175,9 +175,7 @@ func _setup_room_types() -> void:
 	for room:Room in map_data[0]:
 		if room.next_rooms.size() >0:
 			room.type = Room.Type.MONSTER
-			# 张颢骞
 			room.enemy_encounter = act1_pool.get_random_encounter_by_type(EnemyEncounter.Type.WEAK)
-			#
 	# 9th floor is always a treasure
 	for room: Room in map_data[8]:
 		if room.next_rooms.size() >0:
@@ -224,7 +222,6 @@ func _set_room_randomly(room_to_set:Room)-> void:
 		consecutive_unknown = is_unknown and has_unknown_parent
 
 	room_to_set.type = type_candidate
-	
 	# 张颢骞
 	if type_candidate == Room.Type.MONSTER:
 		# 这里是根据房间高度决定强怪池弱怪池，原游戏是前n场战斗是弱怪池
@@ -232,7 +229,9 @@ func _set_room_randomly(room_to_set:Room)-> void:
 		if room_to_set.row > 3:
 			encounter_type = EnemyEncounter.Type.STRONG
 		room_to_set.enemy_encounter = act1_pool.get_random_encounter_by_type(encounter_type)
-	#
+	elif type_candidate == Room.Type.ELITE:
+		room_to_set.enemy_encounter = act1_pool.get_random_encounter_by_type(EnemyEncounter.Type.ELITE)
+	
 	
 func _room_has_parent_of_type(room: Room, type: Room.Type) -> bool:
 	
@@ -277,9 +276,4 @@ func _get_random_room_type_by_weight() -> Room.Type:
 		return Room.Type.SHOP
 	else:
 		return Room.Type.UNKNOWN
-	
-	
-	
-	
-	
 	

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicPile" format=3 uid="uid://b63u1i8uuan3g"]
+
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="1_blll3"]
+[ext_resource type="Script" uid="uid://cgkirnvrwbk4i" path="res://scripts/costum_resources/relic_pile.gd" id="2_cxx2o"]
+[ext_resource type="Resource" uid="uid://d3a7gl0qcwuho" path="res://entities/relics/colorless/水银沙漏.tres" id="2_vurd4"]
+[ext_resource type="Resource" uid="uid://h2lk8mcg6tu5" path="res://entities/relics/colorless/灯笼.tres" id="3_1ico1"]
+[ext_resource type="Resource" uid="uid://b5niu17o73g0m" path="res://entities/relics/colorless/锚.tres" id="4_wilqf"]
+[ext_resource type="Resource" uid="uid://bcxf25bju8u48" path="res://entities/relics/ironclad/燃烧之血.tres" id="5_a1qvk"]
+
+[resource]
+script = ExtResource("2_cxx2o")
+relics = Array[ExtResource("1_blll3")]([ExtResource("2_vurd4"), ExtResource("3_1ico1"), ExtResource("4_wilqf"), ExtResource("5_a1qvk")])
+metadata/_custom_type_script = "uid://cgkirnvrwbk4i"

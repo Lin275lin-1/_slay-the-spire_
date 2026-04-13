@@ -1,5 +1,4 @@
-# 记得free
-extends Object
+extends RefCounted
 class_name Modifier
 var type: Enums.NumericType
 var additive: int = 0

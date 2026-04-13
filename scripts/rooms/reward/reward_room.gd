@@ -40,8 +40,8 @@ func _ready()->void:
 	return_button.mouse_entered.connect(_on_return_button_entered)
 	return_button.mouse_exited.connect(_on_return_button_exited)
 	
-	add_gold_reward(77)
-	add_card_reward()
+	#add_gold_reward(77)
+	#add_card_reward()
 	
 
 func _on_return_button_entered():

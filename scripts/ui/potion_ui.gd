@@ -1,0 +1,86 @@
+class_name PotionUI
+extends MarginContainer
+
+signal potion_used(potion_ui: PotionUI)
+
+@onready var out_line: TextureRect = $OutLine
+@onready var texture_rect: TextureRect = $TextureRect
+
+const POTION_PLACEHOLDER = preload("res://images/packed/potions/potion_placeholder.png")
+
+var potion: Potion
+var targets: Array[Node] = []
+var targeting := false
+var in_combat := false
+
+func _ready() -> void:
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+	gui_input.connect(_on_gui_input)
+
+func set_potion(value: Potion):
+	if value == null:
+		potion = null
+		out_line.texture = null
+		texture_rect.texture = POTION_PLACEHOLDER
+	else:
+		potion = value
+		out_line.texture = value.outline_icon
+		texture_rect.texture = value.icon
+
+func play() -> void:
+	potion.play(targets)
+	potion_used.emit(self)
+
+func _on_mouse_entered() -> void:
+	Events.tooltip_show_request.emit(self,  _show_keyword_tooltip)
+	out_line.show()
+
+func _on_mouse_exited() -> void:
+	Events.tooltip_hide_request.emit()
+	out_line.hide()
+	
+func _on_gui_input(event: InputEvent) -> void:
+	if not in_combat:
+		return
+	if event.is_action_pressed("left_mouse"):
+		if potion == null:
+			return
+		if potion.target_type == Potion.TargetType.SELF:
+			targets = get_tree().get_nodes_in_group("ui_player")
+			play()
+		elif potion.target_type == Potion.TargetType.ALL_ENEMY:
+			targets = get_tree().get_nodes_in_group("ui_enemies")
+			play()
+		else:
+			if targeting:
+				_end_aiming()
+			else:
+				_start_aiming()
+
+func _input(event: InputEvent) -> void:
+	if not targeting:
+		return	
+	if event.is_action_pressed("right_mouse"):
+		_end_aiming()
+	elif event.is_action_pressed("left_mouse"):
+		get_viewport().set_input_as_handled()
+		_end_aiming()
+		if targets.is_empty():
+			return
+		play()
+
+func _start_aiming() -> void:
+	targets.clear()
+	targeting = true
+	Events.potion_aim_started.emit(self)
+
+func _end_aiming() -> void:
+	targeting = false
+	Events.potion_aim_ended.emit(self)
+
+func _show_keyword_tooltip() -> void:
+	if potion:
+		KeywordTooltip.add_keyword(potion.potion_name, potion.description)
+		KeywordTooltip.keyword_tooltip.global_position = global_position + Vector2(size.x * 1.4, size.y)
+		KeywordTooltip.show()

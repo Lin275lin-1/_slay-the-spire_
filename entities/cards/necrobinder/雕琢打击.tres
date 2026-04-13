@@ -1,0 +1,36 @@
+[gd_resource type="Resource" format=3 uid="uid://ciiko3jlk30aq"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_2klbc"]
+[ext_resource type="Texture2D" uid="uid://bcgn03j" path="res://images/atlases/card_atlas.sprites/necrobinder/sculpting_strike.tres" id="2_35aj8"]
+[ext_resource type="Script" uid="uid://cj4qfukbhf6x8" path="res://entities/cards/necrobinder/雕琢打击.gd" id="3_4buib"]
+[ext_resource type="AudioStream" uid="uid://b4eqc65cqogm6" path="res://audio/SFX/blunt_attack.mp3" id="4_1xsq3"]
+
+[sub_resource type="Resource" id="Resource_ppitb"]
+script = ExtResource("1_2klbc")
+base_value = 7
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_qdl3f"]
+script = ExtResource("1_2klbc")
+base_value = 10
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_4buib")
+id = "雕琢打击"
+base_target = 1
+card_color = 8
+base_cost = 1
+portrait = ExtResource("2_35aj8")
+base_description = "[center]造成{damage}点伤害。[/center][p][center]选择一张手牌施加[color=gold]虚无[/color]。[/center]"
+sound = ExtResource("4_1xsq3")
+base_numeric_entries = Array[ExtResource("1_2klbc")]([SubResource("Resource_ppitb")])
+upgraded_target = 1
+upgraded_cost = 1
+upgraded_description = "[center]造成{damage}点伤害。[/center][p][center]选择一张手牌施加[color=gold]虚无[/color]。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_2klbc")]([SubResource("Resource_qdl3f")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

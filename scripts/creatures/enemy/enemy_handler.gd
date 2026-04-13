@@ -20,7 +20,15 @@ func setup_enemies(encounter: EnemyEncounter) -> void:
 		var new_enemy: Enemy = EnemyScene.instantiate()
 		new_enemy.position = enemy_entry.position
 		new_enemy.stats = enemy_entry.enemy_stats.create_instance()
+		
+		new_enemy.ready.connect(
+			func():
+				var buffs := enemy_entry.get_initial_buffs()
+				for key in buffs.keys():
+					new_enemy.add_buff(ApplyBuffContext.new(new_enemy, [new_enemy], buffs[key], key))
+				)
 		add_child(new_enemy)
+		
 
 func start_turn() -> void:
 	if get_child_count() == 0:

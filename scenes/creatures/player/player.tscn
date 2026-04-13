@@ -2,9 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://cb16flm0r74mt" path="res://scenes/creatures/creature.tscn" id="1_gw8ya"]
 [ext_resource type="Script" uid="uid://bw2yoey1sa2w8" path="res://scripts/creatures/player/player.gd" id="2_ydy0f"]
+[ext_resource type="FontFile" uid="uid://bgo5h1rnqi6op" path="res://fonts/zhs/NotoSansMonoCJKsc-Regular.otf" id="3_0ax2n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eajrs"]
 size = Vector2(674, 816)
+
+[sub_resource type="LabelSettings" id="LabelSettings_eajrs"]
+font = ExtResource("3_0ax2n")
+font_size = 50
 
 [node name="Area2D" unique_id=1710440414 groups=["ui_player"] instance=ExtResource("1_gw8ya")]
 collision_layer = 8
@@ -15,3 +20,6 @@ stats = null
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="5" unique_id=1021674470]
 position = Vector2(0, -408)
 shape = SubResource("RectangleShape2D_eajrs")
+
+[node name="DamageNumberSpawner" parent="." index="7" unique_id=1887516962]
+label_setttings = SubResource("LabelSettings_eajrs")

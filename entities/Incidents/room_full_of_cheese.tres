@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="IncidentData" format=3 uid="uid://n1fy0iraa2ol"]
+
+[ext_resource type="Script" uid="uid://cff53ccvxdc3t" path="res://scripts/costum_resources/incident_data.gd" id="1_vnneg"]
+
+[resource]
+script = ExtResource("1_vnneg")
+backgroundPath = "res://images/events/room_full_of_cheese.png"
+incidentName = "room_full_of_cheese"
+stage = 1
+eventTitile = "满屋芝士"
+eventDescription = "这房间里全是芝士！！！
+你环顾四周，想看看有没有陷阱，
+结果发现头顶上是…更多的芝士。
+屋里的蜡烛似乎也是用芝士做的。家具同样是芝士。
+突然，你身后的门砰地一声关上了。
+也是芝士做的。"
+option1Description = "大快朵颐
+从8张随机普通牌中选择2张加入到你的牌组"
+option2Description = "仔细翻找
+失去14点生命，获得天选芝士"
+press_op1_title = Array[String](["大快朵颐"])
+press_op1_description = Array[String](["你小尝了一小口芝士，
+但这反而勾起了你对芝士更强烈的食欲。
+时光流逝…
+你最终吃下了惊人份量的芝士。
+今晚，大概梦里都全是芝士了。"])
+press_op1_op1description = Array[String](["继续"])
+press_op1_op2description = Array[String](["继续"])
+press_op2_title = Array[String](["仔细翻找"])
+press_op2_description = Array[String](["你翻来覆去地找了几个小时……
+在这满屋芝士的浓香包围下，
+你的意识开始飘向某些诡异的地方，
+时光悄然流逝，
+而你，渐渐陷入了昏沉…
+你猛然惊醒，发现手中正攥着什么东西。
+那块天选芝士。"])
+press_op2_op1description = Array[String](["继续"])
+press_op2_op2description = Array[String](["继续"])

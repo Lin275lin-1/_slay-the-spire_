@@ -5,9 +5,6 @@
 [ext_resource type="Script" uid="uid://iqqyr44teapg" path="res://scripts/costum_resources/intents/sub_intent.gd" id="2_851xv"]
 [ext_resource type="Texture2D" uid="uid://b6te4h7u0cikh" path="res://images/packed/intents/attack/intent_attack_1.png" id="3_rsknn"]
 [ext_resource type="AudioStream" uid="uid://b4eqc65cqogm6" path="res://audio/SFX/blunt_attack.mp3" id="4_6ocyn"]
-[ext_resource type="Resource" uid="uid://by2gga1uh715e" path="res://entities/characters/status_cards/粘液.tres" id="5_h507v"]
-[ext_resource type="Texture2D" uid="uid://s3dma6tta5n3" path="res://images/packed/intents/intent_status_card.png" id="6_bh4vf"]
-[ext_resource type="Script" uid="uid://b3b84q5sqt5kj" path="res://scripts/costum_resources/intents/put_card_sub_intent.gd" id="7_bh4vf"]
 
 [sub_resource type="Resource" id="Resource_h507v"]
 script = ExtResource("2_851xv")
@@ -22,17 +19,8 @@ sub_intents = Array[ExtResource("2_851xv")]([SubResource("Resource_h507v")])
 anim_name = "cast"
 metadata/_custom_type_script = "uid://ce34juwu5b0yr"
 
-[sub_resource type="Resource" id="Resource_1qj4i"]
-script = ExtResource("7_bh4vf")
-card = ExtResource("5_h507v")
-type = 10
-icon = ExtResource("6_bh4vf")
-base_value = 1
-metadata/_custom_type_script = "uid://b3b84q5sqt5kj"
-
 [sub_resource type="Resource" id="Resource_rsknn"]
 script = ExtResource("1_nmjdl")
-sub_intents = Array[ExtResource("2_851xv")]([SubResource("Resource_1qj4i")])
 anim_name = "cast"
 metadata/_custom_type_script = "uid://ce34juwu5b0yr"
 

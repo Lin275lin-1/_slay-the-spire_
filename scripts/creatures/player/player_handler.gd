@@ -5,6 +5,7 @@ const HAND_DRAW_INTERVAL := 0.25
 const HAND_DISCARD_INTERVAL := 0.25
 
 @export var hand_manager: HandManager
+@export var relics: RelicHandler
 @onready var player: Player = $"../Player"
 
 var char_stats: CharacterStats
@@ -17,15 +18,16 @@ func start_battle(char_stats_: CharacterStats) -> void:
 	char_stats.draw_pile = char_stats_.deck.duplicate(true)
 	char_stats.draw_pile.shuffle()
 	char_stats.discard_pile = CardPile.new()
+	relics.relics_activated.connect(_on_relics_activated)
 	start_turn()
 	
 func start_turn() -> void:
 	player.start_turn()
-	draw_cards(char_stats.cards_per_turn)
+	relics.activate_relics_by_trigger_type(Relic.TriggerType.START_OF_TURN)
 
 func end_turn() -> void:
 	player.end_turn()
-	discard_cards()
+	relics.activate_relics_by_trigger_type(Relic.TriggerType.END_OF_TURN)
 
 func draw_card() -> Card:
 	reshuffle_deck_from_discard_pile()
@@ -111,8 +113,7 @@ func reshuffle_deck_from_discard_pile() -> void:
 		return
 	
 	while not char_stats.discard_pile.is_empty():
-		char_stats.draw_pile.add_card(char_stats.discard_pile.draw_card())
-	
+		char_stats.draw_pile.add_card(char_stats.discard_pile.draw_card())	
 	char_stats.draw_pile.shuffle()
 
 func put_card_in_draw_pile(card: Card, top: bool = false) -> void:
@@ -123,7 +124,11 @@ func put_card_in_draw_pile(card: Card, top: bool = false) -> void:
 		char_stats.draw_pile.shuffle()
 
 func put_card_in_hand(card: Card) -> void:
-	hand_manager.add_card(card)
+	if hand_manager.add_card(card):
+		hand_manager.set_cards()
+		return
+	else:
+		char_stats.discard_pile.add_card(card)
 
 func put_card_in_discard_pile(card: Card) -> void:
 	char_stats.discard_pile.add_card(card)
@@ -139,3 +144,10 @@ func _on_card_played(card: Card) -> void:
 		char_stats.exhaust_pile.add_card(card)
 	else:
 		put_card_in_discard_pile(card)
+		
+func _on_relics_activated(type: Relic.TriggerType):
+	match type:
+		Relic.TriggerType.START_OF_TURN:
+			draw_cards(char_stats.cards_per_turn)
+		Relic.TriggerType.END_OF_TURN:
+			discard_cards()

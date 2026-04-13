@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EnemyEncounter" format=3 uid="uid://d2ev4fm055apj"]
+
+[ext_resource type="Script" uid="uid://dw53gdpom3gn6" path="res://scripts/costum_resources/enemy_entry.gd" id="1_chrha"]
+[ext_resource type="Resource" uid="uid://co5o388rhc6fe" path="res://entities/enemies/vantom/vantom.tres" id="2_3qayt"]
+[ext_resource type="Script" uid="uid://dgu4qpyr0pnnb" path="res://scripts/costum_resources/enemy_encounter.gd" id="2_rj0wk"]
+
+[sub_resource type="Resource" id="Resource_rj0wk"]
+script = ExtResource("1_chrha")
+enemy_stats = ExtResource("2_3qayt")
+position = Vector2(1385, 520)
+initial_buff = {
+"滑溜": 9
+}
+metadata/_custom_type_script = "uid://dw53gdpom3gn6"
+
+[resource]
+script = ExtResource("2_rj0wk")
+type = 3
+weight = 1.0
+enemy_entries = Array[ExtResource("1_chrha")]([SubResource("Resource_rj0wk")])
+encounter_name = "vantom"
+metadata/_custom_type_script = "uid://dgu4qpyr0pnnb"

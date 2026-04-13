@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://dotbvee182xdb"]
+
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="1_0240u"]
+[ext_resource type="Script" uid="uid://jvpf65gf7yuq" path="res://scripts/costum_resources/card_pile.gd" id="2_aaywu"]
+[ext_resource type="Resource" uid="uid://bwxn117fqejg3" path="res://entities/cards/colorless/飞溅.tres" id="2_ydfme"]
+[ext_resource type="Resource" uid="uid://2t6dsuhi1es4" path="res://entities/cards/colorless/拳斗.tres" id="3_ydfme"]
+
+[resource]
+script = ExtResource("2_aaywu")
+cards = Array[ExtResource("1_0240u")]([ExtResource("2_ydfme"), ExtResource("3_ydfme")])
+metadata/_custom_type_script = "uid://jvpf65gf7yuq"

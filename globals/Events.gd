@@ -15,6 +15,9 @@ signal card_previewed(card_ui: CardUI, to_preview: bool)
 signal card_played(card: Card)
 signal target_selected(target: Creature, card: Card)
 signal target_unselected(card: Card)
+## 药水相关
+signal potion_aim_started(potion_ui: PotionUI)
+signal potion_aim_ended(potion_ui: PotionUI)
 ## 玩家相关
 # 玩家回合开始抽牌后
 signal player_hand_drawn
@@ -28,9 +31,10 @@ signal enemy_action_completed(enemy: Enemy)
 signal enemy_turn_ended
 signal enemy_died
 ## 提示栏相关
-signal tooltip_show_request(node: Node)
+signal tooltip_show_request(node: Node, callback: Callable)
 signal tooltip_hide_request 
 ## 战斗相关
+signal combat_start
 signal combat_won
 ## 测试用
 signal shop_exited

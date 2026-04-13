@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://cmilch2jb6xgn"]
+
+[ext_resource type="Texture2D" uid="uid://bbw5nx0" path="res://images/atlases/potion_atlas.sprites/block_potion.tres" id="1_3ktux"]
+[ext_resource type="Texture2D" uid="uid://r7fju" path="res://images/atlases/potion_outline_atlas.sprites/block_potion.tres" id="2_4qa8h"]
+[ext_resource type="Script" uid="uid://dcd3k6bjs0161" path="res://entities/potions/格挡药水.gd" id="3_3ktux"]
+
+[resource]
+script = ExtResource("3_3ktux")
+id = "block_potion"
+potion_name = "格挡药水"
+description = "获得12点格挡"
+icon = ExtResource("1_3ktux")
+outline_icon = ExtResource("2_4qa8h")
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

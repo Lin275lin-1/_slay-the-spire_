@@ -16,6 +16,7 @@ visible = false
 [node name="CurrentRoom" type="Node" parent="." unique_id=1013259375]
 
 [node name="Debug" type="VBoxContainer" parent="." unique_id=1592071927]
+z_index = 100
 offset_right = 200.0
 offset_bottom = 724.0
 

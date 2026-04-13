@@ -1,7 +1,9 @@
 class_name PutCardEffect
 extends Effect
 
-func execute(context: Context) -> void:
+# 没有使用
+
+func execute(context: Context) -> Variant:
 	for target: Creature in context.targets:
 		if not target:
 			continue
@@ -21,3 +23,4 @@ func execute(context: Context) -> void:
 					for i in range(context.amount):
 						target.put_card_in_hand(put_card_context.card.duplicate())
 				
+	return null

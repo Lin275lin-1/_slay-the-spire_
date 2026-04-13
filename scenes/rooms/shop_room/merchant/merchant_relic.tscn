@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bro6sn3uqyhfr"]
+
+[ext_resource type="Script" uid="uid://d4e77v8q0as8c" path="res://scripts/rooms/shop_room/merchant/merchant_relic.gd" id="1_bj1an"]
+[ext_resource type="Texture2D" uid="uid://jqn0hv" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_gold.tres" id="3_onwjv"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="4_wkakw"]
+
+[node name="MerchantRelic" type="Control" unique_id=1572514816]
+custom_minimum_size = Vector2(122, 112)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 122.0
+offset_bottom = 122.0
+scale = Vector2(0.65, 0.65)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+mouse_filter = 2
+script = ExtResource("1_bj1an")
+
+[node name="RelicHolder" type="Control" parent="." unique_id=853455278]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -104.615395
+offset_top = -143.07693
+offset_right = 11.538467
+offset_bottom = -46.92308
+scale = Vector2(2, 2)
+mouse_filter = 2
+
+[node name="Cost" type="HBoxContainer" parent="." unique_id=727005547]
+layout_mode = 0
+offset_left = -148.0
+offset_top = 52.0
+offset_right = 148.0
+offset_bottom = 106.0
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Cost" unique_id=448740788]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_onwjv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CostLabel" type="Label" parent="Cost" unique_id=1660417851]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.223529, 0.223529, 0.223529, 0)
+theme_override_colors/font_outline_color = Color(0.0666667, 0, 0, 0.431373)
+theme_override_constants/line_spacing = 0
+theme_override_constants/outline_size = 15
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_wkakw")
+theme_override_font_sizes/font_size = 39
+text = "99"

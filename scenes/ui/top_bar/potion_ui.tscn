@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://l5o2kc2hcb4h"]
+
+[ext_resource type="Script" uid="uid://b0q6gjtkjs25u" path="res://scripts/ui/potion_ui.gd" id="1_l0m77"]
+[ext_resource type="Texture2D" uid="uid://1uxi4t" path="res://images/atlases/potion_outline_atlas.sprites/fire_potion.tres" id="2_l0m77"]
+[ext_resource type="Texture2D" uid="uid://e00muw" path="res://images/atlases/potion_atlas.sprites/fire_potion.tres" id="3_ym3yu"]
+
+[node name="Potion2" type="MarginContainer" unique_id=40549828]
+mouse_filter = 0
+script = ExtResource("1_l0m77")
+
+[node name="OutLine" type="TextureRect" parent="." unique_id=128797854]
+visible = false
+self_modulate = Color(1, 1, 1, 0.4392157)
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+texture = ExtResource("2_l0m77")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=150360801]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+texture = ExtResource("3_ym3yu")
+expand_mode = 1
+stretch_mode = 5

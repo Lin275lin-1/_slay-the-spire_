@@ -10,10 +10,10 @@ func _init() -> void:
 	buff_name = buff_info["name"]
 	description = buff_info["description"]
 	icon = buff_info["icon"]
-	
-func _ready() -> void:
 	type = Type.DEBUFF
 	affect = AFFECT.TARGET
+	
+func _ready() -> void:
 	if agent and agent.has_signal("before_take_damage"):
 		agent.connect("before_take_damage", _on_before_take_damage)
 	else:

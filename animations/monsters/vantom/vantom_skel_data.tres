@@ -1,7 +1,7 @@
-[gd_resource type="SpineSkeletonDataResource" load_steps=9 format=3 uid="uid://dny2x2y3vlkp6"]
+[gd_resource type="SpineSkeletonDataResource" format=3 uid="uid://dny2x2y3vlkp6"]
 
-[ext_resource type="SpineAtlasResource" uid="uid://t8nldw7u1gpy" path="res://animations/monsters/vantom/vantom.atlas" id="1_p3lab"]
-[ext_resource type="SpineSkeletonFileResource" uid="uid://d4nvau82v6q20" path="res://animations/monsters/vantom/vantom.skel" id="2_wvbs4"]
+[ext_resource type="SpineAtlasResource" uid="uid://1qelc8262vj6" path="res://animations/monsters/vantom/vantom.atlas" id="1_31ven"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bqkhbifut1uwl" path="res://animations/monsters/vantom/vantom.skel" id="2_q57f8"]
 
 [sub_resource type="SpineAnimationMix" id="SpineAnimationMix_d1miq"]
 from = "attack_heavy"
@@ -31,7 +31,7 @@ from = "hurt"
 to = "die"
 
 [resource]
-atlas_res = ExtResource("1_p3lab")
-skeleton_file_res = ExtResource("2_wvbs4")
+atlas_res = ExtResource("1_31ven")
+skeleton_file_res = ExtResource("2_q57f8")
 default_mix = 0.05
 animation_mixes = [SubResource("SpineAnimationMix_d1miq"), SubResource("SpineAnimationMix_crsp0"), SubResource("SpineAnimationMix_7s48e"), SubResource("SpineAnimationMix_75fak"), SubResource("SpineAnimationMix_i8j3m"), SubResource("SpineAnimationMix_iorxo")]

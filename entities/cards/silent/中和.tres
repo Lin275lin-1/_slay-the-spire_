@@ -1,0 +1,52 @@
+[gd_resource type="Resource" format=3 uid="uid://dbnn1ddj582d6"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_5v2x8"]
+[ext_resource type="Texture2D" uid="uid://custti" path="res://images/atlases/card_atlas.sprites/silent/neutralize.tres" id="2_rlxfg"]
+[ext_resource type="Script" uid="uid://cs30sa4fbqi21" path="res://entities/cards/silent/中和.gd" id="3_3dlyd"]
+[ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_3dlyd"]
+
+[sub_resource type="Resource" id="Resource_3dlyd"]
+script = ExtResource("1_5v2x8")
+base_value = 3
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_7gmoc"]
+script = ExtResource("1_5v2x8")
+type = 4
+base_value = 1
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_x0ua3"]
+script = ExtResource("1_5v2x8")
+base_value = 5
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_wwk66"]
+script = ExtResource("1_5v2x8")
+type = 4
+base_value = 2
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_3dlyd")
+id = "中和"
+base_target = 1
+card_color = 2
+discoverable = false
+draftable = false
+portrait = ExtResource("2_rlxfg")
+base_description = "[center]造成{damage}点伤害。[/center][p][center]施加{stacks}层[color=gold]虚弱[/color]。[/center]"
+sound = ExtResource("4_3dlyd")
+base_numeric_entries = Array[ExtResource("1_5v2x8")]([SubResource("Resource_3dlyd"), SubResource("Resource_7gmoc")])
+upgraded_target = 1
+upgraded_description = "[center]造成{damage}点伤害。[/center][p][center]施加{stacks}层[color=gold]虚弱[/color]。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_5v2x8")]([SubResource("Resource_x0ua3"), SubResource("Resource_wwk66")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

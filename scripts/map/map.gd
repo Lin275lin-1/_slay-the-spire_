@@ -27,12 +27,16 @@ var run_stats: RunStats   # 外部状态
 
 var old_camera_2d_position_y: float
 
+# 预加载的商店场景资源
+var shop_scene_resource: PackedScene = null
+
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS -1)
 	
 	legend.highlight_requested.connect(_on_legend_highlight_requested)
 	legend.highlight_cleared.connect(_on_legend_highlight_cleared)
 	
+	_preload_shop_scene()
 	#先执行 map的_ready()	方法
 	#if run_stats.map_data == null:
 		#generate_new_map()
@@ -45,6 +49,31 @@ func _ready() -> void:
 	## 取最小缩放因子以保持宽高比（与 keep aspect 类似）
 	#var zoom_factor = min(scale_factor.x, scale_factor.y)
 	#camera_2d.zoom = Vector2(zoom_factor, zoom_factor)
+	
+func _preload_shop_scene() -> void:
+	# 如果已经加载过则跳过
+	if shop_scene_resource != null:
+		return
+	# 使用 ResourceLoader 异步加载，不阻塞当前帧
+	ResourceLoader.load_threaded_request("res://scenes/rooms/shop_room/shop_room.tscn")
+
+# 获取已加载的商店场景资源（如果尚未完成则等待）
+func get_shop_scene() -> PackedScene:
+	if shop_scene_resource:
+		return shop_scene_resource
+	
+	var path = "res://scenes/rooms/shop_room/shop_room.tscn"
+	var status = ResourceLoader.load_threaded_get_status(path)
+	if status == ResourceLoader.THREAD_LOAD_LOADED:
+		shop_scene_resource = ResourceLoader.load_threaded_get(path)
+		return shop_scene_resource
+	elif status == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+		# 如果还在加载中，可以等待或返回 null
+		return null
+	else:
+		# 加载失败或未请求，同步加载作为后备
+		shop_scene_resource = load(path)
+		return shop_scene_resource
 	
 func init(stats:RunStats) -> void:
 	run_stats = stats
@@ -130,21 +159,23 @@ func _connect_lines(room: Room) -> void:
 		new_map_line.modulate = Color(1, 1, 1, 0.1)
 		lines.add_child(new_map_line)
 		
-func _on_map_room_selected(room:Room) -> void:
-	for map_room:MapRoom in rooms.get_children():
+func _on_map_room_selected(room: Room) -> void:
+	# 立即发射信号，让场景切换最先开始
+	Events.map_room_selected.emit(room)
+	
+	# 将本函数中原有的所有 UI 更新逻辑延迟到下一帧执行
+	call_deferred("_apply_map_ui_updates", room)
+
+# 新增函数：包含原 _on_map_room_selected 中除信号发射外的所有代码
+func _apply_map_ui_updates(room: Room) -> void:
+	for map_room: MapRoom in rooms.get_children():
 		if map_room.room.row == room.row:
 			map_room.available = false
-	
-			
+
 	if last_room != null:
 		update_line_opacity_between(last_room, room, 1.0)
 	last_room = room
-	#run_stats.floors_climbed += 1
-	#update_line_opacity(room, 1.0)
-	#test
-	Events.map_room_selected.emit(room)
-	
-	#camera不可滚动,回到地图底部且所有背景消失
+
 	old_camera_2d_position_y = camera_2d.position.y
 	camera_2d.position.y = 0
 	scroll_enabled = false

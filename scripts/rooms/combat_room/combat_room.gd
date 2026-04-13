@@ -10,37 +10,45 @@ extends Control
 # 子节点的所有char_stats由该节点分发
 @export var char_stats: CharacterStats: set = _set_char_stats
 @export var music: AudioStream
+@export var relics: RelicHandler
+
+
+
 
 func _ready() -> void:
 	# 这步应该在开始一局时进行
 	#var new_stats: CharacterStats = char_stats.create_instance()
-	
 	
 	enemy_handler.child_order_changed.connect(_on_child_order_changed)
 	Events.enemy_turn_ended.connect(_on_enemy_turn_ended)
 	Events.player_turn_ended.connect(player_handler.end_turn)
 	Events.player_hand_discarded.connect(enemy_handler.start_turn)
 	
+	# 调试用
 	#start_combat()
-	# 初始化牌堆
 	
 
 func start_combat() -> void:
 	MusicPlayer.play(music, true)
 	enemy_handler.setup_enemies(enemy_encounter)
 	enemy_handler.reset_enemy_intents()
+	# 调试用
+	#char_stats = char_stats.create_instance()
+	#
 	combat_ui.char_stats = char_stats
 	hand_manager.char_stats = char_stats
 	player.stats = char_stats
-	player_handler.start_battle(char_stats)
-	combat_ui.initialize_card_pile_view()
+	
+	relics.relics_activated.connect(_on_relics_activated)
+	relics.activate_relics_by_trigger_type(Relic.TriggerType.START_OF_COMBAT)
 
 func _on_add_card_pressed() -> void:
 	player_handler.draw_card()
 
 func _on_child_order_changed() -> void:
-	if enemy_handler.get_child_count() == 0:
-		Events.combat_won.emit()
+	if enemy_handler.get_child_count() == 0 and is_instance_valid(relics):
+
+		relics.activate_relics_by_trigger_type(Relic.TriggerType.END_OF_COMBAT)
 	
 func _on_enemy_turn_ended() -> void:
 	player_handler.start_turn()
@@ -52,3 +60,13 @@ func _set_char_stats(value: CharacterStats) -> void:
 
 func _on_back_to_map_pressed() -> void:
 	Events.combat_won.emit()
+
+func _on_relics_activated(type: Relic.TriggerType) -> void:
+	match type:
+		Relic.TriggerType.START_OF_COMBAT:
+			player_handler.relics = relics
+			player_handler.start_battle(char_stats)
+			combat_ui.initialize_card_pile_view()
+			Events.combat_start.emit()
+		Relic.TriggerType.END_OF_COMBAT:
+			Events.combat_won.emit()

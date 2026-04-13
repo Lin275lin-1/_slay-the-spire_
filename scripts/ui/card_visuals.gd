@@ -33,11 +33,16 @@ const CARD_FRAME_RED_MAT = preload("res://materials/cards/frames/card_frame_red_
 @onready var card_frame: TextureRect = %CardFrame
 @onready var portrait_border: TextureRect = %PortraitBorder
 @onready var title_label: RichTextLabel = %TitleLabel
-@onready var energy_label: Label = %EnergyLabel
+@onready var energy_label: RichTextLabel = %EnergyLabel
 @onready var type_label: Label = %TypeLabel
 @onready var description_label: RichTextLabel = %DescriptionLabel
 @onready var title_banner: TextureRect = $TitleBanner
 @onready var type_plaque: NinePatchRect = %TypePlaque
+@onready var energy_icon: TextureRect = %EnergyIcon
+@onready var enchantment: TextureRect = %Enchantment
+@onready var enchantment_icon: TextureRect = %EnchantmentIcon
+@onready var enchantment_stack_label: Label = %EnchantmentStackLabel
+
 
 func _set_card(value: Card) -> void:
 	if not is_node_ready():
@@ -46,7 +51,20 @@ func _set_card(value: Card) -> void:
 	card = value
 	card_portrait.texture = card.portrait
 	title_label.text = card.get_title()
-	energy_label.text = str(card.get_cost())
+	if card.playable:
+		if card.first_play_free and card.get_cost() > 0:
+			energy_label.text = "[color=green]0[/color]"
+		else:
+			energy_label.text = str(card.get_cost())
+	else:
+		energy_icon.visible = false
+	if card.has_enchantment():
+		var enchant = card.enchantment
+		enchantment.show()
+		enchantment_icon.texture = enchant.icon
+		enchantment_stack_label.text = "" if enchant.stacks == 0 else str(enchant.stacks) 
+	else:
+		enchantment.hide()
 	description_label.text = card.get_default_description()
 	var type_text: String
 	# TODO: 诅咒，状态

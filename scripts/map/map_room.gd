@@ -75,7 +75,9 @@ func _on_input_event(_viewport:Node, event:InputEvent, _shape_idx:int) -> void:
 	if not available or not event.is_action_pressed("left_mouse"):
 		return
 	room.selected = true
+	animation_player.speed_scale = 2.0
 	animation_player.play("select")
+	#animation_player.speed_scale = 1.0
 	target_alpha = 1.0
 	sprite_2d.modulate.a = target_alpha        # 选中后完全不透明	
 	#print("clicked")

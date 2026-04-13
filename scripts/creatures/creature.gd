@@ -27,6 +27,7 @@ const BUFF_UI = preload("res://scenes/rooms/combat_room/combat_ui/buff_ui.tscn")
 @onready var name_label: Label = %NameLabel
 @onready var name_plate: Control = $NamePlate
 @onready var name_tween: Tween
+@onready var damage_number_spawner: DamageNumberSpawner = $DamageNumberSpawner
 
 
 var spine_anim_state: SpineAnimationState
@@ -34,12 +35,11 @@ var spine_anim_state: SpineAnimationState
 func speech(_text: String, _time: float = 2.5) -> void:
 	pass
 
-func attack(context: Context) -> void:
-	for child: Creature in context.targets:
-		var damage_context = DamageContext.new(self, [child], context.amount)
-		before_attack.emit(damage_context)
-		child.take_damage(damage_context)
-
+func attack(context: Context) -> int:
+	var damage_context = DamageContext.new(self, context.targets, context.amount, context.modifiers)
+	before_attack.emit(damage_context)
+	return context.targets[0].take_damage(damage_context)
+	
 func gain_block(_context: Context) -> void:
 	pass
 
@@ -63,6 +63,7 @@ func add_buff(buff_context: ApplyBuffContext) -> void:
 		var buff_ui := BUFF_UI.instantiate()
 		buff_ui.buff = buff_context.buff_node
 		buff_container.add_child(buff_ui)
+	damage_number_spawner.spawn_buff_label(buff_context.buff_node.buff_name, buff_context.buff_node.type == Buff.Type.BUFF)
 	after_applied_buff.emit(buff_context)
 
 func get_buff(buff_name: String) -> Buff:
@@ -75,7 +76,7 @@ func get_modifiers_by_type(type: Enums.NumericType, affect: Buff.AFFECT) -> Arra
 	var ret := []
 	for child: Buff in buff_manager.get_children():
 		if child.affect == affect or child.affect == Buff.AFFECT.ALL:
-			ret += child.get_modifiers_on_type(type)
+			ret += child.get_modifiers_by_type(type)
 	return ret
 
 func start_turn() -> void:
@@ -88,8 +89,8 @@ func end_turn() -> void:
 func lose_health(_context: Context) -> void:
 	pass
 	
-func take_damage(_context: Context) -> void:
-	pass
+func take_damage(_context: Context) -> int:
+	return 0
 
 func die() -> void:
 	pass

@@ -2,8 +2,6 @@
 class_name FragileDebuff
 extends Buff
 
-
-
 func _init() -> void:
 	# 一定要在init中设置buff名
 	# 在buff进树之前会判断buff_name
@@ -11,10 +9,10 @@ func _init() -> void:
 	buff_name = buff_info["name"]
 	description = buff_info["description"]
 	icon = buff_info["icon"]
-	
-func _ready() -> void:
 	type = Type.DEBUFF
 	affect = AFFECT.SELF
+	
+func _ready() -> void:
 	if agent and agent.has_signal("before_gain_block"):
 		agent.connect("before_gain_block", _on_before_gain_block)
 	else:

@@ -34,6 +34,10 @@ func on_input(event: InputEvent) -> void:
 		card_state_machine_change_state_requested.emit(self, STATE.BASE)
 		Events.player_talked.emit("没有足够的能量", 2.5)
 		return
+	if not card_ui.card.playable:
+		card_state_machine_change_state_requested.emit(self, STATE.BASE)
+		Events.player_talked.emit("这张牌无法打出", 2.5)
+		return
 	
 	if single_targetd and mouse_motion and card_ui.targets.size() > 0:
 		card_state_machine_change_state_requested.emit(self, STATE.AIMING)

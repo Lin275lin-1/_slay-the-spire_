@@ -1,0 +1,15 @@
+[gd_resource type="Resource" format=3 uid="uid://d3a7gl0qcwuho"]
+
+[ext_resource type="Texture2D" uid="uid://bnbg0lc" path="res://images/atlases/relic_atlas.sprites/mercury_hourglass.tres" id="1_ww2e6"]
+[ext_resource type="Script" uid="uid://n0lvv0axssla" path="res://entities/relics/colorless/水银沙漏.gd" id="2_ww2e6"]
+[ext_resource type="AudioStream" uid="uid://b4eqc65cqogm6" path="res://audio/SFX/blunt_attack.mp3" id="3_jkgan"]
+
+[resource]
+script = ExtResource("2_ww2e6")
+sound = ExtResource("3_jkgan")
+relic_name = "水银沙漏"
+id = "mercury_hourglass"
+icon = ExtResource("1_ww2e6")
+description = "回合开始时，对所有敌人照成3点伤害"
+relic_type = 14
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

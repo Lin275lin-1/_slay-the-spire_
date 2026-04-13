@@ -1,0 +1,35 @@
+[gd_resource type="Resource" format=3 uid="uid://4b4rigm35wmi"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_ywwuo"]
+[ext_resource type="Texture2D" uid="uid://cl6hb7j" path="res://images/atlases/card_atlas.sprites/ironclad/headbutt.tres" id="2_ocxdh"]
+[ext_resource type="Script" uid="uid://bv3cx8hvc7sok" path="res://entities/cards/ironclad/头槌.gd" id="3_ocxdh"]
+[ext_resource type="AudioStream" uid="uid://b4eqc65cqogm6" path="res://audio/SFX/blunt_attack.mp3" id="4_ocxdh"]
+
+[sub_resource type="Resource" id="Resource_rcmhm"]
+script = ExtResource("1_ywwuo")
+base_value = 9
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_3kjcc"]
+script = ExtResource("1_ywwuo")
+base_value = 12
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_ocxdh")
+id = "头槌"
+base_target = 1
+base_cost = 1
+portrait = ExtResource("2_ocxdh")
+base_description = "[center]造成{damage}点伤害。[/center][center]将一张牌从[color=gold]弃牌堆[/color]移至[color=gold]抽牌堆[/color]顶部。[/center]"
+sound = ExtResource("4_ocxdh")
+base_numeric_entries = Array[ExtResource("1_ywwuo")]([SubResource("Resource_rcmhm")])
+upgraded_target = 1
+upgraded_cost = 1
+upgraded_description = "[center]造成{damage}点伤害。[/center][center]将一张牌从[color=gold]弃牌堆[/color]移至[color=gold]抽牌堆[/color]顶部。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_ywwuo")]([SubResource("Resource_3kjcc")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

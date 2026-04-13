@@ -7,16 +7,22 @@ extends Node2D
 
 
 var current_card: CardUI
+var current_potion: PotionUI
 var targeting := false
 
 func _ready() -> void:
 	Events.card_aim_started.connect(_on_card_aim_started)
 	Events.card_aim_ended.connect(_on_card_aim_ended)
+	Events.potion_aim_started.connect(_on_potion_aim_started)
+	Events.potion_aim_ended.connect(_on_potion_aim_ended)
 
 func _process(_delta: float) -> void:
 	if not targeting:
 		return 
-	bessel_arrow.reset(current_card.global_position + current_card.size / 2, get_global_mouse_position())
+	if current_card:
+		bessel_arrow.reset(current_card.global_position + current_card.size / 2, get_global_mouse_position())
+	if current_potion:
+		bessel_arrow.reset(current_potion.global_position + current_potion.size / 2, get_global_mouse_position())
 	area_2d.position = get_local_mouse_position()
 	
 func _on_card_aim_started(card: CardUI) -> void:
@@ -36,15 +42,37 @@ func _on_card_aim_ended(_card: CardUI) -> void:
 	current_card = null
 	bessel_arrow.hide()
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	if not current_card or not targeting:
+func _on_potion_aim_started(potion: PotionUI) -> void:
+	if (potion.potion as Potion).target_type != Potion.TargetType.SINGLE_ENEMY:
+		printerr("car_target_selector: _on_potion_aim_started")
 		return
-	if not current_card.targets.has(area):
+	bessel_arrow.show()
+	targeting = true
+	area_2d.monitoring = true
+	area_2d.monitorable = true
+	current_potion = potion
+
+func _on_potion_aim_ended(_potion: PotionUI) -> void:
+	targeting = false
+	area_2d.monitorable = false
+	area_2d.monitoring = false
+	current_potion = null
+	bessel_arrow.hide()
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if (not current_card and not current_potion) or not targeting:
+		return
+	if current_card and not current_card.targets.has(area):
 		Events.target_selected.emit(area, current_card.card)
 		current_card.targets.append(area)
+	if current_potion and not current_potion.targets.has(area):
+		current_potion.targets.append(area)
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
-	if not current_card or not targeting:
+	if (not current_card and not current_potion) or not targeting:
 		return
-	Events.target_unselected.emit(current_card.card)
-	current_card.targets.erase(area)
+	if current_card:
+		Events.target_unselected.emit(current_card.card)
+		current_card.targets.erase(area)
+	if current_potion:
+		current_potion.targets.erase(area)

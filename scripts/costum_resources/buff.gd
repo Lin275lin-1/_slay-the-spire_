@@ -39,7 +39,7 @@ func get_description() -> String:
 func get_modifier() -> Array[Modifier]:
 	return []
 
-func get_modifiers_on_type(type_: Enums.NumericType) -> Array:
+func get_modifiers_by_type(type_: Enums.NumericType) -> Array:
 	var result := []
 	for modifier: Modifier in get_modifier():
 		if modifier.type == type_:

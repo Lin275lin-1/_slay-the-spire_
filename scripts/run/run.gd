@@ -13,7 +13,6 @@ const BATTLE_REWARD_SCENE = preload("res://scenes/rooms/reward/reward_room.tscn"
 
 @onready var current_room: Node = $CurrentRoom
 
-#待删?
 @onready var combat: Button = %combat
 @onready var treasure: Button = %treasure
 @onready var shop: Button = %shop
@@ -21,22 +20,19 @@ const BATTLE_REWARD_SCENE = preload("res://scenes/rooms/reward/reward_room.tscn"
 @onready var rewards: Button = %rewards
 @onready var incident: Button = %incident
 
-
 @onready var map: Button = %map
-
-#得到map节点
 @onready var map_node: Map = $Map
 @onready var top_bar: TopBar = %TopBar
-#@onready var gold_ui: GoldUI = %TopBar/Left/TopBarGold
-
 @onready var deck_view: DeckView = %DeckView
-
 
 @export var run_startup: RunStartup
 
 var character: CharacterStats
-
 var stats: RunStats
+
+# 异步加载状态变量
+var loading_status: int = 0
+
 
 func _ready() -> void:
 	if not run_startup:
@@ -51,108 +47,73 @@ func _ready() -> void:
 			print("加载游戏")
 	
 func _on_map_room_selected(room: Room) -> void:
-	# 根据房间类型选择对应的场景
 	var scene: PackedScene
 	match room.type:
-		Room.Type.MONSTER:
-			scene = COMBAT_SCENE
-		Room.Type.ELITE:
-			scene = COMBAT_SCENE   # 精英怪也是战斗
-		Room.Type.BOSS:
-			scene = COMBAT_SCENE
+		Room.Type.MONSTER, Room.Type.ELITE, Room.Type.BOSS:
+			_on_combat_room_entered(room)
+			return
 		Room.Type.TREASURE:
 			scene = TREASURE_SCENE
 		Room.Type.SHOP:
 			scene = SHOP_SCENE
 		Room.Type.CAMPFIRE:
-			scene = CAMPFIRE_SCENE
+			_on_campfire_room_entered(room)
+			return
 		Room.Type.UNKNOWN:
-			scene = INCIDENT_SCENE   # 事件房间
+			scene = INCIDENT_SCENE
+			_on_incident_room_entered(room)
+			return
+
 		_:
 			return
 
-	# 切换视图
-	var new_room_node = _change_view(scene)
-	
-	# 如果是战斗房间，还需要传递敌人数据
-	#if scene == COMBAT_SCENE:
-		#var combat_room = new_room_node as CombatRoom
-		#combat_room.char_stats = character
-		## 从 room 中获取敌人生成数据（例如 room.enemy_encounter）
-		## 需要确保 Room 资源中包含了 encounter 信息
-		#combat_room.enemy_encounter = room.enemy_encounter
-		#combat_room.start_combat()
+	if room.type == Room.Type.SHOP:
+		call_deferred("_change_view_deferred", scene)
+	else:
+		await _change_view(scene)
 		
 func _start_run() -> void:
 	stats = RunStats.new()
-	
 	_setup_event_connections()
 	_setup_top_bar()
-	# TODO: 生成地图
 	map_node.init(stats)
 	_show_map()
-	#debug
-	#await get_tree().create_timer(3).timeout
-	#stats.gold += 55
 
 func _setup_top_bar() -> void:
-	deck_view.card_pile = character.deck
-	
-	#金币状态赋值
 	top_bar.run_stats = stats   
-	
 	top_bar.initialize(character)
 	top_bar.deck_view_requested.connect(deck_view.show_card_pile.bind("你在战斗中将会使用这里的所有卡牌。", false))
-
+	top_bar.relic_handler.add_relic(character.starting_relic)
 
 func _change_view(scene: PackedScene) -> Node:
 	if current_room.get_child_count() > 0:
 		current_room.get_child(0).queue_free()
-		
+	
+	# 商店场景特殊处理：使用地图中预加载的资源
+	if scene == SHOP_SCENE:
+		var loaded_scene = map_node.get_shop_scene()
+		if loaded_scene == null:
+			# 如果资源还未加载完成，回退同步加载
+			loaded_scene = load(scene.resource_path)
+		var new_view = loaded_scene.instantiate()
+		current_room.add_child.call_deferred(new_view)
+		return new_view
+	
+	# 其他场景正常处理
 	var new_view := scene.instantiate()
 	current_room.add_child(new_view)
-	
-	# zhanghaoqian
-	if scene == COMBAT_SCENE:
-		# 这段应该在_on_battle_room_entered(room: Room)中实现，new_view.enemy_encounter = room.enemy_encounter
-		new_view = new_view as CombatRoom
-		new_view.char_stats = character
-		# 测试怪物池使用的代码
-		var encounter_pool = preload("res://entities/encounters/encounter_pools/act1_encounter_pool.tres")
-		new_view.enemy_encounter = encounter_pool.get_random_encounter_by_type(EnemyEncounter.Type.WEAK)
-		#
-		new_view.start_combat()
-	#
-	
 	return new_view
 	
 func _on_combat_won() -> void:
-	
-	var reward_scene :=_change_view(BATTLE_REWARD_SCENE) as BattleReward
+	var reward_scene := await _change_view(BATTLE_REWARD_SCENE) as BattleReward
 	reward_scene.run_stats = stats
-	reward_scene.character_stats =character
-	
-	#地图
-	#map_node.complete_current_room()
-	
-	#this is temporary code,it will come from real battle encounter data
-	# as a dependency
-	
-	# reward_scene.add_gold_reward(map.last_room.enemy_encounter.roll_gold_reward())
-	#reward_scene.add_gold_reward(77)
-	#reward_scene.add_card_reward()
-	
+	reward_scene.character_stats = character
+	reward_scene.add_gold_reward(map_node.last_room.enemy_encounter.roll_gold_reward())
+	reward_scene.add_card_reward()
+
 func _setup_event_connections() -> void:
 	Events.combat_won.connect(_on_combat_won)
 	
-	#这里会造成地图重新初始化,导致legend对应图标无法高亮
-	#Events.combat_reward_exited.connect(_change_view.bind(MAP_SCENE))
-	#Events.campfire_exited.connect(_change_view.bind(MAP_SCENE))
-	#Events.shop_exited.connect(_change_view.bind(MAP_SCENE))
-	#Events.treasure_room_exited.connect(_change_view.bind(MAP_SCENE))
-	#Events.incident_exited.connect(_change_view.bind(MAP_SCENE))
-	
-	#房间事件完成后返回到地图并且向前走一步
 	Events.combat_reward_exited.connect(_on_room_exited)
 	Events.shop_exited.connect(_on_room_exited)
 	Events.treasure_room_exited.connect(_on_room_exited)
@@ -161,33 +122,73 @@ func _setup_event_connections() -> void:
 	
 	Events.map_exited.connect(_on_map_exited)
 	map.pressed.connect(_show_map)
-	#test
-	combat.pressed.connect(_change_view.bind(COMBAT_SCENE))
-	rewards.pressed.connect(_change_view.bind(COMBAT_REWARD_SCENE))
-	treasure.pressed.connect(_change_view.bind(TREASURE_SCENE))
-	shop.pressed.connect(_change_view.bind(SHOP_SCENE))
-	campfire.pressed.connect(_change_view.bind(CAMPFIRE_SCENE))
-	incident.pressed.connect(_change_view.bind(INCIDENT_SCENE))
+	
+	# 测试按钮 - 使用包装函数
+	combat.pressed.connect(_on_combat_room_entered.bind(null))
+	rewards.pressed.connect(_on_rewards_pressed)
+	treasure.pressed.connect(_on_treasure_pressed)
+	shop.pressed.connect(_on_shop_pressed)
+	campfire.pressed.connect(_on_campfire_pressed)
+	incident.pressed.connect(_on_incident_pressed)
+
+# 测试按钮包装函数
+func _on_rewards_pressed():
+	await _change_view(COMBAT_REWARD_SCENE)
+
+func _on_treasure_pressed():
+	await _change_view(TREASURE_SCENE)
+
+func _on_shop_pressed():
+	await _change_view(SHOP_SCENE)
+
+func _on_campfire_pressed():
+	await _change_view(CAMPFIRE_SCENE)
+
+func _on_incident_pressed():
+	await _change_view(INCIDENT_SCENE)
 
 func _show_map() -> void:
-	# 隐藏当前房间视图
 	if current_room.get_child_count() > 0:
 		current_room.get_child(0).hide()
-	# 显示地图节点
 	map_node.show_map()	
-	
-	
-	
+
 func _on_map_exited() -> void:
 	map_node.hide()
-	# 重新显示当前房间视图
 	if current_room.get_child_count() > 0:
 		current_room.get_child(0).show()
-		
 	print("map_exited")
 
 func _on_room_exited() -> void:
-	# 完成当前房间（解锁下一层）
 	map_node.complete_current_room()
-	# 显示地图
 	_show_map()
+
+func _on_combat_room_entered(room: Room = null):
+	var battle_scene :CombatRoom = await _change_view(COMBAT_SCENE)
+	battle_scene.char_stats = character
+	if room:
+		battle_scene.enemy_encounter = room.enemy_encounter
+	battle_scene.relics = top_bar.relic_handler
+	battle_scene.start_combat()
+
+
+#func _on_campfire_room_entered(room: Room) -> void:
+	#var campfire_scene :CampfireRoom = await _change_view(CAMPFIRE_SCENE) as CampfireRoom
+	#campfire_scene.char_stats = character
+	#campfire_scene.deck_view = deck_view
+
+func _change_view_deferred(scene: PackedScene) -> void:
+	await _change_view(scene)
+
+func _on_campfire_room_entered(room: Room)-> void:
+	var capfire_scene :CampfireRoom = _change_view(CAMPFIRE_SCENE) as CampfireRoom
+	capfire_scene.char_stats=character
+	capfire_scene.deck_view = deck_view
+
+	
+func _on_incident_room_entered(room: Room)->void:
+	var incident_scene :IncidentRoom = _change_view(INCIDENT_SCENE) as IncidentRoom
+	incident_scene.char_stats = character
+	incident_scene.run_stats=stats
+	incident_scene.deck_view=deck_view
+	incident_scene.init()
+	

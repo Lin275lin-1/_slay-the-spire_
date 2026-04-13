@@ -1,5 +1,762 @@
 extends Control
 
+const CARD_MENU_UI_SCENE = preload("res://scenes/ui/card_menu_ui.tscn")
+const RELIC_PILE_PATH = "res://entities/merchant/relic/shop_relics.tres"
+const POTION_PILE_PATH = "res://entities/merchant/potions/shop_potions.tres"
 
-func _on_button_pressed() -> void:
+# 商品价格随机区间
+const RELIC_PRICE_MIN := 100
+const RELIC_PRICE_MAX := 150
+
+const POTION_PRICE_MIN := 40
+const POTION_PRICE_MAX := 80
+#删除卡牌固定费用为75（基础金币设置为75）
+const CARD_REMOVAL_PRICE := 75
+
+# 折扣概率
+const DISCOUNT_CHANCE := 0.3
+const DISCOUNT_FACTOR_MIN := 0.3
+const DISCOUNT_FACTOR_MAX := 0.9
+
+@onready var inventory := %MerchantInventory
+@onready var return_button := %Reback
+@onready var merchant_button := $SceneContainer/MerchantButton
+@onready var highlight_polygon := $SceneContainer/MerchantButton/HighlightPolygon as Line2D
+
+#merchant_inventory下的节点
+var slots_container: Control
+var back_button: Control
+var backstop: ColorRect
+var is_hovered := false
+var back_button_hovered := false
+
+# 商人手部
+var merchant_hand: SpineSprite
+var hand_hide_timer: Timer
+var hand_shake_timer: Timer
+var base_hand_pos: Vector2
+var current_shake_tween: Tween
+var hand_move_tween: Tween
+
+# 游戏运行数据
+var run_stats: RunStats
+var cards_populated := false
+
+#删除卡牌Ui节点
+var card_removal_node: MerchantCardRemoval
+
+#控制ui是否响应
+var is_exiting := false
+
+# 商人对话气泡
+const DIALOGUE_SCENE = preload("res://scenes/rooms/shop_room/merchant/merchant_rug_dialogue.tscn")
+var dialogue_bubble: Node2D   # 类型根据实际根节点而定
+# 商人台词库
+const LINES = {
+	"purchase_success": [
+		"成交！",
+		"又一笔买卖......嚯嚯嚯！有得赚！",
+		"祝你顺利哦！",
+		"概不退换。",
+        "谢啦~"
+	],
+	"purchase_fail": [
+		"没钱啦？",
+		"哎呀呀，这点金币可不够啊。",
+		"等你多挣一点金币再来。",
+		"我这儿不是做慈善的。",
+		"嘿兄弟，你没钱啊！",
+        "你的金币不够。"
+	],
+	"potion_full": [
+        "你没有空间存放。"
+	],
+	"card_removal_success": [
+		"卸下负担，轻装上阵！",
+		"明智的取舍。",
+        "少即是多，对吧？"
+	],
+	"card_removal_cancel": [
+		"改变主意了吗？随时欢迎。",
+        "不想移除了？没关系。"
+	]
+}
+
+
+func _ready() -> void:
+	
+	_initialize_merchant_animation()
+	_initialize_hand_timers()
+	_initialize_highlight()
+	_initialize_inventory_nodes()
+	_initialize_run_stats()
+	_initialize_card_removal()
+	_initialize_dialogue()
+	
+	# 连接商人按钮信号
+	if merchant_button.has_signal("shop_requested"):
+		merchant_button.shop_requested.connect(_show_inventory)
+	
+	# 连接返回地图按钮
+	if not return_button.pressed.is_connected(_on_return_map_pressed):
+		return_button.pressed.connect(_on_return_map_pressed)
+	
+#	进入房间识别所有事件输入
+	is_exiting = true
+
+# ============================================
+# 初始化
+# ============================================
+func _initialize_merchant_animation() -> void:
+	#商人初始动画	
+	$SceneContainer/MerchantButton/MerchantVisual.get_animation_state().set_animation("idle_loop", true, 0)
+
+func _initialize_hand_timers() -> void:
+	#当停止悬停后手部归位计时器(这里设为1s)	
+	hand_hide_timer = Timer.new()
+	hand_hide_timer.one_shot = true
+	hand_hide_timer.wait_time = 1.0
+	hand_hide_timer.timeout.connect(_on_hand_hide_timeout)
+	add_child(hand_hide_timer)
+	
+	#设置商人手部悬停后的颤动定时器(可选)	
+	hand_shake_timer = Timer.new()
+	hand_shake_timer.wait_time = 0.03
+	hand_shake_timer.timeout.connect(_apply_hand_shake)
+	add_child(hand_shake_timer)
+
+#商人按钮悬停的高亮效果设置
+func _initialize_highlight() -> void:
+	if highlight_polygon:
+		highlight_polygon.modulate.a = 0.0
+
+#初始化商人的仓库
+func _initialize_inventory_nodes() -> void:
+	if not inventory:
+		return
+		
+	backstop = inventory.get_node("Backstop") as ColorRect
+#slots_container内部包含三种商品
+	slots_container = inventory.get_node("SlotsContainer") as Control
+	back_button = inventory.get_node("BackButton") as Control
+	merchant_hand = inventory.get_node_or_null("MerchantHandContainer") as SpineSprite
+	card_removal_node = slots_container.get_node_or_null("MerchantCardRemoval") as MerchantCardRemoval
+
+	if back_button:
+		back_button.visible = false
+		back_button.mouse_filter = Control.MOUSE_FILTER_STOP
+		# 双重保障：gui_input 信号直接处理点击
+		if not back_button.gui_input.is_connected(_on_back_button_gui_input):
+			back_button.gui_input.connect(_on_back_button_gui_input)
+			
+	if slots_container:
+		_set_slots_initial_position(slots_container)
+	else:
+		print("错误：未找到 SlotsContainer 节点！")
+
+#获取runstats
+func _initialize_run_stats() -> void:
+	var current = self
+	while current:
+		if current is Run:
+			run_stats = current.stats
+			break
+		current = current.get_parent()
+		
+		
+	if run_stats:
+		run_stats.gold_changed.connect(_update_all_affordability)
+	else:
+		print("警告：无法获取 RunStats，购买和颜色更新功能将不可用")
+
+#删除卡牌的信号连接
+func _initialize_card_removal() -> void:
+	if not card_removal_node or not run_stats:
+		return
+	card_removal_node.set_run_stats(run_stats)
+	card_removal_node.removal_clicked.connect(_on_card_removal_purchased)
+	_connect_hand_signals(card_removal_node)
+
+#商人聊天气泡初始位置设置
+func _initialize_dialogue() -> void:
+	dialogue_bubble = DIALOGUE_SCENE.instantiate()
+	dialogue_bubble.z_index = 5
+	# 设置一个合适的初始位置（也可在 say 时动态调整）
+	dialogue_bubble.position = Vector2(400, 50)
+	add_child(dialogue_bubble)
+
+
+# ============================================
+# 聊天气泡前的随机台词
+# ============================================
+func _say_random(key: String, duration: float = 2.0) -> void:
+	if not LINES.has(key):
+		return
+	var lines = LINES[key]
+	if lines.is_empty():
+		return
+	say(lines[randi() % lines.size()], duration)
+
+func say(message: String, duration: float = 2.0) -> void:
+	if dialogue_bubble and dialogue_bubble.has_method("say"):
+		dialogue_bubble.say(message, duration)
+
+# ============================================
+# 商品填充（卡牌/遗物/药水）(均复用了相关ui)
+# ============================================
+func _populate_cards() -> void:
+	if not slots_container:
+		return
+	var char_name = _get_character_name()
+	if char_name == "":
+		print("无法获取角色名称，跳过卡牌填充")
+		return
+
+	var character_pile = load("res://entities/merchant/shop_cards/cards/%s/shop_%s_card_pile.tres" % [char_name, char_name]) as CardPile
+	var colorless_pile = load("res://entities/merchant/shop_cards/colorless/shop_colorless_cards.tres") as CardPile
+
+	var fill_region = func(container: Node, pile: CardPile, region_name: String):
+		if not container or not pile:
+			return
+		var slots: Array[MerchantCard] = []
+		for child in container.get_children():
+			if child is MerchantCard:
+				slots.append(child)
+		_clear_slots(slots, "card_data")
+		if slots.is_empty() or pile.cards.is_empty():
+			print(region_name + "：无槽位或牌库为空")
+			return
+
+		var available = pile.cards.duplicate()
+		available.shuffle()
+		var count = min(slots.size(), available.size())
+		for i in range(count):
+			var card_data = available[i]
+			_apply_random_price_and_discount(card_data)
+			var slot = slots[i]
+			slot.visible = true
+			slot.card_data = card_data
+			if run_stats:
+				slot.set_run_stats(run_stats)
+			_connect_card_signals(slot)
+		#print(region_name + "填充完成，数量：", count)
+
+	fill_region.call(slots_container.get_node_or_null("CharacterCards"), character_pile, "角色卡牌")
+	fill_region.call(slots_container.get_node_or_null("ColorlessCards"), colorless_pile, "无色卡牌")
+
+func _populate_relics() -> void:
+	if not slots_container:
+		return
+	var relics_container = slots_container.get_node_or_null("Relics")
+	if not relics_container:
+		return
+
+	var relic_pile = load(RELIC_PILE_PATH) as RelicPile
+	if not relic_pile:
+		return
+
+	var character_stats = _get_character_stats()
+	if not character_stats:
+		return
+
+	var available_relics: Array[Relic] = []
+	for relic in relic_pile.relics:
+		if not relic.can_appear_as_reward(character_stats, Relic.RelicType.SHOP_RELIC):
+			continue
+		# 过滤已拥有的遗物
+		if run_stats.has_relic(relic.id):
+			continue
+		available_relics.append(relic)
+	available_relics.shuffle()
+
+	var slots: Array[Control] = _find_slots(relics_container, "merchant_relic.gd", "set_relic_data", "MerchantRelic")
+	_clear_slots(slots, "relic_data")
+	var count = min(slots.size(), available_relics.size())
+	for i in range(count):
+		var relic = available_relics[i]
+		_apply_random_price_to_relic(relic)
+		var slot = slots[i]
+		slot.visible = true
+		_set_data(slot, "relic_data", relic)
+		_set_data(slot, "run_stats", run_stats)
+		_connect_click_signal(slot, "relic_clicked", _on_relic_purchased)
+		_connect_hand_signals(slot)
+	# print("遗物填充完成，实际显示数量：", count)
+	
+func _populate_potions() -> void:
+	if not slots_container:
+		return
+	var potions_container = slots_container.get_node_or_null("Potions")
+	if not potions_container:
+		return
+
+	var potion_pile = load(POTION_PILE_PATH) as PotionPile
+	if not potion_pile:
+		return
+
+	var available_potions = potion_pile.potions.duplicate()
+	available_potions.shuffle()
+
+	var slots: Array[Control] = _find_slots(potions_container, "merchant_potion.gd", "set_potion_data", "MerchantPotion")
+	_clear_slots(slots, "potion_data")
+	var count = min(slots.size(), available_potions.size())
+	for i in range(count):
+		var potion = available_potions[i]
+		_apply_random_price_to_potion(potion)
+		var slot = slots[i]
+		slot.visible = true
+		_set_data(slot, "potion_data", potion)
+		_set_data(slot, "run_stats", run_stats)
+		_connect_click_signal(slot, "potion_clicked", _on_potion_purchased)
+		_connect_hand_signals(slot)
+	#print("药水填充完成，实际显示数量：", count)
+
+# ============================================
+# 槽位查找与数据设置辅助函数
+# ============================================
+func _find_slots(container: Node, script_name: String, method_name: String, class_hint: String) -> Array[Control]:
+	var slots: Array[Control] = []
+	for child in container.get_children():
+		if child.get_script() and child.get_script().resource_path.ends_with(script_name):
+			slots.append(child)
+		elif child.has_method(method_name):
+			slots.append(child)
+		elif class_hint in child.name or child.is_class(class_hint):
+			slots.append(child)
+	return slots
+
+func _clear_slots(slots: Array, data_property: String) -> void:
+	for slot in slots:
+		slot.visible = false
+		_set_data(slot, data_property, null)
+
+func _set_data(node: Object, property: String, value) -> void:
+	if property in node:
+		node.set(property, value)
+	elif node.has_method("set_" + property):
+		node.call("set_" + property, value)
+
+func _connect_click_signal(slot: Control, signal_name: String, callback: Callable) -> void:
+	if slot.has_signal(signal_name):
+		var sig = slot.get(signal_name)
+		if not sig.is_connected(callback):
+			sig.connect(callback.bind(slot))
+
+func _connect_hand_signals(node: Object, hover_offset: Vector2 = Vector2(-60, -200)) -> void:
+	if node.has_signal("hand_hover_requested"):
+		var sig = node.hand_hover_requested
+		if not sig.is_connected(_on_hand_hover):
+			sig.connect(_on_hand_hover)
+	if node.has_signal("hand_hide_requested"):
+		var sig = node.hand_hide_requested
+		if not sig.is_connected(_on_hand_hide):
+			sig.connect(_on_hand_hide)
+
+func _connect_card_signals(card_node: MerchantCard) -> void:
+	_connect_click_signal(card_node, "card_clicked", _on_card_purchased)
+	_connect_hand_signals(card_node)
+
+# ============================================
+# 价格生成
+# ============================================
+func _apply_random_price_and_discount(card: Card) -> void:
+	var range_vec = _get_price_range_by_rarity(card.rarity)
+	var base_price = randi_range(int(range_vec.x), int(range_vec.y))
+	if randf() < DISCOUNT_CHANCE:
+		card.on_sale = true
+		card.original_price = base_price
+		card.shop_price = int(base_price * randf_range(DISCOUNT_FACTOR_MIN, DISCOUNT_FACTOR_MAX))
+	else:
+		card.on_sale = false
+		card.shop_price = base_price
+
+func _apply_random_price_to_relic(relic: Relic) -> void:
+	relic.shop_price = randi_range(RELIC_PRICE_MIN, RELIC_PRICE_MAX)
+	relic.on_sale = false
+
+func _apply_random_price_to_potion(potion: Potion) -> void:
+	potion.shop_price = randi_range(POTION_PRICE_MIN, POTION_PRICE_MAX)
+	potion.on_sale = false
+
+func _get_price_range_by_rarity(rarity: Card.Rarity) -> Vector2:
+	match rarity:
+		Card.Rarity.COMMON:   return Vector2(30, 50)
+		Card.Rarity.UNCOMMON: return Vector2(60, 80)
+		Card.Rarity.RARE:     return Vector2(100, 120)
+		_:                   return Vector2(30, 50)
+
+# ============================================
+# 购买回调
+# ============================================
+func _on_card_purchased(card: Card, card_node: MerchantCard) -> void:
+	if not _can_afford(card.shop_price):
+		_say_random("purchase_fail", 1.5)
+		_shake_node(card_node)  
+		return
+	run_stats.gold -= card.shop_price
+	_add_card_to_deck(card)
+	card_node.queue_free()
+	_say_random("purchase_success", 2.0)
+	#print("成功购买卡牌：", card.id)
+
+func _on_relic_purchased(relic: Relic, relic_node: MerchantRelic) -> void:
+	if not _can_afford(relic.shop_price):
+		_say_random("purchase_fail", 1.5)
+		_shake_node(relic_node)  
+		return
+	run_stats.gold -= relic.shop_price
+	run_stats.add_relic(relic)
+	relic_node.queue_free()
+	_say_random("purchase_success", 2.0)
+	#print("成功购买遗物：", relic.relic_name)
+	
+func _on_potion_purchased(potion: Potion, potion_node: MerchantPotion) -> void:
+	if not _can_afford(potion.shop_price):
+		_say_random("purchase_fail", 1.5)
+		_shake_node(potion_node)  
+		return
+	run_stats.gold -= potion.shop_price
+	if not run_stats.add_potion(potion):
+		run_stats.gold += potion.shop_price
+		_say_random("potion_full", 1.5)
+		#print("药水槽位已满，无法购买")
+		return
+	potion_node.queue_free()
+	_say_random("purchase_success", 2.0)
+	#print("成功购买药水：", potion.potion_name)
+	
+func _on_card_removal_purchased(price: int):
+	#print("卡牌移除服务点击，价格: ", price)
+	if not _can_afford(price):
+		_say_random("purchase_fail", 1.5)
+		_shake_node(card_removal_node)  
+		return
+	#print("金币足够，开始选择卡牌...")
+	var selected_card = await _show_card_removal_selection()
+	if selected_card == null:
+		_say_random("card_removal_cancel", 1.5)
+		#print("未选择任何卡牌或选择取消，不扣金币")
+		return
+	#print("玩家选择了卡牌: ", selected_card.id)
+	run_stats.gold -= price
+	var run_node = _get_run_node()
+	if run_node and run_node.character and run_node.character.deck:
+		run_node.character.deck.remove_card(selected_card)
+		_say_random("card_removal_success", 2.0)
+		#print("成功移除卡牌: ", selected_card.id)
+		
+func _can_afford(price: int) -> bool:
+	if not run_stats:
+		print("RunStats 未初始化")
+		return false
+	if run_stats.gold < price:
+		#print("金币不足，无法购买")
+		return false
+	return true
+
+# ============================================
+# 卡牌移除
+# ============================================
+func _show_card_removal_selection() -> Card:
+	is_exiting = false
+	var run_node = _get_run_node()
+	if not run_node or not run_node.character:
+		print("无法获取角色数据")
+		return null
+	var deck = run_node.character.deck
+	if not deck or deck.cards.is_empty():
+		print("牌组为空，无法移除卡牌")
+		return null
+
+	var deck_view: DeckView = get_node_or_null("/root/Run/DeckViewLayer/DeckView") as DeckView
+	if not deck_view:
+		deck_view = run_node.get_node_or_null("DeckViewLayer/DeckView") as DeckView
+	if not deck_view:
+		deck_view = _find_node_of_type(run_node, DeckView)
+	
+	if not deck_view:
+		print("严重错误：未找到 DeckView 节点，无法弹出选择界面")
+		return null
+
+	print("成功获取 DeckView，正在调用 select_card_pile...")
+	
+	var selected = await deck_view.select_card_pile(
+		deck.cards.duplicate(),
+		1, 1,
+		"选择一张卡牌移除"
+	)
+	print("选择结果数组大小: ", selected.size())
+	is_exiting = true
+	if selected.size() > 0:
+		return selected[0]
+	return null
+
+# ============================================
+# 手部控制
+# ============================================
+func _on_hand_hover(card_node: Node) -> void:
+	if not merchant_hand:
+		return
+	_stop_hand_timers_and_shake()
+	
+	var offset := Vector2(-60, -200)
+	if card_node is MerchantRelic or card_node is MerchantPotion:
+		offset = Vector2(-40, -70)
+	elif card_node is MerchantCardRemoval:
+		offset = Vector2(-40, -20)
+	
+	_move_hand_to_node(card_node, offset)
+
+func _move_hand_to_node(target_node: Node, offset: Vector2) -> void:
+	var center = target_node.global_position + target_node.size * target_node.scale * 0.5
+	base_hand_pos = center + offset
+	hand_move_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
+	hand_move_tween.tween_property(merchant_hand, "global_position", base_hand_pos, 2)
+	hand_move_tween.tween_callback(_start_shake)
+	merchant_hand.visible = true
+
+func _stop_hand_timers_and_shake() -> void:
+	if hand_hide_timer:
+		hand_hide_timer.stop()
+	_stop_shake()
+
+func _start_shake() -> void:
+	hand_shake_timer.stop()
+	hand_shake_timer.start()
+
+func _stop_shake() -> void:
+	hand_shake_timer.stop()
+	if current_shake_tween and current_shake_tween.is_valid():
+		current_shake_tween.kill()
+	if hand_move_tween and hand_move_tween.is_valid():
+		hand_move_tween.kill()
+
+func _on_hand_hide() -> void:
+	if hand_hide_timer:
+		hand_hide_timer.start()
+
+func _on_hand_hide_timeout() -> void:
+	_stop_shake()
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
+	tween.tween_property(merchant_hand, "position", Vector2(234, -54), 2)
+
+func _apply_hand_shake() -> void:
+	if not merchant_hand or base_hand_pos == Vector2.ZERO:
+		return
+	var offset = Vector2(randf_range(-1.5, 1.5), randf_range(-1.5, 1.5))
+	if current_shake_tween and current_shake_tween.is_valid():
+		current_shake_tween.kill()
+	current_shake_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	current_shake_tween.tween_property(merchant_hand, "global_position", base_hand_pos + offset, 0.12)
+
+#这里可以考虑购买后不立即收回
+func _reset_hand_immediately() -> void:
+	_stop_hand_timers_and_shake()
+	merchant_hand.position = Vector2(234, -54)
+
+# ============================================
+# UI 交互与动画
+# ============================================
+func _set_slots_initial_position(slots: Control) -> void:
+	var viewport_size = get_viewport().get_visible_rect().size
+	var target_x = (viewport_size.x - slots.size.x) / 2
+	slots.set_meta("target_position", Vector2(target_x, 0))
+	slots.position = Vector2(target_x, -slots.size.y)
+
+#仓库滑下
+func _show_inventory() -> void:
+	if not slots_container:
+		return
+	slots_container.visible = true
+	var root = get_tree().root
+	if slots_container.get_parent() != root:
+		slots_container.reparent(root)
+	slots_container.z_index = 3
+
+	var target_pos: Vector2 = slots_container.get_meta("target_position", Vector2.ZERO)
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
+	tween.tween_property(slots_container, "position", target_pos, 0.5)
+	tween.parallel().tween_property(slots_container, "modulate:a", 1.0, 0.3).from(0.0)
+
+	back_button.visible = true
+	back_button.z_index = 10
+	if backstop:
+		backstop.visible = true
+		create_tween().tween_property(backstop, "modulate:a", 0.7, 0.3)
+
+	if not cards_populated:
+		_populate_cards()
+		_populate_relics()
+		_populate_potions()
+		_update_all_affordability()
+		cards_populated = true
+
+
+func _on_back_button_pressed() -> void:
+	_reset_hand_immediately()
+	var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
+#	快速返回,实际上还会有bug
+	tween.tween_property(slots_container, "position:y", -slots_container.size.y, 0.1)
+	tween.parallel().tween_property(slots_container, "modulate:a", 0.0, 0.3)
+	if backstop:
+		var mask_tween = create_tween()
+		mask_tween.tween_property(backstop, "modulate:a", 0.0, 0.3)
+		mask_tween.tween_callback(func(): backstop.visible = false)
+	tween.tween_callback(_reset_inventory_position)
+
+func _reset_inventory_position() -> void:
+	if slots_container.get_parent() != inventory:
+		slots_container.reparent(inventory)
+	slots_container.visible = false
+	back_button.visible = false
+
+# ============================================
+# 辅助函数
+# ============================================
+func _get_run_node() -> Run:
+	var current = self
+	while current:
+		if current is Run:
+			return current
+		current = current.get_parent()
+	return null
+
+func _find_node_of_type(node: Node, type) -> Node:
+	if is_instance_of(node, type):
+		return node
+	for child in node.get_children():
+		var found = _find_node_of_type(child, type)
+		if found:
+			return found
+	return null
+
+func _get_character_stats():
+	var run_node = _get_run_node()
+	return run_node.character if run_node else null
+
+#好像就两个
+func _get_character_name() -> String:
+	var stats = _get_character_stats()
+	if not stats:
+		return ""
+	match stats.character_name:
+		"铁甲战士": return "ironclad"
+		"静默猎手": return "silent"
+		_: return ""
+
+func _add_card_to_deck(card: Card):
+	var run_node = _get_run_node()
+	if run_node and run_node.character:
+		run_node.character.deck.add_card(card)
+	else:
+		Events.card_purchased.emit(card)
+		
+#实时更新所有costlabel颜色
+func _update_all_affordability():
+	_update_all_cards_affordability()
+	
+	var relics_container = slots_container.get_node_or_null("Relics")
+	if relics_container:
+		for child in relics_container.get_children():
+			if child is MerchantRelic:
+				child._update_cost_color()
+	
+	var potions_container = slots_container.get_node_or_null("Potions")
+	if potions_container:
+		for child in potions_container.get_children():
+			if child is MerchantPotion:
+				child._update_cost_color()
+	
+	if card_removal_node:
+		card_removal_node._update_cost_color()
+
+
+func _update_all_cards_affordability():
+	for container_name in ["CharacterCards", "ColorlessCards"]:
+		var container = slots_container.get_node_or_null(container_name)
+		if container:
+			for child in container.get_children():
+				if child is MerchantCard:
+					child._update_cost_color()
+
+# 晃动指定商品节点（购买失败）
+func _shake_node(node: Control, intensity: float = 5.0, duration: float = 0.15) -> void:
+	if not node:
+		return
+	
+	var original_pos = node.position
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	# 快速左右晃动三次
+	tween.tween_property(node, "position:x", original_pos.x - intensity, duration * 0.25)
+	tween.tween_property(node, "position:x", original_pos.x + intensity, duration * 0.25)
+	tween.tween_property(node, "position:x", original_pos.x - intensity * 0.5, duration * 0.25)
+	tween.tween_property(node, "position:x", original_pos.x + intensity * 0.5, duration * 0.25)
+	tween.tween_property(node, "position:x", original_pos.x, duration * 0.25)
+
+# ============================================
+# 输入处理
+# ============================================
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		_handle_mouse_motion(event)
+		return
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_handle_mouse_click(event)
+
+func _handle_mouse_motion(event: InputEventMouseMotion) -> void:
+	if is_exiting == false:
+		return
+	var local = make_input_local(event)
+	if local is InputEventMouseMotion:
+		var inside = Rect2(Vector2.ZERO, size).has_point(local.position)
+		if inside != is_hovered:
+			is_hovered = inside
+			_set_hover_effect(inside)
+	if back_button and back_button.visible:
+		var back_rect = back_button.get_global_rect()
+		var inside = back_rect.has_point(event.global_position)
+		if inside != back_button_hovered:
+			back_button_hovered = inside
+			_set_back_button_scale(inside)
+
+func _handle_mouse_click(event: InputEventMouseButton) -> void:
+	if is_exiting == false:
+		return
+	# 优先检测 back_button 的点击
+	if back_button and back_button.visible:
+		if back_button.get_global_rect().has_point(event.global_position):
+			_on_back_button_pressed()
+			accept_event()
+			return
+	# 如果库存未打开，点击商人身体区域由 MerchantButton 信号处理，这里不再重复
+
+func _set_back_button_scale(active: bool) -> void:
+	if not back_button: return
+	var target = Vector2(1.2, 1.2) if active else Vector2.ONE
+	create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT).tween_property(back_button, "scale", target, 0.15)
+
+func _set_hover_effect(active: bool) -> void:
+	if not highlight_polygon: return
+	create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT).tween_property(highlight_polygon, "modulate:a", 1.0 if active else 0.0, 0.15)
+
+# ============================================
+# 返回地图按钮
+# ============================================
+func _on_return_map_pressed() -> void:
+	is_exiting = false
 	Events.shop_exited.emit()
+
+func _on_return_button_entered():
+	return_button.scale = Vector2(1.1, 1.1)
+
+func _on_return_button_exited():
+	return_button.scale = Vector2(1, 1)
+
+# ============================================
+# BackButton 的 gui_input 保障（Control 专用）
+# ============================================
+func _on_back_button_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_on_back_button_pressed()
+		accept_event()

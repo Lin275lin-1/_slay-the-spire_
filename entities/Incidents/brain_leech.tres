@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="IncidentData" format=3 uid="uid://dwbg5eckcpody"]
+
+[ext_resource type="Script" uid="uid://cff53ccvxdc3t" path="res://scripts/costum_resources/incident_data.gd" id="1_3j4bw"]
+
+[resource]
+script = ExtResource("1_3j4bw")
+backgroundPath = "res://images/events/brain_leech.png"
+incidentName = "brain_leech"
+stage = 1
+eventTitile = "脑蛭"
+eventDescription = "咚！
+你的头顶传来一阵刺痛，一个念头刺入了你的脑海。
+“分享知识吗？？？”
+你不知如何是好…"
+option1Description = "把它扯下来
+失去5点生命值。获得一组无色卡牌奖励。"
+option2Description = "分享知识
+从5张随机牌中选择1张加入你的牌组"
+press_op1_title = Array[String](["把它扯下来"])
+press_op1_description = Array[String](["你暴力地将它从头上扯了下来，
+并狠狠地把它丢得远远的！
+你的脑海中响起一个声音：
+“不~~~~~~~~~~~~…”"])
+press_op1_op1description = Array[String](["继续"])
+press_op1_op2description = Array[String](["继续"])
+press_op2_title = Array[String](["分享知识"])
+press_op2_description = Array[String](["“何其浮华博大，迷宫般的头脑！
+这简直是取之不尽的智识珍馐，
+当真让人大快朵颐啊！”
+脑蛭心满意足地弹开了，随后爬向远方。
+你大受震撼。"])
+press_op2_op1description = Array[String](["继续"])
+press_op2_op2description = Array[String](["继续"])

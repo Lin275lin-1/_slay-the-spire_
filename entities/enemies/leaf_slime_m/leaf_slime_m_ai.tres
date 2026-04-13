@@ -4,9 +4,6 @@
 [ext_resource type="Script" uid="uid://iqqyr44teapg" path="res://scripts/costum_resources/intents/sub_intent.gd" id="2_ldd8u"]
 [ext_resource type="Texture2D" uid="uid://bkbn4fvc4je43" path="res://images/packed/intents/attack/intent_attack_2.png" id="3_vqc1p"]
 [ext_resource type="AudioStream" uid="uid://b4eqc65cqogm6" path="res://audio/SFX/blunt_attack.mp3" id="4_ldd8u"]
-[ext_resource type="Resource" uid="uid://by2gga1uh715e" path="res://entities/characters/status_cards/粘液.tres" id="5_et3dl"]
-[ext_resource type="Texture2D" uid="uid://s3dma6tta5n3" path="res://images/packed/intents/intent_status_card.png" id="6_ldd8u"]
-[ext_resource type="Script" uid="uid://b3b84q5sqt5kj" path="res://scripts/costum_resources/intents/put_card_sub_intent.gd" id="7_kvjr0"]
 [ext_resource type="Script" uid="uid://bmnqyhqm6pv8y" path="res://entities/enemies/leaf_slime_m/leaf_slime_m_ai.gd" id="8_et3dl"]
 
 [sub_resource type="Resource" id="Resource_6ocyn"]
@@ -23,18 +20,8 @@ intent_name = "ClumpShot"
 anim_name = "attack"
 metadata/_custom_type_script = "uid://ce34juwu5b0yr"
 
-[sub_resource type="Resource" id="Resource_nfbet"]
-script = ExtResource("7_kvjr0")
-where = 1
-card = ExtResource("5_et3dl")
-type = 10
-icon = ExtResource("6_ldd8u")
-base_value = 2
-metadata/_custom_type_script = "uid://b3b84q5sqt5kj"
-
 [sub_resource type="Resource" id="Resource_bh4vf"]
 script = ExtResource("1_et3dl")
-sub_intents = Array[ExtResource("2_ldd8u")]([SubResource("Resource_nfbet")])
 intent_name = "StickyShot"
 anim_name = "cast"
 metadata/_custom_type_script = "uid://ce34juwu5b0yr"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://6tqk3prnw8wl"]
+
+[ext_resource type="Texture2D" uid="uid://e00muw" path="res://images/atlases/potion_atlas.sprites/fire_potion.tres" id="1_dlqdp"]
+[ext_resource type="Script" uid="uid://dp4kbh1mc3ne2" path="res://entities/potions/火焰药水.gd" id="2_dlqdp"]
+
+[resource]
+script = ExtResource("2_dlqdp")
+id = "fire_potion"
+potion_name = "火焰药水"
+description = "对指定敌人造成20点伤害"
+icon = ExtResource("1_dlqdp")
+outline_icon = ExtResource("1_dlqdp")
+target_type = 1
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

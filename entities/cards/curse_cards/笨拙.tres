@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bqfjsc6fqxox6"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_252ff"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="2_14pq7"]
+[ext_resource type="Texture2D" uid="uid://bkv25jf" path="res://images/atlases/card_atlas.sprites/curse/clumsy.tres" id="2_puk2x"]
+
+[resource]
+script = ExtResource("2_14pq7")
+id = "笨拙"
+type = 16
+card_color = 32
+base_cost = 3
+rarity = 8
+draftable = false
+portrait = ExtResource("2_puk2x")
+base_description = "[center]不能被打出。[/center]"
+ethereal = true
+playable = false
+upgradable = false
+metadata/_custom_type_script = "uid://br1hibx18tv13"

@@ -11,9 +11,10 @@ func _init() -> void:
 	buff_name = buff_info["name"]
 	description = buff_info["description"]
 	icon = buff_info["icon"]
+	type = Type.BUFF
 	
 func _ready() -> void:
-	type = Type.DEBUFF
+	
 	if agent and agent.has_signal("after_take_damage"):
 		agent.connect("after_take_damage", _on_after_take_damage)
 	else:
@@ -25,7 +26,8 @@ func get_modifier() -> Array[Modifier]:
 
 func _on_after_take_damage(context: Context) -> void:
 	# 不会触发 before_take_damage
-	context.source.stats.take_damage(stacks)
+	if context.source is Creature:
+		context.source.stats.take_damage(stacks)
 
 func get_description() -> String:
 	return description.format({"stacks": stacks})
