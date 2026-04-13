@@ -17,7 +17,6 @@ extends Resource
 
 func set_target(value: Creature):
 	for sub_intent: SubIntent in sub_intents:
-		print(value)
 		sub_intent.target = value
 func set_source(value: Creature):
 	for sub_intent: SubIntent in sub_intents:

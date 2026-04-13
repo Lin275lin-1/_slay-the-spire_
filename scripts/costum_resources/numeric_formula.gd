@@ -18,6 +18,7 @@ func calculate(target: Creature) -> int:
 		SourceType.FIXED:
 			base = 0
 		SourceType.TARGET_BUFF_STACKS:
-			var buff := target.get_buff(buff_name)
-			base = buff.stacks if buff else 0
+			if target:
+				var buff := target.get_buff(buff_name)
+				base = buff.stacks if buff else 0
 	return int(multiplier * (base + additive))

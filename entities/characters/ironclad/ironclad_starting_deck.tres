@@ -5,10 +5,25 @@
 [ext_resource type="Script" uid="uid://jvpf65gf7yuq" path="res://scripts/costum_resources/card_pile.gd" id="2_pcwuu"]
 [ext_resource type="Resource" uid="uid://by1y0dacb0le4" path="res://entities/cards/ironclad/全身撞击.tres" id="3_8xmro"]
 [ext_resource type="Resource" uid="uid://dqdqfe0bcpgp6" path="res://entities/cards/ironclad/愤怒.tres" id="4_7hj0v"]
+[ext_resource type="Resource" uid="uid://crx7od0tunyjb" path="res://entities/cards/ironclad/壁垒.tres" id="7_t8brg"]
+[ext_resource type="Resource" uid="uid://cj8n0wv5q8ry5" path="res://entities/cards/ironclad/恶魔形态.tres" id="8_au0bv"]
 [ext_resource type="Resource" uid="uid://qhmifpkdvj6h" path="res://entities/cards/ironclad/武装.tres" id="9_au0bv"]
+[ext_resource type="Resource" uid="uid://b2c13bouulo8c" path="res://entities/cards/ironclad/战斗专注.tres" id="9_cyjvc"]
+[ext_resource type="Resource" uid="uid://rfrswfbanfy" path="res://entities/cards/ironclad/打击.tres" id="10_lmdw5"]
+[ext_resource type="Resource" uid="uid://durx4ieeeb30h" path="res://entities/cards/ironclad/放血.tres" id="11_bsqa6"]
+[ext_resource type="Resource" uid="uid://upuj7jv770uk" path="res://entities/cards/ironclad/欺凌.tres" id="12_whuos"]
+[ext_resource type="Resource" uid="uid://dk4qphec16bps" path="res://entities/cards/ironclad/烙印.tres" id="13_cilra"]
 [ext_resource type="Resource" uid="uid://4b4rigm35wmi" path="res://entities/cards/ironclad/头槌.tres" id="14_cilra"]
+[ext_resource type="Resource" uid="uid://cbdwqvevklhm0" path="res://entities/cards/ironclad/燃烧.tres" id="14_lm2nt"]
+[ext_resource type="Resource" uid="uid://b0odwvcj314k2" path="res://entities/cards/ironclad/燃烧契约.tres" id="15_jqanm"]
+[ext_resource type="Resource" uid="uid://dosdxrq1vcxfj" path="res://entities/cards/ironclad/痛击.tres" id="16_q88nh"]
+[ext_resource type="Resource" uid="uid://objfyia1a4gs" path="res://entities/cards/ironclad/突破.tres" id="17_vp0wk"]
+[ext_resource type="Resource" uid="uid://djt7dhsu34m5b" path="res://entities/cards/ironclad/耸肩无视.tres" id="18_2qpn7"]
+[ext_resource type="Resource" uid="uid://bfpgqg7mlesr4" path="res://entities/cards/ironclad/重锤.tres" id="19_o2bww"]
+[ext_resource type="Resource" uid="uid://bwfi2t422lab6" path="res://entities/cards/ironclad/闪电霹雳.tres" id="20_b05o3"]
+[ext_resource type="Resource" uid="uid://b5jbjk3a0xd0q" path="res://entities/cards/ironclad/防御.tres" id="21_1n3x5"]
 
 [resource]
 script = ExtResource("2_pcwuu")
-cards = Array[ExtResource("1_6dnus")]([ExtResource("2_4bseq"), ExtResource("3_8xmro"), ExtResource("14_cilra"), ExtResource("4_7hj0v"), ExtResource("9_au0bv")])
+cards = Array[ExtResource("1_6dnus")]([ExtResource("2_4bseq"), ExtResource("3_8xmro"), ExtResource("14_cilra"), ExtResource("4_7hj0v"), ExtResource("9_au0bv"), ExtResource("7_t8brg"), ExtResource("8_au0bv"), ExtResource("9_cyjvc"), ExtResource("10_lmdw5"), ExtResource("11_bsqa6"), ExtResource("12_whuos"), ExtResource("13_cilra"), ExtResource("14_lm2nt"), ExtResource("15_jqanm"), ExtResource("16_q88nh"), ExtResource("17_vp0wk"), ExtResource("18_2qpn7"), ExtResource("19_o2bww"), ExtResource("20_b05o3"), ExtResource("21_1n3x5")])
 metadata/_custom_type_script = "uid://jvpf65gf7yuq"

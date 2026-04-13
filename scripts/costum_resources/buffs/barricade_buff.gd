@@ -21,7 +21,7 @@ func _ready() -> void:
 		agent.connect("after_turn_started", _on_after_turn_started)
 
 func get_modifier() -> Array[Modifier]:
-	var modifier := Modifier.new(Enums.NumericType.DAMAGE, 0, 1.5, null)
+	var modifier := Modifier.new(Enums.NumericType.DAMAGE, 0, 1.0, null)
 	return [modifier]
 
 func _on_before_turn_started(creature: Creature) -> void:

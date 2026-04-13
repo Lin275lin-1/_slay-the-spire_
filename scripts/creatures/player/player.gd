@@ -68,10 +68,7 @@ func select_deck(context: ChooseCardContext) -> void:
 		context.callback.call(card)
 
 func gain_block(context: Context) -> void:
-	print("test")
 	before_gain_block.emit(context)
-	print(context.amount)
-	print(context.get_final_value())
 	stats.block += context.get_final_value()
 
 func get_block() -> int:
