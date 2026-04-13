@@ -1,36 +1,106 @@
 [gd_resource type="Resource" format=3 uid="uid://dbnn1ddj582d6"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_5v2x8"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_kepm5"]
 [ext_resource type="Texture2D" uid="uid://custti" path="res://images/atlases/card_atlas.sprites/silent/neutralize.tres" id="2_rlxfg"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_x3c2t"]
 [ext_resource type="Script" uid="uid://cs30sa4fbqi21" path="res://entities/cards/silent/中和.gd" id="3_3dlyd"]
 [ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_3dlyd"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_l7eg0"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="5_wtvvq"]
+
+[sub_resource type="Resource" id="Resource_lek1s"]
+script = ExtResource("2_x3c2t")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
 [sub_resource type="Resource" id="Resource_3dlyd"]
 script = ExtResource("1_5v2x8")
-base_value = 3
+numeric_provider = SubResource("Resource_lek1s")
 placeholder = "damage"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_r34qw"]
+script = ExtResource("2_x3c2t")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
 [sub_resource type="Resource" id="Resource_7gmoc"]
 script = ExtResource("1_5v2x8")
-type = 4
-base_value = 1
+numeric_type = 4
+numeric_provider = SubResource("Resource_r34qw")
 placeholder = "stacks"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_5lr33"]
+script = ExtResource("2_x3c2t")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_75xof"]
+script = ExtResource("4_l7eg0")
+damage_provider = SubResource("Resource_5lr33")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_tqala"]
+script = ExtResource("2_x3c2t")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_sj7hw"]
+script = ExtResource("5_wtvvq")
+buff_name = "虚弱"
+buff_stack_provider = SubResource("Resource_tqala")
+target_type = 2
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_8x7va"]
+script = ExtResource("2_x3c2t")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_wb5db"]
+script = ExtResource("4_l7eg0")
+damage_provider = SubResource("Resource_8x7va")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_8carj"]
+script = ExtResource("2_x3c2t")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_whlrv"]
+script = ExtResource("5_wtvvq")
+buff_name = "虚弱"
+buff_stack_provider = SubResource("Resource_8carj")
+target_type = 2
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_2bkfj"]
+script = ExtResource("2_x3c2t")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
 [sub_resource type="Resource" id="Resource_x0ua3"]
 script = ExtResource("1_5v2x8")
-base_value = 5
+numeric_provider = SubResource("Resource_2bkfj")
 placeholder = "damage"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_mihnh"]
+script = ExtResource("2_x3c2t")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
 [sub_resource type="Resource" id="Resource_wwk66"]
 script = ExtResource("1_5v2x8")
-type = 4
-base_value = 2
+numeric_type = 4
+numeric_provider = SubResource("Resource_mihnh")
 placeholder = "stacks"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
@@ -42,6 +112,7 @@ base_target = 1
 card_color = 2
 discoverable = false
 draftable = false
+effects = Array[ExtResource("2_kepm5")]([SubResource("Resource_75xof"), SubResource("Resource_sj7hw")])
 portrait = ExtResource("2_rlxfg")
 base_description = "[center]造成{damage}点伤害。[/center][p][center]施加{stacks}层[color=gold]虚弱[/color]。[/center]"
 sound = ExtResource("4_3dlyd")
@@ -49,4 +120,5 @@ base_numeric_entries = Array[ExtResource("1_5v2x8")]([SubResource("Resource_3dly
 upgraded_target = 1
 upgraded_description = "[center]造成{damage}点伤害。[/center][p][center]施加{stacks}层[color=gold]虚弱[/color]。[/center]"
 upgraded_numeric_entries = Array[ExtResource("1_5v2x8")]([SubResource("Resource_x0ua3"), SubResource("Resource_wwk66")])
+upgraded_effects = Array[ExtResource("2_kepm5")]([SubResource("Resource_wb5db"), SubResource("Resource_whlrv")])
 metadata/_custom_type_script = "uid://br1hibx18tv13"

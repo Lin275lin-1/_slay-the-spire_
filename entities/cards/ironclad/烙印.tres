@@ -1,32 +1,136 @@
-[gd_resource type="Resource" format=3 uid="uid://dk4qphec16bps"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dk4qphec16bps"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_7g7x0"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_1f28g"]
 [ext_resource type="Texture2D" uid="uid://t28flj" path="res://images/atlases/card_atlas.sprites/ironclad/brand.tres" id="2_vdpk4"]
-[ext_resource type="Script" uid="uid://ba5pp0i84fuub" path="res://entities/cards/ironclad/烙印.gd" id="3_6d8nn"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_v6l75"]
+[ext_resource type="Script" uid="uid://bgxakc1nj11hm" path="res://scripts/costum_resources/effects/loss_health_effect.gd" id="4_1mirt"]
+[ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="5_0w4ou"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="6_bvhf2"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="8_t428w"]
+
+[sub_resource type="Resource" id="Resource_yghm2"]
+script = ExtResource("2_1f28g")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
 [sub_resource type="Resource" id="Resource_nfdik"]
 script = ExtResource("1_7g7x0")
-type = 4
-base_value = 1
+numeric_type = 1
+numeric_provider = SubResource("Resource_yghm2")
+placeholder = "lose_health"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_ov1pj"]
+script = ExtResource("2_1f28g")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_posev"]
+script = ExtResource("1_7g7x0")
+numeric_type = 4
+numeric_provider = SubResource("Resource_ov1pj")
 placeholder = "stacks"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_fb2y2"]
+script = ExtResource("2_1f28g")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_hfn42"]
+script = ExtResource("4_1mirt")
+lose_health_provider = SubResource("Resource_fb2y2")
+target_type = 1
+metadata/_custom_type_script = "uid://bgxakc1nj11hm"
+
+[sub_resource type="Resource" id="Resource_ee2j6"]
+script = ExtResource("5_0w4ou")
+callback = 1
+where = 1
+min_select = 1
+max_select = 1
+metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+
+[sub_resource type="Resource" id="Resource_0l836"]
+script = ExtResource("2_1f28g")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_40g3n"]
+script = ExtResource("6_bvhf2")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_0l836")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_2jjcy"]
+script = ExtResource("2_1f28g")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_fpwf7"]
+script = ExtResource("4_1mirt")
+lose_health_provider = SubResource("Resource_2jjcy")
+target_type = 1
+metadata/_custom_type_script = "uid://bgxakc1nj11hm"
+
+[sub_resource type="Resource" id="Resource_hqriv"]
+script = ExtResource("5_0w4ou")
+callback = 1
+where = 1
+min_select = 1
+max_select = 1
+metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+
+[sub_resource type="Resource" id="Resource_1mugd"]
+script = ExtResource("2_1f28g")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_007lt"]
+script = ExtResource("6_bvhf2")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_1mugd")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_gu5xp"]
+script = ExtResource("2_1f28g")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
 [sub_resource type="Resource" id="Resource_5k5ep"]
 script = ExtResource("1_7g7x0")
-type = 4
-base_value = 2
-placeholder = "stacks"
+numeric_type = 1
+numeric_provider = SubResource("Resource_gu5xp")
+placeholder = "lose_health"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_bbwx0"]
+script = ExtResource("2_1f28g")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_oo28o"]
+script = ExtResource("1_7g7x0")
+numeric_type = 4
+numeric_provider = SubResource("Resource_bbwx0")
+placeholder = "stacks"
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
 [resource]
-script = ExtResource("3_6d8nn")
+script = ExtResource("8_t428w")
 id = "烙印"
 type = 2
 rarity = 4
+effects = Array[ExtResource("3_v6l75")]([SubResource("Resource_hfn42"), SubResource("Resource_ee2j6"), SubResource("Resource_40g3n")])
 portrait = ExtResource("2_vdpk4")
-base_description = "[center]失去1点生命。[/center][center][color=gold]消耗[/color]一张牌。[/center][p][center]获得{stacks}层力量。[/center]"
-base_numeric_entries = Array[ExtResource("1_7g7x0")]([SubResource("Resource_nfdik")])
-upgraded_description = "[center]失去1点生命。[/center][center][color=gold]消耗[/color]一张牌。[/center][p][center]获得{stacks}层力量。[/center]"
-upgraded_numeric_entries = Array[ExtResource("1_7g7x0")]([SubResource("Resource_5k5ep")])
+base_description = "[center]失去{lose_health}点生命。[/center][center][color=gold]消耗[/color]一张牌。[/center][p][center]获得{stacks}层力量。[/center]"
+base_numeric_entries = Array[ExtResource("1_7g7x0")]([SubResource("Resource_nfdik"), SubResource("Resource_posev")])
+upgraded_description = "[center]失去{lose_health}点生命。[/center][center][color=gold]消耗[/color]一张牌。[/center][p][center]获得{stacks}层力量。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_7g7x0")]([SubResource("Resource_5k5ep"), SubResource("Resource_oo28o")])
+upgraded_effects = Array[ExtResource("3_v6l75")]([SubResource("Resource_fpwf7"), SubResource("Resource_hqriv"), SubResource("Resource_007lt")])

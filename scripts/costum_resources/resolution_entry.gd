@@ -3,7 +3,7 @@ extends Object
 # 要结算的卡牌
 var card: Card
 # 上下文
-var context: Context
+var context: Dictionary
 # 当前执行到第n个效果
 var effect_index: int = 0
 

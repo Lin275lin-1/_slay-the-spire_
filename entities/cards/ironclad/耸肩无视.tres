@@ -2,37 +2,103 @@
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_khewp"]
 [ext_resource type="Texture2D" uid="uid://6rwx4n" path="res://images/atlases/card_atlas.sprites/ironclad/shrug_it_off.tres" id="2_11jwt"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_bccfr"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_5wk7v"]
 [ext_resource type="Script" uid="uid://ccn4rd333asft" path="res://entities/cards/ironclad/耸肩无视.gd" id="3_a6tga"]
+[ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="4_ecjd2"]
 [ext_resource type="AudioStream" uid="uid://cnxfhtrl0n8nm" path="res://audio/SFX/frost_orb_passive.mp3" id="4_x4nvq"]
+[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="5_lg5y1"]
+
+[sub_resource type="Resource" id="Resource_n0n14"]
+script = ExtResource("2_bccfr")
+fixed_value = 8
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
 [sub_resource type="Resource" id="Resource_4m843"]
 script = ExtResource("1_khewp")
-type = 2
-base_value = 8
+numeric_type = 2
+numeric_provider = SubResource("Resource_n0n14")
 placeholder = "block"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_cptd6"]
+script = ExtResource("2_bccfr")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
 [sub_resource type="Resource" id="Resource_cemlr"]
 script = ExtResource("1_khewp")
-type = 5
-base_value = 1
+numeric_type = 5
+numeric_provider = SubResource("Resource_cptd6")
 placeholder = "cards"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_4i0al"]
+script = ExtResource("2_bccfr")
+fixed_value = 8
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_duevm"]
+script = ExtResource("4_ecjd2")
+block_provider = SubResource("Resource_4i0al")
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_kkvbk"]
+script = ExtResource("2_bccfr")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ujg5k"]
+script = ExtResource("5_lg5y1")
+draw_card_provider = SubResource("Resource_kkvbk")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_l78d2"]
+script = ExtResource("2_bccfr")
+fixed_value = 11
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_rdjfc"]
+script = ExtResource("4_ecjd2")
+block_provider = SubResource("Resource_l78d2")
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_cdoro"]
+script = ExtResource("2_bccfr")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_4ly0a"]
+script = ExtResource("5_lg5y1")
+draw_card_provider = SubResource("Resource_cdoro")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_ybbby"]
+script = ExtResource("2_bccfr")
+fixed_value = 11
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
 [sub_resource type="Resource" id="Resource_qyxni"]
 script = ExtResource("1_khewp")
-type = 2
-base_value = 11
+numeric_type = 2
+numeric_provider = SubResource("Resource_ybbby")
 placeholder = "block"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_bvwy2"]
+script = ExtResource("2_bccfr")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
 [sub_resource type="Resource" id="Resource_k8l5r"]
 script = ExtResource("1_khewp")
-type = 5
-base_value = 1
+numeric_type = 5
+numeric_provider = SubResource("Resource_bvwy2")
 placeholder = "cards"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
@@ -42,6 +108,7 @@ script = ExtResource("3_a6tga")
 id = "耸肩无视"
 type = 2
 base_cost = 1
+effects = Array[ExtResource("3_5wk7v")]([SubResource("Resource_duevm"), SubResource("Resource_ujg5k")])
 portrait = ExtResource("2_11jwt")
 base_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center][p][center]抽{cards}张牌[/center]"
 sound = ExtResource("4_x4nvq")
@@ -49,3 +116,4 @@ base_numeric_entries = Array[ExtResource("1_khewp")]([SubResource("Resource_4m84
 upgraded_cost = 1
 upgraded_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center][p][center]抽{cards}张牌[/center]"
 upgraded_numeric_entries = Array[ExtResource("1_khewp")]([SubResource("Resource_qyxni"), SubResource("Resource_k8l5r")])
+upgraded_effects = Array[ExtResource("3_5wk7v")]([SubResource("Resource_rdjfc"), SubResource("Resource_4ly0a")])

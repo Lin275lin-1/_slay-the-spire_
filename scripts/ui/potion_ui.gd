@@ -29,7 +29,7 @@ func set_potion(value: Potion):
 		texture_rect.texture = value.icon
 
 func play() -> void:
-	potion.play(targets)
+	potion.play(get_tree().get_first_node_in_group("ui_player"), targets)
 	potion_used.emit(self)
 
 func _on_mouse_entered() -> void:

@@ -1,21 +1,78 @@
 [gd_resource type="Resource" format=3 uid="uid://b2c13bouulo8c"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_3r53d"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_cbvpc"]
 [ext_resource type="Texture2D" uid="uid://b03h6ce" path="res://images/atlases/card_atlas.sprites/ironclad/battle_trance.tres" id="2_iy161"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_v7ntq"]
 [ext_resource type="Script" uid="uid://b4wybeioqkpgo" path="res://entities/cards/ironclad/战斗专注.gd" id="3_cbvpc"]
+[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="4_me246"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="5_2bjek"]
+
+[sub_resource type="Resource" id="Resource_kdgnw"]
+script = ExtResource("2_v7ntq")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
 [sub_resource type="Resource" id="Resource_alu25"]
 script = ExtResource("1_3r53d")
-type = 5
-base_value = 3
+numeric_type = 5
+numeric_provider = SubResource("Resource_kdgnw")
 placeholder = "cards"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_10hhi"]
+script = ExtResource("2_v7ntq")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_py8nv"]
+script = ExtResource("4_me246")
+draw_card_provider = SubResource("Resource_10hhi")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_6u03x"]
+script = ExtResource("2_v7ntq")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_asgym"]
+script = ExtResource("5_2bjek")
+buff_name = "无法抽牌"
+buff_stack_provider = SubResource("Resource_6u03x")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_tgej0"]
+script = ExtResource("2_v7ntq")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_j73js"]
+script = ExtResource("4_me246")
+draw_card_provider = SubResource("Resource_tgej0")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_xc54p"]
+script = ExtResource("2_v7ntq")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_vyx7w"]
+script = ExtResource("5_2bjek")
+buff_name = "无法抽牌"
+buff_stack_provider = SubResource("Resource_xc54p")
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_k2gpy"]
+script = ExtResource("2_v7ntq")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
 [sub_resource type="Resource" id="Resource_b5dql"]
 script = ExtResource("1_3r53d")
-type = 5
-base_value = 4
+numeric_type = 5
+numeric_provider = SubResource("Resource_k2gpy")
 placeholder = "cards"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
@@ -25,8 +82,10 @@ script = ExtResource("3_cbvpc")
 id = "战斗专注"
 type = 2
 rarity = 2
+effects = Array[ExtResource("2_cbvpc")]([SubResource("Resource_py8nv"), SubResource("Resource_asgym")])
 portrait = ExtResource("2_iy161")
 base_description = "[center]抽{cards}张牌。[/center][p][center]本回合内[color=gold]无法抽牌[/color][/center]"
 base_numeric_entries = Array[ExtResource("1_3r53d")]([SubResource("Resource_alu25")])
 upgraded_description = "[center]抽{cards}张牌。[/center][p][center]本回合内[color=gold]无法抽牌[/color][/center]"
 upgraded_numeric_entries = Array[ExtResource("1_3r53d")]([SubResource("Resource_b5dql")])
+upgraded_effects = Array[ExtResource("2_cbvpc")]([SubResource("Resource_j73js"), SubResource("Resource_vyx7w")])

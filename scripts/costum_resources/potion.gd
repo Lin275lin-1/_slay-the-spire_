@@ -21,5 +21,5 @@ enum Rarity{
 @export var target_type: TargetType
 @export var rarity: Rarity
 
-func play(_targets: Array[Node]) -> void:
+func play(_source: Node, _targets: Array[Node]) -> void:
 	pass

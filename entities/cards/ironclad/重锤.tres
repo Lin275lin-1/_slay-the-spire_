@@ -2,19 +2,53 @@
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_syci7"]
 [ext_resource type="Texture2D" uid="uid://b6s4nay" path="res://images/atlases/card_atlas.sprites/ironclad/bludgeon.tres" id="2_ob025"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_x6lwy"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_2v4ty"]
 [ext_resource type="Script" uid="uid://cbxjlhfexbmqk" path="res://entities/cards/ironclad/重锤.gd" id="3_wxb0q"]
 [ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_2yo68"]
+[ext_resource type="Script" uid="uid://bhhtjppe5dfcx" path="res://scripts/costum_resources/effects/damage_effect.gd" id="4_o1fyu"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="8_5mk5h"]
+
+[sub_resource type="Resource" id="Resource_njek6"]
+script = ExtResource("2_x6lwy")
+fixed_value = 32
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
 [sub_resource type="Resource" id="Resource_ch1fc"]
 script = ExtResource("1_syci7")
-base_value = 32
+numeric_provider = SubResource("Resource_njek6")
 placeholder = "damage"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_fqdpw"]
+script = ExtResource("2_x6lwy")
+fixed_value = 32
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ncoce"]
+script = ExtResource("4_o1fyu")
+damage_provider = SubResource("Resource_fqdpw")
+metadata/_custom_type_script = "uid://bhhtjppe5dfcx"
+
+[sub_resource type="Resource" id="Resource_n7fi6"]
+script = ExtResource("2_x6lwy")
+fixed_value = 42
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ytxv4"]
+script = ExtResource("8_5mk5h")
+damage_provider = SubResource("Resource_n7fi6")
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_51p85"]
+script = ExtResource("2_x6lwy")
+fixed_value = 32
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
 [sub_resource type="Resource" id="Resource_etmdp"]
 script = ExtResource("1_syci7")
-base_value = 42
+numeric_provider = SubResource("Resource_51p85")
 placeholder = "damage"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
@@ -25,11 +59,13 @@ id = "重锤"
 base_target = 1
 base_cost = 3
 rarity = 2
+effects = Array[ExtResource("3_2v4ty")]([SubResource("Resource_ncoce")])
 portrait = ExtResource("2_ob025")
 base_description = "[center]造成{damage}点伤害。[/center]"
 sound = ExtResource("4_2yo68")
 base_numeric_entries = Array[ExtResource("1_syci7")]([SubResource("Resource_ch1fc")])
 upgraded_target = 1
-upgraded_cost = 42
+upgraded_cost = 3
 upgraded_description = "[center]造成{damage}点伤害。[/center]"
 upgraded_numeric_entries = Array[ExtResource("1_syci7")]([SubResource("Resource_etmdp")])
+upgraded_effects = Array[ExtResource("3_2v4ty")]([SubResource("Resource_ytxv4")])

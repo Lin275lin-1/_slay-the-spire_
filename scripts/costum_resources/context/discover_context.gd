@@ -8,9 +8,7 @@ var can_skip: bool
 var upgraded: bool
 var first_play_free: bool
 
-func _init(source_: Node, targets_: Array[Node], color_: int, type_: int, rarity_: int, can_skip_: bool, upgraded_: bool, first_play_free_: bool):
-	source = source_
-	targets = targets_
+func _init(color_: int, type_: int, rarity_: int, can_skip_: bool, upgraded_: bool, first_play_free_: bool):
 	color = color_
 	type = type_
 	rarity = rarity_

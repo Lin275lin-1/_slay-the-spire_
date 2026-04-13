@@ -23,5 +23,6 @@ func get_description() -> String:
 
 func _on_before_turn_started(_creature: Node2D) -> void:
 	var apply_buff_effect = ApplyBuffEffect.new()
-	apply_buff_effect.sound = buff_sound
-	apply_buff_effect.execute(ApplyBuffContext.new(agent, [agent], 2, StrengthBuff.new()))
+	apply_buff_effect.target_type = Effect.TargetType.SINGLE_ENEMY
+	apply_buff_effect.buff_name = "力量"
+	apply_buff_effect.buff_stack_provider = NumericProvider.new(stacks)

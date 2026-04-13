@@ -25,7 +25,7 @@ func setup_enemies(encounter: EnemyEncounter) -> void:
 			func():
 				var buffs := enemy_entry.get_initial_buffs()
 				for key in buffs.keys():
-					new_enemy.add_buff(ApplyBuffContext.new(new_enemy, [new_enemy], buffs[key], key))
+					new_enemy.add_buff(ApplyBuffContext.new(new_enemy, new_enemy, buffs[key], key))
 				)
 		add_child(new_enemy)
 		

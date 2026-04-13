@@ -1,8 +1,8 @@
 class_name BuffManager
 extends Node
 
-# 如果新增buff，返回true
-func add_buff(buff_context: ApplyBuffContext) -> bool:
+# 如果新增buff，返回0
+func add_buff(buff_context: ApplyBuffContext) -> int:
 	var buff_node: Buff = buff_context.buff_node
 	var exist_buff: Buff = null;
 	for child: Buff in get_children():
@@ -10,10 +10,10 @@ func add_buff(buff_context: ApplyBuffContext) -> bool:
 			exist_buff = child
 			break
 	if exist_buff:
+		var buff_stacks = exist_buff.stacks
 		exist_buff.add_stack(buff_node.stacks)
-		return false
+		return buff_stacks
 	else:
-		# 在applybuffeffect中多目标buff会被拆成多个单目标buff
-		buff_node.agent = buff_context.targets[0]
+		buff_node.agent = buff_context.target
 		add_child(buff_node)
-		return true
+		return 0

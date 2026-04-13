@@ -36,17 +36,18 @@ func speech(_text: String, _time: float = 2.5) -> void:
 	pass
 
 func attack(context: Context) -> int:
-	var damage_context = DamageContext.new(self, context.targets, context.amount, context.modifiers)
+	var damage_context = DamageContext.new(self, context.target, context.amount, context.modifiers)
 	before_attack.emit(damage_context)
-	return context.targets[0].take_damage(damage_context)
+	return context.target.take_damage(damage_context)
 	
 func gain_block(_context: Context) -> void:
 	pass
 
-func apply_buff(buff_context: ApplyBuffContext) -> void:
+func apply_buff(buff_context: ApplyBuffContext) -> int:
 	before_apply_buff.emit(buff_context)
-	buff_context.targets[0].add_buff(buff_context)
+	var ret = buff_context.target.add_buff(buff_context)
 	after_apply_buff.emit(buff_context)
+	return ret
 
 func has_buff(name_: String) -> bool:
 	for child: Buff in buff_manager.get_children():
@@ -54,17 +55,19 @@ func has_buff(name_: String) -> bool:
 			return true
 	return false
 	
-func add_buff(buff_context: ApplyBuffContext) -> void:
+func add_buff(buff_context: ApplyBuffContext) -> int:
 	before_applied_buff.emit(buff_context)
 	if not buff_context.buff_node:
-		return
+		return 0
 	buff_context.buff_node.stacks = buff_context.amount	
-	if buff_manager.add_buff(buff_context):
+	var buff_stacks = buff_manager.add_buff(buff_context)
+	if buff_stacks == 0:
 		var buff_ui := BUFF_UI.instantiate()
 		buff_ui.buff = buff_context.buff_node
 		buff_container.add_child(buff_ui)
 	damage_number_spawner.spawn_buff_label(buff_context.buff_node.buff_name, buff_context.buff_node.type == Buff.Type.BUFF)
 	after_applied_buff.emit(buff_context)
+	return buff_stacks + buff_context.amount
 
 func get_buff(buff_name: String) -> Buff:
 	for buff: Buff in buff_manager.get_children():
@@ -86,8 +89,8 @@ func start_turn() -> void:
 func end_turn() -> void:
 	turn_ended.emit(self)
 	
-func lose_health(_context: Context) -> void:
-	pass
+func lose_health(_context: Context) -> int:
+	return 0
 	
 func take_damage(_context: Context) -> int:
 	return 0

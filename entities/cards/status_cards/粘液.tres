@@ -1,8 +1,57 @@
 [gd_resource type="Resource" format=3 uid="uid://by2gga1uh715e"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_v5erv"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_td2il"]
 [ext_resource type="Texture2D" uid="uid://p3dctu" path="res://images/atlases/card_atlas.sprites/status/slimed.tres" id="2_wqwyq"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_qpq4r"]
 [ext_resource type="Script" uid="uid://b3vbmv0v5bmx2" path="res://entities/cards/status_cards/粘液.gd" id="3_ybkfm"]
+[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="4_ff21i"]
+
+[sub_resource type="Resource" id="Resource_tm3y2"]
+script = ExtResource("2_td2il")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_6dbo2"]
+script = ExtResource("1_v5erv")
+numeric_type = 5
+numeric_provider = SubResource("Resource_tm3y2")
+placeholder = "cards"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_c0kh1"]
+script = ExtResource("2_td2il")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_aj48f"]
+script = ExtResource("4_ff21i")
+draw_card_provider = SubResource("Resource_c0kh1")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_td2il"]
+script = ExtResource("2_td2il")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_qpq4r"]
+script = ExtResource("4_ff21i")
+draw_card_provider = SubResource("Resource_td2il")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_ff21i"]
+script = ExtResource("2_td2il")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_fg7xe"]
+script = ExtResource("1_v5erv")
+numeric_type = 5
+numeric_provider = SubResource("Resource_ff21i")
+placeholder = "cards"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
 script = ExtResource("3_ybkfm")
@@ -12,9 +61,13 @@ card_color = 64
 base_cost = 1
 discoverable = false
 draftable = false
+effects = Array[ExtResource("3_qpq4r")]([SubResource("Resource_aj48f")])
 portrait = ExtResource("2_wqwyq")
-base_description = "[center]抽1张牌。[/center]"
+base_description = "[center]抽{cards}张牌。[/center]"
+base_numeric_entries = Array[ExtResource("1_v5erv")]([SubResource("Resource_6dbo2")])
 exhaust = true
 upgraded_description = "无法升级"
+upgraded_numeric_entries = Array[ExtResource("1_v5erv")]([SubResource("Resource_fg7xe")])
+upgraded_effects = Array[ExtResource("3_qpq4r")]([SubResource("Resource_qpq4r")])
 upgradable = false
 metadata/_custom_type_script = "uid://br1hibx18tv13"

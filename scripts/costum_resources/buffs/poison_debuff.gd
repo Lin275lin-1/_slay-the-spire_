@@ -20,7 +20,7 @@ func _ready() -> void:
 		printerr("该对象没有turn_started信号")
 
 func _on_before_turn_started(target: Node) -> void:
-	target.lose_health(LoseHealthContext.new(self, [target], stacks))
+	target.lose_health(LoseHealthContext.new(self, target, stacks))
 	remove_stack(1)
 
 func get_description() -> String:

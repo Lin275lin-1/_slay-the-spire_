@@ -2,7 +2,39 @@
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_ukmfr"]
 [ext_resource type="Texture2D" uid="uid://bvqtcfp" path="res://images/atlases/card_atlas.sprites/colorless/splash.tres" id="2_b8qtd"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_m25ax"]
 [ext_resource type="Script" uid="uid://df2pkhw3t40ir" path="res://entities/cards/colorless/飞溅.gd" id="3_idlmp"]
+[ext_resource type="Script" uid="uid://c6aimd4krc1h5" path="res://scripts/costum_resources/card_filter.gd" id="3_qk0du"]
+[ext_resource type="Script" uid="uid://ba3wlijo516jr" path="res://scripts/costum_resources/effects/discover_effect.gd" id="3_v1dyf"]
+
+[sub_resource type="Resource" id="Resource_xux8m"]
+script = ExtResource("3_qk0du")
+color = 31
+type = 7
+rarity = 7
+metadata/_custom_type_script = "uid://c6aimd4krc1h5"
+
+[sub_resource type="Resource" id="Resource_qk0du"]
+script = ExtResource("3_v1dyf")
+card_filter = SubResource("Resource_xux8m")
+can_skip = true
+first_play_free = true
+metadata/_custom_type_script = "uid://ba3wlijo516jr"
+
+[sub_resource type="Resource" id="Resource_is2f2"]
+script = ExtResource("3_qk0du")
+color = 31
+type = 7
+rarity = 7
+metadata/_custom_type_script = "uid://c6aimd4krc1h5"
+
+[sub_resource type="Resource" id="Resource_glte7"]
+script = ExtResource("3_v1dyf")
+card_filter = SubResource("Resource_is2f2")
+can_skip = true
+upgraded = true
+first_play_free = true
+metadata/_custom_type_script = "uid://ba3wlijo516jr"
 
 [resource]
 script = ExtResource("3_idlmp")
@@ -11,8 +43,10 @@ type = 2
 card_color = 64
 base_cost = 1
 rarity = 2
+effects = Array[ExtResource("2_m25ax")]([SubResource("Resource_qk0du")])
 portrait = ExtResource("2_b8qtd")
 base_description = "[center]从3张其他角色的攻击牌中选择1张加入你的[color=gold]手牌[/color]。这张牌在本回合免费打出。[/center]"
 upgraded_cost = 1
 upgraded_description = "从3张其他角色的[color=gold]升级[/color]过的攻击牌中选择1张加入你的[color=gold]手牌[/color]。这张牌在本回合免费打出。"
+upgraded_effects = Array[ExtResource("2_m25ax")]([SubResource("Resource_glte7")])
 metadata/_custom_type_script = "uid://br1hibx18tv13"

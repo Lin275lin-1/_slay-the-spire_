@@ -59,7 +59,6 @@ func _set_current_intent(value: Intent) -> void:
 	current_intent = value
 	if not current_intent:
 		return
-	current_intent.calc_final_values(self, get_tree().get_first_node_in_group("ui_player"))
 	intents.update_intent(current_intent)
 
 func _set_enemy_stats(value: EnemyStats) -> void:
@@ -82,6 +81,7 @@ func _setup_ai() -> void:
 	if enemy_ai:
 		enemy_ai.queue_free()
 	enemy_ai = stats.ai
+	enemy_ai.set_up_intents(self, get_tree().get_first_node_in_group("ui_player"))
 	
 func start_turn() -> void:
 	before_turn_started.emit(self)
@@ -95,7 +95,7 @@ func update_intent() -> void:
 	if not enemy_ai:
 		return
 	if not current_intent:
-		# TODO:修改
+		# TODO:修改	
 		current_intent = enemy_ai.choose_intent(self, get_tree().get_first_node_in_group("ui_player"))
 		return
 
@@ -130,9 +130,9 @@ func die() -> void:
 		func (_x, _y, _z): queue_free()
 	)
 	
-func lose_health(context: Context) -> void:
+func lose_health(context: Context) -> int:
 	if stats.health <= 0:
-		return
+		return 0
 	
 	before_lose_health.emit(context)
 	stats.health -= context.amount
@@ -142,6 +142,8 @@ func lose_health(context: Context) -> void:
 	else:
 		spine_anim_state.set_animation(enemy_ai.get_hurt_animation_name(), true, 0)
 		spine_anim_state.add_animation(enemy_ai.get_idle_animation_name(), 0, true, 0)
+	
+	return context.amount
 
 func take_damage(context: Context) -> int:
 	if stats.health <= 0:
@@ -189,7 +191,6 @@ func show_keyword_tooltip() -> void:
 
 func _on_after_applied_buff(context: Context) -> void:
 	if current_intent:
-		current_intent.calc_final_values(self, context.source)
 		intents.update_intent(current_intent)
 
 func set_hitbox() -> void:

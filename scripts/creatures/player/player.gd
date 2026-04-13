@@ -18,6 +18,8 @@ var spine_manager: SpineManager
 
 # 本回合打出攻击牌的数量
 var attack_played_this_turn := 0
+var skill_played_this_turn := 0
+var energy_used_this_turn := 0
 
 func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
@@ -66,7 +68,10 @@ func select_deck(context: ChooseCardContext) -> void:
 		context.callback.call(card)
 
 func gain_block(context: Context) -> void:
+	print("test")
 	before_gain_block.emit(context)
+	print(context.amount)
+	print(context.get_final_value())
 	stats.block += context.get_final_value()
 
 func get_block() -> int:
@@ -96,9 +101,9 @@ func gain_energy(context: GainEnergyContext) -> void:
 	stats.energy += context.amount
 	
 	
-func lose_health(context: Context) -> void:
+func lose_health(context: Context) -> int:
 	if stats.health <= 0:
-		return
+		return 0
 	
 	before_lose_health.emit(context)
 	stats.health -= context.amount
@@ -109,7 +114,8 @@ func lose_health(context: Context) -> void:
 		Events.player_hit.emit()
 		spine_anim_state.set_animation("hurt", false, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
-
+	
+	return context.amount
 
 func take_damage(context: Context) -> int:
 	if stats.health <= 0:
@@ -161,6 +167,13 @@ func discard_card(card: Card) -> void:
 func exhaust_hand_card(card: Card) -> void:
 	agent.exhaust_hand_card(card)
 
+# TODO: 实现这两个方法
+func exhaust_draw_pile_card(card: Card) -> void:
+	pass
+
+func exhaust_discard_pile_card(card: Card) -> void:
+	pass
+
 func start_turn() -> void:
 	before_turn_started.emit(self)
 	stats.block = 0
@@ -169,6 +182,8 @@ func start_turn() -> void:
 
 func end_turn() -> void:
 	attack_played_this_turn = 0
+	skill_played_this_turn = 0
+	energy_used_this_turn = 0
 	turn_ended.emit(self)
 		
 func _set_char_stats(value: CharacterStats) -> void:
@@ -203,11 +218,18 @@ func _update_player() -> void:
 	name_label.text = stats.character_name
 
 func _on_card_played(card: Card) -> void:
+	var cost = 0 if card.first_play_free else card.get_cost()
+	card.first_play_free = false
+	energy_used_this_turn += cost
+	stats.energy -= cost	
+	
 	if card.type == Card.Type.ATTACK:
 		attack_played_this_turn += 1
 		spine_anim_state.set_animation("attack", false, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
 	else:
+		if card.type == Card.Type.SKILL:
+			skill_played_this_turn += 1
 		spine_anim_state.set_animation("cast", false, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
 	

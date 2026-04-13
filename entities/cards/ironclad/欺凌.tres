@@ -1,46 +1,114 @@
 [gd_resource type="Resource" format=3 uid="uid://upuj7jv770uk"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_dcc5o"]
+[ext_resource type="Script" uid="uid://cve4413kffhfx" path="res://scripts/costum_resources/numeric_formula.gd" id="2_2rp3l"]
 [ext_resource type="Texture2D" uid="uid://4566p1" path="res://images/atlases/card_atlas.sprites/ironclad/bully.tres" id="2_478sc"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_7ygmb"]
 [ext_resource type="Script" uid="uid://d260ofonx8dkc" path="res://entities/cards/ironclad/欺凌.gd" id="3_nj3k8"]
-[ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_0qfxb"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="4_2wp2l"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="5_ouyh2"]
+[ext_resource type="Script" uid="uid://bhhtjppe5dfcx" path="res://scripts/costum_resources/effects/damage_effect.gd" id="8_psi50"]
 
-[sub_resource type="Resource" id="Resource_oq3ul"]
+[sub_resource type="Resource" id="Resource_rj15w"]
+script = ExtResource("2_2rp3l")
+source = 1
+multiplier = 2.0
+buff_name = "易伤"
+metadata/_custom_type_script = "uid://cve4413kffhfx"
+
+[sub_resource type="Resource" id="Resource_3tnvw"]
+script = ExtResource("3_7ygmb")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_oamol"]
 script = ExtResource("1_dcc5o")
-base_value = 4
+numeric_provider = SubResource("Resource_3tnvw")
+numeric_formula = SubResource("Resource_rj15w")
 placeholder = "damage"
 affected_by = 2
-source = 4
-extra_param = {
-"buff_name": "易伤",
-"factor": 2
-}
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
-[sub_resource type="Resource" id="Resource_4g3i7"]
+[sub_resource type="Resource" id="Resource_pjos2"]
+script = ExtResource("3_7ygmb")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_q2v5u"]
 script = ExtResource("1_dcc5o")
-type = 7
-base_value = 2
+numeric_type = 7
+numeric_provider = SubResource("Resource_pjos2")
 placeholder = "factor"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
-[sub_resource type="Resource" id="Resource_0ecuv"]
+[sub_resource type="Resource" id="Resource_vxshi"]
+script = ExtResource("2_2rp3l")
+source = 1
+multiplier = 2.0
+buff_name = "易伤"
+metadata/_custom_type_script = "uid://cve4413kffhfx"
+
+[sub_resource type="Resource" id="Resource_benik"]
+script = ExtResource("3_7ygmb")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_h5son"]
+script = ExtResource("5_ouyh2")
+damage_provider = SubResource("Resource_benik")
+damage_formula = SubResource("Resource_vxshi")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_mb7s2"]
+script = ExtResource("2_2rp3l")
+source = 1
+multiplier = 3.0
+buff_name = "易伤"
+metadata/_custom_type_script = "uid://cve4413kffhfx"
+
+[sub_resource type="Resource" id="Resource_5xxpw"]
+script = ExtResource("3_7ygmb")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_8qf4s"]
+script = ExtResource("8_psi50")
+damage_provider = SubResource("Resource_5xxpw")
+damage_formula = SubResource("Resource_mb7s2")
+target_type = 2
+metadata/_custom_type_script = "uid://bhhtjppe5dfcx"
+
+[sub_resource type="Resource" id="Resource_iqu7d"]
+script = ExtResource("2_2rp3l")
+source = 1
+multiplier = 3.0
+buff_name = "易伤"
+metadata/_custom_type_script = "uid://cve4413kffhfx"
+
+[sub_resource type="Resource" id="Resource_n7jjo"]
+script = ExtResource("3_7ygmb")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ua2aw"]
 script = ExtResource("1_dcc5o")
-base_value = 4
+numeric_provider = SubResource("Resource_n7jjo")
+numeric_formula = SubResource("Resource_iqu7d")
 placeholder = "damage"
 affected_by = 2
-source = 4
-extra_param = {
-"buff_name": "易伤",
-"factor": 3
-}
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
-[sub_resource type="Resource" id="Resource_7swf0"]
+[sub_resource type="Resource" id="Resource_v0jyx"]
+script = ExtResource("3_7ygmb")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_sdq1k"]
 script = ExtResource("1_dcc5o")
-type = 7
-base_value = 3
+numeric_type = 7
+numeric_provider = SubResource("Resource_v0jyx")
 placeholder = "factor"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
@@ -49,10 +117,13 @@ metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 script = ExtResource("3_nj3k8")
 id = "欺凌"
 base_target = 1
+rarity = 2
+effects = Array[ExtResource("4_2wp2l")]([SubResource("Resource_h5son")])
 portrait = ExtResource("2_478sc")
-base_description = "[center]造成{damage}点伤害。[/center][p][center]敌人身上每有一层[color=gold]易伤[/color]就额外造成{factor}点伤害。[/center]"
-sound = ExtResource("4_0qfxb")
-base_numeric_entries = Array[ExtResource("1_dcc5o")]([SubResource("Resource_oq3ul"), SubResource("Resource_4g3i7")])
-upgraded_target = 1
-upgraded_description = "[center]造成{damage}点伤害。[/center][p][center]敌人身上每有一层[color=gold]易伤[/color]就额外造成{factor}点伤害。[/center]"
-upgraded_numeric_entries = Array[ExtResource("1_dcc5o")]([SubResource("Resource_0ecuv"), SubResource("Resource_7swf0")])
+base_description = "[center]造成{damage}点伤害。[/center]
+[center]该敌人身上每有一层[color=gold]易伤[/color]就额外造成{factor}点伤害。[center]"
+base_numeric_entries = Array[ExtResource("1_dcc5o")]([SubResource("Resource_oamol"), SubResource("Resource_q2v5u")])
+upgraded_description = "[center]造成{damage}点伤害。[/center]
+[center]该敌人身上每有一层[color=gold]易伤[/color]就额外造成{factor}点伤害。[center]"
+upgraded_numeric_entries = Array[ExtResource("1_dcc5o")]([SubResource("Resource_ua2aw"), SubResource("Resource_sdq1k")])
+upgraded_effects = Array[ExtResource("4_2wp2l")]([SubResource("Resource_8qf4s")])

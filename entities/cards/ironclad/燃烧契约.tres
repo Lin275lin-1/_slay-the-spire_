@@ -2,20 +2,96 @@
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_yvywq"]
 [ext_resource type="Texture2D" uid="uid://cbwhwps" path="res://images/atlases/card_atlas.sprites/ironclad/burning_pact.tres" id="2_goriw"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_iy4gf"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_1shly"]
 [ext_resource type="Script" uid="uid://dq8f3cktw8dm6" path="res://entities/cards/ironclad/燃烧契约.gd" id="3_du2rw"]
+[ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="4_854wf"]
+[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="5_1q8wk"]
 
-[sub_resource type="Resource" id="Resource_d0f2e"]
+[sub_resource type="Resource" id="Resource_iy4gf"]
+script = ExtResource("2_iy4gf")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_1shly"]
 script = ExtResource("1_yvywq")
-type = 5
-base_value = 2
+numeric_type = 7
+numeric_provider = SubResource("Resource_iy4gf")
+placeholder = "exhuast"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_854wf"]
+script = ExtResource("2_iy4gf")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_1q8wk"]
+script = ExtResource("1_yvywq")
+numeric_type = 5
+numeric_provider = SubResource("Resource_854wf")
 placeholder = "cards"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
-[sub_resource type="Resource" id="Resource_nehdt"]
+[sub_resource type="Resource" id="Resource_3c3dw"]
+script = ExtResource("4_854wf")
+callback = 1
+where = 1
+min_select = 1
+max_select = 1
+metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+
+[sub_resource type="Resource" id="Resource_jckgm"]
+script = ExtResource("2_iy4gf")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_57wjk"]
+script = ExtResource("5_1q8wk")
+draw_card_provider = SubResource("Resource_jckgm")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_yltit"]
+script = ExtResource("4_854wf")
+callback = 1
+where = 1
+min_select = 1
+max_select = 1
+metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+
+[sub_resource type="Resource" id="Resource_fe7p1"]
+script = ExtResource("2_iy4gf")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_rv65e"]
+script = ExtResource("5_1q8wk")
+draw_card_provider = SubResource("Resource_fe7p1")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_t87xj"]
+script = ExtResource("2_iy4gf")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_vg260"]
 script = ExtResource("1_yvywq")
-type = 5
-base_value = 3
+numeric_type = 7
+numeric_provider = SubResource("Resource_t87xj")
+placeholder = "exhaust"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_0vj6m"]
+script = ExtResource("2_iy4gf")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_m4u1n"]
+script = ExtResource("1_yvywq")
+numeric_type = 5
+numeric_provider = SubResource("Resource_0vj6m")
 placeholder = "cards"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
@@ -26,9 +102,11 @@ id = "燃烧契约"
 type = 2
 base_cost = 1
 rarity = 2
+effects = Array[ExtResource("3_1shly")]([SubResource("Resource_3c3dw"), SubResource("Resource_57wjk")])
 portrait = ExtResource("2_goriw")
-base_description = "[center][color=gold]消耗[/color]1张牌。[/center][p][center]抽{cards}张牌。[/center]"
-base_numeric_entries = Array[ExtResource("1_yvywq")]([SubResource("Resource_d0f2e")])
+base_description = "[center][color=gold]消耗[/color]{exhaust}张牌。[/center][p][center]抽{cards}张牌。[/center]"
+base_numeric_entries = Array[ExtResource("1_yvywq")]([SubResource("Resource_1shly"), SubResource("Resource_1q8wk")])
 upgraded_cost = 1
-upgraded_description = "[center][color=gold]消耗[/color]1张牌。[/center][p][center]抽{cards}张牌。[/center]"
-upgraded_numeric_entries = Array[ExtResource("1_yvywq")]([SubResource("Resource_nehdt")])
+upgraded_description = "[center][color=gold]消耗[/color]{exhaust}张牌。[/center][p][center]抽{cards}张牌。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_yvywq")]([SubResource("Resource_vg260"), SubResource("Resource_m4u1n")])
+upgraded_effects = Array[ExtResource("3_1shly")]([SubResource("Resource_yltit"), SubResource("Resource_rv65e")])

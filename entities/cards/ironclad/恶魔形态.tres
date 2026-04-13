@@ -2,37 +2,108 @@
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_ppwhd"]
 [ext_resource type="Texture2D" uid="uid://v6vreg" path="res://images/atlases/card_atlas.sprites/ironclad/demon_form.tres" id="2_7w2ll"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_d4f3w"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_yjwun"]
 [ext_resource type="Script" uid="uid://bt5vtxq45orx" path="res://entities/cards/ironclad/恶魔形态.gd" id="3_7w2ll"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_x6w22"]
 [ext_resource type="AudioStream" uid="uid://dbe46o0jyq2x8" path="res://audio/SFX/dark_orb_channel.mp3" id="4_ym4su"]
+
+[sub_resource type="Resource" id="Resource_6ota8"]
+script = ExtResource("2_d4f3w")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
 [sub_resource type="Resource" id="Resource_7w2ll"]
 script = ExtResource("1_ppwhd")
-type = 4
-base_value = 2
+numeric_type = 4
+numeric_provider = SubResource("Resource_6ota8")
 placeholder = "stacks_1"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_2cu3w"]
+script = ExtResource("2_d4f3w")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
 [sub_resource type="Resource" id="Resource_ym4su"]
 script = ExtResource("1_ppwhd")
-type = 4
-base_value = 2
+numeric_type = 4
+numeric_provider = SubResource("Resource_2cu3w")
 placeholder = "stacks_2"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_4heux"]
+script = ExtResource("2_d4f3w")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_51y2o"]
+script = ExtResource("4_x6w22")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_4heux")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_tio3q"]
+script = ExtResource("2_d4f3w")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_534pb"]
+script = ExtResource("4_x6w22")
+buff_name = "恶魔形态"
+buff_stack_provider = SubResource("Resource_tio3q")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_rd062"]
+script = ExtResource("2_d4f3w")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_sihh2"]
+script = ExtResource("4_x6w22")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_rd062")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_u70e5"]
+script = ExtResource("2_d4f3w")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_n4jqy"]
+script = ExtResource("4_x6w22")
+buff_name = "恶魔形态"
+buff_stack_provider = SubResource("Resource_u70e5")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_jqp6g"]
+script = ExtResource("2_d4f3w")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
 [sub_resource type="Resource" id="Resource_nbr5u"]
 script = ExtResource("1_ppwhd")
-type = 4
-base_value = 3
+numeric_type = 4
+numeric_provider = SubResource("Resource_jqp6g")
 placeholder = "stacks_1"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_si6n5"]
+script = ExtResource("2_d4f3w")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
 [sub_resource type="Resource" id="Resource_f8drp"]
 script = ExtResource("1_ppwhd")
-type = 4
-base_value = 3
+numeric_type = 4
+numeric_provider = SubResource("Resource_si6n5")
 placeholder = "stacks_2"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
@@ -43,6 +114,7 @@ id = "恶魔形态"
 type = 4
 base_cost = 3
 rarity = 4
+effects = Array[ExtResource("2_yjwun")]([SubResource("Resource_51y2o"), SubResource("Resource_534pb")])
 portrait = ExtResource("2_7w2ll")
 base_description = "[center]获得{stacks_1}层[color=gold]力量[/color]。[/center][p][center]获得{stacks_2}层[color=gold]恶魔形态[/color]。[/center]"
 sound = ExtResource("4_ym4su")
@@ -50,4 +122,5 @@ base_numeric_entries = Array[ExtResource("1_ppwhd")]([SubResource("Resource_7w2l
 upgraded_cost = 3
 upgraded_description = "[center]获得{stacks_1}层[color=gold]力量[/color]。[/center][p][center]获得{stacks_2}层[color=gold]恶魔形态[/color]。[/center]"
 upgraded_numeric_entries = Array[ExtResource("1_ppwhd")]([SubResource("Resource_nbr5u"), SubResource("Resource_f8drp")])
+upgraded_effects = Array[ExtResource("2_yjwun")]([SubResource("Resource_sihh2"), SubResource("Resource_n4jqy")])
 metadata/_custom_type_script = "uid://br1hibx18tv13"
