@@ -6,10 +6,10 @@
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_m6ar7"]
 [ext_resource type="PackedScene" uid="uid://cvoqhpj7w5j8b" path="res://scenes/creature_visuals/toad_pole.tscn" id="3_m135s"]
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_a7uck"]
-[ext_resource type="Texture2D" uid="uid://cdjfipfy2o2u8" path="res://images/packed/intents/attack/intent_attack_2.png" id="5_3t3x4"]
+[ext_resource type="Texture2D" uid="uid://bkbn4fvc4je43" path="res://images/packed/intents/attack/intent_attack_2.png" id="5_3t3x4"]
 [ext_resource type="Script" uid="uid://bces7ijyodhmv" path="res://scripts/costum_resources/intents/attack_sub_intent.gd" id="6_vedxq"]
 [ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="7_8gyfs"]
-[ext_resource type="Texture2D" uid="uid://bueaoomrl3ifh" path="res://images/packed/intents/intent_buff.png" id="8_lp2mx"]
+[ext_resource type="Texture2D" uid="uid://epusnbog8ryc" path="res://images/packed/intents/intent_buff.png" id="8_lp2mx"]
 [ext_resource type="Script" uid="uid://dpbv4m5rd0bbq" path="res://scripts/costum_resources/intents/apply_buff_sub_intent.gd" id="9_v4l63"]
 [ext_resource type="Script" uid="uid://gjypfal5fy2c" path="res://entities/enemies/toadpole/toadpole_ai.gd" id="10_s8vbf"]
 

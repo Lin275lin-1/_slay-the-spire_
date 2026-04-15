@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://b2h28fgmhk2p3" path="res://entities/cards/ironclad/武装.gd" id="3_d0u1j"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_x6sth"]
 [ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="4_42s83"]
-[ext_resource type="AudioStream" uid="uid://cnxfhtrl0n8nm" path="res://audio/SFX/frost_orb_passive.mp3" id="4_auaqv"]
+[ext_resource type="AudioStream" uid="uid://dg3m3v6ldrym8" path="res://audio/SFX/frost_orb_passive.mp3" id="4_auaqv"]
 [ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="5_61rnp"]
 
 [sub_resource type="Resource" id="Resource_thu2h"]

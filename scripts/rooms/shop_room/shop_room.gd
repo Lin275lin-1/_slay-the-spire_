@@ -237,7 +237,8 @@ func _populate_cards() -> void:
 		available.shuffle()
 		var count = min(slots.size(), available.size())
 		for i in range(count):
-			var card_data: Card = available[i]
+			#卡牌复制
+			var card_data: Card = available[i] as Card
 			var shop_item = _create_card_shop_item(card_data)
 			var slot = slots[i]
 			slot.visible = true
@@ -401,7 +402,8 @@ func _on_card_purchased(shop_item: ShopItem, card_node: MerchantCard) -> void:
 		_shake_node(card_node)  
 		return
 	run_stats.gold -= shop_item.shop_price
-	_add_card_to_deck(shop_item.item_data)
+#	卡牌复制
+	_add_card_to_deck(shop_item.item_data.duplicate())
 	card_node.queue_free()
 	_say_random("purchase_success", 2.0)	
 	#print("成功购买卡牌：", card.id)

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cxnepi0" path="res://images/atlases/card_atlas.sprites/ironclad/defend_ironclad.tres" id="2_svckb"]
 [ext_resource type="Script" uid="uid://b6koyyeqx1l35" path="res://entities/cards/ironclad/防御.gd" id="3_6dpba"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_qrnip"]
-[ext_resource type="AudioStream" uid="uid://cnxfhtrl0n8nm" path="res://audio/SFX/frost_orb_passive.mp3" id="4_8q7md"]
+[ext_resource type="AudioStream" uid="uid://dg3m3v6ldrym8" path="res://audio/SFX/frost_orb_passive.mp3" id="4_8q7md"]
 [ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="4_60726"]
 
 [sub_resource type="Resource" id="Resource_2jflv"]
