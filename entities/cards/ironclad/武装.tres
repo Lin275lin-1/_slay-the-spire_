@@ -1,13 +1,13 @@
-[gd_resource type="Resource" format=3 uid="uid://qhmifpkdvj6h"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://qhmifpkdvj6h"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_hsmi0"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_hb7p8"]
 [ext_resource type="Texture2D" uid="uid://v5fhk" path="res://images/atlases/card_atlas.sprites/ironclad/armaments.tres" id="2_qyk1p"]
-[ext_resource type="Script" uid="uid://b2h28fgmhk2p3" path="res://entities/cards/ironclad/武装.gd" id="3_d0u1j"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_x6sth"]
 [ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="4_42s83"]
 [ext_resource type="AudioStream" uid="uid://cnxfhtrl0n8nm" path="res://audio/SFX/frost_orb_passive.mp3" id="4_auaqv"]
 [ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="5_61rnp"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_hb7p8"]
 
 [sub_resource type="Resource" id="Resource_thu2h"]
 script = ExtResource("2_hb7p8")
@@ -69,7 +69,7 @@ placeholder = "block"
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("3_d0u1j")
+script = ExtResource("7_hb7p8")
 id = "武装"
 type = 2
 base_cost = 1

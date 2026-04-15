@@ -37,11 +37,13 @@ func apply(source: Node, _targets: Array[Node], _card_context: Dictionary, _prev
 			cards = []
 	if all:
 		for card: Card in cards:
-			card.upgrade()
+			get_callback(source).call(card)
+			source.agent.update_hand()
+		return null
 	elif where == Where.HAND:
-		await source.select_hand(ChooseCardContext.new(source, cards, get_hint_text(), min_select, max_select, get_callback(source)))
+		await source.select_hand(ChooseCardContext.new(source, cards, get_hint_text(), min_select, max_select, get_callback(source), get_selection_mode()))
 	else:
-		await source.select_deck(ChooseCardContext.new(source, cards, get_hint_text(), min_select, max_select, get_callback(source)))
+		await source.select_deck(ChooseCardContext.new(source, cards, get_hint_text(), min_select, max_select, get_callback(source), get_selection_mode()))
 	return null
 
 func get_callback(source: Player) -> Callable:
@@ -72,6 +74,24 @@ func get_callback(source: Player) -> Callable:
 			return func(card: Card): source.discard_card(card)
 			
 	return func(_card: Card): return
+	
+func get_selection_mode() -> DeckView.SelectionMode:
+	match callback:
+		Callback.UPGRADE:
+			return DeckView.SelectionMode.UPGRADE
+		Callback.EXHAUST:
+			return DeckView.SelectionMode.SELECT
+		Callback.APPLY_EXHAUST:
+			return DeckView.SelectionMode.SELECT
+		Callback.APPLY_ETHEREAL:
+			return DeckView.SelectionMode.SELECT
+		Callback.APPLY_SLY:
+			return DeckView.SelectionMode.SELECT
+		Callback.PUT_INTO_DRAW_PILE_TOP:
+			return DeckView.SelectionMode.SELECT
+		Callback.DISCARD:
+			return DeckView.SelectionMode.SELECT
+	return DeckView.SelectionMode.SELECT
 
 func get_hint_text() -> String:
 	var front: String

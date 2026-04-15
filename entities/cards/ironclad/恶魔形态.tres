@@ -1,12 +1,12 @@
-[gd_resource type="Resource" format=3 uid="uid://cj8n0wv5q8ry5"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cj8n0wv5q8ry5"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_ppwhd"]
 [ext_resource type="Texture2D" uid="uid://v6vreg" path="res://images/atlases/card_atlas.sprites/ironclad/demon_form.tres" id="2_7w2ll"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_d4f3w"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_yjwun"]
-[ext_resource type="Script" uid="uid://bt5vtxq45orx" path="res://entities/cards/ironclad/恶魔形态.gd" id="3_7w2ll"]
 [ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_x6w22"]
 [ext_resource type="AudioStream" uid="uid://dbe46o0jyq2x8" path="res://audio/SFX/dark_orb_channel.mp3" id="4_ym4su"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="6_d4f3w"]
 
 [sub_resource type="Resource" id="Resource_6ota8"]
 script = ExtResource("2_d4f3w")
@@ -109,7 +109,7 @@ affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("3_7w2ll")
+script = ExtResource("6_d4f3w")
 id = "恶魔形态"
 type = 4
 base_cost = 3

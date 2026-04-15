@@ -2,6 +2,7 @@ class_name BuffUI
 extends TextureRect
 
 var buff: Buff
+var agent: Creature
 @onready var stack_label: Label = $StackLabel
 
 func _ready() -> void:
@@ -15,8 +16,10 @@ func _ready() -> void:
 func update_stack():
 	if stack_label:
 		stack_label.text = str(buff.stacks) if buff.stacks > 1 else ""
-	
+		agent.buff_changed.emit()
+		
 func _on_buff_removed() -> void:
+	agent.buff_changed.emit()
 	queue_free()
 
 func _on_mouse_entered():

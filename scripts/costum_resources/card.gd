@@ -126,6 +126,8 @@ func play(source: Player, targets: Array[Node]) -> void:
 	var previous_result = null
 	for effect:Effect in get_effects():
 		previous_result = await effect.execute(source, card_context, previous_result)
+	if enchantment:
+		enchantment.on_play(source, targets)
 	Events.card_played.emit(self)
 
 func apply_effects(_source: Player, _targets: Array[Node]) -> void:
@@ -240,3 +242,6 @@ func has_enchantment() -> bool:
 func set_echantment(enchantment_: Enchantment) -> void:
 	enchantment = enchantment_
 	enchantment.on_enchant_set(self)
+
+func can_upgrade() -> bool:
+	return upgradable and !upgraded

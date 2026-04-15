@@ -1,13 +1,13 @@
-[gd_resource type="Resource" format=3 uid="uid://4b4rigm35wmi"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://4b4rigm35wmi"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_ywwuo"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_f0e67"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_gt0w0"]
 [ext_resource type="Texture2D" uid="uid://cl6hb7j" path="res://images/atlases/card_atlas.sprites/ironclad/headbutt.tres" id="2_ocxdh"]
-[ext_resource type="Script" uid="uid://bv3cx8hvc7sok" path="res://entities/cards/ironclad/头槌.gd" id="3_ocxdh"]
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_bf4l0"]
 [ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_ocxdh"]
 [ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="5_4afoc"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_gt0w0"]
 
 [sub_resource type="Resource" id="Resource_lts0g"]
 script = ExtResource("2_gt0w0")
@@ -61,7 +61,7 @@ affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("3_ocxdh")
+script = ExtResource("7_gt0w0")
 id = "头槌"
 base_target = 1
 base_cost = 1

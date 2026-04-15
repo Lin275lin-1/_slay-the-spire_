@@ -1,12 +1,12 @@
-[gd_resource type="Resource" format=3 uid="uid://ckuslsre8gkok"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://ckuslsre8gkok"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_s678t"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_1bysc"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_7yhpf"]
 [ext_resource type="Texture2D" uid="uid://croho4y" path="res://images/atlases/card_atlas.sprites/silent/acrobatics.tres" id="2_ymop5"]
-[ext_resource type="Script" uid="uid://yiuflfbsuia0" path="res://entities/cards/silent/杂技.gd" id="3_6yoq3"]
 [ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="3_7yhpf"]
 [ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="4_a16hm"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_7yhpf"]
 
 [sub_resource type="Resource" id="Resource_a16hm"]
 script = ExtResource("2_7yhpf")
@@ -94,7 +94,7 @@ placeholder = "discard_cards"
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("3_6yoq3")
+script = ExtResource("7_7yhpf")
 id = "杂技"
 type = 2
 card_color = 2

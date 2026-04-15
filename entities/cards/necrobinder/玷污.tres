@@ -1,12 +1,12 @@
-[gd_resource type="Resource" format=3 uid="uid://bdpwi66a4qek4"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bdpwi66a4qek4"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_75tvl"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_r0ym5"]
 [ext_resource type="Texture2D" uid="uid://pafakq" path="res://images/atlases/card_atlas.sprites/necrobinder/defile.tres" id="2_u3761"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_tdfu7"]
-[ext_resource type="Script" uid="uid://btp5g8uxwew6f" path="res://entities/cards/necrobinder/玷污.gd" id="3_u3761"]
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_03253"]
 [ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_fs1rm"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="6_r0ym5"]
 
 [sub_resource type="Resource" id="Resource_pk2ti"]
 script = ExtResource("2_r0ym5")
@@ -20,14 +20,14 @@ placeholder = "damage"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
-[sub_resource type="Resource" id="Resource_k5j86"]
+[sub_resource type="Resource" id="Resource_r0ym5"]
 script = ExtResource("2_r0ym5")
 fixed_value = 13
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
 [sub_resource type="Resource" id="Resource_bsq5n"]
 script = ExtResource("4_03253")
-repeat_count_provider = SubResource("Resource_k5j86")
+damage_provider = SubResource("Resource_r0ym5")
 target_type = 2
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
 
@@ -55,7 +55,7 @@ affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("3_u3761")
+script = ExtResource("6_r0ym5")
 id = "玷污"
 base_target = 1
 card_color = 8

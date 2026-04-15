@@ -1,12 +1,12 @@
-[gd_resource type="Resource" format=3 uid="uid://b2c13bouulo8c"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b2c13bouulo8c"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_3r53d"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_cbvpc"]
 [ext_resource type="Texture2D" uid="uid://b03h6ce" path="res://images/atlases/card_atlas.sprites/ironclad/battle_trance.tres" id="2_iy161"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_v7ntq"]
-[ext_resource type="Script" uid="uid://b4wybeioqkpgo" path="res://entities/cards/ironclad/战斗专注.gd" id="3_cbvpc"]
 [ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="4_v7ntq"]
 [ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="5_me246"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_v7ntq"]
 
 [sub_resource type="Resource" id="Resource_kdgnw"]
 script = ExtResource("2_v7ntq")
@@ -79,7 +79,7 @@ affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("3_cbvpc")
+script = ExtResource("7_v7ntq")
 id = "战斗专注"
 type = 2
 rarity = 2

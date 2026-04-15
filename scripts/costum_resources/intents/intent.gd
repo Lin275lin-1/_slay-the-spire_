@@ -18,6 +18,13 @@ extends Resource
 func set_target(value: Creature):
 	for sub_intent: SubIntent in sub_intents:
 		sub_intent.target = value
+		
 func set_source(value: Creature):
 	for sub_intent: SubIntent in sub_intents:
 		sub_intent.source = value
+
+func has_attack_sub_intent() -> bool:
+	for sub_intent in sub_intents:
+		if sub_intent is AttackSubIntent:
+			return true
+	return false

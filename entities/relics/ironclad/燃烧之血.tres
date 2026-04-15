@@ -1,7 +1,21 @@
 [gd_resource type="Resource" format=3 uid="uid://bcxf25bju8u48"]
 
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_bdulg"]
 [ext_resource type="Texture2D" uid="uid://jhywwo" path="res://images/atlases/relic_atlas.sprites/burning_blood.tres" id="1_bvece"]
 [ext_resource type="Script" uid="uid://c1cqk8110tjqm" path="res://entities/relics/ironclad/燃烧之血.gd" id="2_bvece"]
+[ext_resource type="Script" uid="uid://da1srbssi025l" path="res://scripts/costum_resources/effects/heal_effect.gd" id="2_dhnr0"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_ow3ri"]
+
+[sub_resource type="Resource" id="Resource_oa3rx"]
+script = ExtResource("2_ow3ri")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ow3ri"]
+script = ExtResource("2_dhnr0")
+heal_provider = SubResource("Resource_oa3rx")
+target_type = 1
+metadata/_custom_type_script = "uid://da1srbssi025l"
 
 [resource]
 script = ExtResource("2_bvece")
@@ -12,4 +26,5 @@ description = "战斗结束时，回合6点生命"
 trigger_type = 3
 character_type = 1
 relic_type = 9
+effects = Array[ExtResource("1_bdulg")]([SubResource("Resource_ow3ri")])
 metadata/_custom_type_script = "uid://bvf88v88tbaks"

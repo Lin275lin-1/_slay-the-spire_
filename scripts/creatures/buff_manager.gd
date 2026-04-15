@@ -11,9 +11,11 @@ func add_buff(buff_context: ApplyBuffContext) -> int:
 			break
 	if exist_buff:
 		var buff_stacks = exist_buff.stacks
-		exist_buff.add_stack(buff_node.stacks)
+		exist_buff.add_stack(buff_context.amount)
 		return buff_stacks
 	else:
+		
 		buff_node.agent = buff_context.target
 		add_child(buff_node)
+		buff_node.stacks = buff_context.amount	
 		return 0

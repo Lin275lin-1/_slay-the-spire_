@@ -32,6 +32,7 @@ func remove_stack(amount: int):
 	if stacks <= 0:
 		queue_free()
 	stack_changed.emit()
+	
 
 func get_description() -> String:
 	return description

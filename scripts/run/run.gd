@@ -24,6 +24,7 @@ const BATTLE_REWARD_SCENE = preload("res://scenes/rooms/reward/reward_room.tscn"
 @onready var map_node: Map = $Map
 @onready var top_bar: TopBar = %TopBar
 @onready var deck_view: DeckView = %DeckView
+@onready var select_deck_view: DeckView = %SelectDeckView
 
 @export var run_startup: RunStartup
 
@@ -182,13 +183,14 @@ func _change_view_deferred(scene: PackedScene) -> void:
 func _on_campfire_room_entered(room: Room)-> void:
 	var capfire_scene :CampfireRoom = _change_view(CAMPFIRE_SCENE) as CampfireRoom
 	capfire_scene.char_stats=character
-	capfire_scene.deck_view = deck_view
+	capfire_scene.deck_view = select_deck_view
+	capfire_scene.initialize()
 
 	
 func _on_incident_room_entered(room: Room)->void:
 	var incident_scene :IncidentRoom = _change_view(INCIDENT_SCENE) as IncidentRoom
 	incident_scene.char_stats = character
 	incident_scene.run_stats=stats
-	incident_scene.deck_view=deck_view
+	incident_scene.deck_view= select_deck_view
 	incident_scene.init()
 	

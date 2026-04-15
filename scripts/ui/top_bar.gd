@@ -13,8 +13,6 @@ signal deck_view_requested(deck: Array[Card])
 
 func _ready()-> void:
 	gold_label.text ="0"
-	
-	
 
 func initialize(stats: CharacterStats) -> void:
 	card_pile_button.card_pile = stats.deck
@@ -30,13 +28,12 @@ func initialize(stats: CharacterStats) -> void:
 	tween.tween_interval(1.0)
 	tween.tween_callback(func(): run_stats.add_potion(preload("uid://btvj32p8ixefr")))
 	tween.tween_interval(1.0)
-	#var tween = create_tween()
-	#tween.tween_callback(func(): run_stats.add_relic(preload("uid://d3a7gl0qcwuho")))
-	#tween.tween_interval(1.0)
-	#tween.tween_callback(func(): run_stats.add_relic(preload("uid://h2lk8mcg6tu5")))
-	#tween.tween_interval(1.0)
-	#tween.tween_callback(func(): run_stats.add_relic(preload("uid://b5niu17o73g0m")))
-	#tween.tween_interval(1.0)
+	tween.tween_callback(func(): run_stats.add_relic(preload("uid://d3a7gl0qcwuho")))
+	tween.tween_interval(1.0)
+	tween.tween_callback(func(): run_stats.add_relic(preload("uid://h2lk8mcg6tu5")))
+	tween.tween_interval(1.0)
+	tween.tween_callback(func(): run_stats.add_relic(preload("uid://b5niu17o73g0m")))
+	tween.tween_interval(1.0)
 	#tween.tween_callback(func(): run_stats.remove_relic(preload("uid://d3a7gl0qcwuho")))
 	#tween.tween_interval(1.0)
 	#tween.tween_callback(func(): run_stats.remove_relic(preload("uid://h2lk8mcg6tu5")))

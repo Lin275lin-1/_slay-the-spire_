@@ -63,7 +63,10 @@ func spawn_damage_label(number: int, blocked: bool = false) -> void:
 	new_label.position = global_position + Vector2(-new_label.size.x / 2, new_label.size.y)
 	new_label.position += Vector2(randf_range(-50.0, 50.0), 0)
 	
-	var target_rise_pos: Vector2 = new_label.position + Vector2(randf_range(-100.0, 100.0), randf_range(-400, -300))
+	# 用于控制上升点的x值以及标签的旋转
+	var rise_x = randf_range(-100.0, 100.0)
+	
+	var target_rise_pos: Vector2 = new_label.position + Vector2(rise_x, randf_range(-400, -300))
 	var target_fall_pos: Vector2 = Vector2(new_label.position.x - (new_label.position.x - target_rise_pos.x) * 3, 1080)
 	if blocked:
 		new_label.label_settings = text_label_settings.duplicate()
@@ -71,6 +74,7 @@ func spawn_damage_label(number: int, blocked: bool = false) -> void:
 		new_label.text = "格挡"
 		new_label.set_float(target_rise_pos, FLOAT_TIME)
 	else:
+		new_label.rotation_degrees = rise_x / 100 * 20
 		new_label.text = str(number)
 		new_label.label_settings = damage_number_label_settings
 		new_label.set_parabola(target_rise_pos, target_fall_pos, RISE_TIME, FALL_TIME)

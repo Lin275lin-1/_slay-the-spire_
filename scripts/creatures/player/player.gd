@@ -63,7 +63,7 @@ func select_hand(context: ChooseCardContext) -> void:
 
 func select_deck(context: ChooseCardContext) -> void:
 	var selected: Array[Card]
-	selected = await deck_view.select_card_pile(context.cards, context.min_select, context.max_select, context.title)
+	selected = await deck_view.select_card_pile(context.cards, context.min_select, context.max_select, context.title, context.selection_mode)
 	for card: Card in selected:
 		context.callback.call(card)
 
@@ -81,12 +81,13 @@ func die() -> void:
 	await spine_manager.animation_completed
 	Events.player_died.emit()
 
-func draw_card(context: DrawCardContext) -> void:
+func draw_card(context: DrawCardContext) -> int:
 	before_draw_card.emit(context)
 	if context.amount != 0:
 		var card: Card = agent.draw_card()
 		after_draw_card.emit(card)
-
+	return context.amount
+	
 #func draw_cards(context: DrawCardContext) -> void:
 	#before_draw_cards.emit(context)
 	#if context.amount > 0:
@@ -95,7 +96,11 @@ func draw_card(context: DrawCardContext) -> void:
 			#tween.tween_callback(draw_card)
 			#tween.tween_interval(0.2)
 		#await tween.finished
-
+		
+func heal(context: HealContext) -> int:
+	context.target.stats.heal(context.amount)
+	return context.amount
+	
 func gain_energy(context: GainEnergyContext) -> void:
 	stats.energy += context.amount
 	

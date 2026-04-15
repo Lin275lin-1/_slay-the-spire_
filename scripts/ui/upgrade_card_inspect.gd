@@ -9,15 +9,21 @@ signal cancel()
 @onready var upgraded_card: CardInspectUI = %UpgradedCard
 @onready var comfirm_button: ComfirmButton = $ComfirmButton
 @onready var cancel_button: ComfirmButton = $CancelButton
+var card :Card
 
 func _ready() -> void:
 	color_rect.gui_input.connect(_on_color_rect_gui_input)
 	#show_card(preload("res://entities/characters/ironclad/cards/主宰.tres"))
-	comfirm_button.pressed.connect(confirm.emit.bind(base_card.card))
+	comfirm_button.pressed.connect(
+		func():
+			confirm.emit(card)
+			)
 	cancel_button.pressed.connect(cancel.emit)
 
-func show_card(card: Card) -> void:
-	base_card.card = card
+func show_card(card_: Card) -> void:
+	base_card.card = card_
+	card = card_
+	
 	var upgraded = card.duplicate()
 	upgraded.upgrade()
 	upgraded_card.card = upgraded

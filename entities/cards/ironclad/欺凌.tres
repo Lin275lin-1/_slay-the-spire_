@@ -1,12 +1,12 @@
-[gd_resource type="Resource" format=3 uid="uid://upuj7jv770uk"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://upuj7jv770uk"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_dcc5o"]
 [ext_resource type="Script" uid="uid://cve4413kffhfx" path="res://scripts/costum_resources/numeric_formula.gd" id="2_2rp3l"]
 [ext_resource type="Texture2D" uid="uid://4566p1" path="res://images/atlases/card_atlas.sprites/ironclad/bully.tres" id="2_478sc"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_7ygmb"]
-[ext_resource type="Script" uid="uid://d260ofonx8dkc" path="res://entities/cards/ironclad/欺凌.gd" id="3_nj3k8"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="4_2wp2l"]
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="5_ouyh2"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_2rp3l"]
 [ext_resource type="Script" uid="uid://bhhtjppe5dfcx" path="res://scripts/costum_resources/effects/damage_effect.gd" id="8_psi50"]
 
 [sub_resource type="Resource" id="Resource_rj15w"]
@@ -114,7 +114,7 @@ affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("3_nj3k8")
+script = ExtResource("7_2rp3l")
 id = "欺凌"
 base_target = 1
 rarity = 2

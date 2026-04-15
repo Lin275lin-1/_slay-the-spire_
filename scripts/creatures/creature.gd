@@ -14,6 +14,7 @@ signal before_apply_buff(context: Context)
 signal after_apply_buff(context: Context)
 signal before_applied_buff(context: Context)
 signal after_applied_buff(context: Context)
+signal buff_changed()
 @warning_ignore_restore("unused_signal")
 # offset: 根据贴图大小调整各个组件
 
@@ -59,11 +60,12 @@ func add_buff(buff_context: ApplyBuffContext) -> int:
 	before_applied_buff.emit(buff_context)
 	if not buff_context.buff_node:
 		return 0
-	buff_context.buff_node.stacks = buff_context.amount	
+	#buff_context.buff_node.stacks = buff_context.amount	
 	var buff_stacks = buff_manager.add_buff(buff_context)
 	if buff_stacks == 0:
-		var buff_ui := BUFF_UI.instantiate()
+		var buff_ui :BuffUI = BUFF_UI.instantiate()
 		buff_ui.buff = buff_context.buff_node
+		buff_ui.agent = self
 		buff_container.add_child(buff_ui)
 	damage_number_spawner.spawn_buff_label(buff_context.buff_node.buff_name, buff_context.buff_node.type == Buff.Type.BUFF)
 	damage_number_spawner.spawn_buff_icon(buff_context.buff_node.icon)
