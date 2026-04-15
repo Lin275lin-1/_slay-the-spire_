@@ -22,6 +22,7 @@ signal potion_aim_ended(potion_ui: PotionUI)
 # 玩家回合开始抽牌后
 signal player_hand_drawn
 signal player_hand_discarded
+signal player_turn_started
 signal player_turn_ended
 signal player_talked(text: String, time: float)
 signal player_died

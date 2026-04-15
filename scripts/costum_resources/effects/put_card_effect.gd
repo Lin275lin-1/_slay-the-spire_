@@ -1,26 +1,63 @@
 class_name PutCardEffect
 extends Effect
 
-# 没有使用
+enum CardSource{
+	SPECIFIED, # 导出的卡牌
+	COPY_OF_PLAYING_CARD, # 只用卡牌的effect中允许使用
+	RANDOM_FROM_POOL
+}
 
-func execute(context: Context) -> Variant:
-	for target: Creature in context.targets:
-		if not target:
-			continue
+enum Where{
+	DRAW_PILE,
+	DISCARD_PILE,
+	HAND
+}
+
+@export var source: CardSource
+@export var where: Where
+@export var card_to_put: Card
+@export var put_card_count_provider: NumericProvider
+@export var card_filter: CardFilter
+# TODO:包装成card_modifier
+@export var upgraded: bool
+@export var first_play_free: bool
+
+func apply(_source: Node, targets: Array[Node], card_context: Dictionary, previous_result: Variant = null) -> Variant:
+	var value := put_card_count_provider.get_value(previous_result, card_context)
+	var cards_to_add :Array[Card] = []
+	
+	match source:
+		CardSource.SPECIFIED:
+			for i in range(value):
+				cards_to_add.append(card_to_put.duplicate())
+		CardSource.COPY_OF_PLAYING_CARD:
+			var card : Card = card_context.get("card")
+			if card:
+				for i in range(value):
+					cards_to_add.append(card.duplicate())
+		CardSource.RANDOM_FROM_POOL:
+			var cards :Array[Card] = CardPool.get_discoverable_cards(card_filter.color, card_filter.type, card_filter.rarity)
+			cards.shuffle()
+			for i in range(value):
+				cards_to_add.append(cards[i].duplicate())
+	
+	for target: Creature in targets:
 		if target is Player:
-			var put_card_context = (context as PutCardContext)
-			match context.where:
-				# 抽牌堆
-				0:
-					for i in range(context.amount):
-						target.put_card_in_draw_pile(put_card_context.card.duplicate())
-				# 弃牌堆
-				1:
-					for i in range(context.amount):
-						target.put_card_in_discard_pile(put_card_context.card.duplicate())
-				# 手牌
-				2:
-					for i in range(context.amount):
-						target.put_card_in_hand(put_card_context.card.duplicate())
-				
+			match where:
+				Where.DRAW_PILE:
+					for card: Card in cards_to_add:
+						target.put_card_in_draw_pile(_apply_modifiers(card))
+				Where.DISCARD_PILE:
+					for card: Card in cards_to_add:
+						target.put_card_in_discard_pile(_apply_modifiers(card))
+				Where.HAND:
+					for card: Card in cards_to_add:
+						target.put_card_in_hand(_apply_modifiers(card))	
 	return null
+
+func _apply_modifiers(card: Card) -> Card:
+	if first_play_free:
+		card.first_play_free = true
+	if upgraded:
+		card.upgrade()
+	return card

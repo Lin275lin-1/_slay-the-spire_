@@ -4,9 +4,9 @@ extends Context
 
 var modifiers: Array[Modifier]
 
-func _init(source_: Node, targets_: Array[Node], amount_: int, modifiers_: Array = [], no_modifiers_ :bool = false):
+func _init(source_: Node, target_: Node, amount_: int, modifiers_: Array = [], no_modifiers_ :bool = false):
 	source = source_
-	targets = targets_
+	target = target_
 	amount = amount_
 	modifiers.append_array(modifiers_)
 	no_modifiers = no_modifiers_

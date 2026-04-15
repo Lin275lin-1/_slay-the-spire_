@@ -1,22 +1,78 @@
 [gd_resource type="Resource" format=3 uid="uid://b4u1h22sin2el"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_4ihcj"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_kxnjv"]
 [ext_resource type="Texture2D" uid="uid://b8p12np" path="res://images/atlases/card_atlas.sprites/ironclad/dominate.tres" id="2_oo10v"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_jtmrg"]
 [ext_resource type="Script" uid="uid://crcvx0yompece" path="res://entities/cards/ironclad/主宰.gd" id="3_kxnjv"]
-[ext_resource type="AudioStream" uid="uid://caa6w8567b0cl" path="res://audio/SFX/dark_orb_channel.mp3" id="4_jtmrg"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_2ry21"]
+[ext_resource type="AudioStream" uid="uid://dbe46o0jyq2x8" path="res://audio/SFX/dark_orb_channel.mp3" id="4_jtmrg"]
 
-[sub_resource type="Resource" id="Resource_daffv"]
+[sub_resource type="Resource" id="Resource_jtmrg"]
+script = ExtResource("3_jtmrg")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_2ry21"]
 script = ExtResource("1_4ihcj")
-type = 4
-base_value = 1
+numeric_type = 4
+numeric_provider = SubResource("Resource_jtmrg")
 placeholder = "stacks"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_nrkkc"]
+script = ExtResource("4_2ry21")
+buff_name = "易伤"
+buff_stack_provider = SubResource("Resource_jtmrg")
+target_type = 2
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_3q401"]
+script = ExtResource("3_jtmrg")
+type = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_uf30r"]
+script = ExtResource("4_2ry21")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_3q401")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_24bt1"]
+script = ExtResource("3_jtmrg")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_1p6qj"]
+script = ExtResource("4_2ry21")
+buff_name = "易伤"
+buff_stack_provider = SubResource("Resource_24bt1")
+target_type = 2
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_uwvfx"]
+script = ExtResource("3_jtmrg")
+type = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_1thm3"]
+script = ExtResource("4_2ry21")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_uwvfx")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_iava7"]
+script = ExtResource("3_jtmrg")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
 [sub_resource type="Resource" id="Resource_s7go0"]
 script = ExtResource("1_4ihcj")
-type = 4
-base_value = 2
+numeric_type = 4
+numeric_provider = SubResource("Resource_iava7")
 placeholder = "stacks"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
@@ -28,13 +84,15 @@ type = 2
 base_target = 1
 base_cost = 1
 rarity = 2
+effects = Array[ExtResource("2_kxnjv")]([SubResource("Resource_nrkkc"), SubResource("Resource_uf30r")])
 portrait = ExtResource("2_oo10v")
 base_description = "[center]施加{stacks}层[color=gold]易伤[/color]。[/center][p][center]目标每有一层[color=gold]易伤[/color]，获得一层[color=gold]力量[/color]。[/center]"
 sound = ExtResource("4_jtmrg")
-base_numeric_entries = Array[ExtResource("1_4ihcj")]([SubResource("Resource_daffv")])
+base_numeric_entries = Array[ExtResource("1_4ihcj")]([SubResource("Resource_2ry21")])
 exhaust = true
 upgraded_target = 1
 upgraded_cost = 1
 upgraded_description = "[center]施加{stacks}层[color=gold]易伤[/color]。[/center][p][center]目标每有一层[color=gold]易伤[/color]，获得一层[color=gold]力量[/color]。[/center]"
 upgraded_numeric_entries = Array[ExtResource("1_4ihcj")]([SubResource("Resource_s7go0")])
+upgraded_effects = Array[ExtResource("2_kxnjv")]([SubResource("Resource_1p6qj"), SubResource("Resource_1thm3")])
 metadata/_custom_type_script = "uid://br1hibx18tv13"

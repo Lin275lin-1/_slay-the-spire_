@@ -4,35 +4,63 @@ extends Resource
 enum SourceType{
 	FIXED,	# 固定值
 	PREVIOUS_RESULT, # 上一个effect的结果
-	PREVIOUS_RESULT_MULTIPLY,
-	PREVIOUS_RESULT_DIVIDE,
+	PLAYER_BLOCK, # 根据玩家格挡
+	PLAYER_BUFF_STACK,
+	CARD_COUNT_BY_NAME, # 根据卡牌数量
+	ATTACK_PLAYED_THIS_TURN, # 根据本回合打出的攻击牌
+	SKILL_PLAYED_THIS_TURN,
+	ENERGY_USED_THIS_TURN,
 	CUSTOM, # 自定义（应该不需要这么复杂的东西，暂时不实现
-	PLAYER_BLOCK, # 根据
-	
 }
-
-		#NumericEntry.Source.FIXED:
-			#return entry.base_value
-		#NumericEntry.Source.PLAYER_BLOCK:
-			#return player.get_block()
-		#NumericEntry.Source.PLAYER_BUFF:
-			## 暂时没做
-			#return 0
-		#NumericEntry.Source.TARGET_BUFF:
-			#if not target:
-				#return entry.base_value
-			#else:
-				#var buff = target.get_buff(entry.extra_param["buff_name"])
-				#if buff:
-					## 有一个我没法复现的bug
-					#return entry.base_value + buff.stacks * entry.extra_param["factor"]
-				#else:
-					#return entry.base_value
-		#NumericEntry.Source.ATTACK_PLAYED_THIS_TURN:
-			#return player.attack_played_this_turn
-		#_:
-			#print("未实现")
-			#return 0
 
 @export var type: SourceType = SourceType.FIXED
 @export var fixed_value: int = 0
+@export var multipiler: float = 1.0
+@export var additive: int = 0
+@export var extra_params :Dictionary = {}
+
+func _init(fixed_value_: int = 0, multiplier_: float = 1.0, additive_: int = 0, type_: SourceType = SourceType.FIXED, extra_params_ := {}) -> void:
+	fixed_value = fixed_value_
+	multipiler = multiplier_
+	additive = additive_
+	type = type_
+	extra_params = extra_params_
+
+func get_value(previous_result: Variant = null, context: Dictionary = {}) -> int:
+	match type:
+		SourceType.FIXED:
+			return _get_value(fixed_value)
+		SourceType.PREVIOUS_RESULT:
+			return _get_value(previous_result) if typeof(previous_result) == TYPE_INT else 0
+		SourceType.PLAYER_BLOCK:
+			var player: Player = context.get("player")
+			if player:
+				return _get_value(player.get_block())
+		SourceType.PLAYER_BUFF_STACK:
+			var player: Player = context.get("player")
+			if player:
+				var buff : Buff = player.get_buff(extra_params.get("player_buff_name", ""))
+				return _get_value(buff.stacks) if buff else 0
+		SourceType.CARD_COUNT_BY_NAME:
+			var player: Player = context.get("player")
+			if player:
+				return _get_value(player.get_card_count_by_name(extra_params.get("card_name", "")))
+		SourceType.ATTACK_PLAYED_THIS_TURN:
+			var player: Player = context.get("player")
+			if player:
+				return _get_value(player.attack_played_this_turn)
+		SourceType.SKILL_PLAYED_THIS_TURN:
+			var player: Player = context.get("player")
+			if player:
+				return _get_value(player.skill_played_this_turn)
+		SourceType.ENERGY_USED_THIS_TURN:
+			var player: Player = context.get("player")
+			if player:
+				return _get_value(player.energy_used_this_turn)
+		SourceType.CUSTOM:
+			printerr("未实现")
+			return 0
+	return 0
+
+func _get_value(base_value: int) -> int:
+	return int(multipiler * (base_value + additive))

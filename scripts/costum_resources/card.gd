@@ -48,6 +48,8 @@ enum COLOR {
 # 是否可作为卡牌奖励
 @export var draftable: bool = true
 @export var enchantment: Enchantment = null
+# 卡牌效果列表
+@export var effects: Array[Effect]
 @export_group("卡牌描述")
 @export var portrait: Texture
 @export_multiline var base_description: String
@@ -58,6 +60,8 @@ enum COLOR {
 @export var exhaust: bool
 # 是否带”虚无“词条
 @export var ethereal: bool
+# 是否带有"奇巧"词条
+@export var sly: bool
 @export var playable : bool = true
 # 升级后
 @export_group("升级后")
@@ -65,20 +69,10 @@ enum COLOR {
 @export var upgraded_cost: int
 @export_multiline var upgraded_description: String
 @export var upgraded_numeric_entries: Array[NumericEntry]
+# 升级后卡牌效果列表
+@export var upgraded_effects: Array[Effect]
 @export var upgraded: bool = false
 @export var upgradable: bool = true
-
-
-# 商店售价(无需自定义)
-# 原价（用于显示划掉的折扣前价格，可选）
-@export var original_price: int = 0
-@export var shop_price: int = 0
-# 是否正在打折
-@export var on_sale: bool = false
-
-# 卡牌效果列表
-var effects: Array[Effect]
-
 
 var first_play_free := false
 
@@ -90,38 +84,49 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 		match entry.affected_by:
 			# 这里感觉有问题
 			NumericEntry.AFFECTED_BY.SELF:
-				modifiers = source_.get_modifiers_by_type(entry.type, Buff.AFFECT.SELF)
+				modifiers = source_.get_modifiers_by_type(entry.numeric_type, Buff.AFFECT.SELF)
 			NumericEntry.AFFECTED_BY.TARGET:
 				if target_:
-					modifiers = target_.get_modifiers_by_type(entry.type, Buff.AFFECT.TARGET)
+					modifiers = target_.get_modifiers_by_type(entry.numeric_type, Buff.AFFECT.TARGET)
 			NumericEntry.AFFECTED_BY.BOTH:
 				if target_:
-					modifiers = NumericHelper.combine_modifiers(source_.get_modifiers_by_type(entry.type, Buff.AFFECT.SELF), target_.get_modifiers_by_type(entry.type, Buff.AFFECT.TARGET))
+					modifiers = NumericHelper.combine_modifiers(source_.get_modifiers_by_type(entry.numeric_type, Buff.AFFECT.SELF), target_.get_modifiers_by_type(entry.numeric_type, Buff.AFFECT.TARGET))
 				else:
-					modifiers = source_.get_modifiers_by_type(entry.type, Buff.AFFECT.SELF)
+					modifiers = source_.get_modifiers_by_type(entry.numeric_type, Buff.AFFECT.SELF)
 			NumericEntry.AFFECTED_BY.NONE:
 				modifiers = []
 			_:
 				printerr("未知的NumericEntry")
 		if enchantment:
-			modifiers = NumericHelper.combine_modifiers(modifiers, enchantment.get_modifiers_by_type(entry.type))
+			modifiers = NumericHelper.combine_modifiers(modifiers, enchantment.get_modifiers_by_type(entry.numeric_type))
 		var final_value = NumericHelper.apply_modifiers(base_value, modifiers)
 		ret[entry.placeholder] = final_value
 	return ret
+#
+#func play(source: Player, targets: Array[Node], char_stats: CharacterStats) -> void:
+	#if first_play_free:
+		#first_play_free = false
+	#else:
+		#char_stats.energy -= get_cost()
+	#if is_single_targeted():
+		#apply_effects(source, targets)
+	#else:
+		#apply_effects(source, _get_targets(source, targets))
+	#if enchantment:
+		#enchantment.on_play(source, targets)
+	#Events.card_played.emit(self)
 
-func play(source: Player, targets: Array[Node], char_stats: CharacterStats) -> void:
-	if first_play_free:
-		first_play_free = false
-	else:
-		char_stats.energy -= get_cost()
-	if is_single_targeted():
-		apply_effects(source, targets)
-	else:
-		apply_effects(source, _get_targets(source, targets))
-	if enchantment:
-		enchantment.on_play(source, targets)
+func play(source: Player, targets: Array[Node]) -> void:
+	var card_context := {
+		"player": source,
+		"card": self,
+		"targets": targets
+	}
+	#CombatResolver.push_card(self,  card_context)
+	var previous_result = null
+	for effect:Effect in get_effects():
+		previous_result = await effect.execute(source, card_context, previous_result)
 	Events.card_played.emit(self)
-
 
 func apply_effects(_source: Player, _targets: Array[Node]) -> void:
 	pass
@@ -160,12 +165,12 @@ func get_description(source_: Creature, target_: Creature) -> String:
 		replacement = str(final_value)
 		for numeric_entry in get_numeric_entries():
 			if numeric_entry.placeholder == placeholder:
-				if numeric_entry.base_value == final_value:
+				if numeric_entry.get_base_value() == final_value:
 					continue
-				elif numeric_entry.base_value > final_value:
+				elif numeric_entry.get_base_value() > final_value:
 					color = "red"
 					replacement = "[color={0}]{1}[/color]".format([color, final_value])
-				elif numeric_entry.base_value < final_value:
+				elif numeric_entry.get_base_value() < final_value:
 					color = "green"
 					replacement = "[color={0}]{1}[/color]".format([color, final_value])
 				ret = ret.replace("{" + placeholder + "}", replacement)
@@ -174,7 +179,8 @@ func get_description(source_: Creature, target_: Creature) -> String:
 func get_default_description() -> String:
 	var dict := {}
 	for entry: NumericEntry in get_numeric_entries():
-		dict[entry.placeholder] = entry.base_value
+		dict[entry.placeholder] = entry.numeric_provider.fixed_value
+		
 	return append_features(_get_default_description()).format(dict)
 
 func get_title() -> String:
@@ -196,33 +202,23 @@ func upgrade() -> void:
 func get_numeric_entries() -> Array[NumericEntry]:
 	return upgraded_numeric_entries if upgraded else base_numeric_entries
 
-func _get_numeric_value(entry: NumericEntry, player: Player = null, target: Creature = null) -> int:
-	match entry.source:
-		NumericEntry.Source.FIXED:
-			return entry.base_value
-		NumericEntry.Source.PLAYER_BLOCK:
-			return player.get_block()
-		NumericEntry.Source.PLAYER_BUFF:
-			# 暂时没做
-			return 0
-		NumericEntry.Source.TARGET_BUFF:
-			if not target:
-				return entry.base_value
-			else:
-				var buff = target.get_buff(entry.extra_param["buff_name"])
-				if buff:
-					# 有一个我没法复现的bug
-					return entry.base_value + buff.stacks * entry.extra_param["factor"]
-				else:
-					return entry.base_value
-		NumericEntry.Source.ATTACK_PLAYED_THIS_TURN:
-			return player.attack_played_this_turn
-		_:
-			print("未实现")
-			return 0
+func get_effects() -> Array[Effect]:
+	return upgraded_effects if upgraded else effects
 
-func get_numeric_value(entries: NumericEntry, player: Player = null, target: Creature = null) -> int:
-	return _get_numeric_value(entries, player, target)
+func _get_numeric_value(entry: NumericEntry, player: Player = null, target: Creature = null) -> int:
+	var card_context := {
+		"player": player,
+		"card": self,
+		"target": target
+	}
+	var value = entry.numeric_provider.get_value(null, card_context)
+	if entry.numeric_formula:
+		value += entry.numeric_formula.calculate(target)
+	return value
+	
+
+func get_numeric_value(entries: NumericEntry, player: Player = null, targets: Creature = null) -> int:
+	return _get_numeric_value(entries, player, targets)
 
 func get_enchantment_modifiers(entry: NumericEntry) -> Array:
 	if has_enchantment():
@@ -237,11 +233,6 @@ func get_cost() -> int:
 
 func get_target() -> Target:
 	return upgraded_target if upgraded else base_target
-
-
-# 获取当前实际售价（打折后）
-func get_shop_price() -> int:
-	return shop_price
 
 func has_enchantment() -> bool:
 	return !(enchantment == null)

@@ -23,6 +23,7 @@ func start_battle(char_stats_: CharacterStats) -> void:
 	
 func start_turn() -> void:
 	player.start_turn()
+	Events.player_turn_started.emit()
 	relics.activate_relics_by_trigger_type(Relic.TriggerType.START_OF_TURN)
 
 func end_turn() -> void:
@@ -34,11 +35,10 @@ func draw_card() -> Card:
 	if char_stats.draw_pile.is_empty():
 		# 抽牌堆与弃牌堆都没牌了
 		return null
-	var card = char_stats.draw_pile.draw_card()
-	# 抽牌堆满了直接放入弃牌堆
+	# 抽牌堆满了不抽牌
 	if hand_manager.get_child_count() >= 10:
-		char_stats.discard_pile.add_card(card)
 		return null
+	var card = char_stats.draw_pile.draw_card()
 	hand_manager.add_card(card)
 	hand_manager.set_cards()
 	reshuffle_deck_from_discard_pile()

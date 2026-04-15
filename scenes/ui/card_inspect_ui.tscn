@@ -2,13 +2,11 @@
 
 [ext_resource type="Script" uid="uid://c78mq5564tdhk" path="res://scripts/ui/card_inspect_ui.gd" id="1_qo61b"]
 [ext_resource type="PackedScene" uid="uid://b22g8dum6re3" path="res://scenes/ui/card_visuals.tscn" id="2_5lsx3"]
-[ext_resource type="Resource" uid="uid://rfrswfbanfy" path="res://entities/cards/ironclad/打击.tres" id="2_ut4np"]
 
 [node name="CardInspectUI" type="CenterContainer" unique_id=946762981]
 offset_right = 300.0
 offset_bottom = 422.0
 script = ExtResource("1_qo61b")
-card = ExtResource("2_ut4np")
 
 [node name="Control" type="Control" parent="." unique_id=199098501]
 custom_minimum_size = Vector2(300, 422)

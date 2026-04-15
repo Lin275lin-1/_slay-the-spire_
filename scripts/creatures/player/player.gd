@@ -2,7 +2,7 @@ class_name Player
 extends Creature
 
 # 玩家专属信号
-signal before_draw_cards(context: DrawCardContext)
+signal before_draw_card(context: DrawCardContext)
 signal after_draw_card(card: Card)
 
 @export var stats: CharacterStats : set = _set_char_stats
@@ -18,6 +18,8 @@ var spine_manager: SpineManager
 
 # 本回合打出攻击牌的数量
 var attack_played_this_turn := 0
+var skill_played_this_turn := 0
+var energy_used_this_turn := 0
 
 func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
@@ -79,29 +81,32 @@ func die() -> void:
 	await spine_manager.animation_completed
 	Events.player_died.emit()
 
-func draw_card() -> void:
-	var card: Card = agent.draw_card()
-	after_draw_card.emit(card)
+func draw_card(context: DrawCardContext) -> void:
+	before_draw_card.emit(context)
+	if context.amount != 0:
+		var card: Card = agent.draw_card()
+		after_draw_card.emit(card)
 
-func draw_cards(context: DrawCardContext) -> void:
-	before_draw_cards.emit(context)
-	if context.amount > 0:
-		var tween = create_tween()
-		for i in range(context.amount):
-			tween.tween_callback(draw_card)
-			tween.tween_interval(0.2)
-		await tween.finished
+#func draw_cards(context: DrawCardContext) -> void:
+	#before_draw_cards.emit(context)
+	#if context.amount > 0:
+		#var tween = create_tween()
+		#for i in range(context.amount):
+			#tween.tween_callback(draw_card)
+			#tween.tween_interval(0.2)
+		#await tween.finished
 
 func gain_energy(context: GainEnergyContext) -> void:
 	stats.energy += context.amount
 	
 	
-func lose_health(context: Context) -> void:
+func lose_health(context: Context) -> int:
 	if stats.health <= 0:
-		return
+		return 0
 	
 	before_lose_health.emit(context)
 	stats.health -= context.amount
+	damage_number_spawner.spawn_damage_label(context.amount, false)
 
 	if stats.health <= 0:
 		die()
@@ -109,7 +114,8 @@ func lose_health(context: Context) -> void:
 		Events.player_hit.emit()
 		spine_anim_state.set_animation("hurt", false, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
-
+	
+	return context.amount
 
 func take_damage(context: Context) -> int:
 	if stats.health <= 0:
@@ -117,7 +123,7 @@ func take_damage(context: Context) -> int:
 	before_take_damage.emit(context)
 	var final_value :int = context.get_final_value()
 	var actual_damage := stats.take_damage(final_value)
-	damage_number_spawner.spawn_damage_label(final_value, actual_damage == 0)
+	damage_number_spawner.spawn_damage_label(actual_damage, actual_damage == 0 and final_value != 0)
 	after_take_damage.emit(context)
 	if stats.health <= 0:
 		die()
@@ -161,6 +167,13 @@ func discard_card(card: Card) -> void:
 func exhaust_hand_card(card: Card) -> void:
 	agent.exhaust_hand_card(card)
 
+# TODO: 实现这两个方法
+func exhaust_draw_pile_card(card: Card) -> void:
+	pass
+
+func exhaust_discard_pile_card(card: Card) -> void:
+	pass
+
 func start_turn() -> void:
 	before_turn_started.emit(self)
 	stats.block = 0
@@ -169,6 +182,8 @@ func start_turn() -> void:
 
 func end_turn() -> void:
 	attack_played_this_turn = 0
+	skill_played_this_turn = 0
+	energy_used_this_turn = 0
 	turn_ended.emit(self)
 		
 func _set_char_stats(value: CharacterStats) -> void:
@@ -203,11 +218,18 @@ func _update_player() -> void:
 	name_label.text = stats.character_name
 
 func _on_card_played(card: Card) -> void:
+	var cost = 0 if card.first_play_free else card.get_cost()
+	card.first_play_free = false
+	energy_used_this_turn += cost
+	stats.energy -= cost	
+	
 	if card.type == Card.Type.ATTACK:
 		attack_played_this_turn += 1
 		spine_anim_state.set_animation("attack", false, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
 	else:
+		if card.type == Card.Type.SKILL:
+			skill_played_this_turn += 1
 		spine_anim_state.set_animation("cast", false, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
 	
@@ -236,18 +258,25 @@ func set_hitbox() -> void:
 	var center_point = visuals.get_center_point()
 	hitbox.shape.size = bound_size
 	hitbox.position = center_point
+	
 	damage_number_spawner.position = center_point
+	# 将damage_number_spawner生成的对象添加到SFXLayer中
+	damage_number_spawner.agent = get_node("../SFXLayer")
+	
 	set_recticles([
 		center_point - bound_size / 2,
 		center_point + Vector2(bound_size.x / 2, -bound_size.y / 2),
 		center_point + Vector2(-bound_size.x / 2, bound_size.y / 2),
 		center_point + bound_size / 2
 	], visuals.get_visual_scale() * 2)
+	
 	var hp_bar_position = center_point + Vector2(-bound_size.x / 2, bound_size.y / 2)
 	health_bar.position = hp_bar_position
 	health_bar.set_length(visuals.get_size().x)
 	health_bar.position = hp_bar_position
+	
 	buff_container.size.x = bound_size.x
 	buff_container.position = hp_bar_position + Vector2(0, 40)
+	
 	name_plate.size.x = bound_size.x
 	name_plate.position = hp_bar_position + Vector2(0, 10)

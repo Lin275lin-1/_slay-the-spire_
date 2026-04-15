@@ -2,19 +2,71 @@
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_2klbc"]
 [ext_resource type="Texture2D" uid="uid://bcgn03j" path="res://images/atlases/card_atlas.sprites/necrobinder/sculpting_strike.tres" id="2_35aj8"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_suesf"]
 [ext_resource type="Script" uid="uid://cj4qfukbhf6x8" path="res://entities/cards/necrobinder/雕琢打击.gd" id="3_4buib"]
-[ext_resource type="AudioStream" uid="uid://b4eqc65cqogm6" path="res://audio/SFX/blunt_attack.mp3" id="4_1xsq3"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_8qd6d"]
+[ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_1xsq3"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_finch"]
+[ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="5_nx85q"]
+
+[sub_resource type="Resource" id="Resource_7l8l3"]
+script = ExtResource("2_suesf")
+fixed_value = 8
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
 [sub_resource type="Resource" id="Resource_ppitb"]
 script = ExtResource("1_2klbc")
-base_value = 7
+numeric_provider = SubResource("Resource_7l8l3")
 placeholder = "damage"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_jc6jr"]
+script = ExtResource("2_suesf")
+fixed_value = 8
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_r33ay"]
+script = ExtResource("4_finch")
+damage_provider = SubResource("Resource_jc6jr")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_t1njb"]
+script = ExtResource("5_nx85q")
+callback = 3
+where = 1
+min_select = 1
+max_select = 1
+metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+
+[sub_resource type="Resource" id="Resource_fas6a"]
+script = ExtResource("2_suesf")
+fixed_value = 12
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_wkb2x"]
+script = ExtResource("4_finch")
+damage_provider = SubResource("Resource_fas6a")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_xktd2"]
+script = ExtResource("5_nx85q")
+callback = 3
+where = 1
+min_select = 1
+max_select = 1
+metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+
+[sub_resource type="Resource" id="Resource_cv3f2"]
+script = ExtResource("2_suesf")
+fixed_value = 12
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
 [sub_resource type="Resource" id="Resource_qdl3f"]
 script = ExtResource("1_2klbc")
-base_value = 10
+numeric_provider = SubResource("Resource_cv3f2")
 placeholder = "damage"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
@@ -25,6 +77,7 @@ id = "雕琢打击"
 base_target = 1
 card_color = 8
 base_cost = 1
+effects = Array[ExtResource("3_8qd6d")]([SubResource("Resource_r33ay"), SubResource("Resource_t1njb")])
 portrait = ExtResource("2_35aj8")
 base_description = "[center]造成{damage}点伤害。[/center][p][center]选择一张手牌施加[color=gold]虚无[/color]。[/center]"
 sound = ExtResource("4_1xsq3")
@@ -33,4 +86,5 @@ upgraded_target = 1
 upgraded_cost = 1
 upgraded_description = "[center]造成{damage}点伤害。[/center][p][center]选择一张手牌施加[color=gold]虚无[/color]。[/center]"
 upgraded_numeric_entries = Array[ExtResource("1_2klbc")]([SubResource("Resource_qdl3f")])
+upgraded_effects = Array[ExtResource("3_8qd6d")]([SubResource("Resource_wkb2x"), SubResource("Resource_xktd2")])
 metadata/_custom_type_script = "uid://br1hibx18tv13"

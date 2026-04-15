@@ -1,6 +1,8 @@
 extends Potion
 
-
-func play(targets: Array[Node]) -> void:
-	var damage_effect := DamageEffect.new()
-	damage_effect.execute(DamageContext.new(null, targets, 10, [], true))
+#
+#func play(source: Node, targets: Array[Node]) -> void:
+	#var damage_effect := DamageEffect.new()
+	#damage_effect.damage_provider = NumericProvider.new(10)
+	#damage_effect.target_type = Effect.TargetType.ALL_ENEMIES
+	#damage_effect.execute(source, {}, null)

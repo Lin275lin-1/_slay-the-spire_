@@ -3,14 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://cb16flm0r74mt" path="res://scenes/creatures/creature.tscn" id="1_p0pr7"]
 [ext_resource type="Script" uid="uid://1evs6fw28860" path="res://scripts/creatures/enemy/enemy.gd" id="2_r5gqq"]
 [ext_resource type="PackedScene" uid="uid://doi41puqdenrn" path="res://scenes/rooms/combat_room/combat_ui/intents.tscn" id="3_c8v6u"]
-[ext_resource type="FontFile" uid="uid://wcoiw83db02h" path="res://fonts/zhs/SourceHanSerifSC-Bold.otf" id="4_ygxal"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ygxal"]
 size = Vector2(283, 218)
-
-[sub_resource type="LabelSettings" id="LabelSettings_f30bu"]
-font = ExtResource("4_ygxal")
-font_size = 50
 
 [node name="Enemy" unique_id=1710440414 groups=["ui_enemies"] instance=ExtResource("1_p0pr7")]
 collision_layer = 4
@@ -26,6 +21,3 @@ offset_bottom = -209.0
 [node name="Hitbox" type="CollisionShape2D" parent="." index="6" unique_id=1451844252]
 position = Vector2(0, -53)
 shape = SubResource("RectangleShape2D_ygxal")
-
-[node name="DamageNumberSpawner" parent="." index="8" unique_id=1887516962]
-label_setttings = SubResource("LabelSettings_f30bu")

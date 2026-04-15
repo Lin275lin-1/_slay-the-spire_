@@ -9,8 +9,9 @@ var max_potion_slots: int = 3
 
 func initialize(run_stats_: RunStats) -> void:
 	run_stats = run_stats_
-	Events.combat_start.connect(_on_combat_started)
 	Events.combat_won.connect(_on_combat_ended)
+	Events.player_turn_ended.connect(_on_player_turn_ended)
+	Events.player_turn_started.connect(_on_player_turn_started)
 	run_stats.potion_added.connect(add_potion)
 	run_stats.potion_removed.connect(remove_potion)
 	update_potion_slot()
@@ -45,10 +46,15 @@ func _on_potion_used(potion_ui: PotionUI) -> void:
 			return
 	printerr("potion_handler:_on_potion_used")	
 		
-func _on_combat_started() -> void:
-	for child: PotionUI in potion_place_holder.get_children():
-		child.in_combat = true
 
+func _on_player_turn_started() -> void:
+	for child: PotionUI in potion_place_holder.get_children():
+		child.can_use = true
+
+func _on_player_turn_ended() -> void:
+	for child: PotionUI in potion_place_holder.get_children():
+		child.can_use = false
+		
 func _on_combat_ended() -> void:
 	for child: PotionUI in potion_place_holder.get_children():
-		child.in_combat = false
+		child.can_use = false

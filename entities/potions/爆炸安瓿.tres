@@ -1,8 +1,23 @@
 [gd_resource type="Resource" format=3 uid="uid://btvj32p8ixefr"]
 
 [ext_resource type="Texture2D" uid="uid://b14yv42" path="res://images/atlases/potion_atlas.sprites/explosive_ampoule.tres" id="1_3hlyg"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_fakex"]
 [ext_resource type="Texture2D" uid="uid://m5xp7e" path="res://images/atlases/potion_outline_atlas.sprites/explosive_ampoule.tres" id="2_m87j0"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_ydubc"]
 [ext_resource type="Script" uid="uid://cl75clvbcksg" path="res://entities/potions/爆炸安瓿.gd" id="3_3hlyg"]
+[ext_resource type="Script" uid="uid://bhhtjppe5dfcx" path="res://scripts/costum_resources/effects/damage_effect.gd" id="3_ine08"]
+
+[sub_resource type="Resource" id="Resource_pto54"]
+script = ExtResource("2_ydubc")
+fixed_value = 10
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_kmpba"]
+script = ExtResource("3_ine08")
+damage_provider = SubResource("Resource_pto54")
+no_modifiers = true
+target_type = 3
+metadata/_custom_type_script = "uid://bhhtjppe5dfcx"
 
 [resource]
 script = ExtResource("3_3hlyg")
@@ -13,4 +28,5 @@ icon = ExtResource("1_3hlyg")
 outline_icon = ExtResource("2_m87j0")
 target_type = 2
 rarity = 1
+effects = Array[ExtResource("1_fakex")]([SubResource("Resource_kmpba")])
 metadata/_custom_type_script = "uid://bumkvpbom08xn"

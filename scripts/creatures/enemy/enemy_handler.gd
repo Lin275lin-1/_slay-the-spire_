@@ -8,8 +8,10 @@ func _ready() -> void:
 
 func reset_enemy_intents() -> void:
 	for child: Enemy in get_children():
-		child.current_intent = null
-		child.update_intent()
+		# 如果child被queue_free就不会再更新意图
+		if is_instance_valid(child):
+			child.current_intent = null
+			child.update_intent()
 
 func setup_enemies(encounter: EnemyEncounter) -> void:
 	if not encounter:
@@ -21,13 +23,20 @@ func setup_enemies(encounter: EnemyEncounter) -> void:
 		new_enemy.position = enemy_entry.position
 		new_enemy.stats = enemy_entry.enemy_stats.create_instance()
 		
-		new_enemy.ready.connect(
-			func():
-				var buffs := enemy_entry.get_initial_buffs()
-				for key in buffs.keys():
-					new_enemy.add_buff(ApplyBuffContext.new(new_enemy, [new_enemy], buffs[key], key))
-				)
+		
 		add_child(new_enemy)
+		if !new_enemy.is_node_ready():
+			await new_enemy.ready
+			
+		var buffs := enemy_entry.get_initial_buffs()
+		for key in buffs.keys():
+			new_enemy.add_buff(ApplyBuffContext.new(new_enemy, new_enemy, buffs[key], key))
+		#new_enemy.ready.connect(
+			#func():
+				#var buffs := enemy_entry.get_initial_buffs()
+				#for key in buffs.keys():
+					#new_enemy.add_buff(ApplyBuffContext.new(new_enemy, new_enemy, buffs[key], key))
+				#)
 		
 
 func start_turn() -> void:

@@ -209,41 +209,47 @@ func _populate_cards() -> void:
 		return
 	var char_name = _get_character_name()
 	if char_name == "":
-		print("无法获取角色名称，跳过卡牌填充")
 		return
 
-	var character_pile = load("res://entities/merchant/shop_cards/cards/%s/shop_%s_card_pile.tres" % [char_name, char_name]) as CardPile
-	var colorless_pile = load("res://entities/merchant/shop_cards/colorless/shop_colorless_cards.tres") as CardPile
+	var character_color = _get_character_color_mask(char_name)
+	if character_color == 0:
+		return
 
-	var fill_region = func(container: Node, pile: CardPile, region_name: String):
-		if not container or not pile:
+	var shop_rarity_mask = Card.Rarity.COMMON | Card.Rarity.UNCOMMON | Card.Rarity.RARE
+
+	# 从全局卡池获取卡牌数组（而不是 CardPile 资源）
+	var character_cards: Array = CardPool.get_draftable_cards(character_color, CardPool.type_mask, shop_rarity_mask)
+	var colorless_cards: Array = CardPool.get_draftable_cards(Card.COLOR.COLORLESS, CardPool.type_mask, shop_rarity_mask)
+
+	var fill_region = func(container: Node, cards_array: Array, region_name: String):
+		if not container:
 			return
 		var slots: Array[MerchantCard] = []
 		for child in container.get_children():
 			if child is MerchantCard:
 				slots.append(child)
-		_clear_slots(slots, "card_data")
-		if slots.is_empty() or pile.cards.is_empty():
+		_clear_slots(slots, "shop_item")
+		if slots.is_empty() or cards_array.is_empty():
 			print(region_name + "：无槽位或牌库为空")
 			return
 
-		var available = pile.cards.duplicate()
+		var available = cards_array.duplicate()
 		available.shuffle()
 		var count = min(slots.size(), available.size())
 		for i in range(count):
-			var card_data = available[i]
-			_apply_random_price_and_discount(card_data)
+			var card_data: Card = available[i]
+			var shop_item = _create_card_shop_item(card_data)
 			var slot = slots[i]
 			slot.visible = true
-			slot.card_data = card_data
+			slot.set_shop_item(shop_item)
 			if run_stats:
 				slot.set_run_stats(run_stats)
 			_connect_card_signals(slot)
-		#print(region_name + "填充完成，数量：", count)
+		# print(region_name + "填充完成，数量：", count)
 
-	fill_region.call(slots_container.get_node_or_null("CharacterCards"), character_pile, "角色卡牌")
-	fill_region.call(slots_container.get_node_or_null("ColorlessCards"), colorless_pile, "无色卡牌")
-
+	fill_region.call(slots_container.get_node_or_null("CharacterCards"), character_cards, "角色卡牌")
+	fill_region.call(slots_container.get_node_or_null("ColorlessCards"), colorless_cards, "无色卡牌")
+	
 func _populate_relics() -> void:
 	if not slots_container:
 		return
@@ -274,11 +280,11 @@ func _populate_relics() -> void:
 	var count = min(slots.size(), available_relics.size())
 	for i in range(count):
 		var relic = available_relics[i]
-		_apply_random_price_to_relic(relic)
+		var shop_item = _create_relic_shop_item(relic)    # 创建 ShopItem
 		var slot = slots[i]
 		slot.visible = true
-		_set_data(slot, "relic_data", relic)
-		_set_data(slot, "run_stats", run_stats)
+		slot.set_shop_item (shop_item)                     # 改为 set_shop_item
+		slot.set_run_stats(run_stats)
 		_connect_click_signal(slot, "relic_clicked", _on_relic_purchased)
 		_connect_hand_signals(slot)
 	# print("遗物填充完成，实际显示数量：", count)
@@ -302,11 +308,11 @@ func _populate_potions() -> void:
 	var count = min(slots.size(), available_potions.size())
 	for i in range(count):
 		var potion = available_potions[i]
-		_apply_random_price_to_potion(potion)
+		var shop_item = _create_potion_shop_item(potion)   # 创建 ShopItem
 		var slot = slots[i]
 		slot.visible = true
-		_set_data(slot, "potion_data", potion)
-		_set_data(slot, "run_stats", run_stats)
+		slot.set_shop_item ( shop_item )                     # 改为 set_shop_item
+		slot.set_run_stats(run_stats)
 		_connect_click_signal(slot, "potion_clicked", _on_potion_purchased)
 		_connect_hand_signals(slot)
 	#print("药水填充完成，实际显示数量：", count)
@@ -353,7 +359,8 @@ func _connect_hand_signals(node: Object, hover_offset: Vector2 = Vector2(-60, -2
 			sig.connect(_on_hand_hide)
 
 func _connect_card_signals(card_node: MerchantCard) -> void:
-	_connect_click_signal(card_node, "card_clicked", _on_card_purchased)
+	if not card_node.card_clicked.is_connected(_on_card_purchased):
+		card_node.card_clicked.connect(_on_card_purchased.bind(card_node))
 	_connect_hand_signals(card_node)
 
 # ============================================
@@ -388,38 +395,37 @@ func _get_price_range_by_rarity(rarity: Card.Rarity) -> Vector2:
 # ============================================
 # 购买回调
 # ============================================
-func _on_card_purchased(card: Card, card_node: MerchantCard) -> void:
-	if not _can_afford(card.shop_price):
+func _on_card_purchased(shop_item: ShopItem, card_node: MerchantCard) -> void:
+	if not _can_afford(shop_item.shop_price):
 		_say_random("purchase_fail", 1.5)
 		_shake_node(card_node)  
 		return
-	run_stats.gold -= card.shop_price
-	_add_card_to_deck(card)
+	run_stats.gold -= shop_item.shop_price
+	_add_card_to_deck(shop_item.item_data)
 	card_node.queue_free()
-	_say_random("purchase_success", 2.0)
+	_say_random("purchase_success", 2.0)	
 	#print("成功购买卡牌：", card.id)
 
-func _on_relic_purchased(relic: Relic, relic_node: MerchantRelic) -> void:
-	if not _can_afford(relic.shop_price):
+func _on_relic_purchased(shop_item: ShopItem, relic_node: MerchantRelic) -> void:
+	if not _can_afford(shop_item.shop_price):
 		_say_random("purchase_fail", 1.5)
 		_shake_node(relic_node)  
 		return
-	run_stats.gold -= relic.shop_price
-	run_stats.add_relic(relic)
+	run_stats.gold -= shop_item.shop_price
+	run_stats.add_relic(shop_item.item_data)
 	relic_node.queue_free()
 	_say_random("purchase_success", 2.0)
 	#print("成功购买遗物：", relic.relic_name)
 	
-func _on_potion_purchased(potion: Potion, potion_node: MerchantPotion) -> void:
-	if not _can_afford(potion.shop_price):
+func _on_potion_purchased(shop_item: ShopItem, potion_node: MerchantPotion) -> void:
+	if not _can_afford(shop_item.shop_price):
 		_say_random("purchase_fail", 1.5)
 		_shake_node(potion_node)  
 		return
-	run_stats.gold -= potion.shop_price
-	if not run_stats.add_potion(potion):
-		run_stats.gold += potion.shop_price
+	run_stats.gold -= shop_item.shop_price
+	if not run_stats.add_potion(shop_item.item_data):
+		run_stats.gold += shop_item.shop_price
 		_say_random("potion_full", 1.5)
-		#print("药水槽位已满，无法购买")
 		return
 	potion_node.queue_free()
 	_say_random("purchase_success", 2.0)
@@ -613,6 +619,23 @@ func _reset_inventory_position() -> void:
 # ============================================
 # 辅助函数
 # ============================================
+func _create_card_shop_item(card: Card) -> ShopItem:
+	var range_vec = _get_price_range_by_rarity(card.rarity)
+	var base_price = randi_range(int(range_vec.x), int(range_vec.y))
+	if randf() < DISCOUNT_CHANCE:
+		var discount_price = int(base_price * randf_range(DISCOUNT_FACTOR_MIN, DISCOUNT_FACTOR_MAX))
+		return ShopItem.new(card, discount_price, true, base_price)
+	else:
+		return ShopItem.new(card, base_price, false, 0)
+
+func _create_relic_shop_item(relic: Relic) -> ShopItem:
+	var price = randi_range(RELIC_PRICE_MIN, RELIC_PRICE_MAX)
+	return ShopItem.new(relic, price, false, 0)
+
+func _create_potion_shop_item(potion: Potion) -> ShopItem:
+	var price = randi_range(POTION_PRICE_MIN, POTION_PRICE_MAX)
+	return ShopItem.new(potion, price, false, 0)
+
 func _get_run_node() -> Run:
 	var current = self
 	while current:
@@ -760,3 +783,10 @@ func _on_back_button_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		_on_back_button_pressed()
 		accept_event()
+
+func _get_character_color_mask(char_name: String) -> int:
+	match char_name:
+		"ironclad": return Card.COLOR.RED
+		"silent":   return Card.COLOR.GREEN
+		# 后续添加其他角色时扩展此处
+		_: return 0

@@ -2,20 +2,102 @@
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_lhgbm"]
 [ext_resource type="Texture2D" uid="uid://bbpfskx" path="res://images/atlases/card_atlas.sprites/ironclad/bloodletting.tres" id="2_awg4v"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_gfkj2"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_eijwo"]
 [ext_resource type="Script" uid="uid://c5voa5l6fqcew" path="res://entities/cards/ironclad/放血.gd" id="3_qdv0n"]
+[ext_resource type="Script" uid="uid://bgxakc1nj11hm" path="res://scripts/costum_resources/effects/loss_health_effect.gd" id="4_mltl7"]
+[ext_resource type="Script" uid="uid://c6kvghrfcdtp7" path="res://scripts/costum_resources/effects/gain_energy_effect.gd" id="5_hhsau"]
 
-[sub_resource type="Resource" id="Resource_7yvx5"]
+[sub_resource type="Resource" id="Resource_gfkj2"]
+script = ExtResource("3_eijwo")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_eijwo"]
 script = ExtResource("1_lhgbm")
-type = 6
-base_value = 2
+numeric_type = 1
+numeric_provider = SubResource("Resource_gfkj2")
+placeholder = "lose_health"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_mltl7"]
+script = ExtResource("3_eijwo")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_hhsau"]
+script = ExtResource("1_lhgbm")
+numeric_type = 6
+numeric_provider = SubResource("Resource_mltl7")
 placeholder = "energy"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
-[sub_resource type="Resource" id="Resource_s1170"]
+[sub_resource type="Resource" id="Resource_cdwm8"]
+script = ExtResource("3_eijwo")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_50rsw"]
+script = ExtResource("4_mltl7")
+lose_health_provider = SubResource("Resource_cdwm8")
+target_type = 1
+metadata/_custom_type_script = "uid://bgxakc1nj11hm"
+
+[sub_resource type="Resource" id="Resource_hr34e"]
+script = ExtResource("3_eijwo")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_fs5tq"]
+script = ExtResource("5_hhsau")
+energy_provider = SubResource("Resource_hr34e")
+metadata/_custom_type_script = "uid://c6kvghrfcdtp7"
+
+[sub_resource type="Resource" id="Resource_h5c8t"]
+script = ExtResource("3_eijwo")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_0h1uv"]
+script = ExtResource("4_mltl7")
+lose_health_provider = SubResource("Resource_h5c8t")
+target_type = 1
+metadata/_custom_type_script = "uid://bgxakc1nj11hm"
+
+[sub_resource type="Resource" id="Resource_7ekpj"]
+script = ExtResource("3_eijwo")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_co18p"]
+script = ExtResource("5_hhsau")
+energy_provider = SubResource("Resource_7ekpj")
+metadata/_custom_type_script = "uid://c6kvghrfcdtp7"
+
+[sub_resource type="Resource" id="Resource_0jbwv"]
+script = ExtResource("3_eijwo")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_abhjn"]
 script = ExtResource("1_lhgbm")
-type = 6
-base_value = 3
+numeric_type = 1
+numeric_provider = SubResource("Resource_0jbwv")
+placeholder = "lose_health"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_66agl"]
+script = ExtResource("3_eijwo")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_6aaeb"]
+script = ExtResource("1_lhgbm")
+numeric_type = 6
+numeric_provider = SubResource("Resource_66agl")
 placeholder = "energy"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
@@ -24,8 +106,10 @@ metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 script = ExtResource("3_qdv0n")
 id = "放血"
 type = 2
+effects = Array[ExtResource("2_gfkj2")]([SubResource("Resource_50rsw"), SubResource("Resource_fs5tq")])
 portrait = ExtResource("2_awg4v")
-base_description = "[center]失去3点生命。[/center][p][center]获得{energy}点[color=gold]能量[/color]。[/center]"
-base_numeric_entries = Array[ExtResource("1_lhgbm")]([SubResource("Resource_7yvx5")])
-upgraded_description = "[center]失去3点生命。[/center][p][center]获得{energy}点[color=gold]能量[/color]。[/center]"
-upgraded_numeric_entries = Array[ExtResource("1_lhgbm")]([SubResource("Resource_s1170")])
+base_description = "[center]失去{lose_health}点生命。[/center][p][center]获得{energy}点[color=gold]能量[/color]。[/center]"
+base_numeric_entries = Array[ExtResource("1_lhgbm")]([SubResource("Resource_eijwo"), SubResource("Resource_hhsau")])
+upgraded_description = "[center]失去{lose_health}点生命。[/center][p][center]获得{energy}点[color=gold]能量[/color]。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_lhgbm")]([SubResource("Resource_abhjn"), SubResource("Resource_6aaeb")])
+upgraded_effects = Array[ExtResource("2_gfkj2")]([SubResource("Resource_0h1uv"), SubResource("Resource_co18p")])

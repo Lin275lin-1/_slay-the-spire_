@@ -1,25 +1,44 @@
 [gd_resource type="Resource" script_class="EnemyEncounter" format=3 uid="uid://dbjvka6mgirbd"]
 
 [ext_resource type="Script" uid="uid://dw53gdpom3gn6" path="res://scripts/costum_resources/enemy_entry.gd" id="1_co8ql"]
-[ext_resource type="Resource" uid="uid://bv0m86mshv3gj" path="res://entities/enemies/nibbit/nibbit.tres" id="2_223kt"]
 [ext_resource type="Script" uid="uid://dgu4qpyr0pnnb" path="res://scripts/costum_resources/enemy_encounter.gd" id="2_fnujm"]
+[ext_resource type="Resource" uid="uid://b7d2m4ftsvv71" path="res://entities/enemies/nibbit/nibbit_ai.tres" id="2_xndn5"]
+[ext_resource type="Script" uid="uid://bjrlwk5w4gqtk" path="res://scripts/costum_resources/enemy_stats.gd" id="3_urjtc"]
+[ext_resource type="PackedScene" uid="uid://ehev41bc2om8" path="res://scenes/creature_visuals/nibbit.tscn" id="4_5vn42"]
 
 [sub_resource type="Resource" id="Resource_xndn5"]
-script = ExtResource("1_co8ql")
-enemy_stats = ExtResource("2_223kt")
-position = Vector2(1200, 520)
-metadata/_custom_type_script = "uid://dw53gdpom3gn6"
+script = ExtResource("3_urjtc")
+ai = ExtResource("2_xndn5")
+enemy_name = "小啃兽"
+hightest_max_health = 46
+lowest_max_health = 42
+visuals_scene = ExtResource("4_5vn42")
+metadata/_custom_type_script = "uid://bjrlwk5w4gqtk"
 
 [sub_resource type="Resource" id="Resource_urjtc"]
 script = ExtResource("1_co8ql")
-enemy_stats = ExtResource("2_223kt")
+enemy_stats = SubResource("Resource_xndn5")
+position = Vector2(1200, 520)
+metadata/_custom_type_script = "uid://dw53gdpom3gn6"
+
+[sub_resource type="Resource" id="Resource_5vn42"]
+script = ExtResource("3_urjtc")
+ai = ExtResource("2_xndn5")
+enemy_name = "小啃兽"
+hightest_max_health = 46
+lowest_max_health = 42
+visuals_scene = ExtResource("4_5vn42")
+metadata/_custom_type_script = "uid://bjrlwk5w4gqtk"
+
+[sub_resource type="Resource" id="Resource_b8gyn"]
+script = ExtResource("1_co8ql")
+enemy_stats = SubResource("Resource_5vn42")
 position = Vector2(1700, 520)
 metadata/_custom_type_script = "uid://dw53gdpom3gn6"
 
 [resource]
 script = ExtResource("2_fnujm")
-type = 1
-weight = 1.0
-enemy_entries = Array[ExtResource("1_co8ql")]([SubResource("Resource_xndn5"), SubResource("Resource_urjtc")])
+weight = 10.0
+enemy_entries = Array[ExtResource("1_co8ql")]([SubResource("Resource_urjtc"), SubResource("Resource_b8gyn")])
 encounter_name = "two_nibbits"
 metadata/_custom_type_script = "uid://dgu4qpyr0pnnb"

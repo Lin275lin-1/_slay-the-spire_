@@ -1,8 +1,23 @@
 [gd_resource type="Resource" format=3 uid="uid://cmilch2jb6xgn"]
 
 [ext_resource type="Texture2D" uid="uid://bbw5nx0" path="res://images/atlases/potion_atlas.sprites/block_potion.tres" id="1_3ktux"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_b2fm5"]
 [ext_resource type="Texture2D" uid="uid://r7fju" path="res://images/atlases/potion_outline_atlas.sprites/block_potion.tres" id="2_4qa8h"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_8ev1v"]
 [ext_resource type="Script" uid="uid://dcd3k6bjs0161" path="res://entities/potions/格挡药水.gd" id="3_3ktux"]
+[ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="3_7catc"]
+
+[sub_resource type="Resource" id="Resource_jb61f"]
+script = ExtResource("2_8ev1v")
+fixed_value = 12
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_7fjhp"]
+script = ExtResource("3_7catc")
+block_provider = SubResource("Resource_jb61f")
+no_modifiers = true
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
 
 [resource]
 script = ExtResource("3_3ktux")
@@ -11,4 +26,5 @@ potion_name = "格挡药水"
 description = "获得12点格挡"
 icon = ExtResource("1_3ktux")
 outline_icon = ExtResource("2_4qa8h")
+effects = Array[ExtResource("1_b2fm5")]([SubResource("Resource_7fjhp")])
 metadata/_custom_type_script = "uid://bumkvpbom08xn"

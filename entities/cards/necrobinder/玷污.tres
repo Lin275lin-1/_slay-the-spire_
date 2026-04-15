@@ -1,20 +1,55 @@
 [gd_resource type="Resource" format=3 uid="uid://bdpwi66a4qek4"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_75tvl"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_r0ym5"]
 [ext_resource type="Texture2D" uid="uid://pafakq" path="res://images/atlases/card_atlas.sprites/necrobinder/defile.tres" id="2_u3761"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_tdfu7"]
 [ext_resource type="Script" uid="uid://btp5g8uxwew6f" path="res://entities/cards/necrobinder/玷污.gd" id="3_u3761"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_03253"]
 [ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_fs1rm"]
+
+[sub_resource type="Resource" id="Resource_pk2ti"]
+script = ExtResource("2_r0ym5")
+fixed_value = 13
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
 [sub_resource type="Resource" id="Resource_u3761"]
 script = ExtResource("1_75tvl")
-base_value = 13
+numeric_provider = SubResource("Resource_pk2ti")
 placeholder = "damage"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_k5j86"]
+script = ExtResource("2_r0ym5")
+fixed_value = 13
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_bsq5n"]
+script = ExtResource("4_03253")
+repeat_count_provider = SubResource("Resource_k5j86")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_nww3v"]
+script = ExtResource("2_r0ym5")
+fixed_value = 17
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_r5chh"]
+script = ExtResource("4_03253")
+damage_provider = SubResource("Resource_nww3v")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_4dkp1"]
+script = ExtResource("2_r0ym5")
+fixed_value = 17
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
 [sub_resource type="Resource" id="Resource_fs1rm"]
 script = ExtResource("1_75tvl")
-base_value = 17
+numeric_provider = SubResource("Resource_4dkp1")
 placeholder = "damage"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
@@ -25,6 +60,7 @@ id = "玷污"
 base_target = 1
 card_color = 8
 base_cost = 1
+effects = Array[ExtResource("3_tdfu7")]([SubResource("Resource_bsq5n")])
 portrait = ExtResource("2_u3761")
 base_description = "[center]造成{damage}点伤害。[/center]"
 sound = ExtResource("4_fs1rm")
@@ -34,4 +70,5 @@ upgraded_target = 1
 upgraded_cost = 1
 upgraded_description = "[center]造成{damage}点伤害。[/center]"
 upgraded_numeric_entries = Array[ExtResource("1_75tvl")]([SubResource("Resource_fs1rm")])
+upgraded_effects = Array[ExtResource("3_tdfu7")]([SubResource("Resource_r5chh")])
 metadata/_custom_type_script = "uid://br1hibx18tv13"

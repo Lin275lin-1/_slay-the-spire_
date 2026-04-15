@@ -4,8 +4,10 @@ extends Node
 var _stack: Array[ResolutionEntry] = []
 var is_resolving: bool = false
 
+var previous_result = null
+
 # 将卡牌加入结算栈，（卡牌调用play时加入）
-func push_card(card: Card, context: Context):
+func push_card(card: Card, context: Dictionary):
 	var entry = ResolutionEntry.new()
 	entry.card = card
 	entry.context = context
@@ -39,10 +41,11 @@ func _clear_stack() -> void:
 func _should_stop() -> bool:
 	return false
 
-func _execute_effect(effect: Effect, context: Context) -> void:
+func _execute_effect(effect: Effect, context: Dictionary) -> void:
 	# 如果execute是同步函数会直接忽略await
-	await effect.execute(context)
+	previous_result = await effect.execute(context.get("player"))
 	
 func _on_card_finished(entry: ResolutionEntry) -> void:
+	previous_result = null
 	Events.card_played.emit(entry.card)
 	

@@ -12,6 +12,7 @@ var current_intent: Intent: set = _set_current_intent
 
 var visuals: CreatureVisuals
 var spine_manager: SpineManager
+var dead: bool = false
 
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
@@ -39,11 +40,20 @@ func do_turn() -> void:
 	
 	if not current_intent:
 		return
-		
+	
+	if dead:
+		Events.enemy_action_completed.emit(self)	
+		return		
+	
+	# 在这个函数中设置了动画名称，必须在动画开始前调用
 	execute_intent()
-	spine_anim_state.set_animation(current_intent.anim_name, true, 0)
+	
+	var track_entry := spine_anim_state.set_animation(current_intent.anim_name, true, 0)
 	spine_anim_state.add_animation(enemy_ai.get_idle_animation_name(), 0, true, 0)
-	await spine_manager.animation_completed
+
+	# 使用await spine_manager.animation_completed有时会出现等待idle_animation结束才发出信号的情况，干脆等待动画时间
+	await get_tree().create_timer(track_entry.get_animation_end()).timeout
+	
 	Events.enemy_action_completed.emit(self)	
 	turn_ended.emit(self)
 	update_intent()
@@ -52,14 +62,13 @@ func execute_intent() -> void:
 	if not current_intent:
 		return
 	var player: Player = get_tree().get_first_node_in_group("ui_player")
-	enemy_ai.execute_intent(self, player, current_intent)
+	await enemy_ai.execute_intent(self, player, current_intent)
 	intents.hide_intent()
 		
 func _set_current_intent(value: Intent) -> void:
 	current_intent = value
 	if not current_intent:
 		return
-	current_intent.calc_final_values(self, get_tree().get_first_node_in_group("ui_player"))
 	intents.update_intent(current_intent)
 
 func _set_enemy_stats(value: EnemyStats) -> void:
@@ -81,7 +90,9 @@ func _set_enemy_stats(value: EnemyStats) -> void:
 func _setup_ai() -> void:
 	if enemy_ai:
 		enemy_ai.queue_free()
-	enemy_ai = stats.ai
+	# 主要是不同怪物intent里source不同，也许修改一下就不需要深拷贝了
+	enemy_ai = stats.ai.duplicate_deep()
+	enemy_ai.set_up_intents(self, get_tree().get_first_node_in_group("ui_player"))
 	
 func start_turn() -> void:
 	before_turn_started.emit(self)
@@ -95,7 +106,7 @@ func update_intent() -> void:
 	if not enemy_ai:
 		return
 	if not current_intent:
-		# TODO:修改
+		# TODO:修改	
 		current_intent = enemy_ai.choose_intent(self, get_tree().get_first_node_in_group("ui_player"))
 		return
 
@@ -121,6 +132,7 @@ func _update_enemy() -> void:
 	_update_stats()
 	
 func die() -> void:
+	dead = true
 	intents.hide()
 	health_bar.hide()
 	reticles.hide()
@@ -130,18 +142,21 @@ func die() -> void:
 		func (_x, _y, _z): queue_free()
 	)
 	
-func lose_health(context: Context) -> void:
+func lose_health(context: Context) -> int:
 	if stats.health <= 0:
-		return
+		return 0
 	
 	before_lose_health.emit(context)
 	stats.health -= context.amount
+	damage_number_spawner.spawn_damage_label(context.amount, false)
 
 	if stats.health <= 0:
 		die()
 	else:
 		spine_anim_state.set_animation(enemy_ai.get_hurt_animation_name(), true, 0)
 		spine_anim_state.add_animation(enemy_ai.get_idle_animation_name(), 0, true, 0)
+	
+	return context.amount
 
 func take_damage(context: Context) -> int:
 	if stats.health <= 0:
@@ -149,7 +164,7 @@ func take_damage(context: Context) -> int:
 	before_take_damage.emit(context)
 	var final_value: int = context.get_final_value()
 	var actual_damage := stats.take_damage(final_value)
-	damage_number_spawner.spawn_damage_label(final_value, actual_damage == 0)
+	damage_number_spawner.spawn_damage_label(actual_damage, actual_damage == 0 and final_value != 0)
 	after_take_damage.emit(context)
 	
 	if stats.health <= 0:
@@ -187,30 +202,37 @@ func show_keyword_tooltip() -> void:
 	KeywordTooltip.keyword_tooltip.global_position = global_position + Vector2(hitbox.shape.size.x / 2, -hitbox.shape.size.y / 2)
 	KeywordTooltip.show()
 
-func _on_after_applied_buff(context: Context) -> void:
+func _on_after_applied_buff(_context: Context) -> void:
 	if current_intent:
-		current_intent.calc_final_values(self, context.source)
 		intents.update_intent(current_intent)
 
 func set_hitbox() -> void:
 	var bound_size = visuals.get_size()
 	var center_point = visuals.get_center_point()
+	
 	hitbox.shape.size = bound_size
 	hitbox.position = center_point
+	
 	damage_number_spawner.position = center_point
+	damage_number_spawner.agent = get_node("../../SFXLayer")
+	
 	set_recticles([
 		center_point - bound_size / 2,
 		center_point + Vector2(bound_size.x / 2, -bound_size.y / 2),
 		center_point + Vector2(-bound_size.x / 2, bound_size.y / 2),
 		center_point + bound_size / 2
 	], visuals.get_visual_scale() * 2)
-	health_bar.set_length(visuals.get_size().x)
+	
 	intents.position = visuals.get_intent_point() - intents.size / 2
+	
 	var hp_bar_position = center_point + Vector2(-bound_size.x / 2, bound_size.y / 2)
+	health_bar.set_length(visuals.get_size().x)
 	health_bar.position = hp_bar_position
 	health_bar.set_length(visuals.get_size().x)
 	health_bar.position = hp_bar_position
+	
 	buff_container.size.x = bound_size.x
 	buff_container.position = hp_bar_position + Vector2(0, 40)
+	
 	name_plate.size.x = bound_size.x
 	name_plate.position = hp_bar_position + Vector2(0, 10)

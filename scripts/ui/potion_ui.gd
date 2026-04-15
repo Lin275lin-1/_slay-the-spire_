@@ -11,14 +11,21 @@ const POTION_PLACEHOLDER = preload("res://images/packed/potions/potion_placehold
 var potion: Potion
 var targets: Array[Node] = []
 var targeting := false
-var in_combat := false
+var can_use := false
+var used := false
+
+var tween: Tween
+# 原位置，为了方便做动画
+var original_position
 
 func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 	gui_input.connect(_on_gui_input)
+	
 
 func set_potion(value: Potion):
+	original_position = position
 	if value == null:
 		potion = null
 		out_line.texture = null
@@ -29,19 +36,37 @@ func set_potion(value: Potion):
 		texture_rect.texture = value.icon
 
 func play() -> void:
-	potion.play(targets)
+	if used:
+		return
+	used = true
+	await potion.play(get_tree().get_first_node_in_group("ui_player"), targets)
 	potion_used.emit(self)
 
 func _on_mouse_entered() -> void:
+	if can_use:
+		if tween:
+			tween.kill()
+		tween = create_tween()
+		tween.set_parallel(true)
+		tween.tween_property(self, "position", original_position + Vector2(0, -7), 0.2)
+		tween.tween_property(self, "scale", Vector2(1.1, 1.1), 0.2)
+		tween.chain().tween_property(self, "position", original_position, 0.2)
 	Events.tooltip_show_request.emit(self,  _show_keyword_tooltip)
 	out_line.show()
 
 func _on_mouse_exited() -> void:
+	if can_use:
+		if tween:
+			tween.kill()
+		tween = create_tween()
+		tween.set_parallel(true)
+		tween.tween_property(self, "scale", Vector2.ONE, 0.2)
+		tween.tween_property(self, "position", original_position, 0.2)
 	Events.tooltip_hide_request.emit()
 	out_line.hide()
 	
 func _on_gui_input(event: InputEvent) -> void:
-	if not in_combat:
+	if not can_use:
 		return
 	if event.is_action_pressed("left_mouse"):
 		if potion == null:

@@ -11,6 +11,24 @@ const FLOAT_TIME := 3.5
 const RISE_TIME := 1.0
 const FALL_TIME := 2.0
 
+var agent: Node
+
+func spawn_buff_icon(buff_icon: Texture2D) -> void:
+	var new_texture: TextureRect = TextureRect.new()
+	new_texture.texture = buff_icon
+	new_texture.pivot_offset = buff_icon.get_size() / 2
+	new_texture.position = global_position - buff_icon.get_size() / 2
+	new_texture.self_modulate.a = 0.5
+	new_texture.scale = Vector2(0.5, 0.5)
+	
+	agent.call_deferred("add_child", new_texture)
+	await new_texture.tree_entered
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(new_texture, "scale", Vector2(1.0, 1.0), 2.0)
+	tween.tween_property(new_texture, "self_modulate:a", 0.1, 2.0)
+	tween.finished.connect(new_texture.queue_free)
+	
 func spawn_buff_label(buff_name: String, is_buff: bool) -> void:
 	var new_label: DamageLabel = DamageLabel.new()
 	new_label.label_settings = text_label_settings.duplicate()
@@ -24,9 +42,10 @@ func spawn_buff_label(buff_name: String, is_buff: bool) -> void:
 	else:
 		new_label.label_settings.font_color = debuff_color
 	
-	get_tree().root.call_deferred("add_child", new_label)
-	# 在label的text被赋值是就会触发resize信号
+	agent.call_deferred("add_child", new_label)
 	await new_label.resized
+	#add_child(new_label)
+	
 	new_label.position = global_position + Vector2(-new_label.size.x / 2, new_label.size.y)
 	var target_rise_pos: Vector2 = new_label.position + Vector2(0, -400)
 	
@@ -38,11 +57,8 @@ func spawn_damage_label(number: int, blocked: bool = false) -> void:
 	# 确保伤害数字在最上层
 	new_label.z_index = 1000
 	new_label.pivot_offset_ratio = Vector2(0.5, 1.0)
-		
-	get_tree().root.call_deferred("add_child", new_label)
-	
-	# 在label的text被赋值是就会触发resize信号
-	await new_label.tree_entered
+	agent.call_deferred("add_child", new_label)
+	await new_label.resized
 	
 	new_label.position = global_position + Vector2(-new_label.size.x / 2, new_label.size.y)
 	new_label.position += Vector2(randf_range(-50.0, 50.0), 0)

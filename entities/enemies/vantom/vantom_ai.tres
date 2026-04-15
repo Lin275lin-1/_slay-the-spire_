@@ -2,56 +2,170 @@
 
 [ext_resource type="Script" uid="uid://ce34juwu5b0yr" path="res://scripts/costum_resources/intents/intent.gd" id="1_sodlo"]
 [ext_resource type="Script" uid="uid://iqqyr44teapg" path="res://scripts/costum_resources/intents/sub_intent.gd" id="2_n1pwd"]
-[ext_resource type="Texture2D" uid="uid://bkbn4fvc4je43" path="res://images/packed/intents/attack/intent_attack_2.png" id="3_bnrly"]
-[ext_resource type="Texture2D" uid="uid://c4qea6ui2gksn" path="res://images/packed/intents/attack/intent_attack_3.png" id="4_oe3fb"]
-[ext_resource type="Texture2D" uid="uid://epusnbog8ryc" path="res://images/packed/intents/intent_buff.png" id="5_27bsf"]
-[ext_resource type="Script" uid="uid://dpbv4m5rd0bbq" path="res://scripts/costum_resources/intents/apply_buff_sub_intent.gd" id="6_oe3fb"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_aa4qt"]
+[ext_resource type="Texture2D" uid="uid://cdjfipfy2o2u8" path="res://images/packed/intents/attack/intent_attack_2.png" id="3_bnrly"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_3aukq"]
+[ext_resource type="Texture2D" uid="uid://r6jnvrqc1utn" path="res://images/packed/intents/attack/intent_attack_3.png" id="4_oe3fb"]
+[ext_resource type="Script" uid="uid://bces7ijyodhmv" path="res://scripts/costum_resources/intents/attack_sub_intent.gd" id="6_bmosx"]
+[ext_resource type="Texture2D" uid="uid://cnpcjof4fvvng" path="res://images/packed/intents/attack/intent_attack_4.png" id="8_yjrj0"]
+[ext_resource type="Resource" uid="uid://djvmk3f4ikvji" path="res://entities/cards/status_cards/伤口.tres" id="9_2g6j5"]
 [ext_resource type="Script" uid="uid://cwa7i0gle4vi5" path="res://entities/enemies/vantom/vantom_ai.gd" id="10_27bsf"]
+[ext_resource type="Script" uid="uid://bfd4cqklwdhs3" path="res://scripts/costum_resources/effects/put_card_effect.gd" id="10_cxmbc"]
+[ext_resource type="Texture2D" uid="uid://b4tk6b14m4yl3" path="res://images/packed/intents/intent_status_card.png" id="11_3m854"]
+[ext_resource type="Script" uid="uid://b3b84q5sqt5kj" path="res://scripts/costum_resources/intents/put_card_sub_intent.gd" id="12_kygs6"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="13_7igu1"]
+[ext_resource type="Texture2D" uid="uid://bueaoomrl3ifh" path="res://images/packed/intents/intent_buff.png" id="14_u2l8y"]
+[ext_resource type="Script" uid="uid://dpbv4m5rd0bbq" path="res://scripts/costum_resources/intents/apply_buff_sub_intent.gd" id="15_e0yg3"]
 
-[sub_resource type="Resource" id="Resource_31xl2"]
-script = ExtResource("2_n1pwd")
+[sub_resource type="Resource" id="Resource_7gxds"]
+script = ExtResource("3_aa4qt")
+fixed_value = 7
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_pwm8t"]
+script = ExtResource("3_aa4qt")
+fixed_value = 7
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_rbigm"]
+script = ExtResource("4_3aukq")
+damage_provider = SubResource("Resource_pwm8t")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_ytjuq"]
+script = ExtResource("6_bmosx")
+damage_provider = SubResource("Resource_7gxds")
 icon = ExtResource("3_bnrly")
-base_value = 7
-metadata/_custom_type_script = "uid://iqqyr44teapg"
+effect = SubResource("Resource_rbigm")
+metadata/_custom_type_script = "uid://bces7ijyodhmv"
 
 [sub_resource type="Resource" id="Resource_ioc5n"]
 script = ExtResource("1_sodlo")
-sub_intents = Array[ExtResource("2_n1pwd")]([SubResource("Resource_31xl2")])
+sub_intents = Array[ExtResource("2_n1pwd")]([SubResource("Resource_ytjuq")])
 intent_name = "InkStain"
 anim_name = "attack"
 metadata/_custom_type_script = "uid://ce34juwu5b0yr"
 
-[sub_resource type="Resource" id="Resource_2g6j5"]
-script = ExtResource("2_n1pwd")
+[sub_resource type="Resource" id="Resource_xc4vh"]
+script = ExtResource("3_aa4qt")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_kxb34"]
+script = ExtResource("3_aa4qt")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_qrpuo"]
+script = ExtResource("3_aa4qt")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_oxnlu"]
+script = ExtResource("4_3aukq")
+repeat_count_provider = SubResource("Resource_qrpuo")
+damage_provider = SubResource("Resource_kxb34")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_buf08"]
+script = ExtResource("3_aa4qt")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_jqhox"]
+script = ExtResource("6_bmosx")
+damage_provider = SubResource("Resource_xc4vh")
+repeat_provider = SubResource("Resource_buf08")
 icon = ExtResource("4_oe3fb")
-base_value = 6
-repeat = 2
-metadata/_custom_type_script = "uid://iqqyr44teapg"
+effect = SubResource("Resource_oxnlu")
+metadata/_custom_type_script = "uid://bces7ijyodhmv"
 
 [sub_resource type="Resource" id="Resource_mdti4"]
 script = ExtResource("1_sodlo")
-sub_intents = Array[ExtResource("2_n1pwd")]([SubResource("Resource_2g6j5")])
+sub_intents = Array[ExtResource("2_n1pwd")]([SubResource("Resource_jqhox")])
 intent_name = "InkSpade"
 anim_name = "debuff"
 metadata/_custom_type_script = "uid://ce34juwu5b0yr"
 
+[sub_resource type="Resource" id="Resource_8ctln"]
+script = ExtResource("3_aa4qt")
+fixed_value = 27
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_0cs6f"]
+script = ExtResource("3_aa4qt")
+fixed_value = 27
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_madhx"]
+script = ExtResource("4_3aukq")
+damage_provider = SubResource("Resource_0cs6f")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_hdfee"]
+script = ExtResource("6_bmosx")
+damage_provider = SubResource("Resource_8ctln")
+icon = ExtResource("8_yjrj0")
+effect = SubResource("Resource_madhx")
+metadata/_custom_type_script = "uid://bces7ijyodhmv"
+
+[sub_resource type="Resource" id="Resource_3aukq"]
+script = ExtResource("3_aa4qt")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_yjrj0"]
+script = ExtResource("10_cxmbc")
+where = 1
+card_to_put = ExtResource("9_2g6j5")
+put_card_count_provider = SubResource("Resource_3aukq")
+target_type = 2
+metadata/_custom_type_script = "uid://bfd4cqklwdhs3"
+
+[sub_resource type="Resource" id="Resource_2g6j5"]
+script = ExtResource("3_aa4qt")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_cxmbc"]
+script = ExtResource("12_kygs6")
+numeric_provider = SubResource("Resource_2g6j5")
+icon = ExtResource("11_3m854")
+effect = SubResource("Resource_yjrj0")
+metadata/_custom_type_script = "uid://b3b84q5sqt5kj"
+
 [sub_resource type="Resource" id="Resource_aa4qt"]
 script = ExtResource("1_sodlo")
+sub_intents = Array[ExtResource("2_n1pwd")]([SubResource("Resource_hdfee"), SubResource("Resource_cxmbc")])
 intent_name = "Dismental"
 anim_name = "attack_heavy"
 metadata/_custom_type_script = "uid://ce34juwu5b0yr"
 
-[sub_resource type="Resource" id="Resource_3aukq"]
-script = ExtResource("6_oe3fb")
-buff_id = "力量"
+[sub_resource type="Resource" id="Resource_uhure"]
+script = ExtResource("3_aa4qt")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_xufcp"]
+script = ExtResource("13_7igu1")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_uhure")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_pg4wj"]
+script = ExtResource("15_e0yg3")
 type = 1
-icon = ExtResource("5_27bsf")
-base_value = 2
+icon = ExtResource("14_u2l8y")
+effect = SubResource("Resource_xufcp")
 metadata/_custom_type_script = "uid://dpbv4m5rd0bbq"
 
 [sub_resource type="Resource" id="Resource_bmosx"]
 script = ExtResource("1_sodlo")
-sub_intents = Array[ExtResource("2_n1pwd")]([SubResource("Resource_3aukq")])
+sub_intents = Array[ExtResource("2_n1pwd")]([SubResource("Resource_pg4wj")])
 intent_name = "ChargeUp"
 anim_name = "buff"
 metadata/_custom_type_script = "uid://ce34juwu5b0yr"

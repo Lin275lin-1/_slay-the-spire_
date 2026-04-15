@@ -5,7 +5,7 @@ extends Control
 @onready var enemy_handler: EnemyHandler = $EnemyHandler
 @onready var player: Player = $Player
 @onready var player_handler: PlayerHandler = $PlayerHandler
-@onready var combat_ui: CombatUI = $CombatUI
+@onready var combat_ui: CombatUI = %CombatUI
 @onready var hand_manager: HandManager = $CombatUI/HandManager
 # 子节点的所有char_stats由该节点分发
 @export var char_stats: CharacterStats: set = _set_char_stats
