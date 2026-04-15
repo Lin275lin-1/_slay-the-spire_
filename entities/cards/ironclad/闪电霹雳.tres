@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://coguyr7klivol" path="res://entities/cards/ironclad/闪电霹雳.gd" id="3_0t5dk"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_t8ehc"]
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_i2oj1"]
-[ext_resource type="AudioStream" uid="uid://ba4ets7sje2xy" path="res://audio/SFX/lightning_orb_evoke.mp3" id="4_ovux8"]
+[ext_resource type="AudioStream" uid="uid://5hkfxlyqq0tx" path="res://audio/SFX/lightning_orb_evoke.mp3" id="4_ovux8"]
 [ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="5_bbw44"]
 
 [sub_resource type="Resource" id="Resource_dobrv"]
