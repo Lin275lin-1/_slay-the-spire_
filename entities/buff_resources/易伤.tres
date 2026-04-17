@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://8vmhbs85oe6t"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_affsy"]
+[ext_resource type="Script" uid="uid://ych5elt6025k" path="res://scripts/costum_resources/buffs/vulnerable_debuff.gd" id="1_ga2ew"]
+[ext_resource type="Texture2D" uid="uid://cow2tyoikjy3t" path="res://images/powers/vulnerable_power.png" id="2_ga2ew"]
+
+[resource]
+script = ExtResource("1_affsy")
+buff_id = "vulnerable"
+buff_name = "易伤"
+description = "受到的攻击伤害增加50%"
+icon = ExtResource("2_ga2ew")
+buff_type = 1
+affect = 1
+buff_script = ExtResource("1_ga2ew")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

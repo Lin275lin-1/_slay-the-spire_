@@ -1,41 +1,61 @@
 class_name Buff
 extends Node
 
-# SPECIAL一般是无法解除的buff
-enum Type {BUFF, DEBUFF, SPECIAL}
-enum AFFECT{SELF, TARGET, ALL}
-var type: Type
-var affect: AFFECT
-# 实际接受buff的对象
 var agent: Creature
-# 图标
-var icon: Texture
 
 signal stack_changed
 
-@export var stacks: int = 1 : set = _set_stacks
-var description: String
-var buff_name: String 
-var stackable: bool = true
+var stacks: int = 1 : set = _set_stacks
+var buff_resource: BuffResource
 
+var buff_id: String
+var buff_name: String
+var description: String
+var icon: Texture2D
+var buff_type: BuffResource.BuffType
+var affect: BuffResource.AFFECT
+var stackable: bool = true
+var max_stack: int = 999
+var min_stack: int = 0
+
+func _ready():
+	if buff_resource:
+		buff_id = buff_resource.buff_id
+		buff_name = buff_resource.buff_name
+		description = buff_resource.description
+		icon = buff_resource.icon
+		affect = buff_resource.affect
+		stackable = buff_resource.stackable
+		max_stack = buff_resource.max_stack
+		min_stack = buff_resource.min_stack
+		initialize()
+
+func initialize() -> void:
+	pass
+		
 func add_stack(amount: int):
 	if not stackable and stacks > 0:
 		return
 	elif amount < 0:
 		remove_stack(-amount)
 		return
-	stacks += amount
+	stacks = clampi(stacks + amount, min_stack, max_stack)
 	stack_changed.emit()
 	
 func remove_stack(amount: int):
-	stacks -= amount
+	stacks = clampi(stacks - amount, min_stack, max_stack)
 	if stacks <= 0:
 		queue_free()
 	stack_changed.emit()
 	
-
 func get_description() -> String:
 	return description
+
+func is_debuff() -> bool:
+	return buff_type == BuffResource.BuffType.DEBUFF
+
+func is_buff() -> bool:
+	return buff_type == BuffResource.BuffType.BUFF
 
 func get_modifier() -> Array[Modifier]:
 	return []

@@ -1,19 +1,7 @@
 class_name HellRaiserBuff
 extends Buff
-
-var block: int
-
-func _init() -> void:
-	# 一定要在init中设置buff名
-	# 在buff进树之前会判断buff_name
-	var buff_info: Dictionary = BuffLibrary.buff_data["地狱狂徒"]
-	buff_name = buff_info["name"]
-	description = buff_info["description"]
-	icon = buff_info["icon"]
-	stackable = false
-	type = Type.BUFF
 	
-func _ready() -> void:
+func initialize() -> void:
 	if agent and agent.has_signal("after_draw_card"):
 		agent.connect("after_draw_card", _on_after_draw_card)
 

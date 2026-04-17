@@ -6,30 +6,26 @@ extends Buff
 
 
 
-func _init() -> void:
-	# 一定要在init中设置buff名
-	# 在buff进树之前会判断buff_name
-	var buff_info: Dictionary = BuffLibrary.buff_data["易伤"]
-	buff_name = buff_info["name"]
-	description = buff_info["description"]
-	icon = buff_info["icon"]
 	
-func _ready() -> void:
-	type = Type.DEBUFF
-	if agent and agent.has_signal("before_take_damage"):
-		agent.connect("before_take_damage", _on_before_take_damage)
+func initialize() -> void:
+	if agent and agent.has_signal("before_attack"):
+		agent.connect("before_attack", _on_before_attack)
 	else:
-		printerr("该对象没有before_take_damage信号")
+		printerr("该对象没有before_attack信号")
 		return
-	if agent and agent.has_signal("turn_started"):
-		agent.connect("turn_started", _on_turn_started)
-
+		
 func get_modifier() -> Array[Modifier]:
-	var modifier := Modifier.new(Enums.NumericType.DAMAGE, 0, 1.5, null)
+	var modifier := Modifier.new(Enums.NumericType.DAMAGE, stacks, 1.0, null)
 	return [modifier]
 
-func _on_before_take_damage(context: Context) -> void:
-	context.amount = int(context.amount * 1.5)
+func get_description() -> String:
+	return description.format({"stacks": stacks})
 
-func _on_turn_started(_creature: Node2D) -> void:
-	remove_stack(1) 
+func remove_stack(amount: int):
+	stacks -= amount
+	if stacks == 0:
+		queue_free()
+	stack_changed.emit()
+
+func _on_before_attack(context: Context) -> void:
+	context.modifiers.append(Modifier.new(Enums.NumericType.DAMAGE, stacks, 1.0, null))

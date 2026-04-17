@@ -29,6 +29,7 @@ metadata/_custom_type_script = "uid://dtok21t0ujjui"
 script = ExtResource("4_572d7")
 buff_name = "地狱狂徒"
 buff_stack_provider = SubResource("Resource_pe6k8")
+target_type = 1
 animation_name = "cast"
 metadata/_custom_type_script = "uid://b8qfrs61nmcix"
 

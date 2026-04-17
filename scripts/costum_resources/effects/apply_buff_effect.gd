@@ -11,7 +11,7 @@ func apply(source: Node, targets: Array[Node], card_context: Dictionary, previou
 	var total = 0
 	for target: Creature in targets:
 		if target:
-			total += source.apply_buff(ApplyBuffContext.new(source, target, value, BuffLibrary.buff_scene[buff_name].new()))
+			total += source.apply_buff(ApplyBuffContext.new(source, target, value, buff_name))
 	if animation_name and source is Player:
 		source.animate_player(animation_name)
 		await source.get_tree().create_timer(animation_delay).timeout

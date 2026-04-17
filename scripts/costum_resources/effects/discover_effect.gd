@@ -13,6 +13,6 @@ func apply(source: Node, _targets: Array[Node], _card_context: Dictionary, _prev
 			await source.get_tree().create_timer(animation_delay).timeout
 		else:
 			await source.get_tree().create_timer(0.1).timeout
-		await source.discover_card(DiscoverContext.new(card_filter.color, card_filter.type, card_filter.rarity, can_skip, upgraded, first_play_free))
+		await source.discover_card(DiscoverContext.new(card_filter.get_color(source), card_filter.type, card_filter.rarity, can_skip, upgraded, first_play_free))
 	return null
 	

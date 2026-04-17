@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://bq5eeswvs1mqq"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_03lo8"]
+[ext_resource type="Script" uid="uid://6ankjxdhmplc" path="res://scripts/costum_resources/buffs/weakness_debuff.gd" id="1_a6gmx"]
+[ext_resource type="Texture2D" uid="uid://c46f5djtfmsu6" path="res://images/powers/weak_power.png" id="2_a6gmx"]
+
+[resource]
+script = ExtResource("1_03lo8")
+buff_id = "weak"
+buff_name = "虚弱"
+description = "造成的攻击伤害减少25%"
+icon = ExtResource("2_a6gmx")
+buff_type = 1
+buff_script = ExtResource("1_a6gmx")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

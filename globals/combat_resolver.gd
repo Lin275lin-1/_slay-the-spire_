@@ -71,8 +71,7 @@ func _resolve():
 			_clear_stack()
 			break
 		else:
-			#await get_tree().process_frame
-			await get_tree().create_timer(0.2).timeout
+			await get_tree().process_frame
 			
 		# 移动到下一个效果
 		current_entry.effect_index += 1

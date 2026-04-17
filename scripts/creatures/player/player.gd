@@ -47,7 +47,8 @@ func discover_card(context: DiscoverContext) -> void:
 	# 随机三张
 	var discovered_cards := availabel_cards.slice(0, 3)
 	var card: Card = await discover_view.select(discovered_cards, context.can_skip, context.upgraded, context.first_play_free)
-	put_card_in_hand(card)
+	if card:
+		put_card_in_hand(card)
 	
 	
 func select_hand(context: ChooseCardContext) -> void:

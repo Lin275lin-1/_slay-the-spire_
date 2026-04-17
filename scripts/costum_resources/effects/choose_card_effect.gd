@@ -46,10 +46,22 @@ func apply(source: Node, _targets: Array[Node], _card_context: Dictionary, _prev
 			source.agent.update_hand()
 		return null
 	elif where == Where.HAND:
-		await source.select_hand(ChooseCardContext.new(source, cards, get_hint_text(), min_select, max_select, get_callback(source), get_selection_mode()))
+		await source.select_hand(ChooseCardContext.new(source, filter_cards(cards), get_hint_text(), min_select, max_select, get_callback(source), get_selection_mode()))
 	else:
-		await source.select_deck(ChooseCardContext.new(source, cards, get_hint_text(), min_select, max_select, get_callback(source), get_selection_mode()))
+		await source.select_deck(ChooseCardContext.new(source, filter_cards(cards), get_hint_text(), min_select, max_select, get_callback(source), get_selection_mode()))
 	return null
+
+func filter_cards(cards: Array[Card]) -> Array[Card]:
+	match callback:
+		Callback.UPGRADE:
+			return cards.filter(func(card: Card): return !card.upgraded)
+		Callback.APPLY_EXHAUST:
+			return cards.filter(func(card: Card): return !card.exhaust)
+		Callback.APPLY_ETHEREAL:
+			return cards.filter(func(card: Card): return !card.ethereal)
+		Callback.APPLY_SLY:
+			return cards.filter(func(card: Card): return !card.sly)
+	return cards
 
 func get_callback(source: Player) -> Callable:
 	match callback:

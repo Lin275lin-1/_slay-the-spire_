@@ -22,7 +22,8 @@ func update_potion_slot() -> void:
 		child.queue_free()
 	for i in range(max_potion_slots):
 		var potion_ui = POTION_UI.instantiate() as PotionUI
-		potion_ui.potion_used.connect(_on_potion_used)
+		potion_ui.before_potion_used.connect(_on_before_potion_used)
+		potion_ui.after_potion_used.connect(_on_after_potion_used)
 		potion_place_holder.add_child(potion_ui)
 	await get_tree().process_frame
 	set_potions()
@@ -39,12 +40,15 @@ func add_potion(_potion: Potion):
 func remove_potion(_index: int):
 	set_potions()
 
-func _on_potion_used(potion_ui: PotionUI) -> void:
+func _on_before_potion_used(_potion_ui: PotionUI) -> void:
+	for child: PotionUI in potion_place_holder.get_children():
+		child.can_use = false
+
+func _on_after_potion_used(potion_ui: PotionUI) -> void:
 	for child: PotionUI in potion_place_holder.get_children():
 		if potion_ui == child:
 			run_stats.remove_potion(child.get_index())
-			return
-	printerr("potion_handler:_on_potion_used")	
+		child.can_use = true
 		
 
 func _on_player_turn_started() -> void:

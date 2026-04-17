@@ -2,19 +2,8 @@
 class_name NoDrawDebuff
 extends Buff
 
-
-
-func _init() -> void:
-	# 一定要在init中设置buff名
-	# 在buff进树之前会判断buff_name
-	var buff_info: Dictionary = BuffLibrary.buff_data["无法抽牌"]
-	buff_name = buff_info["name"]
-	description = buff_info["description"]
-	icon = buff_info["icon"]
-	stackable = false
-	type = Type.DEBUFF
 	
-func _ready() -> void:
+func initialize() -> void:
 	if agent and agent.has_signal("before_draw_card"):
 		agent.connect("before_draw_card", _on_before_draw_cards)
 	else:

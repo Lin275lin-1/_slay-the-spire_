@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://ccqwrv2c3okid"]
+
+[ext_resource type="Script" uid="uid://m8ilyl4sqh4v" path="res://scripts/costum_resources/buffs/barricade_buff.gd" id="1_3oykx"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_oewph"]
+[ext_resource type="Texture2D" uid="uid://cprduuaciunkc" path="res://images/powers/barricade_power.png" id="2_3oykx"]
+
+[resource]
+script = ExtResource("1_oewph")
+buff_id = "barricade"
+buff_name = "壁垒"
+description = "回合开始时格挡不会自动消失"
+icon = ExtResource("2_3oykx")
+stackable = false
+buff_script = ExtResource("1_3oykx")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://cj63qok0noycu"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_02185"]
+[ext_resource type="Script" uid="uid://chrrbcmsqtrvg" path="res://scripts/costum_resources/buffs/slippery.gd" id="1_dbydo"]
+[ext_resource type="Texture2D" uid="uid://ddn3qttbgideh" path="res://images/powers/slippery_power.png" id="2_dbydo"]
+
+[resource]
+script = ExtResource("1_02185")
+buff_id = "slippery"
+buff_name = "滑溜"
+description = "下次失去生命值时，只会失去1点生命"
+icon = ExtResource("2_dbydo")
+buff_script = ExtResource("1_dbydo")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

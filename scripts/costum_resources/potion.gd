@@ -24,7 +24,7 @@ enum COLOR {
 
 @export var id: String
 @export var potion_name: String
-@export var description: String
+@export_multiline var description: String
 @export var icon: Texture
 @export var outline_icon: Texture
 @export var target_type: TargetType

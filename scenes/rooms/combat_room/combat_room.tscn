@@ -52,6 +52,8 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 script = ExtResource("4_4hrnf")
 
+[node name="CombatResolver" parent="CombatUI" unique_id=1563317517 instance=ExtResource("16_4hrnf")]
+
 [node name="EndTurn" type="Button" parent="CombatUI" unique_id=1064167628]
 offset_left = 1658.0
 offset_top = 802.0
@@ -184,8 +186,6 @@ visible = false
 
 [node name="DiscoverCardView" parent="CombatUI" unique_id=1432431847 instance=ExtResource("15_4hrnf")]
 visible = false
-
-[node name="CombatResolver" parent="CombatUI" unique_id=1563317517 instance=ExtResource("16_4hrnf")]
 
 [node name="RedFlash" type="CanvasLayer" parent="." unique_id=919668335]
 layer = 2

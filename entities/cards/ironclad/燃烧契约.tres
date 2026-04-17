@@ -50,6 +50,7 @@ metadata/_custom_type_script = "uid://dtok21t0ujjui"
 [sub_resource type="Resource" id="Resource_57wjk"]
 script = ExtResource("5_1shly")
 draw_card_provider = SubResource("Resource_jckgm")
+animation_name = "cast"
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
 
 [sub_resource type="Resource" id="Resource_yltit"]
@@ -68,6 +69,7 @@ metadata/_custom_type_script = "uid://dtok21t0ujjui"
 [sub_resource type="Resource" id="Resource_rv65e"]
 script = ExtResource("5_1shly")
 draw_card_provider = SubResource("Resource_fe7p1")
+animation_name = "cast"
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
 
 [sub_resource type="Resource" id="Resource_t87xj"]

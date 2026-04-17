@@ -84,15 +84,15 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 		match entry.affected_by:
 			# 这里感觉有问题
 			NumericEntry.AFFECTED_BY.SELF:
-				modifiers = source_.get_modifiers_by_type(entry.numeric_type, Buff.AFFECT.SELF)
+				modifiers = source_.get_modifiers_by_type(entry.numeric_type, BuffResource.AFFECT.SELF)
 			NumericEntry.AFFECTED_BY.TARGET:
 				if target_:
-					modifiers = target_.get_modifiers_by_type(entry.numeric_type, Buff.AFFECT.TARGET)
+					modifiers = target_.get_modifiers_by_type(entry.numeric_type, BuffResource.AFFECT.TARGET)
 			NumericEntry.AFFECTED_BY.BOTH:
 				if target_:
-					modifiers = NumericHelper.combine_modifiers(source_.get_modifiers_by_type(entry.numeric_type, Buff.AFFECT.SELF), target_.get_modifiers_by_type(entry.numeric_type, Buff.AFFECT.TARGET))
+					modifiers = NumericHelper.combine_modifiers(source_.get_modifiers_by_type(entry.numeric_type, BuffResource.AFFECT.SELF), target_.get_modifiers_by_type(entry.numeric_type, BuffResource.AFFECT.TARGET))
 				else:
-					modifiers = source_.get_modifiers_by_type(entry.numeric_type, Buff.AFFECT.SELF)
+					modifiers = source_.get_modifiers_by_type(entry.numeric_type, BuffResource.AFFECT.SELF)
 			NumericEntry.AFFECTED_BY.NONE:
 				modifiers = []
 			_:
