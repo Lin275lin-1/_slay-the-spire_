@@ -12,6 +12,8 @@ func initialize(run_stats_: RunStats) -> void:
 	Events.combat_won.connect(_on_combat_ended)
 	Events.player_turn_ended.connect(_on_player_turn_ended)
 	Events.player_turn_started.connect(_on_player_turn_started)
+	Events.before_potion_used.connect(_on_before_potion_used)
+	Events.after_potion_used.connect(_on_after_potion_used)
 	run_stats.potion_added.connect(add_potion)
 	run_stats.potion_removed.connect(remove_potion)
 	update_potion_slot()
@@ -22,8 +24,6 @@ func update_potion_slot() -> void:
 		child.queue_free()
 	for i in range(max_potion_slots):
 		var potion_ui = POTION_UI.instantiate() as PotionUI
-		potion_ui.before_potion_used.connect(_on_before_potion_used)
-		potion_ui.after_potion_used.connect(_on_after_potion_used)
 		potion_place_holder.add_child(potion_ui)
 	await get_tree().process_frame
 	set_potions()

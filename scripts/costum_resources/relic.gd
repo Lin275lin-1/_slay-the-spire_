@@ -45,9 +45,11 @@ func initialize_relic(_owner: RelicUI) -> void:
 	pass
 
 func activate_relic(owner: RelicUI) -> void:
-	for effect: Effect in effects:
-		await effect.execute(owner.get_tree().get_first_node_in_group('ui_player'), {}, null)
-	owner.flash()
+	var player = owner.get_tree().get_first_node_in_group("ui_player")
+	# 没有指向性的遗物，所以targets为空
+	var relic_context = {"player": player, "targets": []}
+	(player as Player).combat_resolver.execute(ResolutionEntry.new(self, effects, relic_context, func(): owner.flash()))
+	
 # 只有基于事件的遗物需要实现这个方法
 # 方法的目的是解除绑定的信号
 # 事实上每次新增遗物时会复制一份遗物资源,relicUI被清除时资源也会被清除

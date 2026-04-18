@@ -153,7 +153,14 @@ func die() -> void:
 	)
 
 func heal(context: HealContext) -> int:
-	context.target.stats.heal(context.amount)
+	return context.target.gain_health(context)
+
+func gain_health(context: HealContext) -> int:
+	return stats.heal(context.amount)
+
+func gain_max_health(context: GainMaxHealthContext) -> int:
+	stats.max_health += context.amount
+	gain_health(HealContext.new(context.source, context.target, context.amount))
 	return context.amount
 	
 func lose_health(context: Context) -> int:

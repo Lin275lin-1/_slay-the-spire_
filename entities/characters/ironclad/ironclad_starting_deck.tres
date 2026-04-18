@@ -16,6 +16,13 @@
 [ext_resource type="Texture2D" uid="uid://bbpfskx" path="res://images/atlases/card_atlas.sprites/ironclad/bloodletting.tres" id="13_whuos"]
 [ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="14_cilra"]
 [ext_resource type="Texture2D" uid="uid://bkyract" path="res://images/atlases/card_atlas.sprites/ironclad/pommel_strike.tres" id="15_lm2nt"]
+[ext_resource type="Resource" uid="uid://upuj7jv770uk" path="res://entities/cards/ironclad/欺凌.tres" id="16_t8brg"]
+[ext_resource type="Resource" uid="uid://bwfi2t422lab6" path="res://entities/cards/ironclad/闪电霹雳.tres" id="17_au0bv"]
+[ext_resource type="Resource" uid="uid://b5jbjk3a0xd0q" path="res://entities/cards/ironclad/防御.tres" id="18_cyjvc"]
+[ext_resource type="Resource" uid="uid://djt7dhsu34m5b" path="res://entities/cards/ironclad/耸肩无视.tres" id="19_lmdw5"]
+[ext_resource type="Resource" uid="uid://objfyia1a4gs" path="res://entities/cards/ironclad/突破.tres" id="20_bsqa6"]
+[ext_resource type="Resource" uid="uid://b0odwvcj314k2" path="res://entities/cards/ironclad/燃烧契约.tres" id="21_whuos"]
+[ext_resource type="Resource" uid="uid://cj8n0wv5q8ry5" path="res://entities/cards/ironclad/恶魔形态.tres" id="22_au0bv"]
 
 [sub_resource type="Resource" id="Resource_via1s"]
 script = ExtResource("4_7hj0v")
@@ -384,5 +391,5 @@ metadata/_custom_type_script = "uid://br1hibx18tv13"
 
 [resource]
 script = ExtResource("2_pcwuu")
-cards = Array[ExtResource("1_6dnus")]([SubResource("Resource_jqanm"), SubResource("Resource_q88nh"), SubResource("Resource_vp0wk"), SubResource("Resource_2qpn7"), SubResource("Resource_o2bww"), SubResource("Resource_b05o3")])
+cards = Array[ExtResource("1_6dnus")]([SubResource("Resource_jqanm"), SubResource("Resource_q88nh"), SubResource("Resource_vp0wk"), SubResource("Resource_2qpn7"), SubResource("Resource_o2bww"), SubResource("Resource_b05o3"), ExtResource("16_t8brg"), ExtResource("17_au0bv"), ExtResource("18_cyjvc"), ExtResource("19_lmdw5"), ExtResource("20_bsqa6"), ExtResource("21_whuos"), ExtResource("22_au0bv")])
 metadata/_custom_type_script = "uid://jvpf65gf7yuq"

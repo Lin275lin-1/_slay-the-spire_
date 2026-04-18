@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://bhwl6sfydj72f"]
+
+[ext_resource type="Texture2D" uid="uid://cubu0cynv2nd1" path="res://images/powers/gigantification_power.png" id="1_5h0go"]
+[ext_resource type="Script" uid="uid://bhgwemum3oryi" path="res://scripts/costum_resources/buffs/gigatification_buff.gd" id="1_87wxt"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_kfrrf"]
+
+[resource]
+script = ExtResource("1_kfrrf")
+buff_id = "gigantification"
+buff_name = "超巨化"
+description = "你打出的下一张攻击牌将会造成三倍伤害"
+icon = ExtResource("1_5h0go")
+stackable = false
+buff_script = ExtResource("1_87wxt")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

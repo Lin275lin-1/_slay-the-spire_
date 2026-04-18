@@ -32,7 +32,9 @@ enum COLOR {
 @export var potion_color: COLOR = COLOR.COLORLESS
 @export var effects: Array[Effect]
 
-func play(source: Node, targets: Array[Node]) -> void:
-	var previous_result: Variant = null
-	for effect: Effect in effects:
-		previous_result = await effect.execute(source, {"targets": targets, "player": source}, previous_result)
+func play(source: Node, targets: Array[Node], potion_ui: PotionUI) -> void:
+	var potion_context = {
+		"targets": targets, 
+		"player": source
+	}
+	(source as Player).combat_resolver.execute(ResolutionEntry.new(self, effects, potion_context, func(): Events.after_potion_used.emit(potion_ui)))

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://d2j6tfnkw0axh"]
+
+[ext_resource type="Texture2D" uid="uid://dkvfdn26bl7a3" path="res://images/powers/regen_power.png" id="1_criem"]
+[ext_resource type="Script" uid="uid://ds3vhaunyxxeq" path="res://scripts/costum_resources/buffs/regen_buff.gd" id="1_n530a"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_o4drv"]
+
+[resource]
+script = ExtResource("1_o4drv")
+buff_id = "regen"
+buff_name = "再生"
+description = "回合结束时恢复{stacks}点生命，然后减少1层"
+icon = ExtResource("1_criem")
+buff_script = ExtResource("1_n530a")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

@@ -1,9 +1,6 @@
 class_name PotionUI
 extends MarginContainer
 
-signal before_potion_used(potion_ui: PotionUI)
-signal after_potion_used(potion_ui: PotionUI)
-
 @onready var out_line: TextureRect = $OutLine
 @onready var texture_rect: TextureRect = $TextureRect
 
@@ -40,9 +37,8 @@ func play() -> void:
 	if used:
 		return
 	used = true
-	before_potion_used.emit(self)
-	await potion.play(get_tree().get_first_node_in_group("ui_player"), targets)
-	after_potion_used.emit(self)
+	Events.before_potion_used.emit(self)
+	potion.play(get_tree().get_first_node_in_group("ui_player"), targets, self)
 	_on_mouse_exited()
 
 func _on_mouse_entered() -> void:

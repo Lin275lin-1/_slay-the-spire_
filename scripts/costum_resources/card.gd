@@ -117,6 +117,7 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 	#Events.card_played.emit(self)
 
 func play(source: Player, targets: Array[Node]) -> void:
+	targets = _get_targets(source, targets) if get_target() != Target.SINGLE_ENEMY else targets
 	var card_context := {
 		"player": source,
 		"card": self,
@@ -131,7 +132,12 @@ func play(source: Player, targets: Array[Node]) -> void:
 	#Events.card_played.emit(self)
 	#CombatResolver.push_card(self, card_context)
 
-	source.card_resolver.push_card(self, card_context)
+	source.combat_resolver.execute(ResolutionEntry.new(self, get_effects(), card_context, \
+	func(): 
+		Events.card_played.emit(self)
+		on_played(source, targets)
+		)
+	)
 	var cost = 0 if first_play_free else get_cost()
 	source.use_energy(cost)
 	first_play_free = false

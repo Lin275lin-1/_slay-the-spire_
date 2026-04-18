@@ -3,6 +3,8 @@ extends Control
 
 const CARD_INSPECT_UI = preload("res://scenes/ui/card_inspect_ui.tscn")
 
+signal resolve_finished()
+
 @onready var card_resolve_stack: HBoxContainer = $CardResolveStack
 
 # 结算栈(不允许外部访问
@@ -25,12 +27,19 @@ func pop_card_ui_in_stack() -> void:
 		card_resolve_stack.get_child(-1).queue_free()
 
 # 将卡牌加入结算栈（卡牌调用play时加入）
-func push_card(card: Card, context: Dictionary):
-	var entry = ResolutionEntry.new(card, context)
-	
-	_stack.append(entry)
-	put_card_ui_in_stack(entry.card)
-	
+#func push_card(card: Card, context: Dictionary):
+	#var entry = ResolutionEntry.new(card, context)
+	#
+	#_stack.append(entry)
+	#put_card_ui_in_stack(entry.card)
+	#
+	#if not is_resolving:
+		#_resolve()
+
+func execute(resolution_entry: ResolutionEntry) -> void:
+	_stack.append(resolution_entry)
+	if resolution_entry.source is Card:
+		put_card_ui_in_stack(resolution_entry.source)
 	if not is_resolving:
 		_resolve()
 		
@@ -45,24 +54,36 @@ func _resolve():
 		if !current_entry.is_entry_available():
 			
 			_stack.pop_back()
-			pop_card_ui_in_stack()
+			if current_entry.source is Card:
+				pop_card_ui_in_stack()
+			#pop_card_ui_in_stack()
 			
-			_on_card_finished(current_entry)
 			
-			await get_tree().create_timer(0.3).timeout
+			if current_entry.on_finish.is_valid():
+				print(current_entry.source)
+				await current_entry.on_finish.call()
+			if current_entry.source is Card:
+				await get_tree().create_timer(0.3).timeout
+			else:
+				await get_tree().process_frame
 			continue
 			
 		# 卡牌所有效果完成后移出调用栈
 		if current_entry.is_finished():
 			
-			current_entry.card.on_played(current_entry.context["player"], current_entry.context["targets"])
+			#current_entry.card.on_played(current_entry.context["player"], current_entry.context["targets"])
 			
 			_stack.pop_back()
-			pop_card_ui_in_stack()
+			if current_entry.source is Card:
+				pop_card_ui_in_stack()
 			
-			_on_card_finished(current_entry)
+			if current_entry.on_finish.is_valid():
+				await current_entry.on_finish.call()
 			# 每张卡牌开始执行后等待一段时间
-			await get_tree().create_timer(0.3).timeout
+			if current_entry.source is Card:
+				await get_tree().create_timer(0.3).timeout
+			else:
+				await get_tree().process_frame
 			continue
 			
 		current_entry.previous_result =  await _execute_effect(current_entry.get_current_effect(), current_entry.context, current_entry.previous_result)
@@ -74,12 +95,16 @@ func _resolve():
 			await get_tree().process_frame
 			
 		# 移动到下一个效果
-		current_entry.effect_index += 1
+		current_entry.advance()
 		
 	is_resolving = false
+	resolve_finished.emit()
 	
 func _clear_stack() -> void:
-	_stack.clear()	
+	while _stack.size() > 0:
+		current_entry = _stack.pop_back()
+		if current_entry.on_finish.is_valid():
+			await current_entry.on_finish.call()
 	for child in card_resolve_stack.get_children():
 		child.queue_free()
 	card_resolve_stack.hide()
@@ -93,9 +118,6 @@ func _should_stop() -> bool:
 func _execute_effect(effect: Effect, context: Dictionary, previous_result: Variant) -> Variant:
 	# 如果execute是同步函数会直接忽略await
 	return await effect.execute(context.get("player"), context, previous_result)
-	
-func _on_card_finished(entry: ResolutionEntry) -> void:
-	Events.card_played.emit(entry.card)
 
 func _set_current_entry(value: ResolutionEntry) -> void:
 	current_entry = value

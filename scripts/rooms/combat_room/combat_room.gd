@@ -11,6 +11,7 @@ extends Control
 @export var char_stats: CharacterStats: set = _set_char_stats
 @export var music: AudioStream
 @export var relics: RelicHandler
+@onready var combat_resolver: CombatResolver = $CombatUI/CombatResolver
 
 
 
@@ -48,7 +49,6 @@ func _on_add_card_pressed() -> void:
 
 func _on_child_order_changed() -> void:
 	if enemy_handler.get_child_count() == 0 and is_instance_valid(relics):
-
 		relics.activate_relics_by_trigger_type(Relic.TriggerType.END_OF_COMBAT)
 	
 func _on_enemy_turn_ended() -> void:
@@ -70,4 +70,7 @@ func _on_relics_activated(type: Relic.TriggerType) -> void:
 			combat_ui.initialize_card_pile_view()
 			Events.combat_start.emit()
 		Relic.TriggerType.END_OF_COMBAT:
+			if combat_resolver.is_resolving:
+				await combat_resolver.resolve_finished
+			#await get_tree().create_timer(0.5).timeout
 			Events.combat_won.emit()

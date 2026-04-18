@@ -9,9 +9,17 @@ const HAND_DISCARD_INTERVAL := 0.25
 @onready var player: Player = $"../Player"
 
 var char_stats: CharacterStats
+# 抽一张牌的效果，这是为了将回合开始时的抽牌也压入结算栈中
+var draw_card_effect: DrawCardEffect = DrawCardEffect.new()
+var draw_card_context := {
+	"player": null,
+	"targets": []
+}
 
 func _ready() -> void:
 	Events.card_played.connect(_on_card_played)
+	draw_card_effect.draw_card_provider = NumericProvider.new(player.stats.cards_per_turn)
+	draw_card_context["player"] = player
 
 func start_battle(char_stats_: CharacterStats) -> void:
 	char_stats = char_stats_
@@ -47,18 +55,24 @@ func add_card_to_hand(card: Card) -> void:
 	if card:
 		hand_manager.add_card(card)
 		hand_manager.set_cards()
+
 		
-func draw_cards(amount: int) -> void:
-	var tween := create_tween()
-	for i in range(amount):
-		tween.tween_callback(func():
-			player.draw_card(DrawCardContext.new(player, null, 1))
-		)
-		tween.tween_interval(HAND_DRAW_INTERVAL)
-	
-	tween.finished.connect(
-		func(): Events.player_hand_drawn.emit()
-	)
+#func draw_cards(amount: int) -> void:
+	#var tween := create_tween()
+	#for i in range(amount):
+		#tween.tween_callback(func():
+			##player.draw_card(DrawCardContext.new(player, null, 1))
+			#player.combat_resolver.execute(ResolutionEntry.new(null, [draw_card_effect], draw_card_context, func(): return))
+		#)
+		#tween.tween_interval(HAND_DRAW_INTERVAL)
+	#
+	#tween.finished.connect(
+		#func(): Events.player_hand_drawn.emit()
+	#)
+
+func draw_cards() -> void:
+	player.combat_resolver.execute(ResolutionEntry.new(null, [draw_card_effect], draw_card_context, func(): Events.player_hand_drawn.emit()))
+
 
 func disable_hand(flag: bool = true) -> void:
 	for child:CardUI in hand_manager.get_children():
@@ -139,6 +153,19 @@ func put_card_in_hand(card: Card) -> void:
 func put_card_in_discard_pile(card: Card) -> void:
 	char_stats.discard_pile.add_card(card)
 
+func remove_card_in_discard_pile(card: Card) -> void:
+	char_stats.discard_pile.remove_card(card)
+
+func remove_card_in_draw_pile(card: Card) -> void:
+	char_stats.draw_pile.remove_card(card)
+
+# 之后估计会改
+func remove_card_in_hand(card: Card) -> void:
+	for child: CardUI in hand_manager.get_children():
+		if child.card == card:
+			hand_manager.discard_card(child)
+			return
+
 func update_hand() -> void:
 	hand_manager.update_hand()
 
@@ -154,6 +181,6 @@ func _on_card_played(card: Card) -> void:
 func _on_relics_activated(type: Relic.TriggerType):
 	match type:
 		Relic.TriggerType.START_OF_TURN:
-			draw_cards(char_stats.cards_per_turn)
+			draw_cards()
 		Relic.TriggerType.END_OF_TURN:
 			discard_cards()

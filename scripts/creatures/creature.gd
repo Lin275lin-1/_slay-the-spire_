@@ -101,6 +101,15 @@ func end_turn() -> void:
 func lose_health(_context: Context) -> int:
 	return 0
 	
+func heal(_context: HealContext) -> int:
+	return 0
+
+func gain_health(_context: HealContext) -> int:
+	return 0
+	
+func gain_max_health(_context: GainMaxHealthContext) -> int:
+	return 0
+	
 func take_damage(_context: Context) -> int:
 	return 0
 	

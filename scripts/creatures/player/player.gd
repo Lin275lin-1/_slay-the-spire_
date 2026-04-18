@@ -10,7 +10,7 @@ signal after_draw_card(context: DrawCardContext)
 @export var deck_view: DeckView
 @export var discover_view: DiscoverCardView
 @export var agent: PlayerHandler
-@export var card_resolver: CombatResolver
+@export var combat_resolver: CombatResolver
 
 @onready var hitbox: CollisionShape2D = $CollisionShape2D
 
@@ -107,7 +107,14 @@ func draw_card(context: DrawCardContext) -> int:
 		#await tween.finished
 		
 func heal(context: HealContext) -> int:
-	context.target.stats.heal(context.amount)
+	return context.target.gain_health(context)
+
+func gain_health(context: HealContext) -> int:
+	return stats.heal(context.amount)
+
+func gain_max_health(context: GainMaxHealthContext) -> int:
+	stats.max_health += context.amount
+	gain_health(HealContext.new(context.source, context.target, context.amount))
 	return context.amount
 	
 func gain_energy(context: GainEnergyContext) -> void:
@@ -169,6 +176,15 @@ func put_card_in_draw_pile(card: Card, top:bool = false) -> void:
 	
 func put_card_in_hand(card: Card) -> void:
 	agent.put_card_in_hand(card)
+
+func remove_card_in_discard_pile(card: Card) -> void:
+	agent.remove_card_in_discard_pile(card)
+
+func remove_card_in_draw_pile(card: Card) -> void:
+	agent.remove_card_in_draw_pile(card)
+	
+func remove_card_in_hand(card: Card) -> void:
+	agent.remove_card_in_hand(card)
 	
 func get_hand_cards() -> Array[Card]:
 	return agent.get_hand()

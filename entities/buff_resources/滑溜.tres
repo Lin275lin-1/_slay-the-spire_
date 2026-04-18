@@ -10,5 +10,6 @@ buff_id = "slippery"
 buff_name = "滑溜"
 description = "下次失去生命值时，只会失去1点生命"
 icon = ExtResource("2_dbydo")
+affect = 1
 buff_script = ExtResource("1_dbydo")
 metadata/_custom_type_script = "uid://c1n4sywvfnffx"

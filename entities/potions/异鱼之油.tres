@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://4u3u7qicmxi5"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_cl8kw"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_gxvjd"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_uy8kg"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_6juvu"]
+[ext_resource type="Texture2D" uid="uid://b2a8lxd" path="res://images/atlases/potion_atlas.sprites/fysh_oil.tres" id="4_edkg0"]
+[ext_resource type="Texture2D" uid="uid://bf1jyim" path="res://images/atlases/potion_outline_atlas.sprites/fysh_oil.tres" id="5_ysyfw"]
+
+[sub_resource type="Resource" id="Resource_r0cv6"]
+script = ExtResource("2_uy8kg")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_065r6"]
+script = ExtResource("3_6juvu")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_r0cv6")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_1l1jp"]
+script = ExtResource("2_uy8kg")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_j4tay"]
+script = ExtResource("3_6juvu")
+buff_name = "敏捷"
+buff_stack_provider = SubResource("Resource_1l1jp")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_gxvjd")
+id = "fysh_oil"
+potion_name = "异鱼之油"
+description = "获得1点[color=gold]力量[/color]和1点[color=gold]敏捷[/color]"
+icon = ExtResource("4_edkg0")
+outline_icon = ExtResource("5_ysyfw")
+rarity = 2
+effects = Array[ExtResource("1_cl8kw")]([SubResource("Resource_065r6"), SubResource("Resource_j4tay")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://g31xo0cpujla"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_w2gw7"]
+[ext_resource type="Texture2D" uid="uid://cp4hyc3" path="res://images/atlases/potion_atlas.sprites/beetle_juice.tres" id="2_2b7hi"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_72jcq"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_iqtky"]
+[ext_resource type="Texture2D" uid="uid://boyjpwx" path="res://images/atlases/potion_outline_atlas.sprites/beetle_juice.tres" id="3_p5mgv"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_ueqhe"]
+
+[sub_resource type="Resource" id="Resource_kntsb"]
+script = ExtResource("2_72jcq")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_dql4l"]
+script = ExtResource("3_ueqhe")
+buff_name = "缩小"
+buff_stack_provider = SubResource("Resource_kntsb")
+target_type = 2
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_iqtky")
+id = "beetle_juice"
+potion_name = "甲虫汁"
+description = "敌人的攻击在下4个回合中造成的伤害减少30%"
+icon = ExtResource("2_2b7hi")
+outline_icon = ExtResource("3_p5mgv")
+target_type = 1
+rarity = 4
+effects = Array[ExtResource("1_w2gw7")]([SubResource("Resource_dql4l")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"
