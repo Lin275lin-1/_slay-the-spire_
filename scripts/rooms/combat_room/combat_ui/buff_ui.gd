@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func update_stack():
 	if stack_label:
-		stack_label.text = str(buff.stacks) if buff.stacks > 1 else ""
+		stack_label.text = str(buff.stacks) if buff.stacks != 1 else ""
 		agent.buff_changed.emit()
 		
 func _on_buff_removed() -> void:

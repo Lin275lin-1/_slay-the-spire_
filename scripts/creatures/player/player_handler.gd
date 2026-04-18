@@ -148,6 +148,7 @@ func put_card_in_hand(card: Card) -> void:
 		hand_manager.set_cards()
 		return
 	else:
+		card.first_play_free = false
 		char_stats.discard_pile.add_card(card)
 
 func put_card_in_discard_pile(card: Card) -> void:

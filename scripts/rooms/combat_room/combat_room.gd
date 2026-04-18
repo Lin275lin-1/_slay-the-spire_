@@ -60,6 +60,8 @@ func _set_char_stats(value: CharacterStats) -> void:
 
 
 func _on_back_to_map_pressed() -> void:
+	if combat_resolver.is_resolving:
+		await combat_resolver.resolve_finished
 	Events.combat_won.emit()
 
 func _on_relics_activated(type: Relic.TriggerType) -> void:

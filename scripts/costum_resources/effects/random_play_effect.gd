@@ -44,6 +44,8 @@ func apply(source_: Node, _targets: Array[Node], card_context: Dictionary, previ
 				candidates.shuffle()
 				cards_to_play = candidates.slice(0, value)
 		
+		if where == Where.HAND:
+			source_.agent.disable_hand(true)
 		for card: Card in cards_to_play:
 			match where:
 				Where.DRAW_PILE:
@@ -53,7 +55,9 @@ func apply(source_: Node, _targets: Array[Node], card_context: Dictionary, previ
 				Where.HAND:
 					source_.remove_card_in_hand(card)
 			_random_play(source_, card)
-			
+			await source_.get_tree().create_timer(0.3).timeout
+		if where == Where.HAND:
+			source_.agent.disable_hand(false)
 	return null
 
 func _random_play(player: Node, card: Card) -> void:

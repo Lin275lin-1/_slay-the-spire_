@@ -40,13 +40,13 @@ func add_stack(amount: int):
 		remove_stack(-amount)
 		return
 	stacks = clampi(stacks + amount, min_stack, max_stack)
-	stack_changed.emit()
+	if stacks == 0:
+		queue_free()
 	
 func remove_stack(amount: int):
 	stacks = clampi(stacks - amount, min_stack, max_stack)
-	if stacks <= 0:
+	if stacks == 0:
 		queue_free()
-	stack_changed.emit()
 	
 func get_description() -> String:
 	return description

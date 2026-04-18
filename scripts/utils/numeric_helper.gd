@@ -13,7 +13,7 @@ static func apply_modifiers(base: int, modifiers: Array) -> int:
 	ret *= total_multiplier
 	for function in total_callables:
 		ret = function.call(ret)
-	return ret
+	return ret if ret >= 0 else 0
 
 static func combine_modifiers(source_m: Array, target_m: Array) -> Array:
 	# 也许需要排序，但是目前看来基本用不上modifier.function,排序没意义

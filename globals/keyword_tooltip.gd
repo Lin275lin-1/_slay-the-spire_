@@ -58,4 +58,5 @@ func _on_timer_timeout() -> void:
 	# TODO:找时间重构
 	if current_node and callback:
 		callback.call()
+		await get_tree().process_frame
 		show()

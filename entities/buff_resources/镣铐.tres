@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://166domtdbt7y"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_0q80a"]
+[ext_resource type="Script" uid="uid://dp13d51rv6eir" path="res://scripts/costum_resources/buffs/temperary_strength_down.gd" id="1_5vurr"]
+[ext_resource type="Texture2D" uid="uid://b1r63cr1yjbt8" path="res://images/powers/shackling_potion_power.png" id="1_nnety"]
+
+[resource]
+script = ExtResource("1_0q80a")
+buff_id = "shackling"
+buff_name = "镣铐"
+description = "在本回合失去{stacks}点力量"
+icon = ExtResource("1_nnety")
+buff_type = 2
+buff_script = ExtResource("1_5vurr")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"
