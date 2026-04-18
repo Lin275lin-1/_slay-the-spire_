@@ -16,6 +16,8 @@ enum Callback{
 	PUT_INTO_DRAW_PILE_TOP,
 	DISCARD,
 	FREE_FOR_COMBAT, # 本场战斗免费打出
+	PUT_INTO_HAND,
+	PUT_INTO_HAND_AND_FIRST_PLAY_FREE # 应该重构的但是我懒得改了
 }
 
 @export var callback: Callback
@@ -90,7 +92,10 @@ func get_callback(source: Player) -> Callable:
 			return func(card: Card): card.sly = true
 		Callback.PUT_INTO_DRAW_PILE_TOP:
 			return func(card: Card):
-				source.stats.discard_pile.remove_card(card)
+				if where == Where.DISCARD_PILE:
+					source.stats.discard_pile.remove_card(card)
+				elif where == Where.HAND:
+					source.remove_card_in_hand(card)
 				source.stats.draw_pile.add_card_to_top(card)
 		Callback.DISCARD:
 			return func(card: Card): source.discard_card(card)
@@ -99,6 +104,21 @@ func get_callback(source: Player) -> Callable:
 			return func(card: Card):
 				card.base_cost = 0
 				card.upgraded_cost = 0
+		Callback.PUT_INTO_HAND:
+			return func(card: Card):
+				if where == Where.DISCARD_PILE:
+					source.stats.discard_pile.remove_card(card)
+				elif where == Where.DRAW_PILE:
+					source.stats.draw_pile.remove_card(card)
+				source.put_card_in_hand(card)
+		Callback.PUT_INTO_HAND_AND_FIRST_PLAY_FREE:
+			return func(card: Card):
+				if where == Where.DISCARD_PILE:
+					source.stats.discard_pile.remove_card(card)
+				elif where == Where.DRAW_PILE:
+					source.stats.draw_pile.remove_card(card)
+				card.first_play_free = true
+				source.put_card_in_hand(card)
 			
 	return func(_card: Card): return
 	
@@ -119,6 +139,10 @@ func get_selection_mode() -> DeckView.SelectionMode:
 		Callback.DISCARD:
 			return DeckView.SelectionMode.SELECT
 		Callback.FREE_FOR_COMBAT:
+			return DeckView.SelectionMode.SELECT
+		Callback.PUT_INTO_HAND:
+			return DeckView.SelectionMode.SELECT
+		Callback.PUT_INTO_HAND_AND_FIRST_PLAY_FREE:
 			return DeckView.SelectionMode.SELECT
 	return DeckView.SelectionMode.SELECT
 
@@ -149,6 +173,10 @@ func get_hint_text() -> String:
 			back = "丢弃"
 		Callback.FREE_FOR_COMBAT:
 			back = "本场战斗免费"
+		Callback.PUT_INTO_HAND:
+			back = "加入手牌"
+		Callback.PUT_INTO_HAND_AND_FIRST_PLAY_FREE:
+			back = "加入手牌"
 		_:
 			back = ""
 	return front + back

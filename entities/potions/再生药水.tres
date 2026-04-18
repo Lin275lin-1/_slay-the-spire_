@@ -12,7 +12,7 @@ script = ExtResource("2_gd2r5")
 fixed_value = 5
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_qjrfj"]
+[sub_resource type="Resource" id="Resource_gd2r5"]
 script = ExtResource("3_dxn4j")
 buff_name = "再生"
 buff_stack_provider = SubResource("Resource_168w3")
@@ -27,5 +27,5 @@ description = "获得5层[color=gold]再生[/color]"
 icon = ExtResource("4_lshm0")
 outline_icon = ExtResource("5_40m60")
 rarity = 2
-effects = Array[ExtResource("1_wjweq")]([SubResource("Resource_qjrfj")])
+effects = Array[ExtResource("1_wjweq")]([SubResource("Resource_gd2r5")])
 metadata/_custom_type_script = "uid://bumkvpbom08xn"

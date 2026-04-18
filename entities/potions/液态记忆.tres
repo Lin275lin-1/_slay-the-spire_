@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://c0yumb1ur2fls"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_qroii"]
+[ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="2_4bd7w"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_h37wi"]
+[ext_resource type="Texture2D" uid="uid://bm5rrlo" path="res://images/atlases/potion_atlas.sprites/liquid_memories.tres" id="3_xx2fu"]
+[ext_resource type="Texture2D" uid="uid://yd1h0b" path="res://images/atlases/potion_outline_atlas.sprites/liquid_memories.tres" id="4_s0i8k"]
+
+[sub_resource type="Resource" id="Resource_bt1lq"]
+script = ExtResource("2_4bd7w")
+callback = 9
+where = 2
+min_select = 1
+max_select = 1
+metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+
+[resource]
+script = ExtResource("2_h37wi")
+id = "liquid_memmories"
+potion_name = "液态记忆"
+description = "将你[color=gold]弃牌堆[/color]中的一张牌放入你的[color=gold]手牌[/color]。这张牌在本回合可以免费打出"
+icon = ExtResource("3_xx2fu")
+outline_icon = ExtResource("4_s0i8k")
+rarity = 4
+effects = Array[ExtResource("1_qroii")]([SubResource("Resource_bt1lq")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"
