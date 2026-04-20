@@ -55,7 +55,6 @@ func apply(source: Node, _targets: Array[Node], _card_context: Dictionary, _prev
 		card_count = await source.select_hand(ChooseCardContext.new(source, filter_cards(cards), get_hint_text(), min_select, max_select, get_callback(source), get_selection_mode()))
 	else:
 		card_count = await source.select_deck(ChooseCardContext.new(source, filter_cards(cards), get_hint_text(), min_select, max_select, get_callback(source), get_selection_mode()))
-	print(card_count)
 	return card_count
 
 func filter_cards(cards: Array[Card]) -> Array[Card]:

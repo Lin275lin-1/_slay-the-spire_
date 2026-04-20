@@ -1,0 +1,102 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bdaswd70bkyc2"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_kjrw7"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_2gple"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_nfdo1"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_mrw4g"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_ufuf4"]
+[ext_resource type="Texture2D" uid="uid://cg5pw0n" path="res://images/atlases/card_atlas.sprites/ironclad/grapple.tres" id="5_r0m8s"]
+
+[sub_resource type="Resource" id="Resource_yowqi"]
+script = ExtResource("2_nfdo1")
+fixed_value = 7
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_cgoli"]
+script = ExtResource("1_kjrw7")
+numeric_type = 4
+numeric_provider = SubResource("Resource_yowqi")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_2awsp"]
+script = ExtResource("2_nfdo1")
+fixed_value = -7
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_q5wri"]
+script = ExtResource("4_ufuf4")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_2awsp")
+target_type = 2
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_qq3qu"]
+script = ExtResource("2_nfdo1")
+fixed_value = 7
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_81frd"]
+script = ExtResource("4_ufuf4")
+buff_name = "擒拿"
+buff_stack_provider = SubResource("Resource_qq3qu")
+target_type = 2
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_t8dry"]
+script = ExtResource("2_nfdo1")
+fixed_value = -9
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_o8uc1"]
+script = ExtResource("4_ufuf4")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_t8dry")
+target_type = 2
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_3tnk2"]
+script = ExtResource("2_nfdo1")
+fixed_value = 9
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_pxga0"]
+script = ExtResource("4_ufuf4")
+buff_name = "擒拿"
+buff_stack_provider = SubResource("Resource_3tnk2")
+target_type = 2
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_no3e5"]
+script = ExtResource("2_nfdo1")
+fixed_value = 9
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_cdtxx"]
+script = ExtResource("1_kjrw7")
+numeric_type = 4
+numeric_provider = SubResource("Resource_no3e5")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_mrw4g")
+id = "擒拿"
+type = 2
+base_target = 1
+base_cost = 1
+rarity = 2
+effects = Array[ExtResource("2_2gple")]([SubResource("Resource_q5wri"), SubResource("Resource_81frd")])
+portrait = ExtResource("5_r0m8s")
+base_description = "[center]使一名敌人在本回合失去{stacks}点[color=gold]力量[/color]。[/center]"
+base_numeric_entries = Array[ExtResource("1_kjrw7")]([SubResource("Resource_cgoli")])
+upgraded_target = 1
+upgraded_cost = 1
+upgraded_description = "[center]使一名敌人在本回合失去{stacks}点[color=gold]力量[/color]。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_kjrw7")]([SubResource("Resource_cdtxx")])
+upgraded_effects = Array[ExtResource("2_2gple")]([SubResource("Resource_o8uc1"), SubResource("Resource_pxga0")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

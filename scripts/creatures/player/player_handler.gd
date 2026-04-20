@@ -73,7 +73,6 @@ func add_card_to_hand(card: Card) -> void:
 func draw_cards() -> void:
 	player.combat_resolver.execute(ResolutionEntry.new(null, [draw_card_effect], draw_card_context, func(): Events.player_hand_drawn.emit()))
 
-
 func disable_hand(flag: bool = true) -> void:
 	for child:CardUI in hand_manager.get_children():
 		child.disabled = flag

@@ -52,7 +52,9 @@ func _set_card(value: Card) -> void:
 	card_portrait.texture = card.portrait
 	title_label.text = card.get_title()
 	if card.playable:
-		if card.first_play_free and card.get_cost() > 0:
+		if card.is_x_cost:
+			energy_label.text = "X"
+		elif card.first_play_free and card.get_cost() > 0:
 			energy_label.text = "[color=green]0[/color]"
 		else:
 			energy_label.text = str(card.get_cost())

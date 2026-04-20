@@ -1,7 +1,6 @@
 class_name BuffManager
 extends Node
 
-# 如果新增buff，返回0
 func add_buff(buff_context: ApplyBuffContext) -> Buff:
 	var buff_resource: BuffResource = BuffLibrary.get_buff_resource_by_name(buff_context.buff_name)
 	var buff_node: Buff = buff_resource.buff_script.new()

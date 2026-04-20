@@ -37,7 +37,6 @@ func set_skill(value: MainSkill):
 func update_skill():
 
 	var factor := float(skill.current_charge) / skill.charge_cost
-	print(factor)
 	#var current_panel_style_box: StyleBoxFlat
 	if factor >= 1:
 		charge_label.text = "[color=gold]{0}[/color]/{1}".format([skill.current_charge, skill.charge_cost])

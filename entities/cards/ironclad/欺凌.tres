@@ -123,6 +123,7 @@ portrait = ExtResource("2_478sc")
 base_description = "[center]造成{damage}点伤害。[/center]
 [center]该敌人身上每有一层[color=gold]易伤[/color]就额外造成{factor}点伤害。[center]"
 base_numeric_entries = Array[ExtResource("1_dcc5o")]([SubResource("Resource_oamol"), SubResource("Resource_q2v5u")])
+upgraded_target = 1
 upgraded_description = "[center]造成{damage}点伤害。[/center]
 [center]该敌人身上每有一层[color=gold]易伤[/color]就额外造成{factor}点伤害。[center]"
 upgraded_numeric_entries = Array[ExtResource("1_dcc5o")]([SubResource("Resource_ua2aw"), SubResource("Resource_sdq1k")])

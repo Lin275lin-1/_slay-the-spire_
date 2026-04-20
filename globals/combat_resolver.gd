@@ -43,51 +43,27 @@ func execute(resolution_entry: ResolutionEntry) -> void:
 	if not is_resolving:
 		_resolve()
 		
-# 不断从栈顶取出effect并执行	
-func _resolve():
+# 不断从栈顶的ResolutionEntry取出effect并执行	
+func _resolve() -> void:
 	is_resolving = true
 	while _stack.size() > 0:
 		current_entry = _stack[-1]
-		# 自动打出的卡牌的目标可能无效
-		# 目前的的解决方法是直接不执行效果
+		# 自动打出的卡牌的目标可能无效(比如死亡后queue_free)
+		# 目前的的解决方法是直接不执行效果，移出调用栈
 		# 好像还有可能出现对previous_freed对象调用effect的情况，但是我没法稳定复现
 		if !current_entry.is_entry_available():
-			
-			_stack.pop_back()
-			if current_entry.source is Card:
-				pop_card_ui_in_stack()
-			#pop_card_ui_in_stack()
-			
-			
-			if current_entry.on_finish.is_valid():
-				print(current_entry.source)
-				await current_entry.on_finish.call()
-			if current_entry.source is Card:
-				await get_tree().create_timer(0.3).timeout
-			else:
-				await get_tree().process_frame
+			_pop_entry()
 			continue
 			
-		# 卡牌所有效果完成后移出调用栈
+		# 所有效果完成后移出调用栈
 		if current_entry.is_finished():
-			
-			#current_entry.card.on_played(current_entry.context["player"], current_entry.context["targets"])
-			
-			_stack.pop_back()
-			if current_entry.source is Card:
-				pop_card_ui_in_stack()
-			
-			if current_entry.on_finish.is_valid():
-				await current_entry.on_finish.call()
-			# 每张卡牌开始执行后等待一段时间
-			if current_entry.source is Card:
-				await get_tree().create_timer(0.3).timeout
-			else:
-				await get_tree().process_frame
+			_pop_entry()
 			continue
 			
-		current_entry.previous_result =  await _execute_effect(current_entry.get_current_effect(), current_entry.context, current_entry.previous_result)
+		current_entry.previous_result =  await _execute_effect(current_entry.get_current_effect()\
+		, current_entry.context, current_entry.previous_result)
 		
+		# 判断执行是否应该终止,如杀死所有敌人/玩家死亡时
 		if _should_stop():
 			_clear_stack()
 			break
@@ -99,14 +75,33 @@ func _resolve():
 		
 	is_resolving = false
 	resolve_finished.emit()
+
+func _pop_entry() -> void:
+	var entry: ResolutionEntry = _stack.pop_back()
+			
+	if entry.source is Card:
+		pop_card_ui_in_stack()
+		
+	# resolution_entry运行结束后的钩子函数
+	if entry.on_finish.is_valid():
+		await current_entry.on_finish.call()
+		
+	# 每张卡牌执行结束后等待一段时间
+	if entry.source is Card:
+		await get_tree().create_timer(0.3).timeout
+	else:
+		await get_tree().process_frame
 	
 func _clear_stack() -> void:
 	while _stack.size() > 0:
 		current_entry = _stack.pop_back()
+		
 		if current_entry.on_finish.is_valid():
 			await current_entry.on_finish.call()
+			
 	for child in card_resolve_stack.get_children():
 		child.queue_free()
+		
 	card_resolve_stack.hide()
 
 # 判断执行是否应该终止,如杀死所有敌人时

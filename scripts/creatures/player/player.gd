@@ -21,6 +21,7 @@ var spine_manager: SpineManager
 var attack_played_this_turn := 0
 var skill_played_this_turn := 0
 var energy_used_this_turn := 0
+var health_lost_times_this_turn := 0
 
 var dead := false
 
@@ -127,6 +128,8 @@ func lose_health(context: Context) -> int:
 	
 	before_lose_health.emit(context)
 	stats.health -= context.amount
+	if context.amount > 0:
+		health_lost_times_this_turn += 1
 	damage_number_spawner.spawn_damage_label(context.amount, false)
 
 	if stats.health <= 0:
@@ -162,6 +165,7 @@ func take_damage_without_signals(amount: int) -> int:
 	if stats.health <= 0:
 		die()
 	elif actual_damage != 0:
+		health_lost_times_this_turn += 1
 		Events.player_hit.emit()
 		spine_anim_state.set_animation("hurt", false, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
@@ -198,12 +202,19 @@ func get_discard_pile() -> Array[Card]:
 func get_exhaust_pile() -> Array[Card]:
 	return stats.get_exhaust_pile()
 
-func get_card_count_by_name(card_name: String) -> int:
+func get_card_count_by_name(card_name: String, base_card: Card) -> int:
 	var all_cards: Array[Card] = get_hand_cards()
 	all_cards.append_array(get_draw_pile())
 	all_cards.append_array(get_discard_pile())
 	# 将所有卡牌加起来，用filter函数筛选出id有name字符串卡牌然后获取数组长度
-	return len(all_cards.filter(func(card: Card): card.id.contains(card_name)))
+	
+	return len(all_cards.filter(func(card: Card): 
+		if card != base_card:
+			return card.id.contains(card_name)
+		else:
+			return false
+		)
+	)
 
 func discard_card(card: Card) -> void:
 	agent.discard_card(card)
@@ -222,12 +233,15 @@ func start_turn() -> void:
 	before_turn_started.emit(self)
 	stats.block = 0
 	stats.energy = stats.max_energy
-	after_turn_started.emit(self)
-
-func end_turn() -> void:
+	
+	health_lost_times_this_turn = 0
 	attack_played_this_turn = 0
 	skill_played_this_turn = 0
 	energy_used_this_turn = 0
+	
+	after_turn_started.emit(self)
+
+func end_turn() -> void:
 	turn_ended.emit(self)
 		
 func _set_char_stats(value: CharacterStats) -> void:

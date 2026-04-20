@@ -12,7 +12,10 @@ func initialize() -> void:
 		printerr("该对象没有before_gain_block信号")
 	
 func get_description() -> String:
-	return description.format({"stacks": stacks})
+	if stacks > 0:
+		return "从卡牌获得的格挡提高{stacks}点".format({"stacks": stacks})
+	else:
+		return "从卡牌获得的格挡降低{stacks}点".format({"stacks": -stacks})
 		
 func get_modifier() -> Array[Modifier]:
 	var modifier := Modifier.new(Enums.NumericType.BLOCK, stacks, 1.0, null)

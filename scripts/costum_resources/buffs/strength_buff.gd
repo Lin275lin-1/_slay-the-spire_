@@ -17,7 +17,10 @@ func get_modifier() -> Array[Modifier]:
 	return [modifier]
 
 func get_description() -> String:
-	return description.format({"stacks": stacks})
+	if stacks > 0:
+		return "造成的攻击伤害提高{stacks}点".format({"stacks": stacks})
+	else:
+		return "造成的攻击伤害降低{stacks}点".format({"stacks": -stacks})
 
 func _on_before_attack(context: Context) -> void:
 	context.modifiers.append(Modifier.new(Enums.NumericType.DAMAGE, stacks, 1.0, null))

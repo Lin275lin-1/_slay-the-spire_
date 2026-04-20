@@ -11,6 +11,8 @@ enum SourceType{
 	SKILL_PLAYED_THIS_TURN,
 	ENERGY_USED_THIS_TURN,
 	PLAYER_MAX_HEALTH, # 玩家最大生命
+	ENERGY_COST, # 卡牌消耗的能量
+	CARD_PLAYED_THIS_COMBAT, # 这张卡牌在本场战斗的打出次数
 	CUSTOM, # 自定义（应该不需要这么复杂的东西，暂时不实现
 }
 
@@ -30,7 +32,7 @@ func _init(fixed_value_: int = 0, multiplier_: float = 1.0, additive_: int = 0, 
 func get_value(previous_result: Variant = null, context: Dictionary = {}) -> int:
 	match type:
 		SourceType.FIXED:
-			return _get_value(fixed_value)
+			return _get_value(0)
 		SourceType.PREVIOUS_RESULT:
 			return _get_value(previous_result) if typeof(previous_result) == TYPE_INT else 0
 		SourceType.PLAYER_BLOCK:
@@ -44,8 +46,9 @@ func get_value(previous_result: Variant = null, context: Dictionary = {}) -> int
 				return _get_value(buff.stacks) if buff else 0
 		SourceType.CARD_COUNT_BY_NAME:
 			var player: Player = context.get("player")
-			if player:
-				return _get_value(player.get_card_count_by_name(extra_params.get("card_name", "")))
+			var card: Card = context.get("card")
+			if player and card:
+				return _get_value(player.get_card_count_by_name(extra_params.get("card_name", ""), card))
 		SourceType.ATTACK_PLAYED_THIS_TURN:
 			var player: Player = context.get("player")
 			if player:
@@ -62,10 +65,18 @@ func get_value(previous_result: Variant = null, context: Dictionary = {}) -> int
 			var player: Player = context.get("player")
 			if player:
 				return _get_value(player.stats.max_health)
+		SourceType.ENERGY_COST:
+			var energy_cost: int = context.get("energy_cost")
+			if energy_cost:
+				return _get_value(energy_cost)
+		SourceType.CARD_PLAYED_THIS_COMBAT:
+			var card: Card = context.get("card")
+			if card:
+				return _get_value(card.card_played_this_combat)
 		SourceType.CUSTOM:
 			printerr("未实现")
 			return 0
-	return 0
+	return fixed_value
 
 func _get_value(base_value: int) -> int:
-	return int(multipiler * (base_value + additive))
+	return fixed_value + int(multipiler * (base_value + additive))
