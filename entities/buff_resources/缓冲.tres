@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://ctelq8ufpna1d"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_8er7o"]
+[ext_resource type="Texture2D" uid="uid://enroe2o8icpq" path="res://images/powers/buffer_power.png" id="1_hqupr"]
+[ext_resource type="Script" uid="uid://c3alugyq3o83h" path="res://scripts/costum_resources/buffs/buffer_buff.gd" id="1_ok4rh"]
+
+[resource]
+script = ExtResource("1_8er7o")
+buff_id = "buffer"
+buff_name = "缓冲"
+description = "阻止下一次你受到的生命值损伤"
+icon = ExtResource("1_hqupr")
+affect = 1
+buff_script = ExtResource("1_ok4rh")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

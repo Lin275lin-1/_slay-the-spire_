@@ -23,6 +23,8 @@ enum COLOR {
 @export var character_icon: Texture2D
 ## 角色的描述，选人界面时使用
 @export var character_description: String
+## 角色的技能 
+@export var main_skill: MainSkill
 
 var energy: int : set = _set_energy
 var deck: CardPile

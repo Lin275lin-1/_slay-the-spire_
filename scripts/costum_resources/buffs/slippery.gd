@@ -2,18 +2,9 @@
 class_name SlipperyBuff
 extends Buff
 
-func _init() -> void:
-	# 一定要在init中设置buff名
-	# 在buff进树之前会判断buff_name
-	var buff_info: Dictionary = BuffLibrary.buff_data["滑溜"]
-	buff_name = buff_info["name"]
-	description = buff_info["description"]
-	icon = buff_info["icon"]
-	type = Type.BUFF
 	
-func _ready() -> void:
-	
-	affect = AFFECT.TARGET
+func initialize() -> void:
+
 	if agent and agent.has_signal("before_lose_health"):
 		agent.connect("before_lose_health", _on_before_take_damage)
 	if agent and agent.has_signal("before_take_damage"):

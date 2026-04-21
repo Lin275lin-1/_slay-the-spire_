@@ -7,6 +7,7 @@ extends TextureButton
 @export var out_line_texture: Texture2D
 @export var icon_texture: Texture2D
 
+
 func _ready() -> void:
 	out_line.texture = out_line_texture
 	icon.texture = icon_texture

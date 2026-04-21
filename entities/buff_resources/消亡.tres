@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://txqtd0jvli3q"]
+
+[ext_resource type="Texture2D" uid="uid://ceud2xnhrqw58" path="res://images/powers/demise_power.png" id="1_hktqq"]
+[ext_resource type="Script" uid="uid://c4knnb2g7giyq" path="res://scripts/costum_resources/buffs/lose_health_on_turn_ended.gd" id="1_i7gwk"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_ilj0v"]
+
+[resource]
+script = ExtResource("1_ilj0v")
+buff_id = "demise"
+buff_name = "消亡"
+description = "在回合结束时失去{stacks}点生命"
+icon = ExtResource("1_hktqq")
+buff_type = 1
+buff_script = ExtResource("1_i7gwk")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

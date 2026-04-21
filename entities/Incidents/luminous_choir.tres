@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="IncidentData" format=3 uid="uid://d2yaeogkj3kbx"]
+
+[ext_resource type="Script" uid="uid://cff53ccvxdc3t" path="res://scripts/costum_resources/incident_data.gd" id="1_vq8op"]
+
+[resource]
+script = ExtResource("1_vq8op")
+backgroundPath = "res://images/events/luminous_choir.png"
+incidentName = "luminous_choir"
+stage = 1
+eventTitile = "冷光合唱团"
+eventDescription = "你撞入了一片沐浴在诡异蓝光下的林间空地。
+高耸的蘑菇随着生物荧光起伏脉动，菌盖肿胀而泛着光泽。
+当你靠近时，真菌们竟开始发出凄美而婉转的旋律，这旋律在你的胸腔内激荡。
+你注意到，在那个体型最大的蘑菇肉质中嵌入了某种闪光的东西，
+正随着真菌之歌有节奏地跃动。"
+option1Description = "供奉
+支付100-149金币。获取一件随机遗物。"
+option2Description = "探入菌肉
+从你的牌组移除2张牌。将一张“孢子心灵”添加到你的牌组"
+press_op1_title = Array[String](["供奉"])
+press_op1_description = Array[String](["将金币置于绵软的地面。随着金币缓缓沉入，
+几根卷须温柔地将一件遗物推向地表，
+让你得以干干净净地将其取走。"])
+press_op1_op1description = Array[String](["继续"])
+press_op1_op2description = Array[String](["继续"])
+press_op2_title = Array[String](["探入菌肉"])
+press_op2_description = Array[String](["你直接将手探入那株主导蘑菇的绵软组织中，掏出了其中的遗物。
+真菌网络因你的侵入而战栗，你的意识也随之一并震颤。"])
+press_op2_op1description = Array[String](["继续。"])
+press_op2_op2description = Array[String](["继续"])
+metadata/_custom_type_script = "uid://cff53ccvxdc3t"

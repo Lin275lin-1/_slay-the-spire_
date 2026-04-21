@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b1wkfh0oxysy4"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_cg5k2"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_uyahp"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_6qxr8"]
+[ext_resource type="Texture2D" uid="uid://bfc0wva" path="res://images/atlases/card_atlas.sprites/curse/spore_mind.tres" id="3_uyahp"]
+
+[resource]
+script = ExtResource("3_6qxr8")
+id = "孢子心灵"
+type = 16
+card_color = 32
+base_cost = 1
+rarity = 8
+draftable = false
+portrait = ExtResource("3_uyahp")
+exhaust = true
+upgradable = false
+metadata/_custom_type_script = "uid://br1hibx18tv13"

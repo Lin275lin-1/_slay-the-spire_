@@ -218,8 +218,8 @@ func _populate_cards() -> void:
 	var shop_rarity_mask = Card.Rarity.COMMON | Card.Rarity.UNCOMMON | Card.Rarity.RARE
 
 	# 从全局卡池获取卡牌数组（而不是 CardPile 资源）
-	var character_cards: Array = CardPool.get_draftable_cards(character_color, CardPool.type_mask, shop_rarity_mask)
-	var colorless_cards: Array = CardPool.get_draftable_cards(Card.COLOR.COLORLESS, CardPool.type_mask, shop_rarity_mask)
+	var character_cards: Array = ItemPool.get_draftable_cards(character_color,ItemPool.card_type_mask, shop_rarity_mask)
+	var colorless_cards: Array = ItemPool.get_draftable_cards(Card.COLOR.COLORLESS, ItemPool.card_type_mask, shop_rarity_mask)
 
 	var fill_region = func(container: Node, cards_array: Array, region_name: String):
 		if not container:

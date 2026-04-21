@@ -1,13 +1,13 @@
-[gd_resource type="Resource" format=3 uid="uid://dbnn1ddj582d6"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dbnn1ddj582d6"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_5v2x8"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_kepm5"]
 [ext_resource type="Texture2D" uid="uid://custti" path="res://images/atlases/card_atlas.sprites/silent/neutralize.tres" id="2_rlxfg"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_x3c2t"]
-[ext_resource type="Script" uid="uid://cs30sa4fbqi21" path="res://entities/cards/silent/中和.gd" id="3_3dlyd"]
 [ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_3dlyd"]
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_l7eg0"]
 [ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="5_wtvvq"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_x3c2t"]
 
 [sub_resource type="Resource" id="Resource_lek1s"]
 script = ExtResource("2_x3c2t")
@@ -106,7 +106,7 @@ affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("3_3dlyd")
+script = ExtResource("7_x3c2t")
 id = "中和"
 base_target = 1
 card_color = 2

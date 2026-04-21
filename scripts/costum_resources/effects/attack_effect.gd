@@ -17,12 +17,17 @@ func apply(source: Node, targets: Array[Node], card_context: Dictionary, previou
 	var repeat_count = repeat
 	if repeat_count_provider:
 		repeat_count = repeat_count_provider.get_value(previous_result, card_context)
+		
 	for target: Creature in targets:
 		for i in range(repeat_count):
 			var damage = value
 			if damage_formula:
 				damage += damage_formula.calculate(target)
 			total_damage += source.attack(DamageContext.new(source, target, damage, modifiers, no_modifiers))
-			await source.get_tree().create_timer(0.1).timeout
+			if animation_name and source is Player:
+				source.animate_player(animation_name)
+				await source.get_tree().create_timer(animation_delay).timeout
+			else:
+				await source.get_tree().create_timer(0.1).timeout
 	return total_damage
 	

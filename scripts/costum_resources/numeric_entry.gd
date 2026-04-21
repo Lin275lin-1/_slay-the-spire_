@@ -16,5 +16,5 @@ enum AFFECTED_BY {
 @export var affected_by: AFFECTED_BY
 
 
-func get_base_value() -> int:
-	return numeric_provider.get_value()
+func get_base_value(card_context: Dictionary = {}) -> int:
+	return numeric_provider.get_value(null, card_context)

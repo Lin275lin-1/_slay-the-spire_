@@ -24,7 +24,7 @@ func get_intent_description() -> String:
 func _get_final_value(base_value: int) -> int:
 		var modifiers : Array = []
 		if target:
-			modifiers = NumericHelper.combine_modifiers(source.get_modifiers_by_type(Enums.NumericType.DAMAGE, Buff.AFFECT.SELF), target.get_modifiers_by_type(Enums.NumericType.DAMAGE, Buff.AFFECT.TARGET))
+			modifiers = NumericHelper.combine_modifiers(source.get_modifiers_by_type(Enums.NumericType.DAMAGE, BuffResource.AFFECT.SELF), target.get_modifiers_by_type(Enums.NumericType.DAMAGE, BuffResource.AFFECT.TARGET))
 		else:
-			modifiers = source.get_modifiers_by_type(Enums.NumericType.DAMAGE, Buff.AFFECT.SELF)
+			modifiers = source.get_modifiers_by_type(Enums.NumericType.DAMAGE, BuffResource.AFFECT.SELF)
 		return NumericHelper.apply_modifiers(base_value, modifiers)		

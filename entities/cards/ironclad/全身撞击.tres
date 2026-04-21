@@ -39,6 +39,7 @@ metadata/_custom_type_script = "uid://dtok21t0ujjui"
 [sub_resource type="Resource" id="Resource_euq0f"]
 script = ExtResource("8_i5s3o")
 damage_provider = SubResource("Resource_xo3se")
+target_type = 2
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
 
 [sub_resource type="Resource" id="Resource_8m53n"]
@@ -60,10 +61,10 @@ base_target = 1
 base_cost = 1
 effects = Array[ExtResource("2_qarhi")]([SubResource("Resource_vlvs2")])
 portrait = ExtResource("2_rs3un")
-base_description = "[center]造成等同于格挡值的攻击伤害。[/center][p][center](造成{damage}点伤害。)[/center]"
+base_description = "[center]造成等同于格挡值的攻击伤害。[/center]"
 sound = ExtResource("4_6j04b")
 base_numeric_entries = Array[ExtResource("1_roarb")]([SubResource("Resource_okqc7")])
 upgraded_target = 1
-upgraded_description = "[center]造成等同于格挡值的攻击伤害。[/center][p][center](造成{damage}点伤害。)[/center]"
+upgraded_description = "[center]造成等同于格挡值的攻击伤害。[/center][p]"
 upgraded_numeric_entries = Array[ExtResource("1_roarb")]([SubResource("Resource_y5ppv")])
 upgraded_effects = Array[ExtResource("2_qarhi")]([SubResource("Resource_euq0f")])

@@ -27,6 +27,7 @@ func add_cards_for_selection(card:Card) -> CardUI:
 	new_card_ui.card = card
 	new_card_ui.parent = self
 	new_card_ui.reparent_requested.connect(_on_card_ui_reparent_requested)
+	new_card_ui.char_stats = char_stats
 	return new_card_ui
 
 func add_card(card: Card) -> bool:

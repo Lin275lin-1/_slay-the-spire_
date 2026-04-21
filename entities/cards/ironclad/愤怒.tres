@@ -1,14 +1,20 @@
-[gd_resource type="Resource" format=3 uid="uid://dqdqfe0bcpgp6"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dqdqfe0bcpgp6"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_o32pn"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_6ni0n"]
 [ext_resource type="Resource" uid="uid://bxfmhxgwl7qn1" path="res://entities/enchantments/锋利.tres" id="2_cdnap"]
 [ext_resource type="Texture2D" uid="uid://6ony3r" path="res://images/atlases/card_atlas.sprites/ironclad/anger.tres" id="2_o32pn"]
-[ext_resource type="Script" uid="uid://duaacoodwy158" path="res://entities/cards/ironclad/愤怒.gd" id="3_o32pn"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_oj80b"]
+<<<<<<< HEAD
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_2a7o5"]
 [ext_resource type="AudioStream" uid="uid://b4eqc65cqogm6" path="res://audio/SFX/blunt_attack.mp3" id="4_u3nrw"]
 [ext_resource type="Script" uid="uid://bfd4cqklwdhs3" path="res://scripts/costum_resources/effects/put_card_effect.gd" id="5_20lup"]
+=======
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_6ni0n"]
+[ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_u3nrw"]
+[ext_resource type="Script" uid="uid://bfd4cqklwdhs3" path="res://scripts/costum_resources/effects/put_card_effect.gd" id="5_oj80b"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="8_6ni0n"]
+>>>>>>> 366aec0e7a48e460ab6d35934a1c3d468b366769
 
 [sub_resource type="Resource" id="Resource_05mso"]
 script = ExtResource("2_6ni0n")
@@ -22,52 +28,52 @@ placeholder = "damage"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
-[sub_resource type="Resource" id="Resource_e6lug"]
+[sub_resource type="Resource" id="Resource_2a7o5"]
 script = ExtResource("2_6ni0n")
 fixed_value = 6
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_dbej6"]
-script = ExtResource("4_2a7o5")
-damage_provider = SubResource("Resource_e6lug")
+[sub_resource type="Resource" id="Resource_20lup"]
+script = ExtResource("4_6ni0n")
+damage_provider = SubResource("Resource_2a7o5")
 target_type = 2
+animation_name = "attack"
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
 
-[sub_resource type="Resource" id="Resource_jmvdx"]
+[sub_resource type="Resource" id="Resource_e6lug"]
 script = ExtResource("2_6ni0n")
 fixed_value = 1
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_u7euy"]
-script = ExtResource("5_20lup")
+[sub_resource type="Resource" id="Resource_dbej6"]
+script = ExtResource("5_oj80b")
 source = 1
 where = 1
-put_card_count_provider = SubResource("Resource_jmvdx")
-target_type = 1
+put_card_count_provider = SubResource("Resource_e6lug")
 metadata/_custom_type_script = "uid://bfd4cqklwdhs3"
 
-[sub_resource type="Resource" id="Resource_2e8cq"]
+[sub_resource type="Resource" id="Resource_jmvdx"]
 script = ExtResource("2_6ni0n")
 fixed_value = 8
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_4fpp2"]
-script = ExtResource("4_2a7o5")
-damage_provider = SubResource("Resource_2e8cq")
+[sub_resource type="Resource" id="Resource_u7euy"]
+script = ExtResource("4_6ni0n")
+damage_provider = SubResource("Resource_jmvdx")
 target_type = 2
+animation_name = "attack"
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
 
-[sub_resource type="Resource" id="Resource_sb52r"]
+[sub_resource type="Resource" id="Resource_2e8cq"]
 script = ExtResource("2_6ni0n")
 fixed_value = 1
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_sdmsl"]
-script = ExtResource("5_20lup")
+[sub_resource type="Resource" id="Resource_4fpp2"]
+script = ExtResource("5_oj80b")
 source = 1
 where = 1
-put_card_count_provider = SubResource("Resource_sb52r")
-target_type = 1
+put_card_count_provider = SubResource("Resource_2e8cq")
 metadata/_custom_type_script = "uid://bfd4cqklwdhs3"
 
 [sub_resource type="Resource" id="Resource_hmecf"]
@@ -83,11 +89,11 @@ affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("3_o32pn")
+script = ExtResource("8_6ni0n")
 id = "愤怒"
 base_target = 1
 enchantment = ExtResource("2_cdnap")
-effects = Array[ExtResource("3_oj80b")]([SubResource("Resource_dbej6"), SubResource("Resource_u7euy")])
+effects = Array[ExtResource("3_oj80b")]([SubResource("Resource_20lup"), SubResource("Resource_dbej6")])
 portrait = ExtResource("2_o32pn")
 base_description = "[center]造成{damage}点伤害。[/center][p][center]将该牌的一张复制放入[color=gold]弃牌堆[/color]。[/center]"
 sound = ExtResource("4_u3nrw")
@@ -95,4 +101,4 @@ base_numeric_entries = Array[ExtResource("1_o32pn")]([SubResource("Resource_o32p
 upgraded_target = 1
 upgraded_description = "[center]造成{damage}点伤害。[/center][p][center]将该牌的一张复制放入[color=gold]弃牌堆[/color]。[/center]"
 upgraded_numeric_entries = Array[ExtResource("1_o32pn")]([SubResource("Resource_n5u4h")])
-upgraded_effects = Array[ExtResource("3_oj80b")]([SubResource("Resource_4fpp2"), SubResource("Resource_sdmsl")])
+upgraded_effects = Array[ExtResource("3_oj80b")]([SubResource("Resource_u7euy"), SubResource("Resource_4fpp2")])

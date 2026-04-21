@@ -14,7 +14,10 @@ enum Callback{
 	APPLY_ETHEREAL,
 	APPLY_SLY,
 	PUT_INTO_DRAW_PILE_TOP,
-	DISCARD
+	DISCARD,
+	FREE_FOR_COMBAT, # 本场战斗免费打出
+	PUT_INTO_HAND,
+	PUT_INTO_HAND_AND_FIRST_PLAY_FREE # 应该重构的但是我懒得改了
 }
 
 @export var callback: Callback
@@ -35,14 +38,36 @@ func apply(source: Node, _targets: Array[Node], _card_context: Dictionary, _prev
 			cards = source.get_hand_cards()
 		_:
 			cards = []
+	if animation_name and source is Player:
+		source.animate_player(animation_name)
+		await source.get_tree().create_timer(animation_delay).timeout
+	else:
+		await source.get_tree().create_timer(0.1).timeout
+	
+	var card_count: int = 0
+	
 	if all:
 		for card: Card in cards:
-			card.upgrade()
+			get_callback(source).call(card)
+			source.agent.update_hand()
+		return len(cards)
 	elif where == Where.HAND:
-		await source.select_hand(ChooseCardContext.new(source, cards, get_hint_text(), min_select, max_select, get_callback(source)))
+		card_count = await source.select_hand(ChooseCardContext.new(source, filter_cards(cards), get_hint_text(), min_select, max_select, get_callback(source), get_selection_mode()))
 	else:
-		await source.select_deck(ChooseCardContext.new(source, cards, get_hint_text(), min_select, max_select, get_callback(source)))
-	return null
+		card_count = await source.select_deck(ChooseCardContext.new(source, filter_cards(cards), get_hint_text(), min_select, max_select, get_callback(source), get_selection_mode()))
+	return card_count
+
+func filter_cards(cards: Array[Card]) -> Array[Card]:
+	match callback:
+		Callback.UPGRADE:
+			return cards.filter(func(card: Card): return !card.upgraded)
+		Callback.APPLY_EXHAUST:
+			return cards.filter(func(card: Card): return !card.exhaust)
+		Callback.APPLY_ETHEREAL:
+			return cards.filter(func(card: Card): return !card.ethereal)
+		Callback.APPLY_SLY:
+			return cards.filter(func(card: Card): return !card.sly)
+	return cards
 
 func get_callback(source: Player) -> Callable:
 	match callback:
@@ -66,12 +91,59 @@ func get_callback(source: Player) -> Callable:
 			return func(card: Card): card.sly = true
 		Callback.PUT_INTO_DRAW_PILE_TOP:
 			return func(card: Card):
-				source.stats.discard_pile.remove_card(card)
+				if where == Where.DISCARD_PILE:
+					source.stats.discard_pile.remove_card(card)
+				elif where == Where.HAND:
+					source.remove_card_in_hand(card)
 				source.stats.draw_pile.add_card_to_top(card)
 		Callback.DISCARD:
 			return func(card: Card): source.discard_card(card)
+		Callback.FREE_FOR_COMBAT:
+			# TODO: 应该有一个current_cost属性
+			return func(card: Card):
+				card.base_cost = 0
+				card.upgraded_cost = 0
+		Callback.PUT_INTO_HAND:
+			return func(card: Card):
+				if where == Where.DISCARD_PILE:
+					source.stats.discard_pile.remove_card(card)
+				elif where == Where.DRAW_PILE:
+					source.stats.draw_pile.remove_card(card)
+				source.put_card_in_hand(card)
+		Callback.PUT_INTO_HAND_AND_FIRST_PLAY_FREE:
+			return func(card: Card):
+				if where == Where.DISCARD_PILE:
+					source.stats.discard_pile.remove_card(card)
+				elif where == Where.DRAW_PILE:
+					source.stats.draw_pile.remove_card(card)
+				card.first_play_free = true
+				source.put_card_in_hand(card)
 			
 	return func(_card: Card): return
+	
+func get_selection_mode() -> DeckView.SelectionMode:
+	match callback:
+		Callback.UPGRADE:
+			return DeckView.SelectionMode.UPGRADE
+		Callback.EXHAUST:
+			return DeckView.SelectionMode.SELECT
+		Callback.APPLY_EXHAUST:
+			return DeckView.SelectionMode.SELECT
+		Callback.APPLY_ETHEREAL:
+			return DeckView.SelectionMode.SELECT
+		Callback.APPLY_SLY:
+			return DeckView.SelectionMode.SELECT
+		Callback.PUT_INTO_DRAW_PILE_TOP:
+			return DeckView.SelectionMode.SELECT
+		Callback.DISCARD:
+			return DeckView.SelectionMode.SELECT
+		Callback.FREE_FOR_COMBAT:
+			return DeckView.SelectionMode.SELECT
+		Callback.PUT_INTO_HAND:
+			return DeckView.SelectionMode.SELECT
+		Callback.PUT_INTO_HAND_AND_FIRST_PLAY_FREE:
+			return DeckView.SelectionMode.SELECT
+	return DeckView.SelectionMode.SELECT
 
 func get_hint_text() -> String:
 	var front: String
@@ -98,6 +170,12 @@ func get_hint_text() -> String:
 			back = "加入抽牌堆顶部"
 		Callback.DISCARD:
 			back = "丢弃"
+		Callback.FREE_FOR_COMBAT:
+			back = "本场战斗免费"
+		Callback.PUT_INTO_HAND:
+			back = "加入手牌"
+		Callback.PUT_INTO_HAND_AND_FIRST_PLAY_FREE:
+			back = "加入手牌"
 		_:
 			back = ""
 	return front + back

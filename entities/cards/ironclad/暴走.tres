@@ -1,0 +1,107 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b8v7hogebydh5"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_irkwj"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_5efpx"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_86l6n"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_8j8w4"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_p1joy"]
+[ext_resource type="Texture2D" uid="uid://cpn4jhx" path="res://images/atlases/card_atlas.sprites/ironclad/rampage.tres" id="5_gi88w"]
+
+[sub_resource type="Resource" id="Resource_777om"]
+script = ExtResource("2_86l6n")
+type = 10
+fixed_value = 9
+multipiler = 5.0
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_aj318"]
+script = ExtResource("1_irkwj")
+numeric_provider = SubResource("Resource_777om")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_d3uop"]
+script = ExtResource("2_86l6n")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_rif0y"]
+script = ExtResource("1_irkwj")
+numeric_type = 7
+numeric_provider = SubResource("Resource_d3uop")
+placeholder = "factor"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_vrnt5"]
+script = ExtResource("2_86l6n")
+type = 10
+fixed_value = 9
+multipiler = 5.0
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_wwecm"]
+script = ExtResource("4_p1joy")
+damage_provider = SubResource("Resource_vrnt5")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_s7qyp"]
+script = ExtResource("2_86l6n")
+type = 10
+fixed_value = 9
+multipiler = 9.0
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_k4tyr"]
+script = ExtResource("4_p1joy")
+damage_provider = SubResource("Resource_s7qyp")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_7155n"]
+script = ExtResource("2_86l6n")
+type = 10
+fixed_value = 9
+multipiler = 9.0
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_l316b"]
+script = ExtResource("1_irkwj")
+numeric_provider = SubResource("Resource_7155n")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_1ywkj"]
+script = ExtResource("2_86l6n")
+fixed_value = 9
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_p7x0r"]
+script = ExtResource("1_irkwj")
+numeric_type = 7
+numeric_provider = SubResource("Resource_1ywkj")
+placeholder = "factor"
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_8j8w4")
+id = "暴走"
+base_target = 1
+base_cost = 1
+rarity = 2
+effects = Array[ExtResource("2_5efpx")]([SubResource("Resource_wwecm")])
+portrait = ExtResource("5_gi88w")
+base_description = "[center]造成{damage}点伤害。
+将这张牌在本场战斗中的伤害增加{factor}。[/center]"
+base_numeric_entries = Array[ExtResource("1_irkwj")]([SubResource("Resource_aj318"), SubResource("Resource_rif0y")])
+upgraded_target = 1
+upgraded_description = "[center]造成{damage}点伤害。
+将这张牌在本场战斗中的伤害增加{factor}。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_irkwj")]([SubResource("Resource_l316b"), SubResource("Resource_p7x0r")])
+upgraded_effects = Array[ExtResource("2_5efpx")]([SubResource("Resource_k4tyr")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

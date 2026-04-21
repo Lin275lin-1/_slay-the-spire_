@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://ka2tydd2fruo"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_w4v5r"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_mp8hh"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_xrvmg"]
+[ext_resource type="Texture2D" uid="uid://bq7sbmt" path="res://images/atlases/potion_atlas.sprites/liquid_bronze.tres" id="4_txm5h"]
+[ext_resource type="Texture2D" uid="uid://0rc2ic" path="res://images/atlases/potion_outline_atlas.sprites/liquid_bronze.tres" id="5_bnbq2"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="6_fl7pw"]
+
+[sub_resource type="Resource" id="Resource_5gq1x"]
+script = ExtResource("2_mp8hh")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_g2qwg"]
+script = ExtResource("3_xrvmg")
+buff_name = "荆棘"
+buff_stack_provider = SubResource("Resource_5gq1x")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("6_fl7pw")
+id = "liquid_bronze"
+potion_name = "流动铜液"
+description = "获得3点[color=gold]荆棘[/color]"
+icon = ExtResource("4_txm5h")
+outline_icon = ExtResource("5_bnbq2")
+rarity = 2
+effects = Array[ExtResource("1_w4v5r")]([SubResource("Resource_g2qwg")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

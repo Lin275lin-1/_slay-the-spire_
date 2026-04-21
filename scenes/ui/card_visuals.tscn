@@ -2,7 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://w1mk8x" path="res://images/atlases/card_atlas.sprites/ironclad/strike_ironclad.tres" id="1_imfec"]
 [ext_resource type="Script" uid="uid://d826qaf767hb" path="res://scripts/ui/card_visuals.gd" id="1_m3e03"]
+[ext_resource type="Shader" uid="uid://bmk3fktq7gqng" path="res://shaders/card_ripple.gdshader" id="2_k4udy"]
 [ext_resource type="Texture2D" uid="uid://cslfj7h" path="res://images/atlases/ui_atlas.sprites/card/card_frame_attack_s.tres" id="2_m3e03"]
+[ext_resource type="Texture2D" uid="uid://chxf48vfn1ivh" path="res://images/packed/card_template/card_frame_sdf.exr" id="3_6o0a7"]
 [ext_resource type="Texture2D" uid="uid://0o70qg" path="res://images/atlases/ui_atlas.sprites/card/card_portrait_border_attack_s.tres" id="3_bp74k"]
 [ext_resource type="Texture2D" uid="uid://qmqejd" path="res://images/atlases/ui_atlas.sprites/card/card_banner.tres" id="4_njcf5"]
 [ext_resource type="Texture2D" uid="uid://g1g8kd" path="res://images/atlases/ui_atlas.sprites/card/energy_ironclad.tres" id="5_b8ve4"]
@@ -11,6 +13,13 @@
 [ext_resource type="Texture2D" uid="uid://hfvemc" path="res://images/atlases/ui_atlas.sprites/card/card_enchant_s.tres" id="10_0ge8e"]
 [ext_resource type="Texture2D" uid="uid://diod4yd30g3s7" path="res://images/enchantments/adroit.png" id="11_k4udy"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k4udy"]
+shader = ExtResource("2_k4udy")
+shader_parameter/ease = 0.005
+shader_parameter/modulo_width = 0.02
+shader_parameter/width = 0.02
+shader_parameter/ripple_speed = 0.03
+
 [node name="Visuals" type="Control" unique_id=829210823]
 layout_mode = 3
 anchors_preset = 0
@@ -18,6 +27,20 @@ offset_right = 300.0
 offset_bottom = 422.0
 mouse_filter = 2
 script = ExtResource("1_m3e03")
+
+[node name="HighLight" type="TextureRect" parent="." unique_id=708652525]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.2901961, 0.9529412, 1, 1)
+material = SubResource("ShaderMaterial_k4udy")
+layout_mode = 0
+offset_left = -235.00002
+offset_top = -174.0
+offset_right = 277.0
+offset_bottom = 338.0
+scale = Vector2(1.5, 1.5)
+mouse_filter = 2
+texture = ExtResource("3_6o0a7")
 
 [node name="CardPortrait" type="TextureRect" parent="." unique_id=2132861725]
 unique_name_in_owner = true

@@ -2,19 +2,7 @@
 class_name ThornsBuff
 extends Buff
 
-
-
-func _init() -> void:
-	# 一定要在init中设置buff名
-	# 在buff进树之前会判断buff_name
-	var buff_info: Dictionary = BuffLibrary.buff_data["荆棘"]
-	buff_name = buff_info["name"]
-	description = buff_info["description"]
-	icon = buff_info["icon"]
-	type = Type.BUFF
-	
-func _ready() -> void:
-	
+func initialize() -> void:
 	if agent and agent.has_signal("after_take_damage"):
 		agent.connect("after_take_damage", _on_after_take_damage)
 	else:
@@ -27,7 +15,7 @@ func get_modifier() -> Array[Modifier]:
 func _on_after_take_damage(context: Context) -> void:
 	# 不会触发 before_take_damage
 	if context.source is Creature:
-		context.source.stats.take_damage(stacks)
+		context.source.take_damage_without_signals(stacks)
 
 func get_description() -> String:
 	return description.format({"stacks": stacks})

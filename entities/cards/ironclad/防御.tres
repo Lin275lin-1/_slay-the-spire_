@@ -1,12 +1,11 @@
-[gd_resource type="Resource" format=3 uid="uid://b5jbjk3a0xd0q"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b5jbjk3a0xd0q"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_lbc2p"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_8q7md"]
 [ext_resource type="Texture2D" uid="uid://cxnepi0" path="res://images/atlases/card_atlas.sprites/ironclad/defend_ironclad.tres" id="2_svckb"]
-[ext_resource type="Script" uid="uid://b6koyyeqx1l35" path="res://entities/cards/ironclad/防御.gd" id="3_6dpba"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_qrnip"]
-[ext_resource type="AudioStream" uid="uid://dg3m3v6ldrym8" path="res://audio/SFX/frost_orb_passive.mp3" id="4_8q7md"]
 [ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="4_60726"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="6_8q7md"]
 
 [sub_resource type="Resource" id="Resource_2jflv"]
 script = ExtResource("2_8q7md")
@@ -30,6 +29,9 @@ script = ExtResource("4_60726")
 block_provider = SubResource("Resource_qaq66")
 target_type = 1
 metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_6dpba"]
+metadata/__load_path__ = "res://audio/SFX/frost_orb_passive.mp3"
 
 [sub_resource type="Resource" id="Resource_mq7rs"]
 script = ExtResource("2_8q7md")
@@ -56,7 +58,7 @@ affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("3_6dpba")
+script = ExtResource("6_8q7md")
 id = "防御"
 type = 2
 base_cost = 1
@@ -65,7 +67,7 @@ draftable = false
 effects = Array[ExtResource("3_qrnip")]([SubResource("Resource_y4gpu")])
 portrait = ExtResource("2_svckb")
 base_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center]"
-sound = ExtResource("4_8q7md")
+sound = SubResource("Resource_6dpba")
 base_numeric_entries = Array[ExtResource("1_lbc2p")]([SubResource("Resource_rknk0")])
 upgraded_cost = 1
 upgraded_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center]"

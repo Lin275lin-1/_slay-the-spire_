@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://djlq4b7ubwa8l"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_wg0d0"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_0e1a1"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_n25b2"]
+[ext_resource type="Texture2D" uid="uid://bt56gyb" path="res://images/atlases/potion_atlas.sprites/fruit_juice.tres" id="2_r7va8"]
+[ext_resource type="Script" uid="uid://d1sa63ef0r5jx" path="res://scripts/costum_resources/effects/gain_max_health_effect.gd" id="3_6jxa5"]
+[ext_resource type="Texture2D" uid="uid://ch04c77" path="res://images/atlases/potion_outline_atlas.sprites/fruit_juice.tres" id="3_ltq42"]
+
+[sub_resource type="Resource" id="Resource_6hn1f"]
+script = ExtResource("2_n25b2")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_guuhw"]
+script = ExtResource("3_6jxa5")
+max_health_provider = SubResource("Resource_6hn1f")
+target_type = 1
+metadata/_custom_type_script = "uid://d1sa63ef0r5jx"
+
+[resource]
+script = ExtResource("2_0e1a1")
+id = "fruit_juice"
+potion_name = "果汁"
+description = "获得5点最大生命"
+icon = ExtResource("2_r7va8")
+outline_icon = ExtResource("3_ltq42")
+rarity = 4
+effects = Array[ExtResource("1_wg0d0")]([SubResource("Resource_guuhw")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

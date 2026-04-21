@@ -1,12 +1,12 @@
-[gd_resource type="Resource" format=3 uid="uid://b0odwvcj314k2"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b0odwvcj314k2"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_yvywq"]
 [ext_resource type="Texture2D" uid="uid://cbwhwps" path="res://images/atlases/card_atlas.sprites/ironclad/burning_pact.tres" id="2_goriw"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_iy4gf"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_1shly"]
-[ext_resource type="Script" uid="uid://dq8f3cktw8dm6" path="res://entities/cards/ironclad/燃烧契约.gd" id="3_du2rw"]
 [ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="4_iy4gf"]
 [ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="5_1shly"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_iy4gf"]
 
 [sub_resource type="Resource" id="Resource_iy4gf"]
 script = ExtResource("2_iy4gf")
@@ -50,6 +50,7 @@ metadata/_custom_type_script = "uid://dtok21t0ujjui"
 [sub_resource type="Resource" id="Resource_57wjk"]
 script = ExtResource("5_1shly")
 draw_card_provider = SubResource("Resource_jckgm")
+animation_name = "cast"
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
 
 [sub_resource type="Resource" id="Resource_yltit"]
@@ -68,6 +69,7 @@ metadata/_custom_type_script = "uid://dtok21t0ujjui"
 [sub_resource type="Resource" id="Resource_rv65e"]
 script = ExtResource("5_1shly")
 draw_card_provider = SubResource("Resource_fe7p1")
+animation_name = "cast"
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
 
 [sub_resource type="Resource" id="Resource_t87xj"]
@@ -97,7 +99,7 @@ affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("3_du2rw")
+script = ExtResource("7_iy4gf")
 id = "燃烧契约"
 type = 2
 base_cost = 1

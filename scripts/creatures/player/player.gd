@@ -3,13 +3,14 @@ extends Creature
 
 # 玩家专属信号
 signal before_draw_card(context: DrawCardContext)
-signal after_draw_card(card: Card)
+signal after_draw_card(context: DrawCardContext)
 
 @export var stats: CharacterStats : set = _set_char_stats
 @export var hand_selector: HandSelector
 @export var deck_view: DeckView
 @export var discover_view: DiscoverCardView
 @export var agent: PlayerHandler
+@export var combat_resolver: CombatResolver
 
 @onready var hitbox: CollisionShape2D = $CollisionShape2D
 
@@ -20,6 +21,9 @@ var spine_manager: SpineManager
 var attack_played_this_turn := 0
 var skill_played_this_turn := 0
 var energy_used_this_turn := 0
+var health_lost_times_this_turn := 0
+
+var dead := false
 
 func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
@@ -39,15 +43,16 @@ func speech(text: String, time: float = 2.5) -> void:
 	#buff_container.add_child(buff_ui)
 
 func discover_card(context: DiscoverContext) -> void:
-	var availabel_cards := CardPool.get_discoverable_cards(context.color, context.type, context.rarity)
+	var availabel_cards := ItemPool.get_discoverable_cards(context.color, context.type, context.rarity)
 	availabel_cards.shuffle()
 	# 随机三张
 	var discovered_cards := availabel_cards.slice(0, 3)
 	var card: Card = await discover_view.select(discovered_cards, context.can_skip, context.upgraded, context.first_play_free)
-	put_card_in_hand(card)
+	if card:
+		put_card_in_hand(card)
 	
 	
-func select_hand(context: ChooseCardContext) -> void:
+func select_hand(context: ChooseCardContext) -> int:
 	var selected: Array[Card]
 	agent.hide_hand()
 	agent.disable_hand()
@@ -60,12 +65,14 @@ func select_hand(context: ChooseCardContext) -> void:
 	agent.update_hand()
 	agent.disable_hand(false)
 	agent.show_hand()
+	return len(selected)
 
-func select_deck(context: ChooseCardContext) -> void:
+func select_deck(context: ChooseCardContext) -> int:
 	var selected: Array[Card]
-	selected = await deck_view.select_card_pile(context.cards, context.min_select, context.max_select, context.title)
+	selected = await deck_view.select_card_pile(context.cards, context.min_select, context.max_select, context.title, context.selection_mode)
 	for card: Card in selected:
 		context.callback.call(card)
+	return len(selected)
 
 func gain_block(context: Context) -> void:
 	before_gain_block.emit(context)
@@ -75,18 +82,22 @@ func get_block() -> int:
 	return stats.block
 	
 func die() -> void:
+	dead = true
 	health_bar.hide()
 	buff_container.hide()
 	spine_anim_state.set_animation("die", false, 0)
 	await spine_manager.animation_completed
 	Events.player_died.emit()
 
-func draw_card(context: DrawCardContext) -> void:
+func draw_card(context: DrawCardContext) -> int:
 	before_draw_card.emit(context)
 	if context.amount != 0:
 		var card: Card = agent.draw_card()
-		after_draw_card.emit(card)
-
+		context.card = card
+		after_draw_card.emit(context)
+		agent.add_card_to_hand(context.card)
+	return context.amount
+	
 #func draw_cards(context: DrawCardContext) -> void:
 	#before_draw_cards.emit(context)
 	#if context.amount > 0:
@@ -95,7 +106,18 @@ func draw_card(context: DrawCardContext) -> void:
 			#tween.tween_callback(draw_card)
 			#tween.tween_interval(0.2)
 		#await tween.finished
+		
+func heal(context: HealContext) -> int:
+	return context.target.gain_health(context)
 
+func gain_health(context: HealContext) -> int:
+	return stats.heal(context.amount)
+
+func gain_max_health(context: GainMaxHealthContext) -> int:
+	stats.max_health += context.amount
+	gain_health(HealContext.new(context.source, context.target, context.amount))
+	return context.amount
+	
 func gain_energy(context: GainEnergyContext) -> void:
 	stats.energy += context.amount
 	
@@ -106,6 +128,8 @@ func lose_health(context: Context) -> int:
 	
 	before_lose_health.emit(context)
 	stats.health -= context.amount
+	if context.amount > 0:
+		health_lost_times_this_turn += 1
 	damage_number_spawner.spawn_damage_label(context.amount, false)
 
 	if stats.health <= 0:
@@ -133,6 +157,21 @@ func take_damage(context: Context) -> int:
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
 	return actual_damage
 
+func take_damage_without_signals(amount: int) -> int:
+	if stats.health <= 0:
+		return 0
+	var actual_damage := stats.take_damage(amount)
+	damage_number_spawner.spawn_damage_label(actual_damage, actual_damage == 0 and amount != 0)
+	if stats.health <= 0:
+		die()
+	elif actual_damage != 0:
+		health_lost_times_this_turn += 1
+		Events.player_hit.emit()
+		spine_anim_state.set_animation("hurt", false, 0)
+		spine_anim_state.add_animation("idle_loop", 0, true, 0)
+	return actual_damage
+
+
 func put_card_in_discard_pile(card: Card) -> void:
 	agent.put_card_in_discard_pile(card)
 
@@ -141,6 +180,15 @@ func put_card_in_draw_pile(card: Card, top:bool = false) -> void:
 	
 func put_card_in_hand(card: Card) -> void:
 	agent.put_card_in_hand(card)
+
+func remove_card_in_discard_pile(card: Card) -> void:
+	agent.remove_card_in_discard_pile(card)
+
+func remove_card_in_draw_pile(card: Card) -> void:
+	agent.remove_card_in_draw_pile(card)
+	
+func remove_card_in_hand(card: Card) -> void:
+	agent.remove_card_in_hand(card)
 	
 func get_hand_cards() -> Array[Card]:
 	return agent.get_hand()
@@ -154,12 +202,19 @@ func get_discard_pile() -> Array[Card]:
 func get_exhaust_pile() -> Array[Card]:
 	return stats.get_exhaust_pile()
 
-func get_card_count_by_name(card_name: String) -> int:
+func get_card_count_by_name(card_name: String, base_card: Card) -> int:
 	var all_cards: Array[Card] = get_hand_cards()
 	all_cards.append_array(get_draw_pile())
 	all_cards.append_array(get_discard_pile())
 	# 将所有卡牌加起来，用filter函数筛选出id有name字符串卡牌然后获取数组长度
-	return len(all_cards.filter(func(card: Card): card.id.contains(card_name)))
+	
+	return len(all_cards.filter(func(card: Card): 
+		if card != base_card:
+			return card.id.contains(card_name)
+		else:
+			return false
+		)
+	)
 
 func discard_card(card: Card) -> void:
 	agent.discard_card(card)
@@ -178,12 +233,15 @@ func start_turn() -> void:
 	before_turn_started.emit(self)
 	stats.block = 0
 	stats.energy = stats.max_energy
-	after_turn_started.emit(self)
-
-func end_turn() -> void:
+	
+	health_lost_times_this_turn = 0
 	attack_played_this_turn = 0
 	skill_played_this_turn = 0
 	energy_used_this_turn = 0
+	
+	after_turn_started.emit(self)
+
+func end_turn() -> void:
 	turn_ended.emit(self)
 		
 func _set_char_stats(value: CharacterStats) -> void:
@@ -217,21 +275,32 @@ func _update_player() -> void:
 	_update_stats()
 	name_label.text = stats.character_name
 
+func use_energy(amount: int) -> void:
+	stats.energy -= amount
+	energy_used_this_turn += amount
+
 func _on_card_played(card: Card) -> void:
-	var cost = 0 if card.first_play_free else card.get_cost()
-	card.first_play_free = false
-	energy_used_this_turn += cost
-	stats.energy -= cost	
 	
 	if card.type == Card.Type.ATTACK:
 		attack_played_this_turn += 1
-		spine_anim_state.set_animation("attack", false, 0)
-		spine_anim_state.add_animation("idle_loop", 0, true, 0)
-	else:
-		if card.type == Card.Type.SKILL:
-			skill_played_this_turn += 1
-		spine_anim_state.set_animation("cast", false, 0)
-		spine_anim_state.add_animation("idle_loop", 0, true, 0)
+		#spine_anim_state.set_animation("attack", false, 0)
+		#spine_anim_state.add_animation("idle_loop", 0, true, 0)
+	elif card.type == Card.Type.SKILL:
+		skill_played_this_turn += 1
+		#spine_anim_state.set_animation("cast", false, 0)
+		#spine_anim_state.add_animation("idle_loop", 0, true, 0)
+
+func animate_attack() -> void:
+	spine_anim_state.set_animation("attack", false, 0)
+	spine_anim_state.add_animation("idle_loop", 0, true, 0)
+	
+func animate_cast() -> void:
+	spine_anim_state.set_animation("cast", false, 0)
+	spine_anim_state.add_animation("idle_loop", 0, true, 0)
+
+func animate_player(anim_name: String) -> void:
+	spine_anim_state.set_animation(anim_name, false, 0)
+	spine_anim_state.add_animation("idle_loop", 0, true, 0)
 	
 func _on_mouse_entered() -> void:
 	show_name()

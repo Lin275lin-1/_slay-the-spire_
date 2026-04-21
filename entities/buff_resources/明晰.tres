@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://cxh5om50temwm"]
+
+[ext_resource type="Script" uid="uid://bgogc6wqmcrw6" path="res://scripts/costum_resources/buffs/clarity_buff.gd" id="1_5c0wo"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_idq06"]
+[ext_resource type="Texture2D" uid="uid://xyw062e3p2jv" path="res://images/powers/clarity_power.png" id="1_ra45b"]
+
+[resource]
+script = ExtResource("1_idq06")
+buff_id = "clarity"
+buff_name = "明晰"
+description = "在你接下来的{stacks}个回合开始时，额外抽1张牌"
+icon = ExtResource("1_ra45b")
+buff_script = ExtResource("1_5c0wo")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

@@ -12,8 +12,15 @@ const CARD_MENU_UI = preload("res://scenes/ui/card_menu_ui.tscn")
 
 @onready var confirm_button: ComfirmButton = $ConfirmButton
 
+enum SelectionMode{
+	NONE,
+	UPGRADE,
+	ENCHANTE,
+	CHANGE,
+	SELECT
+}
 
-var selection_mode: bool = false
+var selection_mode: SelectionMode = SelectionMode.NONE
 var max_selection: int = 0
 var min_selection: int = 0
 var selected_cards: Array[Card] = []
@@ -23,10 +30,12 @@ signal selection_confirmed()
 var all_cards: Array[Card]
 var current_idx: int = -1
 
+
+
 func _ready() -> void:
 	back_button.pressed.connect(
 		func():
-			if selection_mode:
+			if selection_mode != SelectionMode.NONE:
 				selected_cards = []
 				selection_confirmed.emit()
 			hide()
@@ -34,7 +43,7 @@ func _ready() -> void:
 	)
 	confirm_button.pressed.connect(
 		func():
-			if selection_mode:
+			if selection_mode != SelectionMode.NONE:
 				selection_confirmed.emit()
 			hide()
 	)
@@ -69,6 +78,19 @@ func _on_inspect_card_requested(card: Card) -> void:
 	card_inspect.show_card(card, last_available, next_available)
 
 func _on_card_selected(card: Card) -> void:
+	match selection_mode:
+		SelectionMode.UPGRADE:
+			print("enter")
+			if max_selection == 1:
+				print("show")
+				upgrade_card_inspect.show_card(card)
+			else:
+				_on_card_select_normal(card)
+				
+		_:
+			_on_card_select_normal(card)
+
+func _on_card_select_normal(card: Card) -> void:
 	if card in selected_cards:
 		selected_cards.erase(card)
 		_set_card_ui_highlight(card, false)
@@ -115,7 +137,10 @@ func _on_next_card_requested() -> void:
 
 # 显示牌堆
 func show_card_pile(pile: Array[Card], hint_text: String, randomized: bool = false) -> void:
-	selection_mode = false
+	if visible:
+		hide()	
+		return
+	selection_mode = SelectionMode.NONE
 	all_cards = pile
 	hint.text = hint_text
 	for card_ui: Node in card_grid_container.get_children():
@@ -126,10 +151,10 @@ func show_card_pile(pile: Array[Card], hint_text: String, randomized: bool = fal
 	_update_view.call_deferred(randomized)
 	show()
 
-func select_card_pile(pile: Array[Card], min_select: int = 0, max_select: int = 1, hint_text: String = "选择卡牌") -> Array[Card]:
+func select_card_pile(pile: Array[Card], min_select: int = 0, max_select: int = 1, hint_text: String = "选择卡牌", selection_mode_: SelectionMode = SelectionMode.SELECT) -> Array[Card]:
 	if min_select >= pile.size():
 		return pile
-	selection_mode = true
+	selection_mode = selection_mode_
 	max_selection = max_select
 	min_selection = min_select
 	selected_cards.clear()
@@ -154,8 +179,12 @@ func _input(event: InputEvent) -> void:
 			hide()
 
 func _on_upgrade_confirmed(card: Card) -> void:
-	card.upgrade()
+	#card.upgrade()
+	selected_cards.append(card)
+	selection_confirmed.emit()
 	upgrade_card_inspect.hide()
-
+	hide()
+	
 func _on_upgrade_cancelled() -> void:
+	selected_cards.clear()
 	upgrade_card_inspect.hide()

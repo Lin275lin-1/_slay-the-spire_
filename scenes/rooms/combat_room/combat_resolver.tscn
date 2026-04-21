@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://v5eu53rlyybk"]
+
+[ext_resource type="Script" uid="uid://cj4i8n5ej62f" path="res://globals/combat_resolver.gd" id="1_8624c"]
+[ext_resource type="PackedScene" uid="uid://cbba4s2smp5b2" path="res://scenes/ui/card_inspect_ui.tscn" id="2_fxkra"]
+
+[node name="CombatResolver" type="Control" unique_id=1563317517]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_8624c")
+
+[node name="CardResolveStack" type="HBoxContainer" parent="." unique_id=1600494619]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -152.0
+offset_right = 291.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_constants/separation = -250
+
+[node name="CardInspectUI" parent="CardResolveStack" unique_id=946762981 instance=ExtResource("2_fxkra")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CardInspectUI2" parent="CardResolveStack" unique_id=1874577617 instance=ExtResource("2_fxkra")]
+layout_mode = 2
+mouse_filter = 2

@@ -13,7 +13,7 @@ func apply(source: Node, targets: Array[Node], card_context: Dictionary, previou
 	var value = damage_provider.get_value(previous_result, card_context)
 	var card: Card = card_context.get("card")
 	var modifiers :Array[Modifier] = []
-	if card.has_enchantment():
+	if card and card.has_enchantment():
 		modifiers.append_array(card.enchantment.get_modifiers_by_type(Enums.NumericType.DAMAGE))
 	var total_damage := 0
 	var repeat_count = repeat

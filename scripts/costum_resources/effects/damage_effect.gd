@@ -23,6 +23,10 @@ func apply(source: Node, targets: Array[Node], card_context: Dictionary, previou
 			if damage_formula:
 				damage += damage_formula.calculate(target)
 			total_damage += target.take_damage(DamageContext.new(source, target, damage, modifiers, no_modifiers))
-			await target.get_tree().create_timer(0.1).timeout
+			if animation_name and source is Player:
+				source.animate_player(animation_name)
+				await source.get_tree().create_timer(animation_delay).timeout
+			else:
+				await source.get_tree().create_timer(0.1).timeout
 	return total_damage
 	

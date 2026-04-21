@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://bvcgunobk55qg"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_4xejn"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_ln02x"]
+[ext_resource type="Texture2D" uid="uid://bw3ji2s" path="res://images/atlases/potion_atlas.sprites/gigantification_potion.tres" id="2_tbo6e"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_yxvwo"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_eqwte"]
+[ext_resource type="Texture2D" uid="uid://cfxkrvb" path="res://images/atlases/potion_outline_atlas.sprites/gigantification_potion.tres" id="3_m3e5e"]
+
+[sub_resource type="Resource" id="Resource_p5vjo"]
+script = ExtResource("2_ln02x")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_roinf"]
+script = ExtResource("3_eqwte")
+buff_name = "超巨化"
+buff_stack_provider = SubResource("Resource_p5vjo")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_yxvwo")
+id = "gigantification_potion"
+potion_name = "超巨化药水"
+description = "你打出的下一张攻击牌将会造成三倍伤害"
+icon = ExtResource("2_tbo6e")
+outline_icon = ExtResource("3_m3e5e")
+rarity = 4
+effects = Array[ExtResource("1_4xejn")]([SubResource("Resource_roinf")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

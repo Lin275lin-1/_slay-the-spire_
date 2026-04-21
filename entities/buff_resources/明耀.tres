@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://4uphdc8epfip"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_8cv6t"]
+[ext_resource type="Texture2D" uid="uid://dw4gog08uttm5" path="res://images/powers/radiance_power.png" id="1_43i0x"]
+[ext_resource type="Script" uid="uid://c47btdyxp4233" path="res://scripts/costum_resources/buffs/radiance_buff.gd" id="1_wxq0a"]
+
+[resource]
+script = ExtResource("1_8cv6t")
+buff_id = "radiance"
+buff_name = "明耀"
+description = "在你接下来的{stacks}个回合开始时，额外获得1点能量"
+icon = ExtResource("1_43i0x")
+buff_script = ExtResource("1_wxq0a")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://bro5p7ugggu2e"]
+
+[ext_resource type="Script" uid="uid://0mpvfpbi73q" path="res://scripts/costum_resources/buffs/no_draw_debuff.gd" id="1_oy0cd"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_xwox6"]
+[ext_resource type="Texture2D" uid="uid://d2tnd41mqu40p" path="res://images/powers/no_draw_power.png" id="2_oy0cd"]
+
+[resource]
+script = ExtResource("1_xwox6")
+buff_id = "no_draw"
+buff_name = "无法抽牌"
+description = "本回合无法抽牌"
+icon = ExtResource("2_oy0cd")
+buff_type = 1
+stackable = false
+buff_script = ExtResource("1_oy0cd")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

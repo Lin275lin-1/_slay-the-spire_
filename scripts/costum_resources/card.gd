@@ -40,7 +40,7 @@ enum COLOR {
 @export var base_target: Target
 ## 卡牌属于那个角色池，详情见COLOR枚举
 @export var card_color: COLOR = COLOR.RED
-# TODO: X费
+@export var is_x_cost: bool = false
 @export var base_cost: int
 @export var rarity: Rarity = Rarity.COMMON
 # 是否可以被发现
@@ -76,6 +76,8 @@ enum COLOR {
 
 var first_play_free := false
 
+var card_played_this_combat: int = 0
+
 func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 	var ret = {}
 	for entry: NumericEntry in get_numeric_entries():
@@ -84,15 +86,15 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 		match entry.affected_by:
 			# 这里感觉有问题
 			NumericEntry.AFFECTED_BY.SELF:
-				modifiers = source_.get_modifiers_by_type(entry.numeric_type, Buff.AFFECT.SELF)
+				modifiers = source_.get_modifiers_by_type(entry.numeric_type, BuffResource.AFFECT.SELF)
 			NumericEntry.AFFECTED_BY.TARGET:
 				if target_:
-					modifiers = target_.get_modifiers_by_type(entry.numeric_type, Buff.AFFECT.TARGET)
+					modifiers = target_.get_modifiers_by_type(entry.numeric_type, BuffResource.AFFECT.TARGET)
 			NumericEntry.AFFECTED_BY.BOTH:
 				if target_:
-					modifiers = NumericHelper.combine_modifiers(source_.get_modifiers_by_type(entry.numeric_type, Buff.AFFECT.SELF), target_.get_modifiers_by_type(entry.numeric_type, Buff.AFFECT.TARGET))
+					modifiers = NumericHelper.combine_modifiers(source_.get_modifiers_by_type(entry.numeric_type, BuffResource.AFFECT.SELF), target_.get_modifiers_by_type(entry.numeric_type, BuffResource.AFFECT.TARGET))
 				else:
-					modifiers = source_.get_modifiers_by_type(entry.numeric_type, Buff.AFFECT.SELF)
+					modifiers = source_.get_modifiers_by_type(entry.numeric_type, BuffResource.AFFECT.SELF)
 			NumericEntry.AFFECTED_BY.NONE:
 				modifiers = []
 			_:
@@ -116,17 +118,45 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 		#enchantment.on_play(source, targets)
 	#Events.card_played.emit(self)
 
-func play(source: Player, targets: Array[Node]) -> void:
+func play(source: Player, targets: Array[Node], no_callback: bool = false) -> void:
+	targets = _get_targets(source, targets) if get_target() != Target.SINGLE_ENEMY else targets
+	var energy_cost = 0 if first_play_free else get_cost()
+	if is_x_cost:
+		energy_cost = source.stats.energy
 	var card_context := {
 		"player": source,
 		"card": self,
-		"targets": targets
+		"targets": targets,
+		"energy_cost": energy_cost
 	}
 	#CombatResolver.push_card(self,  card_context)
-	var previous_result = null
-	for effect:Effect in get_effects():
-		previous_result = await effect.execute(source, card_context, previous_result)
-	Events.card_played.emit(self)
+	#var previous_result = null
+	#for effect:Effect in get_effects():
+		#previous_result = await effect.execute(source, card_context, previous_result)
+	#if enchantment:
+		#enchantment.on_play(source, targets)
+	#Events.card_played.emit(self)
+	#CombatResolver.push_card(self, card_context)
+	Events.before_card_played.emit(self, card_context)
+	if no_callback:
+		source.combat_resolver.execute(ResolutionEntry.new(self, get_effects(), card_context, func(): 
+			on_played(source, targets)
+			)
+		)
+	else:
+		source.combat_resolver.execute(ResolutionEntry.new(self, get_effects(), card_context, \
+		func(): 
+			Events.card_played.emit(self)
+			on_played(source, targets)
+			)
+		)
+	source.use_energy(energy_cost)
+	first_play_free = false
+
+func on_played(source: Player, targets: Array[Node]) -> void:
+	card_played_this_combat += 1
+	if enchantment:
+		enchantment.on_play(source, targets)
 
 func apply_effects(_source: Player, _targets: Array[Node]) -> void:
 	pass
@@ -165,12 +195,12 @@ func get_description(source_: Creature, target_: Creature) -> String:
 		replacement = str(final_value)
 		for numeric_entry in get_numeric_entries():
 			if numeric_entry.placeholder == placeholder:
-				if numeric_entry.get_base_value() == final_value:
+				if numeric_entry.get_base_value({"card": self}) == final_value:
 					continue
-				elif numeric_entry.get_base_value() > final_value:
+				elif numeric_entry.get_base_value({"card": self}) > final_value:
 					color = "red"
 					replacement = "[color={0}]{1}[/color]".format([color, final_value])
-				elif numeric_entry.get_base_value() < final_value:
+				elif numeric_entry.get_base_value({"card": self}) < final_value:
 					color = "green"
 					replacement = "[color={0}]{1}[/color]".format([color, final_value])
 				ret = ret.replace("{" + placeholder + "}", replacement)
@@ -179,7 +209,7 @@ func get_description(source_: Creature, target_: Creature) -> String:
 func get_default_description() -> String:
 	var dict := {}
 	for entry: NumericEntry in get_numeric_entries():
-		dict[entry.placeholder] = entry.numeric_provider.fixed_value
+		dict[entry.placeholder] = entry.get_base_value({"card": self})
 		
 	return append_features(_get_default_description()).format(dict)
 
@@ -240,3 +270,12 @@ func has_enchantment() -> bool:
 func set_echantment(enchantment_: Enchantment) -> void:
 	enchantment = enchantment_
 	enchantment.on_enchant_set(self)
+
+func can_upgrade() -> bool:
+	return upgradable and !upgraded
+	
+func has_highlight_condition(player: Node, target: Node) -> bool:
+	for effect: Effect in effects:
+		if effect is ConditionalEffect:
+			return effect.is_condition_met(player, target)
+	return false

@@ -19,7 +19,6 @@ func _ready() -> void:
 	area_exited.connect(_on_area_exited)
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
-	after_applied_buff.connect(_on_after_applied_buff)
 
 #func add_buff(buff_context: ApplyBuffContext) -> void:
 	#before_applied_buff.emit(buff_context)
@@ -36,7 +35,7 @@ func gain_block(context: Context) -> void:
 
 func do_turn() -> void:
 	start_turn()
-	stats.block = 0
+	
 	
 	if not current_intent:
 		return
@@ -57,6 +56,7 @@ func do_turn() -> void:
 	Events.enemy_action_completed.emit(self)	
 	turn_ended.emit(self)
 	update_intent()
+	
 
 func execute_intent() -> void:
 	if not current_intent:
@@ -92,15 +92,25 @@ func _setup_ai() -> void:
 		enemy_ai.queue_free()
 	# 主要是不同怪物intent里source不同，也许修改一下就不需要深拷贝了
 	enemy_ai = stats.ai.duplicate_deep()
-	enemy_ai.set_up_intents(self, get_tree().get_first_node_in_group("ui_player"))
+	var player : Player = get_tree().get_first_node_in_group("ui_player")
+	enemy_ai.set_up_intents(self, player)
+	buff_changed.connect(
+		func():
+			# 只有带有攻击的意图需要动态显示
+			if current_intent and current_intent.has_attack_sub_intent():
+				intents.update_display(current_intent)
+	)
+	player.buff_changed.connect(
+		func():
+			if current_intent and current_intent.has_attack_sub_intent():
+				intents.update_display(current_intent)
+	)
+	
 	
 func start_turn() -> void:
 	before_turn_started.emit(self)
 	stats.block = 0
 	after_turn_started.emit(self)
-
-func end_turn() -> void:
-	turn_ended.emit(self)
 
 func update_intent() -> void:
 	if not enemy_ai:
@@ -138,9 +148,21 @@ func die() -> void:
 	reticles.hide()
 	buff_container.hide()
 	spine_anim_state.set_animation(enemy_ai.get_die_animation_name(), true, 0)
+	Events.enemy_died.emit()
 	spine_manager.animation_completed.connect(
 		func (_x, _y, _z): queue_free()
 	)
+
+func heal(context: HealContext) -> int:
+	return context.target.gain_health(context)
+
+func gain_health(context: HealContext) -> int:
+	return stats.heal(context.amount)
+
+func gain_max_health(context: GainMaxHealthContext) -> int:
+	stats.max_health += context.amount
+	gain_health(HealContext.new(context.source, context.target, context.amount))
+	return context.amount
 	
 func lose_health(context: Context) -> int:
 	if stats.health <= 0:
@@ -173,6 +195,20 @@ func take_damage(context: Context) -> int:
 		spine_anim_state.set_animation(enemy_ai.get_hurt_animation_name(), true, 0)
 		spine_anim_state.add_animation(enemy_ai.get_idle_animation_name(), 0, true, 0)
 	return actual_damage
+
+func take_damage_without_signals(amount: int) -> int:
+	if stats.health <= 0:
+		return 0
+	var actual_damage := stats.take_damage(amount)
+	damage_number_spawner.spawn_damage_label(actual_damage, actual_damage == 0 and amount != 0)
+	
+	if stats.health <= 0:
+		die()
+	elif actual_damage > 0:
+		spine_anim_state.set_animation(enemy_ai.get_hurt_animation_name(), true, 0)
+		spine_anim_state.add_animation(enemy_ai.get_idle_animation_name(), 0, true, 0)
+	return actual_damage
+
 	
 func _on_area_entered(_area: Area2D) -> void:
 	reticles.visible = true
@@ -201,10 +237,6 @@ func show_keyword_tooltip() -> void:
 	
 	KeywordTooltip.keyword_tooltip.global_position = global_position + Vector2(hitbox.shape.size.x / 2, -hitbox.shape.size.y / 2)
 	KeywordTooltip.show()
-
-func _on_after_applied_buff(_context: Context) -> void:
-	if current_intent:
-		intents.update_intent(current_intent)
 
 func set_hitbox() -> void:
 	var bound_size = visuals.get_size()

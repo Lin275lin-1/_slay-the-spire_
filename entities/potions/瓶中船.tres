@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://h33udj8rlig0"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_hm8t8"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_lc1ty"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_mbn6n"]
+[ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="3_lc7m6"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_l7mvr"]
+[ext_resource type="Texture2D" uid="uid://cubpayd" path="res://images/atlases/potion_atlas.sprites/ship_in_a_bottle.tres" id="5_jyr5e"]
+[ext_resource type="Texture2D" uid="uid://cyk2k8y" path="res://images/atlases/potion_outline_atlas.sprites/ship_in_a_bottle.tres" id="6_34xdg"]
+
+[sub_resource type="Resource" id="Resource_pyw4e"]
+script = ExtResource("2_mbn6n")
+fixed_value = 14
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ifvxm"]
+script = ExtResource("3_lc7m6")
+block_provider = SubResource("Resource_pyw4e")
+no_modifiers = true
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_mbn6n"]
+script = ExtResource("2_mbn6n")
+fixed_value = 14
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_pu4w2"]
+script = ExtResource("4_l7mvr")
+buff_name = "下回合格挡"
+buff_stack_provider = SubResource("Resource_mbn6n")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_lc1ty")
+id = "ship_in_a_bottle"
+potion_name = "瓶中船"
+description = "获得14点[color=gold]格挡[/color]。在下个回合开始时获得14点[color=gold]格挡[/color]"
+icon = ExtResource("5_jyr5e")
+outline_icon = ExtResource("6_34xdg")
+rarity = 4
+effects = Array[ExtResource("1_hm8t8")]([SubResource("Resource_ifvxm"), SubResource("Resource_pu4w2")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

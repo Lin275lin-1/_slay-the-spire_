@@ -14,7 +14,7 @@ const FALL_TIME := 2.0
 var agent: Node
 
 func spawn_buff_icon(buff_icon: Texture2D) -> void:
-	var new_texture: TextureRect = TextureRect.new()
+	var new_texture: BuffTextureRect = BuffTextureRect.new()
 	new_texture.texture = buff_icon
 	new_texture.pivot_offset = buff_icon.get_size() / 2
 	new_texture.position = global_position - buff_icon.get_size() / 2
@@ -23,11 +23,12 @@ func spawn_buff_icon(buff_icon: Texture2D) -> void:
 	
 	agent.call_deferred("add_child", new_texture)
 	await new_texture.tree_entered
-	var tween = create_tween()
-	tween.set_parallel(true)
-	tween.tween_property(new_texture, "scale", Vector2(1.0, 1.0), 2.0)
-	tween.tween_property(new_texture, "self_modulate:a", 0.1, 2.0)
-	tween.finished.connect(new_texture.queue_free)
+	new_texture.fade_out()
+	#var tween = create_tween()
+	#tween.set_parallel(true)
+	#tween.tween_property(new_texture, "scale", Vector2(1.0, 1.0), 2.0)
+	#tween.tween_property(new_texture, "self_modulate:a", 0.1, 2.0)
+	#tween.finished.connect(new_texture.queue_free)
 	
 func spawn_buff_label(buff_name: String, is_buff: bool) -> void:
 	var new_label: DamageLabel = DamageLabel.new()
@@ -63,7 +64,10 @@ func spawn_damage_label(number: int, blocked: bool = false) -> void:
 	new_label.position = global_position + Vector2(-new_label.size.x / 2, new_label.size.y)
 	new_label.position += Vector2(randf_range(-50.0, 50.0), 0)
 	
-	var target_rise_pos: Vector2 = new_label.position + Vector2(randf_range(-100.0, 100.0), randf_range(-400, -300))
+	# 用于控制上升点的x值以及标签的旋转
+	var rise_x = randf_range(-100.0, 100.0)
+	
+	var target_rise_pos: Vector2 = new_label.position + Vector2(rise_x, randf_range(-400, -300))
 	var target_fall_pos: Vector2 = Vector2(new_label.position.x - (new_label.position.x - target_rise_pos.x) * 3, 1080)
 	if blocked:
 		new_label.label_settings = text_label_settings.duplicate()
@@ -71,6 +75,7 @@ func spawn_damage_label(number: int, blocked: bool = false) -> void:
 		new_label.text = "格挡"
 		new_label.set_float(target_rise_pos, FLOAT_TIME)
 	else:
+		new_label.rotation_degrees = rise_x / 100 * 20
 		new_label.text = str(number)
 		new_label.label_settings = damage_number_label_settings
 		new_label.set_parabola(target_rise_pos, target_fall_pos, RISE_TIME, FALL_TIME)

@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://6h12sghrcbbw"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_hkkqc"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_6k8v1"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_l636y"]
+[ext_resource type="Script" uid="uid://c6kvghrfcdtp7" path="res://scripts/costum_resources/effects/gain_energy_effect.gd" id="3_bknyg"]
+[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="4_cgu7u"]
+[ext_resource type="Texture2D" uid="uid://baofyw2" path="res://images/atlases/potion_atlas.sprites/cure_all.tres" id="5_6xvkq"]
+[ext_resource type="Texture2D" uid="uid://nfqdic" path="res://images/atlases/potion_outline_atlas.sprites/cure_all.tres" id="6_hfjey"]
+
+[sub_resource type="Resource" id="Resource_4dmp3"]
+script = ExtResource("2_6k8v1")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_fx8a7"]
+script = ExtResource("3_bknyg")
+energy_provider = SubResource("Resource_4dmp3")
+metadata/_custom_type_script = "uid://c6kvghrfcdtp7"
+
+[sub_resource type="Resource" id="Resource_s76mk"]
+script = ExtResource("2_6k8v1")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_xeloy"]
+script = ExtResource("4_cgu7u")
+draw_card_provider = SubResource("Resource_s76mk")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[resource]
+script = ExtResource("2_l636y")
+id = "cure_all"
+potion_name = "痊愈药水"
+description = "获得1点能量，抽2张牌"
+icon = ExtResource("5_6xvkq")
+outline_icon = ExtResource("6_hfjey")
+rarity = 2
+effects = Array[ExtResource("1_hkkqc")]([SubResource("Resource_fx8a7"), SubResource("Resource_xeloy")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

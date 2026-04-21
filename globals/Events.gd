@@ -12,12 +12,20 @@ signal card_click_ended(card_ui: CardUI)
 signal card_drag_started(card_ui: CardUI)
 signal card_drag_ended(card_ui: CardUI)
 signal card_previewed(card_ui: CardUI, to_preview: bool)
+signal before_card_played(card: Card, card_context: Dictionary)
 signal card_played(card: Card)
 signal target_selected(target: Creature, card: Card)
 signal target_unselected(card: Card)
 ## 药水相关
 signal potion_aim_started(potion_ui: PotionUI)
 signal potion_aim_ended(potion_ui: PotionUI)
+signal before_potion_used(potion_ui: PotionUI)
+signal after_potion_used(potion_ui: PotionUI)
+## 技能相关
+signal before_skill_played(skill: Skill)
+signal skill_played(skill: Skill)
+signal skill_aim_started(skill_ui: MainSkillUI)
+signal skill_aim_ended(skill_ui: MainSkillUI)
 ## 玩家相关
 # 玩家回合开始抽牌后
 signal player_hand_drawn

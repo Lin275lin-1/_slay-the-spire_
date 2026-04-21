@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://c2qbini5mxl58"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_ic2hj"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_8gmpx"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_n37bv"]
+[ext_resource type="Texture2D" uid="uid://cx8l1nv" path="res://images/atlases/potion_atlas.sprites/duplicator.tres" id="2_yqmys"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_jep6x"]
+[ext_resource type="Texture2D" uid="uid://jtpf7c" path="res://images/atlases/potion_outline_atlas.sprites/duplicator.tres" id="3_ydkky"]
+
+[sub_resource type="Resource" id="Resource_juvg7"]
+script = ExtResource("2_8gmpx")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_3d7dm"]
+script = ExtResource("3_jep6x")
+buff_name = "复制"
+buff_stack_provider = SubResource("Resource_juvg7")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_n37bv")
+id = "duplicator"
+potion_name = "复制药水"
+description = "本回合，你打出的下一张牌会额外打出一次"
+icon = ExtResource("2_yqmys")
+outline_icon = ExtResource("3_ydkky")
+rarity = 2
+effects = Array[ExtResource("1_ic2hj")]([SubResource("Resource_3d7dm")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

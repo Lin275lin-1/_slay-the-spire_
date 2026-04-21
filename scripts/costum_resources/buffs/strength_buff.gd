@@ -4,17 +4,8 @@ extends Buff
 
 
 
-func _init() -> void:
-	# 一定要在init中设置buff名
-	# 在buff进树之前会判断buff_name
-	var buff_info: Dictionary = BuffLibrary.buff_data["力量"]
-	buff_name = buff_info["name"]
-	description = buff_info["description"]
-	icon = buff_info["icon"]
-	type = Type.BUFF
-	affect = AFFECT.SELF
 	
-func _ready() -> void:
+func initialize() -> void:
 	if agent and agent.has_signal("before_attack"):
 		agent.connect("before_attack", _on_before_attack)
 	else:
@@ -26,13 +17,10 @@ func get_modifier() -> Array[Modifier]:
 	return [modifier]
 
 func get_description() -> String:
-	return description.format({"stacks": stacks})
-
-func remove_stack(amount: int):
-	stacks -= amount
-	if stacks == 0:
-		queue_free()
-	stack_changed.emit()
+	if stacks > 0:
+		return "造成的攻击伤害提高{stacks}点".format({"stacks": stacks})
+	else:
+		return "造成的攻击伤害降低{stacks}点".format({"stacks": -stacks})
 
 func _on_before_attack(context: Context) -> void:
 	context.modifiers.append(Modifier.new(Enums.NumericType.DAMAGE, stacks, 1.0, null))

@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://p5t5ynm0gru3" path="res://scripts/rooms/combat_room/combat_ui/card_ui.gd" id="1_s55cg"]
 [ext_resource type="Script" uid="uid://n32cyhvf6qam" path="res://scripts/hand_manager/card_state_machine/card_state_machine.gd" id="2_1kpl7"]
 [ext_resource type="PackedScene" uid="uid://b22g8dum6re3" path="res://scenes/ui/card_visuals.tscn" id="2_17lfd"]
-[ext_resource type="Resource" uid="uid://bqq44kff15k4w" path="res://entities/characters/ironclad/ironclad_stats.tres" id="3_fi06d"]
 [ext_resource type="Script" uid="uid://r1hpyjdc572v" path="res://scripts/hand_manager/card_state_machine/card_base_state.gd" id="9_7cyci"]
 [ext_resource type="Script" uid="uid://h66064xnout6" path="res://scripts/hand_manager/card_state_machine/card_clicked_state.gd" id="10_0og8s"]
 [ext_resource type="Script" uid="uid://b3itqlw4pv3ga" path="res://scripts/hand_manager/card_state_machine/card_dragging_state.gd" id="11_2u763"]
@@ -21,7 +20,6 @@ offset_right = 300.0
 offset_bottom = 422.0
 pivot_offset = Vector2(150, 211)
 script = ExtResource("1_s55cg")
-char_stats = ExtResource("3_fi06d")
 
 [node name="DropPointArea" type="Area2D" parent="." unique_id=1533357214]
 collision_mask = 2

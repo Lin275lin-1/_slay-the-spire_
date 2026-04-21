@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://b1ew0v55iy3nm"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_6akcv"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_t2ywp"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_vgpsy"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_v1t8b"]
+[ext_resource type="Texture2D" uid="uid://bf7xj7l" path="res://images/atlases/potion_atlas.sprites/heart_of_iron.tres" id="4_tqh8d"]
+[ext_resource type="Texture2D" uid="uid://orib23" path="res://images/atlases/potion_outline_atlas.sprites/heart_of_iron.tres" id="5_31j7f"]
+
+[sub_resource type="Resource" id="Resource_xvi7f"]
+script = ExtResource("2_t2ywp")
+fixed_value = 7
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_7cjwf"]
+script = ExtResource("3_v1t8b")
+buff_name = "覆甲"
+buff_stack_provider = SubResource("Resource_xvi7f")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_vgpsy")
+id = "heart_of_iron"
+potion_name = "铁心药水"
+description = "获得7层[color=gold]覆甲[/color]"
+icon = ExtResource("4_tqh8d")
+outline_icon = ExtResource("5_31j7f")
+rarity = 2
+effects = Array[ExtResource("1_6akcv")]([SubResource("Resource_7cjwf")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

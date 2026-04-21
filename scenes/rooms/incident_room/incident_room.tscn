@@ -17,10 +17,10 @@ scale = Vector2(0.5510174, 0.65903455)
 
 [node name="eventPanel" type="VBoxContainer" parent="." unique_id=639686592]
 layout_mode = 0
-offset_left = 677.0
-offset_top = 64.0
-offset_right = 1918.0
-offset_bottom = 937.0
+offset_left = 619.0
+offset_top = 48.0
+offset_right = 1860.0
+offset_bottom = 1008.0
 theme_override_constants/separation = 30
 
 [node name="eventTitle" type="Label" parent="eventPanel" unique_id=487997266]
@@ -31,9 +31,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="eventDescription" type="Label" parent="eventPanel" unique_id=1774559978]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 
 [node name="optionsContainer" type="VBoxContainer" parent="eventPanel" unique_id=243252297]
@@ -43,12 +43,12 @@ layout_mode = 2
 [node name="option1" type="Button" parent="eventPanel/optionsContainer" unique_id=21923567]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 30
 
 [node name="option2" type="Button" parent="eventPanel/optionsContainer" unique_id=2064884499]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 30
 
 [connection signal="pressed" from="eventPanel/optionsContainer/option1" to="." method="_on_option_1_pressed"]
 [connection signal="pressed" from="eventPanel/optionsContainer/option2" to="." method="_on_option_2_pressed"]

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://p5j8aaf5krvc"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_g2blm"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_bu3o8"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_cqg67"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_bh3cn"]
+[ext_resource type="Texture2D" uid="uid://5fqu05" path="res://images/atlases/potion_atlas.sprites/vulnerable_potion.tres" id="4_pwbg6"]
+[ext_resource type="Texture2D" uid="uid://ciypap0" path="res://images/atlases/potion_outline_atlas.sprites/vulnerable_potion.tres" id="5_j6n83"]
+
+[sub_resource type="Resource" id="Resource_dnjki"]
+script = ExtResource("2_cqg67")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_nuy8u"]
+script = ExtResource("3_bh3cn")
+buff_name = "易伤"
+buff_stack_provider = SubResource("Resource_dnjki")
+target_type = 2
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_bu3o8")
+id = "vulnerable_potion"
+potion_name = "易伤药水"
+description = "给予3层[color=gold]易伤[/color]"
+icon = ExtResource("4_pwbg6")
+outline_icon = ExtResource("5_j6n83")
+target_type = 1
+effects = Array[ExtResource("1_g2blm")]([SubResource("Resource_nuy8u")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

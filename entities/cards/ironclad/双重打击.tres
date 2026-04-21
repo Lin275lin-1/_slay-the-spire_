@@ -1,0 +1,83 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dpankwujdaqkp"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_7heg4"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_77s23"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_dt801"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_dwe22"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_dt801"]
+[ext_resource type="Texture2D" uid="uid://bbo6vi2" path="res://images/atlases/card_atlas.sprites/ironclad/twin_strike.tres" id="5_2bicf"]
+
+[sub_resource type="Resource" id="Resource_6gqoh"]
+script = ExtResource("2_dt801")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_5scfx"]
+script = ExtResource("1_7heg4")
+numeric_provider = SubResource("Resource_6gqoh")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_qdiw0"]
+script = ExtResource("2_dt801")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_2bicf"]
+script = ExtResource("2_dt801")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_kogdj"]
+script = ExtResource("4_dt801")
+repeat_count_provider = SubResource("Resource_2bicf")
+damage_provider = SubResource("Resource_qdiw0")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_ilr2o"]
+script = ExtResource("2_dt801")
+fixed_value = 7
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_brji2"]
+script = ExtResource("2_dt801")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_4lisw"]
+script = ExtResource("4_dt801")
+repeat_count_provider = SubResource("Resource_brji2")
+damage_provider = SubResource("Resource_ilr2o")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_r6a83"]
+script = ExtResource("2_dt801")
+fixed_value = 7
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_qitht"]
+script = ExtResource("1_7heg4")
+numeric_provider = SubResource("Resource_r6a83")
+placeholder = "damge"
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_dwe22")
+id = "双重打击"
+base_target = 1
+base_cost = 1
+effects = Array[ExtResource("2_77s23")]([SubResource("Resource_kogdj")])
+portrait = ExtResource("5_2bicf")
+base_description = "[center]造成{damage}点伤害两次。[/center]"
+base_numeric_entries = Array[ExtResource("1_7heg4")]([SubResource("Resource_5scfx")])
+upgraded_target = 1
+upgraded_cost = 1
+upgraded_description = "[center]造成{damage}点伤害两次。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_7heg4")]([SubResource("Resource_qitht")])
+upgraded_effects = Array[ExtResource("2_77s23")]([SubResource("Resource_4lisw")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

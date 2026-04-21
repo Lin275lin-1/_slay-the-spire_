@@ -1,0 +1,155 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://daughd7v5s37"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_v35rm"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_g5u41"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_jetpy"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_6is1m"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_3at44"]
+[ext_resource type="Script" uid="uid://cibjrcipdqbs7" path="res://scripts/costum_resources/condition.gd" id="5_g0y01"]
+[ext_resource type="Script" uid="uid://66oyp04ol1ud" path="res://scripts/costum_resources/effects/condition_effect.gd" id="6_xlhat"]
+[ext_resource type="Texture2D" uid="uid://bmceoki" path="res://images/atlases/card_atlas.sprites/ironclad/beta/spite.tres" id="7_02tsx"]
+
+[sub_resource type="Resource" id="Resource_ns8ff"]
+script = ExtResource("2_g5u41")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_aamws"]
+script = ExtResource("1_v35rm")
+numeric_provider = SubResource("Resource_ns8ff")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_wt4se"]
+script = ExtResource("2_g5u41")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_qxbix"]
+script = ExtResource("1_v35rm")
+numeric_type = 7
+numeric_provider = SubResource("Resource_wt4se")
+placeholder = "repeat"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_8g5yx"]
+script = ExtResource("2_g5u41")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_to7f5"]
+script = ExtResource("4_3at44")
+damage_provider = SubResource("Resource_8g5yx")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_picgy"]
+script = ExtResource("5_g0y01")
+type = 3
+metadata/_custom_type_script = "uid://cibjrcipdqbs7"
+
+[sub_resource type="Resource" id="Resource_jxqr3"]
+script = ExtResource("2_g5u41")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_hq0wu"]
+script = ExtResource("4_3at44")
+damage_provider = SubResource("Resource_jxqr3")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_u2tdt"]
+script = ExtResource("6_xlhat")
+condition = SubResource("Resource_picgy")
+if_effects = Array[ExtResource("2_jetpy")]([SubResource("Resource_hq0wu")])
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://66oyp04ol1ud"
+
+[sub_resource type="Resource" id="Resource_lqv5l"]
+script = ExtResource("2_g5u41")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ewurg"]
+script = ExtResource("4_3at44")
+damage_provider = SubResource("Resource_lqv5l")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_ay6ap"]
+script = ExtResource("5_g0y01")
+type = 3
+metadata/_custom_type_script = "uid://cibjrcipdqbs7"
+
+[sub_resource type="Resource" id="Resource_dxw03"]
+script = ExtResource("2_g5u41")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_mc80k"]
+script = ExtResource("2_g5u41")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_uoc5m"]
+script = ExtResource("4_3at44")
+repeat_count_provider = SubResource("Resource_mc80k")
+damage_provider = SubResource("Resource_dxw03")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_3u4fi"]
+script = ExtResource("6_xlhat")
+condition = SubResource("Resource_ay6ap")
+if_effects = Array[ExtResource("2_jetpy")]([SubResource("Resource_uoc5m")])
+target_type = 2
+metadata/_custom_type_script = "uid://66oyp04ol1ud"
+
+[sub_resource type="Resource" id="Resource_2a7p8"]
+script = ExtResource("2_g5u41")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_kwn30"]
+script = ExtResource("1_v35rm")
+numeric_provider = SubResource("Resource_2a7p8")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_20k6j"]
+script = ExtResource("2_g5u41")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_cdp2t"]
+script = ExtResource("1_v35rm")
+numeric_type = 7
+numeric_provider = SubResource("Resource_20k6j")
+placeholder = "repeat"
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_6is1m")
+id = "怨恨"
+base_target = 1
+rarity = 2
+effects = Array[ExtResource("2_jetpy")]([SubResource("Resource_to7f5"), SubResource("Resource_u2tdt")])
+portrait = ExtResource("7_02tsx")
+base_description = "[center]造成{damage}点伤害。
+如果你在本回合失去过生命值，则攻击{repeat}次。[/center]"
+base_numeric_entries = Array[ExtResource("1_v35rm")]([SubResource("Resource_aamws"), SubResource("Resource_qxbix")])
+upgraded_target = 1
+upgraded_description = "[center]造成{damage}点伤害。
+如果你在本回合失去过生命值，则攻击{repeat}次。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_v35rm")]([SubResource("Resource_kwn30"), SubResource("Resource_cdp2t")])
+upgraded_effects = Array[ExtResource("2_jetpy")]([SubResource("Resource_ewurg"), SubResource("Resource_3u4fi")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

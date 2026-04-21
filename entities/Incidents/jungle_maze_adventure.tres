@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="IncidentData" format=3 uid="uid://not1mwgui78m"]
+
+[ext_resource type="Script" uid="uid://cff53ccvxdc3t" path="res://scripts/costum_resources/incident_data.gd" id="1_ey3nf"]
+
+[resource]
+script = ExtResource("1_ey3nf")
+backgroundPath = "res://images/events/jungle_maze_adventure.png"
+incidentName = "jungle_maze_adventure"
+stage = 1
+eventTitile = "丛林迷宫奇遇"
+eventDescription = "在一片林间空地上，你撞见了一群寒碜的冒险者小队，
+他们正俯瞰着一座巨型迷宫并指手画脚。
+他们邀请你入伙，共同开启一场搜刮迷宫财富的史诗级任务。
+身为老手，你心知肚明这迷宫里塞满了致命陷阱和守卫。
+搭伙干活确实容易些，但那样你就得跟人平分战利品了。"
+option1Description = "结伴同行
+获得35-65金币。"
+option2Description = "独自挑战
+获得135-165金币。失去18点生命。"
+press_op1_title = Array[String](["结伴同行"])
+press_op1_description = Array[String](["每个人的脸上都乐开了花，包括你自己！
+这群人里居然还有个吟游诗人！
+你们迈着轻快的步伐走入迷宫，
+乌贼巫师阿奎德手到擒来地解除了所有陷阱，
+你和一位格拉索里安战士则轻轻松松地解决掉了那些手持狼牙棒的守卫。
+这是你这辈子最愉快的一次冒险，你也真的留下了美好的回忆。"])
+press_op1_op1description = Array[String](["继续。"])
+press_op1_op2description = Array[String](["继续。"])
+press_op2_title = Array[String](["独自挑战"])
+press_op2_description = Array[String](["你带着几分厌烦，无视了他们那此刻紧蹙的眉头，径直走了过去。
+其中一人甚至还对着你挥了挥拳头。
+迷宫里到处都透着恶意。你掉进过地刺陷阱，被带刺的巨型滚木迎头击中，
+还得一路上和那些挥舞着狼牙棒的暴躁生物缠斗。
+你简直受够了这些带刺的玩意，
+甚至开始考虑下次冒险是不是得向团队协作低头了。"])
+press_op2_op1description = Array[String](["继续"])
+press_op2_op2description = Array[String](["继续"])
+metadata/_custom_type_script = "uid://cff53ccvxdc3t"
