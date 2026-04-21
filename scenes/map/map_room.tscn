@@ -11,7 +11,7 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_11bm1"]
 resource_local_to_scene = true
-radius = 50.0
+radius = 136.72554
 
 [sub_resource type="Animation" id="Animation_55kfl"]
 length = 0.001
@@ -270,7 +270,6 @@ modulate = Color(0.78039217, 0.8117647, 0.64705884, 0)
 texture = ExtResource("8_5hkq2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=286046258]
-visible = false
 shape = SubResource("CircleShape2D_11bm1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=399628461]

@@ -6,6 +6,7 @@ const SCROLL_SPEED := 250
 const MAP_ROOM = preload("res://scenes/map/map_room.tscn")
 const MAP_LINE = preload("res://scenes/map/map_line.tscn")
 
+
 @onready var map_generator: MapGenerator = $MapGenerator
 @onready var lines: Node2D = %Lines
 @onready var rooms: Node2D = %Rooms
@@ -140,9 +141,15 @@ func hide_map() -> void:
 	
 func _spawn_room(room: Room) -> void:
 	var new_map_room := MAP_ROOM.instantiate() as MapRoom
+	if room.type == Room.Type.CAMPFIRE or room.type == Room.Type.SHOP:
+		new_map_room.scale = Vector2(1.3, 1.3)
+	else:
+		new_map_room.scale = Vector2(1.0005, 1.0005)
 	rooms.add_child(new_map_room)
 	new_map_room.room =room
 	new_map_room.selected.connect(_on_map_room_selected)
+	
+	
 	_connect_lines(room)
 	
 	if room.selected and room.row < run_stats.floors_climbed:

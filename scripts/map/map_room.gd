@@ -6,11 +6,11 @@ signal selected(room:Room)
 
 const ICONS := {
 	Room.Type.NOT_ASSIGNED:[null,Vector2.ONE],
-	Room.Type.MONSTER:[preload("res://images/ui/run_history/monster.png"),Vector2.ONE],
-	Room.Type.TREASURE:[preload("res://images/ui/run_history/treasure.png"),Vector2.ONE],
-	Room.Type.CAMPFIRE:[preload("res://images/ui/run_history/rest_site.png"), Vector2(0.6,0.6)],
-	Room.Type.SHOP:[preload("res://images/ui/run_history/shop.png"), Vector2(0.6,0.6)],
-	Room.Type.BOSS:[preload("res://images/map/placeholder/doormaker_boss_icon.png"),Vector2(1.25,1.25)],
+	Room.Type.MONSTER:[preload("res://images/atlases/ui_atlas.sprites/map/icons/map_monster.tres"),Vector2.ONE],
+	Room.Type.TREASURE:[preload("res://images/atlases/ui_atlas.sprites/map/icons/map_chest.tres"),Vector2.ONE],
+	Room.Type.CAMPFIRE:[preload("res://images/atlases/ui_atlas.sprites/map/icons/map_rest.tres"), Vector2(0.6,0.6)],
+	Room.Type.SHOP:[preload("res://images/atlases/ui_atlas.sprites/map/icons/map_shop.tres"), Vector2(0.6,0.6)],
+	Room.Type.BOSS:[preload("res://images/map/placeholder/vantom_boss_icon.png"),Vector2(1.25,1.25)],
 	Room.Type.ELITE:   [preload("res://images/atlases/ui_atlas.sprites/map/icons/map_elite.tres"), Vector2.ONE],  
 	Room.Type.UNKNOWN: [preload("res://images/atlases/ui_atlas.sprites/map/icons/map_unknown.tres"), Vector2.ONE],   
 }
@@ -96,10 +96,10 @@ func set_highlight(highlight: bool):
 		sprite_2d.modulate.a = 1.0
 		# 以下为原有高亮效果（颜色、缩放等），可根据需要保留或注释
 		modulate = Color(1, 1, 0.5, 1.0)  
-		if room.type != Room.Type.BOSS and room.type != Room.Type.TREASURE and room.type != Room.Type.MONSTER and room.type != Room.Type.ELITE:
+		if room.type == Room.Type.UNKNOWN:
 			highlight_sprite.modulate.a = 1.0
-		if room.type == Room.Type.ELITE:
-			scale = original_scale * 1.6
+		if room.type == Room.Type.ELITE and room.type == Room.Type.MONSTER:
+			scale = original_scale * 2.6
 		else:
 			scale = original_scale * 1.2
 	else:

@@ -32,11 +32,8 @@ func _ready()->void:
 	for node:Node in rewards.get_children():
 		node.queue_free()
 
-	#debug_gold and character
-	run_stats =RunStats.new()
-	run_stats.gold_changed.connect(func(): print("gold:%s" % run_stats.gold))
-	character_stats = preload("res://entities/characters/ironclad/ironclad_stats.tres").create_instance()
-	
+	if run_stats:
+		run_stats.gold_changed.connect(func(): print("gold:%s" % run_stats.gold))
 	return_button.mouse_entered.connect(_on_return_button_entered)
 	return_button.mouse_exited.connect(_on_return_button_exited)
 	

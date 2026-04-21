@@ -2,8 +2,8 @@ class_name MapGenerator
 extends Node
 
 #默认横向和纵向间隔像素
-const X_DIST := 150
-const Y_DIST := 180
+const X_DIST := 200
+const Y_DIST := 200
 #五个像素的随机性
 const PLACEMENT_RANDOMNESS := 25
 #网格分布
@@ -76,14 +76,14 @@ func _generate_initial_grid()-> Array[Array]:
 		for j in MAP_WIDTH:
 			var current_room := Room.new()
 			var offset := Vector2(randf(), randf()) * PLACEMENT_RANDOMNESS
-			current_room.position = Vector2(j * X_DIST,i *-Y_DIST) + offset
+			current_room.position = Vector2(j * X_DIST-100,i *-Y_DIST+300) + offset
 			current_room.row = i
 			current_room.column = j
 			current_room.next_rooms=[]
 		
 			#boss room has a non_random Y
 			if i == FLOORS - 1:
-				current_room.position.y = (i + 1)* -Y_DIST
+				current_room.position.y = (i + 1)* -Y_DIST+300
 			adjacent_rooms.append((current_room))
 			
 		result.append((adjacent_rooms))

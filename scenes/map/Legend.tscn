@@ -1,130 +1,171 @@
 [gd_scene format=3 uid="uid://c30ke3xdmcd3m"]
 
-[ext_resource type="Texture2D" uid="uid://ct8bvjut5km88" path="res://images/map/placeholder/doormaker_boss_icon.png" id="1_1d4hb"]
 [ext_resource type="Script" uid="uid://6li5ydxala48" path="res://scripts/map/legend.gd" id="1_s1h33"]
-[ext_resource type="Texture2D" uid="uid://dgqw0oq7m4op4" path="res://images/ui/run_history/rest_site.png" id="2_lhq6a"]
-[ext_resource type="Texture2D" uid="uid://d0bnqgli2j38b" path="res://images/ui/run_history/treasure.png" id="3_dae2c"]
-[ext_resource type="Texture2D" uid="uid://b24m5kkdts7r4" path="res://images/ui/run_history/shop.png" id="4_oqu8t"]
-[ext_resource type="Texture2D" uid="uid://5rlmjn1j1ydl" path="res://images/ui/run_history/monster.png" id="5_s1h33"]
+[ext_resource type="Texture2D" uid="uid://b7jjoqq" path="res://images/atlases/ui_atlas.sprites/map/icons/map_rest.tres" id="2_jx14c"]
+[ext_resource type="Texture2D" uid="uid://b3sludl" path="res://images/atlases/ui_atlas.sprites/map/icons/map_chest.tres" id="3_m2r12"]
+[ext_resource type="Texture2D" uid="uid://b52jis7" path="res://images/atlases/ui_atlas.sprites/map/icons/map_shop.tres" id="4_bws55"]
+[ext_resource type="Texture2D" uid="uid://b4vyq55" path="res://images/atlases/ui_atlas.sprites/map/icons/map_monster.tres" id="5_yhyiq"]
 [ext_resource type="Texture2D" uid="uid://ba4j0gn" path="res://images/atlases/ui_atlas.sprites/map/icons/map_elite.tres" id="7_jx14c"]
 [ext_resource type="Texture2D" uid="uid://lplp03" path="res://images/atlases/ui_atlas.sprites/map/icons/map_unknown.tres" id="8_m2r12"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2rcfn"]
+load_path = "res://.godot/imported/vantom_boss_icon.png-16fef2eb5e2154e126528cb76a7c574b.ctex"
+
 [node name="Legend" type="Control" unique_id=1221335584]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.869
+anchor_top = 0.5
+anchor_right = 0.869
+anchor_bottom = 0.5
+offset_left = -2859.48
+offset_top = -645.0
+offset_right = -964.1466
+offset_bottom = 73.00006
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.7, 1.7)
 script = ExtResource("1_s1h33")
 
-[node name="legend_item" type="VBoxContainer" parent="." unique_id=861421509]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1600.0
-offset_top = 300.0
-offset_right = -220.0
-offset_bottom = -237.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(3, 3)
-metadata/_edit_lock_ = true
-
-[node name="Label2" type="Label" parent="legend_item" unique_id=1873783159]
-layout_mode = 2
+[node name="Label2" type="Label" parent="." unique_id=1873783159]
+layout_mode = 0
+offset_left = 1601.0
+offset_top = 265.0
+offset_right = 1850.0
+offset_bottom = 300.0
 text = "Legend"
 horizontal_alignment = 1
 
-[node name="BossEntry" type="HBoxContainer" parent="legend_item" unique_id=1547803213]
-layout_mode = 2
-
-[node name="BossIcon" type="TextureRect" parent="legend_item/BossEntry" unique_id=1094007488]
-layout_mode = 2
-texture = ExtResource("1_1d4hb")
+[node name="BossIcon" type="TextureRect" parent="." unique_id=1094007488]
+layout_mode = 0
+offset_left = 1661.0
+offset_top = 289.0
+offset_right = 1699.0
+offset_bottom = 325.0
+texture = SubResource("CompressedTexture2D_2rcfn")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="legend_item/BossEntry" unique_id=599050301]
-layout_mode = 2
+[node name="Label" type="Label" parent="." unique_id=599050301]
+layout_mode = 0
+offset_left = 1713.0
+offset_top = 301.0
+offset_right = 1744.0
+offset_bottom = 319.0
 theme_override_font_sizes/font_size = 13
 text = "Boss"
 
-[node name="CampfireEntry" type="HBoxContainer" parent="legend_item" unique_id=2072796970]
-layout_mode = 2
-
-[node name="CampfireIcon" type="TextureRect" parent="legend_item/CampfireEntry" unique_id=1918132132]
-layout_mode = 2
-texture = ExtResource("2_lhq6a")
+[node name="CampfireIcon" type="TextureRect" parent="." unique_id=1918132132]
+layout_mode = 0
+offset_left = 1658.0
+offset_top = 327.0
+offset_right = 1701.0
+offset_bottom = 369.0
+texture = ExtResource("2_jx14c")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="legend_item/CampfireEntry" unique_id=2000023775]
-layout_mode = 2
-theme_override_font_sizes/font_size = 13
-text = "campfire"
-
-[node name="TreasureEntry" type="HBoxContainer" parent="legend_item" unique_id=257785256]
-layout_mode = 2
-
-[node name="TreasureIcon" type="TextureRect" parent="legend_item/TreasureEntry" unique_id=120227418]
-layout_mode = 2
-texture = ExtResource("3_dae2c")
-expand_mode = 2
-
-[node name="Label" type="Label" parent="legend_item/TreasureEntry" unique_id=950828884]
-layout_mode = 2
+[node name="Label3" type="Label" parent="." unique_id=950828884]
+layout_mode = 0
+offset_left = 1711.0
+offset_top = 508.0
+offset_right = 1767.0
+offset_bottom = 526.0
 theme_override_font_sizes/font_size = 13
 text = "Treasure"
 
-[node name="ShopEntry" type="HBoxContainer" parent="legend_item" unique_id=1213880012]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="ShopIcon" type="TextureRect" parent="legend_item/ShopEntry" unique_id=888559351]
-layout_mode = 2
-texture = ExtResource("4_oqu8t")
+[node name="TreasureIcon" type="TextureRect" parent="." unique_id=120227418]
+layout_mode = 0
+offset_left = 1600.0
+offset_top = 324.0
+offset_right = 1600.0
+offset_bottom = 324.0
+texture = ExtResource("3_m2r12")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="legend_item/ShopEntry" unique_id=1627109141]
-layout_mode = 2
+[node name="ShopIcon" type="TextureRect" parent="." unique_id=888559351]
+layout_mode = 0
+offset_left = 1658.0
+offset_top = 364.0
+offset_right = 1696.0
+offset_bottom = 401.0
+texture = ExtResource("4_bws55")
+expand_mode = 2
+
+[node name="Label4" type="Label" parent="." unique_id=1627109141]
+layout_mode = 0
+offset_left = 1714.0
+offset_top = 371.0
+offset_right = 1746.0
+offset_bottom = 389.0
 theme_override_font_sizes/font_size = 13
 text = "Shop"
 
-[node name="MonsterEntry" type="HBoxContainer" parent="legend_item" unique_id=136814496]
-layout_mode = 2
-
-[node name="MonsterIcon" type="TextureRect" parent="legend_item/MonsterEntry" unique_id=759608666]
-layout_mode = 2
-texture = ExtResource("5_s1h33")
+[node name="MonsterIcon" type="TextureRect" parent="." unique_id=759608666]
+layout_mode = 0
+offset_left = 1660.0
+offset_top = 397.0
+offset_right = 1696.0
+offset_bottom = 430.0
+texture = ExtResource("5_yhyiq")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="legend_item/MonsterEntry" unique_id=1531517503]
-layout_mode = 2
+[node name="Label5" type="Label" parent="." unique_id=1531517503]
+layout_mode = 0
+offset_left = 1712.0
+offset_top = 402.0
+offset_right = 1765.0
+offset_bottom = 420.0
 theme_override_font_sizes/font_size = 13
 text = "Monster"
 
-[node name="EliteEntry" type="HBoxContainer" parent="legend_item" unique_id=375480618]
-layout_mode = 2
-
-[node name="EliteIcon" type="TextureRect" parent="legend_item/EliteEntry" unique_id=1227022014]
-layout_mode = 2
+[node name="EliteIcon" type="TextureRect" parent="." unique_id=1227022014]
+layout_mode = 0
+offset_left = 1661.0
+offset_top = 427.0
+offset_right = 1696.0
+offset_bottom = 462.0
 texture = ExtResource("7_jx14c")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="legend_item/EliteEntry" unique_id=1520748868]
-layout_mode = 2
+[node name="Label6" type="Label" parent="." unique_id=1520748868]
+layout_mode = 0
+offset_left = 1712.0
+offset_top = 436.0
+offset_right = 1740.0
+offset_bottom = 454.0
 theme_override_font_sizes/font_size = 13
 text = "Elite"
 
-[node name="UnknownEntry" type="HBoxContainer" parent="legend_item" unique_id=702868953]
-layout_mode = 2
+[node name="Label7" type="Label" parent="." unique_id=651980768]
+layout_mode = 0
+offset_left = 1711.0
+offset_top = 469.0
+offset_right = 1772.0
+offset_bottom = 487.0
+theme_override_font_sizes/font_size = 13
+text = "Unknown"
 
-[node name="UnkonwnIcon" type="TextureRect" parent="legend_item/UnknownEntry" unique_id=2037797632]
-layout_mode = 2
+[node name="UnkonwnIcon" type="TextureRect" parent="." unique_id=2037797632]
+layout_mode = 0
+offset_left = 1661.0
+offset_top = 459.0
+offset_right = 1696.0
+offset_bottom = 493.0
 texture = ExtResource("8_m2r12")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="legend_item/UnknownEntry" unique_id=651980768]
-layout_mode = 2
+[node name="Label8" type="Label" parent="." unique_id=2000023775]
+layout_mode = 0
+offset_left = 1713.0
+offset_top = 339.0
+offset_right = 1813.0
+offset_bottom = 357.0
 theme_override_font_sizes/font_size = 13
-text = "Unknown"
+text = "campfire"
+
+[node name="ChestIcon" type="TextureRect" parent="." unique_id=1069297787]
+layout_mode = 0
+offset_left = 1656.0
+offset_top = 495.0
+offset_right = 1703.0
+offset_bottom = 539.0
+texture = ExtResource("3_m2r12")
+expand_mode = 2

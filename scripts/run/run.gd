@@ -28,6 +28,7 @@ const BATTLE_REWARD_SCENE = preload("res://scenes/rooms/reward/reward_room.tscn"
 @export var run_startup: RunStartup
 
 var character: CharacterStats
+
 var stats: RunStats
 
 # 异步加载状态变量
@@ -46,7 +47,11 @@ func _ready() -> void:
 			map_node.init(stats)
 			print("加载游戏")
 	
+	#	debug
+	_print_runstats_arrays(stats)
+	
 func _on_map_room_selected(room: Room) -> void:
+	_print_runstats_arrays(stats)
 	var scene: PackedScene
 	match room.type:
 		Room.Type.MONSTER, Room.Type.ELITE, Room.Type.BOSS:
@@ -78,6 +83,7 @@ func _start_run() -> void:
 	_setup_top_bar()
 	map_node.init(stats)
 	_show_map()
+	_print_runstats_arrays(stats)
 
 func _setup_top_bar() -> void:
 	top_bar.run_stats = stats   
@@ -159,6 +165,7 @@ func _on_map_exited() -> void:
 	print("map_exited")
 
 func _on_room_exited() -> void:
+	_print_runstats_arrays(stats)
 	map_node.complete_current_room()
 	_show_map()
 
@@ -192,3 +199,83 @@ func _on_incident_room_entered(room: Room)->void:
 	incident_scene.deck_view=deck_view
 	incident_scene.init()
 	
+
+
+#内容打印
+func _print_runstats_arrays(stats: RunStats) -> void:
+	if not stats:
+		print("❌ stats 为空")
+		return
+	
+	print("========== RunStats 数组内容 ==========")
+	
+	# 1. 遗物数组 (relics)
+	print("📦 Relics (%d):" % stats.relics.size())
+	if stats.relics.is_empty():
+		print("   (无遗物)")
+	else:
+		for i in range(stats.relics.size()):
+			var relic: Relic = stats.relics[i]
+			if relic:
+				print("   [%d] %s (ID: %s, Type: %s)" % [i, relic.relic_name, relic.id, _relic_type_to_string(relic.relic_type)])
+			else:
+				print("   [%d] null" % i)
+	
+	# 2. 药水数组 (potions)，可能包含 null
+	print("🧪 Potions (%d slots, max %d):" % [stats.potions.size(), stats.max_potion_slots])
+	if stats.potions.is_empty():
+		print("   (无药水栏位)")
+	else:
+		for i in range(stats.potions.size()):
+			var potion: Potion = stats.potions[i]
+			if potion:
+				print("   [%d] %s (ID: %s, Rarity: %s)" % [i, potion.potion_name, potion.id, _potion_rarity_to_string(potion.rarity)])
+			else:
+				print("   [%d] 空栏位" % i)
+	
+	# 3. 地图数据 (map_data) - 二维数组
+	#print("🗺️ Map Data (楼层数: %d, 已攀爬: %d):" % [stats.map_data.size(), stats.floors_climbed])
+	#if stats.map_data.is_empty():
+		#print("   (无地图数据)")
+	#else:
+		#for floor_idx in range(stats.map_data.size()):
+			#var floor_rooms: Array = stats.map_data[floor_idx]
+			#print("   Floor %d: %d 个房间" % [floor_idx, floor_rooms.size()])
+			#for room_idx in range(floor_rooms.size()):
+				#var room = floor_rooms[room_idx]
+				#if room and room is Room:
+					## 假设 Room 有 type 和 node_name 属性
+					#print("      Room %d: %s (Type: %s)" % [room_idx, room.node_name if "node_name" in room else "未命名", _room_type_to_string(room.type)])
+				#else:
+					#print("      Room %d: 无效房间数据" % room_idx)
+
+# 辅助函数：将遗物类型比特值转为可读字符串
+func _relic_type_to_string(type_bits: int) -> String:
+	var types = []
+	if type_bits & Relic.RelicType.STARTER_RELIC: types.append("初始")
+	if type_bits & Relic.RelicType.NORMAL_RELIC: types.append("普通")
+	if type_bits & Relic.RelicType.ANCIENT_RELIC: types.append("先古")
+	if type_bits & Relic.RelicType.SHOP_RELIC: types.append("商店")
+	return ", ".join(types) if not types.is_empty() else "未知"
+
+# 辅助函数：药水稀有度转字符串
+func _potion_rarity_to_string(rarity: Potion.Rarity) -> String:
+	match rarity:
+		Potion.Rarity.COMMON: return "普通"
+		Potion.Rarity.UNCOMMON: return "罕见"
+		Potion.Rarity.RARE: return "稀有"
+		_: return "未知"
+
+# 辅助函数：房间类型转字符串（假设 Room.Type 枚举存在）
+func _room_type_to_string(room_type) -> String:
+	# 请根据实际 Room.Type 枚举调整
+	var type_names = {
+		0: "怪物",
+		1: "精英",
+		2: "BOSS",
+		3: "宝藏",
+		4: "商店",
+		5: "篝火",
+		6: "未知"
+	}
+	return type_names.get(room_type, "未知类型")
