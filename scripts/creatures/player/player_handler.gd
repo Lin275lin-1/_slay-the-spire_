@@ -35,6 +35,11 @@ func start_turn() -> void:
 	relics.activate_relics_by_trigger_type(Relic.TriggerType.START_OF_TURN)
 
 func end_turn() -> void:
+	# 等待其他效果压入调用栈，比如“惊逃”buff
+	# 很丑陋，但是我没办法了
+	await get_tree().process_frame
+	if player.combat_resolver.is_resolving:
+		await player.combat_resolver.resolve_finished
 	player.end_turn()
 	relics.activate_relics_by_trigger_type(Relic.TriggerType.END_OF_TURN)
 
@@ -107,7 +112,11 @@ func discard_cards() -> void:
 			#TODO:卡片消耗特效
 		else:
 			tween.tween_callback(char_stats.discard_pile.add_card.bind(child.card))
-		tween.tween_callback(hand_manager.discard_card.bind(child))
+		tween.tween_callback(
+		func():
+			if is_instance_valid(child):
+				hand_manager.discard_card(child)
+			)
 		tween.tween_interval(HAND_DISCARD_INTERVAL)
 	tween.finished.connect(
 		func(): Events.player_hand_discarded.emit()
@@ -175,6 +184,7 @@ func _on_card_played(card: Card) -> void:
 		return
 	if card.exhaust:
 		char_stats.exhaust_pile.add_card(card)
+		Events.card_exhausted.emit(card)
 	else:
 		put_card_in_discard_pile(card)
 		

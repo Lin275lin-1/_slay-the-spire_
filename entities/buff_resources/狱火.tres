@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://cs04qyocmyn24"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_0m2i0"]
+[ext_resource type="Texture2D" uid="uid://d0am7tua5n0ct" path="res://images/powers/inferno_power.png" id="1_f5yte"]
+[ext_resource type="Script" uid="uid://tma0hulmeglo" path="res://scripts/costum_resources/buffs/inferno_buff.gd" id="1_ndhqs"]
+
+[resource]
+script = ExtResource("1_0m2i0")
+buff_id = "inferno"
+buff_name = "狱火"
+description = "在你的回合开始时，失去1点生命。
+每当你在你的回合内失去生命时，对所有敌人造成{stacks}点伤害。"
+icon = ExtResource("1_f5yte")
+buff_script = ExtResource("1_ndhqs")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

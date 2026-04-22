@@ -129,6 +129,7 @@ func discard_card(card: CardUI) -> void:
 	set_cards()
 
 func exhaust_card(card: CardUI) -> void:
+	Events.card_exhausted.emit(card.card)
 	card.queue_free()
 	# 等待card.queue_free()
 	await get_tree().process_frame

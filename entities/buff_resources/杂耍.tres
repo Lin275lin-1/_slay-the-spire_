@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://b2uof73xylfgk"]
+
+[ext_resource type="Script" uid="uid://cto67yxxmb2dq" path="res://scripts/costum_resources/buffs/juggling_buff.gd" id="1_3k2qp"]
+[ext_resource type="Texture2D" uid="uid://b1goceunlqgny" path="res://images/powers/juggling_power.png" id="1_3uo2k"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_v8s86"]
+
+[resource]
+script = ExtResource("1_v8s86")
+buff_id = "juggling"
+buff_name = "杂耍"
+description = "将你在每回合打出的第三张攻击牌的复制品加入你的手牌。"
+icon = ExtResource("1_3uo2k")
+stackable = false
+buff_script = ExtResource("1_3k2qp")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

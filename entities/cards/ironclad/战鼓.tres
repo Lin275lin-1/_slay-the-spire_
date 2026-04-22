@@ -1,0 +1,96 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cpomkb02i0m7v"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_ncc11"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_bmm4v"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_ie1q6"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_81mq0"]
+[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="4_5pxrx"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="5_n6k36"]
+[ext_resource type="Texture2D" uid="uid://p2d2rv" path="res://images/atlases/card_atlas.sprites/ironclad/drum_of_battle.tres" id="6_vkt4g"]
+
+[sub_resource type="Resource" id="Resource_frp5n"]
+script = ExtResource("2_ie1q6")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ipstt"]
+script = ExtResource("1_ncc11")
+numeric_type = 5
+numeric_provider = SubResource("Resource_frp5n")
+placeholder = "cards"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_6dj0l"]
+script = ExtResource("2_ie1q6")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_m4008"]
+script = ExtResource("4_5pxrx")
+draw_card_provider = SubResource("Resource_6dj0l")
+animation_name = "cast"
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_55gp5"]
+script = ExtResource("2_ie1q6")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_1xmps"]
+script = ExtResource("5_n6k36")
+buff_name = "战鼓"
+buff_stack_provider = SubResource("Resource_55gp5")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_651hl"]
+script = ExtResource("2_ie1q6")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_j5vxf"]
+script = ExtResource("4_5pxrx")
+draw_card_provider = SubResource("Resource_651hl")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_khjrk"]
+script = ExtResource("2_ie1q6")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_7j1h2"]
+script = ExtResource("5_n6k36")
+buff_name = "战鼓"
+buff_stack_provider = SubResource("Resource_khjrk")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_vdwn1"]
+script = ExtResource("2_ie1q6")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_8xa3b"]
+script = ExtResource("1_ncc11")
+numeric_type = 5
+numeric_provider = SubResource("Resource_vdwn1")
+placeholder = "cards"
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_81mq0")
+id = "战鼓"
+type = 4
+rarity = 2
+effects = Array[ExtResource("2_bmm4v")]([SubResource("Resource_m4008"), SubResource("Resource_1xmps")])
+portrait = ExtResource("6_vkt4g")
+base_description = "[center]抽{cards}张牌。
+在你的回合开始时，消耗你的[color=gold]抽牌堆[/color]顶部的牌。[/center]"
+base_numeric_entries = Array[ExtResource("1_ncc11")]([SubResource("Resource_ipstt")])
+upgraded_description = "[center]抽{cards}张牌。
+在你的回合开始时，消耗你的[color=gold]抽牌堆[/color]顶部的牌。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_ncc11")]([SubResource("Resource_8xa3b")])
+upgraded_effects = Array[ExtResource("2_bmm4v")]([SubResource("Resource_j5vxf"), SubResource("Resource_7j1h2")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

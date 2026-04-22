@@ -5,71 +5,26 @@
 [ext_resource type="Script" uid="uid://jvpf65gf7yuq" path="res://scripts/costum_resources/card_pile.gd" id="2_pcwuu"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_8xmro"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="4_7hj0v"]
-[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="5_jj41u"]
-[ext_resource type="Texture2D" uid="uid://twvroh" path="res://images/atlases/card_atlas.sprites/ironclad/hellraiser.tres" id="6_ewnxv"]
-[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="7_y7rga"]
 [ext_resource type="Script" uid="uid://bgxakc1nj11hm" path="res://scripts/costum_resources/effects/loss_health_effect.gd" id="10_cyjvc"]
 [ext_resource type="Script" uid="uid://c6kvghrfcdtp7" path="res://scripts/costum_resources/effects/gain_energy_effect.gd" id="11_lmdw5"]
 [ext_resource type="Resource" uid="uid://b56gw7xhi8pe1" path="res://entities/enchantments/伶俐.tres" id="12_bsqa6"]
 [ext_resource type="Texture2D" uid="uid://bbpfskx" path="res://images/atlases/card_atlas.sprites/ironclad/bloodletting.tres" id="13_whuos"]
-[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="14_cilra"]
-[ext_resource type="Texture2D" uid="uid://bkyract" path="res://images/atlases/card_atlas.sprites/ironclad/pommel_strike.tres" id="15_lm2nt"]
 [ext_resource type="Resource" uid="uid://b0odwvcj314k2" path="res://entities/cards/ironclad/燃烧契约.tres" id="21_whuos"]
-[ext_resource type="Resource" uid="uid://bdaswd70bkyc2" path="res://entities/cards/ironclad/擒拿.tres" id="22_cyjvc"]
-[ext_resource type="Resource" uid="uid://dpankwujdaqkp" path="res://entities/cards/ironclad/双重打击.tres" id="23_cyjvc"]
-[ext_resource type="Resource" uid="uid://cpctwatpicixg" path="res://entities/cards/ironclad/飞剑回旋镖.tres" id="24_bsqa6"]
+[ext_resource type="Resource" uid="uid://du22jyswvyejh" path="res://entities/cards/ironclad/被遗忘的仪式.tres" id="23_bsqa6"]
+[ext_resource type="Resource" uid="uid://sb0r84ncduiw" path="res://entities/cards/ironclad/与我一战！.tres" id="23_cilra"]
+[ext_resource type="Resource" uid="uid://cpomkb02i0m7v" path="res://entities/cards/ironclad/战鼓.tres" id="24_lmdw5"]
+[ext_resource type="Resource" uid="uid://d1fywgxnbcolm" path="res://entities/cards/ironclad/狂怒.tres" id="25_cilra"]
+[ext_resource type="Resource" uid="uid://dmrcvdktoglfm" path="res://entities/cards/ironclad/杂耍.tres" id="25_jqanm"]
 [ext_resource type="Resource" uid="uid://qhmifpkdvj6h" path="res://entities/cards/ironclad/武装.tres" id="25_whuos"]
-[ext_resource type="Script" uid="uid://cve4413kffhfx" path="res://scripts/costum_resources/numeric_formula.gd" id="26_lm2nt"]
-[ext_resource type="Resource" uid="uid://jibu7cmc6tit" path="res://entities/cards/ironclad/铁斩波.tres" id="27_cilra"]
-[ext_resource type="Texture2D" uid="uid://cgk5w5e" path="res://images/atlases/card_atlas.sprites/ironclad/molten_fist.tres" id="27_jqanm"]
+[ext_resource type="Resource" uid="uid://bx7lnqlexg07w" path="res://entities/cards/ironclad/无惧疼痛.tres" id="26_q88nh"]
+[ext_resource type="Resource" uid="uid://dtyhdho4woj0l" path="res://entities/cards/ironclad/扯碎.tres" id="26_whuos"]
+[ext_resource type="Resource" uid="uid://b2c13bouulo8c" path="res://entities/cards/ironclad/战斗专注.tres" id="27_cilra"]
 [ext_resource type="Resource" uid="uid://16qcmvy2hybc" path="res://entities/cards/ironclad/战栗.tres" id="28_jqanm"]
-[ext_resource type="Resource" uid="uid://dwwdbcsdjlfi0" path="res://entities/cards/ironclad/预备打击.tres" id="29_jqanm"]
-[ext_resource type="Resource" uid="uid://cm5u1npu17hc8" path="res://entities/cards/ironclad/血墙.tres" id="29_q88nh"]
+[ext_resource type="Resource" uid="uid://cpctwatpicixg" path="res://entities/cards/ironclad/飞剑回旋镖.tres" id="28_q88nh"]
+[ext_resource type="Resource" uid="uid://bdil4umbqay37" path="res://entities/cards/ironclad/劫掠.tres" id="29_jqanm"]
 [ext_resource type="Resource" uid="uid://daughd7v5s37" path="res://entities/cards/ironclad/怨恨.tres" id="29_vp0wk"]
 [ext_resource type="Resource" uid="uid://dqldofe3j3ro8" path="res://entities/cards/ironclad/旋风斩.tres" id="30_q88nh"]
-[ext_resource type="Resource" uid="uid://dfotaocwk4uqc" path="res://entities/cards/ironclad/拆卸.tres" id="30_vp0wk"]
 [ext_resource type="Resource" uid="uid://b8v7hogebydh5" path="res://entities/cards/ironclad/暴走.tres" id="31_vp0wk"]
-[ext_resource type="Resource" uid="uid://bpj3tqx286uw5" path="res://entities/cards/ironclad/完美打击.tres" id="32_2qpn7"]
-
-[sub_resource type="Resource" id="Resource_via1s"]
-script = ExtResource("4_7hj0v")
-fixed_value = 1
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_d6njt"]
-script = ExtResource("5_jj41u")
-buff_name = "地狱狂徒"
-buff_stack_provider = SubResource("Resource_via1s")
-target_type = 1
-animation_name = "cast"
-metadata/_custom_type_script = "uid://b8qfrs61nmcix"
-
-[sub_resource type="Resource" id="Resource_pe6k8"]
-script = ExtResource("4_7hj0v")
-fixed_value = 1
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_l2sug"]
-script = ExtResource("5_jj41u")
-buff_name = "地狱狂徒"
-buff_stack_provider = SubResource("Resource_pe6k8")
-target_type = 1
-animation_name = "cast"
-metadata/_custom_type_script = "uid://b8qfrs61nmcix"
-
-[sub_resource type="Resource" id="Resource_jqanm"]
-script = ExtResource("1_6dnus")
-id = "地狱狂徒"
-type = 4
-base_cost = 2
-rarity = 4
-effects = Array[ExtResource("3_8xmro")]([SubResource("Resource_d6njt")])
-portrait = ExtResource("6_ewnxv")
-base_description = "[center]每当你抽到名字中有“打击”的牌时，对一名随机敌人打出这张牌。[/center]"
-upgraded_cost = 1
-upgraded_description = "[center]每当你抽到名字中有“打击”的牌时，对一名随机敌人打出这张牌。[/center]"
-upgraded_effects = Array[ExtResource("3_8xmro")]([SubResource("Resource_l2sug")])
-metadata/_custom_type_script = "uid://br1hibx18tv13"
 
 [sub_resource type="Resource" id="Resource_gfkj2"]
 script = ExtResource("4_7hj0v")
@@ -178,223 +133,7 @@ upgraded_description = "[center]失去{lose_health}点生命。[/center][p][cent
 upgraded_numeric_entries = Array[ExtResource("2_4bseq")]([SubResource("Resource_abhjn"), SubResource("Resource_6aaeb")])
 upgraded_effects = Array[ExtResource("3_8xmro")]([SubResource("Resource_0h1uv"), SubResource("Resource_co18p")])
 
-[sub_resource type="Resource" id="Resource_auuvv"]
-script = ExtResource("4_7hj0v")
-fixed_value = 9
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_t1ma7"]
-script = ExtResource("2_4bseq")
-numeric_provider = SubResource("Resource_auuvv")
-placeholder = "damage"
-affected_by = 2
-metadata/_custom_type_script = "uid://cxgxfbwykbp84"
-
-[sub_resource type="Resource" id="Resource_3n82j"]
-script = ExtResource("4_7hj0v")
-fixed_value = 1
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_eropg"]
-script = ExtResource("2_4bseq")
-numeric_type = 5
-numeric_provider = SubResource("Resource_3n82j")
-placeholder = "cards"
-affected_by = 3
-metadata/_custom_type_script = "uid://cxgxfbwykbp84"
-
-[sub_resource type="Resource" id="Resource_ogcdt"]
-script = ExtResource("4_7hj0v")
-fixed_value = 9
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_d773o"]
-script = ExtResource("7_y7rga")
-damage_provider = SubResource("Resource_ogcdt")
-target_type = 2
-animation_name = "attack"
-metadata/_custom_type_script = "uid://vkklgv0ma0yf"
-
-[sub_resource type="Resource" id="Resource_wcdfk"]
-script = ExtResource("4_7hj0v")
-fixed_value = 1
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_x3oof"]
-script = ExtResource("14_cilra")
-draw_card_provider = SubResource("Resource_wcdfk")
-metadata/_custom_type_script = "uid://dd8cefu454sp5"
-
-[sub_resource type="Resource" id="Resource_74fh3"]
-script = ExtResource("4_7hj0v")
-fixed_value = 10
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_51t85"]
-script = ExtResource("7_y7rga")
-damage_provider = SubResource("Resource_74fh3")
-target_type = 2
-animation_name = "attack"
-metadata/_custom_type_script = "uid://vkklgv0ma0yf"
-
-[sub_resource type="Resource" id="Resource_n8hgm"]
-script = ExtResource("4_7hj0v")
-fixed_value = 2
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_3sncj"]
-script = ExtResource("14_cilra")
-draw_card_provider = SubResource("Resource_n8hgm")
-metadata/_custom_type_script = "uid://dd8cefu454sp5"
-
-[sub_resource type="Resource" id="Resource_hee4h"]
-script = ExtResource("4_7hj0v")
-fixed_value = 10
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_qk8fx"]
-script = ExtResource("2_4bseq")
-numeric_provider = SubResource("Resource_hee4h")
-placeholder = "damage"
-affected_by = 2
-metadata/_custom_type_script = "uid://cxgxfbwykbp84"
-
-[sub_resource type="Resource" id="Resource_mefo0"]
-script = ExtResource("4_7hj0v")
-fixed_value = 2
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_3ma15"]
-script = ExtResource("2_4bseq")
-numeric_type = 5
-numeric_provider = SubResource("Resource_mefo0")
-placeholder = "cards"
-affected_by = 3
-metadata/_custom_type_script = "uid://cxgxfbwykbp84"
-
-[sub_resource type="Resource" id="Resource_b05o3"]
-script = ExtResource("1_6dnus")
-id = "剑柄打击"
-base_target = 1
-base_cost = 1
-effects = Array[ExtResource("3_8xmro")]([SubResource("Resource_d773o"), SubResource("Resource_x3oof")])
-portrait = ExtResource("15_lm2nt")
-base_description = "[center]造成{damage}点伤害。[/center]
-[center]抽{cards}张牌。[/center]"
-base_numeric_entries = Array[ExtResource("2_4bseq")]([SubResource("Resource_t1ma7"), SubResource("Resource_eropg")])
-upgraded_target = 1
-upgraded_cost = 1
-upgraded_description = "[center]造成{damage}点伤害。[/center]
-[center]抽{cards}张牌。[/center]"
-upgraded_numeric_entries = Array[ExtResource("2_4bseq")]([SubResource("Resource_qk8fx"), SubResource("Resource_3ma15")])
-upgraded_effects = Array[ExtResource("3_8xmro")]([SubResource("Resource_51t85"), SubResource("Resource_3sncj")])
-upgraded = true
-metadata/_custom_type_script = "uid://br1hibx18tv13"
-
-[sub_resource type="Resource" id="Resource_02sye"]
-script = ExtResource("4_7hj0v")
-fixed_value = 10
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_tff6k"]
-script = ExtResource("2_4bseq")
-numeric_provider = SubResource("Resource_02sye")
-placeholder = "damage"
-affected_by = 2
-metadata/_custom_type_script = "uid://cxgxfbwykbp84"
-
-[sub_resource type="Resource" id="Resource_af6rm"]
-script = ExtResource("4_7hj0v")
-fixed_value = 10
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_txnwk"]
-script = ExtResource("7_y7rga")
-damage_provider = SubResource("Resource_af6rm")
-target_type = 2
-animation_name = "attack"
-metadata/_custom_type_script = "uid://vkklgv0ma0yf"
-
-[sub_resource type="Resource" id="Resource_tourm"]
-script = ExtResource("26_lm2nt")
-source = 1
-buff_name = "易伤"
-metadata/_custom_type_script = "uid://cve4413kffhfx"
-
-[sub_resource type="Resource" id="Resource_dowrv"]
-script = ExtResource("4_7hj0v")
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_6i542"]
-script = ExtResource("5_jj41u")
-buff_name = "易伤"
-buff_stack_provider = SubResource("Resource_dowrv")
-buff_stack_formula = SubResource("Resource_tourm")
-target_type = 2
-metadata/_custom_type_script = "uid://b8qfrs61nmcix"
-
-[sub_resource type="Resource" id="Resource_833jq"]
-script = ExtResource("4_7hj0v")
-fixed_value = 14
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_xrtul"]
-script = ExtResource("7_y7rga")
-damage_provider = SubResource("Resource_833jq")
-target_type = 2
-animation_name = "attack"
-metadata/_custom_type_script = "uid://vkklgv0ma0yf"
-
-[sub_resource type="Resource" id="Resource_lpr7i"]
-script = ExtResource("26_lm2nt")
-source = 1
-buff_name = "易伤"
-metadata/_custom_type_script = "uid://cve4413kffhfx"
-
-[sub_resource type="Resource" id="Resource_qg54n"]
-script = ExtResource("4_7hj0v")
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_dx2xm"]
-script = ExtResource("5_jj41u")
-buff_name = "易伤"
-buff_stack_provider = SubResource("Resource_qg54n")
-buff_stack_formula = SubResource("Resource_lpr7i")
-target_type = 2
-metadata/_custom_type_script = "uid://b8qfrs61nmcix"
-
-[sub_resource type="Resource" id="Resource_018uv"]
-script = ExtResource("4_7hj0v")
-fixed_value = 14
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_w2c4k"]
-script = ExtResource("2_4bseq")
-numeric_provider = SubResource("Resource_018uv")
-placeholder = "damage"
-affected_by = 2
-metadata/_custom_type_script = "uid://cxgxfbwykbp84"
-
-[sub_resource type="Resource" id="Resource_q88nh"]
-script = ExtResource("1_6dnus")
-id = "熔融之拳"
-base_target = 1
-base_cost = 1
-effects = Array[ExtResource("3_8xmro")]([SubResource("Resource_txnwk"), SubResource("Resource_6i542")])
-portrait = ExtResource("27_jqanm")
-base_description = "[center]造成{damage}点伤害。[/center]
-[center]将该敌人身上的[color=gold]易伤[/color]层数翻倍。[/center]"
-base_numeric_entries = Array[ExtResource("2_4bseq")]([SubResource("Resource_tff6k")])
-exhaust = true
-upgraded_target = 1
-upgraded_cost = 1
-upgraded_description = "[center]造成{damage}点伤害。[/center]
-[center]将该敌人身上的[color=gold]易伤[/color]层数翻倍。[/center]"
-upgraded_numeric_entries = Array[ExtResource("2_4bseq")]([SubResource("Resource_w2c4k")])
-upgraded_effects = Array[ExtResource("3_8xmro")]([SubResource("Resource_xrtul"), SubResource("Resource_dx2xm")])
-metadata/_custom_type_script = "uid://br1hibx18tv13"
-
 [resource]
 script = ExtResource("2_pcwuu")
-cards = Array[ExtResource("1_6dnus")]([SubResource("Resource_jqanm"), SubResource("Resource_vp0wk"), SubResource("Resource_b05o3"), ExtResource("21_whuos"), ExtResource("22_cyjvc"), ExtResource("23_cyjvc"), ExtResource("24_bsqa6"), ExtResource("25_whuos"), SubResource("Resource_q88nh"), ExtResource("27_cilra"), ExtResource("29_jqanm"), ExtResource("28_jqanm"), ExtResource("29_q88nh"), ExtResource("30_q88nh"), ExtResource("31_vp0wk"), ExtResource("32_2qpn7"), ExtResource("30_vp0wk"), ExtResource("29_vp0wk")])
+cards = Array[ExtResource("1_6dnus")]([SubResource("Resource_vp0wk"), ExtResource("21_whuos"), ExtResource("25_whuos"), ExtResource("28_jqanm"), ExtResource("30_q88nh"), ExtResource("31_vp0wk"), ExtResource("29_vp0wk"), ExtResource("23_bsqa6"), ExtResource("25_cilra"), ExtResource("24_lmdw5"), ExtResource("24_lmdw5"), ExtResource("23_cilra"), ExtResource("25_jqanm"), ExtResource("26_q88nh"), ExtResource("26_whuos"), ExtResource("27_cilra"), ExtResource("28_q88nh"), ExtResource("29_jqanm")])
 metadata/_custom_type_script = "uid://jvpf65gf7yuq"

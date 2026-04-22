@@ -44,8 +44,10 @@ func _ready() -> void:
 	Events.card_drag_ended.connect(_on_card_click_or_drag_or_aiming_ended)
 	Events.target_selected.connect(_on_target_selected)
 	Events.target_unselected.connect(_on_target_unselected)
+	
 	card_state_machine.init()
 	player = get_tree().get_first_node_in_group("ui_player")
+	Events.card_played.connect(func(_card: Card): visuals.set_hightlight(playable, card.has_highlight_condition(player, null)))
 
 func play() -> void:
 	if not card:
@@ -134,6 +136,8 @@ func set_card(value: Card) -> void:
 	
 	card = value
 	visuals.card = value
+	if char_stats:
+		visuals.set_hightlight(playable, card.has_highlight_condition(player, null))
 
 func _set_playable(value: bool) -> void:
 	playable = value

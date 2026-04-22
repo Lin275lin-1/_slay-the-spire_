@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://cxsgywt7cg7d2"]
+
+[ext_resource type="Script" uid="uid://b2n3ph5phrq7q" path="res://scripts/costum_resources/buffs/drum_of_battle_buff.gd" id="1_1mfvc"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_osplw"]
+[ext_resource type="Texture2D" uid="uid://dwipyexbqoq2h" path="res://images/powers/drum_of_battle_power.png" id="2_02k3i"]
+
+[resource]
+script = ExtResource("1_osplw")
+buff_id = "drum_of_battle"
+buff_name = "战鼓"
+description = "在你的回合开始时，消耗你抽牌堆顶部的{stacks}张牌"
+icon = ExtResource("2_02k3i")
+buff_script = ExtResource("1_1mfvc")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

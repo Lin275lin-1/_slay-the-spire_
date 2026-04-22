@@ -8,6 +8,8 @@ enum Type{
 	PLAYER_LOSE_HP_THIS_TURN, # 本回合失去过生命
 	PLAYER_HAS_BUFF, # 玩家有buff
 	PLAYER_BUFF_MORE_THAN_STACKS, # 玩家buff层数多于stacks
+	PLAYER_EXHAUSTED_CARD_THIS_TURN, # 玩家本回合消耗过卡牌
+	LAST_DRAW_IS_ATTACK, # 上一次抽牌为攻击牌
 }
 
 @export var type: Type = Type.ALWAYS
@@ -17,7 +19,7 @@ enum Type{
 @export var combine_mode: String = "AND"
 @export var extra_params: Dictionary
 
-func is_met(_source: Node, target: Node, context: Dictionary) -> bool:
+func is_met(_source: Node, target: Node, context: Dictionary, previous_result: Variant = null) -> bool:
 	match type:
 		Type.ALWAYS:
 			return true
@@ -41,6 +43,14 @@ func is_met(_source: Node, target: Node, context: Dictionary) -> bool:
 				var buff: Buff = player.get_buff(extra_params.get("buff_name", ""))
 				if buff:
 					return buff.stacks > extra_params.get("stacks", 0)
+		Type.PLAYER_EXHAUSTED_CARD_THIS_TURN:
+			var player: Player = context.get("player")
+			if player.card_exhausted_this_turn > 0:
+				return true
+		Type.LAST_DRAW_IS_ATTACK:
+			previous_result = (previous_result as Card)
+			if previous_result and previous_result.type == Card.Type.ATTACK:
+				return true
 		_:
 			return false
 		
@@ -79,6 +89,11 @@ func is_met_without_context(source: Node, target: Node) -> bool:
 				var buff: Buff = player.get_buff(extra_params.get("buff_name", ""))
 				if buff:
 					return buff.stacks > extra_params.get("stacks", 0)
+		Type.PLAYER_EXHAUSTED_CARD_THIS_TURN:
+			var player: Player = source as Player
+			
+			if player and player.card_exhausted_this_turn > 0:
+				return true
 		_:
 			return false
 		

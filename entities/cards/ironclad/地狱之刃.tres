@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b5y0muf7kfbly"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_gi50x"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_n80od"]
+[ext_resource type="Script" uid="uid://c6aimd4krc1h5" path="res://scripts/costum_resources/card_filter.gd" id="3_3fwr4"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_yejpd"]
+[ext_resource type="Script" uid="uid://ba3wlijo516jr" path="res://scripts/costum_resources/effects/discover_effect.gd" id="4_68jej"]
+[ext_resource type="Texture2D" uid="uid://bxw4xpi" path="res://images/atlases/card_atlas.sprites/ironclad/infernal_blade.tres" id="5_3fwr4"]
+
+[sub_resource type="Resource" id="Resource_wofb2"]
+script = ExtResource("3_3fwr4")
+color_type = 1
+rarity = 7
+metadata/_custom_type_script = "uid://c6aimd4krc1h5"
+
+[sub_resource type="Resource" id="Resource_rs5nc"]
+script = ExtResource("4_68jej")
+card_filter = SubResource("Resource_wofb2")
+first_play_free = true
+animation_name = "cast"
+metadata/_custom_type_script = "uid://ba3wlijo516jr"
+
+[sub_resource type="Resource" id="Resource_7h1hf"]
+script = ExtResource("3_3fwr4")
+color_type = 1
+rarity = 7
+metadata/_custom_type_script = "uid://c6aimd4krc1h5"
+
+[sub_resource type="Resource" id="Resource_rap0h"]
+script = ExtResource("4_68jej")
+card_filter = SubResource("Resource_7h1hf")
+first_play_free = true
+animation_name = "cast"
+metadata/_custom_type_script = "uid://ba3wlijo516jr"
+
+[resource]
+script = ExtResource("3_yejpd")
+id = "地狱之刃"
+type = 2
+base_cost = 1
+rarity = 2
+effects = Array[ExtResource("2_n80od")]([SubResource("Resource_rs5nc")])
+portrait = ExtResource("5_3fwr4")
+base_description = "[center]从三张随机攻击牌种选择一张加入你的手牌。这张牌在本回合内可以免费打出。[/center]"
+exhaust = true
+upgraded_description = "[center]从三张随机攻击牌种选择一张加入你的手牌。这张牌在本回合内可以免费打出。[/center]"
+upgraded_effects = Array[ExtResource("2_n80od")]([SubResource("Resource_rap0h")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"
