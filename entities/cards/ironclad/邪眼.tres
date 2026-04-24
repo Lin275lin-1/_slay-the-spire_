@@ -1,0 +1,124 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cltjgrxa0t7nb"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_tohaa"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_5cs41"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_hft8w"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_up5a8"]
+[ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="4_0vfk0"]
+[ext_resource type="Script" uid="uid://cibjrcipdqbs7" path="res://scripts/costum_resources/condition.gd" id="5_hogt8"]
+[ext_resource type="Script" uid="uid://66oyp04ol1ud" path="res://scripts/costum_resources/effects/condition_effect.gd" id="6_h7cqw"]
+[ext_resource type="Texture2D" uid="uid://b60dq5s" path="res://images/atlases/card_atlas.sprites/ironclad/evil_eye.tres" id="7_0vfk0"]
+
+[sub_resource type="Resource" id="Resource_m4gi3"]
+script = ExtResource("2_5cs41")
+fixed_value = 9
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_m43fc"]
+script = ExtResource("1_tohaa")
+numeric_type = 2
+numeric_provider = SubResource("Resource_m4gi3")
+placeholder = "blocks"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_xpya5"]
+script = ExtResource("2_5cs41")
+fixed_value = 9
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_pthcn"]
+script = ExtResource("4_0vfk0")
+block_provider = SubResource("Resource_xpya5")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_uarlj"]
+script = ExtResource("5_hogt8")
+type = 6
+metadata/_custom_type_script = "uid://cibjrcipdqbs7"
+
+[sub_resource type="Resource" id="Resource_lj27a"]
+script = ExtResource("2_5cs41")
+fixed_value = 9
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_mk7mg"]
+script = ExtResource("4_0vfk0")
+block_provider = SubResource("Resource_lj27a")
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_acwck"]
+script = ExtResource("6_h7cqw")
+condition = SubResource("Resource_uarlj")
+if_effects = Array[ExtResource("2_hft8w")]([SubResource("Resource_mk7mg")])
+target_type = 1
+metadata/_custom_type_script = "uid://66oyp04ol1ud"
+
+[sub_resource type="Resource" id="Resource_e5cpc"]
+script = ExtResource("2_5cs41")
+fixed_value = 11
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_qp8sg"]
+script = ExtResource("4_0vfk0")
+block_provider = SubResource("Resource_e5cpc")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_knu3c"]
+script = ExtResource("5_hogt8")
+type = 6
+metadata/_custom_type_script = "uid://cibjrcipdqbs7"
+
+[sub_resource type="Resource" id="Resource_2yu5b"]
+script = ExtResource("2_5cs41")
+fixed_value = 11
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_omvjy"]
+script = ExtResource("4_0vfk0")
+block_provider = SubResource("Resource_2yu5b")
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_xpqxw"]
+script = ExtResource("6_h7cqw")
+condition = SubResource("Resource_knu3c")
+if_effects = Array[ExtResource("2_hft8w")]([SubResource("Resource_omvjy")])
+target_type = 1
+metadata/_custom_type_script = "uid://66oyp04ol1ud"
+
+[sub_resource type="Resource" id="Resource_qrwie"]
+script = ExtResource("2_5cs41")
+fixed_value = 11
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_poscc"]
+script = ExtResource("1_tohaa")
+numeric_type = 2
+numeric_provider = SubResource("Resource_qrwie")
+placeholder = "blocks"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_up5a8")
+id = "邪眼"
+type = 2
+base_cost = 1
+rarity = 2
+effects = Array[ExtResource("2_hft8w")]([SubResource("Resource_pthcn"), SubResource("Resource_acwck")])
+portrait = ExtResource("7_0vfk0")
+base_description = "[center]获得{blocks}点格挡。
+如果你在本回合[color=gold]消耗过[/color]卡牌，则额外获得{blocks}点[color=gold]格挡[/color]。[/center]"
+base_numeric_entries = Array[ExtResource("1_tohaa")]([SubResource("Resource_m43fc")])
+upgraded_cost = 1
+upgraded_description = "[center]获得{blocks}点格挡。
+如果你在本回合[color=gold]消耗过[/color]卡牌，则额外获得{blocks}点[color=gold]格挡[/color]。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_tohaa")]([SubResource("Resource_poscc")])
+upgraded_effects = Array[ExtResource("2_hft8w")]([SubResource("Resource_qp8sg"), SubResource("Resource_xpqxw")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

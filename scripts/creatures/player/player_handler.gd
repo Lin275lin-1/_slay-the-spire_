@@ -10,7 +10,7 @@ const HAND_DISCARD_INTERVAL := 0.25
 
 var char_stats: CharacterStats
 # 抽一张牌的效果，这是为了将回合开始时的抽牌也压入结算栈中
-var draw_card_effect: DrawCardEffect = DrawCardEffect.new()
+var draw_card_effect_with_iteration: IterationEffect = IterationEffect.new()
 var draw_card_context := {
 	"player": null,
 	"targets": []
@@ -18,7 +18,7 @@ var draw_card_context := {
 
 func _ready() -> void:
 	Events.card_played.connect(_on_card_played)
-	draw_card_effect.draw_card_provider = NumericProvider.new(player.stats.cards_per_turn)
+	draw_card_effect_with_iteration.effects = [DrawCardEffect.new()]
 	draw_card_context["player"] = player
 
 func start_battle(char_stats_: CharacterStats) -> void:
@@ -35,6 +35,11 @@ func start_turn() -> void:
 	relics.activate_relics_by_trigger_type(Relic.TriggerType.START_OF_TURN)
 
 func end_turn() -> void:
+	# 等待其他效果压入调用栈，比如“惊逃”buff
+	# 很丑陋，但是我没办法了
+	await get_tree().process_frame
+	if player.combat_resolver.is_resolving:
+		await player.combat_resolver.resolve_finished
 	player.end_turn()
 	relics.activate_relics_by_trigger_type(Relic.TriggerType.END_OF_TURN)
 
@@ -71,7 +76,8 @@ func add_card_to_hand(card: Card) -> void:
 	#)
 
 func draw_cards() -> void:
-	player.combat_resolver.execute(ResolutionEntry.new(null, [draw_card_effect], draw_card_context, func(): Events.player_hand_drawn.emit()))
+	draw_card_effect_with_iteration.count_provider = NumericProvider.new(char_stats.cards_per_turn)
+	player.combat_resolver.execute(ResolutionEntry.new(null, [draw_card_effect_with_iteration], draw_card_context, func(): Events.player_hand_drawn.emit()))
 
 func disable_hand(flag: bool = true) -> void:
 	for child:CardUI in hand_manager.get_children():
@@ -107,7 +113,11 @@ func discard_cards() -> void:
 			#TODO:卡片消耗特效
 		else:
 			tween.tween_callback(char_stats.discard_pile.add_card.bind(child.card))
-		tween.tween_callback(hand_manager.discard_card.bind(child))
+		tween.tween_callback(
+		func():
+			if is_instance_valid(child):
+				hand_manager.discard_card(child)
+			)
 		tween.tween_interval(HAND_DISCARD_INTERVAL)
 	tween.finished.connect(
 		func(): Events.player_hand_discarded.emit()
@@ -175,6 +185,7 @@ func _on_card_played(card: Card) -> void:
 		return
 	if card.exhaust:
 		char_stats.exhaust_pile.add_card(card)
+		Events.card_exhausted.emit(card)
 	else:
 		put_card_in_discard_pile(card)
 		

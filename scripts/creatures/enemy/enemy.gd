@@ -170,6 +170,7 @@ func lose_health(context: Context) -> int:
 	
 	before_lose_health.emit(context)
 	stats.health -= context.amount
+	after_lose_health.emit(context)
 	damage_number_spawner.spawn_damage_label(context.amount, false)
 
 	if stats.health <= 0:

@@ -1,0 +1,77 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cq4jdaf8q25eg"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_oi1sh"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_514as"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_sn4yw"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_oqwi8"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_shj4x"]
+[ext_resource type="Texture2D" uid="uid://b7pb71j" path="res://images/atlases/card_atlas.sprites/ironclad/inferno.tres" id="5_1h5uh"]
+
+[sub_resource type="Resource" id="Resource_wc2ce"]
+script = ExtResource("2_514as")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_kv2y4"]
+script = ExtResource("1_oi1sh")
+numeric_type = 4
+numeric_provider = SubResource("Resource_wc2ce")
+placeholder = "stacks"
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_c3qpi"]
+script = ExtResource("2_514as")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_l6gyd"]
+script = ExtResource("4_shj4x")
+buff_name = "狱火"
+buff_stack_provider = SubResource("Resource_c3qpi")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_0c0qh"]
+script = ExtResource("2_514as")
+fixed_value = 9
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_1k573"]
+script = ExtResource("4_shj4x")
+buff_name = "狱火"
+buff_stack_provider = SubResource("Resource_0c0qh")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_tp6n8"]
+script = ExtResource("2_514as")
+fixed_value = 9
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_uqsj3"]
+script = ExtResource("1_oi1sh")
+numeric_type = 4
+numeric_provider = SubResource("Resource_tp6n8")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_oqwi8")
+id = "狱火"
+type = 4
+base_cost = 1
+rarity = 2
+effects = Array[ExtResource("2_sn4yw")]([SubResource("Resource_l6gyd")])
+portrait = ExtResource("5_1h5uh")
+base_description = "[center]在你的回合开始时，失去1点生命。
+每当你在你的回合内失去生命时，对所有敌人造成{stacks}点伤害。[/center]"
+base_numeric_entries = Array[ExtResource("1_oi1sh")]([SubResource("Resource_kv2y4")])
+upgraded_cost = 1
+upgraded_description = "[center]在你的回合开始时，失去1点生命。
+每当你在你的回合内失去生命时，对所有敌人造成{stacks}点伤害。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_oi1sh")]([SubResource("Resource_uqsj3")])
+upgraded_effects = Array[ExtResource("2_sn4yw")]([SubResource("Resource_1k573")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

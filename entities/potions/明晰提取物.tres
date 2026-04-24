@@ -8,14 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bpkyafv" path="res://images/atlases/potion_outline_atlas.sprites/clarity.tres" id="6_vjytg"]
 [ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="7_4d3cg"]
 
-[sub_resource type="Resource" id="Resource_1fjsv"]
-script = ExtResource("2_fsslc")
-fixed_value = 1
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
 [sub_resource type="Resource" id="Resource_ey818"]
 script = ExtResource("3_txgeg")
-draw_card_provider = SubResource("Resource_1fjsv")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
 
 [sub_resource type="Resource" id="Resource_5w4ln"]

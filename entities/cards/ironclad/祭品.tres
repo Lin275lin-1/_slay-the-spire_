@@ -1,0 +1,182 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dx5ppg6s0n36o"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_6xwii"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_penda"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_qhaiu"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_gw8fy"]
+[ext_resource type="Script" uid="uid://bgxakc1nj11hm" path="res://scripts/costum_resources/effects/loss_health_effect.gd" id="4_lc1fe"]
+[ext_resource type="Script" uid="uid://c6kvghrfcdtp7" path="res://scripts/costum_resources/effects/gain_energy_effect.gd" id="5_vlpuh"]
+[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="6_ngbe6"]
+[ext_resource type="Script" uid="uid://c8ly86kb5vc65" path="res://scripts/costum_resources/effects/iteration_effect.gd" id="7_s4mga"]
+[ext_resource type="Texture2D" uid="uid://kpywx5" path="res://images/atlases/card_atlas.sprites/ironclad/offering.tres" id="8_8d60e"]
+
+[sub_resource type="Resource" id="Resource_ojvbi"]
+script = ExtResource("2_penda")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_yphmr"]
+script = ExtResource("1_6xwii")
+numeric_type = 1
+numeric_provider = SubResource("Resource_ojvbi")
+placeholder = "lose_health"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_hjn2h"]
+script = ExtResource("2_penda")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_v8emb"]
+script = ExtResource("1_6xwii")
+numeric_type = 6
+numeric_provider = SubResource("Resource_hjn2h")
+placeholder = "energy"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_2ct6x"]
+script = ExtResource("2_penda")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_bsorr"]
+script = ExtResource("1_6xwii")
+numeric_type = 5
+numeric_provider = SubResource("Resource_2ct6x")
+placeholder = "cards"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_bfrnm"]
+script = ExtResource("2_penda")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_whbxj"]
+script = ExtResource("4_lc1fe")
+lose_health_provider = SubResource("Resource_bfrnm")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://bgxakc1nj11hm"
+
+[sub_resource type="Resource" id="Resource_4ohcj"]
+script = ExtResource("2_penda")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ly3rt"]
+script = ExtResource("5_vlpuh")
+energy_provider = SubResource("Resource_4ohcj")
+metadata/_custom_type_script = "uid://c6kvghrfcdtp7"
+
+[sub_resource type="Resource" id="Resource_6dtp8"]
+script = ExtResource("2_penda")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_eiixk"]
+script = ExtResource("6_ngbe6")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_8nv5h"]
+script = ExtResource("7_s4mga")
+count_provider = SubResource("Resource_6dtp8")
+effects = Array[ExtResource("2_qhaiu")]([SubResource("Resource_eiixk")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
+
+[sub_resource type="Resource" id="Resource_rdtp7"]
+script = ExtResource("2_penda")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_leh2g"]
+script = ExtResource("4_lc1fe")
+lose_health_provider = SubResource("Resource_rdtp7")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://bgxakc1nj11hm"
+
+[sub_resource type="Resource" id="Resource_67mal"]
+script = ExtResource("2_penda")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_bt6ct"]
+script = ExtResource("5_vlpuh")
+energy_provider = SubResource("Resource_67mal")
+metadata/_custom_type_script = "uid://c6kvghrfcdtp7"
+
+[sub_resource type="Resource" id="Resource_2ltyb"]
+script = ExtResource("2_penda")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_r27o2"]
+script = ExtResource("6_ngbe6")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_prlgm"]
+script = ExtResource("7_s4mga")
+count_provider = SubResource("Resource_2ltyb")
+effects = Array[ExtResource("2_qhaiu")]([SubResource("Resource_r27o2")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
+
+[sub_resource type="Resource" id="Resource_kcqlp"]
+script = ExtResource("2_penda")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_todvn"]
+script = ExtResource("1_6xwii")
+numeric_type = 1
+numeric_provider = SubResource("Resource_kcqlp")
+placeholder = "lose_health"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_l5ypm"]
+script = ExtResource("2_penda")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ebvpv"]
+script = ExtResource("1_6xwii")
+numeric_type = 6
+numeric_provider = SubResource("Resource_l5ypm")
+placeholder = "energy"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_v7hno"]
+script = ExtResource("2_penda")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_vwvxl"]
+script = ExtResource("1_6xwii")
+numeric_type = 5
+numeric_provider = SubResource("Resource_v7hno")
+placeholder = "cards"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_gw8fy")
+id = "祭品"
+type = 2
+rarity = 4
+effects = Array[ExtResource("2_qhaiu")]([SubResource("Resource_whbxj"), SubResource("Resource_ly3rt"), SubResource("Resource_8nv5h")])
+portrait = ExtResource("8_8d60e")
+base_description = "[center]失去{lose_health}点生命。
+获得{energy}点能量。
+抽{cards}张牌。[/center]"
+base_numeric_entries = Array[ExtResource("1_6xwii")]([SubResource("Resource_yphmr"), SubResource("Resource_v8emb"), SubResource("Resource_bsorr")])
+exhaust = true
+upgraded_description = "[center]失去{lose_health}点生命。
+获得{energy}点能量。
+抽{cards}张牌。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_6xwii")]([SubResource("Resource_todvn"), SubResource("Resource_ebvpv"), SubResource("Resource_vwvxl")])
+upgraded_effects = Array[ExtResource("2_qhaiu")]([SubResource("Resource_leh2g"), SubResource("Resource_bt6ct"), SubResource("Resource_prlgm")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b03h6ce" path="res://images/atlases/card_atlas.sprites/ironclad/battle_trance.tres" id="2_iy161"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_v7ntq"]
 [ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="4_v7ntq"]
+[ext_resource type="Script" uid="uid://c8ly86kb5vc65" path="res://scripts/costum_resources/effects/iteration_effect.gd" id="5_2bjek"]
 [ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="5_me246"]
 [ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_v7ntq"]
 
@@ -21,15 +22,20 @@ placeholder = "cards"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
-[sub_resource type="Resource" id="Resource_2bjek"]
+[sub_resource type="Resource" id="Resource_10hhi"]
 script = ExtResource("2_v7ntq")
 fixed_value = 3
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_10hhi"]
+[sub_resource type="Resource" id="Resource_asgym"]
 script = ExtResource("4_v7ntq")
-draw_card_provider = SubResource("Resource_2bjek")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_tgej0"]
+script = ExtResource("5_2bjek")
+count_provider = SubResource("Resource_10hhi")
+effects = Array[ExtResource("2_cbvpc")]([SubResource("Resource_asgym")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
 
 [sub_resource type="Resource" id="Resource_py8nv"]
 script = ExtResource("2_v7ntq")
@@ -43,15 +49,20 @@ buff_stack_provider = SubResource("Resource_py8nv")
 target_type = 1
 metadata/_custom_type_script = "uid://b8qfrs61nmcix"
 
-[sub_resource type="Resource" id="Resource_asgym"]
+[sub_resource type="Resource" id="Resource_vyx7w"]
 script = ExtResource("2_v7ntq")
 fixed_value = 4
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_tgej0"]
+[sub_resource type="Resource" id="Resource_j7t65"]
 script = ExtResource("4_v7ntq")
-draw_card_provider = SubResource("Resource_asgym")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_f2opv"]
+script = ExtResource("5_2bjek")
+count_provider = SubResource("Resource_vyx7w")
+effects = Array[ExtResource("2_cbvpc")]([SubResource("Resource_j7t65")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
 
 [sub_resource type="Resource" id="Resource_j73js"]
 script = ExtResource("2_v7ntq")
@@ -83,10 +94,10 @@ script = ExtResource("7_v7ntq")
 id = "战斗专注"
 type = 2
 rarity = 2
-effects = Array[ExtResource("2_cbvpc")]([SubResource("Resource_10hhi"), SubResource("Resource_6u03x")])
+effects = Array[ExtResource("2_cbvpc")]([SubResource("Resource_tgej0"), SubResource("Resource_6u03x")])
 portrait = ExtResource("2_iy161")
 base_description = "[center]抽{cards}张牌。[/center][p][center]本回合内[color=gold]无法抽牌[/color][/center]"
 base_numeric_entries = Array[ExtResource("1_3r53d")]([SubResource("Resource_alu25")])
 upgraded_description = "[center]抽{cards}张牌。[/center][p][center]本回合内[color=gold]无法抽牌[/color][/center]"
 upgraded_numeric_entries = Array[ExtResource("1_3r53d")]([SubResource("Resource_b5dql")])
-upgraded_effects = Array[ExtResource("2_cbvpc")]([SubResource("Resource_tgej0"), SubResource("Resource_xc54p")])
+upgraded_effects = Array[ExtResource("2_cbvpc")]([SubResource("Resource_f2opv"), SubResource("Resource_xc54p")])

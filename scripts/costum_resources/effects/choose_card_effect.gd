@@ -1,3 +1,5 @@
+## 这个类耦合度太高了
+## @deprecated: 使用SelectCardEffect
 class_name ChooseCardEffect
 extends Effect
 
@@ -17,14 +19,23 @@ enum Callback{
 	DISCARD,
 	FREE_FOR_COMBAT, # 本场战斗免费打出
 	PUT_INTO_HAND,
-	PUT_INTO_HAND_AND_FIRST_PLAY_FREE # 应该重构的但是我懒得改了
+	PUT_INTO_HAND_AND_FIRST_PLAY_FREE 
+}
+
+enum RandomChooseMode{
+	NONE, # 手动选择
+	ALL, # 自动选择所有卡牌
+	ATTACK, # 自动选择所有攻击牌
+	NON_ATTACK, # 自动选择所有非攻击牌
+	RANDOM, # 随机选择
+	FIRST, # 第一张
 }
 
 @export var callback: Callback
 @export var where: Where
 @export var min_select: int
 @export var max_select: int
-@export var all: bool
+@export var random_choose_mode: RandomChooseMode
 
 func apply(source: Node, _targets: Array[Node], _card_context: Dictionary, _previous_result: Variant = null) -> Variant:
 	var cards: Array[Card]
@@ -45,17 +56,41 @@ func apply(source: Node, _targets: Array[Node], _card_context: Dictionary, _prev
 		await source.get_tree().create_timer(0.1).timeout
 	
 	var card_count: int = 0
-	
-	if all:
-		for card: Card in cards:
-			get_callback(source).call(card)
-			source.agent.update_hand()
-		return len(cards)
-	elif where == Where.HAND:
-		card_count = await source.select_hand(ChooseCardContext.new(source, filter_cards(cards), get_hint_text(), min_select, max_select, get_callback(source), get_selection_mode()))
-	else:
-		card_count = await source.select_deck(ChooseCardContext.new(source, filter_cards(cards), get_hint_text(), min_select, max_select, get_callback(source), get_selection_mode()))
-	return card_count
+	var hook: Callable = get_callback(source)
+	match random_choose_mode:
+		RandomChooseMode.NONE:
+			if where == Where.HAND:
+				card_count = await source.choose_hand(ChooseCardContext.new(source, filter_cards(cards), get_hint_text(), min_select, max_select, hook, get_selection_mode()))
+			else:
+				card_count = await source.choose_deck(ChooseCardContext.new(source, filter_cards(cards), get_hint_text(), min_select, max_select, hook, get_selection_mode()))
+			return card_count
+		RandomChooseMode.ALL:
+			for card: Card in cards:
+				hook.call(card)
+			if where == Where.HAND:
+				source.agent.update_hand()
+			return len(cards)
+		RandomChooseMode.ATTACK:
+			cards = cards.filter(func(card: Card): return card.type == Card.Type.ATTACK)
+			for card: Card in cards:
+				hook.call(card)
+			if where == Where.HAND:
+				source.agent.update_hand()
+			return len(cards)
+		RandomChooseMode.NON_ATTACK:
+			cards = cards.filter(func(card: Card): return card.type != Card.Type.ATTACK)
+			for card: Card in cards:
+				hook.call(card)
+			if where == Where.HAND:
+				source.agent.update_hand()
+			return len(cards)
+		RandomChooseMode.FIRST:
+			if len(cards) > 0:
+				var card: Card = cards[0]
+				hook.call(card)
+				if where == Where.HAND:
+					source.agent.update_hand()
+	return 0
 
 func filter_cards(cards: Array[Card]) -> Array[Card]:
 	match callback:

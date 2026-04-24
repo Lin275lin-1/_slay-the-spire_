@@ -1,0 +1,100 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://du22jyswvyejh"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_lpntx"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_0gy4e"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_deaa7"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_iv6q7"]
+[ext_resource type="Script" uid="uid://cibjrcipdqbs7" path="res://scripts/costum_resources/condition.gd" id="4_ckmpg"]
+[ext_resource type="Script" uid="uid://c6kvghrfcdtp7" path="res://scripts/costum_resources/effects/gain_energy_effect.gd" id="5_f4r3n"]
+[ext_resource type="Script" uid="uid://66oyp04ol1ud" path="res://scripts/costum_resources/effects/condition_effect.gd" id="6_tsi8i"]
+[ext_resource type="Texture2D" uid="uid://id63fk" path="res://images/atlases/card_atlas.sprites/ironclad/forgotten_ritual.tres" id="7_3bcd6"]
+
+[sub_resource type="Resource" id="Resource_gav7s"]
+script = ExtResource("2_0gy4e")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_q0php"]
+script = ExtResource("1_lpntx")
+numeric_type = 6
+numeric_provider = SubResource("Resource_gav7s")
+placeholder = "energy"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_nsfm0"]
+script = ExtResource("4_ckmpg")
+type = 6
+metadata/_custom_type_script = "uid://cibjrcipdqbs7"
+
+[sub_resource type="Resource" id="Resource_w6qmf"]
+script = ExtResource("2_0gy4e")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_nn5wf"]
+script = ExtResource("5_f4r3n")
+energy_provider = SubResource("Resource_w6qmf")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://c6kvghrfcdtp7"
+
+[sub_resource type="Resource" id="Resource_ajith"]
+script = ExtResource("6_tsi8i")
+condition = SubResource("Resource_nsfm0")
+if_effects = Array[ExtResource("2_deaa7")]([SubResource("Resource_nn5wf")])
+target_type = 1
+metadata/_custom_type_script = "uid://66oyp04ol1ud"
+
+[sub_resource type="Resource" id="Resource_aff0n"]
+script = ExtResource("4_ckmpg")
+type = 6
+metadata/_custom_type_script = "uid://cibjrcipdqbs7"
+
+[sub_resource type="Resource" id="Resource_d81kp"]
+script = ExtResource("2_0gy4e")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_yyj8c"]
+script = ExtResource("5_f4r3n")
+energy_provider = SubResource("Resource_d81kp")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://c6kvghrfcdtp7"
+
+[sub_resource type="Resource" id="Resource_4q2k8"]
+script = ExtResource("6_tsi8i")
+condition = SubResource("Resource_aff0n")
+if_effects = Array[ExtResource("2_deaa7")]([SubResource("Resource_yyj8c")])
+target_type = 1
+metadata/_custom_type_script = "uid://66oyp04ol1ud"
+
+[sub_resource type="Resource" id="Resource_4h2la"]
+script = ExtResource("2_0gy4e")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_blft0"]
+script = ExtResource("1_lpntx")
+numeric_type = 6
+numeric_provider = SubResource("Resource_4h2la")
+placeholder = "energy"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_iv6q7")
+id = "被遗忘的仪式"
+type = 2
+base_cost = 1
+rarity = 2
+effects = Array[ExtResource("2_deaa7")]([SubResource("Resource_ajith")])
+portrait = ExtResource("7_3bcd6")
+base_description = "[center]如果你在本回合[color=gold]消耗过[/color]卡牌，则获得{energy}点能量。[/center]"
+base_numeric_entries = Array[ExtResource("1_lpntx")]([SubResource("Resource_q0php")])
+exhaust = true
+upgraded_description = "[center]如果你在本回合[color=gold]消耗过[/color]卡牌，则获得{energy}点能量。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_lpntx")]([SubResource("Resource_blft0")])
+upgraded_effects = Array[ExtResource("2_deaa7")]([SubResource("Resource_4q2k8")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

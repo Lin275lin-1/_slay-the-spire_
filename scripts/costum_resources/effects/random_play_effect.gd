@@ -5,6 +5,7 @@ enum CardSource{
 	SPECIFIED, # 导出的卡牌
 	RANDOM, # where中的随机牌
 	TOP_OF_DECK, 
+	RANDOM_ATTACK, # where中的随机攻击牌
 }
 
 enum Where{
@@ -41,6 +42,10 @@ func apply(source_: Node, _targets: Array[Node], card_context: Dictionary, previ
 			CardSource.TOP_OF_DECK:
 				cards_to_play = candidates.slice(0, value)
 			CardSource.RANDOM:
+				candidates.shuffle()
+				cards_to_play = candidates.slice(0, value)
+			CardSource.RANDOM_ATTACK:
+				candidates = candidates.filter(func(card: Card): return card.type == Card.Type.ATTACK)
 				candidates.shuffle()
 				cards_to_play = candidates.slice(0, value)
 		

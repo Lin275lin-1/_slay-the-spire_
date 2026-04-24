@@ -1,0 +1,74 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://d1fywgxnbcolm"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_1n3xw"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_5ean3"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_f3kuw"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_287k3"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_tebk6"]
+[ext_resource type="Texture2D" uid="uid://b1ntb8v" path="res://images/atlases/card_atlas.sprites/ironclad/rage.tres" id="5_m4vkd"]
+
+[sub_resource type="Resource" id="Resource_k8m1j"]
+script = ExtResource("2_f3kuw")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_nbo8x"]
+script = ExtResource("1_1n3xw")
+numeric_type = 4
+numeric_provider = SubResource("Resource_k8m1j")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_ujkel"]
+script = ExtResource("2_f3kuw")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_o38sf"]
+script = ExtResource("4_tebk6")
+buff_name = "狂怒"
+buff_stack_provider = SubResource("Resource_ujkel")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_kpber"]
+script = ExtResource("2_f3kuw")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_78h6p"]
+script = ExtResource("4_tebk6")
+buff_name = "狂怒"
+buff_stack_provider = SubResource("Resource_kpber")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_7wekq"]
+script = ExtResource("2_f3kuw")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_p4jms"]
+script = ExtResource("1_1n3xw")
+numeric_type = 4
+numeric_provider = SubResource("Resource_7wekq")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_287k3")
+id = "狂怒"
+type = 2
+rarity = 2
+effects = Array[ExtResource("2_5ean3")]([SubResource("Resource_o38sf")])
+portrait = ExtResource("5_m4vkd")
+base_description = "[center]打出此牌后，你在这个回合内每打出一张攻击牌，获得{stacks}点格挡。[/center]"
+base_numeric_entries = Array[ExtResource("1_1n3xw")]([SubResource("Resource_nbo8x")])
+upgraded_description = "[center]打出此牌后，你在这个回合内每打出一张攻击牌，获得{stacks}点格挡。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_1n3xw")]([SubResource("Resource_p4jms")])
+upgraded_effects = Array[ExtResource("2_5ean3")]([SubResource("Resource_78h6p")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

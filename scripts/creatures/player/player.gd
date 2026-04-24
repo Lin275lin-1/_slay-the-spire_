@@ -22,6 +22,8 @@ var attack_played_this_turn := 0
 var skill_played_this_turn := 0
 var energy_used_this_turn := 0
 var health_lost_times_this_turn := 0
+var card_exhausted_this_turn := 0
+var health_lose_times_this_combat := 0
 
 var dead := false
 
@@ -30,6 +32,7 @@ func _ready() -> void:
 	mouse_exited.connect(_on_mouse_exited)
 	Events.card_played.connect(_on_card_played)
 	Events.player_talked.connect(speech)
+	Events.card_exhausted.connect(func(_card: Card):card_exhausted_this_turn += 1)
 	
 func speech(text: String, time: float = 2.5) -> void:
 	speech_bubble.set_text(text, time)
@@ -51,8 +54,8 @@ func discover_card(context: DiscoverContext) -> void:
 	if card:
 		put_card_in_hand(card)
 	
-	
-func select_hand(context: ChooseCardContext) -> int:
+## 弃用
+func choose_hand(context: ChooseCardContext) -> int:
 	var selected: Array[Card]
 	agent.hide_hand()
 	agent.disable_hand()
@@ -67,12 +70,31 @@ func select_hand(context: ChooseCardContext) -> int:
 	agent.show_hand()
 	return len(selected)
 
-func select_deck(context: ChooseCardContext) -> int:
+func select_hand(context: SelectCardContext) -> Array[Card]:
+	var selected: Array[Card]
+	agent.hide_hand()
+	agent.disable_hand()
+	if context.max_select > 1:
+		selected = await hand_selector.multi_select(context.cards as Array[Card], context.title, context.min_select, context.max_select)
+	else:
+		selected = await hand_selector.single_select(context.cards as Array[Card], context.title)
+	agent.update_hand()
+	agent.disable_hand(false)
+	agent.show_hand()
+	return selected
+	
+## 弃用
+func chooose_deck(context: ChooseCardContext) -> int:
 	var selected: Array[Card]
 	selected = await deck_view.select_card_pile(context.cards, context.min_select, context.max_select, context.title, context.selection_mode)
 	for card: Card in selected:
 		context.callback.call(card)
 	return len(selected)
+
+func select_deck(context: SelectCardContext) -> Array[Card]:
+	var selected: Array[Card]
+	selected = await deck_view.select_card_pile(context.cards, context.min_select, context.max_select, context.title, context.selection_mode)
+	return selected
 
 func gain_block(context: Context) -> void:
 	before_gain_block.emit(context)
@@ -89,14 +111,15 @@ func die() -> void:
 	await spine_manager.animation_completed
 	Events.player_died.emit()
 
-func draw_card(context: DrawCardContext) -> int:
+func draw_card(context: DrawCardContext) -> Variant:
 	before_draw_card.emit(context)
+	var card: Card = null
 	if context.amount != 0:
-		var card: Card = agent.draw_card()
+		card = agent.draw_card()
 		context.card = card
 		after_draw_card.emit(context)
 		agent.add_card_to_hand(context.card)
-	return context.amount
+	return card
 	
 #func draw_cards(context: DrawCardContext) -> void:
 	#before_draw_cards.emit(context)
@@ -128,8 +151,10 @@ func lose_health(context: Context) -> int:
 	
 	before_lose_health.emit(context)
 	stats.health -= context.amount
+	after_lose_health.emit(context)
 	if context.amount > 0:
 		health_lost_times_this_turn += 1
+		health_lose_times_this_combat += 1
 	damage_number_spawner.spawn_damage_label(context.amount, false)
 
 	if stats.health <= 0:
@@ -223,11 +248,21 @@ func exhaust_hand_card(card: Card) -> void:
 	agent.exhaust_hand_card(card)
 
 # TODO: 实现这两个方法
-func exhaust_draw_pile_card(card: Card) -> void:
-	pass
-
-func exhaust_discard_pile_card(card: Card) -> void:
-	pass
+func exhaust_draw_pile_card(exhaust_card: Card) -> void:
+	for card: Card in stats.get_draw_pile():
+		if card == exhaust_card:
+			stats.draw_pile.remove_card(card)
+			stats.exhaust_pile.add_card(card)
+			Events.card_exhausted.emit(card)
+			return
+			 
+func exhaust_discard_pile_card(exhaust_card: Card) -> void:
+	for card: Card in stats.get_discard_pile():
+		if card == exhaust_card:
+			stats.discard_pile.remove_card(card)
+			stats.exhaust_pile.add_card(card)
+			Events.card_exhausted.emit(card)
+			return
 
 func start_turn() -> void:
 	before_turn_started.emit(self)
@@ -238,11 +273,13 @@ func start_turn() -> void:
 	attack_played_this_turn = 0
 	skill_played_this_turn = 0
 	energy_used_this_turn = 0
+	card_exhausted_this_turn = 0
 	
 	after_turn_started.emit(self)
 
 func end_turn() -> void:
 	turn_ended.emit(self)
+	
 		
 func _set_char_stats(value: CharacterStats) -> void:
 	stats = value
