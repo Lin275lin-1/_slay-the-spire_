@@ -13,6 +13,10 @@ enum FlagName{
 @export var flag_name: FlagName = FlagName.NONE
 @export var value: bool = false
 
+func _init(flag_name_: FlagName = FlagName.NONE, value_: bool = false) -> void:
+	flag_name = flag_name_
+	value = value_
+
 func execute(source: Node, card_context: Dictionary = {}, _previous_result: Variant = null) -> Variant:
 	var card = (card_context.get("target_card", null) as Card)
 	source = (source as Player)

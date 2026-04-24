@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://bedvckv7ssok1"]
+
+[ext_resource type="Script" uid="uid://by71bvqbtpxho" path="res://scripts/costum_resources/buffs/unmoveable_buff.gd" id="1_7u4dg"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_vunv5"]
+[ext_resource type="Texture2D" uid="uid://ds3wywjc1mlbt" path="res://images/powers/unmovable_power.png" id="2_lmfti"]
+
+[resource]
+script = ExtResource("1_vunv5")
+buff_id = "unmovable"
+buff_name = "不动"
+description = "每个回合你第一次从卡牌中获得[color=gold]格挡[/color]时，将数值翻倍"
+icon = ExtResource("2_lmfti")
+stackable = false
+buff_script = ExtResource("1_7u4dg")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

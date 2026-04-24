@@ -16,6 +16,10 @@ enum TargetPile{
 @export var target_pile: TargetPile = TargetPile.DrawPile
 # 是否放在牌库顶，如果否，在加入卡牌后会随机洗牌
 @export var top: bool = true
+
+func _init(target_pile_: TargetPile = TargetPile.DrawPile, top_: bool = true) -> void:
+	target_pile = target_pile_
+	top = top_
 				
 func execute(source: Node, card_context: Dictionary = {}, _previous_result: Variant = null) -> Variant:
 	var card = card_context.get("target_card", null)

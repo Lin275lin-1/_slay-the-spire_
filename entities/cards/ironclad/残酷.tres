@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dqme0bfba2pii"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_qvuv2"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_j3tdh"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_mtnuv"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_3d3gw"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_h8hae"]
+[ext_resource type="Texture2D" uid="uid://wewk5y" path="res://images/atlases/card_atlas.sprites/ironclad/cruelty.tres" id="5_q8wxu"]
+
+[sub_resource type="Resource" id="Resource_0ay68"]
+script = ExtResource("2_j3tdh")
+fixed_value = 15
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_adnkh"]
+script = ExtResource("1_qvuv2")
+numeric_type = 4
+numeric_provider = SubResource("Resource_0ay68")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_xgc3n"]
+script = ExtResource("2_j3tdh")
+fixed_value = 15
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_7wapk"]
+script = ExtResource("4_h8hae")
+buff_name = "残酷"
+buff_stack_provider = SubResource("Resource_xgc3n")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_qopy5"]
+script = ExtResource("2_j3tdh")
+fixed_value = 25
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_3q80u"]
+script = ExtResource("4_h8hae")
+buff_name = "残酷"
+buff_stack_provider = SubResource("Resource_qopy5")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_frugt"]
+script = ExtResource("2_j3tdh")
+fixed_value = 25
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_hwelp"]
+script = ExtResource("1_qvuv2")
+numeric_type = 4
+numeric_provider = SubResource("Resource_frugt")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_3d3gw")
+id = "残酷"
+base_cost = 1
+rarity = 4
+effects = Array[ExtResource("2_mtnuv")]([SubResource("Resource_7wapk")])
+portrait = ExtResource("5_q8wxu")
+base_description = "[center]对敌人的攻击伤害提高{stacks}%。[/center]"
+base_numeric_entries = Array[ExtResource("1_qvuv2")]([SubResource("Resource_adnkh")])
+upgraded_cost = 1
+upgraded_description = "[center]对敌人的攻击伤害提高{stacks}%。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_qvuv2")]([SubResource("Resource_hwelp")])
+upgraded_effects = Array[ExtResource("2_mtnuv")]([SubResource("Resource_3q80u")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

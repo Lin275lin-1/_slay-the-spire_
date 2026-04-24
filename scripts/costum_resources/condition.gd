@@ -10,6 +10,7 @@ enum Type{
 	PLAYER_BUFF_MORE_THAN_STACKS, # 玩家buff层数多于stacks
 	PLAYER_EXHAUSTED_CARD_THIS_TURN, # 玩家本回合消耗过卡牌
 	LAST_DRAW_IS_ATTACK, # 上一次抽牌为攻击牌
+	EXHAUST_FILE_COUNT_MORE_THAN_COUNT
 }
 
 @export var type: Type = Type.ALWAYS
@@ -51,6 +52,10 @@ func is_met(_source: Node, target: Node, context: Dictionary, previous_result: V
 			previous_result = (previous_result as Card)
 			if previous_result and previous_result.type == Card.Type.ATTACK:
 				return true
+		Type.EXHAUST_FILE_COUNT_MORE_THAN_COUNT:
+			var player: Player = context.get("player")
+			if player:
+				return len(player.get_exhaust_pile()) > extra_params.get("count", 99)
 		_:
 			return false
 		
@@ -94,6 +99,10 @@ func is_met_without_context(source: Node, target: Node) -> bool:
 			
 			if player and player.card_exhausted_this_turn > 0:
 				return true
+		Type.EXHAUST_FILE_COUNT_MORE_THAN_COUNT:
+			var player: Player = source as Player
+			if player:
+				return len(player.get_exhaust_pile()) > extra_params.get("count", 99)
 		_:
 			return false
 		

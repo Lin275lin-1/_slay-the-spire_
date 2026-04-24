@@ -2,9 +2,6 @@
 class_name StrengthBuff
 extends Buff
 
-
-
-	
 func initialize() -> void:
 	if agent and agent.has_signal("before_attack"):
 		agent.connect("before_attack", _on_before_attack)

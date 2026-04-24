@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bhfco4qj3dntc"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_pskqh"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_nqs4x"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_vlwl6"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_woyol"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_w3ecc"]
+[ext_resource type="Texture2D" uid="uid://bed1bsf" path="res://images/atlases/card_atlas.sprites/ironclad/unmovable.tres" id="5_bpek8"]
+
+[sub_resource type="Resource" id="Resource_6gvid"]
+script = ExtResource("3_woyol")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_26fl6"]
+script = ExtResource("4_w3ecc")
+buff_name = "不动"
+buff_stack_provider = SubResource("Resource_6gvid")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_gvch3"]
+script = ExtResource("3_woyol")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_g7cit"]
+script = ExtResource("4_w3ecc")
+buff_name = "不动"
+buff_stack_provider = SubResource("Resource_gvch3")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("3_vlwl6")
+id = "坚定不移"
+type = 4
+base_cost = 2
+rarity = 4
+effects = Array[ExtResource("2_nqs4x")]([SubResource("Resource_26fl6")])
+portrait = ExtResource("5_bpek8")
+base_description = "[center]每个回合你第一次从卡牌中获得[color=gold]格挡[/color]时，将数值翻倍。[/center]"
+upgraded_cost = 1
+upgraded_description = "[center]每个回合你第一次从卡牌中获得[color=gold]格挡[/color]时，将数值翻倍。[/center]"
+upgraded_effects = Array[ExtResource("2_nqs4x")]([SubResource("Resource_g7cit")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

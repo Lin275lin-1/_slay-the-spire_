@@ -316,7 +316,7 @@ func use_energy(amount: int) -> void:
 	stats.energy -= amount
 	energy_used_this_turn += amount
 
-func _on_card_played(card: Card) -> void:
+func _on_card_played(card: Card, _card_context: Dictionary) -> void:
 	
 	if card.type == Card.Type.ATTACK:
 		attack_played_this_turn += 1
