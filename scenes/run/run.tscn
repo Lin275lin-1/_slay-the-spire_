@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://kfd10rulosb7" path="res://scenes/run/run_start_up.tres" id="2_wdonh"]
 [ext_resource type="PackedScene" uid="uid://cdcj73ue1lo5b" path="res://scenes/ui/top_bar/top_bar.tscn" id="4_o4jfg"]
 [ext_resource type="PackedScene" uid="uid://bijk3yg4btssm" path="res://scenes/ui/deck_view.tscn" id="5_gqbdr"]
+[ext_resource type="PackedScene" uid="uid://c00rm6aktjcg8" path="res://scenes/settings/pause_menu.tscn" id="6_5o40y"]
 
 [node name="Run" type="Node" unique_id=185755344]
 script = ExtResource("1_l7o68")
@@ -78,4 +79,9 @@ visible = false
 
 [node name="DeckView" parent="DeckViewLayer" unique_id=1662556681 instance=ExtResource("5_gqbdr")]
 unique_name_in_owner = true
+visible = false
+
+[node name="PauseMenu" parent="." unique_id=1067367733 instance=ExtResource("6_5o40y")]
+process_mode = 3
+layer = 5
 visible = false

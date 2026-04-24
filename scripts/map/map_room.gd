@@ -66,9 +66,9 @@ func set_room(new_data: Room) -> void:
 	sprite_2d.texture = ICONS[room.type][0]
 	sprite_2d.scale = ICONS[room.type][1]
 
-#func show_selected() -> void:
-	#Select_Circle.modulate = Color.BLACK
-	#sprite_2d.modulate.a = 1.0           # 选中后完全不透明	
+func show_selected() -> void:
+	Select_Circle.modulate = Color.BLACK
+	sprite_2d.modulate.a = 1.0           # 选中后完全不透明	
 
 func _on_input_event(_viewport:Node, event:InputEvent, _shape_idx:int) -> void:
 	#print("事件触发, available=", available, ", 动作=", event.as_text())

@@ -3,6 +3,13 @@ extends Control
 
 signal deck_view_requested(deck: Array[Card])
 
+#处理设置按钮点击
+signal settings_requested
+@onready var settings_button: Button = $Right/Settings/TextureRect/settingsButton
+func _on_settings_button_pressed() -> void:
+	settings_requested.emit()
+	
+
 @onready var card_pile_button: CardPileButton = $Right/Deck/CardPileButton
 @onready var avatar: TextureRect = $Left/AvatarContainer/AvatarBg/Avatar
 

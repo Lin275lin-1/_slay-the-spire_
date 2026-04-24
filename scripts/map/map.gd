@@ -14,21 +14,21 @@ const MAP_LINE = preload("res://scenes/map/map_line.tscn")
 @onready var legend: Legend = $Legend_background/Legend
 @onready var legendAll: CanvasLayer = $Legend_background
 
-var scroll_enabled: bool = true   # 滚动是否可用
+@export var scroll_enabled: bool = true   # 滚动是否可用
 
 #var map_data: Array[Array]
 #var floors_climbed: int
-var last_room: Room
-var camera_edge_y: float
+@export var last_room: Room
+@export var camera_edge_y: float
 
-var room_to_lines: Dictionary = {} 
+@export var room_to_lines: Dictionary = {} 
 
-var run_stats: RunStats   # 外部状态
+@export var run_stats: RunStats   # 外部状态
 
-var old_camera_2d_position_y: float
+@export var old_camera_2d_position_y: float
 
 # 预加载的商店场景资源
-var shop_scene_resource: PackedScene = null
+@export var shop_scene_resource: PackedScene = null
 
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS -1)
@@ -98,10 +98,19 @@ func generate_new_map() -> void:
 	run_stats.map_data = map_generator.generate_map()
 	create_map()
 	
+func load_map(stats:RunStats,last_room_climbed:Room)->void:
+	run_stats = stats
+	last_room=last_room_climbed
+	if run_stats.map_data.is_empty():
+		generate_new_map()
+	else:
+		create_map()
+	if run_stats.floors_climbed>0:
+		unlock_next_rooms()
+	else:
+		unlock_floor()
+	
 func create_map() -> void:
-	
-	
-	
 	for current_floor: Array in run_stats.map_data:
 		for room: Room in current_floor:
 			if room.next_rooms.size() >0:

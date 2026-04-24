@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://v5fhk" path="res://images/atlases/card_atlas.sprites/ironclad/armaments.tres" id="2_qyk1p"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_x6sth"]
 [ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="4_42s83"]
-[ext_resource type="AudioStream" uid="uid://cnxfhtrl0n8nm" path="res://audio/SFX/frost_orb_passive.mp3" id="4_auaqv"]
+[ext_resource type="AudioStream" uid="uid://debelv08fuh1w" path="res://audio/SFX/frost_orb_passive.mp3" id="4_auaqv"]
 [ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="5_61rnp"]
 [ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_hb7p8"]
 
