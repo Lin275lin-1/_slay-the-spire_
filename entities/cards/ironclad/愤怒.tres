@@ -5,16 +5,10 @@
 [ext_resource type="Resource" uid="uid://bxfmhxgwl7qn1" path="res://entities/enchantments/锋利.tres" id="2_cdnap"]
 [ext_resource type="Texture2D" uid="uid://6ony3r" path="res://images/atlases/card_atlas.sprites/ironclad/anger.tres" id="2_o32pn"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_oj80b"]
-<<<<<<< HEAD
-[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_2a7o5"]
-[ext_resource type="AudioStream" uid="uid://b4eqc65cqogm6" path="res://audio/SFX/blunt_attack.mp3" id="4_u3nrw"]
-[ext_resource type="Script" uid="uid://bfd4cqklwdhs3" path="res://scripts/costum_resources/effects/put_card_effect.gd" id="5_20lup"]
-=======
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_6ni0n"]
 [ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_u3nrw"]
 [ext_resource type="Script" uid="uid://bfd4cqklwdhs3" path="res://scripts/costum_resources/effects/put_card_effect.gd" id="5_oj80b"]
 [ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="8_6ni0n"]
->>>>>>> 366aec0e7a48e460ab6d35934a1c3d468b366769
 
 [sub_resource type="Resource" id="Resource_05mso"]
 script = ExtResource("2_6ni0n")

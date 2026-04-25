@@ -39,12 +39,7 @@ enum Rarity{
 ## 使用比特判断类型	 比特从右往左一次为 商店遗物，先古(boss)遗物，普通遗物，初始遗物
 ## e.g. 输入0b1010: 普通遗物+商店遗物
 @export_range(0, 15) var relic_type: int
-<<<<<<< HEAD
-
-
-=======
 @export var effects: Array[Effect]
->>>>>>> 366aec0e7a48e460ab6d35934a1c3d468b366769
 
 func initialize_relic(_owner: RelicUI) -> void:
 	pass

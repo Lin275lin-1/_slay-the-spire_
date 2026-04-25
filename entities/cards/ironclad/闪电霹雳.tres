@@ -5,10 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://x6dqru" path="res://images/atlases/card_atlas.sprites/ironclad/thunderclap.tres" id="2_s5fly"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_t8ehc"]
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_i2oj1"]
-<<<<<<< HEAD
-[ext_resource type="AudioStream" uid="uid://5hkfxlyqq0tx" path="res://audio/SFX/lightning_orb_evoke.mp3" id="4_ovux8"]
-=======
->>>>>>> 366aec0e7a48e460ab6d35934a1c3d468b366769
 [ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="5_bbw44"]
 [ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_gi2mb"]
 

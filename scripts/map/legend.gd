@@ -18,9 +18,9 @@ func _ready():
 	$ChestIcon.mouse_entered.connect(_on_icon_entered.bind(Room.Type.TREASURE))
 	$ChestIcon.mouse_exited.connect(_on_icon_exited)
 	
-	$BossIcon.mouse_entered.connect(_on_icon_entered.bind(Room.Type.BOSS))
-	$BossIcon.mouse_exited.connect(_on_icon_exited)
-	
+	#$BossIcon.mouse_entered.connect(_on_icon_entered.bind(Room.Type.BOSS))
+	#$BossIcon.mouse_exited.connect(_on_icon_exited)
+	#
 	$EliteIcon.mouse_entered.connect(_on_icon_entered.bind(Room.Type.ELITE))
 	$EliteIcon.mouse_exited.connect(_on_icon_exited)
 	

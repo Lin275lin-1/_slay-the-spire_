@@ -1,44 +1,251 @@
-[gd_scene format=3 uid="uid://biut3gg2m2x80"]
+[gd_scene format=3 uid="uid://dgociq66jscru"]
 
-[ext_resource type="Script" uid="uid://dhaqaax2hxeqj" path="res://scripts/rooms/treasure_room/treasure_room.gd" id="1_y2iv3"]
+[ext_resource type="Texture2D" uid="uid://b3y04h5kyjxn4" path="res://images/vfx/dot.png" id="1_b3ajw"]
+[ext_resource type="Script" uid="uid://dhaqaax2hxeqj" path="res://scripts/rooms/treasure_room/treasure_room.gd" id="1_tr4x5"]
+[ext_resource type="Texture2D" uid="uid://bdjpa6mp5bple" path="res://images/packed/vfx/generic/twinkle_star.png" id="2_3thi6"]
+[ext_resource type="Texture2D" uid="uid://sx01rrq77xc5" path="res://images/ui/reward_screen/reward_banner.png" id="4_ilwlc"]
+[ext_resource type="Texture2D" uid="uid://kbk0da" path="res://images/atlases/ui_atlas.sprites/proceed_button.tres" id="6_ilwlc"]
+[ext_resource type="Texture2D" uid="uid://bfgnbi8cra37q" path="res://images/packed/vfx/coin_flip_anim.png" id="13_gfpvi"]
 
-[node name="TreasureRoom" type="Control" unique_id=1266712932]
+[sub_resource type="Curve" id="Curve_tr4x5"]
+_data = [Vector2(0.020833328, 0.20754719), 0.0, 0.0, 0, 0, Vector2(0.49479166, 0.35094345), -0.13800558, -0.13800558, 0, 0, Vector2(0.859375, 0.17735851), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_tr4x5"]
+colors = PackedColorArray(1, 0.84313726, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7io1s"]
+texture = ExtResource("4_ilwlc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_005ub"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gfpvi"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 3
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_bbyxe"]
+_data = [Vector2(0, 0), 0.0, 6.4895, 0, 0, Vector2(0.210821, 0.94636), 0.929028, 0.929028, 0, 0, Vector2(0.636194, 0.823755), -1.21935, -1.21935, 0, 0, Vector2(1, 0), -0.133354, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_qvk5y"]
+curve = SubResource("Curve_bbyxe")
+
+[sub_resource type="Gradient" id="Gradient_gfpvi"]
+offsets = PackedFloat32Array(0, 0.595745)
+colors = PackedColorArray(0.342581, 0.342581, 0.342581, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0okix"]
+gradient = SubResource("Gradient_gfpvi")
+width = 64
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y6pmb"]
+lifetime_randomness = 0.2
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(2, 1, 1)
+emission_shape = 1
+emission_sphere_radius = 150.0
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, -1, 0)
+spread = 40.0
+initial_velocity_min = 150.0
+initial_velocity_max = 600.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+gravity = Vector3(0, 800, 0)
+attractor_interaction_enabled = false
+scale_min = 0.8
+scale_max = 1.2
+color_ramp = SubResource("GradientTexture1D_0okix")
+alpha_curve = SubResource("CurveTexture_qvk5y")
+hue_variation_min = -0.01
+hue_variation_max = 0.00999998
+anim_speed_max = 0.56
+anim_offset_max = 1.0
+collision_mode = 1
+collision_friction = 0.5
+collision_bounce = 0.75
+collision_use_scale = true
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fc3o3"]
+polygon = PackedVector2Array(1003, 190, 925, 262, -988, 257, -1074, 200)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3thi6"]
+load_path = "res://.godot/imported/sunken_treasury.png-191fb5ec0339a644b06f8f06e8b0f69e.ctex"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7io1s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_005ub"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g2e3x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1q5ur"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_usnyd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jctvt"]
+
+[node name="TreasureRoom" type="Control" unique_id=692000113]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_y2iv3")
+mouse_filter = 1
+script = ExtResource("1_tr4x5")
 
-[node name="Label" type="Label" parent="." unique_id=488723113]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1436998394]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -26.0
-offset_top = -102.0
-offset_right = 20.0
-offset_bottom = -53.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "宝箱房"
+mouse_filter = 2
+color = Color(0, 0, 0, 0.44705883)
 
-[node name="Button" type="Button" parent="." unique_id=1912887378]
+[node name="Chest" type="Control" parent="." unique_id=1181917001]
+unique_name_in_owner = true
+z_index = 1
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -50.0
-offset_right = 100.0
-offset_bottom = 50.0
+anchor_left = 0.42800003
+anchor_top = 0.439
+anchor_right = 0.42800003
+anchor_bottom = 0.439
+offset_left = -219.76007
+offset_top = -108.120026
+offset_right = 255.23993
+offset_bottom = 191.87997
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ChestVisual" type="SpineSprite" parent="Chest" unique_id=1902831461]
+unique_name_in_owner = true
+position = Vector2(-604, -301)
+scale = Vector2(0.4, 0.4)
+
+[node name="Sparkles" type="CPUParticles2D" parent="Chest" unique_id=2119854917]
+position = Vector2(275, 82)
+amount = 70
+texture = ExtResource("2_3thi6")
+lifetime = 1.5
+explosiveness = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 0.01
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_tr4x5")
+color_ramp = SubResource("Gradient_tr4x5")
+
+[node name="PointLight2D" type="PointLight2D" parent="Chest" unique_id=1331740207]
+position = Vector2(1292, -343.00003)
+scale = Vector2(15.786133, 7.695312)
+energy = 4.81
+texture = ExtResource("1_b3ajw")
+metadata/_edit_lock_ = true
+
+[node name="Line2D" type="Line2D" parent="Chest" unique_id=1105441034]
+points = PackedVector2Array(97, 65, 104, 65, 107, 64, 111, 64, 114, 63, 117, 62, 123, 63, 127, 62, 130, 62, 134, 62, 139, 61, 144, 60, 148, 59, 154, 59, 159, 58, 163, 58, 168, 58, 172, 56, 175, 56, 180, 56, 183, 55, 187, 53, 195, 53, 199, 51, 203, 51, 211, 48, 216, 48, 219, 47, 223, 47, 229, 46, 235, 45, 238, 45, 243, 43, 246, 43, 250, 41, 256, 41, 258, 42, 263, 40, 266, 39, 271, 37, 274, 33, 275, 29, 280, 25, 284, 20, 289, 18, 293, 16, 296, 14, 301, 11, 305, 9, 305, 15, 303, 18, 301, 19, 300, 24, 301, 29, 299, 34, 300, 39, 303, 42, 307, 46, 309, 45, 312, 46, 317, 47, 320, 48, 323, 48, 330, 50, 334, 50, 339, 53, 350, 56, 362, 58, 383, 63, 398, 67, 413, 71, 419, 73, 426, 66, 434, 64, 441, 60, 448, 57, 453, 56, 458, 56, 462, 55, 468, 58, 471, 59, 471, 61, 467, 67, 463, 72, 457, 76, 451, 85, 450, 87, 442, 95, 444, 101, 446, 104, 447, 109, 450, 117, 441, 127, 440, 136, 438, 145, 440, 155, 441, 162, 441, 174, 441, 185, 438, 201, 440, 207, 439, 222, 444, 231, 451, 232, 438, 236, 426, 234, 415, 237, 399, 239, 387, 244, 370, 248, 360, 253, 347, 257, 337, 259, 328, 260, 316, 263, 306, 265, 299, 268, 294, 270, 281, 274, 271, 277, 258, 281, 246, 281, 240, 287, 237, 291, 233, 295, 218, 296, 209, 289, 205, 282, 205, 279, 190, 276, 186, 271, 177, 269, 167, 263, 159, 260, 147, 253, 141, 251, 139, 251, 137, 238, 136, 231, 135, 219, 135, 213, 131, 209, 126, 205, 119, 198, 110, 194, 98, 189, 89, 187, 84, 184, 77, 181, 73, 179, 67, 171, 68, 159, 67, 138, 64, 124, 59, 114, 56, 97, 58, 88, 54, 78, 45, 69, 38, 64, 29, 60, 24, 49, 32, 43, 39, 48, 45, 47, 50, 47, 60, 50, 73, 50, 79, 52, 86, 54, 89, 59, 93, 63, 96, 64, 98, 65)
+closed = true
+
+[node name="center" type="PointLight2D" parent="Chest" unique_id=2073957725]
+position = Vector2(324.5, 68.00008)
+scale = Vector2(9.839846, 4.960938)
+color = Color(0.9098039, 0.35686275, 0.35686275, 1)
+energy = 0.0
+texture = ExtResource("1_b3ajw")
+
+[node name="HandsContainer" type="Control" parent="." unique_id=848388474]
+unique_name_in_owner = true
+light_mask = 2
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="HandsContainer" unique_id=931523199]
+light_mask = 2
+layout_mode = 0
+offset_left = 571.0
+offset_top = 201.0
+offset_right = 1179.0
+offset_bottom = 320.0
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_7io1s")
+theme_override_styles/focus = SubResource("StyleBoxTexture_005ub")
+text = "What's Inside?"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="HandsContainer" unique_id=287562960]
+light_mask = 4
+visibility_layer = 2
+z_index = 1
+anchors_preset = 0
+offset_left = 766.0
+offset_top = 357.0
+offset_right = 978.0
+offset_bottom = 512.0
+
+[node name="GoldExplosion" type="GPUParticles2D" parent="." unique_id=153827581]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_gfpvi")
+position = Vector2(864, 500)
+emitting = false
+amount = 500
+texture = ExtResource("13_gfpvi")
+lifetime = 2.5
+one_shot = true
+speed_scale = 1.8
+explosiveness = 0.5
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_y6pmb")
+
+[node name="GoldExplosionCollider" type="LightOccluder2D" parent="." unique_id=907708133]
+position = Vector2(997, 842)
+occluder = SubResource("OccluderPolygon2D_fc3o3")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1098497176]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -169.0
+offset_top = -355.0
+offset_right = 1351.0
+offset_bottom = 181.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("CompressedTexture2D_3thi6")
+metadata/_edit_lock_ = true
+
+[node name="Button" type="Button" parent="." unique_id=246102532]
+layout_mode = 0
+offset_left = 1669.0
+offset_top = 750.0
+offset_right = 1911.0
+offset_bottom = 887.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7io1s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_005ub")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_g2e3x")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_1q5ur")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_usnyd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jctvt")
 text = "返回地图"
-
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+icon = ExtResource("6_ilwlc")
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_lock_ = true

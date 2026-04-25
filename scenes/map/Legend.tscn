@@ -8,9 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://ba4j0gn" path="res://images/atlases/ui_atlas.sprites/map/icons/map_elite.tres" id="7_jx14c"]
 [ext_resource type="Texture2D" uid="uid://lplp03" path="res://images/atlases/ui_atlas.sprites/map/icons/map_unknown.tres" id="8_m2r12"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2rcfn"]
-load_path = "res://.godot/imported/vantom_boss_icon.png-16fef2eb5e2154e126528cb76a7c574b.ctex"
-
 [node name="Legend" type="Control" unique_id=1221335584]
 layout_mode = 3
 anchor_left = 0.869
@@ -28,30 +25,12 @@ script = ExtResource("1_s1h33")
 
 [node name="Label2" type="Label" parent="." unique_id=1873783159]
 layout_mode = 0
-offset_left = 1601.0
-offset_top = 265.0
-offset_right = 1850.0
-offset_bottom = 300.0
+offset_left = 1600.5881
+offset_top = 289.41177
+offset_right = 1849.5881
+offset_bottom = 324.41177
 text = "Legend"
 horizontal_alignment = 1
-
-[node name="BossIcon" type="TextureRect" parent="." unique_id=1094007488]
-layout_mode = 0
-offset_left = 1661.0
-offset_top = 289.0
-offset_right = 1699.0
-offset_bottom = 325.0
-texture = SubResource("CompressedTexture2D_2rcfn")
-expand_mode = 2
-
-[node name="Label" type="Label" parent="." unique_id=599050301]
-layout_mode = 0
-offset_left = 1713.0
-offset_top = 301.0
-offset_right = 1744.0
-offset_bottom = 319.0
-theme_override_font_sizes/font_size = 13
-text = "Boss"
 
 [node name="CampfireIcon" type="TextureRect" parent="." unique_id=1918132132]
 layout_mode = 0

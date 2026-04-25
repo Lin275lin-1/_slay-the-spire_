@@ -8,6 +8,7 @@ const MAP_SCENE := preload("res://scenes/map/map.tscn")
 const SHOP_SCENE := preload("res://scenes/rooms/shop_room/shop_room.tscn")
 const TREASURE_SCENE := preload("res://scenes/rooms/treasure_room/treasure_room.tscn")
 const INCIDENT_SCENE := preload("res://scenes/rooms/incident_room/incident_room.tscn")
+const ANCIENT_SCENE := preload("res://scenes/rooms/ancient_room/ancient_room.tscn")
 
 const BATTLE_REWARD_SCENE = preload("res://scenes/rooms/reward/reward_room.tscn")
 
@@ -29,10 +30,8 @@ const BATTLE_REWARD_SCENE = preload("res://scenes/rooms/reward/reward_room.tscn"
 @export var run_startup: RunStartup
 
 var character: CharacterStats
-
 var stats: RunStats
 
-# 异步加载状态变量
 var loading_status: int = 0
 
 
@@ -47,44 +46,39 @@ func _ready() -> void:
 		RunStartup.Type.CONTINUE_RUN:
 			map_node.init(stats)
 			print("加载游戏")
-	
-	#	debug
-	_print_runstats_arrays(stats)
-	
+
+
 func _on_map_room_selected(room: Room) -> void:
-	_print_runstats_arrays(stats)
-	var scene: PackedScene
 	match room.type:
 		Room.Type.MONSTER, Room.Type.ELITE, Room.Type.BOSS:
 			_on_combat_room_entered(room)
 			return
 		Room.Type.TREASURE:
-			scene = TREASURE_SCENE
+			_on_treasure_room_entered(room)
+			return
 		Room.Type.SHOP:
-			scene = SHOP_SCENE
+			_on_shop_room_entered(room)
+			return
 		Room.Type.CAMPFIRE:
 			_on_campfire_room_entered(room)
 			return
 		Room.Type.UNKNOWN:
-			scene = INCIDENT_SCENE
 			_on_incident_room_entered(room)
 			return
-
+		Room.Type.ANCIENT:
+			_on_ancient_room_entered(room)
+			return
 		_:
 			return
 
-	if room.type == Room.Type.SHOP:
-		call_deferred("_change_view_deferred", scene)
-	else:
-		await _change_view(scene)
-		
+
 func _start_run() -> void:
 	stats = RunStats.new()
 	_setup_event_connections()
 	_setup_top_bar()
 	map_node.init(stats)
 	_show_map()
-	_print_runstats_arrays(stats)
+
 
 func _setup_top_bar() -> void:
 	top_bar.run_stats = stats  
@@ -93,31 +87,23 @@ func _setup_top_bar() -> void:
 	top_bar.deck_view_requested.connect(deck_view.show_card_pile.bind("你在战斗中将会使用这里的所有卡牌。", false))
 	top_bar.relic_handler.add_relic(character.starting_relic)
 
+
 func _change_view(scene: PackedScene) -> Node:
 	if current_room.get_child_count() > 0:
 		current_room.get_child(0).queue_free()
 	
-	# 商店场景特殊处理：使用地图中预加载的资源
-	if scene == SHOP_SCENE:
-		var loaded_scene = map_node.get_shop_scene()
-		if loaded_scene == null:
-			# 如果资源还未加载完成，回退同步加载
-			loaded_scene = load(scene.resource_path)
-		var new_view = loaded_scene.instantiate()
-		current_room.add_child.call_deferred(new_view)
-		return new_view
-	
-	# 其他场景正常处理
 	var new_view := scene.instantiate()
 	current_room.add_child(new_view)
 	return new_view
-	
+
+
 func _on_combat_won() -> void:
 	var reward_scene := await _change_view(BATTLE_REWARD_SCENE) as BattleReward
 	reward_scene.run_stats = stats
 	reward_scene.character_stats = character
 	reward_scene.add_gold_reward(map_node.last_room.enemy_encounter.roll_gold_reward())
 	reward_scene.add_card_reward()
+
 
 func _setup_event_connections() -> void:
 	Events.combat_won.connect(_on_combat_won)
@@ -127,11 +113,11 @@ func _setup_event_connections() -> void:
 	Events.treasure_room_exited.connect(_on_room_exited)
 	Events.incident_exited.connect(_on_room_exited)
 	Events.campfire_exited.connect(_on_room_exited)
+	Events.ancient_exited.connect(_on_room_exited)
 	
 	Events.map_exited.connect(_on_map_exited)
 	map.pressed.connect(_show_map)
 	
-	# 测试按钮 - 使用包装函数
 	combat.pressed.connect(_on_combat_room_entered.bind(null))
 	rewards.pressed.connect(_on_rewards_pressed)
 	treasure.pressed.connect(_on_treasure_pressed)
@@ -139,26 +125,32 @@ func _setup_event_connections() -> void:
 	campfire.pressed.connect(_on_campfire_pressed)
 	incident.pressed.connect(_on_incident_pressed)
 
+	# 先古遗物选择信号（全局连接一次）
+	Events.ancient_relic_selected.connect(_on_ancient_relic_selected)
+
+
 # 测试按钮包装函数
 func _on_rewards_pressed():
 	await _change_view(COMBAT_REWARD_SCENE)
 
 func _on_treasure_pressed():
-	await _change_view(TREASURE_SCENE)
+	_on_treasure_room_entered(null)
 
 func _on_shop_pressed():
-	await _change_view(SHOP_SCENE)
+	_on_shop_room_entered(null)
 
 func _on_campfire_pressed():
-	await _change_view(CAMPFIRE_SCENE)
+	_on_campfire_room_entered(null)
 
 func _on_incident_pressed():
-	await _change_view(INCIDENT_SCENE)
+	_on_incident_room_entered(null)
+
 
 func _show_map() -> void:
 	if current_room.get_child_count() > 0:
 		current_room.get_child(0).hide()
-	map_node.show_map()	
+	map_node.show_map()
+
 
 func _on_map_exited() -> void:
 	map_node.hide()
@@ -166,10 +158,11 @@ func _on_map_exited() -> void:
 		current_room.get_child(0).show()
 	print("map_exited")
 
+
 func _on_room_exited() -> void:
-	_print_runstats_arrays(stats)
 	map_node.complete_current_room()
 	_show_map()
+
 
 func _on_combat_room_entered(room: Room = null):
 	var battle_scene :CombatRoom = await _change_view(COMBAT_SCENE)
@@ -180,105 +173,36 @@ func _on_combat_room_entered(room: Room = null):
 	battle_scene.start_combat()
 
 
-#func _on_campfire_room_entered(room: Room) -> void:
-	#var campfire_scene :CampfireRoom = await _change_view(CAMPFIRE_SCENE) as CampfireRoom
-	#campfire_scene.char_stats = character
-	#campfire_scene.deck_view = deck_view
+func _on_campfire_room_entered(room: Room) -> void:
+	var campfire_scene :CampfireRoom = await _change_view(CAMPFIRE_SCENE) as CampfireRoom
+	campfire_scene.char_stats = character
+	campfire_scene.deck_view = select_deck_view
+	campfire_scene.initialize()
 
-func _change_view_deferred(scene: PackedScene) -> void:
-	await _change_view(scene)
 
-func _on_campfire_room_entered(room: Room)-> void:
-	var capfire_scene :CampfireRoom = _change_view(CAMPFIRE_SCENE) as CampfireRoom
-	capfire_scene.char_stats=character
-	capfire_scene.deck_view = select_deck_view
-	capfire_scene.initialize()
-
-	
-func _on_incident_room_entered(room: Room)->void:
-	var incident_scene :IncidentRoom = _change_view(INCIDENT_SCENE) as IncidentRoom
+func _on_incident_room_entered(room: Room) -> void:
+	var incident_scene :IncidentRoom = await _change_view(INCIDENT_SCENE) as IncidentRoom
 	incident_scene.char_stats = character
-	incident_scene.run_stats=stats
-	incident_scene.deck_view= select_deck_view
+	incident_scene.run_stats = stats
+	incident_scene.deck_view = select_deck_view
 	incident_scene.init()
-	
 
 
-#内容打印
-func _print_runstats_arrays(stats: RunStats) -> void:
-	if not stats:
-		print("❌ stats 为空")
-		return
-	
-	print("========== RunStats 数组内容 ==========")
-	
-	# 1. 遗物数组 (relics)
-	print("📦 Relics (%d):" % stats.relics.size())
-	if stats.relics.is_empty():
-		print("   (无遗物)")
-	else:
-		for i in range(stats.relics.size()):
-			var relic: Relic = stats.relics[i]
-			if relic:
-				print("   [%d] %s (ID: %s, Type: %s)" % [i, relic.relic_name, relic.id, _relic_type_to_string(relic.relic_type)])
-			else:
-				print("   [%d] null" % i)
-	
-	# 2. 药水数组 (potions)，可能包含 null
-	print("🧪 Potions (%d slots, max %d):" % [stats.potions.size(), stats.max_potion_slots])
-	if stats.potions.is_empty():
-		print("   (无药水栏位)")
-	else:
-		for i in range(stats.potions.size()):
-			var potion: Potion = stats.potions[i]
-			if potion:
-				print("   [%d] %s (ID: %s, Rarity: %s)" % [i, potion.potion_name, potion.id, _potion_rarity_to_string(potion.rarity)])
-			else:
-				print("   [%d] 空栏位" % i)
-	
-	# 3. 地图数据 (map_data) - 二维数组
-	#print("🗺️ Map Data (楼层数: %d, 已攀爬: %d):" % [stats.map_data.size(), stats.floors_climbed])
-	#if stats.map_data.is_empty():
-		#print("   (无地图数据)")
-	#else:
-		#for floor_idx in range(stats.map_data.size()):
-			#var floor_rooms: Array = stats.map_data[floor_idx]
-			#print("   Floor %d: %d 个房间" % [floor_idx, floor_rooms.size()])
-			#for room_idx in range(floor_rooms.size()):
-				#var room = floor_rooms[room_idx]
-				#if room and room is Room:
-					## 假设 Room 有 type 和 node_name 属性
-					#print("      Room %d: %s (Type: %s)" % [room_idx, room.node_name if "node_name" in room else "未命名", _room_type_to_string(room.type)])
-				#else:
-					#print("      Room %d: 无效房间数据" % room_idx)
+func _on_shop_room_entered(room: Room) -> void:
+	# 商店脚本会自己通过父节点找到 Run 并获取 run_stats / character，无需额外传参
+	await _change_view(SHOP_SCENE)
 
-# 辅助函数：将遗物类型比特值转为可读字符串
-func _relic_type_to_string(type_bits: int) -> String:
-	var types = []
-	if type_bits & Relic.RelicType.STARTER_RELIC: types.append("初始")
-	if type_bits & Relic.RelicType.NORMAL_RELIC: types.append("普通")
-	if type_bits & Relic.RelicType.ANCIENT_RELIC: types.append("先古")
-	if type_bits & Relic.RelicType.SHOP_RELIC: types.append("商店")
-	return ", ".join(types) if not types.is_empty() else "未知"
 
-# 辅助函数：药水稀有度转字符串
-func _potion_rarity_to_string(rarity: Potion.Rarity) -> String:
-	match rarity:
-		Potion.Rarity.COMMON: return "普通"
-		Potion.Rarity.UNCOMMON: return "罕见"
-		Potion.Rarity.RARE: return "稀有"
-		_: return "未知"
+func _on_treasure_room_entered(room: Room) -> void:
+	# 宝藏房间同理（假设它内部也有类似的初始化机制）
+	await _change_view(TREASURE_SCENE)
 
-# 辅助函数：房间类型转字符串（假设 Room.Type 枚举存在）
-func _room_type_to_string(room_type) -> String:
-	# 请根据实际 Room.Type 枚举调整
-	var type_names = {
-		0: "怪物",
-		1: "精英",
-		2: "BOSS",
-		3: "宝藏",
-		4: "商店",
-		5: "篝火",
-		6: "未知"
-	}
-	return type_names.get(room_type, "未知类型")
+
+func _on_ancient_room_entered(room: Room) -> void:
+	# 先古房自己管理遗物逻辑，这部分完全在 ancient_room.gd 内处理
+	await _change_view(ANCIENT_SCENE)
+
+
+func _on_ancient_relic_selected(relic: Relic) -> void:
+	# 将选中的先古遗物添加到玩家遗物栏
+	top_bar.relic_handler.add_relic(relic)

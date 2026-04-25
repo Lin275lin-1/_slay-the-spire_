@@ -113,7 +113,7 @@ func create_map() -> void:
 	
 	_spawn_room(run_stats.map_data[MapGenerator.FLOORS-1][middle])
 	var map_width_pixels := MapGenerator.X_DIST * (MapGenerator.MAP_WIDTH -1)
-	var map_width_pixeLs := MapGenerator.X_DIST * (MapGenerator.MAP_WIDTH -1)
+	
 	visuals.position.x = (get_viewport_rect().size.x - map_width_pixels) / 2
 	visuals.position.y = get_viewport_rect().size.y / 2
 	
@@ -141,19 +141,23 @@ func hide_map() -> void:
 	
 func _spawn_room(room: Room) -> void:
 	var new_map_room := MAP_ROOM.instantiate() as MapRoom
+	rooms.add_child(new_map_room)   # 先加入场景树，让 @onready 变量完成初始化
+	
+	# 现在可以安全访问 Select_Circle 了
 	if room.type == Room.Type.CAMPFIRE or room.type == Room.Type.SHOP:
-		new_map_room.scale = Vector2(1.3, 1.3)
+		new_map_room.scale = Vector2(1.4, 1.4)
+		new_map_room.Select_Circle.scale = Vector2(1.0, 1.0 )
 	else:
 		new_map_room.scale = Vector2(1.0005, 1.0005)
-	rooms.add_child(new_map_room)
-	new_map_room.room =room
+		new_map_room.Select_Circle.scale = Vector2(1.3,1.3)
+	new_map_room.room = room
 	new_map_room.selected.connect(_on_map_room_selected)
-	
-	
 	_connect_lines(room)
 	
 	if room.selected and room.row < run_stats.floors_climbed:
 		new_map_room.show_selected()
+		
+	new_map_room.original_scale = new_map_room.scale
 		
 func _connect_lines(room: Room) -> void:
 	if room.next_rooms.is_empty():
@@ -173,7 +177,6 @@ func _on_map_room_selected(room: Room) -> void:
 	# 将本函数中原有的所有 UI 更新逻辑延迟到下一帧执行
 	call_deferred("_apply_map_ui_updates", room)
 
-# 新增函数：包含原 _on_map_room_selected 中除信号发射外的所有代码
 func _apply_map_ui_updates(room: Room) -> void:
 	for map_room: MapRoom in rooms.get_children():
 		if map_room.room.row == room.row:

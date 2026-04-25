@@ -7,15 +7,15 @@ const Y_DIST := 200
 #五个像素的随机性
 const PLACEMENT_RANDOMNESS := 25
 #网格分布
-const FLOORS :=15
+const FLOORS :=16
 const MAP_WIDTH := 7
 const PATHS := 6
 #房间权重
-const MONSTER_ROOM_WEIGHT := 9.0
-const SHOP_ROOM_WEIGHT :=3.0
-const CAMPFIRE_ROOM_WEIGHT :=4.0
+const MONSTER_ROOM_WEIGHT := 12.0
+const SHOP_ROOM_WEIGHT :=5.0
+const CAMPFIRE_ROOM_WEIGHT :=5.0
 const ELITE_ROOM_WEIGHT := 6.0      # 精英房间权重（可根据需要调整）
-const UNKNOWN_ROOM_WEIGHT := 3.0    # 未知房间权重
+const UNKNOWN_ROOM_WEIGHT := 6.0    # 未知房间权重
 
 @export var act1_pool: EnemyEncounterPool
 @export var act2_pool: EnemyEncounterPool
@@ -38,12 +38,22 @@ var map_data: Array[Array]
 func generate_map() -> Array[Array]:
 	#生成地图数组	
 	map_data =_generate_initial_grid()
+	
+	var middle := floori(MAP_WIDTH * 0.5)
+	var ancient_room := map_data[0][middle] as Room
+	ancient_room.type = Room.Type.ANCIENT
+	
+	
 	#生成起始节点
 	var starting_points := _get_random_starting_points()
+	for j in starting_points:
+		var first_floor_room := map_data[1][j] as Room
+		ancient_room.next_rooms.append(first_floor_room)
+	
 	
 	for j in starting_points:
 		var current_j := j
-		for i in FLOORS - 1:
+		for i in range(1, FLOORS - 1):
 			current_j = _setup_connection(i, current_j)
 	
 	# 初始化怪物池: 张颢骞
@@ -154,8 +164,9 @@ func _setup_boss_room() -> void:
 		if current_room.next_rooms:
 			current_room.next_rooms = [] as Array[Room]
 			current_room.next_rooms.append(boss_room)
-	
 	boss_room.type =Room.Type.BOSS
+	
+	
 	# 张颢骞
 	boss_room.enemy_encounter = act1_pool.get_random_encounter_by_type(EnemyEncounter.Type.BOSS)
 	# 
@@ -172,16 +183,16 @@ func _setup_random_room_weights() -> void:
 	
 func _setup_room_types() -> void:
 	# first floor is always a battle
-	for room:Room in map_data[0]:
+	for room:Room in map_data[1]:
 		if room.next_rooms.size() >0:
 			room.type = Room.Type.MONSTER
 			room.enemy_encounter = act1_pool.get_random_encounter_by_type(EnemyEncounter.Type.WEAK)
 	# 9th floor is always a treasure
-	for room: Room in map_data[8]:
+	for room: Room in map_data[9]:
 		if room.next_rooms.size() >0:
 			room.type = Room.Type.TREASURE
 	# last floor before the boss is always a campfire
-	for room: Room in map_data[13]:
+	for room: Room in map_data[14]:
 		if room.next_rooms.size() > 0:
 			room.type = Room.Type.CAMPFIRE
 	
@@ -195,6 +206,7 @@ func _setup_room_types() -> void:
 	
 func _set_room_randomly(room_to_set:Room)-> void:
 	var campfire_below_4 := true
+	var elite_below_4 := true
 	var consecutive_campfire := true
 	var consecutive_shop := true
 	var campfire_on_13 := true
@@ -202,7 +214,7 @@ func _set_room_randomly(room_to_set:Room)-> void:
 	var consecutive_unknown := true
 	var type_candidate: Room.Type
 
-	while campfire_below_4 or consecutive_campfire or consecutive_shop or campfire_on_13 or consecutive_elite or consecutive_unknown:
+	while campfire_below_4 or consecutive_campfire or consecutive_shop or campfire_on_13 or consecutive_elite or consecutive_unknown or elite_below_4:
 		type_candidate = _get_random_room_type_by_weight()
 		var is_campfire := type_candidate == Room.Type.CAMPFIRE
 		var is_shop := type_candidate == Room.Type.SHOP
@@ -214,10 +226,11 @@ func _set_room_randomly(room_to_set:Room)-> void:
 		var has_elite_parent := _room_has_parent_of_type(room_to_set, Room.Type.ELITE)
 		var has_unknown_parent := _room_has_parent_of_type(room_to_set, Room.Type.UNKNOWN)
 
-		campfire_below_4 = is_campfire and room_to_set.row < 3
+		campfire_below_4 = is_campfire and room_to_set.row < 4
+		elite_below_4 = is_elite and room_to_set.row < 5
 		consecutive_campfire = is_campfire and has_campfire_parent
 		consecutive_shop = is_shop and has_shop_parent
-		campfire_on_13 = is_campfire and room_to_set.row == 12
+		campfire_on_13 = is_campfire and room_to_set.row == 13
 		consecutive_elite = is_elite and has_elite_parent
 		consecutive_unknown = is_unknown and has_unknown_parent
 
