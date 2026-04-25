@@ -1,0 +1,109 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bq6wc6nyaa5l5"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_xi4tp"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_jawnt"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_np6rn"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_k0v68"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_56vj0"]
+[ext_resource type="Texture2D" uid="uid://hqhg1h" path="res://images/atlases/card_atlas.sprites/ironclad/conflagration.tres" id="5_argec"]
+
+[sub_resource type="Resource" id="Resource_37key"]
+script = ExtResource("2_jawnt")
+type = 5
+fixed_value = 8
+multipiler = 2.0
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ybedn"]
+script = ExtResource("1_xi4tp")
+numeric_provider = SubResource("Resource_37key")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_lb4hq"]
+script = ExtResource("2_jawnt")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_omd62"]
+script = ExtResource("1_xi4tp")
+numeric_type = 7
+numeric_provider = SubResource("Resource_lb4hq")
+placeholder = "increment"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_mwooa"]
+script = ExtResource("2_jawnt")
+type = 5
+fixed_value = 8
+multipiler = 2.0
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_fx78o"]
+script = ExtResource("4_56vj0")
+damage_provider = SubResource("Resource_mwooa")
+target_type = 3
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_e6nlh"]
+script = ExtResource("2_jawnt")
+type = 5
+fixed_value = 9
+multipiler = 3.0
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_xd7cs"]
+script = ExtResource("4_56vj0")
+damage_provider = SubResource("Resource_e6nlh")
+target_type = 3
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_brxh5"]
+script = ExtResource("2_jawnt")
+type = 5
+fixed_value = 9
+multipiler = 3.0
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_4qjy6"]
+script = ExtResource("1_xi4tp")
+numeric_provider = SubResource("Resource_brxh5")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_uf8kd"]
+script = ExtResource("2_jawnt")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_i6ckw"]
+script = ExtResource("1_xi4tp")
+numeric_type = 7
+numeric_provider = SubResource("Resource_uf8kd")
+placeholder = "increment"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_k0v68")
+id = "焚烧"
+base_target = 2
+base_cost = 1
+rarity = 4
+effects = Array[ExtResource("2_np6rn")]([SubResource("Resource_fx78o")])
+portrait = ExtResource("5_argec")
+base_description = "[center]对所有敌人造成{damage}点伤害。
+你在本回合中每打出过一张其他攻击牌，这张牌的伤害就提升{increment}点。[/center]"
+base_numeric_entries = Array[ExtResource("1_xi4tp")]([SubResource("Resource_ybedn"), SubResource("Resource_omd62")])
+upgraded_target = 2
+upgraded_cost = 1
+upgraded_description = "center]对所有敌人造成{damage}点伤害。
+你在本回合中每打出过一张其他攻击牌，这张牌的伤害就提升{increment}点。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_xi4tp")]([SubResource("Resource_4qjy6"), SubResource("Resource_i6ckw")])
+upgraded_effects = Array[ExtResource("2_np6rn")]([SubResource("Resource_xd7cs")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

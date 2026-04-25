@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://d0prug5ikaswq"]
+
+[ext_resource type="Texture2D" uid="uid://cl6mqycnyg2va" path="res://images/events/crystal_sphere/divine_button.png" id="1_56x8q"]
+[ext_resource type="Texture2D" uid="uid://dtrfepvck32hc" path="res://images/events/crystal_sphere/divine_button_outline.png" id="2_m2d0q"]
+[ext_resource type="Script" uid="uid://dhym74c8bp86r" path="res://scripts/settings/buttons.gd" id="2_yitq7"]
+
+[node name="PauseButton" type="TextureButton" unique_id=158527566]
+texture_normal = ExtResource("1_56x8q")
+stretch_mode = 0
+script = ExtResource("2_yitq7")
+
+[node name="Label" type="Label" parent="." unique_id=1554526887]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "继续"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="outline" type="TextureRect" parent="." unique_id=1381414950]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_m2d0q")

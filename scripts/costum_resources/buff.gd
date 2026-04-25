@@ -68,8 +68,9 @@ func get_modifiers_by_type(type_: Enums.NumericType) -> Array:
 	return result	
 
 func _set_stacks(value: int) -> void:
-	if stackable:
-		stacks = value
-	else:
-		stacks = clampi(value, 0, 1)
+	#if stackable:
+		#stacks = value
+	#else:
+		#stacks = clampi(value, 0, 1)
+	stacks = value
 	stack_changed.emit()

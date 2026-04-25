@@ -13,6 +13,7 @@ script = ExtResource("2_2gm6f")
 callback = 6
 where = 1
 max_select = 10
+random_choose_mode = 1
 metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
 
 [sub_resource type="Resource" id="Resource_55ylv"]

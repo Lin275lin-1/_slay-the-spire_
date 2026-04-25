@@ -50,14 +50,8 @@ script = ExtResource("3_3o047")
 fixed_value = 3
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_s6byx"]
-script = ExtResource("3_3o047")
-fixed_value = 3
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
 [sub_resource type="Resource" id="Resource_p05pq"]
 script = ExtResource("4_55nap")
-repeat_count_provider = SubResource("Resource_s6byx")
 damage_provider = SubResource("Resource_yns4a")
 target_type = 2
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"

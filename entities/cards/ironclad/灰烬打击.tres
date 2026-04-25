@@ -1,0 +1,107 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://22qt2fusitku"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_870nn"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_5pdoh"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_pfcl8"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_56kfd"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_ikaj4"]
+[ext_resource type="Texture2D" uid="uid://bg8n7oq" path="res://images/atlases/card_atlas.sprites/ironclad/ashen_strike.tres" id="5_bhrf6"]
+
+[sub_resource type="Resource" id="Resource_87bkd"]
+script = ExtResource("2_pfcl8")
+type = 11
+fixed_value = 6
+multipiler = 3.0
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_obh76"]
+script = ExtResource("1_870nn")
+numeric_provider = SubResource("Resource_87bkd")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_kb3n0"]
+script = ExtResource("2_pfcl8")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_vui5s"]
+script = ExtResource("1_870nn")
+numeric_type = 7
+numeric_provider = SubResource("Resource_kb3n0")
+placeholder = "factor"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_5yydi"]
+script = ExtResource("2_pfcl8")
+type = 11
+fixed_value = 6
+multipiler = 3.0
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_l5w4a"]
+script = ExtResource("4_ikaj4")
+damage_provider = SubResource("Resource_5yydi")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_lcdwo"]
+script = ExtResource("2_pfcl8")
+type = 11
+fixed_value = 6
+multipiler = 4.0
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_uwsct"]
+script = ExtResource("4_ikaj4")
+damage_provider = SubResource("Resource_lcdwo")
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_titd6"]
+script = ExtResource("2_pfcl8")
+type = 11
+fixed_value = 6
+multipiler = 4.0
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_24jlw"]
+script = ExtResource("1_870nn")
+numeric_provider = SubResource("Resource_titd6")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_gxbvy"]
+script = ExtResource("2_pfcl8")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_xxto1"]
+script = ExtResource("1_870nn")
+numeric_type = 7
+numeric_provider = SubResource("Resource_gxbvy")
+placeholder = "factor"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_56kfd")
+id = "灰烬打击"
+base_target = 1
+base_cost = 1
+rarity = 2
+effects = Array[ExtResource("2_5pdoh")]([SubResource("Resource_l5w4a")])
+portrait = ExtResource("5_bhrf6")
+base_description = "[center]造成{damage}点伤害。
+你的[color=gold]消耗堆[/color]中每有一张牌，伤害增加{factor}。[/center]"
+base_numeric_entries = Array[ExtResource("1_870nn")]([SubResource("Resource_obh76"), SubResource("Resource_vui5s")])
+upgraded_target = 1
+upgraded_cost = 1
+upgraded_description = "[center]造成{damage}点伤害。
+你的[color=gold]消耗堆[/color]中每有一张牌，伤害增加{factor}。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_870nn")]([SubResource("Resource_24jlw"), SubResource("Resource_xxto1")])
+upgraded_effects = Array[ExtResource("2_5pdoh")]([SubResource("Resource_uwsct")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

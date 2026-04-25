@@ -21,10 +21,14 @@ func put_card_ui_in_stack(card: Card) -> void:
 	var card_inspect_ui: CardInspectUI = CARD_INSPECT_UI.instantiate()
 	card_resolve_stack.add_child(card_inspect_ui)
 	card_inspect_ui.card = card
-
+	
 func pop_card_ui_in_stack() -> void:
 	if card_resolve_stack.get_child_count() != 0:
 		card_resolve_stack.get_child(-1).queue_free()
+		
+func pop_all_card_ui_in_stack() -> void:
+	for child in card_resolve_stack.get_children():
+		child.queue_free()
 
 # 将卡牌加入结算栈（卡牌调用play时加入）
 #func push_card(card: Card, context: Dictionary):
@@ -74,6 +78,10 @@ func _resolve() -> void:
 		current_entry.advance()
 		
 	is_resolving = false
+	# 连锁打出卡牌会触发奇怪的bug导致引发连锁的卡牌ui无法queue_free
+	# 目前不知道原因，干脆在栈结算完成时清空所有卡牌ui
+	# 不影响卡牌执行逻辑所以我现在不打算改
+	pop_all_card_ui_in_stack()
 	resolve_finished.emit()
 
 func _pop_entry() -> void:

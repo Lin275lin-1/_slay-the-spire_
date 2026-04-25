@@ -1,0 +1,118 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dlwby14aja0vw"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_6uv2o"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_h72i8"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_vk0v0"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_w1dqs"]
+[ext_resource type="Script" uid="uid://cqcf6adphkjfy" path="res://scripts/costum_resources/effects/select_card_effect.gd" id="4_iihrg"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="5_bnoqx"]
+[ext_resource type="Script" uid="uid://csyjq6ujulplm" path="res://scripts/costum_resources/effects/card_effects/card_effect.gd" id="5_g0ffs"]
+[ext_resource type="Script" uid="uid://brihgwpyu7v5v" path="res://scripts/costum_resources/effects/card_effects/exhaust_card_effect.gd" id="6_2n765"]
+[ext_resource type="Script" uid="uid://c8ly86kb5vc65" path="res://scripts/costum_resources/effects/iteration_effect.gd" id="6_iihrg"]
+[ext_resource type="Script" uid="uid://c2drp2mlr0vhm" path="res://scripts/costum_resources/effects/foreach_card_effect.gd" id="7_8x34p"]
+[ext_resource type="Texture2D" uid="uid://cvci3od" path="res://images/atlases/card_atlas.sprites/ironclad/fiend_fire.tres" id="7_g0ffs"]
+
+[sub_resource type="Resource" id="Resource_2n765"]
+script = ExtResource("2_h72i8")
+fixed_value = 7
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_8x34p"]
+script = ExtResource("1_6uv2o")
+numeric_provider = SubResource("Resource_2n765")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_2flxl"]
+script = ExtResource("4_iihrg")
+selectionMode = 1
+metadata/_custom_type_script = "uid://cqcf6adphkjfy"
+
+[sub_resource type="Resource" id="Resource_vsdiv"]
+script = ExtResource("6_2n765")
+metadata/_custom_type_script = "uid://brihgwpyu7v5v"
+
+[sub_resource type="Resource" id="Resource_ogr6k"]
+script = ExtResource("7_8x34p")
+effects = Array[ExtResource("5_g0ffs")]([SubResource("Resource_vsdiv")])
+metadata/_custom_type_script = "uid://c2drp2mlr0vhm"
+
+[sub_resource type="Resource" id="Resource_crua5"]
+script = ExtResource("2_h72i8")
+type = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_s5fnc"]
+script = ExtResource("2_h72i8")
+fixed_value = 7
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_jpio1"]
+script = ExtResource("5_bnoqx")
+damage_provider = SubResource("Resource_s5fnc")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_ut5md"]
+script = ExtResource("6_iihrg")
+count_provider = SubResource("Resource_crua5")
+effects = Array[ExtResource("2_vk0v0")]([SubResource("Resource_jpio1")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
+
+[sub_resource type="Resource" id="Resource_mn6im"]
+script = ExtResource("4_iihrg")
+selectionMode = 1
+metadata/_custom_type_script = "uid://cqcf6adphkjfy"
+
+[sub_resource type="Resource" id="Resource_8bcfx"]
+script = ExtResource("6_2n765")
+metadata/_custom_type_script = "uid://brihgwpyu7v5v"
+
+[sub_resource type="Resource" id="Resource_ghsr6"]
+script = ExtResource("7_8x34p")
+effects = Array[ExtResource("5_g0ffs")]([SubResource("Resource_8bcfx")])
+metadata/_custom_type_script = "uid://c2drp2mlr0vhm"
+
+[sub_resource type="Resource" id="Resource_ft7vv"]
+script = ExtResource("2_h72i8")
+fixed_value = 10
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_7qg5n"]
+script = ExtResource("5_bnoqx")
+damage_provider = SubResource("Resource_ft7vv")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_1pvws"]
+script = ExtResource("2_h72i8")
+fixed_value = 10
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_p1h0e"]
+script = ExtResource("1_6uv2o")
+numeric_provider = SubResource("Resource_1pvws")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_w1dqs")
+id = "恶魔之焰"
+base_target = 1
+base_cost = 2
+rarity = 4
+effects = Array[ExtResource("2_vk0v0")]([SubResource("Resource_2flxl"), SubResource("Resource_ogr6k"), SubResource("Resource_ut5md")])
+portrait = ExtResource("7_g0ffs")
+base_description = "[center][color=gold]消耗[/color]所有[color=gold]手牌[/color]。
+每张被[color=gold]消耗[/color]的牌造成{damage}点伤害。[/center]"
+base_numeric_entries = Array[ExtResource("1_6uv2o")]([SubResource("Resource_8x34p")])
+exhaust = true
+upgraded_target = 1
+upgraded_cost = 2
+upgraded_description = "[center][color=gold]消耗[/color]所有[color=gold]手牌[/color]。
+每张被[color=gold]消耗[/color]的牌造成{damage}点伤害。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_6uv2o")]([SubResource("Resource_p1h0e")])
+upgraded_effects = Array[ExtResource("2_vk0v0")]([SubResource("Resource_mn6im"), SubResource("Resource_ghsr6"), SubResource("Resource_7qg5n")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

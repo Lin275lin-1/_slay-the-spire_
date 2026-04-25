@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://c00rm6aktjcg8"]
+
+[ext_resource type="Script" uid="uid://b2kqg7sen48p3" path="res://scripts/settings/pause_menu.gd" id="1_a155m"]
+[ext_resource type="PackedScene" uid="uid://tnl8udgtv6w5" path="res://scenes/ui/comfirm_button.tscn" id="1_mc0ca"]
+[ext_resource type="FontFile" uid="uid://blw3ftbmibl2g" path="res://fonts/kreon_regular.ttf" id="1_o2k2b"]
+[ext_resource type="Texture2D" uid="uid://bb803i8" path="res://images/atlases/ui_atlas.sprites/back_button.tres" id="2_o2k2b"]
+[ext_resource type="Texture2D" uid="uid://cxm0iyd" path="res://images/atlases/compressed.sprites/back_button_outline.tres" id="3_tratq"]
+[ext_resource type="Texture2D" uid="uid://cahogy5" path="res://images/atlases/compressed.sprites/back_button_arrow.tres" id="4_yfbmn"]
+[ext_resource type="PackedScene" uid="uid://d0prug5ikaswq" path="res://scenes/settings/buttons.tscn" id="5_8ady0"]
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1067367733]
+script = ExtResource("1_a155m")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1265632049]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.69803923)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=703889788]
+custom_minimum_size = Vector2(450, 550)
+offset_left = 731.0
+offset_top = 208.0
+offset_right = 1181.0
+offset_bottom = 782.0
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=520711263]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6883513, 0.5737749, 0.2241699, 1)
+theme_override_fonts/font = ExtResource("1_o2k2b")
+theme_override_font_sizes/font_size = 50
+text = "已暂停"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="continueButton" parent="VBoxContainer" unique_id=158527566 instance=ExtResource("5_8ady0")]
+layout_mode = 2
+text = "继续"
+
+[node name="settingButton" parent="VBoxContainer" unique_id=50935526 instance=ExtResource("5_8ady0")]
+layout_mode = 2
+text = "设置"
+
+[node name="saveButton" parent="VBoxContainer" unique_id=1843955906 instance=ExtResource("5_8ady0")]
+layout_mode = 2
+text = "保存并退出"
+
+[node name="BackButton" parent="." unique_id=959760777 instance=ExtResource("1_mc0ca")]
+offset_left = -65.0
+offset_top = 813.0
+offset_right = 235.0
+offset_bottom = 1015.0
+texture_normal = ExtResource("2_o2k2b")
+out_line_texture = ExtResource("3_tratq")
+icon_texture = ExtResource("4_yfbmn")
+
+[connection signal="pressed" from="VBoxContainer/continueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/settingButton" to="." method="_on_setting_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/saveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

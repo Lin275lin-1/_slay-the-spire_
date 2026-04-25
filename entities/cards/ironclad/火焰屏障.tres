@@ -1,0 +1,127 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cfsevi2kvrl38"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_kkwfp"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_d8jfb"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_tyjoy"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_d6sfy"]
+[ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="4_iw5cp"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="5_cimfp"]
+[ext_resource type="Texture2D" uid="uid://6bwvdv" path="res://images/atlases/card_atlas.sprites/ironclad/flame_barrier.tres" id="6_sfrvl"]
+
+[sub_resource type="Resource" id="Resource_hl2ye"]
+script = ExtResource("2_tyjoy")
+fixed_value = 12
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_36wh2"]
+script = ExtResource("1_kkwfp")
+numeric_type = 2
+numeric_provider = SubResource("Resource_hl2ye")
+placeholder = "blocks"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_skmki"]
+script = ExtResource("2_tyjoy")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_iiwqg"]
+script = ExtResource("1_kkwfp")
+numeric_type = 4
+numeric_provider = SubResource("Resource_skmki")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_lin5d"]
+script = ExtResource("2_tyjoy")
+fixed_value = 12
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_tqovx"]
+script = ExtResource("4_iw5cp")
+block_provider = SubResource("Resource_lin5d")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_bghqh"]
+script = ExtResource("2_tyjoy")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_y777y"]
+script = ExtResource("5_cimfp")
+buff_name = "火焰屏障"
+buff_stack_provider = SubResource("Resource_bghqh")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_dfel0"]
+script = ExtResource("2_tyjoy")
+fixed_value = 16
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_78hw0"]
+script = ExtResource("4_iw5cp")
+block_provider = SubResource("Resource_dfel0")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_nupo4"]
+script = ExtResource("2_tyjoy")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_fjhdn"]
+script = ExtResource("5_cimfp")
+buff_name = "火焰屏障"
+buff_stack_provider = SubResource("Resource_nupo4")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_u6ey0"]
+script = ExtResource("2_tyjoy")
+fixed_value = 16
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_e0sjn"]
+script = ExtResource("1_kkwfp")
+numeric_type = 2
+numeric_provider = SubResource("Resource_u6ey0")
+placeholder = "block"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_o8qts"]
+script = ExtResource("2_tyjoy")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_kei3k"]
+script = ExtResource("1_kkwfp")
+numeric_type = 4
+numeric_provider = SubResource("Resource_o8qts")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_d6sfy")
+id = "火焰屏障"
+type = 2
+base_cost = 2
+rarity = 2
+effects = Array[ExtResource("2_d8jfb")]([SubResource("Resource_tqovx"), SubResource("Resource_y777y")])
+portrait = ExtResource("6_sfrvl")
+base_description = "[center]获得{blocks}点[color=gold]格挡[/color]。
+你在这个回合每受到一次攻击，都会对攻击者造成{stacks}点伤害。[/center]"
+base_numeric_entries = Array[ExtResource("1_kkwfp")]([SubResource("Resource_36wh2"), SubResource("Resource_iiwqg")])
+upgraded_cost = 2
+upgraded_description = "[center]获得{blocks}点[color=gold]格挡[/color]。
+你在这个回合每受到一次攻击，都会对攻击者造成{stacks}点伤害。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_kkwfp")]([SubResource("Resource_e0sjn"), SubResource("Resource_kei3k")])
+upgraded_effects = Array[ExtResource("2_d8jfb")]([SubResource("Resource_78hw0"), SubResource("Resource_fjhdn")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://c78lxnrxamek"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_fxmlt"]
+[ext_resource type="Script" uid="uid://cj25jm8u6xjld" path="res://scripts/costum_resources/buffs/rage_buff.gd" id="1_qwror"]
+[ext_resource type="Texture2D" uid="uid://cglt23fqiaoqr" path="res://images/powers/rage_power.png" id="2_2qmhu"]
+
+[resource]
+script = ExtResource("1_fxmlt")
+buff_id = "rage"
+buff_name = "狂怒"
+description = "本回合，你每打出一张攻击牌就获得{stacks}点格挡。"
+icon = ExtResource("2_2qmhu")
+buff_script = ExtResource("1_qwror")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

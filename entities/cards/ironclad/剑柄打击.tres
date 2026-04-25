@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_rxrwg"]
 [ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="5_07gfi"]
 [ext_resource type="Texture2D" uid="uid://bkyract" path="res://images/atlases/card_atlas.sprites/ironclad/pommel_strike.tres" id="6_cycwc"]
+[ext_resource type="Script" uid="uid://c8ly86kb5vc65" path="res://scripts/costum_resources/effects/iteration_effect.gd" id="8_rxrwg"]
 
 [sub_resource type="Resource" id="Resource_auuvv"]
 script = ExtResource("2_y0bsc")
@@ -45,14 +46,8 @@ target_type = 2
 animation_name = "attack"
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
 
-[sub_resource type="Resource" id="Resource_wcdfk"]
-script = ExtResource("2_y0bsc")
-fixed_value = 1
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
 [sub_resource type="Resource" id="Resource_x3oof"]
 script = ExtResource("5_07gfi")
-draw_card_provider = SubResource("Resource_wcdfk")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
 
 [sub_resource type="Resource" id="Resource_74fh3"]
@@ -67,15 +62,20 @@ target_type = 2
 animation_name = "attack"
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
 
-[sub_resource type="Resource" id="Resource_n8hgm"]
+[sub_resource type="Resource" id="Resource_07gfi"]
 script = ExtResource("2_y0bsc")
 fixed_value = 2
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_3sncj"]
+[sub_resource type="Resource" id="Resource_cycwc"]
 script = ExtResource("5_07gfi")
-draw_card_provider = SubResource("Resource_n8hgm")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_wcdfk"]
+script = ExtResource("8_rxrwg")
+count_provider = SubResource("Resource_07gfi")
+effects = Array[ExtResource("2_wygs1")]([SubResource("Resource_cycwc")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
 
 [sub_resource type="Resource" id="Resource_hee4h"]
 script = ExtResource("2_y0bsc")
@@ -117,6 +117,6 @@ upgraded_cost = 1
 upgraded_description = "[center]造成{damage}点伤害。[/center]
 [center]抽{cards}张牌。[/center]"
 upgraded_numeric_entries = Array[ExtResource("1_gk6t8")]([SubResource("Resource_qk8fx"), SubResource("Resource_3ma15")])
-upgraded_effects = Array[ExtResource("2_wygs1")]([SubResource("Resource_51t85"), SubResource("Resource_3sncj")])
+upgraded_effects = Array[ExtResource("2_wygs1")]([SubResource("Resource_51t85"), SubResource("Resource_wcdfk")])
 upgraded = true
 metadata/_custom_type_script = "uid://br1hibx18tv13"

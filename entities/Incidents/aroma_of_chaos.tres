@@ -17,7 +17,7 @@ eventDescription = "费力地穿过一片厚密的灌木丛并来到空地后，
 option1Description = "放任自流
 附魔你牌组中的一张牌"
 option2Description = "维持理智
-升级你拍照中的一张牌"
+升级你牌组中的一张牌"
 press_op1_title = Array[String](["放任自流"])
 press_op1_description = Array[String](["你选择了屈服，任由你的思绪渐行渐远…
 你看见了自己正与朋友们谈笑风生，作为团队的一员并肩作战，

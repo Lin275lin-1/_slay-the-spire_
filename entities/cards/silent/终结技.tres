@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_aoakq"]
 [ext_resource type="Script" uid="uid://diearpqpfot8s" path="res://entities/cards/silent/终结技.gd" id="3_hc47b"]
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_0dwbi"]
+[ext_resource type="Script" uid="uid://c8ly86kb5vc65" path="res://scripts/costum_resources/effects/iteration_effect.gd" id="5_aoakq"]
 
 [sub_resource type="Resource" id="Resource_6ao5r"]
 script = ExtResource("2_r762g")
@@ -32,38 +33,51 @@ placeholder = "times"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
+[sub_resource type="Resource" id="Resource_0dwbi"]
+script = ExtResource("2_r762g")
+type = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
 [sub_resource type="Resource" id="Resource_tnoue"]
 script = ExtResource("2_r762g")
 fixed_value = 6
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
 [sub_resource type="Resource" id="Resource_usluf"]
-script = ExtResource("2_r762g")
-type = 5
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_06xuy"]
 script = ExtResource("4_0dwbi")
-repeat_count_provider = SubResource("Resource_usluf")
 damage_provider = SubResource("Resource_tnoue")
 target_type = 2
+animation_name = "attack"
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_06xuy"]
+script = ExtResource("5_aoakq")
+count_provider = SubResource("Resource_0dwbi")
+effects = Array[ExtResource("3_aoakq")]([SubResource("Resource_usluf")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
 
 [sub_resource type="Resource" id="Resource_yxhhr"]
 script = ExtResource("2_r762g")
-fixed_value = 8
+type = 5
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
 [sub_resource type="Resource" id="Resource_uq05e"]
 script = ExtResource("2_r762g")
-type = 5
+fixed_value = 8
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
 [sub_resource type="Resource" id="Resource_jfny5"]
 script = ExtResource("4_0dwbi")
-repeat_count_provider = SubResource("Resource_uq05e")
-damage_provider = SubResource("Resource_yxhhr")
+damage_provider = SubResource("Resource_uq05e")
+target_type = 2
+animation_name = "attack"
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_u588w"]
+script = ExtResource("5_aoakq")
+count_provider = SubResource("Resource_yxhhr")
+effects = Array[ExtResource("3_aoakq")]([SubResource("Resource_jfny5")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
 
 [sub_resource type="Resource" id="Resource_q3ae3"]
 script = ExtResource("2_r762g")
@@ -105,5 +119,5 @@ upgraded_target = 1
 upgraded_cost = 1
 upgraded_description = "[center]在这个回合内每打出过一张攻击牌，就造成{damage}点伤害一次。[/center]"
 upgraded_numeric_entries = Array[ExtResource("1_20u08")]([SubResource("Resource_r762g"), SubResource("Resource_bqjk8")])
-upgraded_effects = Array[ExtResource("3_aoakq")]([SubResource("Resource_jfny5")])
+upgraded_effects = Array[ExtResource("3_aoakq")]([SubResource("Resource_u588w")])
 metadata/_custom_type_script = "uid://br1hibx18tv13"

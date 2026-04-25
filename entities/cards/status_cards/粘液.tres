@@ -20,24 +20,12 @@ placeholder = "cards"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
-[sub_resource type="Resource" id="Resource_c0kh1"]
-script = ExtResource("2_td2il")
-fixed_value = 1
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
 [sub_resource type="Resource" id="Resource_aj48f"]
 script = ExtResource("4_ff21i")
-draw_card_provider = SubResource("Resource_c0kh1")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
-
-[sub_resource type="Resource" id="Resource_td2il"]
-script = ExtResource("2_td2il")
-fixed_value = 1
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
 [sub_resource type="Resource" id="Resource_qpq4r"]
 script = ExtResource("4_ff21i")
-draw_card_provider = SubResource("Resource_td2il")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
 
 [sub_resource type="Resource" id="Resource_ff21i"]

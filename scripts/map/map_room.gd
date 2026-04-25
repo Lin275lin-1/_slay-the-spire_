@@ -54,6 +54,7 @@ func set_room(new_data: Room) -> void:
 	sprite_2d.scale = ICONS[room.type][1]
 	original_scale = scale
 
+<<<<<<< HEAD
 	# 古代房始终保持完全不透明
 	if room.type == Room.Type.ANCIENT:
 		target_alpha = 1.0
@@ -61,6 +62,11 @@ func set_room(new_data: Room) -> void:
 	else:
 		target_alpha = 0.6
 		sprite_2d.modulate.a = target_alpha
+=======
+func show_selected() -> void:
+	Select_Circle.modulate = Color.BLACK
+	sprite_2d.modulate.a = 1.0           # 选中后完全不透明	
+>>>>>>> 9a7f11eee5fb6efad8567b78814b06ef8a0a9af3
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if not available or not event.is_action_pressed("left_mouse"):

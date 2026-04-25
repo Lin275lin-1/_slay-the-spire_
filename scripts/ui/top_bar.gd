@@ -3,6 +3,13 @@ extends Control
 
 signal deck_view_requested(deck: Array[Card])
 
+#处理设置按钮点击
+signal settings_requested
+@onready var settings_button: Button = $Right/Settings/TextureRect/settingsButton
+func _on_settings_button_pressed() -> void:
+	settings_requested.emit()
+	
+
 @onready var card_pile_button: CardPileButton = $Right/Deck/CardPileButton
 @onready var avatar: TextureRect = $Left/AvatarContainer/AvatarBg/Avatar
 
@@ -23,13 +30,13 @@ func initialize(stats: CharacterStats) -> void:
 	top_bar_potion.initialize(run_stats)
 	relic_handler.initialize(run_stats)
 	# 测试用
-	var tween = create_tween()
-	tween.tween_callback(func(): run_stats.add_potion(preload("res://entities/potions/预知之滴.tres")))
-	tween.tween_interval(1.0)
-	tween.tween_callback(func(): run_stats.add_potion(preload("res://entities/potions/幸运补剂.tres")))
-	tween.tween_interval(1.0)
-	tween.tween_callback(func(): run_stats.add_potion(preload("res://entities/potions/液态记忆.tres")))
-	tween.tween_interval(1.0)
+	#var tween = create_tween()
+	#tween.tween_callback(func(): run_stats.add_potion(preload("res://entities/potions/预知之滴.tres")))
+	#tween.tween_interval(1.0)
+	#tween.tween_callback(func(): run_stats.add_potion(preload("res://entities/potions/幸运补剂.tres")))
+	#tween.tween_interval(1.0)
+	#tween.tween_callback(func(): run_stats.add_potion(preload("res://entities/potions/液态记忆.tres")))
+	#tween.tween_interval(1.0)
 	#tween.tween_callback(func(): run_stats.add_relic(preload("uid://d3a7gl0qcwuho")))
 	#tween.tween_interval(1.0)
 	#tween.tween_callback(func(): run_stats.add_relic(preload("uid://h2lk8mcg6tu5")))

@@ -18,14 +18,12 @@ script = ExtResource("3_bknyg")
 energy_provider = SubResource("Resource_4dmp3")
 metadata/_custom_type_script = "uid://c6kvghrfcdtp7"
 
-[sub_resource type="Resource" id="Resource_s76mk"]
-script = ExtResource("2_6k8v1")
-fixed_value = 2
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
 [sub_resource type="Resource" id="Resource_xeloy"]
 script = ExtResource("4_cgu7u")
-draw_card_provider = SubResource("Resource_s76mk")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_6k8v1"]
+script = ExtResource("4_cgu7u")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
 
 [resource]
@@ -36,5 +34,5 @@ description = "获得1点能量，抽2张牌"
 icon = ExtResource("5_6xvkq")
 outline_icon = ExtResource("6_hfjey")
 rarity = 2
-effects = Array[ExtResource("1_hkkqc")]([SubResource("Resource_fx8a7"), SubResource("Resource_xeloy")])
+effects = Array[ExtResource("1_hkkqc")]([SubResource("Resource_fx8a7"), SubResource("Resource_xeloy"), SubResource("Resource_6k8v1")])
 metadata/_custom_type_script = "uid://bumkvpbom08xn"

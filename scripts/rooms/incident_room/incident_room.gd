@@ -101,10 +101,9 @@ func init()->void:
 	randomize()  # 初始化随机种子
 	random_number = randi_range(0, incidentsDataArray.size()-1)  # 生成0到房间数组大小-1的随机整数
 	room_number=random_number
-	#用作测试
-	room_number=incidentsDataArray.size()-1
-	#room_number=3
-	set_incident_data(incidentsDataArray[room_number])
+	
+	
+	set_init_incident_data(incidentsDataArray[room_number])
 
 func set_init_incident_data(data:IncidentData)->void:
 	incident_data=data
@@ -113,8 +112,9 @@ func set_init_incident_data(data:IncidentData)->void:
 	event_description.text=incident_data.eventDescription
 	option_1.text=incident_data.option1Description
 	option_2.text=incident_data.option2Description
-	#处理滑脚独桥的信息
+
 	if data.incidentName=="slippery_bridge":
+		print("处理滑脚独桥的信息")
 		random_card_number = randi_range(0, char_stats.deck.cards.size()-1) 
 		var card:Card=char_stats.deck.cards[random_card_number]
 		option_1.text="跨越\n\""

@@ -14,6 +14,7 @@ signal card_drag_ended(card_ui: CardUI)
 signal card_previewed(card_ui: CardUI, to_preview: bool)
 signal before_card_played(card: Card, card_context: Dictionary)
 signal card_played(card: Card)
+signal card_exhausted(card: Card)
 signal target_selected(target: Creature, card: Card)
 signal target_unselected(card: Card)
 ## 药水相关
