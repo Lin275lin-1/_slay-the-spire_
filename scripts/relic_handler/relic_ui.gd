@@ -3,6 +3,7 @@ extends Control
 
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var count: Label = $Count
 
 @export var relic: Relic
 
@@ -16,6 +17,10 @@ func set_relic(new_relic: Relic) -> void:
 	
 	relic = new_relic
 	texture_rect.texture = new_relic.icon
+	update_count()
+
+func update_count() -> void:
+	count.text = str(relic.count) if relic.count > 0 else ""
 
 func flash() -> void:
 	animation_player.play("flash")

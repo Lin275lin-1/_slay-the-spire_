@@ -1,9 +1,6 @@
 # 记得改类名
 class_name InfernoBuff
 extends Buff
-
-
-
 	
 func initialize() -> void:
 	if agent is Player:

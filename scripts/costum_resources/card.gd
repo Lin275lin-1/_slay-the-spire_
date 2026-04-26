@@ -146,11 +146,11 @@ func play(source: Player, targets: Array[Node], no_callback: bool = false) -> vo
 	else:
 		source.combat_resolver.execute(ResolutionEntry.new(self, get_effects(), card_context, \
 		func(): 
-			Events.card_played.emit(self)
+			Events.card_played.emit(self, card_context)
 			on_played(source, targets)
 			)
 		)
-	source.use_energy(energy_cost)
+		source.use_energy(energy_cost)
 	first_play_free = false
 
 func on_played(source: Player, targets: Array[Node]) -> void:

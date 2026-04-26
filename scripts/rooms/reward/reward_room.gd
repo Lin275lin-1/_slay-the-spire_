@@ -125,6 +125,5 @@ func _on_card_reward_taken(card:Card)->void:
 	if not character_stats or not card:
 		return
 	#print("DeckBefore:\n%s\n" % character_stats.deck)
-#	卡牌复制
-	character_stats.deck.add_card(card.duplicate())
+	character_stats.add_card_to_deck(card)
 	#print("DeckAfter:\n%s" % character_stats.deck)

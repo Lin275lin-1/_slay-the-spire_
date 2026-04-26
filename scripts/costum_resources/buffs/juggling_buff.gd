@@ -22,7 +22,7 @@ func _on_turn_ended(_creature: Creature) -> void:
 	stacks = attack_count + 1
 	used = false
 
-func _on_card_played(card: Card) -> void:
+func _on_card_played(card: Card, _card_context: Dictionary) -> void:
 	if not used and card.type == Card.Type.ATTACK:
 		attack_count += 1
 		if attack_count == 3:

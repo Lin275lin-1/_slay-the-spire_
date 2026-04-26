@@ -13,10 +13,12 @@ signal card_drag_started(card_ui: CardUI)
 signal card_drag_ended(card_ui: CardUI)
 signal card_previewed(card_ui: CardUI, to_preview: bool)
 signal before_card_played(card: Card, card_context: Dictionary)
-signal card_played(card: Card)
+signal card_played(card: Card, card_context: Dictionary)
 signal card_exhausted(card: Card)
 signal target_selected(target: Creature, card: Card)
 signal target_unselected(card: Card)
+
+signal card_added_to_deck(card: Card, char_stats: CharacterStats)
 ## 药水相关
 signal potion_aim_started(potion_ui: PotionUI)
 signal potion_aim_ended(potion_ui: PotionUI)
@@ -56,6 +58,13 @@ signal treasure_room_exited
 signal incident_exited
 signal map_exited
 signal ancient_exited
+# 给遗物使用
+signal shop_entered(room: Room, run_stats: RunStats, char_stats: CharacterStats)
+signal campfire_entered(room: Room, run_stats: RunStats, char_stats: CharacterStats)
+signal combat_room_entered(room: Room, run_stats: RunStats, char_stats: CharacterStats)
+signal treasure_room_entered(room: Room, run_stats: RunStats, char_stats: CharacterStats)
+signal incident_room_entered(room: Room, run_stats: RunStats, char_stats: CharacterStats)
+signal unknown_room_entered(room: Room, run_stats: RunStats, char_stats: CharacterStats)
 @warning_ignore_restore("unused_signal")
 
 ##地图房间

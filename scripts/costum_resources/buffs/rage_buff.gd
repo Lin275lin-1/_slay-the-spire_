@@ -18,7 +18,7 @@ func get_modifier() -> Array[Modifier]:
 func get_description() -> String:
 	return description.format({"stacks": stacks})
 
-func _on_card_played(card: Card) -> void:
+func _on_card_played(card: Card, _card_context: Dictionary) -> void:
 	if card.type == Card.Type.ATTACK:
 		agent.gain_block(GainBlockContext.new(agent, agent, stacks, [], true))
 

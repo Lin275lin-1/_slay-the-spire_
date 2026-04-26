@@ -24,6 +24,7 @@ func _ready() -> void:
 
 func set_potion(value: Potion):
 	original_position = position
+	used = false
 	if value == null:
 		potion = null
 		out_line.texture = null

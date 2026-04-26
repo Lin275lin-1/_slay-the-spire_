@@ -53,6 +53,13 @@ func get_discard_pile() -> Array[Card]:
 func get_exhaust_pile() -> Array[Card]:
 	return exhaust_pile.cards
 
+func get_deck() -> Array[Card]:
+	return deck.cards
+
+func add_card_to_deck(card: Card) -> void:
+	deck.add_card(card)
+	Events.card_added_to_deck.emit(card, self)
+
 func create_instance() -> CharacterStats:
 	var instance := self.duplicate()
 	instance.health = max_health

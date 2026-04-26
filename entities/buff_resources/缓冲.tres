@@ -8,7 +8,7 @@
 script = ExtResource("1_8er7o")
 buff_id = "buffer"
 buff_name = "缓冲"
-description = "阻止下一次你受到的生命值损伤"
+description = "阻止下一次受到的攻击伤害"
 icon = ExtResource("1_hqupr")
 affect = 1
 buff_script = ExtResource("1_ok4rh")

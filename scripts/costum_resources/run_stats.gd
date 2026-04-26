@@ -8,6 +8,7 @@ signal floor_changed(new_floor: int)          # 楼层变化信号
 ## 药水相关
 signal potion_added(potion: Potion)
 signal potion_removed(index: int)
+signal potion_slots_changed()
 ## 遗物相关
 signal relic_added(relic: Relic)
 signal relic_removed(relic: Relic)
@@ -23,9 +24,10 @@ const BASE_RARE_WEIGHT := 0.3
 
 ## 药水
 var potions: Array[Potion] = []
-@export var max_potion_slots: int = 3
+@export var max_potion_slots: int = 3 : set =  _set_max_potion_slots
 ## 遗物
 var relics: Array[Relic] = []
+
 
 
 @export var card_rewards := BASE_CARD_REWARDS
@@ -94,3 +96,12 @@ func has_relic(relic_id: String) -> bool:
 		if relic.id == relic_id:
 			return true
 	return false
+	
+func _set_max_potion_slots(value: int) -> void:
+	# 不考虑减少栏位
+	var delta :int = value - max_potion_slots
+	for i in range(delta):
+		potions.append(null)
+	max_potion_slots = value
+	potion_slots_changed.emit()
+	

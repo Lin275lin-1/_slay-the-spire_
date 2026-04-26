@@ -16,6 +16,8 @@ enum Type{
 
 @export var type: Type = Type.ALWAYS
 
+func _init(type_: Type = Type.ALWAYS) -> void:
+	type = type_
 
 func is_met(card: Card) -> bool:
 	match type:

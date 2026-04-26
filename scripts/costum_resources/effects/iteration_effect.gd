@@ -9,5 +9,12 @@ func execute(source: Node, card_context: Dictionary = {}, previous_result: Varia
 	var last_result = previous_result
 	for i in range(count):
 		for effect in effects:
-			last_result = await effect.execute(source, card_context)
+			if _is_targets_valid(card_context.get("targets", [null])):
+				last_result = await effect.execute(source, card_context)
 	return last_result
+
+func _is_targets_valid(targets: Array) -> bool:
+	for target in targets:
+		if not is_instance_valid(target):
+			return false
+	return true

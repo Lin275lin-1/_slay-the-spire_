@@ -31,6 +31,7 @@ enum COLOR {
 @export var rarity: Rarity = Rarity.COMMON
 @export var potion_color: COLOR = COLOR.COLORLESS
 @export var effects: Array[Effect]
+@export var draftable: bool = true
 
 func play(source: Node, targets: Array[Node], potion_ui: PotionUI) -> void:
 	var potion_context = {

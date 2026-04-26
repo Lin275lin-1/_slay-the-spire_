@@ -52,7 +52,7 @@ func _on_add_card_pressed() -> void:
 	player_handler.add_card_to_hand(card)
 
 func _on_child_order_changed() -> void:
-	if enemy_handler.get_child_count() == 0 and is_instance_valid(relics):
+	if enemy_handler.get_child_count() == 0 and is_instance_valid(relics):		
 		relics.activate_relics_by_trigger_type(Relic.TriggerType.END_OF_COMBAT)
 	
 func _on_enemy_turn_ended() -> void:
@@ -64,9 +64,13 @@ func _set_char_stats(value: CharacterStats) -> void:
 
 
 func _on_back_to_map_pressed() -> void:
-	if combat_resolver.is_resolving:
-		await combat_resolver.resolve_finished
-	Events.combat_won.emit()
+	#if combat_resolver.is_resolving:
+		#await combat_resolver.resolve_finished
+	#Events.combat_won.emit()
+	var enemies = get_tree().get_nodes_in_group("ui_enemies")
+	for enemy: Enemy in enemies:
+		enemy.take_damage_without_signals(9999)
+	
 
 func _on_relics_activated(type: Relic.TriggerType) -> void:
 	match type:

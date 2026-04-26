@@ -1,0 +1,74 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b11kpk4adpht"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_nae7k"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_5s34o"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_eeutu"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_ogpbs"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_p0w0f"]
+[ext_resource type="Texture2D" uid="uid://rsva73" path="res://images/atlases/card_atlas.sprites/ironclad/pyre.tres" id="5_6q6sa"]
+
+[sub_resource type="Resource" id="Resource_n4xja"]
+script = ExtResource("2_eeutu")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_7377h"]
+script = ExtResource("1_nae7k")
+numeric_type = 4
+numeric_provider = SubResource("Resource_n4xja")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_18oqu"]
+script = ExtResource("2_eeutu")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_se40x"]
+script = ExtResource("4_p0w0f")
+buff_name = "薪火之源"
+buff_stack_provider = SubResource("Resource_18oqu")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_yeuyb"]
+script = ExtResource("2_eeutu")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_lq3ai"]
+script = ExtResource("4_p0w0f")
+buff_name = "薪火之源"
+buff_stack_provider = SubResource("Resource_yeuyb")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_gopue"]
+script = ExtResource("2_eeutu")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_7ppxt"]
+script = ExtResource("1_nae7k")
+numeric_type = 4
+numeric_provider = SubResource("Resource_gopue")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_ogpbs")
+id = "薪火之源"
+type = 4
+base_cost = 2
+rarity = 4
+effects = Array[ExtResource("2_5s34o")]([SubResource("Resource_se40x")])
+portrait = ExtResource("5_6q6sa")
+base_description = "[center]回合开始时获得{stacks}点能量。[/center]"
+base_numeric_entries = Array[ExtResource("1_nae7k")]([SubResource("Resource_7377h")])
+upgraded_cost = 2
+upgraded_description = "[center]回合开始时获得{stacks}点能量。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_nae7k")]([SubResource("Resource_7ppxt")])
+upgraded_effects = Array[ExtResource("2_5s34o")]([SubResource("Resource_lq3ai")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://dmgfsxby1n0vr"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_3a8d6"]
+[ext_resource type="Script" uid="uid://cibjrcipdqbs7" path="res://scripts/costum_resources/condition.gd" id="2_38n8f"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="2_i2mbh"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_7u0tb"]
+[ext_resource type="Script" uid="uid://66oyp04ol1ud" path="res://scripts/costum_resources/effects/condition_effect.gd" id="3_a2osj"]
+[ext_resource type="Texture2D" uid="uid://cfnjom2" path="res://images/atlases/relic_atlas.sprites/red_skull.tres" id="4_7u0tb"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_owvnp"]
+
+[sub_resource type="Resource" id="Resource_m8a4b"]
+script = ExtResource("2_38n8f")
+type = 9
+extra_params = {
+"percent": 30
+}
+metadata/_custom_type_script = "uid://cibjrcipdqbs7"
+
+[sub_resource type="Resource" id="Resource_byqfc"]
+script = ExtResource("3_7u0tb")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_acyup"]
+script = ExtResource("4_owvnp")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_byqfc")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_ja0xj"]
+script = ExtResource("3_a2osj")
+condition = SubResource("Resource_m8a4b")
+if_effects = Array[ExtResource("1_3a8d6")]([SubResource("Resource_acyup")])
+metadata/_custom_type_script = "uid://66oyp04ol1ud"
+
+[resource]
+script = ExtResource("2_i2mbh")
+relic_name = "红头骨"
+id = "red_skull"
+icon = ExtResource("4_7u0tb")
+description = "回合开始时，如果你的生命值低于或等于30%，获得1点力量"
+trigger_type = 1
+relic_color = 1
+effects = Array[ExtResource("1_3a8d6")]([SubResource("Resource_ja0xj")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

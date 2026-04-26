@@ -1,24 +1,246 @@
 [gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://hp2dus3ms3gm"]
 
 [ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="1_6dnus"]
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="2_lm2nt"]
 [ext_resource type="Script" uid="uid://jvpf65gf7yuq" path="res://scripts/costum_resources/card_pile.gd" id="2_pcwuu"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_jqanm"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="4_q88nh"]
+[ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="5_vp0wk"]
+[ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="6_2qpn7"]
+[ext_resource type="Texture2D" uid="uid://v5fhk" path="res://images/atlases/card_atlas.sprites/ironclad/armaments.tres" id="7_o2bww"]
+[ext_resource type="AudioStream" uid="uid://cnxfhtrl0n8nm" path="res://audio/SFX/frost_orb_passive.mp3" id="8_b05o3"]
 [ext_resource type="Resource" uid="uid://b0odwvcj314k2" path="res://entities/cards/ironclad/燃烧契约.tres" id="13_1lg0p"]
-[ext_resource type="Resource" uid="uid://cd01pkgiwrarp" path="res://entities/cards/ironclad/地狱狂徒.tres" id="14_4bseq"]
 [ext_resource type="Resource" uid="uid://dk4qphec16bps" path="res://entities/cards/ironclad/烙印.tres" id="14_8xmro"]
 [ext_resource type="Resource" uid="uid://dlwby14aja0vw" path="res://entities/cards/ironclad/恶魔之焰.tres" id="15_7hj0v"]
-[ext_resource type="Resource" uid="uid://c3bct51mhqs4n" path="res://entities/cards/ironclad/剑柄打击.tres" id="15_8xmro"]
-[ext_resource type="Resource" uid="uid://cq4jdaf8q25eg" path="res://entities/cards/ironclad/狱火.tres" id="16_jj41u"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="18_1n3x5"]
+[ext_resource type="Script" uid="uid://cqcf6adphkjfy" path="res://scripts/costum_resources/effects/select_card_effect.gd" id="19_bnn7l"]
+[ext_resource type="Script" uid="uid://csyjq6ujulplm" path="res://scripts/costum_resources/effects/card_effects/card_effect.gd" id="20_tbhg8"]
+[ext_resource type="Script" uid="uid://dl6g3g7ag1dpg" path="res://scripts/costum_resources/effects/card_effects/put_card_to_pile_effect.gd" id="21_0nu07"]
+[ext_resource type="Script" uid="uid://c2drp2mlr0vhm" path="res://scripts/costum_resources/effects/foreach_card_effect.gd" id="22_ypxan"]
 [ext_resource type="Resource" uid="uid://du22jyswvyejh" path="res://entities/cards/ironclad/被遗忘的仪式.tres" id="23_bsqa6"]
-[ext_resource type="Resource" uid="uid://qhmifpkdvj6h" path="res://entities/cards/ironclad/武装.tres" id="25_whuos"]
+[ext_resource type="Texture2D" uid="uid://cl6hb7j" path="res://images/atlases/card_atlas.sprites/ironclad/headbutt.tres" id="23_l52n2"]
+[ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="24_fm77h"]
 [ext_resource type="Resource" uid="uid://dx5ppg6s0n36o" path="res://entities/cards/ironclad/祭品.tres" id="26_cilra"]
-[ext_resource type="Resource" uid="uid://4b4rigm35wmi" path="res://entities/cards/ironclad/头槌.tres" id="26_lm2nt"]
 [ext_resource type="Resource" uid="uid://dtyhdho4woj0l" path="res://entities/cards/ironclad/扯碎.tres" id="26_whuos"]
 [ext_resource type="Resource" uid="uid://b2c13bouulo8c" path="res://entities/cards/ironclad/战斗专注.tres" id="27_cilra"]
-[ext_resource type="Resource" uid="uid://bf678imic2wxo" path="res://entities/cards/ironclad/倾泻.tres" id="28_lm2nt"]
+[ext_resource type="Resource" uid="uid://di7qxohmibul1" path="res://entities/cards/ironclad/契约终结.tres" id="28_jqanm"]
+[ext_resource type="Resource" uid="uid://bf0wlb2wv510t" path="res://entities/cards/ironclad/连环拳.tres" id="28_lm2nt"]
 [ext_resource type="Resource" uid="uid://cpctwatpicixg" path="res://entities/cards/ironclad/飞剑回旋镖.tres" id="28_q88nh"]
-[ext_resource type="Resource" uid="uid://bdil4umbqay37" path="res://entities/cards/ironclad/劫掠.tres" id="29_jqanm"]
+[ext_resource type="Resource" uid="uid://dqme0bfba2pii" path="res://entities/cards/ironclad/残酷.tres" id="28_vp0wk"]
+[ext_resource type="Resource" uid="uid://0m10x56r5id3" path="res://entities/cards/ironclad/岿然不动.tres" id="29_2qpn7"]
+[ext_resource type="Resource" uid="uid://dapmctnguc1os" path="res://entities/cards/ironclad/添柴.tres" id="29_q88nh"]
+[ext_resource type="Resource" uid="uid://idtkqaixrec5" path="res://entities/cards/ironclad/绯红披风.tres" id="30_vp0wk"]
+[ext_resource type="Resource" uid="uid://4l38k3ro47sj" path="res://entities/cards/ironclad/好勇斗狠.tres" id="31_2qpn7"]
+[ext_resource type="Resource" uid="uid://deto4wnidcwi3" path="res://entities/cards/ironclad/黑暗之拥.tres" id="31_vp0wk"]
+[ext_resource type="Resource" uid="uid://bhfco4qj3dntc" path="res://entities/cards/ironclad/坚定不移.tres" id="32_2qpn7"]
+[ext_resource type="Resource" uid="uid://dkh3jtvt7fgbx" path="res://entities/cards/ironclad/势不可当.tres" id="33_o2bww"]
+
+[sub_resource type="Resource" id="Resource_thu2h"]
+script = ExtResource("3_jqanm")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_xctxy"]
+script = ExtResource("2_lm2nt")
+numeric_type = 2
+numeric_provider = SubResource("Resource_thu2h")
+placeholder = "block"
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_04gy0"]
+script = ExtResource("3_jqanm")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_hi5sw"]
+script = ExtResource("5_vp0wk")
+block_provider = SubResource("Resource_04gy0")
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_gevhg"]
+script = ExtResource("6_2qpn7")
+where = 1
+min_select = 1
+max_select = 1
+metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+
+[sub_resource type="Resource" id="Resource_jhr7b"]
+script = ExtResource("3_jqanm")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_37300"]
+script = ExtResource("5_vp0wk")
+block_provider = SubResource("Resource_jhr7b")
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_gqx7i"]
+script = ExtResource("6_2qpn7")
+where = 1
+metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+
+[sub_resource type="Resource" id="Resource_e36l4"]
+script = ExtResource("3_jqanm")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_6o2r8"]
+script = ExtResource("2_lm2nt")
+numeric_type = 2
+numeric_provider = SubResource("Resource_e36l4")
+placeholder = "block"
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_j73b2"]
+script = ExtResource("1_6dnus")
+id = "武装"
+type = 2
+base_cost = 1
+effects = Array[ExtResource("4_q88nh")]([SubResource("Resource_hi5sw"), SubResource("Resource_gevhg")])
+portrait = ExtResource("7_o2bww")
+base_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center]
+[center][color=gold]升级[/color]手牌中的一张卡牌。[/center]"
+sound = ExtResource("8_b05o3")
+base_numeric_entries = Array[ExtResource("2_lm2nt")]([SubResource("Resource_xctxy")])
+upgraded_cost = 1
+upgraded_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center]
+[center][color=gold]升级[/color]手牌中所有卡牌。[/center]"
+upgraded_numeric_entries = Array[ExtResource("2_lm2nt")]([SubResource("Resource_6o2r8")])
+upgraded_effects = Array[ExtResource("4_q88nh")]([SubResource("Resource_37300"), SubResource("Resource_gqx7i")])
+
+[sub_resource type="Resource" id="Resource_lts0g"]
+script = ExtResource("3_jqanm")
+fixed_value = 9
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_rcmhm"]
+script = ExtResource("2_lm2nt")
+numeric_provider = SubResource("Resource_lts0g")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_8pqqb"]
+script = ExtResource("3_jqanm")
+fixed_value = 9
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_yofp3"]
+script = ExtResource("18_1n3x5")
+damage_provider = SubResource("Resource_8pqqb")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_i23f4"]
+script = ExtResource("19_bnn7l")
+where = 2
+min_select = 1
+max_select = 1
+metadata/_custom_type_script = "uid://cqcf6adphkjfy"
+
+[sub_resource type="Resource" id="Resource_cgq6e"]
+script = ExtResource("21_0nu07")
+metadata/_custom_type_script = "uid://dl6g3g7ag1dpg"
+
+[sub_resource type="Resource" id="Resource_yiydk"]
+script = ExtResource("22_ypxan")
+effects = Array[ExtResource("20_tbhg8")]([SubResource("Resource_cgq6e")])
+metadata/_custom_type_script = "uid://c2drp2mlr0vhm"
+
+[sub_resource type="Resource" id="Resource_r16s7"]
+script = ExtResource("3_jqanm")
+fixed_value = 12
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_xj5hh"]
+script = ExtResource("18_1n3x5")
+damage_provider = SubResource("Resource_r16s7")
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_godxd"]
+script = ExtResource("19_bnn7l")
+where = 2
+min_select = 1
+max_select = 1
+metadata/_custom_type_script = "uid://cqcf6adphkjfy"
+
+[sub_resource type="Resource" id="Resource_3oy6m"]
+script = ExtResource("21_0nu07")
+metadata/_custom_type_script = "uid://dl6g3g7ag1dpg"
+
+[sub_resource type="Resource" id="Resource_rhk01"]
+script = ExtResource("22_ypxan")
+effects = Array[ExtResource("20_tbhg8")]([SubResource("Resource_3oy6m")])
+metadata/_custom_type_script = "uid://c2drp2mlr0vhm"
+
+[sub_resource type="Resource" id="Resource_qdq0t"]
+script = ExtResource("3_jqanm")
+fixed_value = 12
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_3kjcc"]
+script = ExtResource("2_lm2nt")
+numeric_provider = SubResource("Resource_qdq0t")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_7anbg"]
+script = ExtResource("1_6dnus")
+id = "头槌"
+base_target = 1
+base_cost = 1
+effects = Array[ExtResource("4_q88nh")]([SubResource("Resource_yofp3"), SubResource("Resource_i23f4"), SubResource("Resource_yiydk")])
+portrait = ExtResource("23_l52n2")
+base_description = "[center]造成{damage}点伤害。[/center][center]将一张牌从[color=gold]弃牌堆[/color]移至[color=gold]抽牌堆[/color]顶部。[/center]"
+sound = ExtResource("24_fm77h")
+base_numeric_entries = Array[ExtResource("2_lm2nt")]([SubResource("Resource_rcmhm")])
+upgraded_target = 1
+upgraded_cost = 1
+upgraded_description = "[center]造成{damage}点伤害。[/center][center]将一张牌从[color=gold]弃牌堆[/color]移至[color=gold]抽牌堆[/color]顶部。[/center]"
+upgraded_numeric_entries = Array[ExtResource("2_lm2nt")]([SubResource("Resource_3kjcc")])
+upgraded_effects = Array[ExtResource("4_q88nh")]([SubResource("Resource_xj5hh"), SubResource("Resource_godxd"), SubResource("Resource_rhk01")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"
+
+[sub_resource type="Resource" id="Resource_7vt7t"]
+script = ExtResource("1_6dnus")
+id = "武装"
+type = 2
+base_cost = 1
+effects = Array[ExtResource("4_q88nh")]([SubResource("Resource_hi5sw"), SubResource("Resource_gevhg")])
+portrait = ExtResource("7_o2bww")
+base_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center]
+[center][color=gold]升级[/color]手牌中的一张卡牌。[/center]"
+sound = ExtResource("8_b05o3")
+base_numeric_entries = Array[ExtResource("2_lm2nt")]([SubResource("Resource_xctxy")])
+upgraded_cost = 1
+upgraded_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center]
+[center][color=gold]升级[/color]手牌中所有卡牌。[/center]"
+upgraded_numeric_entries = Array[ExtResource("2_lm2nt")]([SubResource("Resource_6o2r8")])
+upgraded_effects = Array[ExtResource("4_q88nh")]([SubResource("Resource_37300"), SubResource("Resource_gqx7i")])
+
+[sub_resource type="Resource" id="Resource_7tgq7"]
+script = ExtResource("1_6dnus")
+id = "头槌"
+base_target = 1
+base_cost = 1
+effects = Array[ExtResource("4_q88nh")]([SubResource("Resource_yofp3"), SubResource("Resource_i23f4"), SubResource("Resource_yiydk")])
+portrait = ExtResource("23_l52n2")
+base_description = "[center]造成{damage}点伤害。[/center][center]将一张牌从[color=gold]弃牌堆[/color]移至[color=gold]抽牌堆[/color]顶部。[/center]"
+sound = ExtResource("24_fm77h")
+base_numeric_entries = Array[ExtResource("2_lm2nt")]([SubResource("Resource_rcmhm")])
+upgraded_target = 1
+upgraded_cost = 1
+upgraded_description = "[center]造成{damage}点伤害。[/center][center]将一张牌从[color=gold]弃牌堆[/color]移至[color=gold]抽牌堆[/color]顶部。[/center]"
+upgraded_numeric_entries = Array[ExtResource("2_lm2nt")]([SubResource("Resource_3kjcc")])
+upgraded_effects = Array[ExtResource("4_q88nh")]([SubResource("Resource_xj5hh"), SubResource("Resource_godxd"), SubResource("Resource_rhk01")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"
 
 [resource]
 script = ExtResource("2_pcwuu")
-cards = Array[ExtResource("1_6dnus")]([ExtResource("25_whuos"), ExtResource("23_bsqa6"), ExtResource("26_whuos"), ExtResource("27_cilra"), ExtResource("28_q88nh"), ExtResource("29_jqanm"), ExtResource("26_cilra"), ExtResource("28_lm2nt"), ExtResource("14_4bseq"), ExtResource("15_8xmro"), ExtResource("26_lm2nt"), ExtResource("13_1lg0p"), ExtResource("25_whuos"), ExtResource("14_8xmro"), ExtResource("15_7hj0v"), ExtResource("26_lm2nt"), ExtResource("16_jj41u")])
+cards = Array[ExtResource("1_6dnus")]([SubResource("Resource_j73b2"), ExtResource("23_bsqa6"), ExtResource("26_whuos"), ExtResource("27_cilra"), ExtResource("28_q88nh"), ExtResource("26_cilra"), SubResource("Resource_7anbg"), ExtResource("13_1lg0p"), SubResource("Resource_7vt7t"), ExtResource("14_8xmro"), ExtResource("15_7hj0v"), SubResource("Resource_7tgq7"), ExtResource("28_jqanm"), ExtResource("28_lm2nt"), ExtResource("29_q88nh"), ExtResource("28_vp0wk"), ExtResource("29_2qpn7"), ExtResource("30_vp0wk"), ExtResource("31_2qpn7"), ExtResource("31_vp0wk"), ExtResource("32_2qpn7"), ExtResource("33_o2bww")])
 metadata/_custom_type_script = "uid://jvpf65gf7yuq"

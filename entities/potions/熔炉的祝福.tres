@@ -2,15 +2,35 @@
 
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_bh8o2"]
 [ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_o8mr3"]
-[ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="2_ub0pw"]
+[ext_resource type="Script" uid="uid://dyn5a42fs7gxs" path="res://scripts/costum_resources/card_condition.gd" id="2_sy5gc"]
+[ext_resource type="Script" uid="uid://cqcf6adphkjfy" path="res://scripts/costum_resources/effects/select_card_effect.gd" id="3_rtclx"]
 [ext_resource type="Texture2D" uid="uid://cqt6dar" path="res://images/atlases/potion_atlas.sprites/blessing_of_the_forge.tres" id="3_tiur4"]
+[ext_resource type="Script" uid="uid://csyjq6ujulplm" path="res://scripts/costum_resources/effects/card_effects/card_effect.gd" id="4_d2axr"]
 [ext_resource type="Texture2D" uid="uid://b3gepai" path="res://images/atlases/potion_outline_atlas.sprites/blessing_of_the_forge.tres" id="4_nueo5"]
+[ext_resource type="Script" uid="uid://dm6tcw4hw6un" path="res://scripts/costum_resources/effects/card_effects/modify_card_flag_effect.gd" id="5_vqd1n"]
+[ext_resource type="Script" uid="uid://c2drp2mlr0vhm" path="res://scripts/costum_resources/effects/foreach_card_effect.gd" id="6_05odx"]
 
-[sub_resource type="Resource" id="Resource_dlk6t"]
-script = ExtResource("2_ub0pw")
-where = 1
-all = true
-metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+[sub_resource type="Resource" id="Resource_jnhxl"]
+script = ExtResource("2_sy5gc")
+type = 1
+metadata/_custom_type_script = "uid://dyn5a42fs7gxs"
+
+[sub_resource type="Resource" id="Resource_ra1ne"]
+script = ExtResource("3_rtclx")
+selectionMode = 1
+filter_condition = SubResource("Resource_jnhxl")
+metadata/_custom_type_script = "uid://cqcf6adphkjfy"
+
+[sub_resource type="Resource" id="Resource_skiie"]
+script = ExtResource("5_vqd1n")
+flag_name = 5
+value = true
+metadata/_custom_type_script = "uid://dm6tcw4hw6un"
+
+[sub_resource type="Resource" id="Resource_st3ab"]
+script = ExtResource("6_05odx")
+effects = Array[ExtResource("4_d2axr")]([SubResource("Resource_skiie")])
+metadata/_custom_type_script = "uid://c2drp2mlr0vhm"
 
 [resource]
 script = ExtResource("2_o8mr3")
@@ -20,5 +40,5 @@ description = "在本场战斗中[color=gold]升级[/color]你[color=gold]手牌
 icon = ExtResource("3_tiur4")
 outline_icon = ExtResource("4_nueo5")
 rarity = 2
-effects = Array[ExtResource("1_bh8o2")]([SubResource("Resource_dlk6t")])
+effects = Array[ExtResource("1_bh8o2")]([SubResource("Resource_ra1ne"), SubResource("Resource_st3ab")])
 metadata/_custom_type_script = "uid://bumkvpbom08xn"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://dix6vlh5k0cbk"]
+
+[ext_resource type="Script" uid="uid://bf6bxkujl4jnb" path="res://scripts/costum_resources/buffs/gain_energy_over_turn_buff.gd" id="1_3q00x"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_trywh"]
+[ext_resource type="Texture2D" uid="uid://beph7mr0r2ip5" path="res://images/powers/pyre_power.png" id="2_hiwld"]
+
+[resource]
+script = ExtResource("1_trywh")
+buff_id = "PYRE"
+buff_name = "薪火之源"
+description = "回合开始时获得{stacks}点能量"
+icon = ExtResource("2_hiwld")
+buff_script = ExtResource("1_3q00x")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

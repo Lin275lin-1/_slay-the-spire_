@@ -268,7 +268,7 @@ func _populate_relics() -> void:
 
 	var available_relics: Array[Relic] = []
 	for relic in relic_pile.relics:
-		if not relic.can_appear_as_reward(character_stats, Relic.RelicType.SHOP_RELIC):
+		if not relic.can_appear_as_reward(character_stats, Relic.Rarity.SHOP_RELIC):
 			continue
 		# 过滤已拥有的遗物
 		if run_stats.has_relic(relic.id):
@@ -672,7 +672,7 @@ func _get_character_name() -> String:
 func _add_card_to_deck(card: Card):
 	var run_node = _get_run_node()
 	if run_node and run_node.character:
-		run_node.character.deck.add_card(card)
+		run_node.character.add_card_to_deck(card)
 	else:
 		Events.card_purchased.emit(card)
 		

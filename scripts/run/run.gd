@@ -73,6 +73,7 @@ func _on_map_room_selected(room: Room) -> void:
 	match room.type:
 		Room.Type.MONSTER, Room.Type.ELITE, Room.Type.BOSS:
 			_on_combat_room_entered(room)
+			Events.combat_room_entered.emit(room, stats, character)
 			return
 		Room.Type.TREASURE:
 			_on_treasure_room_entered(room)
@@ -84,16 +85,32 @@ func _on_map_room_selected(room: Room) -> void:
 			_on_campfire_room_entered(room)
 			return
 		Room.Type.UNKNOWN:
-			_handle_unknown_room(room)
-			return
-		Room.Type.ANCIENT:
-			_on_ancient_room_entered(room)
+			_handle_unknown_room(scene,room)
+			Events.unknown_room_entered.emit(room, stats, character)
 			return
 		_:
 			return
 
-# ========== 问号房逻辑 ==========
-func _handle_unknown_room(room: Room) -> void:
+	#if room.type == Room.Type.SHOP:
+		#call_deferred("_change_view_deferred", scene)
+	#else:
+	
+
+
+################实现问号房逻辑####################
+var unknown_room_probs = {
+	"combat": 0.10,      # 战斗
+	"shop": 0.02,       # 商人
+	"treasure": 0.03,   # 宝箱
+	"incident": 0.85    # 事件
+}
+
+# 保存上一次的房间类型，用于概率补偿
+var last_unknown_room_type: String = ""
+var compensation_chance: float = 0.0  # 补偿概率
+
+func _handle_unknown_room(scene: PackedScene, room: Room) -> void:
+	# 1. 计算当前概率（考虑补偿机制）
 	var current_probs = calculate_compensated_probabilities()
 	var room_type = get_random_room_type(current_probs)
 	
@@ -218,14 +235,8 @@ func _change_view(scene: PackedScene) -> Node:
 	if current_room.get_child_count() > 0:
 		current_room.get_child(0).queue_free()
 	
-	# 商店场景特殊处理：优先使用地图中预加载的资源（避免重复加载）
-	var final_scene = scene
-	if scene == SHOP_SCENE and map_node.has_method("get_shop_scene"):
-		var loaded_scene = map_node.get_shop_scene()
-		if loaded_scene != null:
-			final_scene = loaded_scene
-	
-	var new_view := final_scene.instantiate()
+	# 其他场景正常处理
+	var new_view := scene.instantiate()
 	current_room.add_child(new_view)
 	return new_view
 
@@ -323,3 +334,34 @@ func _on_ancient_room_entered(room: Room) -> void:
 
 func _on_ancient_relic_selected(relic: Relic) -> void:
 	top_bar.relic_handler.add_relic(relic)
+func _on_campfire_room_entered(room: Room)-> void:
+	var capfire_scene :CampfireRoom = _change_view(CAMPFIRE_SCENE) as CampfireRoom
+	capfire_scene.char_stats=character
+	capfire_scene.deck_view = select_deck_view
+	capfire_scene.initialize()
+	Events.campfire_entered.emit(room, stats, character)
+
+	
+func _on_incident_room_entered(room: Room)->void:
+	
+	var incident_scene :IncidentRoom = _change_view(INCIDENT_SCENE) as IncidentRoom
+	incident_scene.char_stats = character
+	incident_scene.run_stats=stats
+	incident_scene.deck_view= select_deck_view
+	incident_scene.init()
+	Events.incident_room_entered.emit(room, stats, character)
+
+func _on_shop_entered(room: Room) -> void:
+	if current_room.get_child_count() > 0:
+		current_room.get_child(0).queue_free()
+	
+	var loaded_scene = map_node.get_shop_scene()
+	if loaded_scene == null:
+		# 如果资源还未加载完成，回退同步加载
+		loaded_scene = load(SHOP_SCENE.resource_path)
+	var new_view = loaded_scene.instantiate()
+	current_room.add_child.call_deferred(new_view)
+	
+	Events.shop_entered.emit(room, stats, character)
+	
+	

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://cg7ljfud08hrs"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_5glcp"]
+[ext_resource type="Texture2D" uid="uid://cdd6foi" path="res://images/atlases/relic_atlas.sprites/meal_ticket.tres" id="2_ewas2"]
+[ext_resource type="Script" uid="uid://u10ld2nb8el8" path="res://entities/relics/colorless/餐券.gd" id="3_hsqk7"]
+
+[resource]
+script = ExtResource("3_hsqk7")
+relic_name = "餐券"
+id = "meal_ticket"
+icon = ExtResource("2_ewas2")
+description = "每当你进入商店房间时，回复15点生命"
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

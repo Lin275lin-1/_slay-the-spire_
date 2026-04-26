@@ -16,6 +16,7 @@ func initialize(run_stats_: RunStats) -> void:
 	Events.after_potion_used.connect(_on_after_potion_used)
 	run_stats.potion_added.connect(add_potion)
 	run_stats.potion_removed.connect(remove_potion)
+	run_stats.potion_slots_changed.connect(update_potion_slot)
 	update_potion_slot()
 
 func update_potion_slot() -> void:

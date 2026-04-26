@@ -26,6 +26,7 @@ func start_battle(char_stats_: CharacterStats) -> void:
 	char_stats.draw_pile = char_stats_.deck.duplicate(true)
 	char_stats.draw_pile.shuffle()
 	char_stats.discard_pile = CardPile.new()
+	char_stats.exhaust_pile = CardPile.new()
 	relics.relics_activated.connect(_on_relics_activated)
 	start_turn()
 	
@@ -160,6 +161,7 @@ func put_card_in_hand(card: Card) -> void:
 		card.first_play_free = false
 		char_stats.discard_pile.add_card(card)
 
+
 func put_card_in_discard_pile(card: Card) -> void:
 	char_stats.discard_pile.add_card(card)
 
@@ -179,7 +181,7 @@ func remove_card_in_hand(card: Card) -> void:
 func update_hand() -> void:
 	hand_manager.update_hand()
 
-func _on_card_played(card: Card) -> void:
+func _on_card_played(card: Card, _card_context: Dictionary) -> void:
 	if card.type == card.Type.POWER:
 		# 能力牌打出后不进入任何牌堆
 		return
