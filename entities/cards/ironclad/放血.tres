@@ -1,12 +1,13 @@
-[gd_resource type="Resource" format=3 uid="uid://durx4ieeeb30h"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://durx4ieeeb30h"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_lhgbm"]
 [ext_resource type="Texture2D" uid="uid://bbpfskx" path="res://images/atlases/card_atlas.sprites/ironclad/bloodletting.tres" id="2_awg4v"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_gfkj2"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_eijwo"]
-[ext_resource type="Script" uid="uid://c5voa5l6fqcew" path="res://entities/cards/ironclad/放血.gd" id="3_qdv0n"]
 [ext_resource type="Script" uid="uid://bgxakc1nj11hm" path="res://scripts/costum_resources/effects/loss_health_effect.gd" id="4_mltl7"]
 [ext_resource type="Script" uid="uid://c6kvghrfcdtp7" path="res://scripts/costum_resources/effects/gain_energy_effect.gd" id="5_hhsau"]
+[ext_resource type="Resource" uid="uid://b56gw7xhi8pe1" path="res://entities/enchantments/伶俐.tres" id="6_eijwo"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_gfkj2"]
 
 [sub_resource type="Resource" id="Resource_gfkj2"]
 script = ExtResource("3_eijwo")
@@ -103,9 +104,10 @@ affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("3_qdv0n")
+script = ExtResource("7_gfkj2")
 id = "放血"
 type = 2
+enchantment = ExtResource("6_eijwo")
 effects = Array[ExtResource("2_gfkj2")]([SubResource("Resource_50rsw"), SubResource("Resource_fs5tq")])
 portrait = ExtResource("2_awg4v")
 base_description = "[center]失去{lose_health}点生命。[/center][p][center]获得{energy}点[color=gold]能量[/color]。[/center]"

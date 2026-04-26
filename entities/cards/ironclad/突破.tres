@@ -1,13 +1,12 @@
-[gd_resource type="Resource" format=3 uid="uid://objfyia1a4gs"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://objfyia1a4gs"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_7hojj"]
 [ext_resource type="Texture2D" uid="uid://cyokfre" path="res://images/atlases/card_atlas.sprites/ironclad/breakthrough.tres" id="1_mytnf"]
-[ext_resource type="Script" uid="uid://mu7i5m4la2jn" path="res://entities/cards/ironclad/突破.gd" id="2_82msx"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_w2fya"]
-[ext_resource type="AudioStream" uid="uid://b4eqc65cqogm6" path="res://audio/SFX/blunt_attack.mp3" id="3_7hojj"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_cecr8"]
 [ext_resource type="Script" uid="uid://bgxakc1nj11hm" path="res://scripts/costum_resources/effects/loss_health_effect.gd" id="4_gnjcy"]
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="5_3j5tx"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_w2fya"]
 
 [sub_resource type="Resource" id="Resource_aw83l"]
 script = ExtResource("2_w2fya")
@@ -55,6 +54,9 @@ script = ExtResource("5_3j5tx")
 damage_provider = SubResource("Resource_w2fya")
 target_type = 3
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_bs0lu"]
+metadata/__load_path__ = "res://audio/SFX/blunt_attack.mp3"
 
 [sub_resource type="Resource" id="Resource_mxojx"]
 script = ExtResource("2_w2fya")
@@ -104,14 +106,14 @@ affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("2_82msx")
+script = ExtResource("7_w2fya")
 id = "突破"
 base_target = 2
 base_cost = 1
 effects = Array[ExtResource("3_cecr8")]([SubResource("Resource_1f51j"), SubResource("Resource_cecr8")])
 portrait = ExtResource("1_mytnf")
 base_description = "[center]失去{lose_health}点生命。[/center][p][center]对所有敌人造成{damage}点伤害。[/center]"
-sound = ExtResource("3_7hojj")
+sound = SubResource("Resource_bs0lu")
 base_numeric_entries = Array[ExtResource("1_7hojj")]([SubResource("Resource_7hojj"), SubResource("Resource_f6jnm")])
 upgraded_target = 2
 upgraded_cost = 1

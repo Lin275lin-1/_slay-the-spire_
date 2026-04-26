@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://b0h21k2528dmk"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_scc0g"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_11cfl"]
+[ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="2_b6pac"]
+[ext_resource type="Texture2D" uid="uid://ckskygl" path="res://images/atlases/potion_atlas.sprites/ashwater.tres" id="3_8fegn"]
+[ext_resource type="Texture2D" uid="uid://bxjvc0u" path="res://images/atlases/potion_outline_atlas.sprites/ashwater.tres" id="4_q3bdy"]
+
+[sub_resource type="Resource" id="Resource_3sgtv"]
+script = ExtResource("2_b6pac")
+callback = 1
+where = 1
+max_select = 10
+metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+
+[resource]
+script = ExtResource("2_11cfl")
+id = "ashwater"
+potion_name = "灰水"
+description = "[color=gold]消耗[/color]你[color=gold]手牌[/color]中的任意张牌"
+icon = ExtResource("3_8fegn")
+outline_icon = ExtResource("4_q3bdy")
+rarity = 2
+potion_color = 1
+effects = Array[ExtResource("1_scc0g")]([SubResource("Resource_3sgtv")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

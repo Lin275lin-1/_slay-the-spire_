@@ -5,8 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://t28flj" path="res://images/atlases/card_atlas.sprites/ironclad/brand.tres" id="2_vdpk4"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_v6l75"]
 [ext_resource type="Script" uid="uid://bgxakc1nj11hm" path="res://scripts/costum_resources/effects/loss_health_effect.gd" id="4_1mirt"]
-[ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="5_0w4ou"]
+[ext_resource type="Script" uid="uid://cqcf6adphkjfy" path="res://scripts/costum_resources/effects/select_card_effect.gd" id="5_0w4ou"]
 [ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="6_bvhf2"]
+[ext_resource type="Script" uid="uid://csyjq6ujulplm" path="res://scripts/costum_resources/effects/card_effects/card_effect.gd" id="6_t428w"]
+[ext_resource type="Script" uid="uid://brihgwpyu7v5v" path="res://scripts/costum_resources/effects/card_effects/exhaust_card_effect.gd" id="7_yghm2"]
+[ext_resource type="Script" uid="uid://c2drp2mlr0vhm" path="res://scripts/costum_resources/effects/foreach_card_effect.gd" id="8_ov1pj"]
 [ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="8_t428w"]
 
 [sub_resource type="Resource" id="Resource_yghm2"]
@@ -48,11 +51,19 @@ metadata/_custom_type_script = "uid://bgxakc1nj11hm"
 
 [sub_resource type="Resource" id="Resource_ee2j6"]
 script = ExtResource("5_0w4ou")
-callback = 1
-where = 1
 min_select = 1
 max_select = 1
-metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+callback_hint = "消耗"
+metadata/_custom_type_script = "uid://cqcf6adphkjfy"
+
+[sub_resource type="Resource" id="Resource_hqriv"]
+script = ExtResource("7_yghm2")
+metadata/_custom_type_script = "uid://brihgwpyu7v5v"
+
+[sub_resource type="Resource" id="Resource_1h3nx"]
+script = ExtResource("8_ov1pj")
+effects = Array[ExtResource("6_t428w")]([SubResource("Resource_hqriv")])
+metadata/_custom_type_script = "uid://c2drp2mlr0vhm"
 
 [sub_resource type="Resource" id="Resource_0l836"]
 script = ExtResource("2_1f28g")
@@ -77,13 +88,21 @@ lose_health_provider = SubResource("Resource_2jjcy")
 target_type = 1
 metadata/_custom_type_script = "uid://bgxakc1nj11hm"
 
-[sub_resource type="Resource" id="Resource_hqriv"]
+[sub_resource type="Resource" id="Resource_wreny"]
 script = ExtResource("5_0w4ou")
-callback = 1
-where = 1
 min_select = 1
 max_select = 1
-metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+callback_hint = "消耗"
+metadata/_custom_type_script = "uid://cqcf6adphkjfy"
+
+[sub_resource type="Resource" id="Resource_vefke"]
+script = ExtResource("7_yghm2")
+metadata/_custom_type_script = "uid://brihgwpyu7v5v"
+
+[sub_resource type="Resource" id="Resource_7t1yr"]
+script = ExtResource("8_ov1pj")
+effects = Array[ExtResource("6_t428w")]([SubResource("Resource_vefke")])
+metadata/_custom_type_script = "uid://c2drp2mlr0vhm"
 
 [sub_resource type="Resource" id="Resource_1mugd"]
 script = ExtResource("2_1f28g")
@@ -127,10 +146,14 @@ script = ExtResource("8_t428w")
 id = "烙印"
 type = 2
 rarity = 4
-effects = Array[ExtResource("3_v6l75")]([SubResource("Resource_hfn42"), SubResource("Resource_ee2j6"), SubResource("Resource_40g3n")])
+effects = Array[ExtResource("3_v6l75")]([SubResource("Resource_hfn42"), SubResource("Resource_ee2j6"), SubResource("Resource_1h3nx"), SubResource("Resource_40g3n")])
 portrait = ExtResource("2_vdpk4")
-base_description = "[center]失去{lose_health}点生命。[/center][center][color=gold]消耗[/color]一张牌。[/center][p][center]获得{stacks}层力量。[/center]"
+base_description = "[center]失去{lose_health}点生命。
+消耗1张牌。
+获得{stacks}点力量。[/center]"
 base_numeric_entries = Array[ExtResource("1_7g7x0")]([SubResource("Resource_nfdik"), SubResource("Resource_posev")])
-upgraded_description = "[center]失去{lose_health}点生命。[/center][center][color=gold]消耗[/color]一张牌。[/center][p][center]获得{stacks}层力量。[/center]"
+upgraded_description = "[center]失去{lose_health}点生命。
+消耗1张牌。
+获得{stacks}点力量。[/center]"
 upgraded_numeric_entries = Array[ExtResource("1_7g7x0")]([SubResource("Resource_5k5ep"), SubResource("Resource_oo28o")])
-upgraded_effects = Array[ExtResource("3_v6l75")]([SubResource("Resource_fpwf7"), SubResource("Resource_hqriv"), SubResource("Resource_007lt")])
+upgraded_effects = Array[ExtResource("3_v6l75")]([SubResource("Resource_fpwf7"), SubResource("Resource_wreny"), SubResource("Resource_7t1yr"), SubResource("Resource_007lt")])

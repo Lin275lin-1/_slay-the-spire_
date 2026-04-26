@@ -23,12 +23,14 @@ enum COLOR {
 @export var character_icon: Texture2D
 ## 角色的描述，选人界面时使用
 @export var character_description: String
+## 角色的技能 
+@export var main_skill: MainSkill
 
-var energy: int : set = _set_energy
-var deck: CardPile
-var discard_pile: CardPile
-var draw_pile: CardPile
-var exhaust_pile: CardPile
+@export var energy: int : set = _set_energy
+@export var deck: CardPile
+@export var discard_pile: CardPile
+@export var draw_pile: CardPile
+@export var exhaust_pile: CardPile
 
 func _set_energy(value: int) -> void:
 	energy = value

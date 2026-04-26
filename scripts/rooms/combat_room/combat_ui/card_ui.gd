@@ -9,7 +9,7 @@ signal toggled(card: CardUI)
 
 @onready var drop_point_area: Area2D = $DropPointArea
 @onready var card_state_machine: CardStateMachine = $CardStateMachine
-@onready var visuals: Control = $Visuals
+@onready var visuals: CardVisuals = $Visuals
 
 var disabled: bool = false : set = _set_disabled
 var playable: bool = true : set = _set_playable
@@ -28,6 +28,9 @@ var movement_tween: Tween
 
 var selection_mode: Enums.SelectionMode = Enums.SelectionMode.NONE
 
+# 玩家(不考虑多人
+var player: Player
+
 # 在dragging/aiming下，卡牌会脱离handmanger
 @warning_ignore("unused_signal")
 signal reparent_requested(card_ui: CardUI)
@@ -41,7 +44,10 @@ func _ready() -> void:
 	Events.card_drag_ended.connect(_on_card_click_or_drag_or_aiming_ended)
 	Events.target_selected.connect(_on_target_selected)
 	Events.target_unselected.connect(_on_target_unselected)
+	
 	card_state_machine.init()
+	player = get_tree().get_first_node_in_group("ui_player")
+	Events.card_played.connect(func(_card: Card): visuals.set_hightlight(playable, card.has_highlight_condition(player, null)))
 
 func play() -> void:
 	if not card:
@@ -122,6 +128,7 @@ func animate_scale(to: Vector2, duration: float) -> void:
 func _set_char_stats(value: CharacterStats) -> void:
 	char_stats = value
 	char_stats.stats_changed.connect(_on_char_stats_changed)
+	_on_char_stats_changed()
 
 func set_card(value: Card) -> void:
 	if not is_node_ready():
@@ -129,9 +136,12 @@ func set_card(value: Card) -> void:
 	
 	card = value
 	visuals.card = value
+	if char_stats:
+		visuals.set_hightlight(playable, card.has_highlight_condition(player, null))
 
 func _set_playable(value: bool) -> void:
 	playable = value
+	visuals.set_hightlight(playable, card.has_highlight_condition(player, null))
 	# TODO:改变卡牌外观
 
 func _set_disabled(value: bool) -> void:
@@ -195,7 +205,7 @@ func _on_card_click_or_drag_or_aiming_started(card_ui: CardUI) -> void:
 		
 func _on_card_click_or_drag_or_aiming_ended(_card_ui: CardUI) -> void:
 	disabled = false
-	self.playable = char_stats.can_play_card(card)
+	playable = char_stats.can_play_card(card)
 
 func set_description(source_: Creature, target_: Creature) -> void:
 	if selection_mode == Enums.SelectionMode.NONE:
@@ -211,13 +221,16 @@ func _on_drop_point_area_area_exited(area: Area2D) -> void:
 	targets.erase(area)
 
 func _on_char_stats_changed() -> void:
-	self.playable = char_stats.can_play_card(card)
+	playable = char_stats.can_play_card(card)
+	#visuals.set_hightlight(self.playable, card.has_highlight_condition(player, null))
 
 func _on_target_selected(target: Creature, card_: Card) -> void:
 	# 如果更改目标的卡牌不是自身，不修改描述
 	if card_ == card:
 		set_description(get_tree().get_first_node_in_group("ui_player"), target)
+		visuals.set_hightlight(playable, card.has_highlight_condition(player, target))
 	
 func _on_target_unselected(card_) -> void:
 	if card_ == card:
 		set_description(get_tree().get_first_node_in_group("ui_player"), null)
+		visuals.set_hightlight(playable, card.has_highlight_condition(player, null))

@@ -42,6 +42,7 @@ const CARD_FRAME_RED_MAT = preload("res://materials/cards/frames/card_frame_red_
 @onready var enchantment: TextureRect = %Enchantment
 @onready var enchantment_icon: TextureRect = %EnchantmentIcon
 @onready var enchantment_stack_label: Label = %EnchantmentStackLabel
+@onready var high_light: TextureRect = %HighLight
 
 
 func _set_card(value: Card) -> void:
@@ -52,7 +53,9 @@ func _set_card(value: Card) -> void:
 	card_portrait.texture = card.portrait
 	title_label.text = card.get_title()
 	if card.playable:
-		if card.first_play_free and card.get_cost() > 0:
+		if card.is_x_cost:
+			energy_label.text = "X"
+		elif card.first_play_free and card.get_cost() > 0:
 			energy_label.text = "[color=green]0[/color]"
 		else:
 			energy_label.text = str(card.get_cost())
@@ -83,6 +86,10 @@ func _set_card(value: Card) -> void:
 			portrait_border.texture = CARD_PORTRAIT_BORDER_POWER_S
 		card.Type.STATUS:
 			type_text = "状态"
+			card_frame.texture = CARD_FRAME_SKILL_S
+			portrait_border.texture = CARD_PORTRAIT_BORDER_SKILL_S
+		card.Type.CURSE:
+			type_text = "诅咒"
 			card_frame.texture = CARD_FRAME_SKILL_S
 			portrait_border.texture = CARD_PORTRAIT_BORDER_SKILL_S
 		_:
@@ -130,3 +137,13 @@ func _set_card(value: Card) -> void:
 
 func set_description(text: String) -> void:
 	description_label.text = text
+	
+func set_hightlight(highlight: bool = false, gold: bool = false) -> void:
+	if highlight:
+		high_light.visible = true
+		if gold:
+			high_light.self_modulate = Color("fff94a")
+		else:
+			high_light.self_modulate = Color("4af3ff")
+	else:
+		high_light.visible = false

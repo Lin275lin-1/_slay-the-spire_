@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://fbhobqh86h63"]
+
+[ext_resource type="Script" uid="uid://vsk432mo2mfx" path="res://scripts/costum_resources/buffs/thorns_buff.gd" id="1_3famb"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_6kecv"]
+[ext_resource type="Texture2D" uid="uid://xbxbf1cqw5fq" path="res://images/powers/thorns_power.png" id="2_3famb"]
+
+[resource]
+script = ExtResource("1_6kecv")
+buff_id = "thorns"
+buff_name = "荆棘"
+description = "受到攻击伤害时，反弹{stacks}点伤害"
+icon = ExtResource("2_3famb")
+buff_script = ExtResource("1_3famb")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

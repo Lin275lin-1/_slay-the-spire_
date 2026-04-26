@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://cgtimwr467o0i"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_plx7u"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_7hpq7"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_xco6j"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_rj72x"]
+[ext_resource type="Texture2D" uid="uid://cl7iby2" path="res://images/atlases/potion_atlas.sprites/flex_potion.tres" id="4_cld3j"]
+[ext_resource type="Texture2D" uid="uid://hjgmmg" path="res://images/atlases/potion_outline_atlas.sprites/flex_potion.tres" id="5_n5j7p"]
+
+[sub_resource type="Resource" id="Resource_l17ay"]
+script = ExtResource("2_7hpq7")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_3tc5q"]
+script = ExtResource("3_rj72x")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_l17ay")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_a3t74"]
+script = ExtResource("2_7hpq7")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_vhcjv"]
+script = ExtResource("3_rj72x")
+buff_name = "肌肉药水"
+buff_stack_provider = SubResource("Resource_a3t74")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_xco6j")
+id = "flex_potion"
+potion_name = "肌肉药水"
+description = "获得5点[color=gold]力量[/color]，回合结束时，失去5点[color=gold]力量[/color]。"
+icon = ExtResource("4_cld3j")
+outline_icon = ExtResource("5_n5j7p")
+effects = Array[ExtResource("1_plx7u")]([SubResource("Resource_3tc5q"), SubResource("Resource_vhcjv")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

@@ -1,13 +1,12 @@
-[gd_resource type="Resource" format=3 uid="uid://bwfi2t422lab6"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bwfi2t422lab6"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_bvjlo"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_gi2mb"]
 [ext_resource type="Texture2D" uid="uid://x6dqru" path="res://images/atlases/card_atlas.sprites/ironclad/thunderclap.tres" id="2_s5fly"]
-[ext_resource type="Script" uid="uid://coguyr7klivol" path="res://entities/cards/ironclad/闪电霹雳.gd" id="3_0t5dk"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_t8ehc"]
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_i2oj1"]
-[ext_resource type="AudioStream" uid="uid://5hkfxlyqq0tx" path="res://audio/SFX/lightning_orb_evoke.mp3" id="4_ovux8"]
 [ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="5_bbw44"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_gi2mb"]
 
 [sub_resource type="Resource" id="Resource_dobrv"]
 script = ExtResource("2_gi2mb")
@@ -56,6 +55,9 @@ buff_name = "易伤"
 buff_stack_provider = SubResource("Resource_dekyv")
 target_type = 3
 metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_ouh1s"]
+metadata/__load_path__ = "res://audio/SFX/lightning_orb_evoke.mp3"
 
 [sub_resource type="Resource" id="Resource_xe3up"]
 script = ExtResource("2_gi2mb")
@@ -106,14 +108,14 @@ affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("3_0t5dk")
+script = ExtResource("7_gi2mb")
 id = "闪电霹雳"
 base_target = 2
 base_cost = 1
 effects = Array[ExtResource("3_t8ehc")]([SubResource("Resource_ckxse"), SubResource("Resource_1bnbt")])
 portrait = ExtResource("2_s5fly")
 base_description = "[center]对所有敌人造成{damage}点伤害。[/center][p][center]施加{stacks}层[color=gold]易伤[/color]。[/center]"
-sound = ExtResource("4_ovux8")
+sound = SubResource("Resource_ouh1s")
 base_numeric_entries = Array[ExtResource("1_bvjlo")]([SubResource("Resource_kfv0u"), SubResource("Resource_11s2g")])
 upgraded_target = 2
 upgraded_cost = 1

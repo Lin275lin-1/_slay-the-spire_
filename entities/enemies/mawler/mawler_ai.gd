@@ -5,6 +5,8 @@ var roared := false
 
 func execute_intent(source: Creature, target: Creature, current_intent: Intent) -> void:
 	last_action = current_intent.intent_name
+	if current_intent.intent_name == "Roar":
+		roared = true
 	super.execute_intent(source, target, current_intent)
 
 func choose_intent(_source: Creature, _target: Creature) -> Intent:

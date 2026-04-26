@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://lq3xabo04psu"]
+
+[ext_resource type="Script" uid="uid://ypk7rcvp4uqy" path="res://scripts/costum_resources/buffs/vicious_buff.gd" id="1_4mu47"]
+[ext_resource type="Texture2D" uid="uid://bdjrt1ihca8xa" path="res://images/powers/vicious_power.png" id="1_c3el6"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_mk1vl"]
+
+[resource]
+script = ExtResource("1_mk1vl")
+buff_id = "vicious"
+buff_name = "凶恶"
+description = "每当你给予易伤时，抽{stacks}张牌"
+icon = ExtResource("1_c3el6")
+buff_script = ExtResource("1_4mu47")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

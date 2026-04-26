@@ -15,11 +15,14 @@ var max_select := 10
 var min_select := 0
 var selected_cards: Array[Card] = []
 
+var char_stats: CharacterStats: set = _set_char_stats
+
 func _ready() -> void:
 	comfirm_button.pressed.connect(_on_comfirm)
 	cancel_button.pressed.connect(_on_cancel)
 	comfirm_button.hide()
 	cancel_button.hide()
+	
 	
 func single_select(cards_to_choose: Array[Card], title: String) -> Array[Card]:
 	#return await _start_selection(cards_to_choose, title, Enums.SelectionMode.SINGLE)
@@ -108,3 +111,7 @@ func _on_cancel() -> void:
 
 func _on_comfirm() -> void:
 	card_selected.emit(selected_cards)
+
+func _set_char_stats(value: CharacterStats) -> void:
+	char_stats = value
+	hand_manager.char_stats = value

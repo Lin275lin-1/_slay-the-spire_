@@ -15,37 +15,45 @@ enum RelicType{
 	ANCIENT_RELIC = 0b0100,
 	SHOP_RELIC = 0b1000
 }
-# 可能需要重构
-enum CharacterType{
-	COLORLESS,
-	IRON_CLAD,
-	SILENT,
-	REGENT,
-	NECROBINDER,
-	DEFECT
+enum COLOR {
+	RED = 0b0000001,	# 铁甲战士
+	GREEN = 0b0000010,	# 静默猎手
+	ORANGE = 0b0000100, # 储君
+	PINK = 0b0001000,	# 亡灵契约师
+	BLUE = 0b0010000,	# 故障机器人
+	COLORLESS = 0b1000000, # 无色
+}
+enum Rarity{
+	COMMON = 0b0001,
+	UNCOMMON = 0b0010,
+	RARE = 0b0100,
+	STARTER_RELIC = 0b1000
 }
 @export var relic_name: String
 @export var id: String
 @export var icon: Texture
 @export_multiline var description: String
 @export var trigger_type: TriggerType
-@export var character_type: CharacterType
+@export var relic_color: COLOR = COLOR.COLORLESS
+@export var rarity: Rarity = Rarity.COMMON
 ## 使用比特判断类型	 比特从右往左一次为 商店遗物，先古(boss)遗物，普通遗物，初始遗物
-## e.g. 输入0b0110: 普通遗物+商店遗物
+## e.g. 输入0b1010: 普通遗物+商店遗物
 @export_range(0, 15) var relic_type: int
-
-
+@export var effects: Array[Effect]
 
 func initialize_relic(_owner: RelicUI) -> void:
 	pass
 
-func activate_relic(_owner: RelicUI) -> void:
-	pass
-
+func activate_relic(owner: RelicUI) -> void:
+	var player = owner.get_tree().get_first_node_in_group("ui_player")
+	# 没有指向性的遗物，所以targets为空
+	var relic_context = {"player": player, "targets": []}
+	(player as Player).combat_resolver.execute(ResolutionEntry.new(self, effects, relic_context, func(): owner.flash()))
+	
 # 只有基于事件的遗物需要实现这个方法
 # 方法的目的是解除绑定的信号
 # 事实上每次新增遗物时会复制一份遗物资源,relicUI被清除时资源也会被清除
-# 所有这个函数至少为了保险
+# 所以这个函数至少为了保险
 func deactivate_relic(_owner: RelicUI) -> void:
 	pass
 
@@ -74,14 +82,14 @@ func can_appear_as_reward(character: CharacterStats, drop_type: Relic.RelicType)
 	
 	#print("  character_type = ", character_type)
 	#print("  当前角色: ", character.character_name)
-	
-	match character.character_name:
-		"铁甲战士":
-			var valid = (character_type == CharacterType.IRON_CLAD) or (character_type == CharacterType.COLORLESS)
+
+	match character.color:
+		CharacterStats.COLOR.RED:
+			var valid = (relic_color == COLOR.RED) or (relic_color == COLOR.COLORLESS)
 			#print("  -> 角色匹配结果: ", valid)
 			return valid
-		"静默猎手":
-			var valid = (character_type == CharacterType.SILENT) or (character_type == CharacterType.COLORLESS)
+		CharacterStats.COLOR.GREEN:
+			var valid = (relic_color == COLOR.RED) or (relic_color == COLOR.COLORLESS)
 			#print("  -> 角色匹配结果: ", valid)
 			return valid
 		_:

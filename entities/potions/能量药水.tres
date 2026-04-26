@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://bbpyu34tsm7pv"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_0kfmg"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_0ufat"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_ft2yf"]
+[ext_resource type="Script" uid="uid://c6kvghrfcdtp7" path="res://scripts/costum_resources/effects/gain_energy_effect.gd" id="3_vvp4l"]
+[ext_resource type="Texture2D" uid="uid://njkt83" path="res://images/atlases/potion_atlas.sprites/energy_potion.tres" id="4_wffod"]
+[ext_resource type="Texture2D" uid="uid://col36q4" path="res://images/atlases/potion_outline_atlas.sprites/energy_potion.tres" id="5_ui52j"]
+
+[sub_resource type="Resource" id="Resource_maags"]
+script = ExtResource("2_ft2yf")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_tqeo3"]
+script = ExtResource("3_vvp4l")
+energy_provider = SubResource("Resource_maags")
+metadata/_custom_type_script = "uid://c6kvghrfcdtp7"
+
+[resource]
+script = ExtResource("2_0ufat")
+id = "energy_potion"
+potion_name = "能量药水"
+description = "获得2点能量"
+icon = ExtResource("4_wffod")
+outline_icon = ExtResource("5_ui52j")
+effects = Array[ExtResource("1_0kfmg")]([SubResource("Resource_tqeo3")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

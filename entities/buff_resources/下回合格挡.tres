@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://bephliwftkg8a"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_7ynt2"]
+[ext_resource type="Script" uid="uid://bmeugqjlwhbsa" path="res://scripts/costum_resources/buffs/block_next_turn_buff.gd" id="1_vnbsp"]
+[ext_resource type="Texture2D" uid="uid://dwijlovs7i7x3" path="res://images/powers/block_next_turn_power.png" id="1_wt0ii"]
+
+[resource]
+script = ExtResource("1_7ynt2")
+buff_id = "block_next_turn"
+buff_name = "下回合格挡"
+description = "下回合开始时，获得{stacks}点[color=gold]格挡[/color]"
+icon = ExtResource("1_wt0ii")
+buff_script = ExtResource("1_vnbsp")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

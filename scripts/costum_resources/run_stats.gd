@@ -22,10 +22,10 @@ const BASE_RARE_WEIGHT := 0.3
 @export var gold := STARTING_GOLD : set = set_gold
 
 ## 药水
-@export var potions: Array[Potion] = []
+var potions: Array[Potion] = []
 @export var max_potion_slots: int = 3
 ## 遗物
-@export var relics: Array[Relic] = []
+var relics: Array[Relic] = []
 
 
 @export var card_rewards := BASE_CARD_REWARDS

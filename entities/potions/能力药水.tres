@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://boobb3xq28x2r"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_wpol3"]
+[ext_resource type="Script" uid="uid://c6aimd4krc1h5" path="res://scripts/costum_resources/card_filter.gd" id="2_b8m2s"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_m4jk5"]
+[ext_resource type="Script" uid="uid://ba3wlijo516jr" path="res://scripts/costum_resources/effects/discover_effect.gd" id="3_vw2ic"]
+[ext_resource type="Texture2D" uid="uid://2ers58" path="res://images/atlases/potion_atlas.sprites/power_potion.tres" id="4_qcrv5"]
+[ext_resource type="Texture2D" uid="uid://csrs5em" path="res://images/atlases/potion_outline_atlas.sprites/power_potion.tres" id="5_c3p7u"]
+
+[sub_resource type="Resource" id="Resource_tvxan"]
+script = ExtResource("2_b8m2s")
+color_type = 1
+type = 4
+rarity = 7
+metadata/_custom_type_script = "uid://c6aimd4krc1h5"
+
+[sub_resource type="Resource" id="Resource_vmxal"]
+script = ExtResource("3_vw2ic")
+card_filter = SubResource("Resource_tvxan")
+first_play_free = true
+metadata/_custom_type_script = "uid://ba3wlijo516jr"
+
+[resource]
+script = ExtResource("2_m4jk5")
+id = "power_potion"
+potion_name = "能力药水"
+description = "从3张随机能力牌中选择1张加入你的[color=gold]手牌[/color]。这张牌在本回合可以免费打出。"
+icon = ExtResource("4_qcrv5")
+outline_icon = ExtResource("5_c3p7u")
+effects = Array[ExtResource("1_wpol3")]([SubResource("Resource_vmxal")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://cajhkw4otp6u"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_k4eyk"]
+[ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="2_2gm6f"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_dlnoi"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_54yu0"]
+[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="4_2f25g"]
+[ext_resource type="Texture2D" uid="uid://citi2ai" path="res://images/atlases/potion_atlas.sprites/gamblers_brew.tres" id="5_dmwyj"]
+[ext_resource type="Texture2D" uid="uid://brd2s40" path="res://images/atlases/potion_outline_atlas.sprites/gamblers_brew.tres" id="6_4dlqo"]
+
+[sub_resource type="Resource" id="Resource_mgqeq"]
+script = ExtResource("2_2gm6f")
+callback = 6
+where = 1
+max_select = 10
+random_choose_mode = 1
+metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+
+[sub_resource type="Resource" id="Resource_55ylv"]
+script = ExtResource("3_54yu0")
+type = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_1jk73"]
+script = ExtResource("4_2f25g")
+draw_card_provider = SubResource("Resource_55ylv")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[resource]
+script = ExtResource("2_dlnoi")
+id = "gamblers_brew"
+potion_name = "赌徒特酿"
+description = "丢弃任意张牌，然后抽相同数量的牌"
+icon = ExtResource("5_dmwyj")
+outline_icon = ExtResource("6_4dlqo")
+rarity = 2
+effects = Array[ExtResource("1_k4eyk")]([SubResource("Resource_mgqeq"), SubResource("Resource_1jk73")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

@@ -4,11 +4,18 @@ extends Control
 #角色选择场景
 #const CHARACTER_SELECTOR = preload("res://scenes/character_selector/character_selector.tscn")
 
+const RUN_SCENE=preload("res://scenes/run/run.tscn")
+
+@export var run_startup:RunStartup
+
 #变量名：变量类型
 #$...获取子节点
 @onready var logo: SpineManager = %logo
 @onready var top: SpineManager = $top
 
+#设置界面
+
+@onready var settingscene: Settings = $settingscene
 
 #四个按钮
 @onready var continue_button: Button = %Continue
@@ -23,17 +30,17 @@ func _ready() -> void:
 	temp=top.get_animation_state()
 	temp.set_animation('animation',true)
 	get_tree().paused=false
-	
+	continue_button.disabled=SaveGame.load_data()==null
+	settingscene.settings_exited.connect(handleSettings)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
+func handleSettings()->void:
+	settingscene.hide()
+	get_tree().paused=false
 
 func _on_continue_pressed() -> void:
+	run_startup.type=RunStartup.Type.CONTINUE_RUN
+	get_tree().change_scene_to_packed(RUN_SCENE)
 	print("coutinue button pressed")
-
 
 func _on_new_run_pressed() -> void:
 	print("new run button pressed")
@@ -41,12 +48,9 @@ func _on_new_run_pressed() -> void:
 	print(log)
 	
 
-
 func _on_settings_pressed() -> void:
-	var log=get_tree().change_scene_to_file("res://scenes/settings/settings.tscn")
-	print("settings button pressed")
-	print(log)
-	
+	settingscene.show()
+	get_tree().paused=true
 
 
 func _on_quit_pressed() -> void:

@@ -1,0 +1,6 @@
+[gd_resource type="RichTextEffect" script_class="ShakeEffect" format=3 uid="uid://c4ysm64bx6hr7"]
+
+[ext_resource type="Script" uid="uid://scy70ptqpm5j" path="res://scripts/rooms/ancient_room/shake_effect.gd" id="1_smi6k"]
+
+[resource]
+script = ExtResource("1_smi6k")

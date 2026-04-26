@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://ce34juwu5b0yr" path="res://scripts/costum_resources/intents/intent.gd" id="1_vigx8"]
 [ext_resource type="Script" uid="uid://iqqyr44teapg" path="res://scripts/costum_resources/intents/sub_intent.gd" id="2_8bhho"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_3o047"]
-[ext_resource type="Texture2D" uid="uid://cdjfipfy2o2u8" path="res://images/packed/intents/attack/intent_attack_2.png" id="3_855rx"]
+[ext_resource type="Texture2D" uid="uid://bkbn4fvc4je43" path="res://images/packed/intents/attack/intent_attack_2.png" id="3_855rx"]
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_55nap"]
 [ext_resource type="Script" uid="uid://bces7ijyodhmv" path="res://scripts/costum_resources/intents/attack_sub_intent.gd" id="6_jw7gk"]
 [ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="7_h84lw"]
 [ext_resource type="Script" uid="uid://gjypfal5fy2c" path="res://entities/enemies/toadpole/toadpole_ai.gd" id="7_uidce"]
-[ext_resource type="Texture2D" uid="uid://bueaoomrl3ifh" path="res://images/packed/intents/intent_buff.png" id="8_gbs82"]
+[ext_resource type="Texture2D" uid="uid://epusnbog8ryc" path="res://images/packed/intents/intent_buff.png" id="8_gbs82"]
 [ext_resource type="Script" uid="uid://dpbv4m5rd0bbq" path="res://scripts/costum_resources/intents/apply_buff_sub_intent.gd" id="9_w40we"]
 
 [sub_resource type="Resource" id="Resource_tmb7p"]
@@ -50,14 +50,8 @@ script = ExtResource("3_3o047")
 fixed_value = 3
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_s6byx"]
-script = ExtResource("3_3o047")
-fixed_value = 3
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
 [sub_resource type="Resource" id="Resource_p05pq"]
 script = ExtResource("4_55nap")
-repeat_count_provider = SubResource("Resource_s6byx")
 damage_provider = SubResource("Resource_yns4a")
 target_type = 2
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
@@ -75,9 +69,27 @@ icon = ExtResource("3_855rx")
 effect = SubResource("Resource_p05pq")
 metadata/_custom_type_script = "uid://bces7ijyodhmv"
 
+[sub_resource type="Resource" id="Resource_3o047"]
+script = ExtResource("3_3o047")
+fixed_value = -2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_jw7gk"]
+script = ExtResource("7_h84lw")
+buff_name = "荆棘"
+buff_stack_provider = SubResource("Resource_3o047")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_gbs82"]
+script = ExtResource("9_w40we")
+type = 1
+effect = SubResource("Resource_jw7gk")
+metadata/_custom_type_script = "uid://dpbv4m5rd0bbq"
+
 [sub_resource type="Resource" id="Resource_55nap"]
 script = ExtResource("1_vigx8")
-sub_intents = Array[ExtResource("2_8bhho")]([SubResource("Resource_ve1yo")])
+sub_intents = Array[ExtResource("2_8bhho")]([SubResource("Resource_ve1yo"), SubResource("Resource_gbs82")])
 intent_name = "SpikeSpit"
 metadata/_custom_type_script = "uid://ce34juwu5b0yr"
 

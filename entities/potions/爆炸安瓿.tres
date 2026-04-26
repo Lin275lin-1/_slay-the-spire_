@@ -27,6 +27,6 @@ description = "对所有敌人造成10点伤害"
 icon = ExtResource("1_3hlyg")
 outline_icon = ExtResource("2_m87j0")
 target_type = 2
-rarity = 1
+rarity = 2
 effects = Array[ExtResource("1_fakex")]([SubResource("Resource_kmpba")])
 metadata/_custom_type_script = "uid://bumkvpbom08xn"

@@ -10,6 +10,8 @@ enum TargetType{
 }
 
 @export var target_type: TargetType = TargetType.NONE
+@export var animation_name: String = ""
+@export var animation_delay: float = 0.1
 
 func execute(source: Node, card_context: Dictionary = {}, previous_result: Variant = null) -> Variant:
 	var targets = get_targets(source, card_context)

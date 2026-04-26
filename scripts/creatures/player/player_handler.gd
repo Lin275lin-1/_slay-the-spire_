@@ -9,9 +9,17 @@ const HAND_DISCARD_INTERVAL := 0.25
 @onready var player: Player = $"../Player"
 
 var char_stats: CharacterStats
+# 抽一张牌的效果，这是为了将回合开始时的抽牌也压入结算栈中
+var draw_card_effect_with_iteration: IterationEffect = IterationEffect.new()
+var draw_card_context := {
+	"player": null,
+	"targets": []
+}
 
 func _ready() -> void:
 	Events.card_played.connect(_on_card_played)
+	draw_card_effect_with_iteration.effects = [DrawCardEffect.new()]
+	draw_card_context["player"] = player
 
 func start_battle(char_stats_: CharacterStats) -> void:
 	char_stats = char_stats_
@@ -27,6 +35,11 @@ func start_turn() -> void:
 	relics.activate_relics_by_trigger_type(Relic.TriggerType.START_OF_TURN)
 
 func end_turn() -> void:
+	# 等待其他效果压入调用栈，比如“惊逃”buff
+	# 很丑陋，但是我没办法了
+	await get_tree().process_frame
+	if player.combat_resolver.is_resolving:
+		await player.combat_resolver.resolve_finished
 	player.end_turn()
 	relics.activate_relics_by_trigger_type(Relic.TriggerType.END_OF_TURN)
 
@@ -39,20 +52,32 @@ func draw_card() -> Card:
 	if hand_manager.get_child_count() >= 10:
 		return null
 	var card = char_stats.draw_pile.draw_card()
-	hand_manager.add_card(card)
-	hand_manager.set_cards()
+	
 	reshuffle_deck_from_discard_pile()
 	return card
 
-func draw_cards(amount: int) -> void:
-	var tween := create_tween()
-	for i in range(amount):
-		tween.tween_callback(draw_card)
-		tween.tween_interval(HAND_DRAW_INTERVAL)
-	
-	tween.finished.connect(
-		func(): Events.player_hand_drawn.emit()
-	)
+func add_card_to_hand(card: Card) -> void:
+	if card:
+		hand_manager.add_card(card)
+		hand_manager.set_cards()
+
+		
+#func draw_cards(amount: int) -> void:
+	#var tween := create_tween()
+	#for i in range(amount):
+		#tween.tween_callback(func():
+			##player.draw_card(DrawCardContext.new(player, null, 1))
+			#player.combat_resolver.execute(ResolutionEntry.new(null, [draw_card_effect], draw_card_context, func(): return))
+		#)
+		#tween.tween_interval(HAND_DRAW_INTERVAL)
+	#
+	#tween.finished.connect(
+		#func(): Events.player_hand_drawn.emit()
+	#)
+
+func draw_cards() -> void:
+	draw_card_effect_with_iteration.count_provider = NumericProvider.new(char_stats.cards_per_turn)
+	player.combat_resolver.execute(ResolutionEntry.new(null, [draw_card_effect_with_iteration], draw_card_context, func(): Events.player_hand_drawn.emit()))
 
 func disable_hand(flag: bool = true) -> void:
 	for child:CardUI in hand_manager.get_children():
@@ -88,7 +113,11 @@ func discard_cards() -> void:
 			#TODO:卡片消耗特效
 		else:
 			tween.tween_callback(char_stats.discard_pile.add_card.bind(child.card))
-		tween.tween_callback(hand_manager.discard_card.bind(child))
+		tween.tween_callback(
+		func():
+			if is_instance_valid(child):
+				hand_manager.discard_card(child)
+			)
 		tween.tween_interval(HAND_DISCARD_INTERVAL)
 	tween.finished.connect(
 		func(): Events.player_hand_discarded.emit()
@@ -128,10 +157,24 @@ func put_card_in_hand(card: Card) -> void:
 		hand_manager.set_cards()
 		return
 	else:
+		card.first_play_free = false
 		char_stats.discard_pile.add_card(card)
 
 func put_card_in_discard_pile(card: Card) -> void:
 	char_stats.discard_pile.add_card(card)
+
+func remove_card_in_discard_pile(card: Card) -> void:
+	char_stats.discard_pile.remove_card(card)
+
+func remove_card_in_draw_pile(card: Card) -> void:
+	char_stats.draw_pile.remove_card(card)
+
+# 之后估计会改
+func remove_card_in_hand(card: Card) -> void:
+	for child: CardUI in hand_manager.get_children():
+		if child.card == card:
+			hand_manager.discard_card(child)
+			return
 
 func update_hand() -> void:
 	hand_manager.update_hand()
@@ -142,12 +185,13 @@ func _on_card_played(card: Card) -> void:
 		return
 	if card.exhaust:
 		char_stats.exhaust_pile.add_card(card)
+		Events.card_exhausted.emit(card)
 	else:
 		put_card_in_discard_pile(card)
 		
 func _on_relics_activated(type: Relic.TriggerType):
 	match type:
 		Relic.TriggerType.START_OF_TURN:
-			draw_cards(char_stats.cards_per_turn)
+			draw_cards()
 		Relic.TriggerType.END_OF_TURN:
 			discard_cards()

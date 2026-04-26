@@ -6,11 +6,13 @@ var min_select: int
 var callback: Callable
 var title: String
 var cards: Array[Card]
+var selection_mode: DeckView.SelectionMode
 
-func _init(source_: Node, cards_: Array[Card], title_: String, min_select_: int, max_select_: int, callback_: Callable) -> void:
+func _init(source_: Node, cards_: Array[Card], title_: String, min_select_: int, max_select_: int, callback_: Callable, selection_mode_: DeckView.SelectionMode) -> void:
 	source = source_
 	cards = cards_
 	title = title_
 	min_select = min_select_
 	max_select = max_select_
 	callback = callback_
+	selection_mode = selection_mode_

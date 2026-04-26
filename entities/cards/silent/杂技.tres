@@ -1,12 +1,13 @@
-[gd_resource type="Resource" format=3 uid="uid://ckuslsre8gkok"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://ckuslsre8gkok"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_s678t"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_1bysc"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_7yhpf"]
 [ext_resource type="Texture2D" uid="uid://croho4y" path="res://images/atlases/card_atlas.sprites/silent/acrobatics.tres" id="2_ymop5"]
-[ext_resource type="Script" uid="uid://yiuflfbsuia0" path="res://entities/cards/silent/杂技.gd" id="3_6yoq3"]
 [ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="3_7yhpf"]
 [ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="4_a16hm"]
+[ext_resource type="Script" uid="uid://c8ly86kb5vc65" path="res://scripts/costum_resources/effects/iteration_effect.gd" id="5_a16hm"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_7yhpf"]
 
 [sub_resource type="Resource" id="Resource_a16hm"]
 script = ExtResource("2_7yhpf")
@@ -33,15 +34,20 @@ numeric_provider = SubResource("Resource_bsj5l")
 placeholder = "discard_cards"
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
-[sub_resource type="Resource" id="Resource_u0fji"]
+[sub_resource type="Resource" id="Resource_1uso2"]
 script = ExtResource("2_7yhpf")
 fixed_value = 3
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_1uso2"]
+[sub_resource type="Resource" id="Resource_u0fji"]
 script = ExtResource("3_7yhpf")
-draw_card_provider = SubResource("Resource_u0fji")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_scena"]
+script = ExtResource("5_a16hm")
+count_provider = SubResource("Resource_1uso2")
+effects = Array[ExtResource("2_1bysc")]([SubResource("Resource_u0fji")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
 
 [sub_resource type="Resource" id="Resource_vcmo7"]
 script = ExtResource("4_a16hm")
@@ -51,15 +57,20 @@ min_select = 1
 max_select = 1
 metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
 
-[sub_resource type="Resource" id="Resource_scena"]
+[sub_resource type="Resource" id="Resource_8j6qs"]
 script = ExtResource("2_7yhpf")
 fixed_value = 4
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_8j6qs"]
+[sub_resource type="Resource" id="Resource_it5yr"]
 script = ExtResource("3_7yhpf")
-draw_card_provider = SubResource("Resource_scena")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_ol5sh"]
+script = ExtResource("5_a16hm")
+count_provider = SubResource("Resource_8j6qs")
+effects = Array[ExtResource("2_1bysc")]([SubResource("Resource_it5yr")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
 
 [sub_resource type="Resource" id="Resource_4nc2i"]
 script = ExtResource("4_a16hm")
@@ -94,17 +105,17 @@ placeholder = "discard_cards"
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("3_6yoq3")
+script = ExtResource("7_7yhpf")
 id = "杂技"
 type = 2
 card_color = 2
 base_cost = 1
-effects = Array[ExtResource("2_1bysc")]([SubResource("Resource_1uso2"), SubResource("Resource_vcmo7")])
+effects = Array[ExtResource("2_1bysc")]([SubResource("Resource_scena"), SubResource("Resource_vcmo7")])
 portrait = ExtResource("2_ymop5")
 base_description = "[center]抽{cards}张牌。[/center][p][center]弃{discard_cards}张牌。[/center]"
 base_numeric_entries = Array[ExtResource("1_s678t")]([SubResource("Resource_6yoq3"), SubResource("Resource_gqks6")])
 upgraded_cost = 1
 upgraded_description = "[center]抽{cards}张牌。[/center][p][center]弃{discard_cards}张牌。[/center]"
 upgraded_numeric_entries = Array[ExtResource("1_s678t")]([SubResource("Resource_ymop5"), SubResource("Resource_7mkgc")])
-upgraded_effects = Array[ExtResource("2_1bysc")]([SubResource("Resource_8j6qs"), SubResource("Resource_4nc2i")])
+upgraded_effects = Array[ExtResource("2_1bysc")]([SubResource("Resource_ol5sh"), SubResource("Resource_4nc2i")])
 metadata/_custom_type_script = "uid://br1hibx18tv13"

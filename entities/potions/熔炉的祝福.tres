@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://bn1d1nf2xxugs"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_bh8o2"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_o8mr3"]
+[ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="2_ub0pw"]
+[ext_resource type="Texture2D" uid="uid://cqt6dar" path="res://images/atlases/potion_atlas.sprites/blessing_of_the_forge.tres" id="3_tiur4"]
+[ext_resource type="Texture2D" uid="uid://b3gepai" path="res://images/atlases/potion_outline_atlas.sprites/blessing_of_the_forge.tres" id="4_nueo5"]
+
+[sub_resource type="Resource" id="Resource_dlk6t"]
+script = ExtResource("2_ub0pw")
+where = 1
+all = true
+metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+
+[resource]
+script = ExtResource("2_o8mr3")
+id = "blessing_of_the_forge"
+potion_name = "熔炉的祝福"
+description = "在本场战斗中[color=gold]升级[/color]你[color=gold]手牌[/color]中的所有牌"
+icon = ExtResource("3_tiur4")
+outline_icon = ExtResource("4_nueo5")
+rarity = 2
+effects = Array[ExtResource("1_bh8o2")]([SubResource("Resource_dlk6t")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

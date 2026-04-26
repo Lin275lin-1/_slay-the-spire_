@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://cvpdulyymheub"]
 
-[ext_resource type="Texture2D" uid="uid://dlffnnvpfuhbw" path="res://images/ui/top_panel/character_icon_silent.png" id="1_20bg2"]
+[ext_resource type="Texture2D" uid="uid://b2kkmffntkk4a" path="res://images/ui/top_panel/character_icon_silent.png" id="1_20bg2"]
 [ext_resource type="Script" uid="uid://dpde6spa48hlj" path="res://scripts/costum_resources/character_stats.gd" id="2_caxby"]
 [ext_resource type="Resource" uid="uid://no4eskllokyl" path="res://entities/characters/silent/silent_starting_deck.tres" id="4_aqrjq"]
 

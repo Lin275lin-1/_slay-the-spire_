@@ -13,6 +13,7 @@ func set_parabola(top_pos: Vector2, end_pos: Vector2, rise_duration: float, fall
 	tween.chain().tween_property(self, "position", end_pos, fall_duration).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	#tween.tween_property(label, "modulate:a", 0.5, fall_duration)
 	tween.tween_property(self, "scale", Vector2.ONE * 0.9, fall_duration)
+	tween.tween_property(self, "rotation_degrees", 0, fall_duration)
 	tween.finished.connect(
 		queue_free
 	)

@@ -1,0 +1,147 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dwwdbcsdjlfi0"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_153a4"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_3w7rg"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_pg8xj"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_nw5gs"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_ktpag"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="5_1aylw"]
+[ext_resource type="Texture2D" uid="uid://gp1q1s" path="res://images/atlases/card_atlas.sprites/ironclad/setup_strike.tres" id="6_m50kv"]
+
+[sub_resource type="Resource" id="Resource_wu87l"]
+script = ExtResource("2_3w7rg")
+fixed_value = 7
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_plcuo"]
+script = ExtResource("1_153a4")
+numeric_provider = SubResource("Resource_wu87l")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_1nsvl"]
+script = ExtResource("2_3w7rg")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_abj8u"]
+script = ExtResource("1_153a4")
+numeric_type = 4
+numeric_provider = SubResource("Resource_1nsvl")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_0574e"]
+script = ExtResource("2_3w7rg")
+fixed_value = 7
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_4tdq3"]
+script = ExtResource("4_ktpag")
+damage_provider = SubResource("Resource_0574e")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_heqtu"]
+script = ExtResource("2_3w7rg")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_o662r"]
+script = ExtResource("5_1aylw")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_heqtu")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_3qf0q"]
+script = ExtResource("2_3w7rg")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_qlha6"]
+script = ExtResource("5_1aylw")
+buff_name = "预备打击"
+buff_stack_provider = SubResource("Resource_3qf0q")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_16nb7"]
+script = ExtResource("2_3w7rg")
+fixed_value = 9
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_lvoem"]
+script = ExtResource("4_ktpag")
+damage_provider = SubResource("Resource_16nb7")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_2tddh"]
+script = ExtResource("2_3w7rg")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_l15wx"]
+script = ExtResource("5_1aylw")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_2tddh")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_6i651"]
+script = ExtResource("2_3w7rg")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_igs82"]
+script = ExtResource("5_1aylw")
+buff_name = "预备打击"
+buff_stack_provider = SubResource("Resource_6i651")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_7wk5q"]
+script = ExtResource("2_3w7rg")
+fixed_value = 9
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_py2as"]
+script = ExtResource("1_153a4")
+numeric_provider = SubResource("Resource_7wk5q")
+placeholder = "damage"
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_iy5l4"]
+script = ExtResource("2_3w7rg")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_x04e3"]
+script = ExtResource("1_153a4")
+numeric_type = 4
+numeric_provider = SubResource("Resource_iy5l4")
+placeholder = "stacks"
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_nw5gs")
+id = "预备打击"
+base_target = 1
+base_cost = 1
+effects = Array[ExtResource("2_pg8xj")]([SubResource("Resource_4tdq3"), SubResource("Resource_o662r"), SubResource("Resource_qlha6")])
+portrait = ExtResource("6_m50kv")
+base_description = "[center]造成{damage}点伤害。[/center]
+[center]在本回合内获得{stacks}点[color=gold]力量[/color]。[/center]"
+base_numeric_entries = Array[ExtResource("1_153a4")]([SubResource("Resource_plcuo"), SubResource("Resource_abj8u")])
+upgraded_target = 1
+upgraded_cost = 1
+upgraded_description = "[center]造成{damage}点伤害。[/center]
+[center]在本回合内获得{stacks}点[color=gold]力量[/color]。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_153a4")]([SubResource("Resource_py2as"), SubResource("Resource_x04e3")])
+upgraded_effects = Array[ExtResource("2_pg8xj")]([SubResource("Resource_lvoem"), SubResource("Resource_l15wx"), SubResource("Resource_igs82")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

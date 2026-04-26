@@ -1,0 +1,124 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b0301tr74ydks"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_epyna"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_iveoc"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_w1ray"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_qpqf4"]
+[ext_resource type="Script" uid="uid://bgxakc1nj11hm" path="res://scripts/costum_resources/effects/loss_health_effect.gd" id="4_amxxk"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="5_r5ks7"]
+[ext_resource type="Texture2D" uid="uid://bcxbmyl" path="res://images/atlases/card_atlas.sprites/ironclad/hemokinesis.tres" id="6_wc8qc"]
+
+[sub_resource type="Resource" id="Resource_nqvo7"]
+script = ExtResource("2_iveoc")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_8br50"]
+script = ExtResource("1_epyna")
+numeric_type = 1
+numeric_provider = SubResource("Resource_nqvo7")
+placeholder = "lose_health"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_t5wfs"]
+script = ExtResource("2_iveoc")
+fixed_value = 16
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_js06g"]
+script = ExtResource("1_epyna")
+numeric_provider = SubResource("Resource_t5wfs")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_cob0h"]
+script = ExtResource("2_iveoc")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_5s2i3"]
+script = ExtResource("4_amxxk")
+lose_health_provider = SubResource("Resource_cob0h")
+target_type = 1
+metadata/_custom_type_script = "uid://bgxakc1nj11hm"
+
+[sub_resource type="Resource" id="Resource_x4rjp"]
+script = ExtResource("2_iveoc")
+fixed_value = 16
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_opy4m"]
+script = ExtResource("5_r5ks7")
+damage_provider = SubResource("Resource_x4rjp")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_ggqrl"]
+script = ExtResource("2_iveoc")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_arexl"]
+script = ExtResource("4_amxxk")
+lose_health_provider = SubResource("Resource_ggqrl")
+target_type = 1
+metadata/_custom_type_script = "uid://bgxakc1nj11hm"
+
+[sub_resource type="Resource" id="Resource_xq7ig"]
+script = ExtResource("2_iveoc")
+fixed_value = 22
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_snkpv"]
+script = ExtResource("5_r5ks7")
+damage_provider = SubResource("Resource_xq7ig")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_h57em"]
+script = ExtResource("2_iveoc")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_n8vdp"]
+script = ExtResource("1_epyna")
+numeric_type = 1
+numeric_provider = SubResource("Resource_h57em")
+placeholder = "lose_health"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_hcw8x"]
+script = ExtResource("2_iveoc")
+fixed_value = 22
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_0g7bc"]
+script = ExtResource("1_epyna")
+numeric_provider = SubResource("Resource_hcw8x")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_qpqf4")
+id = "御血术"
+base_target = 1
+base_cost = 1
+rarity = 2
+effects = Array[ExtResource("2_w1ray")]([SubResource("Resource_5s2i3"), SubResource("Resource_opy4m")])
+portrait = ExtResource("6_wc8qc")
+base_description = "[center]失去{lose_health}点生命。
+造成{damage}点伤害。[/center]"
+base_numeric_entries = Array[ExtResource("1_epyna")]([SubResource("Resource_8br50"), SubResource("Resource_js06g")])
+upgraded_target = 1
+upgraded_cost = 1
+upgraded_description = "[center]失去{lose_health}点生命。
+造成{damage}点伤害。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_epyna")]([SubResource("Resource_n8vdp"), SubResource("Resource_0g7bc")])
+upgraded_effects = Array[ExtResource("2_w1ray")]([SubResource("Resource_arexl"), SubResource("Resource_snkpv")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

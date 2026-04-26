@@ -1,6 +1,7 @@
 class_name ShopItem
 extends RefCounted
 
+#封装
 var item_data            # 原始数据：Card / Relic / Potion
 var shop_price: int
 var on_sale: bool = false

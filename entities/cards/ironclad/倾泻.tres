@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bf678imic2wxo"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_3ygrq"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_610pg"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_ei7kr"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_gmktw"]
+[ext_resource type="Script" uid="uid://cls6in5kdu2mo" path="res://scripts/costum_resources/effects/random_play_effect.gd" id="4_gs03p"]
+[ext_resource type="Texture2D" uid="uid://2s2f2g" path="res://images/atlases/card_atlas.sprites/ironclad/cascade.tres" id="5_i5xil"]
+
+[sub_resource type="Resource" id="Resource_lbwde"]
+script = ExtResource("3_ei7kr")
+type = 9
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_67bxq"]
+script = ExtResource("4_gs03p")
+source = 2
+random_play_count_provider = SubResource("Resource_lbwde")
+animation_name = "cast"
+metadata/_custom_type_script = "uid://cls6in5kdu2mo"
+
+[sub_resource type="Resource" id="Resource_rhlam"]
+script = ExtResource("3_ei7kr")
+type = 9
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_64k5s"]
+script = ExtResource("4_gs03p")
+source = 2
+random_play_count_provider = SubResource("Resource_rhlam")
+animation_name = "cast"
+metadata/_custom_type_script = "uid://cls6in5kdu2mo"
+
+[resource]
+script = ExtResource("3_gmktw")
+id = "倾泻"
+type = 2
+is_x_cost = true
+rarity = 4
+effects = Array[ExtResource("2_610pg")]([SubResource("Resource_67bxq")])
+portrait = ExtResource("5_i5xil")
+base_description = "[center]打出你[color=gold]抽牌堆[/color]顶部的X张牌。[/center]"
+upgraded_description = "[center]打出你[color=gold]抽牌堆[/color]顶部的X + 1张牌。[/center]"
+upgraded_effects = Array[ExtResource("2_610pg")]([SubResource("Resource_64k5s")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

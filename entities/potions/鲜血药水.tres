@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://bjg6dycn70kno"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_ji7x0"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_tsfyv"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_upmb8"]
+[ext_resource type="Script" uid="uid://da1srbssi025l" path="res://scripts/costum_resources/effects/heal_effect.gd" id="3_fdv88"]
+[ext_resource type="Texture2D" uid="uid://c0cbfum" path="res://images/atlases/potion_atlas.sprites/blood_potion.tres" id="4_8pwnd"]
+[ext_resource type="Texture2D" uid="uid://bx6c6gh" path="res://images/atlases/potion_outline_atlas.sprites/blood_potion.tres" id="5_o3pim"]
+
+[sub_resource type="Resource" id="Resource_gb28r"]
+script = ExtResource("2_tsfyv")
+type = 8
+multipiler = 0.2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_46fn7"]
+script = ExtResource("3_fdv88")
+heal_provider = SubResource("Resource_gb28r")
+target_type = 1
+metadata/_custom_type_script = "uid://da1srbssi025l"
+
+[resource]
+script = ExtResource("2_upmb8")
+id = "blood_potion"
+potion_name = "鲜血药水"
+description = "回复你最大生命值的20%"
+icon = ExtResource("4_8pwnd")
+outline_icon = ExtResource("5_o3pim")
+potion_color = 1
+effects = Array[ExtResource("1_ji7x0")]([SubResource("Resource_46fn7")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

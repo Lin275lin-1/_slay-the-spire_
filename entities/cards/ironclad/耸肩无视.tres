@@ -1,13 +1,12 @@
-[gd_resource type="Resource" format=3 uid="uid://djt7dhsu34m5b"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://djt7dhsu34m5b"]
 
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_khewp"]
 [ext_resource type="Texture2D" uid="uid://6rwx4n" path="res://images/atlases/card_atlas.sprites/ironclad/shrug_it_off.tres" id="2_11jwt"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_bccfr"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_5wk7v"]
-[ext_resource type="Script" uid="uid://ccn4rd333asft" path="res://entities/cards/ironclad/耸肩无视.gd" id="3_a6tga"]
 [ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="4_bccfr"]
-[ext_resource type="AudioStream" uid="uid://dg3m3v6ldrym8" path="res://audio/SFX/frost_orb_passive.mp3" id="4_x4nvq"]
 [ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="5_5wk7v"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_bccfr"]
 
 [sub_resource type="Resource" id="Resource_n0n14"]
 script = ExtResource("2_bccfr")
@@ -46,15 +45,12 @@ block_provider = SubResource("Resource_ecjd2")
 target_type = 1
 metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
 
-[sub_resource type="Resource" id="Resource_4i0al"]
-script = ExtResource("2_bccfr")
-fixed_value = 1
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
 [sub_resource type="Resource" id="Resource_duevm"]
 script = ExtResource("5_5wk7v")
-draw_card_provider = SubResource("Resource_4i0al")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_x4nvq"]
+metadata/__load_path__ = "res://audio/SFX/frost_orb_passive.mp3"
 
 [sub_resource type="Resource" id="Resource_kkvbk"]
 script = ExtResource("2_bccfr")
@@ -67,14 +63,8 @@ block_provider = SubResource("Resource_kkvbk")
 target_type = 1
 metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
 
-[sub_resource type="Resource" id="Resource_l78d2"]
-script = ExtResource("2_bccfr")
-fixed_value = 1
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
 [sub_resource type="Resource" id="Resource_rdjfc"]
 script = ExtResource("5_5wk7v")
-draw_card_provider = SubResource("Resource_l78d2")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
 
 [sub_resource type="Resource" id="Resource_ybbby"]
@@ -104,14 +94,14 @@ affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
 [resource]
-script = ExtResource("3_a6tga")
+script = ExtResource("7_bccfr")
 id = "耸肩无视"
 type = 2
 base_cost = 1
 effects = Array[ExtResource("3_5wk7v")]([SubResource("Resource_lg5y1"), SubResource("Resource_duevm")])
 portrait = ExtResource("2_11jwt")
 base_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center][p][center]抽{cards}张牌[/center]"
-sound = ExtResource("4_x4nvq")
+sound = SubResource("Resource_x4nvq")
 base_numeric_entries = Array[ExtResource("1_khewp")]([SubResource("Resource_4m843"), SubResource("Resource_cemlr")])
 upgraded_cost = 1
 upgraded_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center][p][center]抽{cards}张牌[/center]"

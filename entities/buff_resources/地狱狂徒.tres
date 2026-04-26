@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://bfcyo6ue88adx"]
+
+[ext_resource type="Script" uid="uid://d0c3jcab4b0ei" path="res://scripts/costum_resources/buffs/hellraiser_buff.gd" id="1_011mt"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_ocavd"]
+[ext_resource type="Texture2D" uid="uid://c6d3mq7b7btua" path="res://images/powers/hellraiser_power.png" id="2_011mt"]
+
+[resource]
+script = ExtResource("1_ocavd")
+buff_id = "hellraiser"
+buff_name = "地狱狂徒"
+description = "每当你抽到名字中有“打击”的牌时，对一名随机敌人打出这张牌。"
+icon = ExtResource("2_011mt")
+stackable = false
+buff_script = ExtResource("1_011mt")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

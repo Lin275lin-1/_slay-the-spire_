@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://c5g38rayqefs3" path="res://scripts/rooms/shop_room/merchant/merchant_rug_dialogue.gd" id="1_t6f80"]
 [ext_resource type="Shader" uid="uid://dsktks6qbymyh" path="res://shaders/hsv.gdshader" id="2_e476p"]
 [ext_resource type="Texture2D" uid="uid://ckwn5a6bhm4km" path="res://images/packed/vfx/speech_bubble3.png" id="3_o7l33"]
-[ext_resource type="FontVariation" path="res://themes/kreon_regular_shared.tres" id="3_v3qyx"]
-[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="4_hs6w1"]
+[ext_resource type="FontFile" uid="uid://blw3ftbmibl2g" path="res://fonts/kreon_regular.ttf" id="4_t6f80"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="5_0x3yl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ygo6g"]
 resource_local_to_scene = true
@@ -64,8 +64,8 @@ theme_override_constants/line_separation = -3
 theme_override_constants/shadow_outline_size = 0
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/normal_font = ExtResource("3_v3qyx")
-theme_override_fonts/bold_font = ExtResource("4_hs6w1")
+theme_override_fonts/normal_font = ExtResource("4_t6f80")
+theme_override_fonts/bold_font = ExtResource("5_0x3yl")
 theme_override_font_sizes/normal_font_size = 24
 theme_override_font_sizes/bold_font_size = 24
 theme_override_font_sizes/bold_italics_font_size = 24

@@ -14,7 +14,7 @@ func get_description(source_: Creature, target_: Creature) -> String:
 	var final_value: int
 	var color: String
 	var replacement: String
-	var ret: String = _get_default_description() + "[center](造成{damage}点伤害{times}次。)[/center]"
+	var ret: String = _get_default_description() + "[p][center](造成{damage}点伤害{times}次。)[/center]"
 	for placeholder: String in numeric_dict.keys():
 		final_value = numeric_dict[placeholder]
 		replacement = str(final_value)

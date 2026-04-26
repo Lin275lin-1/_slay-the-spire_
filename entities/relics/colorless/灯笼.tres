@@ -1,7 +1,20 @@
 [gd_resource type="Resource" format=3 uid="uid://h2lk8mcg6tu5"]
 
 [ext_resource type="Texture2D" uid="uid://b5b6yjy" path="res://images/atlases/relic_atlas.sprites/lantern.tres" id="1_84n5j"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_xsibf"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_6r6ww"]
 [ext_resource type="Script" uid="uid://du24lh2ycs8fi" path="res://entities/relics/colorless/灯笼.gd" id="2_84n5j"]
+[ext_resource type="Script" uid="uid://c6kvghrfcdtp7" path="res://scripts/costum_resources/effects/gain_energy_effect.gd" id="3_5dc73"]
+
+[sub_resource type="Resource" id="Resource_rke5o"]
+script = ExtResource("2_6r6ww")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ok84g"]
+script = ExtResource("3_5dc73")
+energy_provider = SubResource("Resource_rke5o")
+metadata/_custom_type_script = "uid://c6kvghrfcdtp7"
 
 [resource]
 script = ExtResource("2_84n5j")
@@ -9,5 +22,6 @@ relic_name = "灯笼"
 id = "lantern"
 icon = ExtResource("1_84n5j")
 description = "第一回合开始后，获得1点能量"
-relic_type = 14
+relic_type = 10
+effects = Array[ExtResource("1_xsibf")]([SubResource("Resource_ok84g")])
 metadata/_custom_type_script = "uid://bvf88v88tbaks"

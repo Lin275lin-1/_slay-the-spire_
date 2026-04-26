@@ -9,7 +9,7 @@
 
 [sub_resource type="Resource" id="Resource_xux8m"]
 script = ExtResource("3_qk0du")
-color = 31
+color_type = 2
 type = 7
 rarity = 7
 metadata/_custom_type_script = "uid://c6aimd4krc1h5"

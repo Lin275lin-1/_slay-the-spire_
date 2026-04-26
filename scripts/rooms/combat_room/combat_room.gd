@@ -7,12 +7,14 @@ extends Control
 @onready var player_handler: PlayerHandler = $PlayerHandler
 @onready var combat_ui: CombatUI = %CombatUI
 @onready var hand_manager: HandManager = $CombatUI/HandManager
+@onready var hand_selelctor: HandSelector = %HandSelelctor
+@onready var combat_resolver: CombatResolver = $CombatUI/CombatResolver
+@onready var main_skill_ui: MainSkillUI = $CombatUI/MainSkill
+
 # 子节点的所有char_stats由该节点分发
 @export var char_stats: CharacterStats: set = _set_char_stats
 @export var music: AudioStream
 @export var relics: RelicHandler
-
-
 
 
 func _ready() -> void:
@@ -37,17 +39,20 @@ func start_combat() -> void:
 	#
 	combat_ui.char_stats = char_stats
 	hand_manager.char_stats = char_stats
+	hand_selelctor.char_stats = char_stats
 	player.stats = char_stats
 	
 	relics.relics_activated.connect(_on_relics_activated)
 	relics.activate_relics_by_trigger_type(Relic.TriggerType.START_OF_COMBAT)
+	
+	main_skill_ui.set_skill(char_stats.main_skill)
 
 func _on_add_card_pressed() -> void:
-	player_handler.draw_card()
+	var card = player_handler.draw_card()
+	player_handler.add_card_to_hand(card)
 
 func _on_child_order_changed() -> void:
 	if enemy_handler.get_child_count() == 0 and is_instance_valid(relics):
-
 		relics.activate_relics_by_trigger_type(Relic.TriggerType.END_OF_COMBAT)
 	
 func _on_enemy_turn_ended() -> void:
@@ -59,6 +64,8 @@ func _set_char_stats(value: CharacterStats) -> void:
 
 
 func _on_back_to_map_pressed() -> void:
+	if combat_resolver.is_resolving:
+		await combat_resolver.resolve_finished
 	Events.combat_won.emit()
 
 func _on_relics_activated(type: Relic.TriggerType) -> void:
@@ -69,4 +76,7 @@ func _on_relics_activated(type: Relic.TriggerType) -> void:
 			combat_ui.initialize_card_pile_view()
 			Events.combat_start.emit()
 		Relic.TriggerType.END_OF_COMBAT:
+			if combat_resolver.is_resolving:
+				await combat_resolver.resolve_finished
+			#await get_tree().create_timer(0.5).timeout
 			Events.combat_won.emit()

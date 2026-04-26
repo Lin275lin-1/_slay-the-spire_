@@ -1,8 +1,8 @@
 class_name AttackEffect
 extends Effect
 
-@export var repeat_count_provider: NumericProvider
-@export var repeat: int = 1
+#@export var repeat_count_provider: NumericProvider
+#@export var repeat: int = 1
 @export var damage_provider: NumericProvider
 @export var damage_formula: NumericFormula
 @export var no_modifiers: bool = false
@@ -14,15 +14,27 @@ func apply(source: Node, targets: Array[Node], card_context: Dictionary, previou
 	if card and card.has_enchantment():
 		modifiers.append_array(card.enchantment.get_modifiers_by_type(Enums.NumericType.DAMAGE))
 	var total_damage := 0
-	var repeat_count = repeat
-	if repeat_count_provider:
-		repeat_count = repeat_count_provider.get_value(previous_result, card_context)
+	#var repeat_count = repeat
+	#if repeat_count_provider:
+		#repeat_count = repeat_count_provider.get_value(previous_result, card_context)
+	#
+	#for i in range(repeat_count):
 	for target: Creature in targets:
-		for i in range(repeat_count):
-			var damage = value
-			if damage_formula:
-				damage += damage_formula.calculate(target)
-			total_damage += source.attack(DamageContext.new(source, target, damage, modifiers, no_modifiers))
-			await source.get_tree().create_timer(0.1).timeout
+		var damage = value
+		if damage_formula:
+			damage += damage_formula.calculate(target)
+		total_damage += source.attack(DamageContext.new(source, target, damage, modifiers, no_modifiers))
+	if animation_name and source is Player:
+		source.animate_player(animation_name)
+		await source.get_tree().create_timer(animation_delay).timeout
+	else:
+		await source.get_tree().create_timer(0.1).timeout
+	#for target: Creature in targets:
+		#for i in range(repeat_count):
+			#var damage = value
+			#if damage_formula:
+				#damage += damage_formula.calculate(target)
+			#total_damage += source.attack(DamageContext.new(source, target, damage, modifiers, no_modifiers))
+			
 	return total_damage
 	

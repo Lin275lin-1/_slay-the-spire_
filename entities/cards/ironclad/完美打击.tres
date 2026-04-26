@@ -1,0 +1,119 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bpj3tqx286uw5"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_vhhuv"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_getow"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_r6kv6"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_du5hx"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_1qpmt"]
+[ext_resource type="Texture2D" uid="uid://8l7act" path="res://images/atlases/card_atlas.sprites/ironclad/perfected_strike.tres" id="5_timvm"]
+
+[sub_resource type="Resource" id="Resource_8qsj6"]
+script = ExtResource("2_getow")
+type = 4
+fixed_value = 6
+multipiler = 2.0
+extra_params = {
+"card_name": "打击"
+}
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_137r6"]
+script = ExtResource("1_vhhuv")
+numeric_provider = SubResource("Resource_8qsj6")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_s3uce"]
+script = ExtResource("2_getow")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_aeh4d"]
+script = ExtResource("1_vhhuv")
+numeric_type = 7
+numeric_provider = SubResource("Resource_s3uce")
+placeholder = "factor"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_d0f57"]
+script = ExtResource("2_getow")
+type = 4
+fixed_value = 6
+multipiler = 2.0
+extra_params = {
+"card_name": "打击"
+}
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_qdrll"]
+script = ExtResource("4_1qpmt")
+damage_provider = SubResource("Resource_d0f57")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_s8cgi"]
+script = ExtResource("2_getow")
+type = 4
+fixed_value = 6
+multipiler = 3.0
+extra_params = {
+"card_name": "打击"
+}
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_getow"]
+script = ExtResource("4_1qpmt")
+damage_provider = SubResource("Resource_s8cgi")
+target_type = 2
+animation_name = "attack"
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_k5lvk"]
+script = ExtResource("2_getow")
+type = 4
+fixed_value = 6
+multipiler = 3.0
+extra_params = {
+"card_name": "打击"
+}
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_hiasp"]
+script = ExtResource("1_vhhuv")
+numeric_provider = SubResource("Resource_k5lvk")
+placeholder = "damage"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_tslm4"]
+script = ExtResource("2_getow")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_qttoi"]
+script = ExtResource("1_vhhuv")
+numeric_type = 7
+numeric_provider = SubResource("Resource_tslm4")
+placeholder = "factor"
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_du5hx")
+id = "完美打击"
+base_target = 1
+base_cost = 2
+effects = Array[ExtResource("2_r6kv6")]([SubResource("Resource_qdrll")])
+portrait = ExtResource("5_timvm")
+base_description = "[center]造成{damage}点伤害。
+你每有一张名字中含有“打击”的牌，伤害+{factor}。[/center]"
+base_numeric_entries = Array[ExtResource("1_vhhuv")]([SubResource("Resource_137r6"), SubResource("Resource_aeh4d")])
+upgraded_target = 1
+upgraded_cost = 2
+upgraded_description = "[center]造成{damage}点伤害。
+你每有一张名字中含有“打击”的牌，伤害+{factor}。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_vhhuv")]([SubResource("Resource_hiasp"), SubResource("Resource_qttoi")])
+upgraded_effects = Array[ExtResource("2_r6kv6")]([SubResource("Resource_getow")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"
