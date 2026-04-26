@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3 uid="uid://cb1u8x714pj53"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_hh02b"]
+[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="2_l2isd"]
+[ext_resource type="Texture2D" uid="uid://hsccl6" path="res://images/atlases/relic_atlas.sprites/unceasing_top.tres" id="3_avdjj"]
+[ext_resource type="Script" uid="uid://fq1sg54lxg18" path="res://entities/relics/colorless/不休陀螺.gd" id="4_l2isd"]
+
+[sub_resource type="Resource" id="Resource_avdjj"]
+script = ExtResource("2_l2isd")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[resource]
+script = ExtResource("4_l2isd")
+relic_name = "不休陀螺"
+id = "unceasing_top"
+icon = ExtResource("3_avdjj")
+description = "每当你打出一张卡牌后，如果你没有手牌，抽一张牌"
+rarity = 4
+effects = Array[ExtResource("1_hh02b")]([SubResource("Resource_avdjj")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

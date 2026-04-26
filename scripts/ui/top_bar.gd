@@ -20,6 +20,12 @@ func _on_settings_button_pressed() -> void:
 @onready var top_bar_potion: PotionHandler = $Left/TopBarPotion
 @onready var health_label: Label = $Left/TopBarHealth/Label
 
+# 这个引用来自run.select_deck_view, 是为了在获得遗物时能够选择牌库
+# 我认为这么传引用很奇怪，应该在run里面选择卡牌，然后将结果传过来，但是我不会写
+# 也许通过信号？select_deck_requested(SelectContext)，然后通过context获取选择的卡牌
+# 如果有时间我会改
+var select_deck_view: DeckView
+
 func _ready()-> void:
 	gold_label.text ="0"
 
@@ -35,13 +41,13 @@ func initialize(stats: CharacterStats) -> void:
 	tween.tween_interval(1.0)
 	#tween.tween_callback(func(): run_stats.add_potion(preload("res://entities/potions/癫狂之触.tres")))
 	#tween.tween_interval(1.0)
-	tween.tween_callback(func(): run_stats.add_relic(preload("res://entities/relics/colorless/钩镰.tres")))
+	tween.tween_callback(func(): run_stats.add_relic(preload("res://entities/relics/shop/扭曲锤子.tres")))
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): run_stats.add_relic(preload("res://entities/relics/colorless/石化蟾蜍.tres")))
+	tween.tween_callback(func(): run_stats.add_relic(preload("res://entities/relics/shop/神秘打火机.tres")))
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): run_stats.add_relic(preload("res://entities/relics/colorless/双节棍.tres")))
+	tween.tween_callback(func(): run_stats.add_relic(preload("res://entities/relics/shop/幽灵种子.tres")))
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): run_stats.add_relic(preload("res://entities/relics/colorless/闪亮口红.tres")))
+	tween.tween_callback(func(): run_stats.add_relic(preload("res://entities/relics/colorless/棋子.tres")))
 	tween.tween_interval(1.0)
 	#tween.tween_callback(func(): run_stats.remove_relic(preload("uid://d3a7gl0qcwuho")))
 	#tween.tween_interval(1.0)
@@ -74,4 +80,4 @@ func _update_health() -> void:
 	health_label.text = "{0}/{1}".format([character_stats.health, character_stats.max_health])
 
 func _on_relic_added(relic: Relic) -> void:
-	relic.on_picked_up(run_stats, character_stats)
+	relic.on_picked_up(run_stats, character_stats, select_deck_view)

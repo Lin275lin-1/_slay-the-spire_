@@ -1,0 +1,30 @@
+[gd_resource type="Resource" format=3 uid="uid://caopjqob4vqa7"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_sv4jd"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_5ocek"]
+[ext_resource type="Script" uid="uid://bhhtjppe5dfcx" path="res://scripts/costum_resources/effects/damage_effect.gd" id="3_0npqb"]
+[ext_resource type="Texture2D" uid="uid://b0affe3" path="res://images/atlases/relic_atlas.sprites/stone_calendar.tres" id="4_fx7bm"]
+[ext_resource type="Script" uid="uid://dausa56pdyoe1" path="res://entities/relics/colorless/历石.gd" id="5_5ocek"]
+
+[sub_resource type="Resource" id="Resource_3vqci"]
+script = ExtResource("2_5ocek")
+fixed_value = 52
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_byjuf"]
+script = ExtResource("3_0npqb")
+damage_provider = SubResource("Resource_3vqci")
+no_modifiers = true
+target_type = 3
+metadata/_custom_type_script = "uid://bhhtjppe5dfcx"
+
+[resource]
+script = ExtResource("5_5ocek")
+relic_name = "历石"
+id = "stone_canledar"
+icon = ExtResource("4_fx7bm")
+description = "在第7回合结束时，对所有敌人造成52点伤害"
+trigger_type = 3
+rarity = 4
+effects = Array[ExtResource("1_sv4jd")]([SubResource("Resource_byjuf")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

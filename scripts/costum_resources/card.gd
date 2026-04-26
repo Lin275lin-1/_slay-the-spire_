@@ -279,3 +279,37 @@ func has_highlight_condition(player: Node, target: Node) -> bool:
 		if effect is ConditionalEffect:
 			return effect.is_condition_met(player, target)
 	return false
+
+func has_attack_effect() -> bool:
+	return _has_attack_effect(get_effects())
+
+func _has_attack_effect(card_effects: Array[Effect]) -> bool:
+	for effect in card_effects:
+		if effect is AttackEffect:
+			return true
+		if effect is IterationEffect:
+			if _has_attack_effect(effect.effects):
+				return true
+		if effect is ConditionalEffect:
+			if _has_attack_effect(effect.if_effects) or _has_attack_effect(effect.else_effects):
+				return true
+		# 不管while_effect
+		# foreach是卡牌相关的，也不需要管
+	return false
+
+func has_block_effect() -> bool:
+	return _has_block_effect(get_effects())
+
+func _has_block_effect(card_effects: Array[Effect]) -> bool:
+	for effect in card_effects:
+		if effect is BlockEffect:
+			return true
+		if effect is IterationEffect:
+			if _has_block_effect(effect.effects):
+				return true
+		if effect is ConditionalEffect:
+			if _has_block_effect(effect.if_effects) or _has_block_effect(effect.else_effects):
+				return true
+		# 不管while_effect
+		# foreach是卡牌相关的，也不需要管
+	return false

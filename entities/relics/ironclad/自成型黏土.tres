@@ -1,0 +1,30 @@
+[gd_resource type="Resource" format=3 uid="uid://bkixc0vsc5cvh"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_0k67t"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_62d6w"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_trut0"]
+[ext_resource type="Texture2D" uid="uid://bt7aebp" path="res://images/atlases/relic_atlas.sprites/self_forming_clay.tres" id="4_3n5ba"]
+[ext_resource type="Script" uid="uid://ba654klm7y3od" path="res://entities/relics/ironclad/自成型黏土.gd" id="5_62d6w"]
+
+[sub_resource type="Resource" id="Resource_bsi6g"]
+script = ExtResource("2_62d6w")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_hk826"]
+script = ExtResource("3_trut0")
+buff_name = "自成型黏土"
+buff_stack_provider = SubResource("Resource_bsi6g")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("5_62d6w")
+relic_name = "自成形黏土"
+id = "self_forming_clay"
+icon = ExtResource("4_3n5ba")
+description = "每当你在战斗中失去生命，就在下回合获得3点格挡"
+relic_color = 1
+rarity = 2
+effects = Array[ExtResource("1_0k67t")]([SubResource("Resource_hk826")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

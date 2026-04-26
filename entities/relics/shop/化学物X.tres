@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://b4eoqnubs4b2m"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_2k5tt"]
+[ext_resource type="Texture2D" uid="uid://ehfa7t" path="res://images/atlases/relic_atlas.sprites/chemical_x.tres" id="2_sd7cy"]
+[ext_resource type="Script" uid="uid://bpo65u5ncc0ee" path="res://entities/relics/shop/化学物X.gd" id="3_bxcx5"]
+
+[resource]
+script = ExtResource("3_bxcx5")
+relic_name = "化学物X"
+id = "chemical_X"
+icon = ExtResource("2_sd7cy")
+description = "耗能为X的牌的效果数值增加2点"
+rarity = 16
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

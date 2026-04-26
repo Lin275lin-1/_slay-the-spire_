@@ -14,6 +14,8 @@ enum Type{
 	PLAYER_HEALTH_EQUAL_OR_LESS_THAN_PERCENT, # 血量低于百分比
 	PLAYER_HAS_NO_BLOCK, # 玩家没有格挡
 	PLAYER_NOT_PLAYED_ATTACK, # 玩家没有打出过攻击牌
+	PLAYER_BLOCK_EQUAL_OR_MORE_THAN_COUNT, # 玩家格挡多余count
+	PLAYER_HAS_NO_HAND, # 玩家没有手牌
 }
 
 @export var type: Type = Type.ALWAYS
@@ -72,6 +74,15 @@ func is_met(_source: Node, target: Node, context: Dictionary, previous_result: V
 			var player: Player = context.get("player")
 			if player:
 				return player.attack_played_this_turn == 0
+		Type.PLAYER_BLOCK_EQUAL_OR_MORE_THAN_COUNT:
+			var player: Player = context.get("player")
+			var block_count = extra_params.get("count", 0)
+			if player:
+				return player.get_block() >= block_count
+		Type.PLAYER_HAS_NO_HAND:
+			var player: Player = context.get("player")
+			if player:
+				return len(player.get_hand_cards()) == 0
 		_:
 			return false
 		
@@ -132,6 +143,15 @@ func is_met_without_context(source: Node, target: Node) -> bool:
 			var player: Player = source as Player
 			if player:
 				return player.attack_played_this_turn == 0
+		Type.PLAYER_BLOCK_EQUAL_OR_MORE_THAN_COUNT:
+			var player: Player = source as Player
+			var block_count = extra_params.get("count", 0)
+			if player:
+				return player.get_block() >= block_count
+		Type.PLAYER_HAS_NO_HAND:
+			var player: Player = source as Player
+			if player:
+				return len(player.get_hand_cards()) == 0
 		_:
 			return false
 		

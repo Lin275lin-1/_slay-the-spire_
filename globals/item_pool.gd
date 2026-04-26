@@ -141,6 +141,10 @@ var relics_by_rarity := {
 	0b100000: [],
 }
 
+var enchantment_dict := {
+	
+}
+
 var card_color_mask: int = 0b1111111
 var card_type_mask: int = 0b11111
 var card_rarity_mask: int = 0b11111
@@ -155,12 +159,18 @@ var relic_rarity_mask: int = 0b1111
 func _ready():
 	load_all_cards("res://entities/cards")
 	load_all_potions("res://entities/potions")
+	load_all_enchantments("res://entities/enchantments")
 	
 func get_cards(color: int, type: int, rarity: int) -> Array[Card]:
 	return filter_card_by_rarity(filter_card_by_type(get_cards_by_color(color), type), rarity)
 
 func get_discoverable_cards(color: int, type: int, rarity: int) -> Array[Card]:
 	return filter_card_by_rarity(filter_card_by_type(get_discoverable_cards_by_color(color), type), rarity)
+
+func get_random_discoverable_cards(color: int, type: int, rarity: int, count: int) -> Array[Card]:
+	var candidates := get_discoverable_cards(color, type, rarity)
+	candidates.shuffle()
+	return candidates.slice(0, count)
 
 #可以被奖励的卡牌
 func get_draftable_cards(color: int, type: int, rarity: int) -> Array[Card]:
@@ -258,6 +268,13 @@ func filter_relic_by_rarity(relics: Array[Relic], mask: int) -> Array[Relic]:
 
 func get_relics(color: int, rarity: int) -> Array[Relic]:
 	return filter_relic_by_rarity(get_relics_by_color(color), rarity)
+	
+func get_enchantment_by_name(enchantment_name: String) -> Enchantment:
+	var enchantment: Enchantment = enchantment_dict.get(enchantment_name, null)
+	if enchantment:
+		return enchantment.duplicate()
+	else:
+		return null
 
 func load_all_cards(dir_path: String):
 	var paths = FileHelper.get_all_resources_in_directory(dir_path)
@@ -294,9 +311,18 @@ func load_all_relics(dir_path: String):
 	for path in paths:
 		var resource: Relic = ResourceLoader.load(path)
 		if resource == null:
-			printerr("无法加载{path}".format(path))
+			printerr("无法加载{path}".format({"path": path}))
 			continue
 		else:
 			relics_by_color[resource.relic_color & relic_color_mask].append(resource)
 			relics_by_rarity[resource.rarity & relic_rarity_mask].append(resource)
-			
+
+func load_all_enchantments(dir_path: String):
+	var paths = FileHelper.get_all_resources_in_directory(dir_path)
+	for path in paths:
+		var resource: Enchantment = ResourceLoader.load(path)
+		if resource == null:
+			printerr("无法加载{path}".format({"path": path}))
+			continue
+		else:
+			enchantment_dict[resource.enchantment_name] = resource

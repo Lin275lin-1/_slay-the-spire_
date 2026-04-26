@@ -22,7 +22,7 @@ func apply(source: Node, targets: Array[Node], card_context: Dictionary, previou
 		var damage = value
 		if damage_formula:
 			damage += damage_formula.calculate(target)
-		total_damage += target.take_damage(DamageContext.new(source, target, damage, modifiers, no_modifiers))
+		total_damage += target.take_damage_without_signals(damage)
 		if animation_name and source is Player:
 			source.animate_player(animation_name)
 			await source.get_tree().create_timer(animation_delay).timeout

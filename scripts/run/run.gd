@@ -208,6 +208,7 @@ func _load_up_top_bar() -> void:
 	top_bar.character_stats = character
 	top_bar.initialize(character)
 	top_bar.deck_view_requested.connect(deck_view.show_card_pile.bind("你在战斗中将会使用这里的所有卡牌。", false))
+	top_bar.select_deck_view = select_deck_view
 	top_bar.relic_handler.add_relic(character.starting_relic)
 	top_bar.relic_handler.add_relics(stats.relics)
 	top_bar.settings_requested.connect(handleSettingsRequest)
@@ -217,6 +218,7 @@ func _setup_top_bar() -> void:
 	top_bar.character_stats = character
 	top_bar.initialize(character)
 	top_bar.deck_view_requested.connect(deck_view.show_card_pile.bind("你在战斗中将会使用这里的所有卡牌。", false))
+	top_bar.select_deck_view = select_deck_view
 	top_bar.relic_handler.add_relic(character.starting_relic)
 	top_bar.settings_requested.connect(handleSettingsRequest)
 

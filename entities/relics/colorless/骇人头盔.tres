@@ -1,0 +1,29 @@
+[gd_resource type="Resource" format=3 uid="uid://bf6od4n14xbv7"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_u52sb"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_h5mar"]
+[ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="3_5wy6e"]
+[ext_resource type="Texture2D" uid="uid://bhwo6dl" path="res://images/atlases/relic_atlas.sprites/intimidating_helmet.tres" id="4_5wy6e"]
+[ext_resource type="Script" uid="uid://bv0l2eoseouew" path="res://entities/relics/colorless/骇人头盔.gd" id="5_6r2nw"]
+
+[sub_resource type="Resource" id="Resource_6r2nw"]
+script = ExtResource("2_h5mar")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_lu3jx"]
+script = ExtResource("3_5wy6e")
+block_provider = SubResource("Resource_6r2nw")
+no_modifiers = true
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[resource]
+script = ExtResource("5_6r2nw")
+relic_name = "骇人头盔"
+id = "intimidating_helmet"
+icon = ExtResource("4_5wy6e")
+description = "每当你打出一张耗能大于等于2的牌，获得4点[color=gold]格挡[/color]"
+rarity = 4
+effects = Array[ExtResource("1_u52sb")]([SubResource("Resource_lu3jx")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

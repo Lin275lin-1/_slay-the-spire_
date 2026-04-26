@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://jd7p652stqwl"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_ajkng"]
+[ext_resource type="Texture2D" uid="uid://kxw6db" path="res://images/atlases/relic_atlas.sprites/burning_sticks.tres" id="2_0mb2h"]
+[ext_resource type="Script" uid="uid://fy0wcuqoikse" path="res://entities/relics/shop/燃烧木棍.gd" id="3_tgmlj"]
+
+[resource]
+script = ExtResource("3_tgmlj")
+relic_name = "燃烧木棍"
+id = "burning_sticks"
+icon = ExtResource("2_0mb2h")
+description = "每场战斗中你第一次消耗技能牌时，将那张牌的复制品加入你的[color=gold]手牌[/color]"
+rarity = 16
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

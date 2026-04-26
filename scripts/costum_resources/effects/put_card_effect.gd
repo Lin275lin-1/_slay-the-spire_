@@ -36,10 +36,11 @@ func apply(source_: Node, targets: Array[Node], card_context: Dictionary, previo
 				for i in range(value):
 					cards_to_add.append(card.duplicate())
 		CardSource.RANDOM_FROM_POOL:
-			var cards :Array[Card] = ItemPool.get_discoverable_cards(card_filter.get_color(source_), card_filter.type, card_filter.rarity)
-			cards.shuffle()
-			for i in range(value):
-				cards_to_add.append(cards[i].duplicate())
+			var cards :Array[Card] = ItemPool.get_random_discoverable_cards(card_filter.get_color(source_)\
+			, card_filter.type, card_filter.rarity, value)
+			for i in range(len(cards)):
+				cards[i] = cards[i].duplicate()
+			cards_to_add = cards
 	
 	for target: Creature in targets:
 		if target is Player:

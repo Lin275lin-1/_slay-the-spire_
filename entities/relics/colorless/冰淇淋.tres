@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://dcl6ivh27c3xx"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_0yweu"]
+[ext_resource type="Texture2D" uid="uid://mr0qdy" path="res://images/atlases/relic_atlas.sprites/ice_cream.tres" id="2_pst3r"]
+[ext_resource type="Script" uid="uid://b7n1s5d2un65t" path="res://entities/relics/colorless/冰淇淋.gd" id="3_lo2a8"]
+
+[resource]
+script = ExtResource("3_lo2a8")
+relic_name = "冰淇淋"
+id = "ice_cream"
+icon = ExtResource("2_pst3r")
+description = "多余的能量可以留到下一回合"
+rarity = 4
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

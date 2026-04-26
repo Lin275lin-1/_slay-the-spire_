@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://dtatvmycn3yc6"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_tnfpj"]
+[ext_resource type="Texture2D" uid="uid://b2ixjbu" path="res://images/atlases/relic_atlas.sprites/kifuda.tres" id="2_bg3mi"]
+[ext_resource type="Script" uid="uid://beb014tahfu4s" path="res://entities/relics/shop/木札.gd" id="3_h4kqk"]
+
+[resource]
+script = ExtResource("3_h4kqk")
+relic_name = "木札"
+id = "kifuda"
+icon = ExtResource("2_bg3mi")
+description = "拾起时，从你的[color=gold]牌组[/color]中选择至多3张牌，[color=gold]附魔[/color]：[color=purple]伶俐[/color]"
+rarity = 16
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

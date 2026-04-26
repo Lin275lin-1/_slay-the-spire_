@@ -42,7 +42,7 @@ var count: int = 0
 func initialize_relic(_owner: RelicUI) -> void:
 	pass
 
-func on_picked_up(_run_stats: RunStats, _char_stats: CharacterStats) -> void:
+func on_picked_up(_run_stats: RunStats, _char_stats: CharacterStats, _select_deck_view: DeckView) -> void:
 	pass
 
 func activate_relic(owner: RelicUI) -> void:

@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://tr4uhxdl432k"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_l7ms1"]
+[ext_resource type="Script" uid="uid://cibjrcipdqbs7" path="res://scripts/costum_resources/condition.gd" id="2_5e7ss"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="2_8l85u"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_cnrvo"]
+[ext_resource type="Script" uid="uid://da1srbssi025l" path="res://scripts/costum_resources/effects/heal_effect.gd" id="4_t4ua2"]
+[ext_resource type="Script" uid="uid://66oyp04ol1ud" path="res://scripts/costum_resources/effects/condition_effect.gd" id="5_7673h"]
+[ext_resource type="Texture2D" uid="uid://cbaqrpc" path="res://images/atlases/relic_atlas.sprites/meat_on_the_bone.tres" id="6_p82cn"]
+
+[sub_resource type="Resource" id="Resource_0y6mq"]
+script = ExtResource("2_5e7ss")
+type = 9
+extra_params = {
+"percent": 50
+}
+metadata/_custom_type_script = "uid://cibjrcipdqbs7"
+
+[sub_resource type="Resource" id="Resource_g2v5s"]
+script = ExtResource("3_cnrvo")
+fixed_value = 12
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_0sg27"]
+script = ExtResource("4_t4ua2")
+heal_provider = SubResource("Resource_g2v5s")
+target_type = 1
+metadata/_custom_type_script = "uid://da1srbssi025l"
+
+[sub_resource type="Resource" id="Resource_o3ipy"]
+script = ExtResource("5_7673h")
+condition = SubResource("Resource_0y6mq")
+if_effects = Array[ExtResource("1_l7ms1")]([SubResource("Resource_0sg27")])
+metadata/_custom_type_script = "uid://66oyp04ol1ud"
+
+[resource]
+script = ExtResource("2_8l85u")
+relic_name = "带骨肉"
+id = "meat_on_the_bone"
+icon = ExtResource("6_p82cn")
+description = "如果你在战斗结束时生命值等于或低于50%，回复12点生命"
+trigger_type = 4
+rarity = 4
+effects = Array[ExtResource("1_l7ms1")]([SubResource("Resource_o3ipy")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"
