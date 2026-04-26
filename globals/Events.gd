@@ -61,6 +61,7 @@ signal campfire_entered(room: Room, run_stats: RunStats, char_stats: CharacterSt
 signal combat_room_entered(room: Room, run_stats: RunStats, char_stats: CharacterStats)
 signal treasure_room_entered(room: Room, run_stats: RunStats, char_stats: CharacterStats)
 signal incident_room_entered(room: Room, run_stats: RunStats, char_stats: CharacterStats)
+signal unknown_room_entered(room: Room, run_stats: RunStats, char_stats: CharacterStats)
 @warning_ignore_restore("unused_signal")
 
 ##地图房间

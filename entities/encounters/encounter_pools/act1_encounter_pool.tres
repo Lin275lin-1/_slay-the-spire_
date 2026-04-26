@@ -2,174 +2,28 @@
 
 [ext_resource type="Script" uid="uid://dgu4qpyr0pnnb" path="res://scripts/costum_resources/enemy_encounter.gd" id="1_8b4wf"]
 [ext_resource type="Script" uid="uid://ctyh7cm7a03s2" path="res://scripts/costum_resources/enemy_encounter_pool.gd" id="2_r6wps"]
-[ext_resource type="Script" uid="uid://ce34juwu5b0yr" path="res://scripts/costum_resources/intents/intent.gd" id="3_f7qwd"]
 [ext_resource type="Resource" uid="uid://qd6x4mb1j81y" path="res://entities/enemies/toadpole/toadpole_stats.tres" id="3_lh6jw"]
-[ext_resource type="Script" uid="uid://iqqyr44teapg" path="res://scripts/costum_resources/intents/sub_intent.gd" id="4_36jb8"]
 [ext_resource type="Resource" uid="uid://6t0lxm3urof3" path="res://entities/enemies/leaf_slime_s/leaf_slime_s.tres" id="4_oisqt"]
 [ext_resource type="Resource" uid="uid://b8gnh6fck14ic" path="res://entities/enemies/mawler/mawler_stats.tres" id="5_15xrl"]
-[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="5_gxx7m"]
 [ext_resource type="Resource" uid="uid://bdt85ngfibtet" path="res://entities/enemies/leaf_slime_m/leaf_slime_m.tres" id="6_5fgax"]
-[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="6_o2qns"]
-[ext_resource type="Texture2D" uid="uid://cdjfipfy2o2u8" path="res://images/packed/intents/attack/intent_attack_2.png" id="7_8nwoh"]
 [ext_resource type="Resource" uid="uid://cgwt53u65hq2h" path="res://entities/enemies/twig_slime_m/twig_slime_m.tres" id="7_nvtwo"]
 [ext_resource type="Resource" uid="uid://b7d2m4ftsvv71" path="res://entities/enemies/nibbit/nibbit_ai.tres" id="8_8bura"]
-[ext_resource type="Script" uid="uid://bces7ijyodhmv" path="res://scripts/costum_resources/intents/attack_sub_intent.gd" id="8_ct8rc"]
 [ext_resource type="Resource" uid="uid://cm4lesyla0lcc" path="res://entities/enemies/twig_slime_s/twig_slime_s.tres" id="8_q6si1"]
 [ext_resource type="Script" uid="uid://dw53gdpom3gn6" path="res://scripts/costum_resources/enemy_entry.gd" id="9_4vgo2"]
 [ext_resource type="Script" uid="uid://bjrlwk5w4gqtk" path="res://scripts/costum_resources/enemy_stats.gd" id="9_lh6jw"]
-[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="9_pokv7"]
 [ext_resource type="Resource" uid="uid://co5o388rhc6fe" path="res://entities/enemies/vantom/vantom.tres" id="10_8bura"]
 [ext_resource type="PackedScene" uid="uid://ehev41bc2om8" path="res://scenes/creature_visuals/nibbit.tscn" id="10_oisqt"]
-[ext_resource type="Texture2D" uid="uid://bueaoomrl3ifh" path="res://images/packed/intents/intent_buff.png" id="10_y7adn"]
-[ext_resource type="Script" uid="uid://dpbv4m5rd0bbq" path="res://scripts/costum_resources/intents/apply_buff_sub_intent.gd" id="11_ce4e2"]
-[ext_resource type="Script" uid="uid://gjypfal5fy2c" path="res://entities/enemies/toadpole/toadpole_ai.gd" id="12_3c5t4"]
 [ext_resource type="Resource" uid="uid://bv0m86mshv3gj" path="res://entities/enemies/nibbit/nibbit.tres" id="12_j2cuc"]
-[ext_resource type="PackedScene" uid="uid://cvoqhpj7w5j8b" path="res://scenes/creature_visuals/toad_pole.tscn" id="14_mn5st"]
-
-[sub_resource type="Resource" id="Resource_tmb7p"]
-script = ExtResource("5_gxx7m")
-fixed_value = 7
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_d6adn"]
-script = ExtResource("5_gxx7m")
-fixed_value = 7
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_hxcke"]
-script = ExtResource("6_o2qns")
-damage_provider = SubResource("Resource_d6adn")
-target_type = 2
-metadata/_custom_type_script = "uid://vkklgv0ma0yf"
-
-[sub_resource type="Resource" id="Resource_s3hed"]
-script = ExtResource("8_ct8rc")
-damage_provider = SubResource("Resource_tmb7p")
-icon = ExtResource("7_8nwoh")
-effect = SubResource("Resource_hxcke")
-metadata/_custom_type_script = "uid://bces7ijyodhmv"
-
-[sub_resource type="Resource" id="Resource_68u33"]
-script = ExtResource("3_f7qwd")
-sub_intents = Array[ExtResource("4_36jb8")]([SubResource("Resource_s3hed")])
-intent_name = "Whirl"
-metadata/_custom_type_script = "uid://ce34juwu5b0yr"
-
-[sub_resource type="Resource" id="Resource_byp0t"]
-script = ExtResource("5_gxx7m")
-fixed_value = 3
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_yns4a"]
-script = ExtResource("5_gxx7m")
-fixed_value = 3
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_p05pq"]
-script = ExtResource("6_o2qns")
-damage_provider = SubResource("Resource_yns4a")
-target_type = 2
-metadata/_custom_type_script = "uid://vkklgv0ma0yf"
-
-[sub_resource type="Resource" id="Resource_dxe34"]
-script = ExtResource("5_gxx7m")
-fixed_value = 3
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_ve1yo"]
-script = ExtResource("8_ct8rc")
-damage_provider = SubResource("Resource_byp0t")
-repeat_provider = SubResource("Resource_dxe34")
-icon = ExtResource("7_8nwoh")
-effect = SubResource("Resource_p05pq")
-metadata/_custom_type_script = "uid://bces7ijyodhmv"
-
-[sub_resource type="Resource" id="Resource_8nwoh"]
-script = ExtResource("5_gxx7m")
-fixed_value = -2
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_ct8rc"]
-script = ExtResource("9_pokv7")
-buff_name = "荆棘"
-buff_stack_provider = SubResource("Resource_8nwoh")
-target_type = 1
-metadata/_custom_type_script = "uid://b8qfrs61nmcix"
-
-[sub_resource type="Resource" id="Resource_pokv7"]
-script = ExtResource("11_ce4e2")
-type = 1
-effect = SubResource("Resource_ct8rc")
-metadata/_custom_type_script = "uid://dpbv4m5rd0bbq"
-
-[sub_resource type="Resource" id="Resource_55nap"]
-script = ExtResource("3_f7qwd")
-sub_intents = Array[ExtResource("4_36jb8")]([SubResource("Resource_ve1yo"), SubResource("Resource_pokv7")])
-intent_name = "SpikeSpit"
-metadata/_custom_type_script = "uid://ce34juwu5b0yr"
-
-[sub_resource type="Resource" id="Resource_1rh8x"]
-script = ExtResource("5_gxx7m")
-fixed_value = 2
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_i6lxq"]
-script = ExtResource("9_pokv7")
-buff_name = "荆棘"
-buff_stack_provider = SubResource("Resource_1rh8x")
-target_type = 1
-metadata/_custom_type_script = "uid://b8qfrs61nmcix"
-
-[sub_resource type="Resource" id="Resource_pvm40"]
-script = ExtResource("11_ce4e2")
-type = 1
-icon = ExtResource("10_y7adn")
-effect = SubResource("Resource_i6lxq")
-metadata/_custom_type_script = "uid://dpbv4m5rd0bbq"
-
-[sub_resource type="Resource" id="Resource_h84lw"]
-script = ExtResource("3_f7qwd")
-sub_intents = Array[ExtResource("4_36jb8")]([SubResource("Resource_pvm40")])
-intent_name = "Spiken"
-metadata/_custom_type_script = "uid://ce34juwu5b0yr"
-
-[sub_resource type="Resource" id="Resource_ue326"]
-script = ExtResource("12_3c5t4")
-intents = Array[ExtResource("3_f7qwd")]([SubResource("Resource_68u33"), SubResource("Resource_55nap"), SubResource("Resource_h84lw")])
-metadata/_custom_type_script = "uid://dpkht0suo8prh"
-
-[sub_resource type="Resource" id="Resource_0l237"]
-script = ExtResource("9_lh6jw")
-ai = SubResource("Resource_ue326")
-enemy_name = "蟾蜍蝌蚪"
-hightest_max_health = 25
-lowest_max_health = 21
-visuals_scene = ExtResource("14_mn5st")
-metadata/_custom_type_script = "uid://bjrlwk5w4gqtk"
 
 [sub_resource type="Resource" id="Resource_e7ryn"]
 script = ExtResource("9_4vgo2")
-enemy_stats = SubResource("Resource_0l237")
+enemy_stats = ExtResource("3_lh6jw")
 position = Vector2(1200, 520)
 metadata/_custom_type_script = "uid://dw53gdpom3gn6"
 
-[sub_resource type="Resource" id="Resource_1qoxs"]
-script = ExtResource("12_3c5t4")
-intents = Array[ExtResource("3_f7qwd")]([SubResource("Resource_68u33"), SubResource("Resource_55nap"), SubResource("Resource_h84lw")])
-metadata/_custom_type_script = "uid://dpkht0suo8prh"
-
-[sub_resource type="Resource" id="Resource_2fh21"]
-script = ExtResource("9_lh6jw")
-ai = SubResource("Resource_1qoxs")
-enemy_name = "蟾蜍蝌蚪"
-hightest_max_health = 25
-lowest_max_health = 21
-visuals_scene = ExtResource("14_mn5st")
-metadata/_custom_type_script = "uid://bjrlwk5w4gqtk"
-
 [sub_resource type="Resource" id="Resource_6ah37"]
 script = ExtResource("9_4vgo2")
-enemy_stats = SubResource("Resource_2fh21")
+enemy_stats = ExtResource("3_lh6jw")
 position = Vector2(1700, 520)
 metadata/_custom_type_script = "uid://dw53gdpom3gn6"
 
@@ -196,7 +50,7 @@ metadata/_custom_type_script = "uid://dw53gdpom3gn6"
 script = ExtResource("1_8b4wf")
 weight = 1.0
 enemy_entries = Array[ExtResource("9_4vgo2")]([SubResource("Resource_duskx"), SubResource("Resource_8fsih")])
-encounter_name = "test"
+encounter_name = "one_slime_one_toadpole"
 metadata/_custom_type_script = "uid://dgu4qpyr0pnnb"
 
 [sub_resource type="Resource" id="Resource_yfb15"]
@@ -210,6 +64,7 @@ script = ExtResource("1_8b4wf")
 type = 2
 weight = 1.0
 enemy_entries = Array[ExtResource("9_4vgo2")]([SubResource("Resource_yfb15")])
+encounter_name = "one_mawler"
 metadata/_custom_type_script = "uid://dgu4qpyr0pnnb"
 
 [sub_resource type="Resource" id="Resource_gnetj"]
@@ -228,6 +83,7 @@ metadata/_custom_type_script = "uid://dw53gdpom3gn6"
 script = ExtResource("1_8b4wf")
 weight = 1.0
 enemy_entries = Array[ExtResource("9_4vgo2")]([SubResource("Resource_gnetj"), SubResource("Resource_0prii")])
+encounter_name = "two_slimes"
 metadata/_custom_type_script = "uid://dgu4qpyr0pnnb"
 
 [sub_resource type="Resource" id="Resource_4u3c1"]

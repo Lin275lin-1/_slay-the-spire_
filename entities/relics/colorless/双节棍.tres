@@ -1,0 +1,27 @@
+[gd_resource type="Resource" format=3 uid="uid://deaqpmyi3rn1u"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_aswro"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_xsmrn"]
+[ext_resource type="Script" uid="uid://c6kvghrfcdtp7" path="res://scripts/costum_resources/effects/gain_energy_effect.gd" id="3_s7h8d"]
+[ext_resource type="Texture2D" uid="uid://cu3w6rn" path="res://images/atlases/relic_atlas.sprites/nunchaku.tres" id="4_ut1cr"]
+[ext_resource type="Script" uid="uid://bygcngit752nn" path="res://entities/relics/colorless/双截棍.gd" id="5_xsmrn"]
+
+[sub_resource type="Resource" id="Resource_kfijp"]
+script = ExtResource("2_xsmrn")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_bvest"]
+script = ExtResource("3_s7h8d")
+energy_provider = SubResource("Resource_kfijp")
+metadata/_custom_type_script = "uid://c6kvghrfcdtp7"
+
+[resource]
+script = ExtResource("5_xsmrn")
+relic_name = "双截棍"
+id = "nunchaku"
+icon = ExtResource("4_ut1cr")
+description = "你每打出10张攻击牌，获得1点能量"
+rarity = 2
+effects = Array[ExtResource("1_aswro")]([SubResource("Resource_bvest")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

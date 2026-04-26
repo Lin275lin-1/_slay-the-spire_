@@ -121,6 +121,8 @@ var potions_by_rarity := {
 	0b100: [],
 }
 
+var special_potions: Dictionary = {}
+
 var relics_by_color := {
 	0b000001: [],
 	0b000010: [],
@@ -152,6 +154,7 @@ var relic_rarity_mask: int = 0b1111
 
 func _ready():
 	load_all_cards("res://entities/cards")
+	load_all_potions("res://entities/potions")
 	
 func get_cards(color: int, type: int, rarity: int) -> Array[Card]:
 	return filter_card_by_rarity(filter_card_by_type(get_cards_by_color(color), type), rarity)
@@ -221,6 +224,9 @@ func get_potions_by_rarity(mask: int) -> Array[Potion]:
 			ret.append_array(potions_by_rarity[key])
 	return ret
 
+func get_special_potion_by_name(potion_name: String) -> Potion:
+	return special_potions.get(potion_name, null)
+
 func filter_potion_by_rarity(potions: Array[Potion], mask: int) -> Array[Potion]:
 	return potions.filter(func(potion: Potion): return potion.rarity & mask != 0)
 	
@@ -277,8 +283,11 @@ func load_all_potions(dir_path: String):
 			printerr("无法加载{path}".format(path))
 			continue
 		else:
-			potions_by_color[resource.potion_color & potion_color_mask].append(resource)
-			potions_by_rarity[resource.rarity & potion_rarity_mask].append(resource)
+			if resource.draftable:
+				potions_by_color[resource.potion_color & potion_color_mask].append(resource)
+				potions_by_rarity[resource.rarity & potion_rarity_mask].append(resource)
+			else:
+				special_potions[resource.potion_name] = resource
 
 func load_all_relics(dir_path: String):
 	var paths = FileHelper.get_all_resources_in_directory(dir_path)
@@ -290,3 +299,4 @@ func load_all_relics(dir_path: String):
 		else:
 			relics_by_color[resource.relic_color & relic_color_mask].append(resource)
 			relics_by_rarity[resource.rarity & relic_rarity_mask].append(resource)
+			

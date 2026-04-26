@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3 uid="uid://dm8ipxkgkd5jj"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_bku1h"]
+[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="2_w0oap"]
+[ext_resource type="Texture2D" uid="uid://fdtpfg" path="res://images/atlases/relic_atlas.sprites/joss_paper.tres" id="3_6xn8u"]
+[ext_resource type="Script" uid="uid://dqkkqc02cpl40" path="res://entities/relics/colorless/金纸.gd" id="4_vajny"]
+
+[sub_resource type="Resource" id="Resource_ht50n"]
+script = ExtResource("2_w0oap")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[resource]
+script = ExtResource("4_vajny")
+relic_name = "金纸"
+id = "joss_paper"
+icon = ExtResource("3_6xn8u")
+description = "你每[color=gold]消耗[/color]5张牌，就抽1张牌"
+rarity = 2
+effects = Array[ExtResource("1_bku1h")]([SubResource("Resource_ht50n")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

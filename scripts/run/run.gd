@@ -70,6 +70,7 @@ func _on_map_room_selected(room: Room) -> void:
 	match room.type:
 		Room.Type.MONSTER, Room.Type.ELITE, Room.Type.BOSS:
 			_on_combat_room_entered(room)
+			Events.combat_room_entered.emit(room, stats, character)
 			return
 		Room.Type.TREASURE:
 			scene = TREASURE_SCENE
@@ -81,6 +82,7 @@ func _on_map_room_selected(room: Room) -> void:
 			return
 		Room.Type.UNKNOWN:
 			_handle_unknown_room(scene,room)
+			Events.unknown_room_entered.emit(room, stats, character)
 			return
 		_:
 			return
