@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_gt0w0"]
 [ext_resource type="Texture2D" uid="uid://cl6hb7j" path="res://images/atlases/card_atlas.sprites/ironclad/headbutt.tres" id="2_ocxdh"]
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_bf4l0"]
-[ext_resource type="AudioStream" uid="uid://b4eqc65cqogm6" path="res://audio/SFX/blunt_attack.mp3" id="4_ocxdh"]
 [ext_resource type="Script" uid="uid://cqcf6adphkjfy" path="res://scripts/costum_resources/effects/select_card_effect.gd" id="5_lts0g"]
 [ext_resource type="Script" uid="uid://csyjq6ujulplm" path="res://scripts/costum_resources/effects/card_effects/card_effect.gd" id="6_8pqqb"]
 [ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_gt0w0"]
@@ -99,7 +98,6 @@ base_cost = 1
 effects = Array[ExtResource("2_f0e67")]([SubResource("Resource_yofp3"), SubResource("Resource_i23f4"), SubResource("Resource_yiydk")])
 portrait = ExtResource("2_ocxdh")
 base_description = "[center]造成{damage}点伤害。[/center][center]将一张牌从[color=gold]弃牌堆[/color]移至[color=gold]抽牌堆[/color]顶部。[/center]"
-sound = ExtResource("4_ocxdh")
 base_numeric_entries = Array[ExtResource("1_ywwuo")]([SubResource("Resource_rcmhm")])
 upgraded_target = 1
 upgraded_cost = 1

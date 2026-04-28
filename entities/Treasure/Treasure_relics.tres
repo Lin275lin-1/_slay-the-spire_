@@ -36,7 +36,6 @@ id = "mercury_hourglass"
 icon = ExtResource("5_rgexj")
 description = "回合开始时，对所有敌人照成3点伤害"
 rarity = 2
-relic_type = 10
 effects = Array[ExtResource("2_ueohv")]([SubResource("Resource_2tcfg")])
 metadata/_custom_type_script = "uid://bvf88v88tbaks"
 
@@ -56,7 +55,6 @@ relic_name = "灯笼"
 id = "lantern"
 icon = ExtResource("8_1fjn8")
 description = "第一回合开始后，获得1点能量"
-relic_type = 10
 effects = Array[ExtResource("2_ueohv")]([SubResource("Resource_ok84g")])
 metadata/_custom_type_script = "uid://bvf88v88tbaks"
 
@@ -78,7 +76,6 @@ relic_name = "锚"
 id = "anchor"
 icon = ExtResource("11_ds7tr")
 description = "第一回合开始后，获得10点[color=gold]格挡[/color]"
-relic_type = 10
 effects = Array[ExtResource("2_ueohv")]([SubResource("Resource_vgr1h")])
 metadata/_custom_type_script = "uid://bvf88v88tbaks"
 
@@ -102,7 +99,6 @@ description = "战斗结束时，回合6点生命"
 trigger_type = 3
 relic_color = 1
 rarity = 8
-relic_type = 1
 effects = Array[ExtResource("2_ueohv")]([SubResource("Resource_ow3ri")])
 metadata/_custom_type_script = "uid://bvf88v88tbaks"
 

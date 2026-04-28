@@ -1,0 +1,43 @@
+[gd_resource type="Resource" format=3 uid="uid://c4xm51bnx5om1"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_33ets"]
+[ext_resource type="Script" uid="uid://dyn5a42fs7gxs" path="res://scripts/costum_resources/card_condition.gd" id="2_f5rwh"]
+[ext_resource type="Script" uid="uid://cqcf6adphkjfy" path="res://scripts/costum_resources/effects/select_card_effect.gd" id="2_hki67"]
+[ext_resource type="Texture2D" uid="uid://c7ctcv" path="res://images/atlases/relic_atlas.sprites/mummified_hand.tres" id="3_k40k3"]
+[ext_resource type="Script" uid="uid://csyjq6ujulplm" path="res://scripts/costum_resources/effects/card_effects/card_effect.gd" id="4_7kjdv"]
+[ext_resource type="Script" uid="uid://dm6tcw4hw6un" path="res://scripts/costum_resources/effects/card_effects/modify_card_flag_effect.gd" id="5_xdb8j"]
+[ext_resource type="Script" uid="uid://c2drp2mlr0vhm" path="res://scripts/costum_resources/effects/foreach_card_effect.gd" id="6_xe3mk"]
+[ext_resource type="Script" uid="uid://celtu5wxxig8q" path="res://entities/relics/colorless/干瘪之手.gd" id="8_f5rwh"]
+
+[sub_resource type="Resource" id="Resource_2bwmd"]
+script = ExtResource("2_f5rwh")
+type = 10
+metadata/_custom_type_script = "uid://dyn5a42fs7gxs"
+
+[sub_resource type="Resource" id="Resource_1eycb"]
+script = ExtResource("2_hki67")
+selectionMode = 2
+max_select = 1
+filter_condition = SubResource("Resource_2bwmd")
+metadata/_custom_type_script = "uid://cqcf6adphkjfy"
+
+[sub_resource type="Resource" id="Resource_1pnrm"]
+script = ExtResource("5_xdb8j")
+flag_name = 1
+value = true
+metadata/_custom_type_script = "uid://dm6tcw4hw6un"
+
+[sub_resource type="Resource" id="Resource_yf2kj"]
+script = ExtResource("6_xe3mk")
+effects = Array[ExtResource("4_7kjdv")]([SubResource("Resource_1pnrm")])
+metadata/_custom_type_script = "uid://c2drp2mlr0vhm"
+
+[resource]
+script = ExtResource("8_f5rwh")
+relic_name = "干瘪之手"
+id = "mummified_hand"
+icon = ExtResource("3_k40k3")
+description = "你每打出一张能力牌，[color=gold]手牌[/color]中就有一张随机牌在这个回合可以免费打出一次"
+rarity = 4
+effects = Array[ExtResource("1_33ets")]([SubResource("Resource_1eycb"), SubResource("Resource_yf2kj")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://b5co2qvcj7mvr"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_imjtp"]
+[ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="2_ehmfn"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="2_smp7i"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_wbutt"]
+[ext_resource type="Texture2D" uid="uid://cog10xy" path="res://images/atlases/relic_atlas.sprites/cloak_clasp.tres" id="3_wbutt"]
+
+[sub_resource type="Resource" id="Resource_cmjdi"]
+script = ExtResource("2_wbutt")
+type = 13
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_3p358"]
+script = ExtResource("2_ehmfn")
+block_provider = SubResource("Resource_cmjdi")
+no_modifiers = true
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[resource]
+script = ExtResource("2_smp7i")
+relic_name = "斗篷扣"
+id = "cloak_clasp"
+icon = ExtResource("3_wbutt")
+description = "在你的回合结束时，每有一张[color=gold]手牌[/color]，就获得1点[color=gold]格挡[/color]"
+trigger_type = 3
+rarity = 4
+effects = Array[ExtResource("1_imjtp")]([SubResource("Resource_3p358")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

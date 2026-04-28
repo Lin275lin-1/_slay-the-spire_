@@ -7,7 +7,8 @@ extends Effect
 
 # 这些effect没有入栈，当作特性算了
 func apply(source: Node, targets: Array[Node], card_context: Dictionary, previous_result: Variant = null) -> Variant:
-	if condition.is_met(source, targets[0], card_context):
+	var target = targets[0] if len(targets) > 0 else null
+	if condition.is_met(source, target, card_context):
 		var last = previous_result
 		for effect: Effect in if_effects:
 			last = await effect.execute(source, card_context, last)

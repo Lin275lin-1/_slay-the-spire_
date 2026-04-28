@@ -9,7 +9,4 @@ func get_description() -> String:
 func can_enchant(card: Card) -> bool:
 	if card.has_enchantment():
 		return false
-	for entry: NumericEntry in card.get_numeric_entries():
-		if entry.type == Enums.NumericType.DAMAGE:
-			return true
-	return false
+	return card.has_attack_effect()

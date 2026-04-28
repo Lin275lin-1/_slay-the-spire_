@@ -1,0 +1,29 @@
+[gd_resource type="Resource" format=3 uid="uid://bf7torqlyu3ke"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_my4lx"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_od7t4"]
+[ext_resource type="Script" uid="uid://bhhtjppe5dfcx" path="res://scripts/costum_resources/effects/damage_effect.gd" id="3_7q5l1"]
+[ext_resource type="Texture2D" uid="uid://cdvak10" path="res://images/atlases/relic_atlas.sprites/mystic_lighter.tres" id="4_y16vp"]
+[ext_resource type="Script" uid="uid://be5axty862lml" path="res://entities/relics/shop/神秘打火机.gd" id="5_od7t4"]
+
+[sub_resource type="Resource" id="Resource_rhodc"]
+script = ExtResource("2_od7t4")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_osh6l"]
+script = ExtResource("3_7q5l1")
+damage_provider = SubResource("Resource_rhodc")
+no_modifiers = true
+target_type = 3
+metadata/_custom_type_script = "uid://bhhtjppe5dfcx"
+
+[resource]
+script = ExtResource("5_od7t4")
+relic_name = "神秘打火机"
+id = "mystic_lightner"
+icon = ExtResource("4_y16vp")
+description = "当你打出一张带[color=gold]附魔[/color]的卡牌后，对所有敌人造成6点伤害"
+rarity = 16
+effects = Array[ExtResource("1_my4lx")]([SubResource("Resource_osh6l")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

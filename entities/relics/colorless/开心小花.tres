@@ -1,0 +1,27 @@
+[gd_resource type="Resource" format=3 uid="uid://vterpguupv7o"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_7uhxc"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_hp6pt"]
+[ext_resource type="Script" uid="uid://c6kvghrfcdtp7" path="res://scripts/costum_resources/effects/gain_energy_effect.gd" id="3_cuwob"]
+[ext_resource type="Texture2D" uid="uid://bep8sao" path="res://images/atlases/relic_atlas.sprites/happy_flower.tres" id="4_itvnt"]
+[ext_resource type="Script" uid="uid://b0evr6rrdbe5u" path="res://entities/relics/colorless/开心小花.gd" id="5_hp6pt"]
+
+[sub_resource type="Resource" id="Resource_b17gv"]
+script = ExtResource("2_hp6pt")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ulhck"]
+script = ExtResource("3_cuwob")
+energy_provider = SubResource("Resource_b17gv")
+metadata/_custom_type_script = "uid://c6kvghrfcdtp7"
+
+[resource]
+script = ExtResource("5_hp6pt")
+relic_name = "开心小花"
+id = "happy_flower"
+icon = ExtResource("4_itvnt")
+description = "每3个回合，获得1点能量"
+trigger_type = 1
+effects = Array[ExtResource("1_7uhxc")]([SubResource("Resource_ulhck")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

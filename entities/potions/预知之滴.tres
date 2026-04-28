@@ -1,17 +1,32 @@
 [gd_resource type="Resource" script_class="Potion" format=3 uid="uid://b2jr1q728i41b"]
 
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_xkkrm"]
-[ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="2_23xol"]
+[ext_resource type="Script" uid="uid://cqcf6adphkjfy" path="res://scripts/costum_resources/effects/select_card_effect.gd" id="2_661ms"]
 [ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_ycn08"]
 [ext_resource type="Texture2D" uid="uid://c1rftpe" path="res://images/atlases/potion_atlas.sprites/droplet_of_precognition.tres" id="3_6j3tv"]
+[ext_resource type="Script" uid="uid://csyjq6ujulplm" path="res://scripts/costum_resources/effects/card_effects/card_effect.gd" id="3_wcxtb"]
+[ext_resource type="Script" uid="uid://dl6g3g7ag1dpg" path="res://scripts/costum_resources/effects/card_effects/put_card_to_pile_effect.gd" id="4_616ea"]
 [ext_resource type="Texture2D" uid="uid://cprpwlp" path="res://images/atlases/potion_outline_atlas.sprites/droplet_of_precognition.tres" id="4_g54ev"]
+[ext_resource type="Script" uid="uid://c2drp2mlr0vhm" path="res://scripts/costum_resources/effects/foreach_card_effect.gd" id="5_euvxe"]
 
-[sub_resource type="Resource" id="Resource_661ms"]
-script = ExtResource("2_23xol")
-callback = 8
+[sub_resource type="Resource" id="Resource_lj6v1"]
+script = ExtResource("2_661ms")
+where = 1
 min_select = 1
 max_select = 1
-metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+callback_hint = "加入手牌"
+metadata/_custom_type_script = "uid://cqcf6adphkjfy"
+
+[sub_resource type="Resource" id="Resource_oausf"]
+script = ExtResource("4_616ea")
+target_pile = 2
+top = false
+metadata/_custom_type_script = "uid://dl6g3g7ag1dpg"
+
+[sub_resource type="Resource" id="Resource_w0djl"]
+script = ExtResource("5_euvxe")
+effects = Array[ExtResource("3_wcxtb")]([SubResource("Resource_oausf")])
+metadata/_custom_type_script = "uid://c2drp2mlr0vhm"
 
 [resource]
 script = ExtResource("2_ycn08")
@@ -21,5 +36,5 @@ description = "选择你[color=gold]抽牌堆[/color]中的一张牌加入你的
 icon = ExtResource("3_6j3tv")
 outline_icon = ExtResource("4_g54ev")
 rarity = 4
-effects = Array[ExtResource("1_xkkrm")]([SubResource("Resource_661ms")])
+effects = Array[ExtResource("1_xkkrm")]([SubResource("Resource_lj6v1"), SubResource("Resource_w0djl")])
 metadata/_custom_type_script = "uid://bumkvpbom08xn"

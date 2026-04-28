@@ -1,13 +1,110 @@
 [gd_resource type="Resource" script_class="RelicPile" format=3 uid="uid://b63u1i8uuan3g"]
 
 [ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="1_blll3"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_cu1v8"]
 [ext_resource type="Script" uid="uid://cgkirnvrwbk4i" path="res://scripts/costum_resources/relic_pile.gd" id="2_cxx2o"]
-[ext_resource type="Resource" uid="uid://d3a7gl0qcwuho" path="res://entities/relics/colorless/水银沙漏.tres" id="2_vurd4"]
-[ext_resource type="Resource" uid="uid://h2lk8mcg6tu5" path="res://entities/relics/colorless/灯笼.tres" id="3_1ico1"]
-[ext_resource type="Resource" uid="uid://b5niu17o73g0m" path="res://entities/relics/colorless/锚.tres" id="4_wilqf"]
-[ext_resource type="Resource" uid="uid://bcxf25bju8u48" path="res://entities/relics/ironclad/燃烧之血.tres" id="5_a1qvk"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_tlvh6"]
+[ext_resource type="Script" uid="uid://bhhtjppe5dfcx" path="res://scripts/costum_resources/effects/damage_effect.gd" id="4_phwwl"]
+[ext_resource type="Texture2D" uid="uid://bnbg0lc" path="res://images/atlases/relic_atlas.sprites/mercury_hourglass.tres" id="5_k6vvd"]
+[ext_resource type="Script" uid="uid://n0lvv0axssla" path="res://entities/relics/colorless/水银沙漏.gd" id="6_i062h"]
+[ext_resource type="Script" uid="uid://c6kvghrfcdtp7" path="res://scripts/costum_resources/effects/gain_energy_effect.gd" id="7_wlkle"]
+[ext_resource type="Texture2D" uid="uid://b5b6yjy" path="res://images/atlases/relic_atlas.sprites/lantern.tres" id="8_ltbqj"]
+[ext_resource type="Script" uid="uid://du24lh2ycs8fi" path="res://entities/relics/colorless/灯笼.gd" id="9_0s4md"]
+[ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="10_f6tn6"]
+[ext_resource type="Texture2D" uid="uid://bymv8uf" path="res://images/atlases/relic_atlas.sprites/anchor.tres" id="11_l6vjd"]
+[ext_resource type="Script" uid="uid://cla4vkc3mk1wm" path="res://entities/relics/colorless/锚.gd" id="12_5s86b"]
+[ext_resource type="Script" uid="uid://da1srbssi025l" path="res://scripts/costum_resources/effects/heal_effect.gd" id="13_ck7uh"]
+[ext_resource type="Texture2D" uid="uid://jhywwo" path="res://images/atlases/relic_atlas.sprites/burning_blood.tres" id="14_7e8iq"]
+[ext_resource type="Script" uid="uid://c1cqk8110tjqm" path="res://entities/relics/ironclad/燃烧之血.gd" id="15_4xl5y"]
+
+[sub_resource type="Resource" id="Resource_b2yia"]
+script = ExtResource("3_tlvh6")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_2tcfg"]
+script = ExtResource("4_phwwl")
+damage_provider = SubResource("Resource_b2yia")
+no_modifiers = true
+target_type = 3
+metadata/_custom_type_script = "uid://bhhtjppe5dfcx"
+
+[sub_resource type="Resource" id="Resource_o47hn"]
+script = ExtResource("6_i062h")
+relic_name = "水银沙漏"
+id = "mercury_hourglass"
+icon = ExtResource("5_k6vvd")
+description = "回合开始时，对所有敌人照成3点伤害"
+rarity = 16
+effects = Array[ExtResource("2_cu1v8")]([SubResource("Resource_2tcfg")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"
+
+[sub_resource type="Resource" id="Resource_rke5o"]
+script = ExtResource("3_tlvh6")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ok84g"]
+script = ExtResource("7_wlkle")
+energy_provider = SubResource("Resource_rke5o")
+metadata/_custom_type_script = "uid://c6kvghrfcdtp7"
+
+[sub_resource type="Resource" id="Resource_1c82b"]
+script = ExtResource("9_0s4md")
+relic_name = "灯笼"
+id = "lantern"
+icon = ExtResource("8_ltbqj")
+description = "第一回合开始后，获得1点能量"
+rarity = 16
+effects = Array[ExtResource("2_cu1v8")]([SubResource("Resource_ok84g")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"
+
+[sub_resource type="Resource" id="Resource_mcooo"]
+script = ExtResource("3_tlvh6")
+fixed_value = 10
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_vgr1h"]
+script = ExtResource("10_f6tn6")
+block_provider = SubResource("Resource_mcooo")
+no_modifiers = true
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_w4i0b"]
+script = ExtResource("12_5s86b")
+relic_name = "锚"
+id = "anchor"
+icon = ExtResource("11_l6vjd")
+description = "第一回合开始后，获得10点[color=gold]格挡[/color]"
+rarity = 16
+effects = Array[ExtResource("2_cu1v8")]([SubResource("Resource_vgr1h")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"
+
+[sub_resource type="Resource" id="Resource_oa3rx"]
+script = ExtResource("3_tlvh6")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ow3ri"]
+script = ExtResource("13_ck7uh")
+heal_provider = SubResource("Resource_oa3rx")
+target_type = 1
+metadata/_custom_type_script = "uid://da1srbssi025l"
+
+[sub_resource type="Resource" id="Resource_2vfiq"]
+script = ExtResource("15_4xl5y")
+relic_name = "燃烧之血"
+id = "burning_blood"
+icon = ExtResource("14_7e8iq")
+description = "战斗结束时，回合6点生命"
+trigger_type = 3
+relic_color = 1
+rarity = 16
+effects = Array[ExtResource("2_cu1v8")]([SubResource("Resource_ow3ri")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"
 
 [resource]
 script = ExtResource("2_cxx2o")
-relics = Array[ExtResource("1_blll3")]([ExtResource("2_vurd4"), ExtResource("3_1ico1"), ExtResource("4_wilqf"), ExtResource("5_a1qvk")])
+relics = Array[ExtResource("1_blll3")]([SubResource("Resource_o47hn"), SubResource("Resource_1c82b"), SubResource("Resource_w4i0b"), SubResource("Resource_2vfiq")])
 metadata/_custom_type_script = "uid://cgkirnvrwbk4i"

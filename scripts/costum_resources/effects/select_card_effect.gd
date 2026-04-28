@@ -38,22 +38,28 @@ func execute(source: Node, _card_context: Dictionary = {}, _previous_result: Var
 		if filter_condition:
 			cards = cards.filter(func(c: Card): return filter_condition.is_met(c))
 		
-		match selectionMode:
-			SelectionMode.MANUAL:
-				if where == Where.HAND:
-					selected_cards = await source.select_hand(SelectCardContext.new(source, cards, _get_hint_text(), min_select, max_select, deck_view_selection_mode))
-				else:
-					selected_cards = await source.select_deck(SelectCardContext.new(source, cards, _get_hint_text(), min_select, max_select, deck_view_selection_mode))
-			SelectionMode.ALL:
-				selected_cards = cards
-			SelectionMode.RANDOM:
-				selected_cards = [cards[randi() % len(cards)]]
-			SelectionMode.FIRST:
-				selected_cards = [cards[0]]
-			SelectionMode.ALL_NOT_UPGRADED:
-				selected_cards = cards.filter(func(c: Card): return c.upgraded == false)
-			_:
-				selected_cards = []
+		if len(cards) > 0:
+			match selectionMode:
+				SelectionMode.MANUAL:
+					if where == Where.HAND:
+						selected_cards = await source.select_hand(SelectCardContext.new(source, cards, _get_hint_text(), min_select, max_select, deck_view_selection_mode))
+					else:
+						selected_cards = await source.select_deck(SelectCardContext.new(source, cards, _get_hint_text(), min_select, max_select, deck_view_selection_mode))
+				SelectionMode.ALL:
+					selected_cards = cards
+				SelectionMode.RANDOM:
+					if max_select == 1:
+						selected_cards = [cards[randi() % len(cards)]]
+					else:
+						selected_cards = cards.duplicate()
+						selected_cards.shuffle()
+						selected_cards = selected_cards.slice(0, max_select)
+				SelectionMode.FIRST:
+					selected_cards = [cards[0]]
+				SelectionMode.ALL_NOT_UPGRADED:
+					selected_cards = cards.filter(func(c: Card): return c.upgraded == false)
+				_:
+					selected_cards = []
 		return {"selected_cards": selected_cards, "source_pile": where}
 	return {"selected_cards": [], "source_pile": where} 
 	

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://bdbyxr3fq0jre"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_n7xs0"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_bfi8r"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="2_l07wb"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_pew7q"]
+[ext_resource type="Texture2D" uid="uid://b4ufjhm" path="res://images/atlases/relic_atlas.sprites/gorget.tres" id="4_fa57w"]
+
+[sub_resource type="Resource" id="Resource_1o5tg"]
+script = ExtResource("2_bfi8r")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_pev3p"]
+script = ExtResource("3_pew7q")
+buff_name = "覆甲"
+buff_stack_provider = SubResource("Resource_1o5tg")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_l07wb")
+relic_name = "护喉甲"
+id = "gorget"
+icon = ExtResource("4_fa57w")
+description = "在每场战斗开始时，获得4层[color=gold]覆甲[/color]"
+trigger_type = 2
+effects = Array[ExtResource("1_n7xs0")]([SubResource("Resource_pev3p")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

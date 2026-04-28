@@ -24,6 +24,8 @@ var energy_used_this_turn := 0
 var health_lost_times_this_turn := 0
 var card_exhausted_this_turn := 0
 var health_lose_times_this_combat := 0
+var player_hit_this_combat := 0
+
 
 var dead := false
 
@@ -161,6 +163,7 @@ func lose_health(context: Context) -> int:
 		die()
 	else:
 		Events.player_hit.emit()
+		player_hit_this_combat += 1
 		spine_anim_state.set_animation("hurt", false, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
 	
@@ -178,6 +181,7 @@ func take_damage(context: Context) -> int:
 		die()
 	elif actual_damage != 0:
 		Events.player_hit.emit()
+		player_hit_this_combat += 1
 		spine_anim_state.set_animation("hurt", false, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
 	return actual_damage
@@ -316,7 +320,7 @@ func use_energy(amount: int) -> void:
 	stats.energy -= amount
 	energy_used_this_turn += amount
 
-func _on_card_played(card: Card) -> void:
+func _on_card_played(card: Card, _card_context: Dictionary) -> void:
 	
 	if card.type == Card.Type.ATTACK:
 		attack_played_this_turn += 1

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" format=3 uid="uid://b7y2fwl5kmm25"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_1arhb"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_hm02f"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_gx102"]
+[ext_resource type="Texture2D" uid="uid://b7rk6ch" path="res://images/atlases/relic_atlas.sprites/shuriken.tres" id="4_pssgv"]
+[ext_resource type="Script" uid="uid://boj8aqv6fwtea" path="res://entities/relics/colorless/手里剑.gd" id="5_rrwhh"]
+
+[sub_resource type="Resource" id="Resource_m5vsm"]
+script = ExtResource("2_hm02f")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_1yr7k"]
+script = ExtResource("3_gx102")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_m5vsm")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("5_rrwhh")
+relic_name = "手里剑"
+id = "shuriken"
+icon = ExtResource("4_pssgv")
+description = "你每在同一回合内打出3张攻击牌，获得1点[color=gold]力量[/color]"
+rarity = 4
+effects = Array[ExtResource("1_1arhb")]([SubResource("Resource_1yr7k")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

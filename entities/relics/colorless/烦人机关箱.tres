@@ -1,0 +1,42 @@
+[gd_resource type="Resource" format=3 uid="uid://dqtjd371o83iw"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_2aohy"]
+[ext_resource type="Script" uid="uid://bfd4cqklwdhs3" path="res://scripts/costum_resources/effects/put_card_effect.gd" id="2_cnyig"]
+[ext_resource type="Script" uid="uid://c6aimd4krc1h5" path="res://scripts/costum_resources/card_filter.gd" id="2_jb8bl"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_fpyqo"]
+[ext_resource type="Texture2D" uid="uid://btvt4v2" path="res://images/atlases/relic_atlas.sprites/vexing_puzzlebox.tres" id="3_puffe"]
+[ext_resource type="Script" uid="uid://6mwh77r34fkj" path="res://entities/relics/colorless/烦人机关箱.gd" id="6_jb8bl"]
+
+[sub_resource type="Resource" id="Resource_i8a0g"]
+script = ExtResource("2_jb8bl")
+color_type = 1
+type = 7
+rarity = 7
+metadata/_custom_type_script = "uid://c6aimd4krc1h5"
+
+[sub_resource type="Resource" id="Resource_7i7tj"]
+script = ExtResource("3_fpyqo")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_jb8bl"]
+script = ExtResource("2_cnyig")
+source = 2
+where = 2
+put_card_count_provider = SubResource("Resource_7i7tj")
+card_filter = SubResource("Resource_i8a0g")
+upgraded = true
+first_play_free = true
+target_type = 1
+metadata/_custom_type_script = "uid://bfd4cqklwdhs3"
+
+[resource]
+script = ExtResource("6_jb8bl")
+relic_name = "烦人机关箱"
+id = "vexing_puzzlebox"
+icon = ExtResource("3_puffe")
+description = "在每场战斗开始时，将一张[color=gold]升级后[/color]的随机卡牌加入你的[color=gold]手牌[/color]。这张牌在本回合可以免费打出"
+trigger_type = 1
+rarity = 4
+effects = Array[ExtResource("1_2aohy")]([SubResource("Resource_jb8bl")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

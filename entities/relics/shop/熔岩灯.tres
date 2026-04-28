@@ -1,0 +1,15 @@
+[gd_resource type="Resource" format=3 uid="uid://dqhd3kwsbqbhc"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_csb7g"]
+[ext_resource type="Texture2D" uid="uid://b2pnvhr" path="res://images/atlases/relic_atlas.sprites/lava_lamp.tres" id="2_nio1y"]
+[ext_resource type="Script" uid="uid://do077qwmq82bm" path="res://entities/relics/shop/熔岩灯.gd" id="3_vsrlu"]
+
+[resource]
+script = ExtResource("3_vsrlu")
+relic_name = "熔岩灯"
+id = "lava_lamp"
+icon = ExtResource("2_nio1y")
+description = "在战斗结束时，如果你没有受伤，则[color=gold]升级[/color]你的所有卡牌奖励"
+trigger_type = 4
+rarity = 4
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

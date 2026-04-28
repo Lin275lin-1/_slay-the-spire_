@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://bq8wbolffoh1v"]
+
+[ext_resource type="Script" uid="uid://dxgbrp2g58nob" path="res://scripts/costum_resources/buffs/aggression_buff.gd" id="1_1qk4o"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_ysy7x"]
+[ext_resource type="Texture2D" uid="uid://bon0xgeb6bjeo" path="res://images/powers/aggression_power.png" id="2_l0ca7"]
+
+[resource]
+script = ExtResource("1_ysy7x")
+buff_id = "aggression"
+buff_name = "好勇斗狠"
+description = "在你的回合开始时，将你[color=gold]弃牌堆[/color]的一张随机攻击牌放入你的[color=gold]手牌[/color]并将其升级。"
+icon = ExtResource("2_l0ca7")
+stackable = false
+buff_script = ExtResource("1_1qk4o")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

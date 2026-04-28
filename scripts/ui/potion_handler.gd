@@ -16,6 +16,7 @@ func initialize(run_stats_: RunStats) -> void:
 	Events.after_potion_used.connect(_on_after_potion_used)
 	run_stats.potion_added.connect(add_potion)
 	run_stats.potion_removed.connect(remove_potion)
+	run_stats.potion_slots_changed.connect(update_potion_slot)
 	update_potion_slot()
 
 func update_potion_slot() -> void:
@@ -59,6 +60,6 @@ func _on_player_turn_ended() -> void:
 	for child: PotionUI in potion_place_holder.get_children():
 		child.can_use = false
 		
-func _on_combat_ended() -> void:
+func _on_combat_ended(_context: RewardContext) -> void:
 	for child: PotionUI in potion_place_holder.get_children():
 		child.can_use = false

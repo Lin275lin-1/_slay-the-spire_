@@ -53,7 +53,6 @@ enum COLOR {
 @export_group("卡牌描述")
 @export var portrait: Texture
 @export_multiline var base_description: String
-@export var sound: AudioStream
 @export var base_numeric_entries: Array[NumericEntry]
 # 注意这两个可以动态生成的词条不能在卡牌描述中写死
 # 是否带“消耗“词条
@@ -146,11 +145,11 @@ func play(source: Player, targets: Array[Node], no_callback: bool = false) -> vo
 	else:
 		source.combat_resolver.execute(ResolutionEntry.new(self, get_effects(), card_context, \
 		func(): 
-			Events.card_played.emit(self)
+			Events.card_played.emit(self, card_context)
 			on_played(source, targets)
 			)
 		)
-	source.use_energy(energy_cost)
+		source.use_energy(energy_cost)
 	first_play_free = false
 
 func on_played(source: Player, targets: Array[Node]) -> void:
@@ -278,4 +277,38 @@ func has_highlight_condition(player: Node, target: Node) -> bool:
 	for effect: Effect in effects:
 		if effect is ConditionalEffect:
 			return effect.is_condition_met(player, target)
+	return false
+
+func has_attack_effect() -> bool:
+	return _has_attack_effect(get_effects())
+
+func _has_attack_effect(card_effects: Array[Effect]) -> bool:
+	for effect in card_effects:
+		if effect is AttackEffect:
+			return true
+		if effect is IterationEffect:
+			if _has_attack_effect(effect.effects):
+				return true
+		if effect is ConditionalEffect:
+			if _has_attack_effect(effect.if_effects) or _has_attack_effect(effect.else_effects):
+				return true
+		# 不管while_effect
+		# foreach是卡牌相关的，也不需要管
+	return false
+
+func has_block_effect() -> bool:
+	return _has_block_effect(get_effects())
+
+func _has_block_effect(card_effects: Array[Effect]) -> bool:
+	for effect in card_effects:
+		if effect is BlockEffect:
+			return true
+		if effect is IterationEffect:
+			if _has_block_effect(effect.effects):
+				return true
+		if effect is ConditionalEffect:
+			if _has_block_effect(effect.if_effects) or _has_block_effect(effect.else_effects):
+				return true
+		# 不管while_effect
+		# foreach是卡牌相关的，也不需要管
 	return false

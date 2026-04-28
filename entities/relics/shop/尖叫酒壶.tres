@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://cng7owrrnebkj"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_xpfj5"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="2_12fvj"]
+[ext_resource type="Script" uid="uid://cibjrcipdqbs7" path="res://scripts/costum_resources/condition.gd" id="2_lgkn3"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_qlp0y"]
+[ext_resource type="Script" uid="uid://bhhtjppe5dfcx" path="res://scripts/costum_resources/effects/damage_effect.gd" id="4_j14wx"]
+[ext_resource type="Script" uid="uid://66oyp04ol1ud" path="res://scripts/costum_resources/effects/condition_effect.gd" id="5_unubo"]
+[ext_resource type="Texture2D" uid="uid://b5rmwph" path="res://images/atlases/relic_atlas.sprites/screaming_flagon.tres" id="6_u3c1t"]
+
+[sub_resource type="Resource" id="Resource_20ijd"]
+script = ExtResource("2_lgkn3")
+type = 13
+metadata/_custom_type_script = "uid://cibjrcipdqbs7"
+
+[sub_resource type="Resource" id="Resource_blsb8"]
+script = ExtResource("3_qlp0y")
+fixed_value = 20
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_1pajr"]
+script = ExtResource("4_j14wx")
+damage_provider = SubResource("Resource_blsb8")
+no_modifiers = true
+target_type = 3
+metadata/_custom_type_script = "uid://bhhtjppe5dfcx"
+
+[sub_resource type="Resource" id="Resource_ruca3"]
+script = ExtResource("5_unubo")
+condition = SubResource("Resource_20ijd")
+if_effects = Array[ExtResource("1_xpfj5")]([SubResource("Resource_1pajr")])
+metadata/_custom_type_script = "uid://66oyp04ol1ud"
+
+[resource]
+script = ExtResource("2_12fvj")
+relic_name = "尖叫酒壶"
+id = "screaming_flagon"
+icon = ExtResource("6_u3c1t")
+description = "如果你在回合结束时没有任何[color=gold]手牌[/color]，则对所有敌人造成20点伤害"
+trigger_type = 3
+rarity = 16
+effects = Array[ExtResource("1_xpfj5")]([SubResource("Resource_ruca3")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

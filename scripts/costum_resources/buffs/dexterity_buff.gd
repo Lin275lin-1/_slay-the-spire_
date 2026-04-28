@@ -2,9 +2,6 @@
 class_name DexterityBuff
 extends Buff
 
-
-
-
 func initialize() -> void:
 	if agent and agent.has_signal("before_gain_block"):
 		agent.connect("before_gain_block", _on_before_gain_block)

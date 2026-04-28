@@ -1,18 +1,29 @@
 [gd_resource type="Resource" script_class="Potion" format=3 uid="uid://b4f3sa0fp06b0"]
 
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_ovxdj"]
-[ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="2_s8ac5"]
+[ext_resource type="Script" uid="uid://cqcf6adphkjfy" path="res://scripts/costum_resources/effects/select_card_effect.gd" id="2_nbwue"]
 [ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_srwkl"]
+[ext_resource type="Script" uid="uid://csyjq6ujulplm" path="res://scripts/costum_resources/effects/card_effects/card_effect.gd" id="3_07nnw"]
 [ext_resource type="Texture2D" uid="uid://bp03l6t" path="res://images/atlases/potion_atlas.sprites/touch_of_insanity.tres" id="3_8w3nu"]
 [ext_resource type="Texture2D" uid="uid://b12f85" path="res://images/atlases/potion_outline_atlas.sprites/touch_of_insanity.tres" id="4_fkkj0"]
+[ext_resource type="Script" uid="uid://qa3e0t7g475d" path="res://scripts/costum_resources/effects/card_effects/set_card_cost_effect.gd" id="4_lscxo"]
+[ext_resource type="Script" uid="uid://c2drp2mlr0vhm" path="res://scripts/costum_resources/effects/foreach_card_effect.gd" id="5_a6oya"]
 
-[sub_resource type="Resource" id="Resource_nbwue"]
-script = ExtResource("2_s8ac5")
-callback = 7
-where = 1
+[sub_resource type="Resource" id="Resource_25ojw"]
+script = ExtResource("2_nbwue")
 min_select = 1
 max_select = 1
-metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+metadata/_custom_type_script = "uid://cqcf6adphkjfy"
+
+[sub_resource type="Resource" id="Resource_ajm13"]
+script = ExtResource("4_lscxo")
+delta = -100
+metadata/_custom_type_script = "uid://qa3e0t7g475d"
+
+[sub_resource type="Resource" id="Resource_10h06"]
+script = ExtResource("5_a6oya")
+effects = Array[ExtResource("3_07nnw")]([SubResource("Resource_ajm13")])
+metadata/_custom_type_script = "uid://c2drp2mlr0vhm"
 
 [resource]
 script = ExtResource("2_srwkl")
@@ -22,5 +33,5 @@ description = "选择你[color=gold]手牌[/color]中的一张牌，使其在本
 icon = ExtResource("3_8w3nu")
 outline_icon = ExtResource("4_fkkj0")
 rarity = 2
-effects = Array[ExtResource("1_ovxdj")]([SubResource("Resource_nbwue")])
+effects = Array[ExtResource("1_ovxdj")]([SubResource("Resource_25ojw"), SubResource("Resource_10h06")])
 metadata/_custom_type_script = "uid://bumkvpbom08xn"

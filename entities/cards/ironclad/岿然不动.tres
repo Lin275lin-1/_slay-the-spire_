@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://0m10x56r5id3"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_u1psa"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_a46qm"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_ecbrk"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_gq523"]
+[ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="4_ux6fo"]
+[ext_resource type="Texture2D" uid="uid://fuv3p8" path="res://images/atlases/card_atlas.sprites/ironclad/impervious.tres" id="5_ybfqm"]
+
+[sub_resource type="Resource" id="Resource_jptu8"]
+script = ExtResource("2_ecbrk")
+fixed_value = 30
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_lqrbi"]
+script = ExtResource("1_u1psa")
+numeric_type = 2
+numeric_provider = SubResource("Resource_jptu8")
+placeholder = "block"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_rul7s"]
+script = ExtResource("2_ecbrk")
+fixed_value = 30
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_mvgg6"]
+script = ExtResource("4_ux6fo")
+block_provider = SubResource("Resource_rul7s")
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_wrejr"]
+script = ExtResource("2_ecbrk")
+fixed_value = 40
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_p28kx"]
+script = ExtResource("4_ux6fo")
+block_provider = SubResource("Resource_wrejr")
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_y1rdf"]
+script = ExtResource("2_ecbrk")
+fixed_value = 40
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_64w8a"]
+script = ExtResource("1_u1psa")
+numeric_type = 2
+numeric_provider = SubResource("Resource_y1rdf")
+placeholder = "block"
+affected_by = 2
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_gq523")
+id = "岿然不动"
+type = 2
+base_cost = 2
+rarity = 4
+effects = Array[ExtResource("2_a46qm")]([SubResource("Resource_mvgg6")])
+portrait = ExtResource("5_ybfqm")
+base_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center]"
+base_numeric_entries = Array[ExtResource("1_u1psa")]([SubResource("Resource_lqrbi")])
+exhaust = true
+upgraded_cost = 2
+upgraded_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_u1psa")]([SubResource("Resource_64w8a")])
+upgraded_effects = Array[ExtResource("2_a46qm")]([SubResource("Resource_p28kx")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

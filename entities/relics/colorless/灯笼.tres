@@ -22,6 +22,6 @@ relic_name = "灯笼"
 id = "lantern"
 icon = ExtResource("1_84n5j")
 description = "第一回合开始后，获得1点能量"
-relic_type = 10
+trigger_type = 2
 effects = Array[ExtResource("1_xsibf")]([SubResource("Resource_ok84g")])
 metadata/_custom_type_script = "uid://bvf88v88tbaks"

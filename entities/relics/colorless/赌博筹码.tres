@@ -1,0 +1,52 @@
+[gd_resource type="Resource" format=3 uid="uid://dhwc2odvvx701"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_kd4ti"]
+[ext_resource type="Script" uid="uid://cqcf6adphkjfy" path="res://scripts/costum_resources/effects/select_card_effect.gd" id="2_ccrkw"]
+[ext_resource type="Script" uid="uid://csyjq6ujulplm" path="res://scripts/costum_resources/effects/card_effects/card_effect.gd" id="3_td5r5"]
+[ext_resource type="Script" uid="uid://bci7nig6fjgom" path="res://scripts/costum_resources/effects/card_effects/discard_card_effect.gd" id="4_qdmxj"]
+[ext_resource type="Script" uid="uid://c2drp2mlr0vhm" path="res://scripts/costum_resources/effects/foreach_card_effect.gd" id="5_jhp1j"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="6_mtwyg"]
+[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="7_dbc8l"]
+[ext_resource type="Script" uid="uid://c8ly86kb5vc65" path="res://scripts/costum_resources/effects/iteration_effect.gd" id="8_flgx8"]
+[ext_resource type="Texture2D" uid="uid://cbr5tgk" path="res://images/atlases/relic_atlas.sprites/gambling_chip.tres" id="9_est1u"]
+[ext_resource type="Script" uid="uid://lw1ri1vkjmkn" path="res://entities/relics/colorless/赌博筹码.gd" id="10_ccrkw"]
+
+[sub_resource type="Resource" id="Resource_ir1ns"]
+script = ExtResource("2_ccrkw")
+max_select = 10
+callback_hint = "弃牌"
+metadata/_custom_type_script = "uid://cqcf6adphkjfy"
+
+[sub_resource type="Resource" id="Resource_m7h7s"]
+script = ExtResource("4_qdmxj")
+metadata/_custom_type_script = "uid://bci7nig6fjgom"
+
+[sub_resource type="Resource" id="Resource_gam7f"]
+script = ExtResource("5_jhp1j")
+effects = Array[ExtResource("3_td5r5")]([SubResource("Resource_m7h7s")])
+metadata/_custom_type_script = "uid://c2drp2mlr0vhm"
+
+[sub_resource type="Resource" id="Resource_43pg0"]
+script = ExtResource("6_mtwyg")
+type = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_hbmih"]
+script = ExtResource("7_dbc8l")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_3wy61"]
+script = ExtResource("8_flgx8")
+count_provider = SubResource("Resource_43pg0")
+effects = Array[ExtResource("1_kd4ti")]([SubResource("Resource_hbmih")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
+
+[resource]
+script = ExtResource("10_ccrkw")
+relic_name = "赌博筹码"
+id = "gambling_chip"
+icon = ExtResource("9_est1u")
+description = "在每场战斗开始时，丢弃任意张牌，然后抽相同数量张牌"
+rarity = 4
+effects = Array[ExtResource("1_kd4ti")]([SubResource("Resource_ir1ns"), SubResource("Resource_gam7f"), SubResource("Resource_3wy61")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

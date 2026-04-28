@@ -1,0 +1,30 @@
+[gd_resource type="Resource" format=3 uid="uid://2fxyp420nuy3"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_7kugl"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_6xh35"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_7am0a"]
+[ext_resource type="Texture2D" uid="uid://bvsqpii" path="res://images/atlases/relic_atlas.sprites/sling_of_courage.tres" id="4_ih0ve"]
+[ext_resource type="Script" uid="uid://cawmegd3g8iom" path="res://entities/relics/shop/勇气投石索.gd" id="5_6xh35"]
+
+[sub_resource type="Resource" id="Resource_vkic6"]
+script = ExtResource("2_6xh35")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_aw4mm"]
+script = ExtResource("3_7am0a")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_vkic6")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("5_6xh35")
+relic_name = "勇气投石索"
+id = "sling_of_courage"
+icon = ExtResource("4_ih0ve")
+description = "在与精英敌人战斗时，获得3点[color=gold]力量[/color]"
+trigger_type = 2
+rarity = 16
+effects = Array[ExtResource("1_7kugl")]([SubResource("Resource_aw4mm")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

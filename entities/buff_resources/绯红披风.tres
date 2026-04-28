@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://b5r02ldo72orr"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_in7x2"]
+[ext_resource type="Script" uid="uid://cflmh6qxsdo6l" path="res://scripts/costum_resources/buffs/crimson_mantle_buff.gd" id="1_xjfqg"]
+[ext_resource type="Texture2D" uid="uid://dqlxda4iiard3" path="res://images/powers/crimson_mantle_power.png" id="2_0iomg"]
+
+[resource]
+script = ExtResource("1_in7x2")
+buff_id = "crimson_mantle"
+buff_name = "绯红披风"
+description = "在你的回合开始时，失去1点生命并获得{stacks}点格挡"
+icon = ExtResource("2_0iomg")
+buff_script = ExtResource("1_xjfqg")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

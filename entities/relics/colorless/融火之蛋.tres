@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://6ajeifgch3i5"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_8r8kp"]
+[ext_resource type="Texture2D" uid="uid://bplkad0" path="res://images/atlases/relic_atlas.sprites/molten_egg.tres" id="2_t6spl"]
+[ext_resource type="Script" uid="uid://dacrn4hnm28jc" path="res://entities/relics/colorless/融火之蛋.gd" id="3_lxfbs"]
+
+[resource]
+script = ExtResource("3_lxfbs")
+relic_name = "融火之蛋"
+id = "molten_egg"
+icon = ExtResource("2_t6spl")
+description = "卡牌奖励中的所有攻击牌会被[color=gold]升级[/color]"
+rarity = 4
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

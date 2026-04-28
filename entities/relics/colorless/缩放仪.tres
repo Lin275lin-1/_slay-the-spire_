@@ -1,0 +1,15 @@
+[gd_resource type="Resource" format=3 uid="uid://m778q3pksfn2"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_ca6dp"]
+[ext_resource type="Texture2D" uid="uid://bve4p8m" path="res://images/atlases/relic_atlas.sprites/pantograph.tres" id="2_c312h"]
+[ext_resource type="Script" uid="uid://bn32opk81qb2i" path="res://entities/relics/colorless/缩放仪.gd" id="3_bl046"]
+
+[resource]
+script = ExtResource("3_bl046")
+relic_name = "缩放仪"
+id = "pantograph"
+icon = ExtResource("2_c312h")
+description = "进入[color=gold]Boss[/color]房时，回复25点生命值"
+rarity = 2
+effects = Array[ExtResource("1_ca6dp")]([null])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

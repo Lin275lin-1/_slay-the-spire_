@@ -1,0 +1,34 @@
+[gd_resource type="Resource" format=3 uid="uid://bceqn5fb1d4hk"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_ib6sd"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_hbbjv"]
+[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="3_and7o"]
+[ext_resource type="Script" uid="uid://c8ly86kb5vc65" path="res://scripts/costum_resources/effects/iteration_effect.gd" id="4_uufa5"]
+[ext_resource type="Texture2D" uid="uid://bll4kwp" path="res://images/atlases/relic_atlas.sprites/pocketwatch.tres" id="5_35qp6"]
+[ext_resource type="Script" uid="uid://b8fndh1xsw3sp" path="res://entities/relics/colorless/怀表.gd" id="6_hbbjv"]
+
+[sub_resource type="Resource" id="Resource_1ennq"]
+script = ExtResource("2_hbbjv")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_g1nrj"]
+script = ExtResource("3_and7o")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_1byyx"]
+script = ExtResource("4_uufa5")
+count_provider = SubResource("Resource_1ennq")
+effects = Array[ExtResource("1_ib6sd")]([SubResource("Resource_g1nrj")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
+
+[resource]
+script = ExtResource("6_hbbjv")
+relic_name = "怀表"
+id = "pocketwatch"
+icon = ExtResource("5_35qp6")
+description = "当你在本回合打出的牌少于等于3张时，则在你的下个回合开始时额外抽3张牌"
+trigger_type = 1
+rarity = 4
+effects = Array[ExtResource("1_ib6sd")]([SubResource("Resource_1byyx")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

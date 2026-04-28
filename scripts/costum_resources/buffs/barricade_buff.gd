@@ -11,14 +11,10 @@ func initialize() -> void:
 		agent.connect("after_turn_started", _on_after_turn_started)
 
 func get_modifier() -> Array[Modifier]:
-	var modifier := Modifier.new(Enums.NumericType.DAMAGE, 0, 1.0, null)
-	return [modifier]
+	return []
 
 func _on_before_turn_started(creature: Creature) -> void:
 	block = creature.stats.block
 	 
 func _on_after_turn_started(creature: Creature) -> void:
 	creature.stats.block = block
-
-func _on_turn_started(_creature: Node2D) -> void:
-	remove_stack(1) 

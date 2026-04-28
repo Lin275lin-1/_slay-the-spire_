@@ -2,9 +2,6 @@
 class_name ViciousBuff
 extends Buff
 
-
-
-	
 func initialize() -> void:
 	if agent is Player:
 		agent.after_applied_buff.connect(_on_after_applied_buff)

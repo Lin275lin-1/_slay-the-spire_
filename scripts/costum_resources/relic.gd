@@ -1,20 +1,15 @@
 class_name Relic
 extends Resource
 
-
+# 只管战斗中的触发,其他信号在脚本中实现
 enum TriggerType {
+	NONE,
 	START_OF_TURN,
 	START_OF_COMBAT,
 	END_OF_TURN,
 	END_OF_COMBAT,
-	EVENT_BASED
 }
-enum RelicType{
-	STARTER_RELIC = 0b0001,
-	NORMAL_RELIC = 0b0010,
-	ANCIENT_RELIC = 0b0100,
-	SHOP_RELIC = 0b1000
-}
+
 enum COLOR {
 	RED = 0b0000001,	# 铁甲战士
 	GREEN = 0b0000010,	# 静默猎手
@@ -24,10 +19,12 @@ enum COLOR {
 	COLORLESS = 0b1000000, # 无色
 }
 enum Rarity{
-	COMMON = 0b0001,
-	UNCOMMON = 0b0010,
-	RARE = 0b0100,
-	STARTER_RELIC = 0b1000
+	COMMON = 0b000001,
+	UNCOMMON = 0b000010,
+	RARE = 0b000100,
+	STARTER_RELIC = 0b001000,
+	SHOP_RELIC = 0b010000,
+	ANCIENT_RELIC = 0b100000,
 }
 @export var relic_name: String
 @export var id: String
@@ -36,12 +33,16 @@ enum Rarity{
 @export var trigger_type: TriggerType
 @export var relic_color: COLOR = COLOR.COLORLESS
 @export var rarity: Rarity = Rarity.COMMON
-## 使用比特判断类型	 比特从右往左一次为 商店遗物，先古(boss)遗物，普通遗物，初始遗物
-## e.g. 输入0b1010: 普通遗物+商店遗物
-@export_range(0, 15) var relic_type: int
+
 @export var effects: Array[Effect]
 
+# 计数器
+var count: int = 0
+
 func initialize_relic(_owner: RelicUI) -> void:
+	pass
+
+func on_picked_up(_run_stats: RunStats, _char_stats: CharacterStats, _select_deck_view: DeckView) -> void:
 	pass
 
 func activate_relic(owner: RelicUI) -> void:
@@ -70,13 +71,13 @@ func deactivate_relic(_owner: RelicUI) -> void:
 			#return false 
 	
 #debug
-func can_appear_as_reward(character: CharacterStats, drop_type: Relic.RelicType) -> bool:
+func can_appear_as_reward(character: CharacterStats, drop_type: Relic.Rarity) -> bool:
 	#print("检查遗物: ", relic_name)
 	#print("  relic_type = ", relic_type, " (二进制: ", ("%04b" % relic_type), ")")
 	#print("  drop_type  = ", drop_type, " (二进制: ", ("%04b" % drop_type), ")")
 	#print("  位与结果   = ", drop_type & relic_type)
 	
-	if (drop_type & relic_type) == 0:
+	if (drop_type & rarity) == 0:
 		#print("  -> 失败：遗物不包含 SHOP_RELIC 标记")
 		return false
 	

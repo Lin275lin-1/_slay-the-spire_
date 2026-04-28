@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://bmpuyxbd41qfr"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_j8olc"]
+[ext_resource type="Texture2D" uid="uid://llvpb4" path="res://images/atlases/relic_atlas.sprites/strawberry.tres" id="2_3yn1x"]
+[ext_resource type="Script" uid="uid://d011whhgywoai" path="res://entities/relics/colorless/草莓.gd" id="3_v1288"]
+
+[resource]
+script = ExtResource("3_v1288")
+relic_name = "草莓"
+id = "strawberry"
+icon = ExtResource("2_3yn1x")
+description = "拾起时，将你的最大生命值提升7"
+trigger_type = 2
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

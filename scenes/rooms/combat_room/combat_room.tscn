@@ -317,7 +317,7 @@ offset_left = 872.0
 offset_top = 177.0
 offset_right = 1072.0
 offset_bottom = 277.0
-text = "返回地图"
+text = "杀死敌人"
 
 [connection signal="pressed" from="AddCard" to="." method="_on_add_card_pressed"]
 [connection signal="pressed" from="BackToMap" to="." method="_on_back_to_map_pressed"]

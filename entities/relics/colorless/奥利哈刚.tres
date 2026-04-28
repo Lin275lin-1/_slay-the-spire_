@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://nhj0274eihjp"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_o1d4n"]
+[ext_resource type="Texture2D" uid="uid://ioql6" path="res://images/atlases/relic_atlas.sprites/orichalcum.tres" id="2_4n5ql"]
+[ext_resource type="Script" uid="uid://cibjrcipdqbs7" path="res://scripts/costum_resources/condition.gd" id="2_h2ykg"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="2_s2yfy"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_gko1u"]
+[ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="4_6o6qd"]
+[ext_resource type="Script" uid="uid://66oyp04ol1ud" path="res://scripts/costum_resources/effects/condition_effect.gd" id="5_4cx4f"]
+
+[sub_resource type="Resource" id="Resource_ouavm"]
+script = ExtResource("2_h2ykg")
+type = 10
+metadata/_custom_type_script = "uid://cibjrcipdqbs7"
+
+[sub_resource type="Resource" id="Resource_3uvqj"]
+script = ExtResource("3_gko1u")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_v0hrs"]
+script = ExtResource("4_6o6qd")
+block_provider = SubResource("Resource_3uvqj")
+no_modifiers = true
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[sub_resource type="Resource" id="Resource_wam7q"]
+script = ExtResource("5_4cx4f")
+condition = SubResource("Resource_ouavm")
+if_effects = Array[ExtResource("1_o1d4n")]([SubResource("Resource_v0hrs")])
+metadata/_custom_type_script = "uid://66oyp04ol1ud"
+
+[resource]
+script = ExtResource("2_s2yfy")
+relic_name = "奥利哈刚"
+id = "orichalcum"
+icon = ExtResource("2_4n5ql")
+description = "如果你在回合结束时没有任何[color=gold]格挡[/color]，获得6点[color=gold]格挡[/color]"
+trigger_type = 3
+rarity = 2
+effects = Array[ExtResource("1_o1d4n")]([SubResource("Resource_wam7q")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

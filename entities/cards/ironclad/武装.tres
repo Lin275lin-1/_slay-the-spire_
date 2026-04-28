@@ -5,9 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://v5fhk" path="res://images/atlases/card_atlas.sprites/ironclad/armaments.tres" id="2_qyk1p"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_x6sth"]
 [ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="4_42s83"]
-[ext_resource type="AudioStream" uid="uid://dg3m3v6ldrym8" path="res://audio/SFX/frost_orb_passive.mp3" id="4_auaqv"]
-[ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="5_61rnp"]
+[ext_resource type="AudioStream" uid="uid://cnxfhtrl0n8nm" path="res://audio/SFX/frost_orb_passive.mp3" id="4_auaqv"]
+[ext_resource type="Script" uid="uid://dyn5a42fs7gxs" path="res://scripts/costum_resources/card_condition.gd" id="5_thu2h"]
+[ext_resource type="Script" uid="uid://cqcf6adphkjfy" path="res://scripts/costum_resources/effects/select_card_effect.gd" id="6_04gy0"]
 [ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_hb7p8"]
+[ext_resource type="Script" uid="uid://csyjq6ujulplm" path="res://scripts/costum_resources/effects/card_effects/card_effect.gd" id="7_hi5sw"]
+[ext_resource type="Script" uid="uid://dm6tcw4hw6un" path="res://scripts/costum_resources/effects/card_effects/modify_card_flag_effect.gd" id="8_gevhg"]
+[ext_resource type="Script" uid="uid://c2drp2mlr0vhm" path="res://scripts/costum_resources/effects/foreach_card_effect.gd" id="9_jhr7b"]
 
 [sub_resource type="Resource" id="Resource_thu2h"]
 script = ExtResource("2_hb7p8")
@@ -32,12 +36,29 @@ block_provider = SubResource("Resource_04gy0")
 target_type = 1
 metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
 
-[sub_resource type="Resource" id="Resource_gevhg"]
-script = ExtResource("5_61rnp")
-where = 1
+[sub_resource type="Resource" id="Resource_gqx7i"]
+script = ExtResource("5_thu2h")
+type = 1
+metadata/_custom_type_script = "uid://dyn5a42fs7gxs"
+
+[sub_resource type="Resource" id="Resource_m7pi0"]
+script = ExtResource("6_04gy0")
 min_select = 1
 max_select = 1
-metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+filter_condition = SubResource("Resource_gqx7i")
+callback_hint = "升级"
+metadata/_custom_type_script = "uid://cqcf6adphkjfy"
+
+[sub_resource type="Resource" id="Resource_vbaq7"]
+script = ExtResource("8_gevhg")
+flag_name = 5
+value = true
+metadata/_custom_type_script = "uid://dm6tcw4hw6un"
+
+[sub_resource type="Resource" id="Resource_p3wv3"]
+script = ExtResource("9_jhr7b")
+effects = Array[ExtResource("7_hi5sw")]([SubResource("Resource_vbaq7")])
+metadata/_custom_type_script = "uid://c2drp2mlr0vhm"
 
 [sub_resource type="Resource" id="Resource_jhr7b"]
 script = ExtResource("2_hb7p8")
@@ -50,10 +71,21 @@ block_provider = SubResource("Resource_jhr7b")
 target_type = 1
 metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
 
-[sub_resource type="Resource" id="Resource_gqx7i"]
-script = ExtResource("5_61rnp")
-where = 1
-metadata/_custom_type_script = "uid://mj4ouyjcdv4v"
+[sub_resource type="Resource" id="Resource_kv0b5"]
+script = ExtResource("6_04gy0")
+selectionMode = 1
+metadata/_custom_type_script = "uid://cqcf6adphkjfy"
+
+[sub_resource type="Resource" id="Resource_v14f8"]
+script = ExtResource("8_gevhg")
+flag_name = 5
+value = true
+metadata/_custom_type_script = "uid://dm6tcw4hw6un"
+
+[sub_resource type="Resource" id="Resource_t1bsh"]
+script = ExtResource("9_jhr7b")
+effects = Array[ExtResource("7_hi5sw")]([SubResource("Resource_v14f8")])
+metadata/_custom_type_script = "uid://c2drp2mlr0vhm"
 
 [sub_resource type="Resource" id="Resource_e36l4"]
 script = ExtResource("2_hb7p8")
@@ -72,7 +104,7 @@ script = ExtResource("7_hb7p8")
 id = "武装"
 type = 2
 base_cost = 1
-effects = Array[ExtResource("3_x6sth")]([SubResource("Resource_hi5sw"), SubResource("Resource_gevhg")])
+effects = Array[ExtResource("3_x6sth")]([SubResource("Resource_hi5sw"), SubResource("Resource_m7pi0"), SubResource("Resource_p3wv3")])
 portrait = ExtResource("2_qyk1p")
 base_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center]
 [center][color=gold]升级[/color]手牌中的一张卡牌。[/center]"
@@ -82,4 +114,4 @@ upgraded_cost = 1
 upgraded_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center]
 [center][color=gold]升级[/color]手牌中所有卡牌。[/center]"
 upgraded_numeric_entries = Array[ExtResource("1_hsmi0")]([SubResource("Resource_6o2r8")])
-upgraded_effects = Array[ExtResource("3_x6sth")]([SubResource("Resource_37300"), SubResource("Resource_gqx7i")])
+upgraded_effects = Array[ExtResource("3_x6sth")]([SubResource("Resource_37300"), SubResource("Resource_kv0b5"), SubResource("Resource_t1bsh")])

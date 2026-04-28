@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://dfra3ov6phtj8"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_racmk"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="2_f0xg5"]
+[ext_resource type="Script" uid="uid://c6aimd4krc1h5" path="res://scripts/costum_resources/card_filter.gd" id="2_sb0wm"]
+[ext_resource type="Script" uid="uid://ba3wlijo516jr" path="res://scripts/costum_resources/effects/discover_effect.gd" id="3_15q8a"]
+[ext_resource type="Texture2D" uid="uid://3bh25v" path="res://images/atlases/relic_atlas.sprites/toolbox.tres" id="4_k5s6r"]
+
+[sub_resource type="Resource" id="Resource_6cm7w"]
+script = ExtResource("2_sb0wm")
+color = 64
+type = 7
+rarity = 7
+metadata/_custom_type_script = "uid://c6aimd4krc1h5"
+
+[sub_resource type="Resource" id="Resource_8hf4h"]
+script = ExtResource("3_15q8a")
+card_filter = SubResource("Resource_6cm7w")
+metadata/_custom_type_script = "uid://ba3wlijo516jr"
+
+[resource]
+script = ExtResource("2_f0xg5")
+relic_name = "工具箱"
+id = "toolbox"
+icon = ExtResource("4_k5s6r")
+description = "在每场战斗开始时，从3张随机无色牌中选择1张加入你的[color=gold]手牌[/color]"
+trigger_type = 2
+rarity = 16
+effects = Array[ExtResource("1_racmk")]([SubResource("Resource_8hf4h")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

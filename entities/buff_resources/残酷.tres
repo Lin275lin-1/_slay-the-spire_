@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://c6barohnjy8b1"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_8t1gl"]
+[ext_resource type="Script" uid="uid://s441lo7wwvrd" path="res://scripts/costum_resources/buffs/cruelty_buff.gd" id="1_evlud"]
+[ext_resource type="Texture2D" uid="uid://cx3aoap3l6xhq" path="res://images/powers/cruelty_power.png" id="2_8lv3n"]
+
+[resource]
+script = ExtResource("1_8t1gl")
+buff_id = "cruelty"
+buff_name = "残酷"
+description = "造成的攻击伤害提高{stacks}%"
+icon = ExtResource("2_8lv3n")
+buff_script = ExtResource("1_evlud")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://drc2a3rk1li28"]
+
+[ext_resource type="Script" uid="uid://bt1seub32j8x5" path="res://scripts/costum_resources/buffs/pen_nib_buff.gd" id="1_2pb5p"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_frvp4"]
+[ext_resource type="Texture2D" uid="uid://d0mptagwcxba6" path="res://images/powers/double_damage_power.png" id="1_swwlg"]
+
+[resource]
+script = ExtResource("1_frvp4")
+buff_id = "pen_nib"
+buff_name = "钢笔尖"
+description = "下一张攻击牌造成双倍伤害"
+icon = ExtResource("1_swwlg")
+stackable = false
+buff_script = ExtResource("1_2pb5p")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

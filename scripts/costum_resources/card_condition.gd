@@ -12,10 +12,13 @@ enum Type{
 	IS_POWER, # 能力牌
 	NON_ATTACK, # 非攻击牌
 	NON_SKILL, # 非技能牌
+	NO_FIRST_PLAY_FREE_AND_NOT_ZERO_COST, # 非第一次打出免费且费用不为0 
 }
 
 @export var type: Type = Type.ALWAYS
 
+func _init(type_: Type = Type.ALWAYS) -> void:
+	type = type_
 
 func is_met(card: Card) -> bool:
 	match type:
@@ -35,5 +38,7 @@ func is_met(card: Card) -> bool:
 			return card.type == Card.Type.SKILL
 		Type.IS_POWER:
 			return card.type == Card.Type.POWER
+		Type.NO_FIRST_PLAY_FREE_AND_NOT_ZERO_COST:
+			return !card.first_play_free and !(card.get_cost() == 0)
 		_:
 			return false			

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://c4bsh422ia65v"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_ftk0d"]
+[ext_resource type="Texture2D" uid="uid://ispthn" path="res://images/atlases/relic_atlas.sprites/whetstone.tres" id="2_ih4hl"]
+[ext_resource type="Script" uid="uid://bh8jea7mg6ipd" path="res://entities/relics/colorless/磨刀石.gd" id="3_usywd"]
+
+[resource]
+script = ExtResource("3_usywd")
+relic_name = "磨刀石"
+id = "whetstone"
+icon = ExtResource("2_ih4hl")
+description = "拾取时，随机[color=gold]升级[/color]2张攻击牌"
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

@@ -18,7 +18,7 @@ func initialize(run_stats_: RunStats):
 
 func activate_relics_by_trigger_type(type: Relic.TriggerType) -> void:
 	# 由信号解决
-	if type == Relic.TriggerType.EVENT_BASED:
+	if type == Relic.TriggerType.NONE:
 		return
 	
 	var relic_queue: Array[Node] = get_children().filter(

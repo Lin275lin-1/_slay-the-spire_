@@ -4,12 +4,18 @@ extends Resource
 enum Type{
 	ALWAYS, # 总是满足条件
 	TARGET_HAS_BUFF, # 目标有buff
-	TAEGET_BUFF_MORE_THAN_STACKS, # 目标buff层数多于stacks
+	TARGET_BUFF_MORE_THAN_STACKS, # 目标buff层数多于stacks
 	PLAYER_LOSE_HP_THIS_TURN, # 本回合失去过生命
 	PLAYER_HAS_BUFF, # 玩家有buff
 	PLAYER_BUFF_MORE_THAN_STACKS, # 玩家buff层数多于stacks
 	PLAYER_EXHAUSTED_CARD_THIS_TURN, # 玩家本回合消耗过卡牌
 	LAST_DRAW_IS_ATTACK, # 上一次抽牌为攻击牌
+	EXHAUST_FILE_COUNT_MORE_THAN_COUNT, # 消耗堆数量大于
+	PLAYER_HEALTH_EQUAL_OR_LESS_THAN_PERCENT, # 血量低于百分比
+	PLAYER_HAS_NO_BLOCK, # 玩家没有格挡
+	PLAYER_NOT_PLAYED_ATTACK, # 玩家没有打出过攻击牌
+	PLAYER_BLOCK_EQUAL_OR_MORE_THAN_COUNT, # 玩家格挡多余count
+	PLAYER_HAS_NO_HAND, # 玩家没有手牌
 }
 
 @export var type: Type = Type.ALWAYS
@@ -25,7 +31,7 @@ func is_met(_source: Node, target: Node, context: Dictionary, previous_result: V
 			return true
 		Type.TARGET_HAS_BUFF:
 			return (target as Creature).has_buff(extra_params.get("buff_name", ""))
-		Type.TAEGET_BUFF_MORE_THAN_STACKS:
+		Type.TARGET_BUFF_MORE_THAN_STACKS:
 			var buff: Buff = (target as Creature).get_buff(extra_params.get("buff_name", ""))
 			if buff:
 				return buff.stacks > extra_params.get("stacks", 0)
@@ -51,6 +57,32 @@ func is_met(_source: Node, target: Node, context: Dictionary, previous_result: V
 			previous_result = (previous_result as Card)
 			if previous_result and previous_result.type == Card.Type.ATTACK:
 				return true
+		Type.EXHAUST_FILE_COUNT_MORE_THAN_COUNT:
+			var player: Player = context.get("player")
+			if player:
+				return len(player.get_exhaust_pile()) > extra_params.get("count", 99)
+		Type.PLAYER_HEALTH_EQUAL_OR_LESS_THAN_PERCENT:
+			var player: Player = context.get("player")
+			var percent: int = extra_params.get("percent", 0)
+			if player:
+				return (float(player.stats.health) / player.stats.max_health) * 100 < percent
+		Type.PLAYER_HAS_NO_BLOCK:
+			var player: Player = context.get("player")
+			if player:
+				return player.stats.block == 0
+		Type.PLAYER_NOT_PLAYED_ATTACK:
+			var player: Player = context.get("player")
+			if player:
+				return player.attack_played_this_turn == 0
+		Type.PLAYER_BLOCK_EQUAL_OR_MORE_THAN_COUNT:
+			var player: Player = context.get("player")
+			var block_count = extra_params.get("count", 0)
+			if player:
+				return player.get_block() >= block_count
+		Type.PLAYER_HAS_NO_HAND:
+			var player: Player = context.get("player")
+			if player:
+				return len(player.get_hand_cards()) == 0
 		_:
 			return false
 		
@@ -71,7 +103,7 @@ func is_met_without_context(source: Node, target: Node) -> bool:
 			target = (target as Creature)
 			if target:
 				return target.has_buff(extra_params.get("buff_name", ""))
-		Type.TAEGET_BUFF_MORE_THAN_STACKS:
+		Type.TARGET_BUFF_MORE_THAN_STACKS:
 			var buff: Buff = (target as Creature).get_buff(extra_params.get("buff_name", ""))
 			if buff:
 				return buff.stacks > extra_params.get("stacks", 0)
@@ -94,6 +126,32 @@ func is_met_without_context(source: Node, target: Node) -> bool:
 			
 			if player and player.card_exhausted_this_turn > 0:
 				return true
+		Type.EXHAUST_FILE_COUNT_MORE_THAN_COUNT:
+			var player: Player = source as Player
+			if player:
+				return len(player.get_exhaust_pile()) > extra_params.get("count", 99)
+		Type.PLAYER_HEALTH_EQUAL_OR_LESS_THAN_PERCENT:
+			var player: Player = source as Player
+			var percent: int = extra_params.get("percent", 0)
+			if player:
+				return (float(player.stats.health) / player.stats.max_health) * 100 < percent
+		Type.PLAYER_HAS_NO_BLOCK:
+			var player: Player = source as Player
+			if player:
+				return player.stats.block == 0
+		Type.PLAYER_NOT_PLAYED_ATTACK:
+			var player: Player = source as Player
+			if player:
+				return player.attack_played_this_turn == 0
+		Type.PLAYER_BLOCK_EQUAL_OR_MORE_THAN_COUNT:
+			var player: Player = source as Player
+			var block_count = extra_params.get("count", 0)
+			if player:
+				return player.get_block() >= block_count
+		Type.PLAYER_HAS_NO_HAND:
+			var player: Player = source as Player
+			if player:
+				return len(player.get_hand_cards()) == 0
 		_:
 			return false
 		

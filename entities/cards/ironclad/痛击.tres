@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_kqsla"]
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_725lo"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_4seyr"]
-[ext_resource type="AudioStream" uid="uid://b4eqc65cqogm6" path="res://audio/SFX/blunt_attack.mp3" id="3_4yurv"]
 [ext_resource type="Script" uid="uid://bhhtjppe5dfcx" path="res://scripts/costum_resources/effects/damage_effect.gd" id="4_7ruo6"]
 [ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="5_ttd8i"]
 [ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_725lo"]
@@ -114,7 +113,6 @@ base_cost = 2
 effects = Array[ExtResource("3_4seyr")]([SubResource("Resource_kxcud"), SubResource("Resource_a5j6e")])
 portrait = ExtResource("1_1yq0f")
 base_description = "[center]造成{damage}点伤害。[/center][p][center]施加{stacks}层[color=gold]易伤[/color]。[/center]"
-sound = ExtResource("3_4yurv")
 base_numeric_entries = Array[ExtResource("1_kqsla")]([SubResource("Resource_kqsla"), SubResource("Resource_4yurv")])
 upgraded_target = 1
 upgraded_cost = 2

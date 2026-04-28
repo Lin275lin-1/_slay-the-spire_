@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://ps4v004adrrp"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_r28ks"]
+[ext_resource type="Texture2D" uid="uid://ba16c3y" path="res://images/atlases/relic_atlas.sprites/mango.tres" id="2_wnrug"]
+[ext_resource type="Script" uid="uid://bixcorms11cor" path="res://entities/relics/colorless/芒果.gd" id="3_wh81i"]
+
+[resource]
+script = ExtResource("3_wh81i")
+relic_name = "芒果"
+id = "mango"
+icon = ExtResource("2_wnrug")
+description = "拾起时，将你的最大生命值提升14"
+rarity = 4
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

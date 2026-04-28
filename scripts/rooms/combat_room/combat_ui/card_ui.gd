@@ -47,7 +47,7 @@ func _ready() -> void:
 	
 	card_state_machine.init()
 	player = get_tree().get_first_node_in_group("ui_player")
-	Events.card_played.connect(func(_card: Card): visuals.set_hightlight(playable, card.has_highlight_condition(player, null)))
+	Events.card_played.connect(func(_card: Card, _card_context: Dictionary): visuals.set_hightlight(playable, card.has_highlight_condition(player, null)))
 
 func play() -> void:
 	if not card:
