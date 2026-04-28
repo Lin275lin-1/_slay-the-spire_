@@ -56,9 +56,6 @@ buff_stack_provider = SubResource("Resource_dekyv")
 target_type = 3
 metadata/_custom_type_script = "uid://b8qfrs61nmcix"
 
-[sub_resource type="Resource" id="Resource_ouh1s"]
-metadata/__load_path__ = "res://audio/SFX/lightning_orb_evoke.mp3"
-
 [sub_resource type="Resource" id="Resource_xe3up"]
 script = ExtResource("2_gi2mb")
 fixed_value = 7
@@ -115,7 +112,6 @@ base_cost = 1
 effects = Array[ExtResource("3_t8ehc")]([SubResource("Resource_ckxse"), SubResource("Resource_1bnbt")])
 portrait = ExtResource("2_s5fly")
 base_description = "[center]对所有敌人造成{damage}点伤害。[/center][p][center]施加{stacks}层[color=gold]易伤[/color]。[/center]"
-sound = SubResource("Resource_ouh1s")
 base_numeric_entries = Array[ExtResource("1_bvjlo")]([SubResource("Resource_kfv0u"), SubResource("Resource_11s2g")])
 upgraded_target = 2
 upgraded_cost = 1

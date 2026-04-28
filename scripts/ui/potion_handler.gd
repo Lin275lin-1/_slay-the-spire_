@@ -60,6 +60,6 @@ func _on_player_turn_ended() -> void:
 	for child: PotionUI in potion_place_holder.get_children():
 		child.can_use = false
 		
-func _on_combat_ended() -> void:
+func _on_combat_ended(_context: RewardContext) -> void:
 	for child: PotionUI in potion_place_holder.get_children():
 		child.can_use = false

@@ -49,7 +49,7 @@ signal tooltip_show_request(node: Node, callback: Callable)
 signal tooltip_hide_request 
 ## 战斗相关
 signal combat_start
-signal combat_won
+signal combat_won(context: RewardContext)
 ## 测试用
 signal shop_exited
 signal campfire_exited

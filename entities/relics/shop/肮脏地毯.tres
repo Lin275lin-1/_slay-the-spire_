@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://qkfv078yv7ru"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_2noq3"]
+[ext_resource type="Texture2D" uid="uid://bcfgiyw" path="res://images/atlases/relic_atlas.sprites/dingy_rug.tres" id="2_cxatl"]
+[ext_resource type="Script" uid="uid://cpp01gbsdvdo3" path="res://entities/relics/shop/肮脏地毯.gd" id="3_0vey6"]
+
+[resource]
+script = ExtResource("3_0vey6")
+relic_name = "肮脏地毯"
+id = "dingy_rug"
+icon = ExtResource("2_cxatl")
+description = "卡牌奖励现在会包括无色牌。"
+rarity = 16
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

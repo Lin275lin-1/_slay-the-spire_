@@ -167,6 +167,7 @@ func _start_run() -> void:
 	_setup_event_connections()
 	_setup_top_bar()
 	map_node.init(stats)
+	ItemPool.current_card_pool = ItemPool.get_draftable_cards_by_color(character.color)
 	save_data = SaveGame.new()
 	_show_map()
 
@@ -188,12 +189,14 @@ func _load_run() -> void:
 	stats = save_data.run_stats
 	character.deck = save_data.current_deck
 	character.health = save_data.current_health
+	ItemPool.current_card_pool = ItemPool.get_draftable_cards_by_color(character.color)
 	for potion in save_data.potions:
 		print("加载药水")
 		stats.add_potion(potion)
-	for relic in save_data.relics:
-		print("加载遗物")
-		stats.add_relic(relic)
+	#for relic in save_data.relics:
+		#print("加载遗物")
+		#stats.add_relic(relic)
+	stats.relics = save_data.relics
 	_load_up_top_bar()
 	_setup_event_connections()
 	map_node.load_map(stats, save_data.last_room)
@@ -209,7 +212,7 @@ func _load_up_top_bar() -> void:
 	top_bar.initialize(character)
 	top_bar.deck_view_requested.connect(deck_view.show_card_pile.bind("你在战斗中将会使用这里的所有卡牌。", false))
 	top_bar.select_deck_view = select_deck_view
-	top_bar.relic_handler.add_relic(character.starting_relic)
+	#top_bar.relic_handler.add_relic(character.starting_relic)
 	top_bar.relic_handler.add_relics(stats.relics)
 	top_bar.settings_requested.connect(handleSettingsRequest)
 
@@ -234,15 +237,19 @@ func _change_view(scene: PackedScene) -> Node:
 	current_room.add_child(new_view)
 	return new_view
 
-func _on_combat_won() -> void:
+func _on_combat_won(context: RewardContext) -> void:
 	var reward_scene := await _change_view(BATTLE_REWARD_SCENE) as BattleReward
 	reward_scene.run_stats = stats
 	reward_scene.character_stats = character
-	reward_scene.add_gold_reward(map_node.last_room.enemy_encounter.roll_gold_reward())
-	reward_scene.add_card_reward()
+	reward_scene.add_rewards(map_node.last_room, context)
 
 func _setup_event_connections() -> void:
-	Events.combat_won.connect(_on_combat_won)
+	Events.combat_won.connect(
+		func(context: RewardContext):
+			# 等待其他遗物修改context
+			await get_tree().process_frame
+			_on_combat_won(context)
+	)
 	Events.combat_reward_exited.connect(_on_room_exited)
 	Events.shop_exited.connect(_on_room_exited)
 	Events.treasure_room_exited.connect(_on_room_exited)

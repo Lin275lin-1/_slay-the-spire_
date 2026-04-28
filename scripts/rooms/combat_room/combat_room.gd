@@ -83,4 +83,4 @@ func _on_relics_activated(type: Relic.TriggerType) -> void:
 			if combat_resolver.is_resolving:
 				await combat_resolver.resolve_finished
 			#await get_tree().create_timer(0.5).timeout
-			Events.combat_won.emit()
+			Events.combat_won.emit(RewardContext.new())

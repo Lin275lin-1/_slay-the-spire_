@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="5_vp0wk"]
 [ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="6_2qpn7"]
 [ext_resource type="Texture2D" uid="uid://v5fhk" path="res://images/atlases/card_atlas.sprites/ironclad/armaments.tres" id="7_o2bww"]
-[ext_resource type="AudioStream" uid="uid://cnxfhtrl0n8nm" path="res://audio/SFX/frost_orb_passive.mp3" id="8_b05o3"]
 [ext_resource type="Resource" uid="uid://b0odwvcj314k2" path="res://entities/cards/ironclad/燃烧契约.tres" id="13_1lg0p"]
 [ext_resource type="Resource" uid="uid://dk4qphec16bps" path="res://entities/cards/ironclad/烙印.tres" id="14_8xmro"]
 [ext_resource type="Resource" uid="uid://dlwby14aja0vw" path="res://entities/cards/ironclad/恶魔之焰.tres" id="15_7hj0v"]
@@ -19,7 +18,6 @@
 [ext_resource type="Script" uid="uid://c2drp2mlr0vhm" path="res://scripts/costum_resources/effects/foreach_card_effect.gd" id="22_ypxan"]
 [ext_resource type="Resource" uid="uid://du22jyswvyejh" path="res://entities/cards/ironclad/被遗忘的仪式.tres" id="23_bsqa6"]
 [ext_resource type="Texture2D" uid="uid://cl6hb7j" path="res://images/atlases/card_atlas.sprites/ironclad/headbutt.tres" id="23_l52n2"]
-[ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="24_fm77h"]
 [ext_resource type="Resource" uid="uid://dx5ppg6s0n36o" path="res://entities/cards/ironclad/祭品.tres" id="26_cilra"]
 [ext_resource type="Resource" uid="uid://b2c13bouulo8c" path="res://entities/cards/ironclad/战斗专注.tres" id="27_cilra"]
 [ext_resource type="Resource" uid="uid://cpctwatpicixg" path="res://entities/cards/ironclad/飞剑回旋镖.tres" id="28_q88nh"]
@@ -120,7 +118,6 @@ base_cost = 1
 effects = Array[ExtResource("4_q88nh")]([SubResource("Resource_yofp3"), SubResource("Resource_i23f4"), SubResource("Resource_yiydk")])
 portrait = ExtResource("23_l52n2")
 base_description = "[center]造成{damage}点伤害。[/center][center]将一张牌从[color=gold]弃牌堆[/color]移至[color=gold]抽牌堆[/color]顶部。[/center]"
-sound = ExtResource("24_fm77h")
 base_numeric_entries = Array[ExtResource("2_lm2nt")]([SubResource("Resource_rcmhm")])
 upgraded_target = 1
 upgraded_cost = 1
@@ -196,7 +193,6 @@ effects = Array[ExtResource("4_q88nh")]([SubResource("Resource_hi5sw"), SubResou
 portrait = ExtResource("7_o2bww")
 base_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center]
 [center][color=gold]升级[/color]手牌中的一张卡牌。[/center]"
-sound = ExtResource("8_b05o3")
 base_numeric_entries = Array[ExtResource("2_lm2nt")]([SubResource("Resource_xctxy")])
 upgraded_cost = 1
 upgraded_description = "[center]获得{block}点[color=gold]格挡[/color]。[/center]
@@ -212,7 +208,6 @@ base_cost = 1
 effects = Array[ExtResource("4_q88nh")]([SubResource("Resource_yofp3"), SubResource("Resource_i23f4"), SubResource("Resource_yiydk")])
 portrait = ExtResource("23_l52n2")
 base_description = "[center]造成{damage}点伤害。[/center][center]将一张牌从[color=gold]弃牌堆[/color]移至[color=gold]抽牌堆[/color]顶部。[/center]"
-sound = ExtResource("24_fm77h")
 base_numeric_entries = Array[ExtResource("2_lm2nt")]([SubResource("Resource_rcmhm")])
 upgraded_target = 1
 upgraded_cost = 1

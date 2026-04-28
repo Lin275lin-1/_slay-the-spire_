@@ -39,6 +39,26 @@ func _ready()->void:
 	
 	#add_gold_reward(77)
 	#add_card_reward()
+
+func add_rewards(room: Room, context: RewardContext) -> void:
+	if room.enemy_encounter.type == EnemyEncounter.Type.BOSS:
+		context.all_rare = true
+		context.extra_relic_count += 1
+	if room.enemy_encounter.type == EnemyEncounter.Type.ELITE:
+		context.extra_relic_count += 1
+	# 常规奖励
+	add_gold_reward(room.enemy_encounter.roll_gold_reward())
+	add_card_reward(context)
+	# 额外奖励
+	for i in range(context.extra_card_count):
+		add_card_reward(context)
+	for i in range(context.extra_potion_count):
+		#add_potion_reward()
+		add_potion_reward(preload("res://entities/potions/虚弱药水.tres"))
+	for i in range(context.extra_relic_count):
+		add_relic_reward(preload("res://entities/relics/colorless/白兽雕像.tres"))
+	for extra_gold in context.extra_gold:
+		add_gold_reward(extra_gold)
 	
 
 func _on_return_button_entered():
@@ -53,23 +73,48 @@ func add_gold_reward(amount:int)->void:
 	gold_reward.reward_text =GOLD_TEXT % amount
 	gold_reward.pressed.connect(_on_gold_reward_taken.bind(amount))
 	rewards.add_child.call_deferred(gold_reward)
+
+func add_potion_reward(potion: Potion) -> void:
+	var potion_reward := REWARD_BUTTON.instantiate() as RewardButton
+	if potion_reward:
+		potion_reward.reward_icon = potion.icon
+		potion_reward.reward_text = potion.potion_name
+		potion_reward.pressed.connect(
+			func():
+				if run_stats:
+					run_stats.add_potion(potion)
+		)
+		rewards.call_deferred("add_child", potion_reward)
+
+func add_relic_reward(relic: Relic) -> void:
+	var relic_reward := REWARD_BUTTON.instantiate() as RewardButton
+	if relic_reward:
+		relic_reward.reward_icon = relic.icon
+		relic_reward.reward_text = relic.relic_name
+		relic_reward.pressed.connect(
+			func():
+				if run_stats:
+					run_stats.add_relic(relic)
+		)
+	rewards.call_deferred("add_child", relic_reward)
 	
 func _on_gold_reward_taken(amount: int) -> void:
 	if not run_stats:
 		return
 	run_stats.gold += amount
+
 #回退
 func _on_button_pressed() -> void:
 	Events.combat_reward_exited.emit()
 
-func add_card_reward()->void:
+func add_card_reward(context: RewardContext)->void:
 	var card_reward := REWARD_BUTTON.instantiate() as RewardButton
 	card_reward.reward_icon=CARD_ICON
 	card_reward.reward_text =CARD_TEXT
-	card_reward.pressed.connect(_show_card_rewards)
+	card_reward.pressed.connect(_show_card_rewards.bind(context))
 	rewards.add_child.call_deferred(card_reward)
 	
-func _show_card_rewards()->void:
+func _show_card_rewards(context: RewardContext)->void:
 	if not run_stats or not character_stats:
 		return
 	var card_rewards := CARD_REWARDS.instantiate() as CardRewards
@@ -77,19 +122,83 @@ func _show_card_rewards()->void:
 	card_rewards.card_reward_selected.connect(_on_card_reward_taken)
 	
 	var card_reward_array:Array[Card]=[]
-	var available_cards:Array[Card]=character_stats.draftable_cards.cards.duplicate(true)
-	
-	for i in run_stats.card_rewards:
-
-		_setup_card_chances()
-		var roll:=randf_range(0.0,card_reward_total_weight)
-		for rarity:Card.Rarity in card_rarity_weights:
-			if card_rarity_weights[rarity]>roll:
-				_modify_weights(rarity)
-				var picked_card:=_get_random_available_card(available_cards,rarity)
-				card_reward_array.append(picked_card)
-				available_cards.erase(picked_card)
-				break
+	#var available_cards:Array[Card]=character_stats.draftable_cards.cards.duplicate(true)
+	var available_cards: Array[Card] = ItemPool.current_card_pool
+	if context.all_rare:
+		for i in run_stats.card_rewards:
+			var picked_card:=_get_random_available_card(available_cards, Card.Rarity.RARE)
+			available_cards.erase(picked_card)
+			picked_card = picked_card.duplicate()
+			match picked_card.type:
+				Card.Type.ATTACK:
+					if context.upgrade_all or context.upgrade_attack:
+						picked_card.upgrade()
+				Card.Type.SKILL:
+					if context.upgrade_all or context.upgrade_skill:
+						picked_card.upgrade()
+				Card.Type.POWER:
+					if context.upgrade_all or context.upgrade_power:
+						picked_card.upgrade()
+						
+			card_reward_array.append(picked_card)
+	elif context.all_uncommon:
+		for i in run_stats.card_rewards:
+			var picked_card:=_get_random_available_card(available_cards, Card.Rarity.UNCOMMON).duplicate()
+			available_cards.erase(picked_card)
+			picked_card = picked_card.duplicate()	
+			match picked_card.type:
+				Card.Type.ATTACK:
+					if context.upgrade_all or context.upgrade_attack:
+						picked_card.upgrade()
+				Card.Type.SKILL:
+					if context.upgrade_all or context.upgrade_skill:
+						picked_card.upgrade()
+				Card.Type.POWER:
+					if context.upgrade_all or context.upgrade_power:
+						picked_card.upgrade()
+						
+			card_reward_array.append(picked_card)
+	elif context.all_common:
+		for i in run_stats.card_rewards:
+			var picked_card:=_get_random_available_card(available_cards, Card.Rarity.COMMON).duplicate()
+			available_cards.erase(picked_card)
+			picked_card = picked_card.duplicate()
+			match picked_card.type:
+				Card.Type.ATTACK:
+					if context.upgrade_all or context.upgrade_attack:
+						picked_card.upgrade()
+				Card.Type.SKILL:
+					if context.upgrade_all or context.upgrade_skill:
+						picked_card.upgrade()
+				Card.Type.POWER:
+					if context.upgrade_all or context.upgrade_power:
+						picked_card.upgrade()
+						
+			card_reward_array.append(picked_card)
+			
+	else:	
+		for i in run_stats.card_rewards:
+			_setup_card_chances()
+			var roll:=randf_range(0.0,card_reward_total_weight)
+			for rarity:Card.Rarity in card_rarity_weights:
+				if card_rarity_weights[rarity]>roll:
+					_modify_weights(rarity)
+					var picked_card:=_get_random_available_card(available_cards,rarity).duplicate()
+					available_cards.erase(picked_card)
+					picked_card = picked_card.duplicate()
+					match picked_card.type:
+						Card.Type.ATTACK:
+							if context.upgrade_all or context.upgrade_attack:
+								picked_card.upgrade()
+						Card.Type.SKILL:
+							if context.upgrade_all or context.upgrade_skill:
+								picked_card.upgrade()
+						Card.Type.POWER:
+							if context.upgrade_all or context.upgrade_power:
+								picked_card.upgrade()
+					
+					card_reward_array.append(picked_card)
+					break
 	card_rewards.rewards=card_reward_array
 	card_rewards.show()
 

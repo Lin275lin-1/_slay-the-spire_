@@ -5,7 +5,7 @@ var available := false
 func initialize_relic(owner: RelicUI) -> void:
 	Events.card_played.connect(_on_card_played.bind(owner))
 	Events.combat_won.connect(
-		func():
+		func(_context: RewardContext):
 			available = false
 			count = 0
 			owner.update_count()

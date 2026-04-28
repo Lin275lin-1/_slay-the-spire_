@@ -3,7 +3,7 @@ extends Enchantment
 var played_times := 0
 
 func _init() -> void:
-	Events.combat_won.connect(func(): played_times = 0)
+	Events.combat_won.connect(func(_context: RewardContext): played_times = 0)
 
 func get_modifiers() -> Array[Modifier]:
 	return [Modifier.new(Enums.NumericType.DAMAGE, played_times * stacks, 1.0, null)]

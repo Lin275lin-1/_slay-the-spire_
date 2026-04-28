@@ -4,7 +4,7 @@ var used := false
 
 func initialize_relic(owner: RelicUI) -> void:
 	Events.combat_won.connect(
-		func():
+		func(_context: RewardContext):
 			used = false
 	)
 	Events.card_exhausted.connect(

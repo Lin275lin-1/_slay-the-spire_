@@ -31,9 +31,6 @@ damage_provider = SubResource("Resource_fqdpw")
 target_type = 2
 metadata/_custom_type_script = "uid://bhhtjppe5dfcx"
 
-[sub_resource type="Resource" id="Resource_2yo68"]
-metadata/__load_path__ = "res://audio/SFX/blunt_attack.mp3"
-
 [sub_resource type="Resource" id="Resource_n7fi6"]
 script = ExtResource("2_x6lwy")
 fixed_value = 42
@@ -66,7 +63,6 @@ rarity = 2
 effects = Array[ExtResource("3_2v4ty")]([SubResource("Resource_ncoce")])
 portrait = ExtResource("2_ob025")
 base_description = "[center]造成{damage}点伤害。[/center]"
-sound = SubResource("Resource_2yo68")
 base_numeric_entries = Array[ExtResource("1_syci7")]([SubResource("Resource_ch1fc")])
 upgraded_target = 1
 upgraded_cost = 3

@@ -3,7 +3,7 @@ extends Relic
 var energy_count := 0
 
 func initialize_relic(owner: RelicUI) -> void:
-	Events.combat_won.connect(func(): energy_count = 0)
+	Events.combat_won.connect(func(_context: RewardContext): energy_count = 0)
 	Events.player_turn_started.connect(
 		func():
 			# 很怪,而且没有使用effect

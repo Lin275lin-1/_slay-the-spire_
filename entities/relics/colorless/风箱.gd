@@ -3,7 +3,7 @@ extends Relic
 var used = false
 
 func initialize_relic(owner: RelicUI) -> void:
-	Events.combat_won.connect(func(): used = false)
+	Events.combat_won.connect(func(_context: RewardContext): used = false)
 	Events.player_hand_drawn.connect(activate_relic.bind(owner))
 	
 func activate_relic(owner: RelicUI) -> void:

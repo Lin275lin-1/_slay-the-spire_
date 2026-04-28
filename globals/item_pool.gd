@@ -156,6 +156,8 @@ var relic_color_mask: int = 0b111111
 var relic_type_mask: int = 0b1111
 var relic_rarity_mask: int = 0b1111
 
+var current_card_pool: Array[Card]
+
 func _ready():
 	load_all_cards("res://entities/cards")
 	load_all_potions("res://entities/potions")

@@ -30,7 +30,7 @@ func get_min_gold_reward() -> int:
 		Type.WEAK:
 			return 10
 		Type.STRONG:
-			return 10
+			return 15
 		Type.ELITE:
 			return 35
 		Type.BOSS:
@@ -41,11 +41,11 @@ func get_min_gold_reward() -> int:
 func get_max_gold_reward() -> int:
 	match type:
 		Type.WEAK:
-			return 10
+			return 15
 		Type.STRONG:
-			return 10
+			return 25
 		Type.ELITE:
-			return 35
+			return 45
 		Type.BOSS:
 			return 100
 		_:

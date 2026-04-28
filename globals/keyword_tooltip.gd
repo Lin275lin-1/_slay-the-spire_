@@ -13,7 +13,7 @@ var callback: Callable
 func _ready() -> void:
 	Events.tooltip_show_request.connect(_on_tooltip_show_requested)
 	Events.tooltip_hide_request.connect(_on_tooltip_hide_requested)
-	Events.combat_won.connect(hide)
+	Events.combat_won.connect(func(_context: RewardContext): hide())
 	tooltip_timer.timeout.connect(_on_timer_timeout)
 
 func clear():

@@ -2,7 +2,7 @@ extends Relic
 
 func initialize_relic(owner: RelicUI) -> void:
 	Events.combat_won.connect(
-		func():
+		func(_context: RewardContext):
 			count = 0
 			owner.update_count()
 	)

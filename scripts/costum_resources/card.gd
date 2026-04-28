@@ -53,7 +53,6 @@ enum COLOR {
 @export_group("卡牌描述")
 @export var portrait: Texture
 @export_multiline var base_description: String
-@export var sound: AudioStream
 @export var base_numeric_entries: Array[NumericEntry]
 # 注意这两个可以动态生成的词条不能在卡牌描述中写死
 # 是否带“消耗“词条

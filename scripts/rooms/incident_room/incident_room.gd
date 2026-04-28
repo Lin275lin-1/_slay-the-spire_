@@ -236,7 +236,7 @@ func handle_brain_leech_op1()->void:
 		
 		reward_scene.run_stats = run_stats
 		reward_scene.character_stats =char_stats
-		reward_scene.add_card_reward()
+		reward_scene.add_card_reward(RewardContext.new())
 		
 		Events.combat_reward_exited.connect(_on_room_exited)
 		
