@@ -163,6 +163,8 @@ func _spawn_room(room: Room) -> void:
 	new_map_room.selected.connect(_on_map_room_selected)
 	_connect_lines(room)
 	
+	new_map_room._update_collision_scale()
+	
 	if room.selected and room.row < run_stats.floors_climbed:
 		if room.type != Room.Type.ANCIENT and room.type != Room.Type.BOSS:
 			new_map_room.show_selected()
@@ -179,21 +181,28 @@ func _connect_lines(room: Room) -> void:
 		# 设置初始透明度（ 0.2 ）
 		new_map_line.modulate = Color(1, 1, 1, 0.1)
 		lines.add_child(new_map_line)
+		print("连线已添加，从 ", room.position, " 到 ", next.position, "，节点数：", lines.get_child_count())
 		
 func _on_map_room_selected(room: Room) -> void:
-	# 立即发射信号，让场景切换最先开始
+	#print("=== _on_map_room_selected 被调用 ===")
+	var previous_room = last_room
 	Events.map_room_selected.emit(room)
-	
-	# 将本函数中原有的所有 UI 更新逻辑延迟到下一帧执行
-	call_deferred("_apply_map_ui_updates", room)
 
-func _apply_map_ui_updates(room: Room) -> void:
+	#print("捕获到的 previous_room: ", previous_room.position if previous_room else "null")
+	call_deferred("_apply_map_ui_updates", room, previous_room)
+	
+func _apply_map_ui_updates(room: Room, previous_room: Room) -> void:
+	#print("=== _apply_map_ui_updates 被调用 ===")
+	#print("room: ", room.position)
+	#if previous_room:
+		#print("previous_room: ", previous_room.position)
+	#else:
+		#print("previous_room is null")
 	for map_room: MapRoom in rooms.get_children():
 		if map_room.room.row == room.row:
 			map_room.available = false
-
-	if last_room != null:
-		update_line_opacity_between(last_room, room, 1.0)
+	if previous_room != null and previous_room != room:
+		update_line_opacity_between(previous_room, room, 0.9)
 	last_room = room
 
 	old_camera_2d_position_y = camera_2d.position.y
@@ -230,8 +239,8 @@ func _on_legend_highlight_cleared():
 	for map_room in rooms.get_children():
 		map_room.set_highlight(false)
 
-
 func update_line_opacity_between(room_a: Room, room_b: Room, opacity: float) -> void:
+	print("开始查找连线: ", room_a.position, " -> ", room_b.position)
 	for line in lines.get_children():
 		var points = line.points
 		if points.size() == 2:
@@ -240,4 +249,6 @@ func update_line_opacity_between(room_a: Room, room_b: Room, opacity: float) -> 
 			if (p1.distance_to(room_a.position) < 1.0 and p2.distance_to(room_b.position) < 1.0) or \
 			   (p1.distance_to(room_b.position) < 1.0 and p2.distance_to(room_a.position) < 1.0):
 				line.modulate.a = opacity
-				break   # 找到后退出循环
+				print("已设置连线透明度为 ", opacity, " 路径: ", p1, " -> ", p2)
+				return   # 找到即返回
+	print("未找到匹配的连线！")

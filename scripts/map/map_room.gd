@@ -1,6 +1,10 @@
 class_name MapRoom
 extends Area2D
 
+const COLLISION_SCALE := 0.7
+
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+
 signal selected(room: Room)
 
 const ICONS := {
@@ -100,7 +104,7 @@ func set_highlight(highlight: bool):
 		modulate = Color.WHITE
 		scale = original_scale
 		highlight_sprite.modulate.a = 0.0
-
+	#_update_collision_scale()
 
 func show_selected() -> void:
 	# 如果节点还未初始化，直接返回
@@ -125,3 +129,8 @@ func show_selected() -> void:
 	# 停止可能残余的动画
 	if animation_player and animation_player.is_playing():
 		animation_player.stop()
+
+func _update_collision_scale() -> void:
+	if scale.x == 0 or scale.y == 0:
+		return
+	collision_shape.scale = Vector2(COLLISION_SCALE/ scale.x, COLLISION_SCALE / scale.y)

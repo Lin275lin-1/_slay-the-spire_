@@ -235,6 +235,9 @@ func _on_combat_won() -> void:
 	reward_scene.character_stats = character
 	reward_scene.add_gold_reward(map_node.last_room.enemy_encounter.roll_gold_reward())
 	reward_scene.add_card_reward()
+	
+	if randf() < 0.4:
+		reward_scene.add_random_potion_reward()
 
 func _setup_event_connections() -> void:
 	Events.combat_won.connect(_on_combat_won)
