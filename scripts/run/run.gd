@@ -167,7 +167,7 @@ func _start_run() -> void:
 	_setup_event_connections()
 	_setup_top_bar()
 	map_node.init(stats)
-	ItemPool.current_card_pool = ItemPool.get_draftable_cards_by_color(character.color)
+	ItemPool.init_item_pool(character.color)
 	save_data = SaveGame.new()
 	_show_map()
 
@@ -189,7 +189,7 @@ func _load_run() -> void:
 	stats = save_data.run_stats
 	character.deck = save_data.current_deck
 	character.health = save_data.current_health
-	ItemPool.current_card_pool = ItemPool.get_draftable_cards_by_color(character.color)
+	ItemPool.init_item_pool(character.color)
 	for potion in save_data.potions:
 		print("加载药水")
 		stats.add_potion(potion)

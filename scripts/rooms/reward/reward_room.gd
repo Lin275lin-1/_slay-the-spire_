@@ -52,11 +52,12 @@ func add_rewards(room: Room, context: RewardContext) -> void:
 	# 额外奖励
 	for i in range(context.extra_card_count):
 		add_card_reward(context)
+	# TODO: 需要随机算法
 	for i in range(context.extra_potion_count):
 		#add_potion_reward()
-		add_potion_reward(preload("res://entities/potions/虚弱药水.tres"))
+		add_potion_reward(ItemPool.current_potion_pool.pick_random().duplicate())
 	for i in range(context.extra_relic_count):
-		add_relic_reward(preload("res://entities/relics/colorless/白兽雕像.tres"))
+		add_relic_reward(ItemPool.current_relic_pool.pick_random().duplicate())
 	for extra_gold in context.extra_gold:
 		add_gold_reward(extra_gold)
 	

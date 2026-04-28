@@ -157,11 +157,18 @@ var relic_type_mask: int = 0b1111
 var relic_rarity_mask: int = 0b1111
 
 var current_card_pool: Array[Card]
+var current_potion_pool: Array[Potion]
+var current_relic_pool: Array[Relic]
 
 func _ready():
 	load_all_cards("res://entities/cards")
 	load_all_potions("res://entities/potions")
 	load_all_enchantments("res://entities/enchantments")
+
+func init_item_pool(color: CharacterStats.COLOR) -> void:
+	current_card_pool = get_draftable_cards_by_color(color)
+	current_potion_pool = get_potions_by_color(color + Potion.COLOR.COLORLESS)
+	current_relic_pool = get_relics_by_color(color + Relic.COLOR.COLORLESS)
 	
 func get_cards(color: int, type: int, rarity: int) -> Array[Card]:
 	return filter_card_by_rarity(filter_card_by_type(get_cards_by_color(color), type), rarity)
