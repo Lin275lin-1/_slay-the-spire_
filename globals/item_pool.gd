@@ -86,6 +86,8 @@ var cards_by_rarity := {
 	0b10000: [],
 }
 
+var curse_and_status_card_dict := {}
+
 var draftable_cards_by_color := {
 	0b0000001: [],
 	0b0000010: [],
@@ -153,8 +155,7 @@ var potion_color_mask: int = 0b111111
 var potion_rarity_mask: int = 0b111
 
 var relic_color_mask: int = 0b111111
-var relic_type_mask: int = 0b1111
-var relic_rarity_mask: int = 0b1111
+var relic_rarity_mask: int = 0b111111
 
 var current_card_pool: Array[Card]
 var current_potion_pool: Array[Potion]
@@ -164,6 +165,7 @@ func _ready():
 	load_all_cards("res://entities/cards")
 	load_all_potions("res://entities/potions")
 	load_all_enchantments("res://entities/enchantments")
+	load_all_relics("res://entities/relics")
 
 func init_item_pool(color: CharacterStats.COLOR) -> void:
 	current_card_pool = get_draftable_cards_by_color(color)
@@ -300,6 +302,8 @@ func load_all_cards(dir_path: String):
 				discoverable_cards_by_color[resource.card_color & card_color_mask].append(resource)
 			if resource.draftable:
 				draftable_cards_by_color[resource.card_color & card_color_mask].append(resource)
+			if resource.type == Card.Type.STATUS or resource.type == Card.Type.CURSE:
+				curse_and_status_card_dict[resource.id] = resource
 
 func load_all_potions(dir_path: String):
 	var paths = FileHelper.get_all_resources_in_directory(dir_path)

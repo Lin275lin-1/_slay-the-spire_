@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://byrm0k6yao2yr"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_s6msf"]
+[ext_resource type="Texture2D" uid="uid://bxc3ye2" path="res://images/atlases/relic_atlas.sprites/small_capsule.tres" id="2_3lex7"]
+[ext_resource type="Script" uid="uid://2dk5dbgaeaf7" path="res://entities/relics/ancient/小型扭蛋.gd" id="3_8noeq"]
+
+[resource]
+script = ExtResource("3_8noeq")
+relic_name = "小型扭蛋"
+id = "small_capsule"
+icon = ExtResource("2_3lex7")
+description = "拾起时，获得一件随机遗物"
+rarity = 32
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

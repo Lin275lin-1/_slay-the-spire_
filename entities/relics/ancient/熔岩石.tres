@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://djkm0nk65q0ii"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_dyeo4"]
+[ext_resource type="Texture2D" uid="uid://xpi3k3" path="res://images/atlases/relic_atlas.sprites/lava_rock.tres" id="2_2reua"]
+[ext_resource type="Script" uid="uid://dil60bsdunghs" path="res://entities/relics/ancient/熔岩石.gd" id="3_0te1i"]
+
+[resource]
+script = ExtResource("3_0te1i")
+relic_name = "熔岩石"
+id = "lava_rock"
+icon = ExtResource("2_2reua")
+description = "Boss敌人额外掉落2件[color=gold]遗物[/color]"
+rarity = 32
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

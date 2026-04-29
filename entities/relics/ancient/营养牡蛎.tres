@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://dgppmnarex715"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_pnk6l"]
+[ext_resource type="Texture2D" uid="uid://b3uovoj" path="res://images/atlases/relic_atlas.sprites/nutritious_oyster.tres" id="2_ory0p"]
+[ext_resource type="Script" uid="uid://ckq2sa5mgqsjk" path="res://entities/relics/ancient/营养牡蛎.gd" id="3_kl0xn"]
+
+[resource]
+script = ExtResource("3_kl0xn")
+relic_name = "营养牡蛎"
+id = "nutrious_oyster"
+icon = ExtResource("2_ory0p")
+description = "拾起时，将你的最大生命值提升11"
+rarity = 32
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

@@ -11,12 +11,12 @@ enum TriggerType {
 }
 
 enum COLOR {
-	RED = 0b0000001,	# 铁甲战士
-	GREEN = 0b0000010,	# 静默猎手
-	ORANGE = 0b0000100, # 储君
-	PINK = 0b0001000,	# 亡灵契约师
-	BLUE = 0b0010000,	# 故障机器人
-	COLORLESS = 0b1000000, # 无色
+	RED = 0b000001,	# 铁甲战士
+	GREEN = 0b000010,	# 静默猎手
+	ORANGE = 0b000100, # 储君
+	PINK = 0b001000,	# 亡灵契约师
+	BLUE = 0b010000,	# 故障机器人
+	COLORLESS = 0b100000, # 无色
 }
 enum Rarity{
 	COMMON = 0b000001,
