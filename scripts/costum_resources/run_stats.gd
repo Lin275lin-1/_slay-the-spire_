@@ -92,7 +92,9 @@ func set_floor(new_floor_climbed)->void:
 	floor_changed.emit(new_floor_climbed)
 
 func has_relic(relic_id: String) -> bool:
+	#print("==========当前已拥有遗物============")
 	for relic in relics:
+		#print(relic.relic_name)
 		if relic.id == relic_id:
 			return true
 	return false

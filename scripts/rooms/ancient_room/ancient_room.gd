@@ -1,6 +1,6 @@
 extends Control
 
-const ANCIENT_RELIC_PILE = preload("res://entities/ancient/ancient_room_relic_pile.tres")
+#const ANCIENT_RELIC_PILE = preload("res://entities/ancient/ancient_room_relic_pile.tres")
 const RELIC_UI_SCENE = preload("res://scenes/relichandler/relic_ui.tscn")
 const NEOW_ICON = preload("res://images/ui/run_history/neow.png")
 
@@ -132,11 +132,21 @@ func _create_relic_options() -> void:
 		relic_buttons.append(relic_ui)
 
 func _pick_random_relics(amount: int) -> Array[Relic]:
-	var pile: RelicPile = ANCIENT_RELIC_PILE
-	var pool := pile.relics.duplicate()
-	pool.shuffle()
+	var color_mask = _get_character_color_mask()
+	if color_mask == 0:
+		return []
+
+	# 获取该角色颜色的所有遗物
+	var all_relics = ItemPool.get_relics_by_color(color_mask)
+	
+	# 过滤出古代遗物（假设 ANCIENT_RELIC 枚举值为 0b100000）
+	#var ancient_relics = all_relics.filter(
+		#func(r: Relic): return r.rarity & Relic.Rarity.ANCIENT_RELIC != 0
+	#)
+	all_relics.shuffle()
+
 	var result: Array[Relic] = []
-	for relic in pool:
+	for relic in all_relics:
 		result.append(relic)
 		if result.size() >= amount:
 			break
@@ -150,15 +160,14 @@ func _select_relic(relic_ui: Control, relic: Relic) -> void:
 	for btn in relic_buttons:
 		btn.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
+	# 不要直接访问 stats，只发射信号，让 Run 去处理添加
 	Events.ancient_relic_selected.emit(relic)
-
 
 	for child in relic_container.get_children():
 		child.queue_free()
 	relic_buttons.clear()
 
 	_show_random_after_choice()
-
 	return_button.visible = true
 
 func _on_relic_mouse_entered(relic_ui: Control, relic: Relic) -> void:
@@ -177,3 +186,32 @@ func _on_button_exited():
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
 	tween.tween_property(return_button, "scale", Vector2(1.0, 1.0), 0.15)
+
+
+func _get_character_color_mask() -> int:
+	var run_node = _get_run_node()
+	if not run_node or not run_node.character:
+		return 0
+	var char_name = _get_character_name(run_node.character)
+	match char_name:
+		"ironclad": return Card.COLOR.RED
+		"silent":   return Card.COLOR.GREEN
+		# 后续角色扩展
+		_: return 0
+
+func _get_character_name(character) -> String:
+	if not character:
+		return ""
+	print("先古房当前角色:",character.character_name)
+	match character.character_name:
+		"铁甲战士": return "ironclad"
+		"静默猎手": return "silent"
+		_: return ""
+	
+func _get_run_node():
+	var current = self
+	while current:
+		if current is Run:
+			return current
+		current = current.get_parent()
+	return null

@@ -124,12 +124,14 @@ var potions_by_rarity := {
 var special_potions: Dictionary = {}
 
 var relics_by_color := {
-	0b000001: [],
-	0b000010: [],
-	0b000100: [],
-	0b001000: [],
-	0b010000: [],
-	0b100000: [],
+	0b0000001: [],
+	0b0000010: [],
+	0b0000100: [],
+	0b0001000: [],
+	0b0010000: [],
+	0b0100000: [],
+#	debug
+	0b1000000: [],   # COLORLESS  ← 添加这一行
 }
 
 var relics_by_rarity := {
@@ -152,9 +154,11 @@ var card_rarity_mask: int = 0b11111
 var potion_color_mask: int = 0b111111
 var potion_rarity_mask: int = 0b111
 
-var relic_color_mask: int = 0b111111
+#debug
+#relic_color_mask多加一位覆盖colorless,同时relic rarity多加两位覆盖所有稀有度
+var relic_color_mask: int = 0b1111111
 var relic_type_mask: int = 0b1111
-var relic_rarity_mask: int = 0b1111
+var relic_rarity_mask: int = 0b111111
 
 var current_card_pool: Array[Card]
 var current_potion_pool: Array[Potion]
@@ -164,7 +168,8 @@ func _ready():
 	load_all_cards("res://entities/cards")
 	load_all_potions("res://entities/potions")
 	load_all_enchantments("res://entities/enchantments")
-
+	load_all_relics("res://entities/relics/")
+	
 func init_item_pool(color: CharacterStats.COLOR) -> void:
 	current_card_pool = get_draftable_cards_by_color(color)
 	current_potion_pool = get_potions_by_color(color + Potion.COLOR.COLORLESS)

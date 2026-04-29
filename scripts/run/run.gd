@@ -193,9 +193,11 @@ func _load_run() -> void:
 	for potion in save_data.potions:
 		print("加载药水")
 		stats.add_potion(potion)
+		#for()
 	#for relic in save_data.relics:
 		#print("加载遗物")
 		#stats.add_relic(relic)
+		
 	stats.relics = save_data.relics
 	_load_up_top_bar()
 	_setup_event_connections()
@@ -321,7 +323,11 @@ func _on_ancient_room_entered(room: Room) -> void:
 	await _change_view(ANCIENT_SCENE)
 
 func _on_ancient_relic_selected(relic: Relic) -> void:
-	top_bar.relic_handler.add_relic(relic)
+	if stats:
+		stats.add_relic(relic)
+	#if top_bar.relic_handler:
+		#top_bar.relic_handler.add_relic(relic)
+	
 	
 func _on_campfire_room_entered(room: Room)-> void:
 	var capfire_scene :CampfireRoom = _change_view(CAMPFIRE_SCENE) as CampfireRoom
