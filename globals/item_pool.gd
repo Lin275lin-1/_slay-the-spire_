@@ -86,6 +86,8 @@ var cards_by_rarity := {
 	0b10000: [],
 }
 
+var curse_and_status_card_dict := {}
+
 var draftable_cards_by_color := {
 	0b0000001: [],
 	0b0000010: [],
@@ -305,6 +307,8 @@ func load_all_cards(dir_path: String):
 				discoverable_cards_by_color[resource.card_color & card_color_mask].append(resource)
 			if resource.draftable:
 				draftable_cards_by_color[resource.card_color & card_color_mask].append(resource)
+			if resource.type == Card.Type.STATUS or resource.type == Card.Type.CURSE:
+				curse_and_status_card_dict[resource.id] = resource
 
 func load_all_potions(dir_path: String):
 	var paths = FileHelper.get_all_resources_in_directory(dir_path)
