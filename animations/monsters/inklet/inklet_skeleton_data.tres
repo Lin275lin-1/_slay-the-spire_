@@ -1,4 +1,4 @@
-[gd_resource type="SpineSkeletonDataResource" load_steps=11 format=3 uid="uid://dw4wgw03clogq"]
+[gd_resource type="SpineSkeletonDataResource" format=3 uid="uid://dw4wgw03clogq"]
 
 [ext_resource type="SpineAtlasResource" uid="uid://ce1dfhoqdhffk" path="res://animations/monsters/inklet/inklet.atlas" id="1_164xn"]
 [ext_resource type="SpineSkeletonFileResource" uid="uid://c4o4l1314cjch" path="res://animations/monsters/inklet/inklet.skel" id="2_mfnf4"]

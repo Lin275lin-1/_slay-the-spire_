@@ -8,7 +8,7 @@
 script = ExtResource("1_02185")
 buff_id = "slippery"
 buff_name = "滑溜"
-description = "下次失去生命值时，只会失去1点生命"
+description = "下次受到攻击时，只会受到1点伤害"
 icon = ExtResource("2_dbydo")
 affect = 1
 buff_script = ExtResource("1_dbydo")

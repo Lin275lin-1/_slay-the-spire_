@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_rj0wk"]
 script = ExtResource("1_chrha")
 enemy_stats = ExtResource("2_3qayt")
-position = Vector2(1385, 520)
+position = Vector2(1385, 600)
 initial_buff = {
 "滑溜": 9
 }

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EnemyEncounter" format=3 uid="uid://cswtrh1b5sfc6"]
+
+[ext_resource type="Script" uid="uid://dw53gdpom3gn6" path="res://scripts/costum_resources/enemy_entry.gd" id="1_aihln"]
+[ext_resource type="Script" uid="uid://dgu4qpyr0pnnb" path="res://scripts/costum_resources/enemy_encounter.gd" id="2_36tsk"]
+[ext_resource type="Resource" uid="uid://cxfp6862d8bhh" path="res://entities/enemies/snapping_jaxfruit/snapping_jaxfruit_stats.tres" id="2_uyktu"]
+[ext_resource type="Resource" uid="uid://cyhbqgnujnuty" path="res://entities/enemies/flyconnid/flyconid_stats.tres" id="3_o6xeq"]
+
+[sub_resource type="Resource" id="Resource_uyktu"]
+script = ExtResource("1_aihln")
+enemy_stats = ExtResource("2_uyktu")
+position = Vector2(1200, 600)
+metadata/_custom_type_script = "uid://dw53gdpom3gn6"
+
+[sub_resource type="Resource" id="Resource_5xhfl"]
+script = ExtResource("1_aihln")
+enemy_stats = ExtResource("3_o6xeq")
+position = Vector2(1700, 600)
+metadata/_custom_type_script = "uid://dw53gdpom3gn6"
+
+[resource]
+script = ExtResource("2_36tsk")
+type = 1
+weight = 1.0
+enemy_entries = Array[ExtResource("1_aihln")]([SubResource("Resource_uyktu"), SubResource("Resource_5xhfl")])
+encounter_name = "红果果绿泡泡"
+metadata/_custom_type_script = "uid://dgu4qpyr0pnnb"

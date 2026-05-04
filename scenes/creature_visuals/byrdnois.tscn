@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cb17rgoogg23f"]
+
+[ext_resource type="Script" uid="uid://b2nmxu6nwwuhu" path="res://scripts/creature_visuals.gd" id="1_hpwk6"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dj1oxk5idenbt" path="res://animations/monsters/byrdonis/byrdonis_skel_data.tres" id="2_rcl5w"]
+[ext_resource type="Script" uid="uid://bayy3j6ssj0g" path="res://scripts/utils/spine_manager.gd" id="3_rxlpo"]
+
+[node name="Byrdnois" type="Node2D" unique_id=2123043038]
+script = ExtResource("1_hpwk6")
+
+[node name="Visuals" type="SpineSprite" parent="." unique_id=503982627]
+skeleton_data_res = ExtResource("2_rcl5w")
+preview_skin = "Default"
+preview_animation = "attack"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(0, -25)
+scale = Vector2(0.314, 0.314)
+script = ExtResource("3_rxlpo")
+metadata/_custom_type_script = "uid://bayy3j6ssj0g"
+
+[node name="Bounds" type="Control" parent="." unique_id=1288543318]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -261.0
+offset_top = -433.0
+offset_right = 317.0
+offset_bottom = 1.0
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="IntentPoint" type="Marker2D" parent="." unique_id=1488931005]
+position = Vector2(0, -419)

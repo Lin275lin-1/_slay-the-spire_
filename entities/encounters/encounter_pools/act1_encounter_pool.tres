@@ -14,6 +14,10 @@
 [ext_resource type="Resource" uid="uid://co5o388rhc6fe" path="res://entities/enemies/vantom/vantom.tres" id="10_8bura"]
 [ext_resource type="PackedScene" uid="uid://ehev41bc2om8" path="res://scenes/creature_visuals/nibbit.tscn" id="10_oisqt"]
 [ext_resource type="Resource" uid="uid://bv0m86mshv3gj" path="res://entities/enemies/nibbit/nibbit.tres" id="12_j2cuc"]
+[ext_resource type="Resource" uid="uid://da4v3myp4p1av" path="res://entities/encounters/act1/three_inklets.tres" id="14_oisqt"]
+[ext_resource type="Resource" uid="uid://cswtrh1b5sfc6" path="res://entities/encounters/act1/红果果绿泡泡.tres" id="15_15xrl"]
+[ext_resource type="Resource" uid="uid://b7sd8dpvqdjb5" path="res://entities/encounters/act1/trump.tres" id="16_5fgax"]
+[ext_resource type="Resource" uid="uid://kgpjjxthep23" path="res://entities/encounters/act1/one_byrdonis.tres" id="17_nvtwo"]
 
 [sub_resource type="Resource" id="Resource_e7ryn"]
 script = ExtResource("9_4vgo2")
@@ -61,7 +65,7 @@ metadata/_custom_type_script = "uid://dw53gdpom3gn6"
 
 [sub_resource type="Resource" id="Resource_5uous"]
 script = ExtResource("1_8b4wf")
-type = 2
+type = 1
 weight = 1.0
 enemy_entries = Array[ExtResource("9_4vgo2")]([SubResource("Resource_yfb15")])
 encounter_name = "one_mawler"
@@ -188,5 +192,5 @@ metadata/_custom_type_script = "uid://dgu4qpyr0pnnb"
 
 [resource]
 script = ExtResource("2_r6wps")
-pool = Array[ExtResource("1_8b4wf")]([SubResource("Resource_x8afg"), SubResource("Resource_cu8jw"), SubResource("Resource_5uous"), SubResource("Resource_bgxud"), SubResource("Resource_f7qwd"), SubResource("Resource_36jb8"), SubResource("Resource_gxx7m"), SubResource("Resource_o2qns")])
+pool = Array[ExtResource("1_8b4wf")]([SubResource("Resource_x8afg"), SubResource("Resource_cu8jw"), SubResource("Resource_5uous"), SubResource("Resource_bgxud"), SubResource("Resource_f7qwd"), SubResource("Resource_36jb8"), SubResource("Resource_gxx7m"), SubResource("Resource_o2qns"), ExtResource("14_oisqt"), ExtResource("15_15xrl"), ExtResource("16_5fgax"), ExtResource("17_nvtwo")])
 metadata/_custom_type_script = "uid://ctyh7cm7a03s2"
