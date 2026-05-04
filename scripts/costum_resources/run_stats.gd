@@ -39,6 +39,8 @@ var relics: Array[Relic] = []
 @export var map_data: Array[Array] = []   # 保存整个地图数据（Room 资源数组）
 @export var floors_climbed: int = 0       # 已攀爬的层数（已解锁的最高楼层索引，0-based）
 
+@export var current_room:Room
+
 func _init() -> void:
 	init_potion_slots()
 
@@ -104,4 +106,34 @@ func _set_max_potion_slots(value: int) -> void:
 		potions.append(null)
 	max_potion_slots = value
 	potion_slots_changed.emit()
+
+#统计当前药水数量
+func potion_count()->int:
+	var count:int=0
+	for i in range(potions.size()):
+		if potions[i] != null:
+			count+=1
+	return count
+	
+	
+#统计当前遗物数量
+func relic_count()->int:
+	var count:int=0
+	for i in range(relics.size()):
+		if relics[i] != null:
+			count+=1
+	return count
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	

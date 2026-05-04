@@ -183,7 +183,7 @@ func _connect_lines(room: Room) -> void:
 func _on_map_room_selected(room: Room) -> void:
 	# 立即发射信号，让场景切换最先开始
 	Events.map_room_selected.emit(room)
-	
+	run_stats.current_room=room
 	# 将本函数中原有的所有 UI 更新逻辑延迟到下一帧执行
 	call_deferred("_apply_map_ui_updates", room)
 
