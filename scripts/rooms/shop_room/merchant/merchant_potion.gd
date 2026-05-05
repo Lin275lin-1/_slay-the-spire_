@@ -102,7 +102,8 @@ func _update_cost_color():
 func update_affordability():
 	_update_cost_color()
 
-
+func get_shop_item() -> ShopItem:
+	return shop_item
 
 func set_shop_item(item: ShopItem) -> void:
 	shop_item = item
