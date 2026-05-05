@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://dlwydxwb7j7dk"]
+
+[ext_resource type="Script" uid="uid://b2nmxu6nwwuhu" path="res://scripts/creature_visuals.gd" id="1_wsuhg"]
+[ext_resource type="SpineAtlasResource" uid="uid://dqk5asoh2etei" path="res://animations/monsters/snapping_jaxfruit/snapping_jaxfruit.atlas" id="2_girdc"]
+[ext_resource type="Script" uid="uid://bayy3j6ssj0g" path="res://scripts/utils/spine_manager.gd" id="3_hvc4u"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://jfxee640ory" path="res://animations/monsters/snapping_jaxfruit/snapping_jaxfruit.skel" id="3_o0vsj"]
+
+[sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_0lgc8"]
+atlas_res = ExtResource("2_girdc")
+skeleton_file_res = ExtResource("3_o0vsj")
+default_mix = 0.05
+
+[node name="SnappingJaxfruit" type="Node2D" unique_id=2123043038]
+script = ExtResource("1_wsuhg")
+
+[node name="Visuals" type="SpineSprite" parent="." unique_id=503982627]
+skeleton_data_res = SubResource("SpineSkeletonDataResource_0lgc8")
+preview_skin = "Default"
+preview_animation = "charge_up"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(0, -25)
+scale = Vector2(0.3, 0.3)
+script = ExtResource("3_hvc4u")
+metadata/_custom_type_script = "uid://bayy3j6ssj0g"
+
+[node name="Bounds" type="Control" parent="." unique_id=1288543318]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -130.0
+offset_top = -283.0
+offset_right = 109.0
+offset_bottom = 1.0
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="IntentPoint" type="Marker2D" parent="." unique_id=1488931005]
+position = Vector2(0, -323)

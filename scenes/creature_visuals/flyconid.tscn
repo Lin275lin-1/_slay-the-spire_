@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://tl7twgqvlxrq"]
+
+[ext_resource type="Script" uid="uid://b2nmxu6nwwuhu" path="res://scripts/creature_visuals.gd" id="1_1rrik"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://celwh77tfpmka" path="res://animations/monsters/flying_mushrooms/flying_mushrooms_skel_data.tres" id="2_ynw74"]
+[ext_resource type="Script" uid="uid://bayy3j6ssj0g" path="res://scripts/utils/spine_manager.gd" id="3_boixp"]
+
+[node name="Flyconid" type="Node2D" unique_id=2123043038]
+script = ExtResource("1_1rrik")
+
+[node name="Visuals" type="SpineSprite" parent="." unique_id=503982627]
+skeleton_data_res = ExtResource("2_ynw74")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(0, 19)
+scale = Vector2(0.45, 0.45)
+script = ExtResource("3_boixp")
+metadata/_custom_type_script = "uid://bayy3j6ssj0g"
+
+[node name="Bounds" type="Control" parent="." unique_id=1288543318]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -130.0
+offset_top = -403.0
+offset_right = 109.0
+offset_bottom = -1.0
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="IntentPoint" type="Marker2D" parent="." unique_id=1488931005]
+position = Vector2(0, -359)

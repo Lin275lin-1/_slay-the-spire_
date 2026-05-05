@@ -115,7 +115,6 @@ func _show_random_after_choice() -> void:
 
 
 func _on_return_pressed() -> void:
-	print("return_button pressed!")  # 如果点击后不出现，说明信号没触发
 	Events.ancient_exited.emit()
 
 func _create_relic_options() -> void:

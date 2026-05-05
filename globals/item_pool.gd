@@ -137,12 +137,17 @@ var relics_by_color := {
 }
 
 var relics_by_rarity := {
-	0b000001: [],
-	0b000010: [],
-	0b000100: [],
-	0b001000: [],
-	0b010000: [],
-	0b100000: [],
+	0b0000001: [],
+	0b0000010: [],
+	0b0000100: [],
+	0b0001000: [],
+	0b0010000: [],
+	0b0100000: [],
+	0b1000000: []
+}
+
+var event_relic_dict := {
+	
 }
 
 var enchantment_dict := {
@@ -160,7 +165,7 @@ var potion_rarity_mask: int = 0b111
 #relic_color_mask多加一位覆盖colorless,同时relic rarity多加两位覆盖所有稀有度
 var relic_color_mask: int = 0b1111111
 var relic_type_mask: int = 0b1111
-var relic_rarity_mask: int = 0b111111
+var relic_rarity_mask: int = 0b1111111
 
 var current_card_pool: Array[Card]
 var current_potion_pool: Array[Potion]
@@ -325,15 +330,21 @@ func load_all_potions(dir_path: String):
 				special_potions[resource.potion_name] = resource
 
 func load_all_relics(dir_path: String):
-	var paths = FileHelper.get_all_resources_in_directory(dir_path)
-	for path in paths:
+	for path in FileHelper.get_all_resources_in_directory(dir_path):
 		var resource: Relic = ResourceLoader.load(path)
 		if resource == null:
-			printerr("无法加载{path}".format({"path": path}))
+			printerr("无法加载 %s" % path)
 			continue
-		else:
-			relics_by_color[resource.relic_color & relic_color_mask].append(resource)
-			relics_by_rarity[resource.rarity & relic_rarity_mask].append(resource)
+		var color_key = resource.relic_color & relic_color_mask
+		var rarity_key = resource.rarity & relic_rarity_mask
+		# 调试
+		if color_key == 0 or rarity_key == 0:
+			printerr("⚠️ 遗物 %s 的 color_key=%d, rarity_key=%d → 已跳过" % [path, color_key, rarity_key])
+			continue          # 直接跳过，不加入字典
+		relics_by_color[color_key].append(resource)
+		relics_by_rarity[rarity_key].append(resource)
+		if resource.rarity == Relic.Rarity.EVENT:
+			event_relic_dict[resource.relic_name] = resource
 
 func load_all_enchantments(dir_path: String):
 	var paths = FileHelper.get_all_resources_in_directory(dir_path)

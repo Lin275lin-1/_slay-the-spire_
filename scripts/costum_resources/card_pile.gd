@@ -8,7 +8,6 @@ signal card_pile_size_changed(card_amout: int)
 func is_empty() -> bool:
 	return cards.is_empty()
 	
-
 #remove the card at position i
 func remove_at_i(i:int)->void:
 	cards.remove_at(i)

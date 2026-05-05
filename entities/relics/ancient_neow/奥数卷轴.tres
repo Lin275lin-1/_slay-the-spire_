@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_v760g"]
 [ext_resource type="Texture2D" uid="uid://bx6etxm" path="res://images/atlases/relic_atlas.sprites/arcane_scroll.tres" id="2_f0hss"]
-[ext_resource type="Script" uid="uid://drcvhv6eqlm43" path="res://entities/relics/ancient/奥数卷轴.gd" id="3_elq60"]
+[ext_resource type="Script" uid="uid://drcvhv6eqlm43" path="res://entities/relics/ancient_neow/奥数卷轴.gd" id="3_elq60"]
 
 [resource]
 script = ExtResource("3_elq60")

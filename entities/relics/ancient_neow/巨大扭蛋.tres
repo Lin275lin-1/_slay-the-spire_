@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_vcw75"]
 [ext_resource type="Texture2D" uid="uid://t8376h" path="res://images/atlases/relic_atlas.sprites/large_capsule.tres" id="2_ytxne"]
-[ext_resource type="Script" uid="uid://crryc56jmu7xp" path="res://entities/relics/ancient/巨大扭蛋.gd" id="3_h2as3"]
+[ext_resource type="Script" uid="uid://crryc56jmu7xp" path="res://entities/relics/ancient_neow/巨大扭蛋.gd" id="3_h2as3"]
 
 [resource]
 script = ExtResource("3_h2as3")

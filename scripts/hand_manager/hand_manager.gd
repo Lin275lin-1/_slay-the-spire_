@@ -52,6 +52,8 @@ func set_cards(instant: bool = false) -> void:
 	elif card_count == 1:
 		var tween := create_tween()
 		var card_ui: CardUI = card_uis[0]
+		if card_ui.discarded:
+			return
 		card_ui.original_position = max_width / 2
 		card_ui.original_position.y -= max_height
 		card_ui.original_rotation = 0.0;
@@ -66,6 +68,8 @@ func set_cards(instant: bool = false) -> void:
 		var card_ui: CardUI
 		for card_index in card_count:
 			card_ui = card_uis[card_index]
+			if card_ui.discarded:
+				continue
 			# !godot中两个操作数都是整数时执行整数除法
 			# 卡牌超出上限时不预留卡牌之间的空间(一般不会出现这种情况
 			if card_count > max_cards_amount:
@@ -121,13 +125,12 @@ func _on_card_previewed(pre_card: CardUI, to_preview: bool) -> void:
 
 # TODO: 卡牌消耗/移向弃牌堆动画
 func discard_card(card: CardUI) -> void:
-	card.queue_free()
 	# 从手牌中移出时去掉本回合打出免费的标记
 	card.card.first_play_free = false
-	# 等待card.queue_free()
-	await get_tree().process_frame
+	card.discarded = true
+	Events.card_discarded.emit(card)
 	set_cards()
-
+	
 func exhaust_card(card: CardUI) -> void:
 	Events.card_exhausted.emit(card.card)
 	card.queue_free()
@@ -142,8 +145,10 @@ func find_card_ui(card: Card) -> CardUI:
 	return null
 
 func discard_hand() -> void:
-	for child in get_children():
-		discard_card(child)
+	for child: CardUI in get_children():
+		child.card.first_play_free = false
+		child.discarded = true
+		Events.card_discarded.emit(child)
 
 func disable_hand() -> void:
 	for card_ui: CardUI in get_children():

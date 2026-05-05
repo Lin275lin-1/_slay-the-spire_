@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_ttbqv"]
 [ext_resource type="Script" uid="uid://bhhtjppe5dfcx" path="res://scripts/costum_resources/effects/damage_effect.gd" id="3_cdmrn"]
 [ext_resource type="Texture2D" uid="uid://45kp83" path="res://images/atlases/relic_atlas.sprites/neows_lament.tres" id="4_575dv"]
-[ext_resource type="Script" uid="uid://buoxbaxcguagv" path="res://entities/relics/ancient/涅奥的悲怆.gd" id="5_yk7o4"]
+[ext_resource type="Script" uid="uid://buoxbaxcguagv" path="res://entities/relics/ancient_neow/涅奥的悲怆.gd" id="5_yk7o4"]
 
 [sub_resource type="Resource" id="Resource_lsl1u"]
 script = ExtResource("2_ttbqv")

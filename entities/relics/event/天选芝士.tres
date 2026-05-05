@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://doxrro5cuunp0"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_n5q6r"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_a5opl"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="2_ymn8n"]
+[ext_resource type="Script" uid="uid://d1sa63ef0r5jx" path="res://scripts/costum_resources/effects/gain_max_health_effect.gd" id="3_s1f1o"]
+[ext_resource type="Texture2D" uid="uid://m8fnpa" path="res://images/atlases/relic_atlas.sprites/chosen_cheese.tres" id="4_pnxrd"]
+
+[sub_resource type="Resource" id="Resource_u5oyk"]
+script = ExtResource("2_a5opl")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_h2vp8"]
+script = ExtResource("3_s1f1o")
+max_health_provider = SubResource("Resource_u5oyk")
+target_type = 1
+metadata/_custom_type_script = "uid://d1sa63ef0r5jx"
+
+[resource]
+script = ExtResource("2_ymn8n")
+relic_name = "天选芝士"
+id = "choosen_cheese"
+icon = ExtResource("4_pnxrd")
+description = "在战斗结束时，获得1点最大生命值"
+trigger_type = 4
+rarity = 64
+effects = Array[ExtResource("1_n5q6r")]([SubResource("Resource_h2vp8")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

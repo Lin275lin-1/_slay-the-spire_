@@ -12,11 +12,13 @@ signal card_click_ended(card_ui: CardUI)
 signal card_drag_started(card_ui: CardUI)
 signal card_drag_ended(card_ui: CardUI)
 signal card_previewed(card_ui: CardUI, to_preview: bool)
+signal card_discarded(card_ui: CardUI)
 signal before_card_played(card: Card, card_context: Dictionary)
 signal card_played(card: Card, card_context: Dictionary)
 signal card_exhausted(card: Card)
 signal target_selected(target: Creature, card: Card)
 signal target_unselected(card: Card)
+
 
 signal card_added_to_deck(card: Card, char_stats: CharacterStats)
 ## 药水相关

@@ -232,7 +232,7 @@ func complete_current_room() -> void:
 	if last_room == null:
 		print("last_room is null, aborting")
 		return
-	print("complete_current_room: last_room row=", last_room.row, " next_rooms count=", last_room.next_rooms.size())
+	#print("complete_current_room: last_room row=", last_room.row, " next_rooms count=", last_room.next_rooms.size())
 	var new_floor = last_room.row + 1
 	run_stats.set_floor(new_floor)
 	unlock_next_rooms()
