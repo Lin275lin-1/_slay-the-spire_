@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cl6hb7j" path="res://images/atlases/card_atlas.sprites/ironclad/headbutt.tres" id="23_l52n2"]
 [ext_resource type="Resource" uid="uid://dx5ppg6s0n36o" path="res://entities/cards/ironclad/祭品.tres" id="26_cilra"]
 [ext_resource type="Resource" uid="uid://b2c13bouulo8c" path="res://entities/cards/ironclad/战斗专注.tres" id="27_cilra"]
+[ext_resource type="Resource" uid="uid://bf678imic2wxo" path="res://entities/cards/ironclad/倾泻.tres" id="28_lm2nt"]
 [ext_resource type="Resource" uid="uid://cpctwatpicixg" path="res://entities/cards/ironclad/飞剑回旋镖.tres" id="28_q88nh"]
 [ext_resource type="Resource" uid="uid://0m10x56r5id3" path="res://entities/cards/ironclad/岿然不动.tres" id="29_2qpn7"]
 [ext_resource type="Resource" uid="uid://dapmctnguc1os" path="res://entities/cards/ironclad/添柴.tres" id="29_q88nh"]
@@ -216,5 +217,5 @@ metadata/_custom_type_script = "uid://br1hibx18tv13"
 
 [resource]
 script = ExtResource("2_pcwuu")
-cards = Array[ExtResource("1_6dnus")]([ExtResource("23_bsqa6"), ExtResource("27_cilra"), ExtResource("28_q88nh"), ExtResource("26_cilra"), SubResource("Resource_7anbg"), ExtResource("13_1lg0p"), SubResource("Resource_7vt7t"), ExtResource("14_8xmro"), ExtResource("15_7hj0v"), SubResource("Resource_7tgq7"), ExtResource("29_q88nh"), ExtResource("29_2qpn7"), ExtResource("30_vp0wk"), ExtResource("31_2qpn7"), ExtResource("31_vp0wk"), ExtResource("32_2qpn7"), ExtResource("34_b05o3")])
+cards = Array[ExtResource("1_6dnus")]([ExtResource("23_bsqa6"), ExtResource("27_cilra"), ExtResource("28_q88nh"), ExtResource("26_cilra"), SubResource("Resource_7anbg"), ExtResource("13_1lg0p"), SubResource("Resource_7vt7t"), ExtResource("14_8xmro"), ExtResource("15_7hj0v"), SubResource("Resource_7tgq7"), ExtResource("29_q88nh"), ExtResource("29_2qpn7"), ExtResource("30_vp0wk"), ExtResource("31_2qpn7"), ExtResource("31_vp0wk"), ExtResource("32_2qpn7"), ExtResource("34_b05o3"), ExtResource("28_lm2nt")])
 metadata/_custom_type_script = "uid://jvpf65gf7yuq"
