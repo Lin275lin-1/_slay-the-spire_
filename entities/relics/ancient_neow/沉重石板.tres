@@ -2,11 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_q4wr4"]
 [ext_resource type="Texture2D" uid="uid://beaqff6" path="res://images/atlases/relic_atlas.sprites/runic_cube.tres" id="2_31ds0"]
-<<<<<<< HEAD:entities/relics/ancient_neow/沉重石板.tres
-[ext_resource type="Script" uid="uid://djhv36jnyama7" path="res://entities/relics/ancient_neow/沉重石板.gd" id="2_q4wr4"]
-=======
 [ext_resource type="Script" uid="uid://djhv36jnyama7" path="res://entities/relics/ancient/沉重石板.gd" id="2_q4wr4"]
->>>>>>> 14019f594ef5f025a83ac2154b6d60c6c3850000:entities/relics/ancient/沉重石板.tres
 
 [resource]
 script = ExtResource("2_q4wr4")

@@ -161,14 +161,10 @@ var card_rarity_mask: int = 0b11111
 var potion_color_mask: int = 0b111111
 var potion_rarity_mask: int = 0b111
 
-<<<<<<< HEAD
 #debug
 #relic_color_mask多加一位覆盖colorless,同时relic rarity多加两位覆盖所有稀有度
 var relic_color_mask: int = 0b1111111
 var relic_type_mask: int = 0b1111
-=======
-var relic_color_mask: int = 0b111111
->>>>>>> 14019f594ef5f025a83ac2154b6d60c6c3850000
 var relic_rarity_mask: int = 0b1111111
 
 var current_card_pool: Array[Card]
@@ -339,7 +335,6 @@ func load_all_relics(dir_path: String):
 		if resource == null:
 			printerr("无法加载 %s" % path)
 			continue
-<<<<<<< HEAD
 		var color_key = resource.relic_color & relic_color_mask
 		var rarity_key = resource.rarity & relic_rarity_mask
 		# 调试
@@ -350,13 +345,6 @@ func load_all_relics(dir_path: String):
 		relics_by_rarity[rarity_key].append(resource)
 		if resource.rarity == Relic.Rarity.EVENT:
 			event_relic_dict[resource.relic_name] = resource
-=======
-		else:
-			relics_by_color[resource.relic_color & relic_color_mask].append(resource)
-			relics_by_rarity[resource.rarity & relic_rarity_mask].append(resource)
-			if resource.rarity == Relic.Rarity.EVENT:
-				event_relic_dict[resource.relic_name] = resource
->>>>>>> 14019f594ef5f025a83ac2154b6d60c6c3850000
 
 func load_all_enchantments(dir_path: String):
 	var paths = FileHelper.get_all_resources_in_directory(dir_path)
