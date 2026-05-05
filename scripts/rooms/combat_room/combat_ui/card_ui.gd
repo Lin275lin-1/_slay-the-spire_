@@ -151,7 +151,7 @@ func _set_disabled(value: bool) -> void:
 
 func _set_discarded(value: bool) -> void:
 	discarded = value
-	if !value:
+	if value:
 		disabled = true
 		
 

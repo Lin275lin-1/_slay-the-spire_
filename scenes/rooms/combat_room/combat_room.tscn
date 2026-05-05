@@ -48,6 +48,7 @@ metadata/_edit_lock_ = true
 
 [node name="SFXLayer" type="CanvasLayer" parent="." unique_id=1811299611]
 unique_name_in_owner = true
+visible = false
 
 [node name="CombatUI" type="CanvasLayer" parent="." unique_id=661618034 groups=["ui_layer"]]
 unique_name_in_owner = true
