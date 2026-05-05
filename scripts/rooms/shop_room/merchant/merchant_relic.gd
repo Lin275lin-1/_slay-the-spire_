@@ -101,7 +101,12 @@ func _update_cost_color():
 func update_affordability():
 	_update_cost_color()
 
+
+#保存相关setter_getter(merchant_card,merchant_potion中类似)
 func set_shop_item(item: ShopItem) -> void:
 	shop_item = item
 	if is_inside_tree():
 		_refresh_display()
+
+func get_shop_item() -> ShopItem:
+	return shop_item
