@@ -7,6 +7,22 @@ const MAP_ROOM = preload("res://scenes/map/map_room.tscn")
 const MAP_LINE = preload("res://scenes/map/map_line.tscn")
 
 
+
+const STAGE_BACKGROUNDS = {
+	1: {
+		"top": "res://images/packed/map/map_bgs/overgrowth/map_top_overgrowth.png",
+		"middle": "res://images/packed/map/map_bgs/overgrowth/map_middle_overgrowth.png",
+		"bottom": "res://images/packed/map/map_bgs/overgrowth/map_bottom_overgrowth.png",
+		"legend_bg": "res://images/rooms/false_queen/false_queen_bg.png"
+	},
+	2: {
+		"top": "res://images/packed/map/map_bgs/underdocks/map_top_underdocks.png",
+		"middle": "res://images/packed/map/map_bgs/underdocks/map_middle_underdocks.png",
+		"bottom": "res://images/packed/map/map_bgs/underdocks/map_bottom_underdocks.png",
+		"legend_bg": "res://images/events/crystal_sphere/crystal_sphere_minigame_bg.png"  
+	}
+}
+
 @onready var map_generator: MapGenerator = $MapGenerator
 @onready var lines: Node2D = %Lines
 @onready var rooms: Node2D = %Rooms
@@ -181,10 +197,11 @@ func _connect_lines(room: Room) -> void:
 		# 设置初始透明度（ 0.2 ）
 		new_map_line.modulate = Color(1, 1, 1, 0.1)
 		lines.add_child(new_map_line)
-		print("连线已添加，从 ", room.position, " 到 ", next.position, "，节点数：", lines.get_child_count())
+		#print("连线已添加，从 ", room.position, " 到 ", next.position, "，节点数：", lines.get_child_count())
 		
 func _on_map_room_selected(room: Room) -> void:
 	#print("=== _on_map_room_selected 被调用 ===")
+	run_stats.current_room = room
 	var previous_room = last_room
 	Events.map_room_selected.emit(room)
 
@@ -213,9 +230,11 @@ func _apply_map_ui_updates(room: Room, previous_room: Room) -> void:
 	
 func complete_current_room() -> void:
 	if last_room == null:
+		print("last_room is null, aborting")
 		return
+	print("complete_current_room: last_room row=", last_room.row, " next_rooms count=", last_room.next_rooms.size())
 	var new_floor = last_room.row + 1
-	run_stats.set_floor(new_floor)   # 假设 RunStats 中有 set_floor 方法发射信号
+	run_stats.set_floor(new_floor)
 	unlock_next_rooms()
 	
 	#地图和legend显现,可以滚动
@@ -240,7 +259,7 @@ func _on_legend_highlight_cleared():
 		map_room.set_highlight(false)
 
 func update_line_opacity_between(room_a: Room, room_b: Room, opacity: float) -> void:
-	print("开始查找连线: ", room_a.position, " -> ", room_b.position)
+	#print("开始查找连线: ", room_a.position, " -> ", room_b.position)
 	for line in lines.get_children():
 		var points = line.points
 		if points.size() == 2:
@@ -249,6 +268,100 @@ func update_line_opacity_between(room_a: Room, room_b: Room, opacity: float) -> 
 			if (p1.distance_to(room_a.position) < 1.0 and p2.distance_to(room_b.position) < 1.0) or \
 			   (p1.distance_to(room_b.position) < 1.0 and p2.distance_to(room_a.position) < 1.0):
 				line.modulate.a = opacity
-				print("已设置连线透明度为 ", opacity, " 路径: ", p1, " -> ", p2)
+				#print("已设置连线透明度为 ", opacity, " 路径: ", p1, " -> ", p2)
 				return   # 找到即返回
-	print("未找到匹配的连线！")
+	#print("未找到匹配的连线！")
+
+
+func rebuild_for_stage(stats: RunStats) -> void:
+	_clear_map()
+	generate_new_map()
+
+	# 🎨 根据当前阶段换背景
+	_apply_stage_background(stats.current_stage)
+
+	# 激活起点房间
+	var start_room: MapRoom = null
+	for child in rooms.get_children():
+		var map_room := child as MapRoom
+		if map_room.room.row == 0 and map_room.room.type == Room.Type.ANCIENT:
+			start_room = map_room
+			break
+	if start_room:
+		start_room.available = true
+		last_room = start_room.room
+	unlock_floor(0)
+
+	camera_2d.position.y = 0
+	old_camera_2d_position_y = 0
+	scroll_enabled = true
+	show()
+	legendAll.show()
+
+func _clear_map() -> void:
+	for child in rooms.get_children():
+		child.queue_free()
+	for child in lines.get_children():
+		child.queue_free()
+
+
+func _apply_stage_background(stage: int) -> void:
+	var paths = STAGE_BACKGROUNDS.get(stage, STAGE_BACKGROUNDS[1])
+
+	var bg = $Background
+	if bg:
+		var top = bg.get_node_or_null("Top")
+		var middle = bg.get_node_or_null("Middle")
+		var down = bg.get_node_or_null("Down")
+		if top and FileAccess.file_exists(paths["top"]):
+
+			top.texture = load(paths["top"])
+		if middle and FileAccess.file_exists(paths["middle"]):
+			middle.texture = load(paths["middle"])
+		if down and FileAccess.file_exists(paths["bottom"]):
+			down.texture = load(paths["bottom"])
+
+	var legend_bg_rect = $Legend_background.get_node_or_null("background") as TextureRect
+	if legend_bg_rect and "legend_bg" in paths and FileAccess.file_exists(paths["legend_bg"]):
+		legend_bg_rect.texture = load(paths["legend_bg"])
+
+
+# 播放阶段过渡动画
+func play_stage_transition(stage: int) -> void:
+	rebuild_for_stage(run_stats)
+	camera_2d.position.y = -camera_edge_y
+	old_camera_2d_position_y = 0.0
+	show()
+	scroll_enabled = false
+
+	_create_act_label(stage)
+
+	var tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(camera_2d, "position:y", 0.0, 2.0)
+	await tween.finished
+
+	scroll_enabled = true
+
+# 创建 ACT 提示控件
+func _create_act_label(stage: int) -> void:
+	# 创建一个专用的 CanvasLayer，确保 UI 始终在相机之上
+	var canvas = CanvasLayer.new()
+	canvas.layer = 10   # 比 legend 更高，避免被遮挡
+	add_child(canvas)
+
+	var label = Label.new()
+	label.text = "ACT " + str(stage)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.add_theme_font_size_override("font_size", 80)
+	label.add_theme_color_override("font_color", Color.WHITE)
+	label.set_anchors_preset(Control.PRESET_FULL_RECT)   # 全屏居中
+	label.modulate.a = 0.0   # 从完全透明开始
+	canvas.add_child(label)
+
+	# 淡入 → 停留 → 淡出 → 自动销毁
+	var t = create_tween()
+	t.tween_property(label, "modulate:a", 1.0, 0.5)
+	t.tween_interval(1.5)   # 在全黑背景下显示 1.5 秒（可调整）
+	t.tween_property(label, "modulate:a", 0.0, 0.5)
+	t.tween_callback(canvas.queue_free)

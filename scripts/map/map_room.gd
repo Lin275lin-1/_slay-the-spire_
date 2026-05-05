@@ -14,10 +14,16 @@ const ICONS := {
 	Room.Type.CAMPFIRE: [preload("res://images/atlases/ui_atlas.sprites/map/icons/map_rest.tres"), Vector2(0.6, 0.6)],
 	Room.Type.SHOP: [preload("res://images/atlases/ui_atlas.sprites/map/icons/map_shop.tres"), Vector2(0.6, 0.6)],
 	# todo vantom.tres
-	Room.Type.BOSS: [preload("res://images/map/placeholder/vantom_boss_icon.png"), Vector2(1.25, 1.25)],
+	Room.Type.BOSS: {
+		1: [preload("res://images/map/placeholder/vantom_boss_icon.png"), Vector2(1.25, 1.25)],
+		2: [preload("res://images/map/placeholder/doormaker_boss_icon.png"), Vector2(1.25, 1.25)]   # 你的新图标
+	},
+	Room.Type.ANCIENT: {
+		1: [preload("res://images/atlases/ui_atlas.sprites/map/ancients/ancient_node_neow.tres"), Vector2.ONE],
+		2: [preload("res://images/atlases/ui_atlas.sprites/map/ancients/ancient_node_orobas.tres"), Vector2.ONE]   # 奥罗巴斯图标
+	},
 	Room.Type.ELITE: [preload("res://images/atlases/ui_atlas.sprites/map/icons/map_elite.tres"), Vector2.ONE],
 	Room.Type.UNKNOWN: [preload("res://images/atlases/ui_atlas.sprites/map/icons/map_unknown.tres"), Vector2.ONE],
-	Room.Type.ANCIENT: [preload("res://images/atlases/ui_atlas.sprites/map/ancients/ancient_node_neow.tres"), Vector2.ONE]
 }
 
 @onready var highlight_sprite: Sprite2D = $Visuals/highlight
@@ -54,8 +60,25 @@ func set_room(new_data: Room) -> void:
 	position = room.position
 	Select_Circle.rotation_degrees = randi_range(0, 360)
 
-	sprite_2d.texture = ICONS[room.type][0]
-	sprite_2d.scale = ICONS[room.type][1]
+	# 获取房间的阶段，默认为1
+	var run = _get_run_node()
+	
+	var stage := 1
+	if run and run.stats:
+		stage = run.stats.current_stage
+		
+	# 从 ICONS 字典中取出对应类型的图标数据
+	var type_data = ICONS[room.type]
+	var entry: Array
+
+	# 判断是数组（单一阶段）还是字典（多阶段）
+	if typeof(type_data) == TYPE_ARRAY:
+		entry = type_data
+	else:  # 字典，根据 stage 选择
+		entry = type_data.get(stage, type_data.get(1, [null, Vector2.ONE]))
+
+	sprite_2d.texture = entry[0]
+	sprite_2d.scale = entry[1]
 	original_scale = scale
 
 	# 古代房始终保持完全不透明
@@ -83,6 +106,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 
 # 正常房间的 select 动画结束后回调
 func _on_map_room_selected() -> void:
+	
 	selected.emit(room)
 
 func set_highlight(highlight: bool):
@@ -134,3 +158,12 @@ func _update_collision_scale() -> void:
 	if scale.x == 0 or scale.y == 0:
 		return
 	collision_shape.scale = Vector2(COLLISION_SCALE/ scale.x, COLLISION_SCALE / scale.y)
+
+
+func _get_run_node():
+	var current = self
+	while current:
+		if current is Run:
+			return current
+		current = current.get_parent()
+	return null

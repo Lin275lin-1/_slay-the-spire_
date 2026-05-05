@@ -147,7 +147,7 @@ color_ramp = SubResource("Gradient_tr4x5")
 [node name="PointLight2D" type="PointLight2D" parent="Chest" unique_id=1331740207]
 position = Vector2(1292, -343.00003)
 scale = Vector2(15.786133, 7.695312)
-energy = 4.81
+energy = 16.0
 texture = ExtResource("1_b3ajw")
 metadata/_edit_lock_ = true
 

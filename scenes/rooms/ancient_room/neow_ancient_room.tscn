@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cko3awly7dr35"]
+[gd_scene format=3 uid="uid://dyj1bly2a4vph"]
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://b8qcmnqy80wb3" path="res://animations/backgrounds/neow_room/neow.tres" id="1_8f5lu"]
 [ext_resource type="Texture2D" uid="uid://dpeuhrd5dmvsy" path="res://animations/backgrounds/neow_room/neow_bg.png" id="1_bcp67"]
@@ -111,7 +111,7 @@ colors = PackedColorArray(0.847059, 0.803922, 0.301961, 0, 1, 1, 1, 1, 0.780392,
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u873h"]
 
-[node name="Neow" type="Control" unique_id=1598024082]
+[node name="Ancient_room" type="Control" unique_id=1598024082]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -146,9 +146,10 @@ metadata/_edit_lock_ = true
 [node name="SpineBoneNode" type="SpineBoneNode" parent="SpineSprite" unique_id=1310767612]
 bone_name = "eye a 1"
 show_behind_parent = true
-position = Vector2(2635.4863, 833.4495)
-rotation = 0.019385546
-scale = Vector2(0.9000786, 0.9000393)
+position = Vector2(2630.7083, 832.3576)
+rotation = 0.017900223
+scale = Vector2(0.90267843, 0.9017784)
+skew = 3.5762787e-05
 
 [node name="light4" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode" unique_id=1399388701]
 show_behind_parent = true
@@ -171,9 +172,10 @@ color_ramp = SubResource("Gradient_vwgt8")
 [node name="SpineBoneNode2" type="SpineBoneNode" parent="SpineSprite" unique_id=968764]
 bone_name = "eye b 1"
 show_behind_parent = true
-position = Vector2(2768.961, 920.9968)
-rotation = 0.019385546
-scale = Vector2(0.9000786, 0.9000393)
+position = Vector2(2766.1592, 919.8928)
+rotation = 0.017900223
+scale = Vector2(0.90267843, 0.9017784)
+skew = 3.5762787e-05
 
 [node name="light4" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode2" unique_id=398644402]
 show_behind_parent = true
@@ -196,9 +198,10 @@ color_ramp = SubResource("Gradient_vwgt8")
 [node name="SpineBoneNode3" type="SpineBoneNode" parent="SpineSprite" unique_id=1361686578]
 bone_name = "eye c 1"
 show_behind_parent = true
-position = Vector2(2892.7798, 995.5639)
-rotation = 0.019385546
-scale = Vector2(0.9000786, 0.9000393)
+position = Vector2(2891.6873, 994.43475)
+rotation = 0.017900223
+scale = Vector2(0.90267843, 0.9017784)
+skew = 3.5762787e-05
 
 [node name="light4" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode3" unique_id=418971897]
 show_behind_parent = true
