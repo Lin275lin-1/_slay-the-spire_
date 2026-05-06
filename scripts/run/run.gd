@@ -11,7 +11,10 @@ const MAP_SCENE := preload("res://scenes/map/map.tscn")
 const SHOP_SCENE := preload("res://scenes/rooms/shop_room/shop_room.tscn")
 const TREASURE_SCENE := preload("res://scenes/rooms/treasure_room/treasure_room.tscn")
 const INCIDENT_SCENE := preload("res://scenes/rooms/incident_room/incident_room.tscn")
-const ANCIENT_SCENE := preload("res://scenes/rooms/ancient_room/ancient_room.tscn")
+
+# 两个先古场景（根据阶段动态选择）
+const ANCIENT_SCENE_NEOW := preload("res://scenes/rooms/ancient_room/neow_ancient_room.tscn")
+const ANCIENT_SCENE_OROBAS := preload("res://scenes/rooms/ancient_room/orobas_ancient_room.tscn")
 
 const BATTLE_REWARD_SCENE = preload("res://scenes/rooms/reward/reward_room.tscn")
 
@@ -43,6 +46,9 @@ var save_data: SaveGame
 @export var elite_mob_killed:int = 0
 @export var loading_status: int = 0
 
+
+# 标记 Boss 战后是否需要进入阶段切换
+var _pending_stage_transition: bool = false
 
 func _ready() -> void:
 	if not run_startup:
@@ -95,11 +101,6 @@ func _on_map_room_selected(room: Room) -> void:
 		_:
 			return
 
-	#if room.type == Room.Type.SHOP:
-		#call_deferred("_change_view_deferred", scene)
-	#else:
-	
-
 ################实现问号房逻辑####################
 var unknown_room_probs = {
 	"combat": 0.10,      # 战斗
@@ -108,12 +109,10 @@ var unknown_room_probs = {
 	"incident": 0.85    # 事件
 }
 
-# 保存上一次的房间类型，用于概率补偿
 var last_unknown_room_type: String = ""
-var compensation_chance: float = 0.0  # 补偿概率
+var compensation_chance: float = 0.0
 
 func _handle_unknown_room(room: Room) -> void:
-	# 1. 计算当前概率（考虑补偿机制）
 	var current_probs = calculate_compensated_probabilities()
 	var room_type = get_random_room_type(current_probs)
 	
@@ -204,9 +203,6 @@ func _load_run() -> void:
 	for potion in save_data.potions:
 		print("加载药水")
 		stats.add_potion(potion)
-	#for relic in save_data.relics:
-		#print("加载遗物")
-		#stats.add_relic(relic)
 	stats.relics = save_data.relics
 	_load_up_top_bar()
 	_setup_event_connections()
@@ -223,7 +219,6 @@ func _load_up_top_bar() -> void:
 	top_bar.initialize(character)
 	top_bar.deck_view_requested.connect(deck_view.show_card_pile.bind("你在战斗中将会使用这里的所有卡牌。", false))
 	top_bar.select_deck_view = select_deck_view
-	#top_bar.relic_handler.add_relic(character.starting_relic)
 	top_bar.relic_handler.add_relics(stats.relics)
 	top_bar.settings_requested.connect(handleSettingsRequest)
 
@@ -243,32 +238,66 @@ func _change_view(scene: PackedScene) -> Node:
 	if current_room.get_child_count() > 0:
 		current_room.get_child(0).queue_free()
 	
-	# 其他场景正常处理
 	var new_view := scene.instantiate()
 	current_room.add_child(new_view)
 	return new_view
 
+# ========== 战斗奖励与阶段切换 ==========
 func _on_combat_won(context: RewardContext) -> void:
 	var reward_scene := await _change_view(BATTLE_REWARD_SCENE) as BattleReward
 	reward_scene.run_stats = stats
 	reward_scene.character_stats = character
 	reward_scene.add_rewards(map_node.last_room, context)
+
 	
-		
+	if map_node.last_room and map_node.last_room.type == Room.Type.BOSS:
+		_pending_stage_transition = true
+		print("boss房胜利")
+
+func _on_combat_reward_exited() -> void:
+	_on_room_exited()
+	if _pending_stage_transition:
+		_pending_stage_transition = false
+		_transition_to_next_stage()
+
+
+func _transition_to_next_stage() -> void:
+	#current_room.hide()
+	#for child in current_room.get_children():
+		#child.queue_free()
+	# 1. 推进阶段（current_stage 从 1 变为 2）
+	stats.advance_stage()
+	print("当前阶段:",stats.current_stage);
+	# 2. 重置旧地图数据（清空地图数组和楼层计数）
+	stats.reset_map()
+	
+	map_node.play_stage_transition(stats.current_stage)
+	print("当前地图数据置空")
+	# 3. 重建第二阶段地图（起点自动为 Ancient 房间）
+	print("======开始重建地图数据*")
+	#map_node.rebuild_for_stage(stats)
+	print("======结束*")
+	# 4. 显示新地图，玩家站在起点（没有任何弹出窗口）
+	print("=======展示地图")
+	#_show_map()
+
 func _setup_event_connections() -> void:
 	Events.combat_won.connect(
 		func(context: RewardContext):
-			# 等待其他遗物修改context
 			await get_tree().process_frame
 			_on_combat_won(context)
 	)
 	Events.player_died_outside.connect(_on_player_died_outside)
 	Events.player_died.connect(on_player_died)
 	Events.combat_reward_exited.connect(_on_room_exited)
+	# ★ 修改：战斗奖励退出使用分流函数
+	Events.combat_reward_exited.connect(_on_combat_reward_exited)
+	
 	Events.shop_exited.connect(_on_room_exited)
 	Events.treasure_room_exited.connect(_on_room_exited)
 	Events.incident_exited.connect(_on_room_exited)
 	Events.campfire_exited.connect(_on_room_exited)
+	# 普通 Ancient 房间退出（地图上 Ancient 格子）也走正常流程
 	Events.ancient_exited.connect(_on_room_exited)
 	
 	Events.map_exited.connect(_on_map_exited)
@@ -334,8 +363,20 @@ func _on_map_exited() -> void:
 	print("map_exited")
 
 func _on_room_exited() -> void:
+	#print(">>> _on_room_exited START")
+	#print("current_room children: ", current_room.get_children())
+	if current_room.get_child_count() > 0:
+		var child = current_room.get_child(0)
+		#print("Removing child: ", child.name)
+		child.queue_free()
+		# 立即从父节点移除（不等下一帧）
+		current_room.remove_child(child)
+		#print("current_room children after remove: ", current_room.get_children())
+	#else:
+		#print("No child to remove")
 	map_node.complete_current_room()
 	_show_map()
+	print(">>> _on_room_exited END")
 
 # ========== 房间入口 ==========
 func _on_combat_room_entered(room: Room = null) -> void:
@@ -353,11 +394,20 @@ func _on_treasure_room_entered(room: Room) -> void:
 	await _change_view(TREASURE_SCENE)
 
 func _on_ancient_room_entered(room: Room) -> void:
-	await _change_view(ANCIENT_SCENE)
+	var scene: PackedScene
+	if stats.current_stage == 1:
+		scene = ANCIENT_SCENE_NEOW
+	else:
+		scene = ANCIENT_SCENE_OROBAS
 
+	var ancient = scene.instantiate()
+	ancient.current_stage = stats.current_stage   
+	current_room.add_child(ancient)  
+		
 func _on_ancient_relic_selected(relic: Relic) -> void:
-	top_bar.relic_handler.add_relic(relic)
-	
+	if stats:
+		stats.add_relic(relic)
+
 func _on_campfire_room_entered(room: Room)-> void:
 	var capfire_scene :CampfireRoom = _change_view(CAMPFIRE_SCENE) as CampfireRoom
 	capfire_scene.char_stats=character
@@ -366,7 +416,6 @@ func _on_campfire_room_entered(room: Room)-> void:
 	Events.campfire_entered.emit(room, stats, character)
 
 func _on_incident_room_entered(room: Room)->void:
-	
 	var incident_scene :IncidentRoom = _change_view(INCIDENT_SCENE) as IncidentRoom
 	incident_scene.char_stats = character
 	incident_scene.run_stats=stats
@@ -380,11 +429,8 @@ func _on_shop_entered(room: Room) -> void:
 	
 	var loaded_scene = map_node.get_shop_scene()
 	if loaded_scene == null:
-		# 如果资源还未加载完成，回退同步加载
 		loaded_scene = load(SHOP_SCENE.resource_path)
 	var new_view = loaded_scene.instantiate()
 	current_room.add_child.call_deferred(new_view)
 	
 	Events.shop_entered.emit(room, stats, character)
-	
-	

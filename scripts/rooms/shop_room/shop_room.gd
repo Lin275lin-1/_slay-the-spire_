@@ -1,8 +1,8 @@
 extends Control
 
 const CARD_MENU_UI_SCENE = preload("res://scenes/ui/card_menu_ui.tscn")
-const RELIC_PILE_PATH = "res://entities/merchant/relic/shop_relics.tres"
-const POTION_PILE_PATH = "res://entities/merchant/potions/shop_potions.tres"
+#const RELIC_PILE_PATH = "res://entities/merchant/relic/shop_relics.tres"
+#const POTION_PILE_PATH = "res://entities/merchant/potions/shop_potions.tres"
 
 # 商品价格随机区间
 const RELIC_PRICE_MIN := 100
@@ -221,6 +221,7 @@ func _populate_cards() -> void:
 	var character_cards: Array = ItemPool.get_draftable_cards(character_color,ItemPool.card_type_mask, shop_rarity_mask)
 	var colorless_cards: Array = ItemPool.get_draftable_cards(Card.COLOR.COLORLESS, ItemPool.card_type_mask, shop_rarity_mask)
 
+
 	var fill_region = func(container: Node, cards_array: Array, region_name: String):
 		if not container:
 			return
@@ -257,9 +258,25 @@ func _populate_relics() -> void:
 	var relics_container = slots_container.get_node_or_null("Relics")
 	if not relics_container:
 		return
+	
+	var char_name = _get_character_name()
+	if char_name == "":
+		return
+	var character_color = _get_character_color_mask(char_name)
+	if character_color == 0:
+		return
 
-	var relic_pile = load(RELIC_PILE_PATH) as RelicPile
-	if not relic_pile:
+
+	var mask = character_color | Card.COLOR.COLORLESS
+	var all_relics = ItemPool.get_relics_by_color(mask)
+	for i in all_relics:
+		print("预备遗物:",i.relic_name,",color:",i.relic_color)
+	#var character_relic_pile: Array = ItemPool.get_relics_by_color(character_color)
+	#var colorless_relic_pile: Array = ItemPool.get_relics_by_color(Card.COLOR.COLORLESS)
+
+	
+	
+	if not all_relics:
 		return
 
 	var character_stats = _get_character_stats()
@@ -267,10 +284,10 @@ func _populate_relics() -> void:
 		return
 
 	var available_relics: Array[Relic] = []
-	for relic in relic_pile.relics:
-		if not relic.can_appear_as_reward(character_stats, Relic.Rarity.SHOP_RELIC):
-			continue
-		# 过滤已拥有的遗物
+	for relic in all_relics:
+		#if not relic.can_appear_as_reward(character_stats, Relic.Rarity.SHOP_RELIC):
+			#continue
+		## 过滤已拥有的遗物
 		if run_stats.has_relic(relic.id):
 			continue
 		available_relics.append(relic)
@@ -297,11 +314,20 @@ func _populate_potions() -> void:
 	if not potions_container:
 		return
 
-	var potion_pile = load(POTION_PILE_PATH) as PotionPile
-	if not potion_pile:
+	#var potion_pile = load(POTION_PILE_PATH) as PotionPile
+	#if not potion_pile:
+		#return
+		
+	var char_name = _get_character_name()
+	if char_name == "":
+		return
+	var character_color = _get_character_color_mask(char_name)
+	if character_color == 0:
 		return
 
-	var available_potions = potion_pile.potions.duplicate()
+#	获取相应药剂
+	var mask = character_color | Card.COLOR.COLORLESS
+	var available_potions = ItemPool.get_potions_by_color(mask)
 	available_potions.shuffle()
 
 	var slots: Array[Control] = _find_slots(potions_container, "merchant_potion.gd", "set_potion_data", "MerchantPotion")

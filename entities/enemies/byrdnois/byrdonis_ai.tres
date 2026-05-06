@@ -1,0 +1,91 @@
+[gd_resource type="Resource" format=3 uid="uid://cw35oj2ttswoc"]
+
+[ext_resource type="Script" uid="uid://ce34juwu5b0yr" path="res://scripts/costum_resources/intents/intent.gd" id="1_2oorc"]
+[ext_resource type="Script" uid="uid://iqqyr44teapg" path="res://scripts/costum_resources/intents/sub_intent.gd" id="2_2vdt6"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_p503j"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_nodtv"]
+[ext_resource type="Script" uid="uid://bces7ijyodhmv" path="res://scripts/costum_resources/intents/attack_sub_intent.gd" id="6_heres"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="7_nodtv"]
+[ext_resource type="Script" uid="uid://c8ly86kb5vc65" path="res://scripts/costum_resources/effects/iteration_effect.gd" id="8_83l2c"]
+[ext_resource type="Script" uid="uid://b4ci70yyt8xkl" path="res://entities/enemies/byrdnois/byrdonis_ai.gd" id="9_nodtv"]
+
+[sub_resource type="Resource" id="Resource_ntn5m"]
+script = ExtResource("3_p503j")
+fixed_value = 16
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_lqoha"]
+script = ExtResource("3_p503j")
+fixed_value = 16
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_vjcvc"]
+script = ExtResource("4_nodtv")
+damage_provider = SubResource("Resource_lqoha")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_t80r6"]
+script = ExtResource("6_heres")
+damage_provider = SubResource("Resource_ntn5m")
+effect = SubResource("Resource_vjcvc")
+metadata/_custom_type_script = "uid://bces7ijyodhmv"
+
+[sub_resource type="Resource" id="Resource_3oh63"]
+script = ExtResource("1_2oorc")
+sub_intents = Array[ExtResource("2_2vdt6")]([SubResource("Resource_t80r6")])
+intent_name = "Swoop"
+anim_name = "attack"
+metadata/_custom_type_script = "uid://ce34juwu5b0yr"
+
+[sub_resource type="Resource" id="Resource_heres"]
+script = ExtResource("3_p503j")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_c7d7r"]
+script = ExtResource("3_p503j")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_plk2q"]
+script = ExtResource("3_p503j")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_b18yb"]
+script = ExtResource("4_nodtv")
+damage_provider = SubResource("Resource_plk2q")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_08adn"]
+script = ExtResource("8_83l2c")
+count_provider = SubResource("Resource_c7d7r")
+effects = Array[ExtResource("7_nodtv")]([SubResource("Resource_b18yb")])
+target_type = 2
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
+
+[sub_resource type="Resource" id="Resource_a5cu1"]
+script = ExtResource("3_p503j")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_3cfig"]
+script = ExtResource("6_heres")
+damage_provider = SubResource("Resource_heres")
+repeat_provider = SubResource("Resource_a5cu1")
+effect = SubResource("Resource_08adn")
+metadata/_custom_type_script = "uid://bces7ijyodhmv"
+
+[sub_resource type="Resource" id="Resource_by2mh"]
+script = ExtResource("1_2oorc")
+sub_intents = Array[ExtResource("2_2vdt6")]([SubResource("Resource_3cfig")])
+intent_name = "Peck"
+anim_name = "attack"
+metadata/_custom_type_script = "uid://ce34juwu5b0yr"
+
+[resource]
+script = ExtResource("9_nodtv")
+intents = Array[ExtResource("1_2oorc")]([SubResource("Resource_3oh63"), SubResource("Resource_by2mh")])
+metadata/_custom_type_script = "uid://dpkht0suo8prh"

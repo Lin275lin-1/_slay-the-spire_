@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyEncounter" format=3 uid="uid://kgpjjxthep23"]
+
+[ext_resource type="Script" uid="uid://dw53gdpom3gn6" path="res://scripts/costum_resources/enemy_entry.gd" id="1_c3kmv"]
+[ext_resource type="Script" uid="uid://dgu4qpyr0pnnb" path="res://scripts/costum_resources/enemy_encounter.gd" id="2_feib8"]
+[ext_resource type="Resource" uid="uid://hbkkgb8v3jvq" path="res://entities/enemies/byrdnois/byrdonis_stats.tres" id="2_ypk1k"]
+
+[sub_resource type="Resource" id="Resource_jyxvi"]
+script = ExtResource("1_c3kmv")
+enemy_stats = ExtResource("2_ypk1k")
+position = Vector2(1385, 600)
+metadata/_custom_type_script = "uid://dw53gdpom3gn6"
+
+[resource]
+script = ExtResource("2_feib8")
+type = 2
+weight = 10.0
+enemy_entries = Array[ExtResource("1_c3kmv")]([SubResource("Resource_jyxvi")])
+encounter_name = "one_dyrdonis"
+metadata/_custom_type_script = "uid://dgu4qpyr0pnnb"

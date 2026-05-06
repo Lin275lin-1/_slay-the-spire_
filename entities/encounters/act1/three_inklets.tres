@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="EnemyEncounter" format=3 uid="uid://da4v3myp4p1av"]
+
+[ext_resource type="Script" uid="uid://dw53gdpom3gn6" path="res://scripts/costum_resources/enemy_entry.gd" id="1_qug6d"]
+[ext_resource type="Script" uid="uid://dgu4qpyr0pnnb" path="res://scripts/costum_resources/enemy_encounter.gd" id="2_2nd8e"]
+[ext_resource type="Resource" uid="uid://dtf3tk7dkxnxo" path="res://entities/enemies/inklet/inklet_stats.tres" id="2_888qq"]
+
+[sub_resource type="Resource" id="Resource_ky2mj"]
+script = ExtResource("1_qug6d")
+enemy_stats = ExtResource("2_888qq")
+position = Vector2(1100, 600)
+initial_buff = {
+"滑溜": 1
+}
+metadata/_custom_type_script = "uid://dw53gdpom3gn6"
+
+[sub_resource type="Resource" id="Resource_fodey"]
+script = ExtResource("1_qug6d")
+enemy_stats = ExtResource("2_888qq")
+position = Vector2(1400, 600)
+initial_buff = {
+"滑溜": 1
+}
+metadata/_custom_type_script = "uid://dw53gdpom3gn6"
+
+[sub_resource type="Resource" id="Resource_td308"]
+script = ExtResource("1_qug6d")
+enemy_stats = ExtResource("2_888qq")
+position = Vector2(1700, 600)
+initial_buff = {
+"滑溜": 1
+}
+metadata/_custom_type_script = "uid://dw53gdpom3gn6"
+
+[resource]
+script = ExtResource("2_2nd8e")
+type = 1
+weight = 1.0
+enemy_entries = Array[ExtResource("1_qug6d")]([SubResource("Resource_ky2mj"), SubResource("Resource_fodey"), SubResource("Resource_td308")])
+encounter_name = "three_inklet"
+metadata/_custom_type_script = "uid://dgu4qpyr0pnnb"

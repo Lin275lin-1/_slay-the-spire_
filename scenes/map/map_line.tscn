@@ -8,5 +8,6 @@ self_modulate = Color(0.9647059, 0.9843137, 0.9843137, 1)
 z_index = -1
 texture_repeat = 2
 width = 13.0
+default_color = Color(0, 0, 0, 1)
 texture = ExtResource("1_hx6oq")
 texture_mode = 1

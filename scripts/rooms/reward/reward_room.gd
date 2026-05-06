@@ -20,6 +20,16 @@ const CARD_TEXT :="Add New Card"
 @onready var rewards:VBoxContainer =%rewards
 @onready var return_button := $Loot/Button
 
+# 遗物稀有度权重（总和影响概率分布）
+@export var relic_common_weight := 6.0
+@export var relic_uncommon_weight := 3.0
+@export var relic_rare_weight := 1.0
+
+# 药水稀有度权重（若药水无稀有度可删除）
+@export var potion_common_weight := 6.0
+@export var potion_uncommon_weight := 3.0
+@export var potion_rare_weight := 1.0
+
 var card_reward_total_weight :=8.8
 var card_rarity_weights :={
 	Card.Rarity.COMMON:0.0,
@@ -46,20 +56,34 @@ func add_rewards(room: Room, context: RewardContext) -> void:
 		context.extra_relic_count += 1
 	if room.enemy_encounter.type == EnemyEncounter.Type.ELITE:
 		context.extra_relic_count += 1
-	# 常规奖励
+	
+	
+	_randomize_extra_potion_rewards(room,context)
+	print("额外遗物数量: ", context.extra_relic_count)
+	print("额外药水数量: ", context.extra_potion_count)	
 	add_gold_reward(room.enemy_encounter.roll_gold_reward())
 	add_card_reward(context)
-	# 额外奖励
+
+	# 额外卡牌
 	for i in range(context.extra_card_count):
 		add_card_reward(context)
-	# TODO: 需要随机算法
+
+	# 额外药水（使用加权随机）
 	for i in range(context.extra_potion_count):
-		#add_potion_reward()
-		add_potion_reward(ItemPool.current_potion_pool.pick_random().duplicate())
+		var potion = _get_random_weighted_potion()
+		if potion:
+			add_potion_reward(potion)
+
+	# 额外遗物（使用加权随机）
 	for i in range(context.extra_relic_count):
-		add_relic_reward(ItemPool.current_relic_pool.pick_random().duplicate())
+		var relic = _get_random_weighted_relic()
+		if relic:
+			add_relic_reward(relic)
+
+	# 额外金币
 	for extra_gold in context.extra_gold:
 		add_gold_reward(extra_gold)
+
 	
 
 func _on_return_button_entered():
@@ -237,3 +261,74 @@ func _on_card_reward_taken(card:Card)->void:
 	#print("DeckBefore:\n%s\n" % character_stats.deck)
 	character_stats.add_card_to_deck(card)
 	#print("DeckAfter:\n%s" % character_stats.deck)
+
+func _get_random_weighted_relic() -> Relic:
+	if not ItemPool.current_relic_pool or ItemPool.current_relic_pool.is_empty():
+		return null
+
+	# 计算总权重
+	var total_weight = relic_common_weight + relic_uncommon_weight + relic_rare_weight
+	var roll = randf() * total_weight
+
+	var target_rarity: int
+	if roll < relic_common_weight:
+		target_rarity = Relic.Rarity.COMMON
+	elif roll < relic_common_weight + relic_uncommon_weight:
+		target_rarity = Relic.Rarity.UNCOMMON
+	else:
+		target_rarity = Relic.Rarity.RARE
+
+	# 从当前池中筛选出该稀有度的遗物
+	var candidates := ItemPool.current_relic_pool.filter(
+		func(r: Relic): return r.rarity == target_rarity
+	)
+	if candidates.is_empty():
+		# 降级：如果没有该稀有度的遗物，从整个池随机
+		candidates = ItemPool.current_relic_pool
+	return candidates.pick_random().duplicate()
+
+func _get_random_weighted_potion() -> Potion:
+	if not ItemPool.current_potion_pool or ItemPool.current_potion_pool.is_empty():
+		return null
+
+	var total_weight = potion_common_weight + potion_uncommon_weight + potion_rare_weight
+	var roll = randf() * total_weight
+
+	var target_rarity: int
+	if roll < potion_common_weight:
+		target_rarity = Potion.Rarity.COMMON
+	elif roll < potion_common_weight + potion_uncommon_weight:
+		target_rarity = Potion.Rarity.UNCOMMON
+	else:
+		target_rarity = Potion.Rarity.RARE
+
+	var candidates := ItemPool.current_potion_pool.filter(
+		func(p: Potion): return p.rarity == target_rarity
+	)
+	if candidates.is_empty():
+		candidates = ItemPool.current_potion_pool
+	return candidates.pick_random().duplicate()
+
+func _randomize_extra_potion_rewards(room: Room, context: RewardContext) -> void:
+	var chance: float = 0.0
+	var bonus_amount: int = 0
+
+	match room.enemy_encounter.type:
+		EnemyEncounter.Type.WEAK:
+			chance = 0.3       # 10% 概率
+			bonus_amount = 1
+		EnemyEncounter.Type.STRONG:
+			chance = 0.5       # 30% 概率
+			bonus_amount = 1
+		EnemyEncounter.Type.ELITE:
+			chance = 0.7
+			bonus_amount = 1
+		EnemyEncounter.Type.BOSS:
+			chance = 1.0
+			bonus_amount = 2
+
+	# 可在此处考虑遗物加成（如“药水腰带”使概率翻倍等），暂时省略
+
+	if randf() < chance:
+		context.extra_potion_count += bonus_amount
+		print("幸运！额外获得药水 x%d" % bonus_amount)

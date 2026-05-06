@@ -7,6 +7,7 @@ const HAND_DISCARD_INTERVAL := 0.25
 @export var hand_manager: HandManager
 @export var relics: RelicHandler
 @onready var player: Player = $"../Player"
+@onready var combat_ui: CombatUI = %CombatUI
 
 var char_stats: CharacterStats
 # 抽一张牌的效果，这是为了将回合开始时的抽牌也压入结算栈中
@@ -53,8 +54,6 @@ func draw_card() -> Card:
 	if hand_manager.get_child_count() >= 10:
 		return null
 	var card = char_stats.draw_pile.draw_card()
-	
-	reshuffle_deck_from_discard_pile()
 	return card
 
 func add_card_to_hand(card: Card) -> void:
@@ -103,26 +102,20 @@ func exhaust_hand_card(card: Card) -> void:
 
 
 func discard_cards() -> void:
-	
 	if hand_manager.get_child_count() == 0:
 		Events.player_hand_discarded.emit()
 		return
-	var tween := create_tween()
+	
 	for child: CardUI in hand_manager.get_children():
 		if child.card.ethereal:
-			tween.tween_callback(char_stats.exhaust_pile.add_card.bind(child.card))
+			char_stats.exhaust_pile.add_card(child.card)
 			#TODO:卡片消耗特效
 		else:
-			tween.tween_callback(char_stats.discard_pile.add_card.bind(child.card))
-		tween.tween_callback(
-		func():
-			if is_instance_valid(child):
-				hand_manager.discard_card(child)
-			)
-		tween.tween_interval(HAND_DISCARD_INTERVAL)
-	tween.finished.connect(
-		func(): Events.player_hand_discarded.emit()
-	)
+			char_stats.discard_pile.add_card(child.card)
+			
+	hand_manager.discard_hand()
+	Events.player_hand_discarded.emit()
+		
 
 func hide_hand() -> void:
 	hand_manager.hide()
@@ -142,8 +135,10 @@ func reshuffle_deck_from_discard_pile() -> void:
 	if not char_stats.draw_pile.is_empty():
 		return
 	
+	combat_ui.animate_shuffle_deck(len(char_stats.get_discard_pile()), char_stats.color)
 	while not char_stats.discard_pile.is_empty():
 		char_stats.draw_pile.add_card(char_stats.discard_pile.draw_card())	
+	
 	char_stats.draw_pile.shuffle()
 
 func put_card_in_draw_pile(card: Card, top: bool = false) -> void:
@@ -160,7 +155,6 @@ func put_card_in_hand(card: Card) -> void:
 	else:
 		card.first_play_free = false
 		char_stats.discard_pile.add_card(card)
-
 
 func put_card_in_discard_pile(card: Card) -> void:
 	char_stats.discard_pile.add_card(card)
@@ -189,6 +183,11 @@ func _on_card_played(card: Card, _card_context: Dictionary) -> void:
 		char_stats.exhaust_pile.add_card(card)
 		Events.card_exhausted.emit(card)
 	else:
+		var discarded_card := CardInspectUI.new()
+		discarded_card.card = card
+		discarded_card.global_position = get_viewport().size / 2
+		discarded_card.global_position += discarded_card.size / 2
+		combat_ui.animate_fly_to_deck(discarded_card, true)
 		put_card_in_discard_pile(card)
 		
 func _on_relics_activated(type: Relic.TriggerType):

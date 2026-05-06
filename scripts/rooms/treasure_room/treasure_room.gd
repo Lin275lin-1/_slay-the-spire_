@@ -1,7 +1,10 @@
 extends Control
 
 const RELIC_UI_SCENE = preload("res://scenes/relichandler/relic_ui.tscn")
-const TREASURE_RELIC_PILE = preload("res://entities/Treasure/Treasure_relics.tres")
+
+@export var relic_common_weight := 6.0
+@export var relic_uncommon_weight := 3.0
+@export var relic_rare_weight := 1.0
 
 @export var gold_min := 50
 @export var gold_max := 150
@@ -14,21 +17,20 @@ const TREASURE_RELIC_PILE = preload("res://entities/Treasure/Treasure_relics.tre
 @onready var proceed_button: Button = $Button
 @onready var relic_display: Control = $HandsContainer/Control
 
+@onready var sparkles: CPUParticles2D = $Chest/Sparkles
+
 var is_opened: bool = false
 
 
 func _ready():
-
 	line_2d.modulate.a = 0.0
 	hands_container.visible = false
 	label.modulate.a = 0.0
-
 
 	chest.mouse_filter = Control.MOUSE_FILTER_STOP
 	chest.mouse_entered.connect(_on_chest_mouse_entered)
 	chest.mouse_exited.connect(_on_chest_mouse_exited)
 	chest.gui_input.connect(_on_chest_gui_input)
-
 
 	proceed_button.visible = false
 	proceed_button.pressed.connect(_on_proceed_pressed)
@@ -59,15 +61,16 @@ func _open_chest():
 	is_opened = true
 
 
+	if sparkles:
+		sparkles.emitting = false
+
 	hands_container.visible = true
 	label.modulate.a = 1.0
 	color_rect.color.a = 1.0
 
-
 	if chest.get_global_rect().has_point(get_global_mouse_position()):
 		var hide_tween = create_tween()
 		hide_tween.tween_property(line_2d, "modulate:a", 0.0, 0.0)
-
 
 	await get_tree().create_timer(1.0).timeout
 	%GoldExplosion.emitting = true
@@ -77,18 +80,17 @@ func _open_chest():
 
 func _give_reward():
 	var run_node = _get_run_node()
-	if run_node and run_node.stats:
-		var gold_amount = randi_range(gold_min, gold_max)
-		run_node.stats.gold += gold_amount
-		print("获得金币：", gold_amount)
+	if not run_node or not run_node.stats:
+		return
 
-#待修改
-	var relic_pile = TREASURE_RELIC_PILE
-	if relic_pile and relic_pile.relics.size() > 0:
-		var random_relic: Relic = relic_pile.relics.pick_random()
-		if run_node:
-			run_node.top_bar.relic_handler.add_relic(random_relic)
-		_show_relic_visual(random_relic)
+	var gold_amount = randi_range(gold_min, gold_max)
+	run_node.stats.gold += gold_amount
+	print("获得金币：", gold_amount)
+
+	var relic = _get_random_weighted_relic(run_node.stats)
+	if relic:
+		run_node.stats.add_relic(relic)
+		_show_relic_visual(relic)
 
 
 func _show_relic_visual(relic: Relic):
@@ -101,7 +103,6 @@ func _show_relic_visual(relic: Relic):
 	relic_ui.mouse_filter = Control.MOUSE_FILTER_STOP
 	relic_ui.z_index = 2
 	relic_ui.set_relic(relic)
-	# 不连接任何点击信号，只保留悬停提示
 
 
 func _on_proceed_pressed():
@@ -129,3 +130,33 @@ func _get_run_node() -> Node:
 			return current
 		current = current.get_parent()
 	return null
+
+
+func _get_random_weighted_relic(stats: RunStats) -> Relic:
+	var pool = ItemPool.current_relic_pool
+	if not pool or pool.is_empty():
+		return null
+
+	var available := pool.duplicate()
+	if stats:
+		available = available.filter(func(r: Relic): return not stats.has_relic(r.id))
+
+	if available.is_empty():
+		return null
+
+	var total_weight = relic_common_weight + relic_uncommon_weight + relic_rare_weight
+	var roll = randf() * total_weight
+
+	var target_rarity: int
+	if roll < relic_common_weight:
+		target_rarity = Relic.Rarity.COMMON
+	elif roll < relic_common_weight + relic_uncommon_weight:
+		target_rarity = Relic.Rarity.UNCOMMON
+	else:
+		target_rarity = Relic.Rarity.RARE
+
+	var candidates := available.filter(func(r: Relic): return r.rarity == target_rarity)
+	if candidates.is_empty():
+		candidates = available
+
+	return candidates.pick_random().duplicate()

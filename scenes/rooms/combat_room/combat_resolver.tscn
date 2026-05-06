@@ -28,7 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 mouse_filter = 2
-theme_override_constants/separation = -250
+theme_override_constants/separation = -300
 
 [node name="CardInspectUI" parent="CardResolveStack" unique_id=946762981 instance=ExtResource("2_fxkra")]
 layout_mode = 2

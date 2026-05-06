@@ -1,0 +1,117 @@
+[gd_resource type="Resource" format=3 uid="uid://cdf1skwhm2y7b"]
+
+[ext_resource type="Script" uid="uid://ce34juwu5b0yr" path="res://scripts/costum_resources/intents/intent.gd" id="1_73d0q"]
+[ext_resource type="Script" uid="uid://iqqyr44teapg" path="res://scripts/costum_resources/intents/sub_intent.gd" id="2_oleog"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_uym0m"]
+[ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_skbh5"]
+[ext_resource type="Script" uid="uid://bces7ijyodhmv" path="res://scripts/costum_resources/intents/attack_sub_intent.gd" id="6_ne2ja"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="7_myb4r"]
+[ext_resource type="Script" uid="uid://c2p6buhbk6em8" path="res://scripts/costum_resources/intents/apply_debuff_sub_intent.gd" id="9_5hryg"]
+[ext_resource type="Script" uid="uid://dpbv4m5rd0bbq" path="res://scripts/costum_resources/intents/apply_buff_sub_intent.gd" id="11_vy1qo"]
+[ext_resource type="Script" uid="uid://tkmkfd31xau8" path="res://entities/enemies/flyconnid/fly_condig_ai.gd" id="12_oleog"]
+
+[sub_resource type="Resource" id="Resource_fah07"]
+script = ExtResource("3_uym0m")
+fixed_value = 8
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_tthnq"]
+script = ExtResource("3_uym0m")
+fixed_value = 8
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_sigpv"]
+script = ExtResource("4_skbh5")
+damage_provider = SubResource("Resource_tthnq")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_81sut"]
+script = ExtResource("6_ne2ja")
+damage_provider = SubResource("Resource_fah07")
+effect = SubResource("Resource_sigpv")
+metadata/_custom_type_script = "uid://bces7ijyodhmv"
+
+[sub_resource type="Resource" id="Resource_i3rsp"]
+script = ExtResource("3_uym0m")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_shxy0"]
+script = ExtResource("7_myb4r")
+buff_name = "脆弱"
+buff_stack_provider = SubResource("Resource_i3rsp")
+target_type = 2
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_wkncv"]
+script = ExtResource("9_5hryg")
+type = 3
+effect = SubResource("Resource_shxy0")
+metadata/_custom_type_script = "uid://c2p6buhbk6em8"
+
+[sub_resource type="Resource" id="Resource_5xa80"]
+script = ExtResource("1_73d0q")
+sub_intents = Array[ExtResource("2_oleog")]([SubResource("Resource_81sut"), SubResource("Resource_wkncv")])
+intent_name = "FrailSpores"
+anim_name = "attack"
+metadata/_custom_type_script = "uid://ce34juwu5b0yr"
+
+[sub_resource type="Resource" id="Resource_u6u3m"]
+script = ExtResource("3_uym0m")
+fixed_value = 11
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_oleog"]
+script = ExtResource("3_uym0m")
+fixed_value = 11
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_xuu1d"]
+script = ExtResource("4_skbh5")
+damage_provider = SubResource("Resource_oleog")
+target_type = 2
+metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_3dl2m"]
+script = ExtResource("6_ne2ja")
+damage_provider = SubResource("Resource_u6u3m")
+effect = SubResource("Resource_xuu1d")
+metadata/_custom_type_script = "uid://bces7ijyodhmv"
+
+[sub_resource type="Resource" id="Resource_42blr"]
+script = ExtResource("1_73d0q")
+sub_intents = Array[ExtResource("2_oleog")]([SubResource("Resource_3dl2m")])
+intent_name = "Smash"
+anim_name = "attack"
+metadata/_custom_type_script = "uid://ce34juwu5b0yr"
+
+[sub_resource type="Resource" id="Resource_qhues"]
+script = ExtResource("3_uym0m")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_8j458"]
+script = ExtResource("7_myb4r")
+buff_name = "易伤"
+buff_stack_provider = SubResource("Resource_qhues")
+target_type = 2
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_ghmje"]
+script = ExtResource("11_vy1qo")
+type = 3
+effect = SubResource("Resource_8j458")
+metadata/_custom_type_script = "uid://dpbv4m5rd0bbq"
+
+[sub_resource type="Resource" id="Resource_171ud"]
+script = ExtResource("1_73d0q")
+sub_intents = Array[ExtResource("2_oleog")]([SubResource("Resource_ghmje")])
+intent_name = "VulnerableSpores"
+anim_name = "cast"
+metadata/_custom_type_script = "uid://ce34juwu5b0yr"
+
+[resource]
+script = ExtResource("12_oleog")
+intents = Array[ExtResource("1_73d0q")]([SubResource("Resource_5xa80"), SubResource("Resource_42blr"), SubResource("Resource_171ud")])
+metadata/_custom_type_script = "uid://dpkht0suo8prh"

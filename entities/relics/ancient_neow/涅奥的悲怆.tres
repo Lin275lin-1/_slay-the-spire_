@@ -1,0 +1,29 @@
+[gd_resource type="Resource" format=3 uid="uid://x504el3q5nu5"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_rgf6w"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_ttbqv"]
+[ext_resource type="Script" uid="uid://bhhtjppe5dfcx" path="res://scripts/costum_resources/effects/damage_effect.gd" id="3_cdmrn"]
+[ext_resource type="Texture2D" uid="uid://45kp83" path="res://images/atlases/relic_atlas.sprites/neows_lament.tres" id="4_575dv"]
+[ext_resource type="Script" uid="uid://buoxbaxcguagv" path="res://entities/relics/ancient_neow/涅奥的悲怆.gd" id="5_yk7o4"]
+
+[sub_resource type="Resource" id="Resource_lsl1u"]
+script = ExtResource("2_ttbqv")
+fixed_value = 50
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_iaq81"]
+script = ExtResource("3_cdmrn")
+damage_provider = SubResource("Resource_lsl1u")
+target_type = 3
+metadata/_custom_type_script = "uid://bhhtjppe5dfcx"
+
+[resource]
+script = ExtResource("5_yk7o4")
+relic_name = "涅奥的悲恸"
+id = "neows_lament"
+icon = ExtResource("4_575dv")
+description = "接下来的3场战斗开始时，对所有敌人造成50点伤害"
+trigger_type = 2
+rarity = 32
+effects = Array[ExtResource("1_rgf6w")]([SubResource("Resource_iaq81")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

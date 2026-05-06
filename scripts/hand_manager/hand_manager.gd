@@ -121,13 +121,12 @@ func _on_card_previewed(pre_card: CardUI, to_preview: bool) -> void:
 
 # TODO: 卡牌消耗/移向弃牌堆动画
 func discard_card(card: CardUI) -> void:
-	card.queue_free()
 	# 从手牌中移出时去掉本回合打出免费的标记
 	card.card.first_play_free = false
-	# 等待card.queue_free()
-	await get_tree().process_frame
+	card.discarded = true
+	Events.card_discarded.emit(card)
 	set_cards()
-
+	
 func exhaust_card(card: CardUI) -> void:
 	Events.card_exhausted.emit(card.card)
 	card.queue_free()
@@ -142,8 +141,9 @@ func find_card_ui(card: Card) -> CardUI:
 	return null
 
 func discard_hand() -> void:
-	for child in get_children():
-		discard_card(child)
+	for child: CardUI in get_children():
+		child.card.first_play_free = false
+		Events.card_discarded.emit(child)
 
 func disable_hand() -> void:
 	for card_ui: CardUI in get_children():

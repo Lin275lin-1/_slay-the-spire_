@@ -18,7 +18,7 @@ metadata/_custom_type_script = "uid://bjrlwk5w4gqtk"
 [sub_resource type="Resource" id="Resource_urjtc"]
 script = ExtResource("1_co8ql")
 enemy_stats = SubResource("Resource_xndn5")
-position = Vector2(1200, 520)
+position = Vector2(1200, 600)
 metadata/_custom_type_script = "uid://dw53gdpom3gn6"
 
 [sub_resource type="Resource" id="Resource_5vn42"]
@@ -33,7 +33,7 @@ metadata/_custom_type_script = "uid://bjrlwk5w4gqtk"
 [sub_resource type="Resource" id="Resource_b8gyn"]
 script = ExtResource("1_co8ql")
 enemy_stats = SubResource("Resource_5vn42")
-position = Vector2(1700, 520)
+position = Vector2(1700, 600)
 metadata/_custom_type_script = "uid://dw53gdpom3gn6"
 
 [resource]

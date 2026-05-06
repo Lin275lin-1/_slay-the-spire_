@@ -416,7 +416,7 @@ func handle_room_full_of_cheese_op2()->void:
 		print(char_stats.health)
 		print("原来遗物的数量")
 		print(run_stats.relics.size())
-		run_stats.add_relic(relics[3])
+		run_stats.add_relic(ItemPool.event_relic_dict["天选芝士"])
 		print("现在遗物数量")
 		print(run_stats.relics.size())
 		

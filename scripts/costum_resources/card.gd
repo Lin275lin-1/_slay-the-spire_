@@ -61,6 +61,8 @@ enum COLOR {
 @export var ethereal: bool
 # 是否带有"奇巧"词条
 @export var sly: bool
+# 是否带有“永恒”词条
+@export var eternal: bool = false
 @export var playable : bool = true
 # 升级后
 @export_group("升级后")
@@ -220,6 +222,8 @@ func append_features(desc: String) -> String:
 		desc += "[p][center][color=gold]消耗。[/color][/center]"
 	if ethereal:
 		desc += "[p][center][color=gold]虚无。[/color][/center]"
+	if eternal:
+		desc += "[p][center][color=gold]永恒。[/color][/center]"
 	if enchantment:
 		desc += enchantment.get_additional_card_description()
 	return desc
@@ -270,8 +274,11 @@ func set_echantment(enchantment_: Enchantment) -> void:
 	enchantment = enchantment_
 	enchantment.on_enchant_set(self)
 
-func can_upgrade() -> bool:
+func can_be_upgraded() -> bool:
 	return upgradable and !upgraded
+
+func can_be_removed() -> bool:
+	return !eternal
 	
 func has_highlight_condition(player: Node, target: Node) -> bool:
 	for effect: Effect in effects:

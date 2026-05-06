@@ -140,13 +140,13 @@ func set_card(value: Card) -> void:
 		visuals.set_hightlight(playable, card.has_highlight_condition(player, null))
 
 func _set_playable(value: bool) -> void:
-	playable = value
-	visuals.set_hightlight(playable, card.has_highlight_condition(player, null))
-	# TODO:改变卡牌外观
+	if card.playable:
+		playable = value
+		visuals.set_hightlight(playable, card.has_highlight_condition(player, null))
 
 func _set_disabled(value: bool) -> void:
 	disabled = value
-
+		
 func _input(event: InputEvent) -> void:
 	if disabled:
 		return

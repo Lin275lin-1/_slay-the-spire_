@@ -13,6 +13,9 @@ signal potion_slots_changed()
 signal relic_added(relic: Relic)
 signal relic_removed(relic: Relic)
 
+# 战斗阶段
+signal stage_changed(new_stage: int)
+
 const STARTING_GOLD:= 75
 
 const BASE_CARD_REWARDS := 3;
@@ -28,6 +31,12 @@ var potions: Array[Potion] = []
 ## 遗物
 var relics: Array[Relic] = []
 
+##当前房间
+var current_room: Room
+
+##当前阶段
+var current_stage : int = 1
+var max_stage : int = 2  
 
 
 @export var card_rewards := BASE_CARD_REWARDS
@@ -94,7 +103,9 @@ func set_floor(new_floor_climbed)->void:
 	floor_changed.emit(new_floor_climbed)
 
 func has_relic(relic_id: String) -> bool:
+	#print("==========当前已拥有遗物============")
 	for relic in relics:
+		#print(relic.relic_name)
 		if relic.id == relic_id:
 			return true
 	return false
@@ -137,3 +148,14 @@ func relic_count()->int:
 	
 	
 	
+## 推进到下一个阶段
+func advance_stage() -> void:
+	if current_stage >= max_stage:
+		return
+	current_stage += 1
+	stage_changed.emit(current_stage)
+
+## 重置地图相关数据（用于阶段切换时清除旧地图）
+func reset_map() -> void:
+	map_data.clear()
+	floors_climbed = 0

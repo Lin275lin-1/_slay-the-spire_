@@ -14,7 +14,7 @@ func _ready() -> void:
 	pass
 
 func initialize() -> void:
-	forgeable_cards = char_stats.deck.cards.filter(func(card: Card): return card.can_upgrade())
+	forgeable_cards = char_stats.deck.cards.filter(func(card: Card): return card.can_be_upgraded())
 	if forgeable_cards.is_empty():
 		forging.disabled = true
 
