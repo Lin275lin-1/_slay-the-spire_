@@ -31,8 +31,8 @@ var potions: Array[Potion] = []
 ## 遗物
 var relics: Array[Relic] = []
 
-##当前房间
-var current_room: Room
+###当前房间
+#var current_room: Room
 
 ##当前阶段
 var current_stage : int = 1
