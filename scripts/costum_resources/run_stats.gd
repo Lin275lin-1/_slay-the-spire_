@@ -79,6 +79,13 @@ func add_relic(relic: Relic) -> void:
 func remove_relic(relic: Relic) -> void:
 	relics.remove_at(relics.find(relic))
 	relic_removed.emit(relic)
+
+func remove_relic_by_name(relic_name: String) -> bool:
+	for relic: Relic in relics:
+		if relic.relic_name == relic_name:
+			remove_relic(relic)
+			return true
+	return false
 			
 func remove_potion(index: int) -> void:
 	if index >= max_potion_slots:
