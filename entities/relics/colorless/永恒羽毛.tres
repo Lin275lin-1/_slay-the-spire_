@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://bv72go5ep65dk"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_11vf8"]
+[ext_resource type="Texture2D" uid="uid://b425ul8" path="res://images/atlases/relic_atlas.sprites/eternal_feather.tres" id="2_p7q82"]
+[ext_resource type="Script" uid="uid://d3bwt84n3xpd7" path="res://entities/relics/colorless/永恒羽毛.gd" id="3_tikyd"]
+
+[resource]
+script = ExtResource("3_tikyd")
+relic_name = "永恒羽毛"
+id = "eternal_feather"
+icon = ExtResource("2_p7q82")
+description = "你的[color=gold]牌组[/color]中每有5张牌，当你进入休息处时就会回复3点生命"
+rarity = 2
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

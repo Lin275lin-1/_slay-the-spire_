@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://cyhbqgnujnuty"]
+
+[ext_resource type="Resource" uid="uid://cdf1skwhm2y7b" path="res://entities/enemies/flyconnid/flyconid_ai.tres" id="1_ev1tm"]
+[ext_resource type="Script" uid="uid://bjrlwk5w4gqtk" path="res://scripts/costum_resources/enemy_stats.gd" id="1_oiqq4"]
+[ext_resource type="PackedScene" uid="uid://tl7twgqvlxrq" path="res://scenes/creature_visuals/flyconid.tscn" id="3_x8scg"]
+
+[resource]
+script = ExtResource("1_oiqq4")
+ai = ExtResource("1_ev1tm")
+enemy_name = "飞蝇菌子"
+hightest_max_health = 49
+lowest_max_health = 47
+visuals_scene = ExtResource("3_x8scg")
+metadata/_custom_type_script = "uid://bjrlwk5w4gqtk"

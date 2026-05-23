@@ -1,0 +1,42 @@
+[gd_resource type="Resource" format=3 uid="uid://dcx6o4h6e7ct0"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_smj6v"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_cksn5"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_je8ff"]
+[ext_resource type="Texture2D" uid="uid://caq7thq" path="res://images/atlases/relic_atlas.sprites/sparkling_rouge.tres" id="4_dipok"]
+[ext_resource type="Script" uid="uid://bogx81yfdrkgm" path="res://entities/relics/colorless/闪亮口红.gd" id="5_cksn5"]
+
+[sub_resource type="Resource" id="Resource_pqir8"]
+script = ExtResource("2_cksn5")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_6ehyu"]
+script = ExtResource("3_je8ff")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_pqir8")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_5bses"]
+script = ExtResource("2_cksn5")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_65fg0"]
+script = ExtResource("3_je8ff")
+buff_name = "敏捷"
+buff_stack_provider = SubResource("Resource_5bses")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("5_cksn5")
+relic_name = "闪亮口红"
+id = "sparkling_rough"
+icon = ExtResource("4_dipok")
+description = "在你的第3回合开始时，获得2点力量和1点敏捷"
+trigger_type = 1
+rarity = 2
+effects = Array[ExtResource("1_smj6v")]([SubResource("Resource_6ehyu"), SubResource("Resource_65fg0")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://bhnr6cctucp1s"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_quwuw"]
+[ext_resource type="Texture2D" uid="uid://cfbyjy8" path="res://images/atlases/relic_atlas.sprites/punch_dagger.tres" id="2_1or27"]
+[ext_resource type="Script" uid="uid://m8e7c3ud6fqx" path="res://entities/relics/shop/拳刃.gd" id="3_fg8m5"]
+
+[resource]
+script = ExtResource("3_fg8m5")
+relic_name = "拳刃"
+id = "punch_dagger"
+icon = ExtResource("2_1or27")
+description = "拾起时，选择一张攻击牌为它[color=gold]附魔[/color]：[color=purple]动量[/color]5"
+rarity = 16
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

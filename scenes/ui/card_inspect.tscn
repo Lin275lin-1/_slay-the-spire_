@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://hpqpdu16q5ie" path="res://scripts/ui/card_inspect.gd" id="1_63gnn"]
 [ext_resource type="Texture2D" uid="uid://b4ffylh" path="res://images/atlases/ui_atlas.sprites/settings_tiny_left_arrow.tres" id="2_gqhu0"]
 [ext_resource type="PackedScene" uid="uid://cbba4s2smp5b2" path="res://scenes/ui/card_inspect_ui.tscn" id="3_nq7og"]
+[ext_resource type="Resource" uid="uid://dk4qphec16bps" path="res://entities/cards/ironclad/烙印.tres" id="4_q77k8"]
 [ext_resource type="Texture2D" uid="uid://kjsi4o" path="res://images/atlases/ui_atlas.sprites/settings_tiny_right_arrow.tres" id="6_1f1oo"]
 
 [node name="CardInspect" type="Control" unique_id=302635351]
@@ -71,6 +72,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+card = ExtResource("4_q77k8")
 
 [node name="RightButtonContainer" type="Control" parent="HBoxContainer" unique_id=1210935373]
 custom_minimum_size = Vector2(109, 120)

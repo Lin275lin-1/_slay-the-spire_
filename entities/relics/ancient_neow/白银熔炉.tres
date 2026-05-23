@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://ct5gxnnqjgxp"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_4xl2a"]
+[ext_resource type="Texture2D" uid="uid://chgk1nj" path="res://images/atlases/relic_atlas.sprites/silver_crucible.tres" id="2_u4nl3"]
+[ext_resource type="Script" uid="uid://dmo487uhq54qf" path="res://entities/relics/ancient_neow/白银熔炉.gd" id="3_u3v7d"]
+
+[resource]
+script = ExtResource("3_u3v7d")
+relic_name = "白银熔炉"
+id = "silver_crucible"
+icon = ExtResource("2_u4nl3")
+description = "你遇到的前2次卡牌奖励将是被升级过的。"
+rarity = 32
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

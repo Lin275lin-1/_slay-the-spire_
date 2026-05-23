@@ -1,0 +1,30 @@
+[gd_resource type="Resource" format=3 uid="uid://dsvdriay0qa6r"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_wady3"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_gufwy"]
+[ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="3_rlmbj"]
+[ext_resource type="Texture2D" uid="uid://vuexon" path="res://images/atlases/relic_atlas.sprites/captains_wheel.tres" id="4_cs1br"]
+[ext_resource type="Script" uid="uid://rxwvoy3mt1a4" path="res://entities/relics/colorless/舵盘.gd" id="5_gufwy"]
+
+[sub_resource type="Resource" id="Resource_cq1cj"]
+script = ExtResource("2_gufwy")
+fixed_value = 18
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_122k7"]
+script = ExtResource("3_rlmbj")
+block_provider = SubResource("Resource_cq1cj")
+no_modifiers = true
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[resource]
+script = ExtResource("5_gufwy")
+relic_name = "舵盘"
+id = "captains_wheel"
+icon = ExtResource("4_cs1br")
+description = "在你的第三回合开始时，获得18点[color=gold]格挡[/color]"
+trigger_type = 1
+rarity = 4
+effects = Array[ExtResource("1_wady3")]([SubResource("Resource_122k7")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

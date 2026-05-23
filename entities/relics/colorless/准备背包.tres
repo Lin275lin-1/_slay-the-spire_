@@ -1,0 +1,33 @@
+[gd_resource type="Resource" format=3 uid="uid://cnyy847ljcitu"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_eqqb0"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_t4fom"]
+[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="3_gshb8"]
+[ext_resource type="Script" uid="uid://c8ly86kb5vc65" path="res://scripts/costum_resources/effects/iteration_effect.gd" id="4_c0f8j"]
+[ext_resource type="Texture2D" uid="uid://breus45" path="res://images/atlases/relic_atlas.sprites/bag_of_preparation.tres" id="5_fh52k"]
+[ext_resource type="Script" uid="uid://cnkajj7dnr62y" path="res://entities/relics/colorless/准备背包.gd" id="6_t4fom"]
+
+[sub_resource type="Resource" id="Resource_ykkev"]
+script = ExtResource("2_t4fom")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_g3h2u"]
+script = ExtResource("3_gshb8")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_cevr4"]
+script = ExtResource("4_c0f8j")
+count_provider = SubResource("Resource_ykkev")
+effects = Array[ExtResource("1_eqqb0")]([SubResource("Resource_g3h2u")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
+
+[resource]
+script = ExtResource("6_t4fom")
+relic_name = "准备背包"
+id = "bag_of_preparation"
+icon = ExtResource("5_fh52k")
+description = "在每场战斗开始时，额外抽2张牌"
+trigger_type = 1
+effects = Array[ExtResource("1_eqqb0")]([SubResource("Resource_cevr4")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

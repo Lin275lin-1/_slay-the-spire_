@@ -1,0 +1,41 @@
+[gd_resource type="Resource" format=3 uid="uid://c6kx5ka0k6qv8"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_uhhuq"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_q13ib"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_x2tx4"]
+[ext_resource type="Texture2D" uid="uid://cmcfl1l" path="res://images/atlases/relic_atlas.sprites/reptile_trinket.tres" id="4_k52s1"]
+[ext_resource type="Script" uid="uid://qgmo56hv3cxh" path="res://entities/relics/colorless/爬行动物饰品.gd" id="5_q13ib"]
+
+[sub_resource type="Resource" id="Resource_86myq"]
+script = ExtResource("2_q13ib")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_4l23d"]
+script = ExtResource("3_x2tx4")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_86myq")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_qc8yu"]
+script = ExtResource("2_q13ib")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_57pdc"]
+script = ExtResource("3_x2tx4")
+buff_name = "爬行动物饰品"
+buff_stack_provider = SubResource("Resource_qc8yu")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("5_q13ib")
+relic_name = "爬行动物饰品"
+id = "reptile_trinket"
+icon = ExtResource("4_k52s1")
+description = "当你使用药水时，在本回合获得3点力量"
+rarity = 2
+effects = Array[ExtResource("1_uhhuq")]([SubResource("Resource_4l23d"), SubResource("Resource_57pdc")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

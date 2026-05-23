@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://cjmftmvmou6ug"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_rtswc"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_otdnn"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="2_txejh"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_di3m5"]
+[ext_resource type="Texture2D" uid="uid://2vv7n1" path="res://images/atlases/relic_atlas.sprites/akabeko.tres" id="4_4mpik"]
+
+[sub_resource type="Resource" id="Resource_4rvi2"]
+script = ExtResource("2_otdnn")
+fixed_value = 8
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_fk2eq"]
+script = ExtResource("3_di3m5")
+buff_name = "活力"
+buff_stack_provider = SubResource("Resource_4rvi2")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_txejh")
+relic_name = "赤牛"
+id = "akabeko"
+icon = ExtResource("4_4mpik")
+description = "在每场战斗开始时，获得8点[color=gold]活力[/color]"
+trigger_type = 2
+rarity = 2
+effects = Array[ExtResource("1_rtswc")]([SubResource("Resource_fk2eq")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

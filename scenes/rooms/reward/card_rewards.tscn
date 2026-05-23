@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://cgjob5cnnv3xf"]
 
-[ext_resource type="Texture2D" uid="uid://d2j6mr7oiuuyh" path="res://images/rooms/architect_victory/architect_victory_bg.png" id="1_1jgo7"]
+[ext_resource type="Texture2D" uid="uid://bx4tt0y7pmtet" path="res://images/rooms/architect_victory/architect_victory_bg.png" id="1_1jgo7"]
 [ext_resource type="Script" uid="uid://dkeir2n32plbu" path="res://scripts/ui/card_rewards.gd" id="2_eovk8"]
-[ext_resource type="Texture2D" uid="uid://bkbggtnccf6pi" path="res://images/ui/reward_screen/reward_banner.png" id="2_ivq4g"]
+[ext_resource type="Texture2D" uid="uid://sx01rrq77xc5" path="res://images/ui/reward_screen/reward_banner.png" id="2_ivq4g"]
 [ext_resource type="PackedScene" uid="uid://uxv6ncqktd1c" path="res://scenes/ui/card_menu_ui.tscn" id="2_p3che"]
-[ext_resource type="Texture2D" uid="uid://cyruikkcbbm0f" path="res://images/ui/reward_screen/reward_skip_button.png" id="3_ivq4g"]
+[ext_resource type="Texture2D" uid="uid://bu4wsg1bugiib" path="res://images/ui/reward_screen/reward_skip_button.png" id="3_ivq4g"]
 [ext_resource type="PackedScene" uid="uid://h3da6tbyw5e0" path="res://scenes/ui/tool_tip.tscn" id="4_eovk8"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eovk8"]

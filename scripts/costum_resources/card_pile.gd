@@ -5,8 +5,23 @@ signal card_pile_size_changed(card_amout: int)
 
 @export var cards: Array[Card] = []
 
+
+
+func get_unique_cards() -> Array[Card]:
+	var unique: Array[Card] = []
+	for card in cards:
+		if not unique.has(card):
+			unique.append(card)
+	return unique
+
+
 func is_empty() -> bool:
 	return cards.is_empty()
+	
+#remove the card at position i
+func remove_at_i(i:int)->void:
+	cards.remove_at(i)
+	card_pile_size_changed.emit(cards.size())
 
 func draw_card() -> Card:
 	var ret: Card = cards.pop_front()
@@ -19,6 +34,10 @@ func add_card(card: Card) -> void:
 
 func add_card_to_top(card: Card) -> void:
 	cards.insert(0, card)
+	card_pile_size_changed.emit(cards.size())
+
+func remove_card(card: Card) -> void:
+	cards.erase(card)
 	card_pile_size_changed.emit(cards.size())
 
 func shuffle() -> void:

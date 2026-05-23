@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dp7wdlyhund3e"]
+
+[ext_resource type="Script" uid="uid://ba2i3686iuabk" path="res://scripts/ui/potion_handler.gd" id="1_6kact"]
+[ext_resource type="Texture2D" uid="uid://ch3nihw" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_char_backdrop.tres" id="1_jn1kl"]
+[ext_resource type="PackedScene" uid="uid://l5o2kc2hcb4h" path="res://scenes/ui/top_bar/potion_ui.tscn" id="2_6kact"]
+
+[node name="TopBarPotion" type="MarginContainer" unique_id=303628199]
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 4
+script = ExtResource("1_6kact")
+
+[node name="PotionBackground" type="NinePatchRect" parent="." unique_id=1247279213]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+texture = ExtResource("1_jn1kl")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1382200655]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="PotionPlaceHolder" type="HBoxContainer" parent="MarginContainer" unique_id=959057598]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Potion2" parent="MarginContainer/PotionPlaceHolder" unique_id=40549828 instance=ExtResource("2_6kact")]
+layout_mode = 2
+
+[node name="Potion4" parent="MarginContainer/PotionPlaceHolder" unique_id=26933637 instance=ExtResource("2_6kact")]
+layout_mode = 2
+
+[node name="Potion5" parent="MarginContainer/PotionPlaceHolder" unique_id=1908498461 instance=ExtResource("2_6kact")]
+layout_mode = 2

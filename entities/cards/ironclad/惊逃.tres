@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cgthpdodyqkgs"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_e0t4e"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_bdcn8"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_3buw1"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_u5pq3"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_xamam"]
+[ext_resource type="Texture2D" uid="uid://cthqvtn" path="res://images/atlases/card_atlas.sprites/ironclad/stampede.tres" id="5_y7o87"]
+
+[sub_resource type="Resource" id="Resource_rcndx"]
+script = ExtResource("3_u5pq3")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_y1jm0"]
+script = ExtResource("4_xamam")
+buff_name = "惊逃"
+buff_stack_provider = SubResource("Resource_rcndx")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_3bt2t"]
+script = ExtResource("3_u5pq3")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_df3jx"]
+script = ExtResource("4_xamam")
+buff_name = "惊逃"
+buff_stack_provider = SubResource("Resource_3bt2t")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("3_3buw1")
+id = "惊逃"
+type = 4
+base_cost = 2
+rarity = 2
+effects = Array[ExtResource("2_bdcn8")]([SubResource("Resource_y1jm0")])
+portrait = ExtResource("5_y7o87")
+base_description = "[center]在你的回合结束时，随机打出你[color=gold]手牌[/color]中的1张攻击牌攻击随机敌人。[/center]"
+upgraded_cost = 1
+upgraded_description = "[center]在你的回合结束时，随机打出你[color=gold]手牌[/color]中的1张攻击牌攻击随机敌人。[/center]"
+upgraded_effects = Array[ExtResource("2_bdcn8")]([SubResource("Resource_df3jx")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

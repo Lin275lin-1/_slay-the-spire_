@@ -15,7 +15,16 @@ extends Resource
 # 决定怪物使用的动画
 @export var anim_name: String
 
-# 不考虑多玩家
-func calc_final_values(source: Creature, target: Creature) -> void:
+func set_target(value: Creature):
 	for sub_intent: SubIntent in sub_intents:
-		sub_intent.calc_final_value(source, target)
+		sub_intent.target = value
+		
+func set_source(value: Creature):
+	for sub_intent: SubIntent in sub_intents:
+		sub_intent.source = value
+
+func has_attack_sub_intent() -> bool:
+	for sub_intent in sub_intents:
+		if sub_intent is AttackSubIntent:
+			return true
+	return false

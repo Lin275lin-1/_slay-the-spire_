@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://dpey3jeoe8kg1"]
+
+[ext_resource type="Script" uid="uid://usdp4yt6enkk" path="res://scripts/costum_resources/buffs/demon_form_buff.gd" id="1_8if5v"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_om86l"]
+[ext_resource type="Texture2D" uid="uid://d3n12gfxmagex" path="res://images/powers/ritual_power.png" id="2_8namv"]
+
+[resource]
+script = ExtResource("1_om86l")
+buff_id = "ritual"
+buff_name = "仪式"
+description = "回合结束时获得{stacks}层力量"
+icon = ExtResource("2_8namv")
+buff_script = ExtResource("1_8if5v")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

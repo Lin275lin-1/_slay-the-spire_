@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RelicPile" format=3 uid="uid://brhklyh3ref7e"]
+
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="1_mwmt0"]
+[ext_resource type="Script" uid="uid://cgkirnvrwbk4i" path="res://scripts/costum_resources/relic_pile.gd" id="2_538rq"]
+[ext_resource type="Resource" uid="uid://cb1u8x714pj53" path="res://entities/relics/colorless/不休陀螺.tres" id="2_t4myo"]
+[ext_resource type="Resource" uid="uid://ceg16mnw32ws6" path="res://entities/relics/colorless/五轮书.tres" id="3_il6y7"]
+[ext_resource type="Resource" uid="uid://dcl6ivh27c3xx" path="res://entities/relics/colorless/冰淇淋.tres" id="4_cb201"]
+[ext_resource type="Resource" uid="uid://b0qfah41jc6tq" path="res://entities/relics/colorless/冻结之蛋.tres" id="5_m3j3a"]
+[ext_resource type="Resource" uid="uid://cnyy847ljcitu" path="res://entities/relics/colorless/准备背包.tres" id="6_bwdr0"]
+
+[resource]
+script = ExtResource("2_538rq")
+relics = Array[ExtResource("1_mwmt0")]([ExtResource("2_t4myo"), ExtResource("3_il6y7"), ExtResource("4_cb201"), ExtResource("5_m3j3a"), ExtResource("6_bwdr0")])
+metadata/_custom_type_script = "uid://cgkirnvrwbk4i"

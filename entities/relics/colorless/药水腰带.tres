@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://chwko3hhq0ins"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_crckj"]
+[ext_resource type="Texture2D" uid="uid://b0qq5d6" path="res://images/atlases/relic_atlas.sprites/potion_belt.tres" id="2_583t4"]
+[ext_resource type="Script" uid="uid://bpcg627ep0vo5" path="res://entities/relics/colorless/药水腰带.gd" id="3_f0xnu"]
+
+[resource]
+script = ExtResource("3_f0xnu")
+relic_name = "药水腰带"
+id = "potion_belt"
+icon = ExtResource("2_583t4")
+description = "拾起时，获得2个药水栏位"
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

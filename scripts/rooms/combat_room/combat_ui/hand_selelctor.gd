@@ -15,17 +15,20 @@ var max_select := 10
 var min_select := 0
 var selected_cards: Array[Card] = []
 
+var char_stats: CharacterStats: set = _set_char_stats
+
 func _ready() -> void:
 	comfirm_button.pressed.connect(_on_comfirm)
 	cancel_button.pressed.connect(_on_cancel)
 	comfirm_button.hide()
 	cancel_button.hide()
 	
+	
 func single_select(cards_to_choose: Array[Card], title: String) -> Array[Card]:
 	#return await _start_selection(cards_to_choose, title, Enums.SelectionMode.SINGLE)
 	max_select = 1
 	min_select = 1
-	return await _start_selection(cards_to_choose, title, Enums.SelectionMode.MULTI)
+	return await _start_selection(cards_to_choose, title, Enums.SelectionMode.SINGLE)
 
 func multi_select(cards_to_choose: Array[Card], title: String, min_: int = 0, max_: int = 10) -> Array[Card]:
 	max_select = max_
@@ -55,6 +58,8 @@ func _start_selection(cards_to_choose: Array[Card], title: String, mode: Enums.S
 	await get_tree().process_frame
 	hand_manager.set_cards(true)
 	hint_label.text = title
+	if min_select > 0:
+		cancel_button.hide()
 	show()
 	var ret: Array[Card]
 	ret = await card_selected
@@ -106,3 +111,7 @@ func _on_cancel() -> void:
 
 func _on_comfirm() -> void:
 	card_selected.emit(selected_cards)
+
+func _set_char_stats(value: CharacterStats) -> void:
+	char_stats = value
+	hand_manager.char_stats = value

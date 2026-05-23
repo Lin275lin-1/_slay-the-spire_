@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://crydegktc4ovs"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_bwq7w"]
+[ext_resource type="Texture2D" uid="uid://bgwtbw4" path="res://images/atlases/relic_atlas.sprites/prayer_wheel.tres" id="2_cp7gg"]
+[ext_resource type="Script" uid="uid://cbi7ejrc8y3a3" path="res://entities/relics/colorless/转经轮.gd" id="3_yjliv"]
+
+[resource]
+script = ExtResource("3_yjliv")
+relic_name = "转经轮"
+id = "prayer_wheel"
+icon = ExtResource("2_cp7gg")
+description = "普通敌人额外掉落一次卡牌奖励。"
+rarity = 4
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

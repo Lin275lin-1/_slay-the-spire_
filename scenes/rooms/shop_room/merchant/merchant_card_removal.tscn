@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://ca1bm16oq4u5v"]
+
+[ext_resource type="Script" uid="uid://d2837m17oppqt" path="res://scripts/rooms/shop_room/merchant/merchant_card_removal.gd" id="1_pxmi0"]
+[ext_resource type="Texture2D" uid="uid://ef4tm4fdq7jo" path="res://images/rooms/merchant_room/card_removal_00.png" id="2_mpe3d"]
+[ext_resource type="Texture2D" uid="uid://jqn0hv" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_gold.tres" id="8_6mx3w"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="9_iwyus"]
+
+[node name="MerchantCardRemoval" type="Control" unique_id=979490937]
+custom_minimum_size = Vector2(122, 112)
+layout_mode = 3
+anchor_left = -0.083000004
+anchor_top = -0.158
+anchor_right = 0.058000002
+anchor_bottom = 0.056
+offset_left = 0.36001587
+offset_top = -0.3600006
+offset_right = 146.5631
+offset_bottom = 125.44311
+scale = Vector2(0.65, 0.65)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+mouse_filter = 2
+script = ExtResource("1_pxmi0")
+
+[node name="Visual" type="Sprite2D" parent="." unique_id=1602346529]
+unique_name_in_owner = true
+position = Vector2(221.53845, 180)
+scale = Vector2(0.559943, 0.559943)
+texture = ExtResource("2_mpe3d")
+
+[node name="Visual2" type="Sprite2D" parent="Visual" unique_id=525314003]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 0.25)
+show_behind_parent = true
+texture = ExtResource("2_mpe3d")
+offset = Vector2(16, 16)
+
+[node name="Cost" type="HBoxContainer" parent="." unique_id=345671473]
+layout_mode = 0
+offset_left = 72.3077
+offset_top = 376.9231
+offset_right = 369.3077
+offset_bottom = 430.9231
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Cost" unique_id=161418509]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 2
+texture = ExtResource("8_6mx3w")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CostLabel" type="Label" parent="Cost" unique_id=1670200118]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.223529, 0.223529, 0.223529, 0)
+theme_override_colors/font_outline_color = Color(0.0666667, 0, 0, 0.431373)
+theme_override_constants/line_spacing = 0
+theme_override_constants/outline_size = 15
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("9_iwyus")
+theme_override_font_sizes/font_size = 39
+text = "99"

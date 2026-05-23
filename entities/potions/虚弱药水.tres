@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://1fej5ddfmscx"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_olkk7"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_7cdwn"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_tyfdi"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_8cnlp"]
+[ext_resource type="Texture2D" uid="uid://wisc21" path="res://images/atlases/potion_atlas.sprites/weak_potion.tres" id="4_bvmf3"]
+[ext_resource type="Texture2D" uid="uid://bkdp8cx" path="res://images/atlases/potion_outline_atlas.sprites/weak_potion.tres" id="5_ng854"]
+
+[sub_resource type="Resource" id="Resource_6fcui"]
+script = ExtResource("2_7cdwn")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_lkwh0"]
+script = ExtResource("3_8cnlp")
+buff_name = "虚弱"
+buff_stack_provider = SubResource("Resource_6fcui")
+target_type = 2
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_tyfdi")
+id = "weak_potion"
+potion_name = "虚弱药水"
+description = "给予3层[color=gold]虚弱[/color]"
+icon = ExtResource("4_bvmf3")
+outline_icon = ExtResource("5_ng854")
+target_type = 1
+effects = Array[ExtResource("1_olkk7")]([SubResource("Resource_lkwh0")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

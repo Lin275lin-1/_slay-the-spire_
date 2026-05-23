@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://dgqiu0ki8g4d0"]
+
+[ext_resource type="Script" uid="uid://cmnwu8swie6yy" path="res://scripts/costum_resources/buffs/dexterity_buff.gd" id="1_sk584"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_vhm5h"]
+[ext_resource type="Texture2D" uid="uid://d20ajkvji6b41" path="res://images/powers/dexterity_power.png" id="2_sk584"]
+
+[resource]
+script = ExtResource("1_vhm5h")
+buff_id = "deterity"
+buff_name = "敏捷"
+description = "从卡牌获得的格挡提高{stacks}点"
+icon = ExtResource("2_sk584")
+min_stack = -999
+buff_script = ExtResource("1_sk584")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

@@ -1,24 +1,103 @@
 [gd_scene format=3 uid="uid://byip6ctv4gdr5"]
 
 [ext_resource type="PackedScene" uid="uid://b06w3uca3vj26" path="res://entities/enemies/enemy_intent_picker.tscn" id="1_mgtwb"]
-[ext_resource type="Script" uid="uid://cpiu2ss1wfos0" path="res://entities/enemies/leaf_slime_m/attack_action.gd" id="2_uyiru"]
-[ext_resource type="Script" uid="uid://d4n2wao2k18as" path="res://entities/enemies/leaf_slime_m/attack_block_action.gd" id="3_0vsok"]
 [ext_resource type="Script" uid="uid://ce34juwu5b0yr" path="res://scripts/costum_resources/intents/intent.gd" id="3_e5hhr"]
 [ext_resource type="Script" uid="uid://iqqyr44teapg" path="res://scripts/costum_resources/intents/sub_intent.gd" id="4_0sti7"]
-[ext_resource type="Script" uid="uid://6hsfcvkq5h3t" path="res://entities/enemies/leaf_slime_m/mega_attack_action.gd" id="4_e5hhr"]
-[ext_resource type="Script" uid="uid://bxf4q06mhs7dk" path="res://entities/enemies/leaf_slime_m/mega_block_action.gd" id="5_0vsok"]
+
+[sub_resource type="GDScript" id="GDScript_syxha"]
+script/source = "extends EnemyAction
+
+@export var damage := 7
+
+func perform_action() -> void:
+	if not enemy or not target:
+		return 
+	
+	var attack_effect := AttackEffect.new()
+	attack_effect.sound = intent.sound
+	attack_effect.execute(DamageContext.new(enemy, [target], damage))
+"
 
 [sub_resource type="Resource" id="Resource_0sti7"]
 script = ExtResource("3_e5hhr")
 metadata/_custom_type_script = "uid://ce34juwu5b0yr"
 
+[sub_resource type="GDScript" id="GDScript_uyiru"]
+script/source = "extends EnemyAction
+
+@export var block := 10
+@export var damage:= 3
+
+func perform_action() -> void:
+	if not enemy or not target:
+		return
+		
+	var block_effect := BlockEffect.new()
+	var attack_effect := AttackEffect.new()
+	block_effect.execute(GainBlockContext.new(enemy, [enemy], block))
+	attack_effect.sound = intent.sound
+	attack_effect.execute(DamageContext.new(enemy, [target], damage))
+		
+"
+
 [sub_resource type="Resource" id="Resource_e5hhr"]
 script = ExtResource("3_e5hhr")
 metadata/_custom_type_script = "uid://ce34juwu5b0yr"
 
+[sub_resource type="GDScript" id="GDScript_0vsok"]
+script/source = "extends EnemyAction
+
+@export var damage := 13
+@export var hp_threshhold := 0.5
+
+# 只允许使用一次
+var already_used := false
+
+func is_performable() -> bool:
+	if not enemy or already_used:
+		return false
+	return enemy.stats.health <= enemy.stats.max_health * hp_threshhold
+
+func perform_action() -> void:
+	if not enemy or not target:
+		return
+	already_used = true
+	var attack_effect := AttackEffect.new()
+	attack_effect.sound = intent.sound
+	attack_effect.execute(DamageContext.new(enemy, [target], damage))	
+	
+"
+
 [sub_resource type="Resource" id="Resource_38wmp"]
 script = ExtResource("3_e5hhr")
 metadata/_custom_type_script = "uid://ce34juwu5b0yr"
+
+[sub_resource type="GDScript" id="GDScript_e5hhr"]
+script/source = "extends EnemyAction
+
+
+@export var block := 13
+@export var hp_threshhold := 0.9
+
+# 只允许使用一次
+var already_used := false
+
+func is_performable() -> bool:
+	if not enemy or already_used:
+		return false
+	
+	return enemy.stats.health <= enemy.stats.max_health * hp_threshhold
+
+func perform_action() -> void:
+	if not enemy or not target:
+		return
+	already_used = true
+	var block_effect := BlockEffect.new()
+	block_effect.sound = intent.sound
+	block_effect.execute(GainBlockContext.new(enemy, [enemy], block))	
+
+	
+"
 
 [sub_resource type="Resource" id="Resource_4siqk"]
 script = ExtResource("3_e5hhr")
@@ -27,26 +106,26 @@ metadata/_custom_type_script = "uid://ce34juwu5b0yr"
 [node name="leaf_slime_m_ai" unique_id=160467564 instance=ExtResource("1_mgtwb")]
 
 [node name="AttackAction" type="Node" parent="." index="0" unique_id=241746270]
-script = ExtResource("2_uyiru")
+script = SubResource("GDScript_syxha")
 type = 1
 intent = SubResource("Resource_0sti7")
 weight = 2.0
 anim_name = "attack"
 
 [node name="AttackDeffendAction" type="Node" parent="." index="1" unique_id=1255205288]
-script = ExtResource("3_0vsok")
+script = SubResource("GDScript_uyiru")
 type = 1
 intent = SubResource("Resource_e5hhr")
 weight = 1.0
 anim_name = "cast"
 
 [node name="MegaAttackAction" type="Node" parent="." index="2" unique_id=1348560572]
-script = ExtResource("4_e5hhr")
+script = SubResource("GDScript_0vsok")
 type = 2
 intent = SubResource("Resource_38wmp")
 anim_name = "attack"
 
 [node name="MegaDeffendAction" type="Node" parent="." index="3" unique_id=1460575418]
-script = ExtResource("5_0vsok")
+script = SubResource("GDScript_e5hhr")
 intent = SubResource("Resource_4siqk")
 anim_name = "cast"

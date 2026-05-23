@@ -1,0 +1,85 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://c5okfwiv6xxr1"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_ylipf"]
+[ext_resource type="Script" uid="uid://c6aimd4krc1h5" path="res://scripts/costum_resources/card_filter.gd" id="2_7l7ia"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_re8md"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_lg32u"]
+[ext_resource type="Script" uid="uid://bfd4cqklwdhs3" path="res://scripts/costum_resources/effects/put_card_effect.gd" id="4_yjqsm"]
+[ext_resource type="Texture2D" uid="uid://beihlyc" path="res://images/atlases/potion_atlas.sprites/orobic_acid.tres" id="5_j2hqc"]
+[ext_resource type="Texture2D" uid="uid://b1dfh78" path="res://images/atlases/potion_outline_atlas.sprites/orobic_acid.tres" id="6_pyrxc"]
+
+[sub_resource type="Resource" id="Resource_dw77g"]
+script = ExtResource("2_7l7ia")
+color_type = 1
+rarity = 7
+metadata/_custom_type_script = "uid://c6aimd4krc1h5"
+
+[sub_resource type="Resource" id="Resource_jg7h1"]
+script = ExtResource("3_lg32u")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_cwf0g"]
+script = ExtResource("4_yjqsm")
+source = 2
+where = 2
+put_card_count_provider = SubResource("Resource_jg7h1")
+card_filter = SubResource("Resource_dw77g")
+first_play_free = true
+target_type = 1
+metadata/_custom_type_script = "uid://bfd4cqklwdhs3"
+
+[sub_resource type="Resource" id="Resource_attjg"]
+script = ExtResource("2_7l7ia")
+color_type = 1
+type = 2
+rarity = 7
+metadata/_custom_type_script = "uid://c6aimd4krc1h5"
+
+[sub_resource type="Resource" id="Resource_0wa5t"]
+script = ExtResource("3_lg32u")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_0wr3c"]
+script = ExtResource("4_yjqsm")
+source = 2
+where = 2
+put_card_count_provider = SubResource("Resource_0wa5t")
+card_filter = SubResource("Resource_attjg")
+first_play_free = true
+target_type = 1
+metadata/_custom_type_script = "uid://bfd4cqklwdhs3"
+
+[sub_resource type="Resource" id="Resource_ex37v"]
+script = ExtResource("2_7l7ia")
+color_type = 1
+type = 4
+rarity = 7
+metadata/_custom_type_script = "uid://c6aimd4krc1h5"
+
+[sub_resource type="Resource" id="Resource_ua3vl"]
+script = ExtResource("3_lg32u")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_2sfoe"]
+script = ExtResource("4_yjqsm")
+source = 2
+where = 2
+put_card_count_provider = SubResource("Resource_ua3vl")
+card_filter = SubResource("Resource_ex37v")
+first_play_free = true
+target_type = 1
+metadata/_custom_type_script = "uid://bfd4cqklwdhs3"
+
+[resource]
+script = ExtResource("2_re8md")
+id = "orobic_acid"
+potion_name = "欧洛巴斯之酸"
+description = "往你的[color=gold]手牌[/color]中加入一张随机攻击牌、一张随机技能牌和一张随机能力牌。这些牌在本回合免费"
+icon = ExtResource("5_j2hqc")
+outline_icon = ExtResource("6_pyrxc")
+rarity = 4
+effects = Array[ExtResource("1_ylipf")]([SubResource("Resource_cwf0g"), SubResource("Resource_0wr3c"), SubResource("Resource_2sfoe")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

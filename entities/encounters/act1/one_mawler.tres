@@ -7,11 +7,12 @@
 [sub_resource type="Resource" id="Resource_yfb15"]
 script = ExtResource("1_uq8wi")
 enemy_stats = ExtResource("2_m4v6x")
-position = Vector2(1385, 520)
+position = Vector2(1385, 720)
 metadata/_custom_type_script = "uid://dw53gdpom3gn6"
 
 [resource]
 script = ExtResource("2_2asky")
+type = 2
 weight = 1.0
 enemy_entries = Array[ExtResource("1_uq8wi")]([SubResource("Resource_yfb15")])
 metadata/_custom_type_script = "uid://dgu4qpyr0pnnb"

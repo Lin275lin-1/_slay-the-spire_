@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://dv605npyck0by"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_pnqqp"]
+[ext_resource type="Texture2D" uid="uid://cntrah4" path="res://images/atlases/relic_atlas.sprites/ghost_seed.tres" id="2_8nt1o"]
+[ext_resource type="Script" uid="uid://u455q8gep56p" path="res://entities/relics/shop/幽灵种子.gd" id="3_um7w2"]
+
+[resource]
+script = ExtResource("3_um7w2")
+relic_name = "幽灵种子"
+id = "ghost_seed"
+icon = ExtResource("2_8nt1o")
+description = "拾取时，使你牌库中的“打击”和“防御”获得虚无"
+rarity = 16
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

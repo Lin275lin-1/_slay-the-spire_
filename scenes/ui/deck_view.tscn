@@ -5,7 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://bb803i8" path="res://images/atlases/ui_atlas.sprites/back_button.tres" id="2_j3w2u"]
 [ext_resource type="Texture2D" uid="uid://cahogy5" path="res://images/atlases/compressed.sprites/back_button_arrow.tres" id="3_ngan4"]
 [ext_resource type="Texture2D" uid="uid://cxm0iyd" path="res://images/atlases/compressed.sprites/back_button_outline.tres" id="3_tntwv"]
+[ext_resource type="Texture2D" uid="uid://b1ommqi" path="res://images/atlases/compressed.sprites/confirm_button_outline.tres" id="4_dcyst"]
+[ext_resource type="PackedScene" uid="uid://cvlmxlw62p50e" path="res://scenes/ui/upgrade_card_inspect.tscn" id="4_kyxad"]
+[ext_resource type="Texture2D" uid="uid://cp3mg3t" path="res://images/atlases/compressed.sprites/confirm_button_tick.tres" id="5_x6nfs"]
 [ext_resource type="PackedScene" uid="uid://ciqc4fkeeetw0" path="res://scenes/ui/card_inspect.tscn" id="6_lc132"]
+[ext_resource type="PackedScene" uid="uid://tnl8udgtv6w5" path="res://scenes/ui/comfirm_button.tscn" id="7_n7x5h"]
 
 [node name="DeckView" type="Control" unique_id=1662556681]
 layout_mode = 3
@@ -109,37 +113,30 @@ text = "你在战斗中将会使用这里的所有卡牌"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackButton" type="Button" parent="." unique_id=573064870]
-unique_name_in_owner = true
+[node name="ConfirmButton" parent="." unique_id=959760777 instance=ExtResource("7_n7x5h")]
 layout_mode = 0
-offset_left = -47.0
+offset_left = 1675.0
 offset_top = 813.0
-offset_right = 261.0
-offset_bottom = 1023.0
-icon = ExtResource("2_j3w2u")
-flat = true
+offset_right = 1975.0
+offset_bottom = 1015.0
+out_line_texture = ExtResource("4_dcyst")
+icon_texture = ExtResource("5_x6nfs")
 
-[node name="TextureRect2" type="TextureRect" parent="BackButton" unique_id=423583559]
-visible = false
-show_behind_parent = true
+[node name="BackButton" parent="." unique_id=1551580270 instance=ExtResource("7_n7x5h")]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 303.0
-offset_bottom = 205.0
-texture = ExtResource("3_tntwv")
-
-[node name="TextureRect" type="TextureRect" parent="BackButton" unique_id=1743523212]
-layout_mode = 1
-offset_left = 57.0
-offset_top = 47.0
-offset_right = 202.0
-offset_bottom = 140.0
-texture = ExtResource("3_ngan4")
-expand_mode = 2
-stretch_mode = 5
+offset_left = -65.0
+offset_top = 813.0
+offset_right = 235.0
+offset_bottom = 1015.0
+texture_normal = ExtResource("2_j3w2u")
+out_line_texture = ExtResource("3_tntwv")
+icon_texture = ExtResource("3_ngan4")
 
 [node name="CardInspect" parent="." unique_id=302635351 instance=ExtResource("6_lc132")]
 unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="UpgradeCardInspect" parent="." unique_id=2037131969 instance=ExtResource("4_kyxad")]
 visible = false
 layout_mode = 1

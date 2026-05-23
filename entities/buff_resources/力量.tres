@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://5liptc5ceswj"]
+
+[ext_resource type="Script" uid="uid://b6a81anpmnmnd" path="res://scripts/costum_resources/buffs/strength_buff.gd" id="1_87d22"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_g2rbg"]
+[ext_resource type="Texture2D" uid="uid://dwmads7xjfpo5" path="res://images/powers/strength_power.png" id="2_87d22"]
+
+[resource]
+script = ExtResource("1_g2rbg")
+buff_id = "strength"
+buff_name = "力量"
+description = "造成的攻击伤害提高{stacks}点"
+icon = ExtResource("2_87d22")
+min_stack = -999
+buff_script = ExtResource("1_87d22")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

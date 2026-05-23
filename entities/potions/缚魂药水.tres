@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://dsyw7y6hmkbln"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_jp7qa"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_efr1m"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_foago"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_kvxe6"]
+[ext_resource type="Texture2D" uid="uid://co4vyjf" path="res://images/atlases/potion_atlas.sprites/potion_of_binding.tres" id="4_ygexi"]
+[ext_resource type="Texture2D" uid="uid://ba5uslq" path="res://images/atlases/potion_outline_atlas.sprites/potion_of_binding.tres" id="5_80f2h"]
+
+[sub_resource type="Resource" id="Resource_pbagn"]
+script = ExtResource("2_foago")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_j6tld"]
+script = ExtResource("3_kvxe6")
+buff_name = "虚弱"
+buff_stack_provider = SubResource("Resource_pbagn")
+target_type = 3
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_xw77d"]
+script = ExtResource("2_foago")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_m3558"]
+script = ExtResource("3_kvxe6")
+buff_name = "易伤"
+buff_stack_provider = SubResource("Resource_xw77d")
+target_type = 3
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_efr1m")
+id = "potion_of_binding"
+potion_name = "缚魂药水"
+description = "给予所有敌人1层[color=gold]虚弱[/color]和1层[color=gold]易伤[/color]"
+icon = ExtResource("4_ygexi")
+outline_icon = ExtResource("5_80f2h")
+target_type = 2
+rarity = 2
+effects = Array[ExtResource("1_jp7qa")]([SubResource("Resource_j6tld"), SubResource("Resource_m3558")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

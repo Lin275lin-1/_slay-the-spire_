@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://bawbb6on8noo2"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_7wef7"]
+[ext_resource type="Texture2D" uid="uid://bw4qml5" path="res://images/atlases/relic_atlas.sprites/gnarled_hammer.tres" id="2_kod15"]
+[ext_resource type="Script" uid="uid://tnprhsyh583s" path="res://entities/relics/shop/扭曲锤子.gd" id="3_qdr3q"]
+
+[resource]
+script = ExtResource("3_qdr3q")
+relic_name = "扭曲锤子"
+id = "gnarled_hammer"
+icon = ExtResource("2_kod15")
+description = "拾起时，从你的牌组中选择至多3张攻击牌，[color=gold]附魔[/color]：[color=purple]锋利[/color]3"
+rarity = 16
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

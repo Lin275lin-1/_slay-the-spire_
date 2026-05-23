@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://c1pjw670se8j6"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_7k8rw"]
+[ext_resource type="Script" uid="uid://c2ij16fdwos3x" path="res://scripts/costum_resources/buffs/fragile_debuff.gd" id="1_cfsps"]
+[ext_resource type="Texture2D" uid="uid://bsyqncengxkc5" path="res://images/powers/frail_power.png" id="2_cfsps"]
+
+[resource]
+script = ExtResource("1_7k8rw")
+buff_id = "frail"
+buff_name = "脆弱"
+description = "从卡牌中获得的格挡降低25%"
+icon = ExtResource("2_cfsps")
+buff_type = 1
+buff_script = ExtResource("1_cfsps")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

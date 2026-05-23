@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://b0qfah41jc6tq"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_vgihv"]
+[ext_resource type="Texture2D" uid="uid://ckmkkw7" path="res://images/atlases/relic_atlas.sprites/frozen_egg.tres" id="2_b34uj"]
+[ext_resource type="Script" uid="uid://bn5mevyeqycyt" path="res://entities/relics/colorless/冻结之蛋.gd" id="3_i6do1"]
+
+[resource]
+script = ExtResource("3_i6do1")
+relic_name = "冻结之蛋"
+id = "frozen_egg"
+icon = ExtResource("2_b34uj")
+description = "卡牌奖励中的所有能力牌会被[color=gold]升级[/color]"
+rarity = 4
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

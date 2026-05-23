@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://bl4mbjqjfffa3"]
+
+[ext_resource type="Texture2D" uid="uid://bb803i8" path="res://images/atlases/ui_atlas.sprites/back_button.tres" id="1_bevpl"]
+[ext_resource type="Texture2D" uid="uid://cxm0iyd" path="res://images/atlases/compressed.sprites/back_button_outline.tres" id="2_p1ych"]
+[ext_resource type="Texture2D" uid="uid://cahogy5" path="res://images/atlases/compressed.sprites/back_button_arrow.tres" id="3_b7g5d"]
+
+[node name="BackButton" type="Control" unique_id=98974390]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -354.0
+offset_right = 160.0
+offset_bottom = -244.0
+grow_vertical = 0
+pivot_offset = Vector2(20, 40)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Shadow" type="TextureRect" parent="." unique_id=1525976690]
+modulate = Color(0, 0, 0, 0.25098)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -1.0
+offset_right = 58.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_bevpl")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Outline" type="TextureRect" parent="." unique_id=1894454937]
+modulate = Color(0.941176, 0.705882, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -16.0
+offset_right = 49.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_p1ych")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Image" type="TextureRect" parent="." unique_id=1821019721]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_top = -13.0
+offset_right = 46.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_bevpl")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Icon" type="TextureRect" parent="Image" unique_id=207688703]
+modulate = Color(1, 0.964706, 0.886275, 1)
+layout_mode = 0
+offset_left = 88.0
+offset_top = 28.0
+offset_right = 168.0
+offset_bottom = 108.0
+mouse_filter = 2
+texture = ExtResource("3_b7g5d")
+expand_mode = 2
+stretch_mode = 5

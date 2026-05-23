@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://dlyf4it5fhxvd"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_h8htg"]
+[ext_resource type="Texture2D" uid="uid://7wmt8j" path="res://images/atlases/relic_atlas.sprites/toxic_egg.tres" id="2_u1u2k"]
+[ext_resource type="Script" uid="uid://n77kbn5e86ev" path="res://entities/relics/colorless/毒素之蛋.gd" id="3_ijhsg"]
+
+[resource]
+script = ExtResource("3_ijhsg")
+relic_name = "毒素之蛋"
+id = "toxic_egg"
+icon = ExtResource("2_u1u2k")
+description = "卡牌奖励中的所有技能牌会被[color=gold]升级[/color]"
+rarity = 4
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://epvxguabanno"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_fa0mc"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_wys3m"]
+[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="3_u1p3y"]
+[ext_resource type="Texture2D" uid="uid://4pvkrl" path="res://images/atlases/potion_atlas.sprites/swift_potion.tres" id="4_8r26o"]
+[ext_resource type="Texture2D" uid="uid://cu3wvyy" path="res://images/atlases/potion_outline_atlas.sprites/swift_potion.tres" id="5_ep8j5"]
+
+[sub_resource type="Resource" id="Resource_n3wk4"]
+script = ExtResource("3_u1p3y")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_5ey4d"]
+script = ExtResource("3_u1p3y")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[sub_resource type="Resource" id="Resource_wo58p"]
+script = ExtResource("3_u1p3y")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[resource]
+script = ExtResource("2_wys3m")
+id = "swift_potion"
+potion_name = "迅捷药水"
+description = "抽3张牌"
+icon = ExtResource("4_8r26o")
+outline_icon = ExtResource("5_ep8j5")
+effects = Array[ExtResource("1_fa0mc")]([SubResource("Resource_n3wk4"), SubResource("Resource_5ey4d"), SubResource("Resource_wo58p")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

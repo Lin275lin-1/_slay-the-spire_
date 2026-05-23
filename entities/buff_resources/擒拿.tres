@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://d0pji3flqwef3"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_5nrfl"]
+[ext_resource type="Script" uid="uid://dp13d51rv6eir" path="res://scripts/costum_resources/buffs/temperary_strength_down.gd" id="1_spafn"]
+[ext_resource type="Texture2D" uid="uid://qgp4uyq7f5o3" path="res://images/powers/grapple_power.png" id="2_bw2w2"]
+
+[resource]
+script = ExtResource("1_5nrfl")
+buff_id = "grapple"
+buff_name = "擒拿"
+description = "在本回合失去{stacks}点[color=gold]力量[/color]"
+icon = ExtResource("2_bw2w2")
+buff_type = 2
+buff_script = ExtResource("1_spafn")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

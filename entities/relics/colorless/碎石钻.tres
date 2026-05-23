@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://brgq7q2gims67"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_e6snj"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="2_e1bf7"]
+[ext_resource type="Script" uid="uid://dyn5a42fs7gxs" path="res://scripts/costum_resources/card_condition.gd" id="2_edgwq"]
+[ext_resource type="Script" uid="uid://cqcf6adphkjfy" path="res://scripts/costum_resources/effects/select_card_effect.gd" id="3_62pmg"]
+[ext_resource type="Script" uid="uid://csyjq6ujulplm" path="res://scripts/costum_resources/effects/card_effects/card_effect.gd" id="4_46uor"]
+[ext_resource type="Script" uid="uid://dm6tcw4hw6un" path="res://scripts/costum_resources/effects/card_effects/modify_card_flag_effect.gd" id="5_aygvy"]
+[ext_resource type="Script" uid="uid://c2drp2mlr0vhm" path="res://scripts/costum_resources/effects/foreach_card_effect.gd" id="6_31muh"]
+[ext_resource type="Texture2D" uid="uid://gir5jp" path="res://images/atlases/relic_atlas.sprites/stone_cracker.tres" id="7_k7ou4"]
+
+[sub_resource type="Resource" id="Resource_edgwq"]
+script = ExtResource("2_edgwq")
+type = 1
+metadata/_custom_type_script = "uid://dyn5a42fs7gxs"
+
+[sub_resource type="Resource" id="Resource_62pmg"]
+script = ExtResource("3_62pmg")
+where = 1
+selectionMode = 2
+max_select = 1
+filter_condition = SubResource("Resource_edgwq")
+metadata/_custom_type_script = "uid://cqcf6adphkjfy"
+
+[sub_resource type="Resource" id="Resource_vjnia"]
+script = ExtResource("5_aygvy")
+flag_name = 5
+value = true
+metadata/_custom_type_script = "uid://dm6tcw4hw6un"
+
+[sub_resource type="Resource" id="Resource_2xiu3"]
+script = ExtResource("6_31muh")
+effects = Array[ExtResource("4_46uor")]([SubResource("Resource_vjnia")])
+metadata/_custom_type_script = "uid://c2drp2mlr0vhm"
+
+[resource]
+script = ExtResource("2_e1bf7")
+relic_name = "碎石钻"
+id = "stone_cracker"
+icon = ExtResource("7_k7ou4")
+description = "回合开始时，在本场战斗中随机[color=gold]升级[/color]你[color=gold]抽牌堆[/color]中的1张牌"
+trigger_type = 1
+rarity = 2
+effects = Array[ExtResource("1_e6snj")]([SubResource("Resource_62pmg"), SubResource("Resource_2xiu3")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

@@ -5,9 +5,8 @@
 class_name MyCard
 extends Card
 
-func apply_effects(context: Context) -> void:
-	var damage_effect := DamageEffect.new()
-	context.amount = 6
+func apply_effects(source: Player, targets: Array[Node]) -> void:
+	var damage_effect := AttackEffect.new()
 	damage_effect.sound = sound
-	damage_effect.execute(context)
+	damage_effect.execute(DamageContext.new(source, targets, get_numeric_value(get_numeric_entries(), 0)))
 	

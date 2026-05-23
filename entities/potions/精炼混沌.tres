@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://bsfxo5tm2jd2d"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_4vesl"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_lwmix"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_r73ph"]
+[ext_resource type="Script" uid="uid://cls6in5kdu2mo" path="res://scripts/costum_resources/effects/random_play_effect.gd" id="3_4ac3f"]
+[ext_resource type="Texture2D" uid="uid://bg8fqkh" path="res://images/atlases/potion_atlas.sprites/distilled_chaos.tres" id="4_f0e0y"]
+[ext_resource type="Texture2D" uid="uid://sgogx3" path="res://images/atlases/potion_outline_atlas.sprites/distilled_chaos.tres" id="5_1nrm8"]
+
+[sub_resource type="Resource" id="Resource_q1q2c"]
+script = ExtResource("2_r73ph")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_iviv4"]
+script = ExtResource("3_4ac3f")
+source = 2
+random_play_count_provider = SubResource("Resource_q1q2c")
+metadata/_custom_type_script = "uid://cls6in5kdu2mo"
+
+[resource]
+script = ExtResource("2_lwmix")
+id = "distilled_chaos"
+potion_name = "精炼混沌"
+description = "打出你[color=gold]抽牌堆[/color]顶部的3张牌"
+icon = ExtResource("4_f0e0y")
+outline_icon = ExtResource("5_1nrm8")
+rarity = 4
+effects = Array[ExtResource("1_4vesl")]([SubResource("Resource_iviv4")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

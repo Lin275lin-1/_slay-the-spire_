@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://drur0rhyikfyy"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_g0pf0"]
+[ext_resource type="Script" uid="uid://dwtmnexvpef5e" path="res://scripts/costum_resources/buffs/juggernaut_buff.gd" id="1_j4bwc"]
+[ext_resource type="Texture2D" uid="uid://o7vky6oo4g4m" path="res://images/powers/juggernaut_power.png" id="2_umk65"]
+
+[resource]
+script = ExtResource("1_g0pf0")
+buff_id = "juggernaut"
+buff_name = "势不可当"
+description = "每当你获得格挡时，对随机敌人造成{stacks}点伤害"
+icon = ExtResource("2_umk65")
+buff_script = ExtResource("1_j4bwc")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

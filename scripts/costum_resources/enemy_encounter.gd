@@ -19,18 +19,18 @@ enum Type{
 @export var enemy_entries: Array[EnemyEntry]
 ## 便于调试和选取特定组合
 @export var encounter_name: String
-
+@export var custom_music: AudioStream
 var accumulated_weight : float = 0.0
 
 func roll_gold_reward() -> int:
-	return randi_range(get_min_gold_reward(), get_max_gold_reward())
+	return RandomSetting.instance.randi_range(get_min_gold_reward(), get_max_gold_reward())
 
 func get_min_gold_reward() -> int:
 	match type:
 		Type.WEAK:
 			return 10
 		Type.STRONG:
-			return 10
+			return 15
 		Type.ELITE:
 			return 35
 		Type.BOSS:
@@ -41,11 +41,11 @@ func get_min_gold_reward() -> int:
 func get_max_gold_reward() -> int:
 	match type:
 		Type.WEAK:
-			return 10
+			return 15
 		Type.STRONG:
-			return 10
+			return 25
 		Type.ELITE:
-			return 35
+			return 45
 		Type.BOSS:
 			return 100
 		_:

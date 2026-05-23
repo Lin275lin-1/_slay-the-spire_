@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://bgsxw22g7o2bq"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_y1xs0"]
+[ext_resource type="Texture2D" uid="uid://bpusrqm" path="res://images/atlases/relic_atlas.sprites/precarious_shears.tres" id="2_4f8in"]
+[ext_resource type="Script" uid="uid://dsvt8x8vaway4" path="res://entities/relics/ancient_neow/松动羊毛剪.gd" id="3_7a0ip"]
+
+[resource]
+script = ExtResource("3_7a0ip")
+relic_name = "松动羊毛剪"
+id = "precarious_shears"
+icon = ExtResource("2_4f8in")
+description = "拾起时，从你的牌组中移除2张牌并失去12点生命"
+rarity = 32
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

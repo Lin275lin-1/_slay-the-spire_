@@ -1,0 +1,28 @@
+[gd_resource type="Resource" format=3 uid="uid://c7hem77j1p5da"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_k1agn"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_qiqst"]
+[ext_resource type="Script" uid="uid://c6kvghrfcdtp7" path="res://scripts/costum_resources/effects/gain_energy_effect.gd" id="3_1vy0p"]
+[ext_resource type="Texture2D" uid="uid://b0kyog" path="res://images/atlases/relic_atlas.sprites/art_of_war.tres" id="4_uay8n"]
+[ext_resource type="Script" uid="uid://cfnim2dd1ka65" path="res://entities/relics/colorless/孙子兵法.gd" id="5_qiqst"]
+
+[sub_resource type="Resource" id="Resource_lgbr4"]
+script = ExtResource("2_qiqst")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ue1ef"]
+script = ExtResource("3_1vy0p")
+energy_provider = SubResource("Resource_lgbr4")
+metadata/_custom_type_script = "uid://c6kvghrfcdtp7"
+
+[resource]
+script = ExtResource("5_qiqst")
+relic_name = "孙子兵法"
+id = "art_of_war"
+icon = ExtResource("4_uay8n")
+description = "如果你在本回合中没有打出过攻击牌，则在下一回合额外获得1点能量"
+trigger_type = 1
+rarity = 4
+effects = Array[ExtResource("1_k1agn")]([SubResource("Resource_ue1ef")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

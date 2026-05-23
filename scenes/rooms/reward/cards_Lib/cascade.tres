@@ -1,21 +1,11 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://ci65aqbgf01s"]
 
 [ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_bbo7f"]
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="2_numeric"]
 [ext_resource type="Texture2D" uid="uid://b3t6bkt6wsk8d" path="res://images/packed/card_portraits/ironclad/cascade.png" id="3_portrait"]
-
-[sub_resource type="Resource" id="numeric_damage_6"]
-script = ExtResource("2_numeric")
-base_value = 6
-placeholder = "damage"
-affected_by = 2
 
 [resource]
 script = ExtResource("1_card")
 id = "连锁"
-target = 1
-cost = 1
-rarity = 1
 portrait = ExtResource("3_portrait")
-description = "[center]造成{damage}点伤害，随机再造成一次同等伤害。[/center]"
-numeric_entries = Array[ExtResource("2_numeric")]([SubResource("numeric_damage_6")])

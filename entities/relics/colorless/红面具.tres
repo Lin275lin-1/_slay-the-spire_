@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://cdyq1eev13lm0"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_kus0j"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="2_1fxle"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_7s1k2"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_6ppj8"]
+[ext_resource type="Texture2D" uid="uid://bhmkft1" path="res://images/atlases/relic_atlas.sprites/red_mask.tres" id="4_4c4mh"]
+
+[sub_resource type="Resource" id="Resource_7qsd2"]
+script = ExtResource("2_7s1k2")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_odjnw"]
+script = ExtResource("3_6ppj8")
+buff_name = "虚弱"
+buff_stack_provider = SubResource("Resource_7qsd2")
+target_type = 3
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_1fxle")
+relic_name = "红面具"
+id = "red_mask"
+icon = ExtResource("4_4c4mh")
+description = "在每场战斗开始时，给于所有敌人1层虚弱"
+trigger_type = 2
+rarity = 2
+effects = Array[ExtResource("1_kus0j")]([SubResource("Resource_odjnw")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

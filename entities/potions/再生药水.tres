@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://bl6uljrjvgkcv"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_wjweq"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_ej0i2"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_gd2r5"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_dxn4j"]
+[ext_resource type="Texture2D" uid="uid://boovmwn" path="res://images/atlases/potion_atlas.sprites/regen_potion.tres" id="4_lshm0"]
+[ext_resource type="Texture2D" uid="uid://njxeii" path="res://images/atlases/potion_outline_atlas.sprites/regen_potion.tres" id="5_40m60"]
+
+[sub_resource type="Resource" id="Resource_168w3"]
+script = ExtResource("2_gd2r5")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_gd2r5"]
+script = ExtResource("3_dxn4j")
+buff_name = "再生"
+buff_stack_provider = SubResource("Resource_168w3")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_ej0i2")
+id = "regen_potion"
+potion_name = "再生药水"
+description = "获得5层[color=gold]再生[/color]"
+icon = ExtResource("4_lshm0")
+outline_icon = ExtResource("5_40m60")
+rarity = 2
+effects = Array[ExtResource("1_wjweq")]([SubResource("Resource_gd2r5")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

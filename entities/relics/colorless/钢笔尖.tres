@@ -1,0 +1,30 @@
+[gd_resource type="Resource" format=3 uid="uid://bs7pxgqevibki"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_gveh0"]
+[ext_resource type="Texture2D" uid="uid://bjuah5b" path="res://images/atlases/relic_atlas.sprites/pen_nib.tres" id="2_evggr"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_nuw5d"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_p56ev"]
+[ext_resource type="Script" uid="uid://dy1yldlm7ggno" path="res://entities/relics/colorless/钢笔尖.gd" id="5_nuw5d"]
+
+[sub_resource type="Resource" id="Resource_kkwne"]
+script = ExtResource("2_nuw5d")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ecngr"]
+script = ExtResource("3_p56ev")
+buff_name = "钢笔尖"
+buff_stack_provider = SubResource("Resource_kkwne")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("5_nuw5d")
+relic_name = "钢笔尖"
+id = "pen_nib"
+icon = ExtResource("2_evggr")
+description = "你每打出的第10张攻击牌将会造成双倍伤害"
+trigger_type = 2
+rarity = 2
+effects = Array[ExtResource("1_gveh0")]([SubResource("Resource_ecngr")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

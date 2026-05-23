@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://j2ythfkyii17"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_4jtmx"]
+[ext_resource type="Texture2D" uid="uid://cvxerfd" path="res://images/atlases/relic_atlas.sprites/petrified_toad.tres" id="2_5s6se"]
+[ext_resource type="Script" uid="uid://ckeffmcodjsn1" path="res://entities/relics/colorless/石化蟾蜍.gd" id="3_wnl0s"]
+
+[resource]
+script = ExtResource("3_wnl0s")
+relic_name = "石化蟾蜍"
+id = "petrified_toad"
+icon = ExtResource("2_5s6se")
+description = "在每场战斗开始时，获得一瓶[color=gold]药水形状的石头[/color]"
+rarity = 2
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

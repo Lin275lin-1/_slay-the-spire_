@@ -1,0 +1,29 @@
+[gd_resource type="Resource" format=3 uid="uid://sax83hm6x00d"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_4rd68"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_0jkyv"]
+[ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="3_oluhb"]
+[ext_resource type="Texture2D" uid="uid://b70d45l" path="res://images/atlases/relic_atlas.sprites/ornamental_fan.tres" id="4_fvsiw"]
+[ext_resource type="Script" uid="uid://dqy4712lmb8s7" path="res://entities/relics/colorless/精致纸扇.gd" id="5_4rd68"]
+
+[sub_resource type="Resource" id="Resource_i4ftp"]
+script = ExtResource("2_0jkyv")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_d6p4d"]
+script = ExtResource("3_oluhb")
+block_provider = SubResource("Resource_i4ftp")
+no_modifiers = true
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[resource]
+script = ExtResource("5_4rd68")
+relic_name = "精致纸扇"
+id = "ornamental_fan"
+icon = ExtResource("4_fvsiw")
+description = "你每在同一回合内打出3张攻击牌，就获得4点格挡"
+rarity = 2
+effects = Array[ExtResource("1_4rd68")]([SubResource("Resource_d6p4d")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

@@ -1,0 +1,348 @@
+[gd_scene format=3 uid="uid://dyj1bly2a4vph"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://b8qcmnqy80wb3" path="res://animations/backgrounds/neow_room/neow.tres" id="1_8f5lu"]
+[ext_resource type="Texture2D" uid="uid://dpeuhrd5dmvsy" path="res://animations/backgrounds/neow_room/neow_bg.png" id="1_bcp67"]
+[ext_resource type="Script" uid="uid://cutupdoq1h8k" path="res://scripts/rooms/ancient_room/ancient_room.gd" id="1_es3kp"]
+[ext_resource type="Texture2D" uid="uid://b3y04h5kyjxn4" path="res://images/vfx/dot.png" id="3_ldvs6"]
+[ext_resource type="Texture2D" uid="uid://kbk0da" path="res://images/atlases/ui_atlas.sprites/proceed_button.tres" id="9_0pwy4"]
+[ext_resource type="FontFile" uid="uid://dqmshhaunu4jy" path="res://fonts/zhs/SourceHanSerifSC-Bold.otf" id="9_0rg71"]
+[ext_resource type="Texture2D" uid="uid://pgxvw4uevmce" path="res://animations/backgrounds/neow_room/neow_vignette.png" id="9_vho1v"]
+[ext_resource type="Texture2D" uid="uid://vkpb57sv14qf" path="res://images/vfx/short_grain_rice_particle.png" id="11_j0k18"]
+[ext_resource type="Texture2D" uid="uid://cfmhfqvktmk06" path="res://images/vfx/monsters/the_insatiable/sand_cloud.png" id="14_1qfuc"]
+[ext_resource type="Texture2D" uid="uid://ct1o2rtgfvjlt" path="res://images/vfx/miasma_cloud.png" id="15_lyenu"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uldxj"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_u4wtr"]
+
+[sub_resource type="Curve" id="Curve_0w33j"]
+_data = [Vector2(0, 0.321019), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.36242), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_vwgt8"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gwy5x"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_alpha_ParticleProcessMaterial_cl8og"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_alpha_ParticleProcessMaterial_cl8og"]
+curve = SubResource("Curve_alpha_ParticleProcessMaterial_cl8og")
+
+[sub_resource type="Curve" id="Curve_y051v"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, -192.733), 0.0, 0.0, 0, 0, Vector2(1, -128.563), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_frrug"]
+curve = SubResource("Curve_y051v")
+
+[sub_resource type="Gradient" id="Gradient_8hxy5"]
+offsets = PackedFloat32Array(0, 0.230912, 0.780261, 0.998138)
+colors = PackedColorArray(0, 0, 0, 1, 0.57902, 0.57902, 0.57902, 1, 0.415686, 0.415686, 0.415686, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oxuda"]
+gradient = SubResource("Gradient_8hxy5")
+
+[sub_resource type="Curve" id="Curve_leqk8"]
+_data = [Vector2(0, 0.337644), 0.0, 0.0, 0, 0, Vector2(0.546125, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fja2n"]
+curve = SubResource("Curve_leqk8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cl8og"]
+particle_flag_disable_z = true
+angle_min = 15.0
+angle_max = 15.0
+angle_curve = SubResource("CurveTexture_frrug")
+gravity = Vector3(50, 0, 0)
+scale_min = 4.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_fja2n")
+color = Color(0.569583, 0.725612, 0.75896, 1)
+color_ramp = SubResource("GradientTexture1D_oxuda")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_cl8og")
+anim_offset_max = 1.0
+
+[sub_resource type="Curve" id="Curve_0viem"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.512915, 15.818), 0.0, 0.0, 0, 0, Vector2(0.998155, 18.7348), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_c35vc"]
+curve = SubResource("Curve_0viem")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_et5f7"]
+particle_flag_disable_z = true
+angle_min = -17.0
+angle_max = -17.0
+angle_curve = SubResource("CurveTexture_c35vc")
+gravity = Vector3(-50, 0, 0)
+scale_min = 4.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_fja2n")
+color = Color(0.568627, 0.72549, 0.760784, 1)
+color_ramp = SubResource("GradientTexture1D_oxuda")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_cl8og")
+anim_offset_max = 1.0
+
+[sub_resource type="Gradient" id="Gradient_1wgss"]
+offsets = PackedFloat32Array(0, 0.258845, 1)
+colors = PackedColorArray(0.847059, 0.803922, 0.301961, 0, 1, 1, 1, 1, 0.780392, 0.65098, 0.403922, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0rg71"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0pwy4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jafp6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gig2d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hmfvm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u873h"]
+
+[node name="Ancient_room" type="Control" unique_id=1598024082]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_es3kp")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2113272806]
+layout_mode = 0
+offset_left = -330.0
+offset_top = -49.0
+offset_right = 2252.0
+offset_bottom = 1172.0
+texture = ExtResource("1_bcp67")
+expand_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="SpineSprite" type="SpineSprite" parent="." unique_id=1376571893]
+skeleton_data_res = ExtResource("1_8f5lu")
+multiply_material = SubResource("CanvasItemMaterial_uldxj")
+screen_material = SubResource("CanvasItemMaterial_u4wtr")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(-390, -57)
+scale = Vector2(0.58, 0.58)
+metadata/_edit_lock_ = true
+
+[node name="SpineBoneNode" type="SpineBoneNode" parent="SpineSprite" unique_id=1310767612]
+bone_name = "eye a 1"
+show_behind_parent = true
+position = Vector2(2630.7083, 832.3576)
+rotation = 0.017900223
+scale = Vector2(0.90267843, 0.9017784)
+skew = 3.5762787e-05
+
+[node name="light4" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode" unique_id=1399388701]
+show_behind_parent = true
+position = Vector2(-2.66943, -2.33974)
+rotation = -0.36242
+scale = Vector2(1.98059, 1.98059)
+skew = -0.00051868
+amount = 2
+texture = ExtResource("3_ldvs6")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_0w33j")
+color = Color(0.699457, 0.649528, 0.205036, 0.486275)
+color_ramp = SubResource("Gradient_vwgt8")
+
+[node name="SpineBoneNode2" type="SpineBoneNode" parent="SpineSprite" unique_id=968764]
+bone_name = "eye b 1"
+show_behind_parent = true
+position = Vector2(2766.1592, 919.8928)
+rotation = 0.017900223
+scale = Vector2(0.90267843, 0.9017784)
+skew = 3.5762787e-05
+
+[node name="light4" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode2" unique_id=398644402]
+show_behind_parent = true
+position = Vector2(-2.66943, -2.33974)
+rotation = -0.36242
+scale = Vector2(1.98059, 1.98059)
+skew = -0.00051868
+amount = 2
+texture = ExtResource("3_ldvs6")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_0w33j")
+color = Color(0.699457, 0.649528, 0.205036, 0.486275)
+color_ramp = SubResource("Gradient_vwgt8")
+
+[node name="SpineBoneNode3" type="SpineBoneNode" parent="SpineSprite" unique_id=1361686578]
+bone_name = "eye c 1"
+show_behind_parent = true
+position = Vector2(2891.6873, 994.43475)
+rotation = 0.017900223
+scale = Vector2(0.90267843, 0.9017784)
+skew = 3.5762787e-05
+
+[node name="light4" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode3" unique_id=418971897]
+show_behind_parent = true
+position = Vector2(-2.66943, -2.33974)
+rotation = -0.36242
+scale = Vector2(1.98059, 1.98059)
+skew = -0.00051868
+amount = 2
+texture = ExtResource("3_ldvs6")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_0w33j")
+color = Color(0.699457, 0.649528, 0.205036, 0.486275)
+color_ramp = SubResource("Gradient_vwgt8")
+
+[node name="NSpineAutoPlayer" type="Node" parent="SpineSprite" unique_id=1864709982]
+
+[node name="fog3" type="GPUParticles2D" parent="." unique_id=311998871]
+material = SubResource("CanvasItemMaterial_gwy5x")
+position = Vector2(1088, 1302)
+amount = 5
+texture = ExtResource("14_1qfuc")
+lifetime = 10.0
+preprocess = 100.0
+fixed_fps = 0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_cl8og")
+
+[node name="fog5" type="GPUParticles2D" parent="." unique_id=925013444]
+material = SubResource("CanvasItemMaterial_gwy5x")
+position = Vector2(36, 1311)
+amount = 5
+texture = ExtResource("14_1qfuc")
+lifetime = 10.0
+preprocess = 100.0
+fixed_fps = 0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_cl8og")
+
+[node name="fog4" type="GPUParticles2D" parent="." unique_id=198703544]
+material = SubResource("CanvasItemMaterial_gwy5x")
+position = Vector2(1088, 1302)
+amount = 5
+texture = ExtResource("14_1qfuc")
+lifetime = 10.0
+preprocess = 100.0
+fixed_fps = 0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_et5f7")
+
+[node name="stars" type="CPUParticles2D" parent="." unique_id=591109521]
+position = Vector2(1003, 590)
+scale = Vector2(0.999997, 0.999997)
+amount = 10
+texture = ExtResource("11_j0k18")
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(1500, 800)
+spread = 180.0
+gravity = Vector2(-1, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+scale_amount_max = 2.0
+color = Color(0.886275, 0.733333, 0.278431, 0.443137)
+color_ramp = SubResource("Gradient_1wgss")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=553522372]
+layout_mode = 0
+offset_left = -330.0
+offset_top = -49.0
+offset_right = 2252.0
+offset_bottom = 1172.0
+texture = ExtResource("9_vho1v")
+expand_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="water effect" type="Sprite2D" parent="." unique_id=856414024]
+modulate = Color(1, 1, 1, 0.5)
+position = Vector2(1048, 957)
+scale = Vector2(7.725, 5.227)
+texture = ExtResource("15_lyenu")
+
+[node name="Label1" type="Label" parent="." unique_id=1441623765]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -73.0
+offset_right = 217.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("9_0rg71")
+theme_override_font_sizes/font_size = 40
+text = "  NEOW"
+metadata/_edit_lock_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=2126784588]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 270.0
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("9_0rg71")
+bbcode_enabled = true
+text = "     [i]Mother of Resurrection(Exiled)[/i]"
+metadata/_edit_lock_ = true
+
+[node name="Button" type="Button" parent="." unique_id=559494296]
+layout_mode = 0
+offset_left = 1669.0
+offset_top = 750.0
+offset_right = 1911.0
+offset_bottom = 887.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0rg71")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_0pwy4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jafp6")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_gig2d")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hmfvm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_u873h")
+text = "返回地图"
+icon = ExtResource("9_0pwy4")
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_lock_ = true
+
+[node name="Control" type="Control" parent="." unique_id=1131086284]
+anchors_preset = 0
+offset_left = 629.0
+offset_top = 726.0
+offset_right = 1318.0
+offset_bottom = 882.0

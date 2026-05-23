@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PotionPile" format=3 uid="uid://ngev21y7g00j"]
+
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="1_nbgdi"]
+[ext_resource type="Resource" uid="uid://cmilch2jb6xgn" path="res://entities/potions/格挡药水.tres" id="2_ptmx2"]
+[ext_resource type="Script" uid="uid://gl5ijp323sue" path="res://scripts/costum_resources/potion_pile.gd" id="2_qjo6k"]
+[ext_resource type="Resource" uid="uid://6tqk3prnw8wl" path="res://entities/potions/火焰药水.tres" id="3_ybiwd"]
+[ext_resource type="Resource" uid="uid://btvj32p8ixefr" path="res://entities/potions/爆炸安瓿.tres" id="4_xq01y"]
+
+[resource]
+script = ExtResource("2_qjo6k")
+potions = Array[ExtResource("1_nbgdi")]([ExtResource("2_ptmx2"), ExtResource("3_ybiwd"), ExtResource("4_xq01y")])
+metadata/_custom_type_script = "uid://gl5ijp323sue"

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://xqmhw02dq37n"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_q5di8"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_4go1x"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_aiuwh"]
+[ext_resource type="Texture2D" uid="uid://bnfquhv" path="res://images/atlases/potion_atlas.sprites/potion_shaped_rock.tres" id="2_lbxnw"]
+[ext_resource type="Script" uid="uid://bhhtjppe5dfcx" path="res://scripts/costum_resources/effects/damage_effect.gd" id="3_dxo40"]
+[ext_resource type="Texture2D" uid="uid://cddewik" path="res://images/atlases/potion_outline_atlas.sprites/potion_shaped_rock.tres" id="3_qww32"]
+
+[sub_resource type="Resource" id="Resource_0gs5c"]
+script = ExtResource("2_4go1x")
+fixed_value = 15
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_yv4vi"]
+script = ExtResource("3_dxo40")
+damage_provider = SubResource("Resource_0gs5c")
+target_type = 2
+metadata/_custom_type_script = "uid://bhhtjppe5dfcx"
+
+[resource]
+script = ExtResource("2_aiuwh")
+id = "potion_shaped_rock"
+potion_name = "药水形状的石头"
+description = "对指定敌人造成15点伤害"
+icon = ExtResource("2_lbxnw")
+outline_icon = ExtResource("3_qww32")
+target_type = 1
+effects = Array[ExtResource("1_q5di8")]([SubResource("Resource_yv4vi")])
+draftable = false
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

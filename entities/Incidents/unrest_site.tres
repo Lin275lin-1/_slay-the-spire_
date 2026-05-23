@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="IncidentData" format=3 uid="uid://n57aj0f3kpn4"]
+
+[ext_resource type="Script" uid="uid://cff53ccvxdc3t" path="res://scripts/costum_resources/incident_data.gd" id="1_ybr17"]
+
+[resource]
+script = ExtResource("1_ybr17")
+backgroundPath = "res://images/events/unrest_site.png"
+incidentName = "unrest_site"
+stage = 1
+eventTitile = "无休之处"
+eventDescription = "你找到了一个隔绝的休息处，于是点起篝火打算休息。
+结果只是打算而已。
+篝火点起后，火光立即胀大起来，
+不是向上而是向着侧面延伸向一片满是冒油树木的林地。
+要不要不管这个情况，就这么继续休息？"
+option1Description = "杀死树木
+失去8点最大生命。获得一件随机遗物。"
+option2Description = "就这样休息
+回复全部生命值。获得睡眠不佳。"
+press_op1_title = Array[String](["杀死树木
+"])
+press_op1_description = Array[String](["这些树木显然有恶意所以你决定把它们解决掉。
+几天之后，你浑身满是灰烬和油脂黏液。
+被杀死的树木中飞出了一大群小小的异鸟灵魂，它们将一个小盒子扔到了你的脚边。
+“感谢你将我们从那些树木体内解放出来……叽叽叽！”
+你真的该多睡一会儿。"])
+press_op1_op1description = Array[String](["继续"])
+press_op1_op2description = Array[String](["继续"])
+press_op2_title = Array[String](["就这样休息"])
+press_op2_description = Array[String](["繁忙的冒险让你精疲力尽，所以尽管异象丛生，你还是决定倒头就睡。
+火焰整晚呼啸作响，让你辗转反侧。
+那些恶心树木的漆黑黏液散发出了一股恶臭的味道。
+你醒了，虽然恢复了体力，精神却没有变好。"])
+press_op2_op1description = Array[String](["继续。"])
+press_op2_op2description = Array[String](["继续。"])
+metadata/_custom_type_script = "uid://cff53ccvxdc3t"

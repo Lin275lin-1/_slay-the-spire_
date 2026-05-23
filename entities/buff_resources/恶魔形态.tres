@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://cgttvre7b7o4w"]
+
+[ext_resource type="Script" uid="uid://usdp4yt6enkk" path="res://scripts/costum_resources/buffs/demon_form_buff.gd" id="1_1crtm"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_vs6xc"]
+[ext_resource type="Texture2D" uid="uid://knniodbluxmd" path="res://images/powers/demon_form_power.png" id="2_1crtm"]
+
+[resource]
+script = ExtResource("1_vs6xc")
+buff_id = "demon_form"
+buff_name = "恶魔形态"
+description = "在每回合开始时，获得{stacks}层力量"
+icon = ExtResource("2_1crtm")
+buff_script = ExtResource("1_1crtm")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

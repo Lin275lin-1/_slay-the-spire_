@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bcxvad4xig08b"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_mwbf3"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_7ehhm"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_wxqfa"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_1thtk"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_mdema"]
+[ext_resource type="Texture2D" uid="uid://cujwttj" path="res://images/atlases/card_atlas.sprites/ironclad/rupture.tres" id="5_wqncm"]
+
+[sub_resource type="Resource" id="Resource_157yh"]
+script = ExtResource("2_7ehhm")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_mhxjc"]
+script = ExtResource("1_mwbf3")
+numeric_type = 4
+numeric_provider = SubResource("Resource_157yh")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_c622p"]
+script = ExtResource("2_7ehhm")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_bnpb2"]
+script = ExtResource("4_mdema")
+buff_name = "撕裂"
+buff_stack_provider = SubResource("Resource_c622p")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_i1t0x"]
+script = ExtResource("2_7ehhm")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_whwow"]
+script = ExtResource("4_mdema")
+buff_name = "撕裂"
+buff_stack_provider = SubResource("Resource_i1t0x")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_po1fs"]
+script = ExtResource("2_7ehhm")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_8o54r"]
+script = ExtResource("1_mwbf3")
+numeric_type = 4
+numeric_provider = SubResource("Resource_po1fs")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_1thtk")
+id = "撕裂"
+type = 4
+base_cost = 1
+rarity = 2
+effects = Array[ExtResource("2_wxqfa")]([SubResource("Resource_bnpb2")])
+portrait = ExtResource("5_wqncm")
+base_description = "[center]每当你在你的回合内失去生命值时, 获得{stacks}点力量。[/center]"
+base_numeric_entries = Array[ExtResource("1_mwbf3")]([SubResource("Resource_mhxjc")])
+upgraded_cost = 1
+upgraded_description = "[center]每当你在你的回合内失去生命值时, 获得{stacks}点力量。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_mwbf3")]([SubResource("Resource_8o54r")])
+upgraded_effects = Array[ExtResource("2_wxqfa")]([SubResource("Resource_whwow")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

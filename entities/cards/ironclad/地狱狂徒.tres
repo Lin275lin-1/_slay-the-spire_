@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cd01pkgiwrarp"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_vcnnp"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_nhl6b"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_1m3j5"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_8o83v"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_572d7"]
+[ext_resource type="Texture2D" uid="uid://twvroh" path="res://images/atlases/card_atlas.sprites/ironclad/hellraiser.tres" id="5_1m3j5"]
+
+[sub_resource type="Resource" id="Resource_via1s"]
+script = ExtResource("3_1m3j5")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_d6njt"]
+script = ExtResource("4_572d7")
+buff_name = "地狱狂徒"
+buff_stack_provider = SubResource("Resource_via1s")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_pe6k8"]
+script = ExtResource("3_1m3j5")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_l2sug"]
+script = ExtResource("4_572d7")
+buff_name = "地狱狂徒"
+buff_stack_provider = SubResource("Resource_pe6k8")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("3_8o83v")
+id = "地狱狂徒"
+type = 4
+base_cost = 2
+rarity = 4
+effects = Array[ExtResource("2_nhl6b")]([SubResource("Resource_d6njt")])
+portrait = ExtResource("5_1m3j5")
+base_description = "[center]每当你抽到名字中有“打击”的牌时，对一名随机敌人打出这张牌。[/center]"
+upgraded_cost = 1
+upgraded_description = "[center]每当你抽到名字中有“打击”的牌时，对一名随机敌人打出这张牌。[/center]"
+upgraded_effects = Array[ExtResource("2_nhl6b")]([SubResource("Resource_l2sug")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

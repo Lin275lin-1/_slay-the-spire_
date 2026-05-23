@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://b35xpgf6cnioo"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_oyle0"]
+[ext_resource type="Texture2D" uid="uid://b1vmhbq" path="res://images/atlases/relic_atlas.sprites/amethyst_aubergine.tres" id="2_mc8pw"]
+[ext_resource type="Script" uid="uid://cxs66cw7aiusw" path="res://entities/relics/colorless/紫水晶茄子.gd" id="3_wivnt"]
+
+[resource]
+script = ExtResource("3_wivnt")
+relic_name = "紫水晶茄子"
+id = "amethyst_aubergine"
+icon = ExtResource("2_mc8pw")
+description = "敌人额外掉落15[color=gold]金币[/color]"
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

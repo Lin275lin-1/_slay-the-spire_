@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cl0i3tn86150l"]
+
+[ext_resource type="Script" uid="uid://b1yfbcfrct8ad" path="res://scripts/relic_handler/relic_handler.gd" id="1_h8ot6"]
+[ext_resource type="PackedScene" uid="uid://cp17g11hmuglh" path="res://scenes/relichandler/relic_ui.tscn" id="1_ppywj"]
+
+[node name="RelicHandler" type="GridContainer" unique_id=956126364]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 263.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 5
+columns = 24
+script = ExtResource("1_h8ot6")
+
+[node name="RelicUI18" parent="." unique_id=1800990862 instance=ExtResource("1_ppywj")]
+layout_mode = 2

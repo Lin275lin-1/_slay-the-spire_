@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://cjg2mtnaih75s"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_ve7yo"]
+[ext_resource type="Texture2D" uid="uid://c01h2en" path="res://images/atlases/relic_atlas.sprites/planisphere.tres" id="2_vjdsx"]
+[ext_resource type="Script" uid="uid://cet7i5lm2kmk7" path="res://entities/relics/colorless/活动星图.gd" id="3_1hdku"]
+
+[resource]
+script = ExtResource("3_1hdku")
+relic_name = "活动星图"
+id = "planisphere"
+icon = ExtResource("2_vjdsx")
+description = "每当你进入？房间的时候，回复5点生命"
+rarity = 2
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

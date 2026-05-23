@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://6dkkipjvc5h6"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_p7dw6"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_0w8vi"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="2_5aoyh"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_xn6ru"]
+[ext_resource type="Texture2D" uid="uid://bin4lj2" path="res://images/atlases/relic_atlas.sprites/brimstone.tres" id="4_ap56n"]
+
+[sub_resource type="Resource" id="Resource_1dv5n"]
+script = ExtResource("2_0w8vi")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_bfwfs"]
+script = ExtResource("3_xn6ru")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_1dv5n")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_qcx31"]
+script = ExtResource("2_0w8vi")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_r6p0r"]
+script = ExtResource("3_xn6ru")
+buff_name = "力量"
+buff_stack_provider = SubResource("Resource_qcx31")
+target_type = 3
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_5aoyh")
+relic_name = "硫磺"
+id = "brimstone"
+icon = ExtResource("4_ap56n")
+description = "在你的每个回合开始时，你获得2点[color=gold]力量，所有敌人获得1点[color=gold]力量[/color]"
+trigger_type = 1
+relic_color = 1
+rarity = 16
+effects = Array[ExtResource("1_p7dw6")]([SubResource("Resource_bfwfs"), SubResource("Resource_r6p0r")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

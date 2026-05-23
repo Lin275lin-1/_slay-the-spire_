@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://mgm1cqfbewnq"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_8t4gq"]
+[ext_resource type="Script" uid="uid://vsk432mo2mfx" path="res://scripts/costum_resources/buffs/thorns_buff.gd" id="1_v7y87"]
+[ext_resource type="Texture2D" uid="uid://8cm730grsjje" path="res://images/powers/flame_barrier_power.png" id="2_cs8yv"]
+
+[resource]
+script = ExtResource("1_8t4gq")
+buff_id = "flame_barrier"
+buff_name = "火焰屏障"
+description = "本回合你每次受到攻击时，反击造成{stacks}点伤害。"
+icon = ExtResource("2_cs8yv")
+buff_script = ExtResource("1_v7y87")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

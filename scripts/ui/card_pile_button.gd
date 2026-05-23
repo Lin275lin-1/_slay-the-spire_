@@ -12,3 +12,4 @@ func _set_card_pile(value: CardPile) -> void:
 		
 func _on_card_pile_size_changed(card_pile_size: int) -> void:
 	label.text = str(card_pile_size)
+	

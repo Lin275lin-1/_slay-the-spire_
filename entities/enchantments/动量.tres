@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://blic33u8ybang"]
+
+[ext_resource type="Texture2D" uid="uid://cijuucto2cf24" path="res://images/enchantments/momentum.png" id="1_sbobn"]
+[ext_resource type="Script" uid="uid://d3t435nqb0nlg" path="res://entities/enchantments/动量.gd" id="2_sbobn"]
+
+[resource]
+script = ExtResource("2_sbobn")
+id = "momentum"
+enchantment_name = "动量"
+description = "在本场战斗中，每次打出就增加这张牌的攻击伤害{stacks}点"
+icon = ExtResource("1_sbobn")
+stacks = 5
+metadata/_custom_type_script = "uid://bohadu72l6n53"

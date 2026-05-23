@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://cj52yri1exc2t"]
+
+[ext_resource type="Texture2D" uid="uid://b0g5wn1j75nud" path="res://images/powers/plating_power.png" id="1_gcpcs"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_w73mv"]
+[ext_resource type="Script" uid="uid://oj6ech1gc6kj" path="res://scripts/costum_resources/buffs/plating.gd" id="1_yoxjc"]
+
+[resource]
+script = ExtResource("1_w73mv")
+buff_id = "plating"
+buff_name = "覆甲"
+description = "在你的回合结束时获得{stacks}点格挡。然后层数减少1层"
+icon = ExtResource("1_gcpcs")
+buff_script = ExtResource("1_yoxjc")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

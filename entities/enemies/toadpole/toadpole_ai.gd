@@ -4,7 +4,6 @@ var buffed := false
 var last_action: String = ""
 
 func execute_intent(source: Creature, target: Creature, current_intent: Intent) -> void:
-	
 	match current_intent.intent_name:
 		"Whirl":
 			current_intent.anim_name = "attack_single_buffed" if buffed else "attack_single"
@@ -17,24 +16,20 @@ func execute_intent(source: Creature, target: Creature, current_intent: Intent) 
 		_:
 			pass
 	last_action = current_intent.intent_name
-	for sub_intent: SubIntent in current_intent.sub_intents:
-		sub_intent.execute(source, [target])
+	super.execute_intent(source, target, current_intent)
 
 func choose_intent(_source: Creature, _target: Creature) -> Intent:
-	if last_action.is_empty():
-		var intent = random_intent([get_intent_by_name(intents, "Spiken"), get_intent_by_name(intents, "Whirl")])
-		last_action = intent.intent_name
-		return intent
-	else:
-		match last_action:
-			"Whirl":
-				return get_intent_by_name(intents, "Spiken")
-			"Spiken":
-				return get_intent_by_name(intents, "SpikeSpit")
-			"SpikeSpit":
-				return get_intent_by_name(intents, "Whirl")
-			_:
-				return random_intent(intents)
+	match last_action:
+		"":
+			return random_intent([get_intent_by_name("Spiken"), get_intent_by_name("Whirl")])
+		"Whirl":
+			return get_intent_by_name("Spiken")
+		"Spiken":
+			return get_intent_by_name("SpikeSpit")
+		"SpikeSpit":
+			return get_intent_by_name("Whirl")
+		_:
+			return random_intent(intents)
 
 func get_die_animation_name() -> String:
 	if buffed:

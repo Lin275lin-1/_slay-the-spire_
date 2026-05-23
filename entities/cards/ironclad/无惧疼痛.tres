@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bx7lnqlexg07w"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_f65w5"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_2mshy"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_lagcm"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_x3tc1"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_nuxt0"]
+[ext_resource type="Texture2D" uid="uid://6ivvsd" path="res://images/atlases/card_atlas.sprites/ironclad/feel_no_pain.tres" id="5_1np7x"]
+
+[sub_resource type="Resource" id="Resource_lc2wf"]
+script = ExtResource("2_lagcm")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_chhq4"]
+script = ExtResource("1_f65w5")
+numeric_type = 4
+numeric_provider = SubResource("Resource_lc2wf")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_8jgnd"]
+script = ExtResource("2_lagcm")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_1h5ga"]
+script = ExtResource("4_nuxt0")
+buff_name = "无惧疼痛"
+buff_stack_provider = SubResource("Resource_8jgnd")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_wsee0"]
+script = ExtResource("2_lagcm")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ok6xq"]
+script = ExtResource("4_nuxt0")
+buff_name = "无惧疼痛"
+buff_stack_provider = SubResource("Resource_wsee0")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_qjjyw"]
+script = ExtResource("2_lagcm")
+fixed_value = 4
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_nwdxe"]
+script = ExtResource("1_f65w5")
+numeric_type = 4
+numeric_provider = SubResource("Resource_qjjyw")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_x3tc1")
+id = "无惧疼痛"
+type = 4
+base_cost = 1
+rarity = 2
+effects = Array[ExtResource("2_2mshy")]([SubResource("Resource_1h5ga")])
+portrait = ExtResource("5_1np7x")
+base_description = "[center]每当有一张牌被消耗时，获得{stacks}点[color=gold]格挡[/color]。[/center]"
+base_numeric_entries = Array[ExtResource("1_f65w5")]([SubResource("Resource_chhq4")])
+upgraded_cost = 1
+upgraded_description = "[center]每当有一张牌被消耗时，获得{stacks}点[color=gold]格挡[/color]。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_f65w5")]([SubResource("Resource_nwdxe")])
+upgraded_effects = Array[ExtResource("2_2mshy")]([SubResource("Resource_ok6xq")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

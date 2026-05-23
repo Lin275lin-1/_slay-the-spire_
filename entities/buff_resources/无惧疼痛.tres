@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://d0g4kxxjdps4w"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_740n3"]
+[ext_resource type="Script" uid="uid://ilx1p5t11bul" path="res://scripts/costum_resources/buffs/feel_no_pain_buff.gd" id="1_flvvu"]
+[ext_resource type="Texture2D" uid="uid://bvvwtnvgn6dhv" path="res://images/powers/feel_no_pain_power.png" id="1_h5aiv"]
+
+[resource]
+script = ExtResource("1_740n3")
+buff_id = "feel_no_pain"
+buff_name = "无惧疼痛"
+description = "每当有一张牌被消耗时，获得{stacks}点格挡"
+icon = ExtResource("1_h5aiv")
+buff_script = ExtResource("1_flvvu")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

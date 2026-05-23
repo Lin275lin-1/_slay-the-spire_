@@ -1,0 +1,72 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dkh3jtvt7fgbx"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_6stli"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_gaxvh"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_tyrpp"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_2mdpk"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_vqhgr"]
+[ext_resource type="Texture2D" uid="uid://b4i42dg" path="res://images/atlases/card_atlas.sprites/ironclad/juggernaut.tres" id="5_m5g1y"]
+
+[sub_resource type="Resource" id="Resource_4fuii"]
+script = ExtResource("2_tyrpp")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_51t38"]
+script = ExtResource("1_6stli")
+numeric_type = 4
+numeric_provider = SubResource("Resource_4fuii")
+placeholder = "stacks"
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_72y04"]
+script = ExtResource("2_tyrpp")
+fixed_value = 5
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_dq0l0"]
+script = ExtResource("4_vqhgr")
+buff_name = "势不可当"
+buff_stack_provider = SubResource("Resource_72y04")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_0gs1v"]
+script = ExtResource("2_tyrpp")
+fixed_value = 7
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ikr4j"]
+script = ExtResource("4_vqhgr")
+buff_name = "势不可当"
+buff_stack_provider = SubResource("Resource_0gs1v")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_12o0m"]
+script = ExtResource("2_tyrpp")
+fixed_value = 7
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_l7amg"]
+script = ExtResource("1_6stli")
+numeric_type = 4
+numeric_provider = SubResource("Resource_12o0m")
+placeholder = "stacks"
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_2mdpk")
+id = "势不可当"
+type = 4
+base_cost = 2
+rarity = 4
+effects = Array[ExtResource("2_gaxvh")]([SubResource("Resource_dq0l0")])
+portrait = ExtResource("5_m5g1y")
+base_description = "[center]每当你获得[color=gold]格挡[/color]时，对随机敌人造成{stacks}点伤害。[/center]"
+base_numeric_entries = Array[ExtResource("1_6stli")]([SubResource("Resource_51t38")])
+upgraded_cost = 2
+upgraded_description = "[center]每当你获得[color=gold]格挡[/color]时，对随机敌人造成{stacks}点伤害。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_6stli")]([SubResource("Resource_l7amg")])
+upgraded_effects = Array[ExtResource("2_gaxvh")]([SubResource("Resource_ikr4j")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

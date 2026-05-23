@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://bv257yq8wt7b6"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_fnjd1"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_4g4oc"]
+[ext_resource type="Texture2D" uid="uid://cir6rpo" path="res://images/atlases/potion_atlas.sprites/powdered_demise.tres" id="2_ckh2v"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_m0o2n"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_lb8m5"]
+[ext_resource type="Texture2D" uid="uid://bt0gh4b" path="res://images/atlases/potion_outline_atlas.sprites/powdered_demise.tres" id="3_rqowu"]
+
+[sub_resource type="Resource" id="Resource_ieg8i"]
+script = ExtResource("2_4g4oc")
+fixed_value = 9
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_lq51n"]
+script = ExtResource("3_lb8m5")
+buff_name = "消亡"
+buff_stack_provider = SubResource("Resource_ieg8i")
+target_type = 2
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_m0o2n")
+id = "powered_demise"
+potion_name = "消亡粉末"
+description = "目标敌人在自身的每个回合结束时，失去9点生命"
+icon = ExtResource("2_ckh2v")
+outline_icon = ExtResource("3_rqowu")
+target_type = 1
+rarity = 2
+effects = Array[ExtResource("1_fnjd1")]([SubResource("Resource_lq51n")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

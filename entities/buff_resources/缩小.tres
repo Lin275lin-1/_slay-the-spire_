@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://dnia7okunoc2l"]
+
+[ext_resource type="Script" uid="uid://bept8blna3m4x" path="res://scripts/costum_resources/buffs/shrink_debuff.gd" id="1_ksbg3"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_l6f6b"]
+[ext_resource type="Texture2D" uid="uid://dcps0y7lex40l" path="res://images/powers/shrink_power.png" id="1_m5wi6"]
+
+[resource]
+script = ExtResource("1_l6f6b")
+buff_id = "shrink"
+buff_name = "缩小"
+description = "攻击伤害减少30%"
+icon = ExtResource("1_m5wi6")
+buff_type = 1
+buff_script = ExtResource("1_ksbg3")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bf0wlb2wv510t"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_xqbl2"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_o0jyc"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_wpge0"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_thuqw"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="4_eokon"]
+[ext_resource type="Texture2D" uid="uid://caajp7y" path="res://images/atlases/card_atlas.sprites/ironclad/one_two_punch.tres" id="5_6tl0h"]
+
+[sub_resource type="Resource" id="Resource_bvj0c"]
+script = ExtResource("2_wpge0")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_wbrlv"]
+script = ExtResource("1_xqbl2")
+numeric_type = 4
+numeric_provider = SubResource("Resource_bvj0c")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_vbn74"]
+script = ExtResource("2_wpge0")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_j74iv"]
+script = ExtResource("4_eokon")
+buff_name = "连环拳"
+buff_stack_provider = SubResource("Resource_vbn74")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_bv1px"]
+script = ExtResource("2_wpge0")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_tqiyd"]
+script = ExtResource("4_eokon")
+buff_name = "连环拳"
+buff_stack_provider = SubResource("Resource_bv1px")
+target_type = 1
+animation_name = "cast"
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[sub_resource type="Resource" id="Resource_pudig"]
+script = ExtResource("2_wpge0")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_dokc2"]
+script = ExtResource("1_xqbl2")
+numeric_type = 4
+numeric_provider = SubResource("Resource_pudig")
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[resource]
+script = ExtResource("3_thuqw")
+id = "连环拳"
+type = 2
+base_cost = 1
+rarity = 4
+effects = Array[ExtResource("2_o0jyc")]([SubResource("Resource_j74iv")])
+portrait = ExtResource("5_6tl0h")
+base_description = "[center]在这个回合，你打出的下{stacks}张攻击牌会被额外打出一次。[/center]"
+base_numeric_entries = Array[ExtResource("1_xqbl2")]([SubResource("Resource_wbrlv")])
+upgraded_cost = 1
+upgraded_description = "[center]在这个回合，你打出的下{stacks}张攻击牌会被额外打出一次。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_xqbl2")]([SubResource("Resource_dokc2")])
+upgraded_effects = Array[ExtResource("2_o0jyc")]([SubResource("Resource_tqiyd")])
+metadata/_custom_type_script = "uid://br1hibx18tv13"

@@ -1,0 +1,42 @@
+[gd_resource type="Resource" format=3 uid="uid://d3okutnxol2ov"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_1ig8f"]
+[ext_resource type="Script" uid="uid://dyn5a42fs7gxs" path="res://scripts/costum_resources/card_condition.gd" id="2_8lw5a"]
+[ext_resource type="Script" uid="uid://cqcf6adphkjfy" path="res://scripts/costum_resources/effects/select_card_effect.gd" id="3_4li83"]
+[ext_resource type="Script" uid="uid://csyjq6ujulplm" path="res://scripts/costum_resources/effects/card_effects/card_effect.gd" id="4_dnfmu"]
+[ext_resource type="Script" uid="uid://dm6tcw4hw6un" path="res://scripts/costum_resources/effects/card_effects/modify_card_flag_effect.gd" id="5_la88n"]
+[ext_resource type="Script" uid="uid://c2drp2mlr0vhm" path="res://scripts/costum_resources/effects/foreach_card_effect.gd" id="6_jmi3g"]
+[ext_resource type="Texture2D" uid="uid://cwkqk7o" path="res://images/atlases/relic_atlas.sprites/bellows.tres" id="7_ibovn"]
+[ext_resource type="Script" uid="uid://bphh1bja2l4d4" path="res://entities/relics/colorless/风箱.gd" id="8_8lw5a"]
+
+[sub_resource type="Resource" id="Resource_87je0"]
+script = ExtResource("2_8lw5a")
+type = 1
+metadata/_custom_type_script = "uid://dyn5a42fs7gxs"
+
+[sub_resource type="Resource" id="Resource_u4g4c"]
+script = ExtResource("3_4li83")
+selectionMode = 1
+filter_condition = SubResource("Resource_87je0")
+metadata/_custom_type_script = "uid://cqcf6adphkjfy"
+
+[sub_resource type="Resource" id="Resource_y12xa"]
+script = ExtResource("5_la88n")
+flag_name = 5
+value = true
+metadata/_custom_type_script = "uid://dm6tcw4hw6un"
+
+[sub_resource type="Resource" id="Resource_pka2y"]
+script = ExtResource("6_jmi3g")
+effects = Array[ExtResource("4_dnfmu")]([SubResource("Resource_y12xa")])
+metadata/_custom_type_script = "uid://c2drp2mlr0vhm"
+
+[resource]
+script = ExtResource("8_8lw5a")
+relic_name = "风箱"
+id = "bellows"
+icon = ExtResource("7_ibovn")
+description = "你在每场战斗开始时[color=gold]升级[/color]你的[color=gold]手牌[/color]"
+rarity = 2
+effects = Array[ExtResource("1_1ig8f")]([SubResource("Resource_u4g4c"), SubResource("Resource_pka2y")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

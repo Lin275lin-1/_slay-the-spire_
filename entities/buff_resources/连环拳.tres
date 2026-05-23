@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://dfjpm81td1b7y"]
+
+[ext_resource type="Texture2D" uid="uid://bmfw8cojpjddb" path="res://images/powers/one_two_punch_power.png" id="1_7rux8"]
+[ext_resource type="Script" uid="uid://bnicd1uglriri" path="res://scripts/costum_resources/buffs/duplicate_attack_buff.gd" id="1_f48dn"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_ih4kf"]
+
+[resource]
+script = ExtResource("1_ih4kf")
+buff_id = "one_two_punch"
+buff_name = "连环拳"
+description = "本回合，你的下{stacks}张攻击牌会多打出一次。"
+icon = ExtResource("1_7rux8")
+buff_script = ExtResource("1_f48dn")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

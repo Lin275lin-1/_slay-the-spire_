@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://c0lurowed36gl"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_8pb2m"]
+[ext_resource type="Script" uid="uid://dt2o4kgx8culf" path="res://scripts/costum_resources/buffs/duplication_buff.gd" id="1_mvvmo"]
+[ext_resource type="Texture2D" uid="uid://lag6akahlg74" path="res://images/powers/duplication_power.png" id="1_yyb5o"]
+
+[resource]
+script = ExtResource("1_8pb2m")
+buff_id = "duplication"
+buff_name = "复制"
+description = "本回合你下一张打出的牌会多打出一次"
+icon = ExtResource("1_yyb5o")
+stackable = false
+buff_script = ExtResource("1_mvvmo")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

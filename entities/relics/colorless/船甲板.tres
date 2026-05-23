@@ -1,0 +1,30 @@
+[gd_resource type="Resource" format=3 uid="uid://rv2b5olamf6o"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_qbmac"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_i1dew"]
+[ext_resource type="Script" uid="uid://dnv7chuoeoi6y" path="res://scripts/costum_resources/effects/block_effect.gd" id="3_1imac"]
+[ext_resource type="Texture2D" uid="uid://cyjfgth" path="res://images/atlases/relic_atlas.sprites/horn_cleat.tres" id="4_uxcn1"]
+[ext_resource type="Script" uid="uid://dl7hhswed04st" path="res://entities/relics/colorless/船甲板.gd" id="5_ornve"]
+
+[sub_resource type="Resource" id="Resource_er0x0"]
+script = ExtResource("2_i1dew")
+fixed_value = 14
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_del28"]
+script = ExtResource("3_1imac")
+block_provider = SubResource("Resource_er0x0")
+no_modifiers = true
+target_type = 1
+metadata/_custom_type_script = "uid://dnv7chuoeoi6y"
+
+[resource]
+script = ExtResource("5_ornve")
+relic_name = "船甲板"
+id = "horn_cleat"
+icon = ExtResource("4_uxcn1")
+description = "在你的第二回合开始时，获得14点[color=gold]格挡[/color]"
+trigger_type = 1
+rarity = 2
+effects = Array[ExtResource("1_qbmac")]([SubResource("Resource_del28")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

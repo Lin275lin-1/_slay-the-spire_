@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://pm3hnngkcxmf"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_nngch"]
+[ext_resource type="Texture2D" uid="uid://b76fod0" path="res://images/atlases/relic_atlas.sprites/dollys_mirror.tres" id="2_tqten"]
+[ext_resource type="Script" uid="uid://cs5vjw32re2h6" path="res://entities/relics/shop/多莉之镜.gd" id="3_idjob"]
+
+[resource]
+script = ExtResource("3_idjob")
+relic_name = "多莉之镜"
+id = "dollys_mirror"
+icon = ExtResource("2_tqten")
+description = "拾起时，从你的牌组中选择一张牌进行复制"
+rarity = 16
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

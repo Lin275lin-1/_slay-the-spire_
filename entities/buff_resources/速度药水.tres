@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://drjjrqeuq070s"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_dlh0q"]
+[ext_resource type="Script" uid="uid://b1ag10nfilko1" path="res://scripts/costum_resources/buffs/dexterity_down_debuff.gd" id="1_pm833"]
+[ext_resource type="Texture2D" uid="uid://cmobnwmhf4pei" path="res://images/powers/speed_potion_power.png" id="2_oh8sq"]
+
+[resource]
+script = ExtResource("1_dlh0q")
+buff_id = "speed_potion"
+buff_name = "速度药水"
+description = "回合结束时，失去{stacks}点敏捷"
+icon = ExtResource("2_oh8sq")
+buff_type = 1
+buff_script = ExtResource("1_pm833")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

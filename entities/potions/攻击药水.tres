@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://fxxoth4ur2s3"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_dq7ms"]
+[ext_resource type="Script" uid="uid://c6aimd4krc1h5" path="res://scripts/costum_resources/card_filter.gd" id="2_fjnoq"]
+[ext_resource type="Script" uid="uid://bumkvpbom08xn" path="res://scripts/costum_resources/potion.gd" id="2_huw7p"]
+[ext_resource type="Script" uid="uid://ba3wlijo516jr" path="res://scripts/costum_resources/effects/discover_effect.gd" id="3_nnmld"]
+[ext_resource type="Texture2D" uid="uid://bkjbc1e" path="res://images/atlases/potion_atlas.sprites/attack_potion.tres" id="4_c4n5r"]
+[ext_resource type="Texture2D" uid="uid://s2t3vv" path="res://images/atlases/potion_outline_atlas.sprites/attack_potion.tres" id="5_bmp1k"]
+
+[sub_resource type="Resource" id="Resource_i8c81"]
+script = ExtResource("2_fjnoq")
+color_type = 1
+rarity = 7
+metadata/_custom_type_script = "uid://c6aimd4krc1h5"
+
+[sub_resource type="Resource" id="Resource_nb6c7"]
+script = ExtResource("3_nnmld")
+card_filter = SubResource("Resource_i8c81")
+first_play_free = true
+metadata/_custom_type_script = "uid://ba3wlijo516jr"
+
+[resource]
+script = ExtResource("2_huw7p")
+id = "attack_potion"
+potion_name = "攻击药水"
+description = "从3张随机攻击牌中选择1张加入你的[color=gold]手牌[/color]。这张牌在本回合可以免费打出。"
+icon = ExtResource("4_c4n5r")
+outline_icon = ExtResource("5_bmp1k")
+effects = Array[ExtResource("1_dq7ms")]([SubResource("Resource_nb6c7")])
+metadata/_custom_type_script = "uid://bumkvpbom08xn"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://cxfp6862d8bhh"]
+
+[ext_resource type="Resource" uid="uid://cya2uomjgmwf7" path="res://entities/enemies/snapping_jaxfruit/snapping_jaxfruit_ai.tres" id="1_rmv7s"]
+[ext_resource type="Script" uid="uid://bjrlwk5w4gqtk" path="res://scripts/costum_resources/enemy_stats.gd" id="1_tox21"]
+[ext_resource type="PackedScene" uid="uid://dlwydxwb7j7dk" path="res://scenes/creature_visuals/snapping_jaxfruit.tscn" id="3_c7e8s"]
+
+[resource]
+script = ExtResource("1_tox21")
+ai = ExtResource("1_rmv7s")
+enemy_name = "闪光贾克斯果"
+hightest_max_health = 33
+lowest_max_health = 31
+visuals_scene = ExtResource("3_c7e8s")
+metadata/_custom_type_script = "uid://bjrlwk5w4gqtk"

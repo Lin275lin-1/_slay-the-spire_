@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cw3d5ekcfckns"]
+
+[ext_resource type="Script" uid="uid://b4x7nyaqm0lc3" path="res://scripts/ui/damage_number_spawner.gd" id="1_ib1sp"]
+[ext_resource type="LabelSettings" uid="uid://ucmprufjyvcb" path="res://themes/damge_number_label_settings.tres" id="2_tirhk"]
+[ext_resource type="LabelSettings" uid="uid://7urdfnst40ow" path="res://themes/buff_text_label_settings.tres" id="3_dqjyb"]
+
+[node name="DamageNumberSpawner" type="Node2D" unique_id=807851387]
+script = ExtResource("1_ib1sp")
+damage_number_label_settings = ExtResource("2_tirhk")
+text_label_settings = ExtResource("3_dqjyb")

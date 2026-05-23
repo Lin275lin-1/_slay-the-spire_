@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cr8j3ko54ugip"]
+
+[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_oj4le"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_xiu6f"]
+[ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_leoom"]
+[ext_resource type="Texture2D" uid="uid://b8usb6a" path="res://images/atlases/card_atlas.sprites/curse/poor_sleep.tres" id="3_xiu6f"]
+
+[resource]
+script = ExtResource("3_leoom")
+id = "睡眠不佳"
+type = 16
+card_color = 32
+rarity = 8
+draftable = false
+portrait = ExtResource("3_xiu6f")
+base_description = "[center]不能被打出。[/center]"
+playable = false
+upgradable = false
+metadata/_custom_type_script = "uid://br1hibx18tv13"

@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="IncidentData" format=3 uid="uid://c108sf3j0psue"]
+
+[ext_resource type="Script" uid="uid://cff53ccvxdc3t" path="res://scripts/costum_resources/incident_data.gd" id="1_ryukp"]
+
+[resource]
+script = ExtResource("1_ryukp")
+backgroundPath = "res://images/events/this_or_that.png"
+incidentName = "this_or_that"
+eventTitile = "这个还是那个？"
+eventDescription = "附近的一个坑洞里突然蹿出一双手臂，
+一只手紧握着一袋可疑的财宝，
+另一只则拿着一件明显被诅咒的遗物。
+“这个……还是那个？”
+一个嘶哑的声音从地下传来，向你低语。"
+option1Description = "那个
+将一张“笨拙”加入你的牌组。获得一件随机遗物"
+option2Description = "这个
+失去6点生命。获得41-69金币"
+press_op1_title = Array[String](["那个"])
+press_op1_description = Array[String](["你抓住了被诅咒的遗物。
+刚握上去，你的手臂上就凭空出现了一对镣铐。
+你听到一阵幽灵般的笑声，
+然后一道明亮的火光充斥了你的视野！
+坑洞和手臂都消失了。"])
+press_op1_op1description = Array[String](["继续"])
+press_op1_op2description = Array[String](["继续"])
+press_op2_title = Array[String](["这个"])
+press_op2_description = Array[String](["你握住钱袋，
+瞬间有第三只手冒了出来，
+想要抓住你！
+你拼命挣扎了一番之后，
+它终于松开了手——坑洞和手臂全都消失了。"])
+press_op2_op1description = Array[String](["继续"])
+press_op2_op2description = Array[String](["继续"])

@@ -4,10 +4,21 @@
 class_name MyEffect
 extends Effect
 
-func execute(context: Context) -> void:
-	for target: Creature in context.targets:
-		if not target:
-			continue
-		if target is Enemy or target is Player:
-			target.gain_block(context)
-			SFXPlayer.play(sound)
+@export var damage_provider: NumericProvider
+@export var damage_formula: NumericFormula
+
+func apply(source: Node, targets: Array[Node], card_context: Dictionary, previous_result: Variant = null) -> Variant:
+	var value = damage_provider.get_value(previous_result, card_context)
+	var card: Card = card_context.get("card")
+	var modifiers :Array[Modifier] = []
+	if card and card.has_enchantment():
+		modifiers.append_array(card.enchantment.get_modifiers_by_type(Enums.NumericType.DAMAGE))
+	var total_damage := 0
+	for target: Creature in targets:
+		var damage = value
+		if damage_formula:
+			damage += damage_formula.calculate(target)
+		total_damage += target.attack(DamageContext.new(source, target, damage, modifiers))
+		await source.get_tree().create_timer(0.2).timeout
+	return total_damage
+	

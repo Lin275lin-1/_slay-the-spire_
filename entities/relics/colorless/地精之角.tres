@@ -1,0 +1,31 @@
+[gd_resource type="Resource" format=3 uid="uid://cx2glufd2pmq7"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_lojwy"]
+[ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="2_i0rlu"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="3_mr2un"]
+[ext_resource type="Script" uid="uid://c6kvghrfcdtp7" path="res://scripts/costum_resources/effects/gain_energy_effect.gd" id="4_lmf7o"]
+[ext_resource type="Texture2D" uid="uid://h0u8pq" path="res://images/atlases/relic_atlas.sprites/gremlin_horn.tres" id="5_vjdba"]
+[ext_resource type="Script" uid="uid://bk7xvw6e7rjbj" path="res://entities/relics/colorless/地精之角.gd" id="6_i0rlu"]
+
+[sub_resource type="Resource" id="Resource_lu017"]
+script = ExtResource("3_mr2un")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_jp2bb"]
+script = ExtResource("4_lmf7o")
+energy_provider = SubResource("Resource_lu017")
+metadata/_custom_type_script = "uid://c6kvghrfcdtp7"
+
+[sub_resource type="Resource" id="Resource_i0rlu"]
+script = ExtResource("2_i0rlu")
+metadata/_custom_type_script = "uid://dd8cefu454sp5"
+
+[resource]
+script = ExtResource("6_i0rlu")
+relic_name = "地精之角"
+id = "gremlin_horn"
+icon = ExtResource("5_vjdba")
+description = "每当有一名敌人死亡时，获得1点能量并抽1张牌"
+effects = Array[ExtResource("1_lojwy")]([SubResource("Resource_jp2bb"), SubResource("Resource_i0rlu")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

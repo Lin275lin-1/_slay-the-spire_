@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://lo0cjem1wqlk"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_o8dr7"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_7ucdr"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="2_hhlf2"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_fa2bh"]
+[ext_resource type="Texture2D" uid="uid://b1m3ijw" path="res://images/atlases/relic_atlas.sprites/bronze_scales.tres" id="4_e50ik"]
+
+[sub_resource type="Resource" id="Resource_n64bh"]
+script = ExtResource("2_7ucdr")
+fixed_value = 3
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_1gl4e"]
+script = ExtResource("3_fa2bh")
+buff_name = "荆棘"
+buff_stack_provider = SubResource("Resource_n64bh")
+target_type = 1
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_hhlf2")
+relic_name = "铜制鳞片"
+id = "bronze_scales"
+icon = ExtResource("4_e50ik")
+description = "在每场战斗开始时，获得3点荆棘"
+trigger_type = 2
+effects = Array[ExtResource("1_o8dr7")]([SubResource("Resource_1gl4e")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://c1hxmtxwkjmik"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_drwx5"]
+[ext_resource type="Texture2D" uid="uid://bun3oej" path="res://images/atlases/relic_atlas.sprites/razor_tooth.tres" id="2_qe5wx"]
+[ext_resource type="Script" uid="uid://bc3sswet8um07" path="res://entities/relics/colorless/剃刀牙.gd" id="3_54f4l"]
+
+[resource]
+script = ExtResource("3_54f4l")
+relic_name = "剃刀牙"
+id = "razor_tooth"
+icon = ExtResource("2_qe5wx")
+description = "你打出攻击牌和技能牌时，将其在本场战斗内[color=gold]升级[/color]"
+rarity = 4
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

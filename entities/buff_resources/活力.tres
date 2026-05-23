@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://e4l2ircqgwqk"]
+
+[ext_resource type="Texture2D" uid="uid://cyci3etwf7esj" path="res://images/powers/vigor_power.png" id="1_3lw4d"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_k7fvp"]
+[ext_resource type="Script" uid="uid://btsssfgn0qpm5" path="res://scripts/costum_resources/buffs/vigor_buff.gd" id="1_sgdmu"]
+
+[resource]
+script = ExtResource("1_k7fvp")
+buff_id = "vigor"
+buff_name = "活力"
+description = "下一张攻击牌伤害造成的伤害增加{stacks}"
+icon = ExtResource("1_3lw4d")
+buff_script = ExtResource("1_sgdmu")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

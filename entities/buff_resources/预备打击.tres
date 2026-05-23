@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://caxymcbqdnwmt"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_d655m"]
+[ext_resource type="Script" uid="uid://g26ddcpcwpqq" path="res://scripts/costum_resources/buffs/flex_potion_buff.gd" id="1_v5mkb"]
+[ext_resource type="Texture2D" uid="uid://do0dpek5h1fcb" path="res://images/powers/setup_strike_power.png" id="2_wn7nq"]
+
+[resource]
+script = ExtResource("1_d655m")
+buff_id = "setup_strike"
+buff_name = "预备打击"
+description = "回合结束时，失去{stacks}点力量"
+icon = ExtResource("2_wn7nq")
+buff_type = 1
+buff_script = ExtResource("1_v5mkb")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

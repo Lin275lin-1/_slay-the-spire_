@@ -8,8 +8,10 @@ func _ready() -> void:
 
 func reset_enemy_intents() -> void:
 	for child: Enemy in get_children():
-		child.current_intent = null
-		child.update_intent()
+		# 如果child被queue_free就不会再更新意图
+		if is_instance_valid(child):
+			child.current_intent = null
+			child.update_intent()
 
 func setup_enemies(encounter: EnemyEncounter) -> void:
 	if not encounter:
@@ -18,11 +20,31 @@ func setup_enemies(encounter: EnemyEncounter) -> void:
 		enemy.queue_free()
 	for enemy_entry : EnemyEntry in encounter.enemy_entries:
 		var new_enemy: Enemy = EnemyScene.instantiate()
+		new_enemy.encounter_index = enemy_entry.index
 		new_enemy.position = enemy_entry.position
 		new_enemy.stats = enemy_entry.enemy_stats.create_instance()
+		
 		add_child(new_enemy)
+		if !new_enemy.is_node_ready():
+			await new_enemy.ready
+			
+		var initial_buff: Dictionary = enemy_entry.initial_buff
+		for key in initial_buff:
+			if key == "格挡":
+				new_enemy.gain_block(GainBlockContext.new(new_enemy, new_enemy, initial_buff[key], [], true))
+			else:
+				new_enemy.add_buff(ApplyBuffContext.new(new_enemy, new_enemy, initial_buff[key], key))
+		#new_enemy.ready.connect(
+			#func():
+				#var buffs := enemy_entry.get_initial_buffs()
+				#for key in buffs.keys():
+					#new_enemy.add_buff(ApplyBuffContext.new(new_enemy, new_enemy, buffs[key], key))
+				#)
+		
 
 func start_turn() -> void:
+	# 等待一小段时间再开始敌人回合
+	await get_tree().create_timer(0.4).timeout
 	if get_child_count() == 0:
 		return
 	

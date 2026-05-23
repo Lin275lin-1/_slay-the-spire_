@@ -9,7 +9,7 @@ func _ready():
 	# 设置纹理九宫格（防止边框拉伸）
 	var style = get_theme_stylebox("panel")
 	if style is StyleBoxTexture:
-		print("has_set")
+		#print("has_set")
 		style.region_rect = Rect2(0, 0, 320, 96)  # 请替换为实际测量值
 		# 设置九宫格边距（正值，边框厚度）
 		style.expand_margin_left = 8
@@ -20,8 +20,8 @@ func _ready():
 func set_text(text: String) -> void:
 	description.text = text
 	# 等待两帧，确保 Label 完成换行和布局
-	await get_tree().process_frame
-	await get_tree().process_frame
+	#await get_tree().process_frame
+	#await get_tree().process_frame
 
 	# 强制更新内部控件的最小尺寸（可选）
 	description.update_minimum_size()

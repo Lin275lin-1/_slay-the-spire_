@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://c8kbyyddxu3sc"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_q5i0a"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_03q7k"]
+[ext_resource type="Script" uid="uid://bvf88v88tbaks" path="res://scripts/costum_resources/relic.gd" id="2_5ttsl"]
+[ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="3_u6uim"]
+[ext_resource type="Texture2D" uid="uid://btvdt4t" path="res://images/atlases/relic_atlas.sprites/bag_of_marbles.tres" id="4_rgevg"]
+
+[sub_resource type="Resource" id="Resource_fr2tf"]
+script = ExtResource("2_03q7k")
+fixed_value = 1
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_nt75u"]
+script = ExtResource("3_u6uim")
+buff_name = "易伤"
+buff_stack_provider = SubResource("Resource_fr2tf")
+target_type = 3
+metadata/_custom_type_script = "uid://b8qfrs61nmcix"
+
+[resource]
+script = ExtResource("2_5ttsl")
+relic_name = "弹珠袋"
+id = "bag_of_marbles"
+icon = ExtResource("4_rgevg")
+description = "在每场战斗开始时，给予所有敌人1层[color=gold]易伤[/color]"
+rarity = 2
+effects = Array[ExtResource("1_q5i0a")]([SubResource("Resource_nt75u")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

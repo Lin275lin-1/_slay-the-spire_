@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://casdgln04jj8h"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_eufbt"]
+[ext_resource type="Script" uid="uid://bmeugqjlwhbsa" path="res://scripts/costum_resources/buffs/block_next_turn_buff.gd" id="1_uw5i2"]
+[ext_resource type="Texture2D" uid="uid://c73ayjngah6eb" path="res://images/powers/self_forming_clay_power.png" id="2_a8j3a"]
+
+[resource]
+script = ExtResource("1_eufbt")
+buff_id = "self_forming_clay"
+buff_name = "自成型黏土"
+description = "下回合开始时，获得{stacks}点[color=gold]格挡[/color]"
+icon = ExtResource("2_a8j3a")
+buff_script = ExtResource("1_uw5i2")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

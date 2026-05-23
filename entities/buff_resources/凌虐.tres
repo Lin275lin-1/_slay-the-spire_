@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://21ayt2aml53w"]
+
+[ext_resource type="Script" uid="uid://dp13d51rv6eir" path="res://scripts/costum_resources/buffs/temperary_strength_down.gd" id="1_8hgv3"]
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_sb8ob"]
+[ext_resource type="Texture2D" uid="uid://b64axhomp8so7" path="res://images/powers/mangle_power.png" id="2_2nnqh"]
+
+[resource]
+script = ExtResource("1_sb8ob")
+buff_id = "mangle"
+buff_name = "凌虐"
+description = "在本回合失去{stacks}点[color=gold]力量[/color]"
+icon = ExtResource("2_2nnqh")
+buff_type = 2
+buff_script = ExtResource("1_8hgv3")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

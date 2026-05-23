@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://hbkkgb8v3jvq"]
+
+[ext_resource type="Resource" uid="uid://cw35oj2ttswoc" path="res://entities/enemies/byrdnois/byrdonis_ai.tres" id="1_ds0p7"]
+[ext_resource type="Script" uid="uid://bjrlwk5w4gqtk" path="res://scripts/costum_resources/enemy_stats.gd" id="1_v5u3j"]
+[ext_resource type="PackedScene" uid="uid://cb17rgoogg23f" path="res://scenes/creature_visuals/byrdnois.tscn" id="3_smys4"]
+
+[resource]
+script = ExtResource("1_v5u3j")
+ai = ExtResource("1_ds0p7")
+enemy_name = "多尼斯异鸟"
+hightest_max_health = 84
+lowest_max_health = 81
+visuals_scene = ExtResource("3_smys4")
+metadata/_custom_type_script = "uid://bjrlwk5w4gqtk"

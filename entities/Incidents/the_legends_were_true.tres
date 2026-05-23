@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="IncidentData" format=3 uid="uid://duv73tbt7aucp"]
+
+[ext_resource type="Script" uid="uid://cff53ccvxdc3t" path="res://scripts/costum_resources/incident_data.gd" id="1_gmmm3"]
+
+[resource]
+script = ExtResource("1_gmmm3")
+backgroundPath = "res://images/events/the_legends_were_true.png"
+incidentName = "the_legends_were_true"
+stage = 1
+eventTitile = "传说是真的"
+eventDescription = "踏入漆黑的密室，一道亮光从上方刺破黑暗，
+与此同时，身后的门砰然关上。
+借着光亮，你看到前方的石台上放着一张地图。
+你有一种强烈的想要拿走它的冲动。事出反常。"
+option1Description = "顺走地图
+获得藏宝图。"
+option2Description = "耐心寻找出口
+失去8点生命。
+获得一瓶随机药水。"
+press_op1_title = Array[String](["顺走地图"])
+press_op1_description = Array[String](["再差能差到哪去？
+你抓起地图，一道出口随之就在房间对侧出现了。"])
+press_op1_op1description = Array[String](["继续"])
+press_op1_op2description = Array[String](["继续"])
+press_op2_title = Array[String](["耐心寻找出口"])
+press_op2_description = Array[String](["你在黑暗中摸索寻找出口，房间突然剧烈震动起来。
+伴随着一声巨响，整间密室在你周围轰然坍塌。
+你艰难地从废墟中脱身，却意外发现了一瓶之前藏在房内的好东西。"])
+press_op2_op1description = Array[String](["继续"])
+press_op2_op2description = Array[String](["继续"])

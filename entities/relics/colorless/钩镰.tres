@@ -1,0 +1,29 @@
+[gd_resource type="Resource" format=3 uid="uid://df8cq1kd13buo"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_rtdq7"]
+[ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_flnfs"]
+[ext_resource type="Script" uid="uid://bhhtjppe5dfcx" path="res://scripts/costum_resources/effects/damage_effect.gd" id="3_uet5q"]
+[ext_resource type="Texture2D" uid="uid://btj2q72" path="res://images/atlases/relic_atlas.sprites/kusarigama.tres" id="4_nonmy"]
+[ext_resource type="Script" uid="uid://bkwp23ruo5deh" path="res://entities/relics/colorless/钩镰.gd" id="5_fna25"]
+
+[sub_resource type="Resource" id="Resource_j6wt7"]
+script = ExtResource("2_flnfs")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_ndgdp"]
+script = ExtResource("3_uet5q")
+damage_provider = SubResource("Resource_j6wt7")
+no_modifiers = true
+target_type = 4
+metadata/_custom_type_script = "uid://bhhtjppe5dfcx"
+
+[resource]
+script = ExtResource("5_fna25")
+relic_name = "钩镰"
+id = "kusarigama"
+icon = ExtResource("4_nonmy")
+description = "你每在同一回合内打出3张攻击牌，就随机对一名敌人造成6点伤害"
+rarity = 2
+effects = Array[ExtResource("1_rtdq7")]([SubResource("Resource_ndgdp")])
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

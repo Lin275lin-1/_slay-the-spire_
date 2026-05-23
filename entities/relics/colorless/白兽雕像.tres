@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://dxsyuhrd5ax3n"]
+
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="1_p2khg"]
+[ext_resource type="Texture2D" uid="uid://btf6los" path="res://images/atlases/relic_atlas.sprites/white_beast_statue.tres" id="2_sjml5"]
+[ext_resource type="Script" uid="uid://3wrcijpptw17" path="res://entities/relics/colorless/白兽雕像.gd" id="3_arrg6"]
+
+[resource]
+script = ExtResource("3_arrg6")
+relic_name = "白兽雕像"
+id = "white_beast_statue"
+icon = ExtResource("2_sjml5")
+description = "战斗结束后额外掉落一瓶药水"
+rarity = 4
+metadata/_custom_type_script = "uid://bvf88v88tbaks"

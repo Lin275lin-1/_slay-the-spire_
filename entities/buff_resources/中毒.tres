@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://cwuuumklbnsk0"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_350aj"]
+[ext_resource type="Script" uid="uid://d1a3oyc6j7ks1" path="res://scripts/costum_resources/buffs/poison_debuff.gd" id="1_xyls2"]
+[ext_resource type="Texture2D" uid="uid://brm8d5fvd6tew" path="res://images/powers/poison_power.png" id="2_xyls2"]
+
+[resource]
+script = ExtResource("1_350aj")
+buff_id = "poison"
+buff_name = "中毒"
+description = "回合开始时失去{stacks}点生命，然后减少一层"
+icon = ExtResource("2_xyls2")
+buff_type = 1
+buff_script = ExtResource("1_xyls2")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

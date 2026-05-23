@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuffResource" format=3 uid="uid://crhp8rldwr4lj"]
+
+[ext_resource type="Script" uid="uid://c1n4sywvfnffx" path="res://scripts/costum_resources/buff_resource.gd" id="1_ar8a8"]
+[ext_resource type="Script" uid="uid://dikdemdoumse1" path="res://scripts/costum_resources/buffs/dark_embrace.gd" id="1_sb84u"]
+[ext_resource type="Texture2D" uid="uid://bensrmc4v4xcw" path="res://images/powers/dark_embrace_power.png" id="2_tuqu6"]
+
+[resource]
+script = ExtResource("1_ar8a8")
+buff_id = "dark_embrace"
+buff_name = "黑暗之拥"
+description = "每当有一张牌被消耗时，抽{stacks}张牌"
+icon = ExtResource("2_tuqu6")
+buff_script = ExtResource("1_sb84u")
+metadata/_custom_type_script = "uid://c1n4sywvfnffx"

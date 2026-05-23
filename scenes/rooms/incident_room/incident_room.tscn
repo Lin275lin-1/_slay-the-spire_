@@ -1,6 +1,23 @@
 [gd_scene format=3 uid="uid://dal3aulxi34fl"]
 
 [ext_resource type="Script" uid="uid://ctq536ja35ys6" path="res://scripts/rooms/incident_room/incident_room.gd" id="1_p27f4"]
+[ext_resource type="Texture2D" uid="uid://v1ovbkxwt3y6" path="res://images/events/doors_of_light_and_dark.png" id="2_qt3pm"]
+[ext_resource type="FontFile" uid="uid://bgo5h1rnqi6op" path="res://fonts/zhs/NotoSansMonoCJKsc-Regular.otf" id="3_ko2o4"]
+[ext_resource type="Texture2D" uid="uid://co4nflor6pb3b" path="res://images/packed/common_ui/event_button.png" id="4_qt3pm"]
+[ext_resource type="Texture2D" uid="uid://6687vb6wm670" path="res://images/packed/common_ui/event_button_outline.png" id="6_6rh6w"]
+[ext_resource type="FontFile" uid="uid://blw3ftbmibl2g" path="res://fonts/kreon_regular.ttf" id="6_neu34"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qt3pm"]
+bg_color = Color(0.047058824, 0.105882354, 0.14117648, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.023529412, 0.050980393, 0.07058824, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [node name="IncidentRoom" type="Control" unique_id=1266712932]
 layout_mode = 3
@@ -11,35 +28,115 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p27f4")
 
-[node name="Label" type="Label" parent="." unique_id=488723113]
+[node name="background" type="Sprite2D" parent="." unique_id=1062807421]
+position = Vector2(958, 538.00006)
+scale = Vector2(0.5510174, 0.65903455)
+texture = ExtResource("2_qt3pm")
+
+[node name="eventPanel" type="VBoxContainer" parent="." unique_id=639686592]
+layout_mode = 0
+offset_left = 804.0
+offset_top = 114.0
+offset_right = 1830.0
+offset_bottom = 544.0
+theme_override_constants/separation = 30
+
+[node name="eventTitle" type="Label" parent="eventPanel" unique_id=487997266]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8901961, 0.7529412, 0.3137255, 1)
+theme_override_font_sizes/font_size = 50
+text = "滑脚木桥"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="eventDescription" type="Label" parent="eventPanel" unique_id=1774559978]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.9607843, 0.9372549, 1)
+theme_override_fonts/font = ExtResource("3_ko2o4")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_qt3pm")
+text = "当你穿过一座摇摇欲坠的木桥时，
+忽然间暴雨倾盆。
+阵阵狂风不断向你袭来，似乎要将你的旅程终结于此。"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="optionsContainer" type="VBoxContainer" parent="." unique_id=243252297]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 0
+offset_left = 790.0
+offset_top = 510.0
+offset_right = 1817.0
+offset_bottom = 1094.0
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="option1" type="TextureButton" parent="optionsContainer" unique_id=391704539]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+texture_normal = ExtResource("4_qt3pm")
+stretch_mode = 0
+
+[node name="outline1" type="TextureRect" parent="optionsContainer/option1" unique_id=2065230859]
+visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -26.0
-offset_top = -102.0
-offset_right = 20.0
-offset_bottom = -53.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "事件房"
+texture = ExtResource("6_6rh6w")
 
-[node name="Button" type="Button" parent="." unique_id=1912887378]
+[node name="text1" type="Label" parent="optionsContainer/option1" unique_id=1494476506]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -50.0
-offset_right = 100.0
-offset_bottom = 50.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "返回地图"
+theme_override_colors/font_color = Color(0.9411765, 0.9607843, 0.9372549, 1)
+theme_override_fonts/font = ExtResource("6_neu34")
+theme_override_font_sizes/font_size = 30
+text = "将从你的牌组中被移除"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="option2" type="TextureButton" parent="optionsContainer" unique_id=768703660]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+texture_normal = ExtResource("4_qt3pm")
+stretch_mode = 0
+
+[node name="outline2" type="TextureRect" parent="optionsContainer/option2" unique_id=589739435]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_6rh6w")
+
+[node name="text2" type="Label" parent="optionsContainer/option2" unique_id=1048460109]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9411765, 0.9607843, 0.9372549, 1)
+theme_override_fonts/font = ExtResource("6_neu34")
+theme_override_font_sizes/font_size = 30
+text = "再撑一会儿
+失去3点生命值。重新随机上面的卡牌"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="optionsContainer/option1" to="." method="_on_option_1_mouse_entered"]
+[connection signal="mouse_exited" from="optionsContainer/option1" to="." method="_on_option_1_mouse_exited"]
+[connection signal="pressed" from="optionsContainer/option1" to="." method="_on_option_1_pressed"]
+[connection signal="mouse_entered" from="optionsContainer/option2" to="." method="_on_option_2_mouse_entered"]
+[connection signal="mouse_exited" from="optionsContainer/option2" to="." method="_on_option_2_mouse_exited"]
+[connection signal="pressed" from="optionsContainer/option2" to="." method="_on_option_2_pressed"]
